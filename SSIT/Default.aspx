@@ -234,12 +234,12 @@
                                     <h4 style="text-transform:uppercase">Nueva Redistribuci&oacute;n de Usos</h4>
                             </asp:LinkButton>
 
-                       <%--     <asp:LinkButton ID="lnkCrearPermisoMC" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/Permisos/Inicio">
+                            <asp:LinkButton ID="lnkCrearPermisoMC" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/Permisos/Inicio">
                                     <span class="bg-success-dk">
                                             <span class="glyphicon imoon-file fs48"></span>
                                         </span>
                                     <h4 style="text-transform:uppercase">Nuevo Permiso Accesorio Actividad M&uacute;sica y Canto</h4>
-                            </asp:LinkButton>--%>
+                            </asp:LinkButton>
 
                         </div>
 
