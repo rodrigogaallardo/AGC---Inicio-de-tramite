@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DGHP_SolicitudesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Encomienda">
+          <Key>
+            <PropertyRef Name="id_encomienda" />
+          </Key>
+          <Property Name="id_encomienda" Type="int" Nullable="false" />
+          <Property Name="FechaEncomienda" Type="datetime" Nullable="false" />
+          <Property Name="nroEncomiendaconsejo" Type="int" Nullable="false" />
+          <Property Name="id_consejo" Type="int" Nullable="false" />
+          <Property Name="id_profesional" Type="int" Nullable="false" />
+          <Property Name="ZonaDeclarada" Type="nvarchar" MaxLength="15" />
+          <Property Name="id_tipotramite" Type="int" Nullable="false" />
+          <Property Name="id_tipoexpediente" Type="int" Nullable="false" />
+          <Property Name="id_subtipoexpediente" Type="int" Nullable="false" />
+          <Property Name="id_estado" Type="int" Nullable="false" />
+          <Property Name="CodigoSeguridad" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Observaciones_plantas" Type="nvarchar" MaxLength="200" />
+          <Property Name="Observaciones_rubros" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" />
+          <Property Name="LastUpdateUser" Type="uniqueidentifier" />
+          <Property Name="Pro_teatro" Type="bit" Nullable="false" />
+          <Property Name="id_solicitud" Type="int" />
+          <Property Name="tipo_anexo" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SSIT_Solicitudes">
+          <Key>
+            <PropertyRef Name="id_solicitud" />
+          </Key>
+          <Property Name="id_solicitud" Type="int" Nullable="false" />
+          <Property Name="id_tipotramite" Type="int" Nullable="false" />
+          <Property Name="id_tipoexpediente" Type="int" Nullable="false" />
+          <Property Name="id_subtipoexpediente" Type="int" Nullable="false" />
+          <Property Name="MatriculaEscribano" Type="int" />
+          <Property Name="NroExpediente" Type="nvarchar" MaxLength="20" />
+          <Property Name="id_estado" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" />
+          <Property Name="LastUpdateUser" Type="uniqueidentifier" />
+          <Property Name="NroExpedienteSade" Type="nvarchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="25" />
+          <Property Name="FechaLibrado" Type="datetime" />
+          <Property Name="CodigoSeguridad" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <Association Name="FK_Encomienda_SSIT_Solicitudes">
+          <End Role="SSIT_Solicitudes" Type="Self.SSIT_Solicitudes" Multiplicity="0..1" />
+          <End Role="Encomienda" Type="Self.Encomienda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SSIT_Solicitudes">
+              <PropertyRef Name="id_solicitud" />
+            </Principal>
+            <Dependent Role="Encomienda">
+              <PropertyRef Name="id_solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DGHP_SolicitudesModelStoreContainer">
+          <EntitySet Name="Encomienda" EntityType="Self.Encomienda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SSIT_Solicitudes" EntityType="Self.SSIT_Solicitudes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Encomienda_SSIT_Solicitudes" Association="Self.FK_Encomienda_SSIT_Solicitudes">
+            <End Role="SSIT_Solicitudes" EntitySet="SSIT_Solicitudes" />
+            <End Role="Encomienda" EntitySet="Encomienda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DGHP_SolicitudesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Encomienda">
+          <Key>
+            <PropertyRef Name="id_encomienda" />
+          </Key>
+          <Property Name="id_encomienda" Type="Int32" Nullable="false" />
+          <Property Name="FechaEncomienda" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nroEncomiendaconsejo" Type="Int32" Nullable="false" />
+          <Property Name="id_consejo" Type="Int32" Nullable="false" />
+          <Property Name="id_profesional" Type="Int32" Nullable="false" />
+          <Property Name="ZonaDeclarada" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="id_tipotramite" Type="Int32" Nullable="false" />
+          <Property Name="id_tipoexpediente" Type="Int32" Nullable="false" />
+          <Property Name="id_subtipoexpediente" Type="Int32" Nullable="false" />
+          <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <Property Name="CodigoSeguridad" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Observaciones_plantas" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Observaciones_rubros" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="Guid" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdateUser" Type="Guid" />
+          <Property Name="Pro_teatro" Type="Boolean" Nullable="false" />
+          <Property Name="id_solicitud" Type="Int32" />
+          <Property Name="tipo_anexo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SSIT_Solicitudes" Relationship="Self.FK_Encomienda_SSIT_Solicitudes" FromRole="Encomienda" ToRole="SSIT_Solicitudes" />
+        </EntityType>
+        <EntityType Name="SSIT_Solicitudes">
+          <Key>
+            <PropertyRef Name="id_solicitud" />
+          </Key>
+          <Property Name="id_solicitud" Type="Int32" Nullable="false" />
+          <Property Name="id_tipotramite" Type="Int32" Nullable="false" />
+          <Property Name="id_tipoexpediente" Type="Int32" Nullable="false" />
+          <Property Name="id_subtipoexpediente" Type="Int32" Nullable="false" />
+          <Property Name="MatriculaEscribano" Type="Int32" />
+          <Property Name="NroExpediente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="Guid" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdateUser" Type="Guid" />
+          <Property Name="NroExpedienteSade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaLibrado" Type="DateTime" Precision="3" />
+          <Property Name="CodigoSeguridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Encomienda" Relationship="Self.FK_Encomienda_SSIT_Solicitudes" FromRole="SSIT_Solicitudes" ToRole="Encomienda" />
+        </EntityType>
+        <Association Name="FK_Encomienda_SSIT_Solicitudes">
+          <End Role="SSIT_Solicitudes" Type="Self.SSIT_Solicitudes" Multiplicity="0..1" />
+          <End Role="Encomienda" Type="Self.Encomienda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SSIT_Solicitudes">
+              <PropertyRef Name="id_solicitud" />
+            </Principal>
+            <Dependent Role="Encomienda">
+              <PropertyRef Name="id_solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DGHP_SolicitudesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Encomienda" EntityType="Self.Encomienda" />
+          <EntitySet Name="SSIT_Solicitudes" EntityType="Self.SSIT_Solicitudes" />
+          <AssociationSet Name="FK_Encomienda_SSIT_Solicitudes" Association="Self.FK_Encomienda_SSIT_Solicitudes">
+            <End Role="SSIT_Solicitudes" EntitySet="SSIT_Solicitudes" />
+            <End Role="Encomienda" EntitySet="Encomienda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DGHP_SolicitudesModelStoreContainer" CdmEntityContainer="DGHP_SolicitudesEntities">
+          <EntitySetMapping Name="Encomienda">
+            <EntityTypeMapping TypeName="DGHP_SolicitudesModel.Encomienda">
+              <MappingFragment StoreEntitySet="Encomienda">
+                <ScalarProperty Name="id_encomienda" ColumnName="id_encomienda" />
+                <ScalarProperty Name="FechaEncomienda" ColumnName="FechaEncomienda" />
+                <ScalarProperty Name="nroEncomiendaconsejo" ColumnName="nroEncomiendaconsejo" />
+                <ScalarProperty Name="id_consejo" ColumnName="id_consejo" />
+                <ScalarProperty Name="id_profesional" ColumnName="id_profesional" />
+                <ScalarProperty Name="ZonaDeclarada" ColumnName="ZonaDeclarada" />
+                <ScalarProperty Name="id_tipotramite" ColumnName="id_tipotramite" />
+                <ScalarProperty Name="id_tipoexpediente" ColumnName="id_tipoexpediente" />
+                <ScalarProperty Name="id_subtipoexpediente" ColumnName="id_subtipoexpediente" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="CodigoSeguridad" ColumnName="CodigoSeguridad" />
+                <ScalarProperty Name="Observaciones_plantas" ColumnName="Observaciones_plantas" />
+                <ScalarProperty Name="Observaciones_rubros" ColumnName="Observaciones_rubros" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
+                <ScalarProperty Name="Pro_teatro" ColumnName="Pro_teatro" />
+                <ScalarProperty Name="id_solicitud" ColumnName="id_solicitud" />
+                <ScalarProperty Name="tipo_anexo" ColumnName="tipo_anexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SSIT_Solicitudes">
+            <EntityTypeMapping TypeName="DGHP_SolicitudesModel.SSIT_Solicitudes">
+              <MappingFragment StoreEntitySet="SSIT_Solicitudes">
+                <ScalarProperty Name="id_solicitud" ColumnName="id_solicitud" />
+                <ScalarProperty Name="id_tipotramite" ColumnName="id_tipotramite" />
+                <ScalarProperty Name="id_tipoexpediente" ColumnName="id_tipoexpediente" />
+                <ScalarProperty Name="id_subtipoexpediente" ColumnName="id_subtipoexpediente" />
+                <ScalarProperty Name="MatriculaEscribano" ColumnName="MatriculaEscribano" />
+                <ScalarProperty Name="NroExpediente" ColumnName="NroExpediente" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
+                <ScalarProperty Name="NroExpedienteSade" ColumnName="NroExpedienteSade" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="FechaLibrado" ColumnName="FechaLibrado" />
+                <ScalarProperty Name="CodigoSeguridad" ColumnName="CodigoSeguridad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

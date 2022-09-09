@@ -1,0 +1,268 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="SSIT.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+    <title id="SiteTitle" runat="server"></title>
+    <asp:PlaceHolder ID="PlaceHolder1" runat="server">
+        <%--          <%: Scripts.Render("~/bundles/jquery") %>
+          <%: Scripts.Render("~/bundles/jquery-ui") %>  --%>
+        <%--<%: Scripts.Render("~/bundles/modernizr") %>--%>
+    </asp:PlaceHolder>
+    <webopt:BundleReference ID="BundleReference1" runat="server" Path="~/Content/css" />
+    <link rel="shortcut icon" href="<%: ResolveClientUrl("~/Content/img/app/favicon.ico")  %>" />
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+
+</head>
+<body>
+    <form id="Form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="180">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
+                <%--Framework Scripts--%>
+
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <div id="page-wrap">
+            <header id="header">
+                <div class="navbar navbar-primary navbar-top">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <a class="navbar-brand bac-header" href="http://buenosaires.gob.ar/agc" target="_blank" style="margin-left: 0px"></a>
+                                <%--<a class="navbar-brand bac-header2 " style="float:left;margin-top:-10px" href="http://www.buenosaires.gob.ar/agc" target="_blank"></a>--%>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <a class="pull-right" href="http://www.buenosaires.gob.ar/" target="_blank">
+                                    <h5 class="sub-brand hidden-sm">
+                                        <img src="<%=Page.ResolveUrl("~/")%>Content/img/app/bac-header-2.png"></h5>
+                                    <%--"<%=Page.ResolveUrl("~/")%>images/ir-top.jpg" --%>
+                                    <%--<img src="<%: ResolveClientUrl("~/Common/Images/icoBastrap.png")  %>" style="height:75%; width:165%; margin-left:-137px; margin-top:10px"/>--%>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="navbar navbar-default" role="navigation" style="box-shadow: 1px 1px 5px #EFEFEF;" runat="server" id="navBarMaster">
+                    <div class="container-fluid">
+
+                        <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled">
+                            <AnonymousTemplate>
+
+
+                                <div class="row">
+
+                                    <div class="ba-navbar-top-find">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                                            <span class="sr-only">Cambiar navegación</span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="collapse navbar-collapse" id="main-nav2">
+                                        <ul class="nav navbar-nav ">
+                                            <li>
+                                                <asp:LinkButton ID="btnInicio" runat="server" PostBackUrl="~/" CausesValidation="false">
+                        <i class="imoon imoon-home"></i> <span class="text" style="font-size:16px !important;">Inicio</span></a>
+                                                </asp:LinkButton>
+                                            </li>
+                                            <li>
+                                        </ul>
+
+
+                                        <ul class="nav navbar-nav navbar-right ">
+                                            <li>
+                                                <asp:LinkButton ID="btnLogin" CssClass="navbar-right" runat="server" PostBackUrl="~/" CausesValidation="false">
+        <span class="text" style="font-size:15px !important;">Iniciar sesión</span></a>
+                                                </asp:LinkButton>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+
+                                <div class="row">
+
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav2">
+                                            <span class="sr-only">Cambiar navegación</span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+
+                                    <div class="collapse navbar-collapse" id="main-nav2">
+
+                                        <div class="collapse navbar-collapse" id="main-nav">
+                                            <ul class="nav navbar-nav ">
+                                                <li>
+
+                                                    <asp:LinkButton runat="server" PostBackUrl="~/Default" CausesValidation="false">
+                <i class="imoon imoon-home"></i> <span class="text" style="font-size:16px !important;">Inicio</span></a>
+                                                    </asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Solicitud/Bandeja" CausesValidation="false">
+                <i class="imoon imoon-inbox"></i> <span class="text" style="font-size:15px !important;">Bandeja de Tramites</span></a>
+                                                    </asp:LinkButton>
+                                                </li>
+                                                <%--li>
+                                                    <asp:LinkButton ID="LinkButton2" runat="server" PostBackUrl="~/Solicitud/Bandeja2" CausesValidation="false">
+                <i class="imoon imoon-inbox"></i> <span class="text" style="font-size:15px !important;">Nueva Bandeja de Tramites</span></a>
+                                                    </asp:LinkButton>
+                                                </li--%>
+                                                <li>
+                                                    <asp:LinkButton ID="BntBandejaNotificaciones" runat="server" PostBackUrl="~/Solicitud/BandejaNotificaciones" CausesValidation="false">
+                                                        <i class="imoon imoon-bell"></i><span class="text" style="font-size: 15px !important;">Bandeja de Notificaciones</span><asp:Label runat="server" ID="lbtBandejaNotificaciones"
+                                                            PostBackUrl="~/Solicitud/BandejaNotificaciones" CausesValidation="false" Style="color: red; font-weight: bold"></asp:Label>
+                                                    </asp:LinkButton>
+                                                </li>
+                                            </ul>
+                                            <ul class="nav navbar-nav navbar-right">
+
+
+                                                <li class="dropdown navbar-color-a" id="menu-user">
+
+                                                    <a title="" href="#" data-toggle="dropdown" data-target="#menu-user" class="dropdown-toggle">
+                                                        <i class="imoon imoon-user"></i>
+                                                        <span class="text ">
+                                                            <asp:Label ID="lblUsername" runat="server"></asp:Label></span>
+                                                        <b class="caret" style="margin-left: 5px;"></b>
+                                                    </a>
+                                                    <ul class="dropdown-menu navbar-color-a">
+                                                        <li>
+                                                            <asp:LinkButton ID="btnChangePassword" runat="server" PostBackUrl="~/Account/Manage">Modificar contrase&ntilde;a</asp:LinkButton></li>
+                                                        <li>
+                                                            <asp:LinkButton ID="btnEdituser" runat="server" PostBackUrl="~/Account/Edit">Actualizar datos de usuario</asp:LinkButton></li>
+                                                        <li>
+                                                            <asp:LinkButton ID="btnTransferir" runat="server" PostBackUrl="~/Solicitud/ConversionUsuarios">Transferir Tramites de Usuario Anterior</asp:LinkButton></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li>
+                                                    <asp:LinkButton ID="btnLogOff" runat="server" OnClick="LogOff" CausesValidation="false">
+                        <i class="imoon imoon-share-alt"></i> 
+                        <span class="text">Cerrar sesi&oacute;n</span>
+                                                    </asp:LinkButton>
+
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+
+                    </div>
+                </nav>
+            </header>
+
+            <div id="body">
+                <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+
+                <div class="container" id="contendorGral" runat="server">
+                    <section class="row" id="sectionPlaceHolder" runat="server">
+                        <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer" class="footer">
+            <div class="container-fluid">
+                <div class="row footer-row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="container-ba">
+                                <a href="http://www.buenosaires.gob.ar/">
+                                    <img src="<%=Page.ResolveUrl("~/")%>Content/img/ba_vamosba_blanco.png" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="container-ba-border">
+                                <a href="#">
+                                    <h3>Solicitud de Inicio de Autorización de Actividad Económica - Agencia Gubernamental de Control</h3>
+                                </a>
+
+                                <div style="font-size: x-small" class="text-muted">
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>
+                                            <asp:Label ID="lblVersion" Text="text" runat="server" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="col-md-8 col-xs-6">
+                            <div class="container-ba-border">
+
+                                <a href="tramitesadistancia@buenosaires.gob.ar">
+                                    <h4>tramitesadistancia@buenosaires.gob.ar</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 hidden-xs">
+                            <div class="container-redes">
+                                <ul class="mini-social">
+                                    <li>
+                                        <a class="social-fb" href="http://www.facebook.com/agcontrol" target="_blank">Facebook</a>
+                                    </li>
+                                    <li>
+                                        <a class="social-tw" href="http://www.twitter.com/agc_control" target="_blank">Twitter</a>
+                                    </li>
+                                    <li>
+                                        <a class="social-yt" href="http://www.youtube.com/user/agcontrolba" target="_blank">Youtube</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: -55px;">
+                    <div class="container-ciudad">
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Hacer que el tamaño de la pagina sea el 100% de alto como minimo
+
+                var alto = $(document).height() - $("#header").height() - $("#footer").height() - 80;
+
+                if (alto > $("#body").height()) {
+                    $("#body").css("min-height", alto);
+                }
+            });
+
+        </script>
+    </form>
+</body>
+</html>

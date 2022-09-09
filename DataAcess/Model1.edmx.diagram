@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f7a6fa2acdc46159616e5ff3e2cec8f" Name="Diagrama1">
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="147.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.aspnet_Membership" Width="1.5" PointX="3" PointY="146.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.aspnet_Roles" Width="1.5" PointX="3" PointY="153.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.aspnet_SchemaVersions" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.aspnet_Users" Width="1.5" PointX="5.25" PointY="147.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_Rel_Elevadores_Inspeccion" Width="1.5" PointX="10.5" PointY="151.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_Rel_Elevadores_Pagos" Width="1.5" PointX="10.5" PointY="147.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_Rel_Empresas_Profesionales" Width="1.5" PointX="10.5" PointY="155.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_Rel_Empresas_Profesionales_Historial" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_Resultado_Inspeccion" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_Tipo_Informe" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_TiposDeElevadores" Width="1.5" PointX="11.25" PointY="131.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ASR_Ubicaciones_Elevadores" Width="1.5" PointX="13.5" PointY="149.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.AuditoriaDeTablas" Width="1.5" PointX="5.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.AVH_visitas" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.BackupCalles" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.BackupEscribanos" Width="1.5" PointX="2.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Barrios" Width="1.5" PointX="6" PointY="111.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CAA_Rel_CAA_DocAdjuntos" Width="1.5" PointX="18.75" PointY="142.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Calles" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Calles_Eliminadas" Width="1.5" PointX="6.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Calles_Excepcion" Width="1.5" PointX="15.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Categorias" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Comisarias" Width="1.5" PointX="6" PointY="113.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Comunas" Width="1.5" PointX="6" PointY="116.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Conceptos_BUI_Independientes" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ConformacionLocal" Width="1.5" PointX="18.75" PointY="182" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ConsejoProfesional" Width="1.5" PointX="3.75" PointY="135.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.ConsejoProfesional_RolesPermitidos" Width="1.5" PointX="8.25" PointY="154.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_ConformacionLocal" Width="1.5" PointX="15.75" PointY="158.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_DatosLocal" Width="1.5" PointX="7.5" PointY="142" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_DocumentosAdjuntos" Width="1.5" PointX="15.75" PointY="165.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Estados" Width="1.5" PointX="11.25" PointY="161.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_HistorialEstados" Width="1.5" PointX="7.5" PointY="157.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Normativas" Width="1.5" PointX="13.5" PointY="144.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Planos" Width="1.5" PointX="14.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Plantas" Width="1.5" PointX="18.75" PointY="166.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Rubros" Width="1.5" PointX="21.75" PointY="167.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Solicitudes" Width="1.5" PointX="13.5" PointY="156.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Solicitudes_Observaciones" Width="1.5" PointX="15.75" PointY="178.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Titulares_PersonasFisicas" Width="1.5" PointX="16.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Titulares_PersonasJuridicas" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Titulares_PersonasJuridicas_PersonasFisicas" Width="1.5" PointX="17.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Titulares_Solicitud_PersonasFisicas" Width="1.5" PointX="26.75" PointY="160" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Titulares_Solicitud_PersonasJuridicas" Width="1.5" PointX="24.75" PointY="167.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas" Width="1.5" PointX="29" PointY="163.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Ubicaciones" Width="1.5" PointX="29.75" PointY="155.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Ubicaciones_PropiedadHorizontal" Width="1.5" PointX="32" PointY="155.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.CPadron_Ubicaciones_Puertas" Width="1.5" PointX="32" PointY="158" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.DatosBuscados" Width="1.5" PointX="17.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.DGFYCO_Ubicaciones" Width="1.5" PointX="10.5" PointY="141.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.DGFYCO_Ubicaciones_DatosAdicionales" Width="1.5" PointX="15.75" PointY="140" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.DGFYCO_Ubicaciones_Puertas" Width="1.5" PointX="12.75" PointY="141.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.DistritosEscolares" Width="1.5" PointX="6" PointY="118.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Documento" Width="1.5" PointX="15" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.dtproperties" Width="1.5" PointX="18.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda" Width="1.5" PointX="16.5" PointY="147.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Certificado_Sobrecarga" Width="1.5" PointX="21" PointY="159.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_ConformacionLocal" Width="1.5" PointX="18.75" PointY="149.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_DatosLocal" Width="1.5" PointX="18.75" PointY="157" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_DocumentosAdjuntos" Width="1.5" PointX="21.75" PointY="150.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Estados" Width="1.5" PointX="14.25" PointY="136.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Firmantes_PersonasFisicas" Width="1.5" PointX="21.75" PointY="145.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Firmantes_PersonasJuridicas" Width="1.5" PointX="23.75" PointY="155.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_HistorialEstados" Width="1.5" PointX="7.5" PointY="207.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Normativas" Width="1.5" PointX="24.75" PointY="150.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Planos" Width="1.5" PointX="24.75" PointY="146.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Plantas" Width="1.5" PointX="18.75" PointY="145.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Rel_TiposDestinos_TiposUsos" Width="1.5" PointX="32.25" PointY="136.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Rel_TiposSobrecargas_TiposDestinos" Width="1.5" PointX="34.25" PointY="158" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Rubros" Width="1.5" PointX="26.75" PointY="155.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Sobrecarga_Detalle1" Width="1.5" PointX="32.25" PointY="150.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Sobrecarga_Detalle2" Width="1.5" PointX="34.5" PointY="151.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Sobrecargas" Width="1.5" PointX="18.75" PointY="189.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Tipos_Certificados_Sobrecarga" Width="1.5" PointX="18.75" PointY="176.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Tipos_Destinos" Width="1.5" PointX="30" PointY="139" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Tipos_Sobrecargas" Width="1.5" PointX="18.75" PointY="179" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Tipos_Usos" Width="1.5" PointX="30" PointY="135" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Titulares_PersonasFisicas" Width="1.5" PointX="27.75" PointY="147.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Titulares_PersonasJuridicas" Width="1.5" PointX="27.75" PointY="140.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Titulares_PersonasJuridicas_PersonasFisicas" Width="1.5" PointX="30" PointY="151" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_TransicionEstados" Width="1.5" PointX="16.5" PointY="118.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Ubicaciones" Width="1.5" PointX="24.75" PointY="141.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Ubicaciones_PropiedadHorizontal" Width="1.5" PointX="30" PointY="142.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_Ubicaciones_Puertas" Width="1.5" PointX="27" PointY="137" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_URLxROL" Width="1.5" PointX="5.25" PointY="179.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Encomienda_ZonasActualizadas" Width="1.5" PointX="18.75" PointY="212.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt" Width="1.5" PointX="11.25" PointY="103.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Empresas" Width="1.5" PointX="13.5" PointY="104.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Estados" Width="1.5" PointX="9" PointY="105.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_HistorialEstados" Width="1.5" PointX="7.5" PointY="210.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Titulares_PersonasFisicas" Width="1.5" PointX="27.75" PointY="109" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Titulares_PersonasJuridicas" Width="1.5" PointX="28.5" PointY="104.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Titulares_PersonasJuridicas_PersonasFisicas" Width="1.5" PointX="30.75" PointY="109.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_TransicionEstados" Width="1.5" PointX="11.25" PointY="100" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Ubicaciones" Width="1.5" PointX="13.5" PointY="122.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Ubicaciones_PropiedadHorizontal" Width="1.5" PointX="33" PointY="127.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EncomiendaExt_Ubicaciones_Puertas" Width="1.5" PointX="15.75" PointY="125.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.EntidadNormativa" Width="1.5" PointX="11.25" PointY="137.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Escribano" Width="1.5" PointX="7.5" PointY="184.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.GrupoConsejos" Width="1.5" PointX="1.5" PointY="135.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.GrupoConsejos_Roles_Clasificacion" Width="1.5" PointX="5.25" PointY="181.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Instructivos" Width="1.5" PointX="7.5" PointY="213.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Localidad" Width="1.5" PointX="25.5" PointY="128.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.MasBuscados" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Parametros" Width="1.5" PointX="19.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Persona" Width="1.5" PointX="36.75" PointY="156.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.PersonasInhibidas" Width="1.5" PointX="27.75" PointY="123.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Profesional" Width="1.5" PointX="6" PointY="133.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Profesional_Perfiles_Inhibiciones" Width="1.5" PointX="8.25" PointY="149.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Provincia" Width="1.5" PointX="23.25" PointY="129.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.RegionesSanitarias" Width="1.5" PointX="6" PointY="121.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_Encomienda_Rectificatoria" Width="1.5" PointX="18.75" PointY="215.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_Rubros_Fichas" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_Rubros_ImpactoAmbiental" Width="1.5" PointX="19.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_TipoExpediente_SubtipoExpediente" Width="1.5" PointX="13.5" PointY="166.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_TipoTramite_TipoExpediente" Width="1.5" PointX="13.5" PointY="170.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_TipoTramite_TiposDeDocumentosRequeridos" Width="1.5" PointX="32.75" PointY="147.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_Usuarios_AS_Empresas" Width="1.5" PointX="7.5" PointY="217.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_Usuarios_GrupoConsejo" Width="1.5" PointX="10.5" PointY="158.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_UsuariosProf_Roles_Clasificacion" Width="1.5" PointX="7.5" PointY="164.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rel_ZonasPlaneamiento_ZonasHabilitaciones" Width="1.5" PointX="19.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_Config_Incendio" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_Historial_Cambios" Width="1.5" PointX="30.75" PointY="177.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_Historial_Cambios_Estados" Width="1.5" PointX="33" PointY="175.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_Historial_Cambios_UsuariosIntervinientes" Width="1.5" PointX="7.5" PointY="222.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_InformacionRelevante" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_InformacionRelevante_Historial_Cambios" Width="1.5" PointX="33" PointY="179" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_TiposDeDocumentosRequeridos" Width="1.5" PointX="21.75" PointY="67.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Rubros_TiposDeDocumentosRequeridos_Historial_Cambios" Width="1.5" PointX="33" PointY="181.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.RubrosCondiciones" Width="1.5" PointX="14.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.RubrosZonasCondiciones" Width="1.5" PointX="17" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.RubrosZonasCondiciones_Historial_Cambios" Width="1.5" PointX="18.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Solicitud" Width="1.5" PointX="9.75" PointY="181.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudDocumento" Width="1.5" PointX="17.25" PointY="95" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudExpediente" Width="1.5" PointX="8.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudHistorialEstados" Width="1.5" PointX="10.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudObservaciones" Width="1.5" PointX="12" PointY="193.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudPartida" Width="1.5" PointX="12" PointY="184.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudPuerta" Width="1.5" PointX="14.25" PointY="185.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudRubro" Width="1.5" PointX="12" PointY="196.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudTipoActividad" Width="1.5" PointX="30.75" PointY="185.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SolicitudZonasActualizadas" Width="1.5" PointX="12" PointY="199.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SSIS_Log" Width="1.5" PointX="12.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SSIT_Solicitudes" Width="1.5" PointX="21.75" PointY="138.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SSIT_Solicitudes_Encomienda" Width="1.5" PointX="30" PointY="146.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SSIT_Solicitudes_HistorialEstados" Width="1.5" PointX="24" PointY="137.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SSIT_Solicitudes_Observaciones" Width="1.5" PointX="24" PointY="134.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SSIT_Solicitudes_RULH" Width="1.5" PointX="20.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SubtipoExpediente" Width="1.5" PointX="11.25" PointY="164.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.SubTiposDeUbicacion" Width="1.5" PointX="8.25" PointY="128.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Sugerencias" Width="1.5" PointX="20.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Tipo_Documentacion_Req" Width="1.5" PointX="24.5" PointY="174.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.tipo_iluminacion" Width="1.5" PointX="16.5" PointY="137.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.tipo_ventilacion" Width="1.5" PointX="16.5" PointY="133.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoActividad" Width="1.5" PointX="24.5" PointY="182.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoDestino" Width="1.5" PointX="16.5" PointY="170.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoDocumento" Width="1.5" PointX="12.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoDocumentoPersonal" Width="1.5" PointX="25.5" PointY="114.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoEstadoSolicitud" Width="1.5" PointX="19.5" PointY="138.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoExpediente" Width="1.5" PointX="11.25" PointY="168.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoInhibicion" Width="1.5" PointX="25.5" PointY="111.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoNormativa" Width="1.5" PointX="11.25" PointY="134.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TiposDeCaracterLegal" Width="1.5" PointX="19.5" PointY="134.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TiposDeDocumentosRequeridos" Width="1.5" PointX="19.5" PointY="128.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TiposDeDocumentosSistema" Width="1.5" PointX="19.5" PointY="125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TiposDeInformes" Width="1.5" PointX="20.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TiposDeIngresosBrutos" Width="1.5" PointX="25.5" PointY="123.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TiposDePlanos" Width="1.5" PointX="22.5" PointY="126.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TiposDeUbicacion" Width="1.5" PointX="6" PointY="129.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoSector" Width="1.5" PointX="16.5" PointY="184.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoSociedad" Width="1.5" PointX="25.5" PointY="119.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoSuperficie" Width="1.5" PointX="16.5" PointY="173.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoTramite" Width="1.5" PointX="11.25" PointY="172" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TipoVerificacion" Width="1.5" PointX="12.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TitularInhibido" Width="1.5" PointX="27.75" PointY="115.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_DocumentosAdjuntos" Width="1.5" PointX="21" PointY="172.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Firmantes_PersonasFisicas" Width="1.5" PointX="27" PointY="169.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Firmantes_PersonasJuridicas" Width="1.5" PointX="21" PointY="177.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Solicitudes" Width="1.5" PointX="18.75" PointY="169.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Solicitudes_HistorialEstados" Width="1.5" PointX="21" PointY="183.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Solicitudes_Observaciones" Width="1.5" PointX="21" PointY="186.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Titulares_PersonasFisicas" Width="1.5" PointX="31" PointY="167.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Titulares_PersonasJuridicas" Width="1.5" PointX="34" PointY="161.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Transf_Titulares_PersonasJuridicas_PersonasFisicas" Width="1.5" PointX="36.25" PointY="169.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.TransicionEstadoSolicitud" Width="1.5" PointX="21.75" PointY="135.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones" Width="1.5" PointX="8.25" PointY="113" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_Clausuras" Width="1.5" PointX="10.5" PointY="110.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_Historial_Cambios" Width="1.5" PointX="13.5" PointY="127.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_Historial_Cambios_Estados" Width="1.5" PointX="15.75" PointY="129" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_Historial_Cambios_UsuariosIntervinientes" Width="1.5" PointX="7.5" PointY="225.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_Inhibiciones" Width="1.5" PointX="10.5" PointY="114.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_PropiedadHorizontal" Width="1.5" PointX="27.75" PointY="131.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_PropiedadHorizontal_Clausuras" Width="1.5" PointX="30" PointY="129.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_PropiedadHorizontal_Historial_Cambios" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_PropiedadHorizontal_Historial_Cambios_Estados" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_PropiedadHorizontal_Historial_Cambios_UsuariosIntervinientes" Width="1.5" PointX="7.5" PointY="228" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_PropiedadHorizontal_Inhibiciones" Width="1.5" PointX="30" PointY="125.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_Puertas" Width="1.5" PointX="10.5" PointY="118.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_Puertas_Historial_Cambios" Width="1.5" PointX="15.75" PointY="122.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_ZonasComplementarias" Width="1.5" PointX="10.5" PointY="122.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Ubicaciones_ZonasComplementarias_Historial_Cambios" Width="1.5" PointX="21.75" PointY="123" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Usuario" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsDatosCallejeroUSIG" Width="1.5" PointX="2.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_ActaNotarial" Width="1.5" PointX="23.75" PointY="160.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_DerechoOcupacion" Width="1.5" PointX="26" PointY="178.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_Files" Width="1.5" PointX="7.5" PointY="230.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_Files_TRANSF" Width="1.5" PointX="23.25" PointY="201.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_InstrumentoJudicial" Width="1.5" PointX="28.25" PointY="174.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_InstrumentoPrivado" Width="1.5" PointX="28.25" PointY="178.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_InstrumentoPublico" Width="1.5" PointX="28.25" PointY="182.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_PersonasFisicas" Width="1.5" PointX="26" PointY="186.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_PersonasFisicas_Representantes" Width="1.5" PointX="28.25" PointY="186" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_PersonasJuridicas" Width="1.5" PointX="26" PointY="189.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_PersonasJuridicas_Representantes" Width="1.5" PointX="28.25" PointY="190.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsEscribanos_Tipos_Escrituras" Width="1.5" PointX="21.5" PointY="163.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_BatchLog" Width="1.5" PointX="10" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_BoletaUnica" Width="1.5" PointX="13" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_BoletaUnica_Errores" Width="1.5" PointX="4.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_BoletaUnica_Estados" Width="1.5" PointX="10.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_BoletaUnica_HistorialEstados" Width="1.5" PointX="15.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_BoletaUnica_HistorialEstados2" Width="1.5" PointX="21.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_Conceptos" Width="1.5" PointX="10" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.wsPagos_PagoElectronico" Width="1.5" PointX="10" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Zonas_Habilitaciones" Width="1.5" PointX="21.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Zonas_Planeamiento" Width="1.5" PointX="6" PointY="124" IsExpanded="true" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK__aspnet_Me__Appli__031C6FA4" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK__aspnet_Ro__Appli__0504B816" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK__aspnet_Us__Appli__05F8DC4F" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK__aspnet_Me__UserI__041093DD" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK__Encomiend__RoleI__2898D86D" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ConsejoProfesional_RolesPermitidos_aspnet_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_GrupoConsejos_Roles_Clasificacion_aspnet_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Profesional_Perfiles_Inhibiciones_aspnet_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_UsuariosProf_Roles_Clasificacion_aspnet_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Rel_Elevadores_Inspección_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Rel_Elevadores_Pagos_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Rel_Empresas_Profesionales_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Ubicaciones_Elevadores_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Ubicaciones_Elevadores_aspnet_Users_LastUpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_DatosLocal_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_DatosLocal_aspnet_Users_LastUpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_HistorialEstados_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Normativas_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Normativas_aspnet_Users_LastUpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Solicitudes_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Solicitudes_aspnet_Users_LastUpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Ubicaciones_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_aspnet_Users_LastUpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_DatosAdicionales_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_DatosAdicionales_aspnet_Users_LastUpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_DocumentosAdjuntos_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_DocumentosAdjuntos_Encomienda_DocumentosAdjuntos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_HistorialEstados_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_HistorialEstados_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Instructivos_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Instructivos_aspnet_Users_LastUpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_Usuarios_AS_Empresas_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_Usuarios_GrupoConsejo_Rel_Usuarios_GrupoConsejo" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_UsuariosProf_Roles_Clasificacion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_Historial_Cambios_UsuariosIntervinientes_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_Encomienda_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasFisicas_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasFisicas_aspnet_Users_UpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_aspnet_Users_CreateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_aspnet_Users_UpdateUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Historial_Cambios_UsuariosIntervinientes_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_PropiedadHorizontal_Historial_Cambios_UsuariosIntervinientes_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_files_wsEscribanos_files" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Rel_Elevadores_Inspección_ASR_Ubicaciones_Elevadores" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Rel_Elevadores_Pagos_ASR_Ubicaciones_Elevadores" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Rel_Empresas_Profesionales_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Ubicaciones_Elevadores_ASR_TiposDeElevadores" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ASR_Ubicaciones_Elevadores_DGFYCO_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Barrios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CAA_Rel_CAA_DocAdjuntos_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Comisarias" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Comunas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ConformacionLocal_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ConformacionLocal_TipoDestino" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ConsejoProfesional_GrupoConsejos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_ConsejoProfesional" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Profesional_ConsejoProfesional" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ConsejoProfesional_RolesPermitidos_GrupoConsejos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_ConformacionLocal_CPadron_Plantas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_ConformacionLocal_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_ConformacionLocal_tipo_iluminacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_ConformacionLocal_Tipo_Superficie" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_ConformacionLocal_tipo_ventilacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_ConformacionLocal_TipoDestino" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_DatosLocal_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_DocumentosAdjuntos_CPadron_DocumentosAdjuntos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_DocumentosAdjuntos_TiposDeDocumentosRequeridos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_DocumentosAdjuntos_TiposDeDocumentosSistema" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Solicitudes_CPadron_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_HistorialEstados_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Normativas_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Normativas_EntidadNormativa" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Normativas_TipoNormativa" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Plantas_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Plantas_TipoSector" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Rubros_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Rubros_Tipo_Documentacion_Req" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Rubros_TipoActividad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Solicitudes_Observaciones_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Solicitudes_SubtipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Solicitudes_TipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Solicitudes_TipoTramite" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasFisicas_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasJuridicas_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Ubicaciones_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Solicitudes_CPadron_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasFisicas_Localidad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasFisicas_TiposDeIngresosBrutos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasJuridicas_Localidad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas_CPadron_Titulares_Solicitud_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasJuridicas_TiposDeIngresosBrutos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasJuridicas_TipoSociedad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Ubicaciones_PropiedadHorizontal_CPadron_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Ubicaciones_Puertas_CPadron_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Ubicaciones_SubTiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Ubicaciones_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_CPadron_Ubicaciones_Zonas_Planeamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_DatosAdicionales_DGFYCO_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_Puertas_DGFYCO_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_SubTiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_DGFYCO_Ubicaciones_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_DistritosEscolares" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Documento_TipoDocumentacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Documento_TipoVerificacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudDocumento_Documentacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_ConformacionLocal_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_DatosLocal_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_DocumentosAdjuntos_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Encomienda_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasFisicas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasJuridicas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Normativas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Planos_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Plantas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Rubros_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecargas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_SubtipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_TipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_TipoTramite" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasFisicas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_PersonasFisicas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Ubicaciones_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_ZonasActualizadas_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_Encomienda_Rectificatoria_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_Encomienda_Rectificatoria_Encomienda1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_Encomienda_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_ActaNotarial_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Certificado_Sobrecarga_Encomienda_Certificado_Sobrecarga" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Certificado_Sobrecarga_Encomienda_Tipos_Certificados_Sobrecarga" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Certificado_Sobrecarga_Encomienda_Tipos_Sobrecargas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecarga_Detalle1_Encomienda_Certificado_Sobrecarga" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_ConformacionLocal_Encomienda_Plantas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_ConformacionLocal_tipo_iluminacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_ConformacionLocal_Tipo_Superficie" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_ConformacionLocal_tipo_ventilacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_ConformacionLocal_TipoDestino" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_DocumentosAdjuntos_TiposDeDocumentosRequeridos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_DocumentosAdjuntos_TiposDeDocumentosSistema" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_TransicionEstadoSolicitud_Encomienda_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_TransicionEstadoSolicitud_Encomienda_Estados1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasFisicas_Encomienda_Titulares_PersonasFisicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasFisicas_TiposDeCaracterLegal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasJuridicas_Encomienda_Titulares_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasJuridicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Firmantes_PersonasJuridicas_TiposDeCaracterLegal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_PersonasFisicas_Encomienda_Firmantes_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Normativas_EntidadNormativa" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Normativas_TipoNormativa" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Planos_Tipo_Plano" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Plantas_TipoSector" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecarga_Detalle1_Encomienda_Plantas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Rel_TiposDestinos_TiposUsos_Encomienda_Tipos_Destinos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Rel_TiposDestinos_TiposUsos_Encomienda_Tipos_Usos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Rel_TiposSobrecargas_TiposDestinos_Encomienda_Tipos_Certificados_Sobrecarga" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Rel_TiposSobrecargas_TiposDestinos_Encomienda_Tipos_Destinos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Rubros_Tipo_Documentacion_Req" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Rubros_TipoActividad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecarga_Detalle1_Encomienda_Tipos_Destinos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecarga_Detalle1_Encomienda_Tipos_Usos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecarga_Detalle2_Encomienda_Sobrecarga_Detalle1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecarga_Detalle2_Encomienda_Tipos_Usos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Sobrecarga_Detalle2_Encomienda_Tipos_Usos1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasFisicas_Localidad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasFisicas_TiposDeIngresosBrutos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_Localidad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_PersonasFisicas_Encomienda_Titulares_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_TiposDeIngresosBrutos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_TipoSociedad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Titulares_PersonasJuridicas_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Ubicaciones_PropiedadHorizontal_Encomienda_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Ubicaciones_Puertas_Encomienda_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Ubicaciones_SubTiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Ubicaciones_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Ubicaciones_Zonas_Planeamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Encomienda_Ubicaciones_PropiedadHorizontal_Ubicaciones_PropiedadHorizontal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Empresas_EncomiendaExt" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_EncomiendaExt_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Titulares_PersonasFisicas_EncomiendaExt" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Titulares_PersonasJuridicas_EncomiendaExt" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Titulares_PersonasJuridicas_PersonasFisicas_EncomiendaExt" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_Encomienda" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_TransicionEstados_EncomiendaExt_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_TransicionEstados_EncomiendaExt_Estados1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Titulares_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Titulares_PersonasJuridicas_PersonasFisicas_EncomiendaExt_Titulares_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Titulares_PersonasJuridicas_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_EncomiendaExt_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_EncomiendaExt_Ubicaciones1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_PropiedadHorizontal_EncomiendaExt_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_Puertas_EncomiendaExt_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_SubTiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_Zonas_Planeamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_EncomiendaExt_Ubicaciones_PropiedadHorizontal_Ubicaciones_PropiedadHorizontal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_EntidadNormativa" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_Escribano" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_Usuarios_GrupoConsejo_GrupoConsejos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_UsuariosProf_Roles_Clasificacion_GrupoConsejos_Roles_Clasificacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Localidad_Provincia" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Persona_Localidad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasFisicas_Localidad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_Localidad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Persona_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_PersonasInhibidas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Profesional_Perfiles_Inhibiciones_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_RegionesSanitarias" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_Rubros_Fichas_Rubros" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_TipoExpediente_SubtipoExpediente_SubtipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_TipoExpediente_SubtipoExpediente_TipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_TipoTramite_TipoExpediente_TipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_TipoTramite_TipoExpediente_TipoTramite" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_TipoTramite_TiposDeDocumentosRequeridos_TiposDeDocumentosRequeridos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rel_TipoTramite_TiposDeDocumentosRequeridos_TipoTramite" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_Config_Incendio_Rubros" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_InformacionRelevante_Rubros" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_TiposDeDocumentosRequeridos_Rubros" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_Historial_Cambios_Estados_Rubros_Historial_Cambios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_Historial_Cambios_Tipo_Documentacion_Req" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_Historial_Cambios_TipoActividad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_InformacionRelevante_Historial_Cambios_Rubros_Historial_Cambios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_TiposDeDocumentosRequeridos_Historial_Cambios_Rubros_Historial_Cambios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Rubros_TiposDeDocumentosRequeridos_TiposDeDocumentosRequeridos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_RubrosZonasCondiciones_RubrosCondiciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_SubTipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_TipoEstadoSolicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_TipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_TipoNormativa" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_TipoSociedad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Solicitud_TipoTramite" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudDocumento_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudObservaciones_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudPartida_Solicitud1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudRubro_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudTipoActividad_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudZonasActualizadas_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudPartida_SubTiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudPartida_TipoSector" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudPartida_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudPuerta_SolicitudPartida" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SolicitudTipoActividad_TipoActividad" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_Encomienda_SSIT_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_HistorialEstados_SSIT_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_Observaciones_SSIT_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_SubtipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_TipoEstadoSolicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_TipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SSIT_Solicitudes_TipoTramite" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Solicitudes_SubtipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_SubTiposDeUbicacion_TiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Historial_Cambios_SubTiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_SubTiposDeUbicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_TitularInhibido_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasJuridicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_PersonasFisicas_TipoDocumentoPersonal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Solicitudes_TipoEstadoSolicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_TransicionEstadoSolicitud_TipoEstadoSolicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_TransicionEstadoSolicitud_TipoEstadoSolicitud1" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Solicitudes_TipoExpediente" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_TitularInhibido_TipoInhibicion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasFisicas_TiposDeCaracterLegal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasJuridicas_TiposDeCaracterLegal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_DocumentosAdjuntos_TiposDeDocumentosRequeridos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_DocumentosAdjuntos_TiposDeDocumentosSistema" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasFisicas_TiposDeIngresosBrutos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_TiposDeIngresosBrutos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Solicitudes_TipoTramite" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_DocumentosAdjuntos_Transf_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_Files_TRANSF_Transf_DocumentosAdjuntos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasFisicas_Transf_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasFisicas_Transf_Titulares_PersonasFisicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasJuridicas_Transf_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Firmantes_PersonasJuridicas_Transf_Titulares_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_PersonasFisicas_Transf_Firmantes_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Solicitudes_HistorialEstados_Transf_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Solicitudes_Observaciones_Transf_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasFisicas_Transf_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_PersonasFisicas_CAA" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_Transf_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Transf_Titulares_PersonasJuridicas_PersonasFisicas_Transf_Titulares_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Clausuras_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Inhibiciones_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_PropiedadHorizontal_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Puertas_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Zonas_Planeamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_ZonasComplementarias_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Historial_Cambios_Estados_Ubicaciones_Historial_Cambios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Historial_Cambios_Zonas_Planeamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_Puertas_Historial_Cambios_Ubicaciones_Historial_Cambios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_ZonasComplementarias_Historial_Cambios_Ubicaciones_Historial_Cambios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_PropiedadHorizontal_Clausuras_Ubicaciones_PropiedadHorizontal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_PropiedadHorizontal_Inhibiciones_Ubicaciones_PropiedadHorizontal" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_PropiedadHorizontal_Historial_Cambios_Estados_Ubicaciones_PropiedadHorizontal_Historial_Cambios" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_ZonasComplementarias_Zonas_Planeamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_Ubicaciones_ZonasComplementarias_Historial_Cambios_Planeamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_ActaNotarial_wsEscribanos_Tipos_Escrituras" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_DerechoOcupacion_wsEscribanos_ActaNotarial" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_PersonasFisicas_wsEscribanos_ActaNotarial" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_PersonasJuridicas_wsEscribanos_ActaNotarial" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_InstrumentoJudicial_wsEscribanos_DerechoOcupacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_InstrumentoPrivado_wsEscribanos_DerechoOcupacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_InstrumentoPublico_wsEscribanos_DerechoOcupacion" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_Files_TRANSF_wsEscribanos_files" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_PersonasFisicas_Representantes_wsEscribanos_PersonasFisicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsEscribanos_PersonasJuridicas_Representantes_wsEscribanos_PersonasJuridicas" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_ws_Pagos_Conceptos_ws_Pagos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsPagos_BatchLogError_wsPagos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsPagos_Cobrados_BU_wsPagos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsPagos_PagoElectronico_wsPagos" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsPagos_BoletaUnica_HistorialEstados_wsPagos_BoletaUnica" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsPagos_BoletaUnica_wsPagos_BoletaUnica_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.FK_wsPagos_BoletaUnica_HistorialEstados_wsPagos_BoletaUnica_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.aspnet_UsersInRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.Profesional_Perfiles_UsuarioWS" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.Rel_Categorias_Rubros" ManuallyRouted="false" />
+        <AssociationConnector Association="DGHP_SolicitudesModel.SolicitudPuertaTipoSector" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

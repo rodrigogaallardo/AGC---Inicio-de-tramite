@@ -1,0 +1,148 @@
+﻿.view-id-shortcuts_home{
+	margin-bottom:30px;
+}
+.view-id-shortcuts_home .views-row{
+	padding:30px 0;
+	text-align:center;
+}
+
+.view-id-shortcuts .views-row{
+	padding:2px 0;
+	text-align:center;
+}
+
+.view-id-shortcuts_home .views-row a{
+	color:#656769;
+	text-transform: uppercase; 
+}
+.view-id-shortcuts_home .views-field-field-description{
+	margin-top:5px;
+}
+.view-id-shortcuts_home .separador{
+	position:relative;
+}
+.view-id-shortcuts_home .shortcuts_top,.view-id-shortcuts_home .shortcuts_bottom{
+	height:10px;
+	
+}
+
+.shortcuts_top {
+	margin-top: 25px;
+}
+.view-id-shortcuts_home .shortcuts_top{
+	background:url('../images/separador_lineadoble_con_sombra_bottom.png') no-repeat bottom center;
+}
+.view-id-shortcuts_home .shortcuts_middle{
+	background:url('../images/separador_linea_doble.png') no-repeat bottom center;
+	height:2px;
+}
+.view-id-shortcuts_home .shortcuts_bottom{
+	background:url('../images/separador_lineadoble_con_sombra_top.png') no-repeat top center;
+}
+
+.circle span {
+	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	width: 70px;
+	height: 70px;
+	display: block;
+	margin: 0 auto;
+}
+.circle.grey
+{
+    text-align: center;
+}
+.circle.grey span {
+	background: #EEE;
+	border: #999999 5px solid;
+}
+.circle.grey span em {
+	color: black;
+    width: 30px;
+	height: 30px;
+	background-repeat: no-repeat;
+	background-position:0;
+	display: block;
+	margin-left: 14px;
+    margin-top:11px;
+	-moz-opacity: 0.4;
+	-khtml-opacity: 0.4;
+	opacity: 0.4;   
+	-webkit-backface-visibility: hidden;
+}
+.circle.grey span em.glyphicon
+{
+    font-size: 32px;
+}
+.circle.grey span em.imoon
+{
+    font-size: 32px;
+
+}
+
+.circle.grey:hover span em {
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;   
+}
+
+
+.circle.grey:hover span {
+	border: #404040 5px solid;
+}
+
+.circle.grey:hover h3 {
+	color: #404040;
+	text-decoration: none!important;
+	cursor: pointer;
+}
+
+
+.circle a:hover {
+	cursor: pointer;
+}
+
+.circle a {
+	text-decoration: none;
+	display: block;
+}
+
+.view-shortcuts-home h3 {
+	margin-top: 10px;
+	text-transform: uppercase;
+	font-size: 17px;
+	color: #666;
+}
+
+.view-shortcuts h3 {
+	margin-top: 10px;
+	text-transform: uppercase;
+	font-size: 16px;
+	color: #666;
+    font-size: 16px;
+    font-weight:bold;
+}
+.circle.ciudadverde span{background-image: url('../images/ba-verde-logo.png') !important; border: none !important; height: 80px; width: 81px;margin-top: -20px;}
+.circle.ciudadverde span:hover{background-image: url('../images/ba-verde-logo-hover.png') !important;}
+
+/* iconos short de distritos */
+.circle.dist-tecno span em { background-image: url('../images/pendrive.png'); }
+.circle.dist-artes span em { background-image: url('../images/artes.png'); }
+.circle.dist-audiov span em { background-image: url('../images/audiovisual.png'); }
+.circle.dist-disen span em { background-image: url('../images/disegno.png'); }
+/**/
+
+.circle.grey.baverde span em{
+height: 80px;
+width: 80px;
+margin:-5px;
+padding:0;
+}
+
+
+.field-content
+{
+    font-size: 12px;
+    padding-top: 3px;
+}

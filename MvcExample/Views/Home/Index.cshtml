@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/VM/Home/HomeVM.js"></script>
+
+
+<!-- jQuery -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<!-- Wijmo CSS and script -->
+<link type="text/css" href="http://cdn.wijmo.com/themes/metro/jquery-wijmo.css" rel="stylesheet" title="metro-jqueryui" />
+<link type="text/css" href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.3.0.min.css" rel="stylesheet" />
+<script type="text/javascript" src="http://cdn.wijmo.com/jquery.wijmo-open.all.2.3.0.min.js"></script>
+<script type="text/javascript" src="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.3.0.min.js"></script>
+<!-- KnockoutJS for MVVM-->
+@*<script type="text/javascript" src="http://cdn.wijmo.com/external/knockout-2.1.0.js"></script>*@
+<script type="text/javascript" src="http://cdn.wijmo.com/external/knockout.wijmo.js"></script>
+
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Pagina Principal de temkplate de Arquitectura
+            </p>
+        </div>
+        <div>
+            <div></div>
+        </div>
+
+
+    </section>
+}
+
+
+
+
+<div class="toolbar">
+    <label>Display: </label>
+    <select data-bind="value: pageSize, wijdropdown: {}">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+</div>
+<table id="dataGrid" data-bind="
+    wijgrid: {
+        data: dataRows,
+        pageSize: pageSize,
+        pageIndex: pageIndex,
+        totalRows: totalRows,
+        allowPaging: true,
+        allowSorting: true,
+        sorted: sorted,
+        pageIndexChanged: paged,
+        columns: [
+        { sortDirection: 'ascending', dataType: 'number', dataFormatString: 'n0', headerText: 'ID', width: 60 },
+        { headerText: 'Product' },
+        { dataType: 'currency', headerText: 'Price', width: 100 },
+        { dataType: 'number', dataFormatString: 'n0', headerText: 'Units', width: 100 }]
+    }">
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        ko.applyBindings(viewModel);
+        viewModel.load();
+        viewModel.sortCommand.subscribe(function (newValue) {
+            viewModel.load();
+        });
+        viewModel.pageIndex.subscribe(function (newValue) {
+            viewModel.load();
+        });
+        viewModel.pageSize.subscribe(function (newValue) {
+            viewModel.load();
+            $(":wijmo-wijdropdown").wijdropdown("refresh");
+        });
+    });
+
+</script>
+
+
+

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsImpresionEscribanos" targetNamespace="http://tempuri.org/dsImpresionEscribanos.xsd" xmlns:mstns="http://tempuri.org/dsImpresionEscribanos.xsd" xmlns="http://tempuri.org/dsImpresionEscribanos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsImpresionEscribanos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsImpresionEscribanos" msprop:Generator_UserDSName="dsImpresionEscribanos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Escribanos" msprop:Generator_TableClassName="EscribanosDataTable" msprop:Generator_TableVarName="tableEscribanos" msprop:Generator_RowChangedName="EscribanosRowChanged" msprop:Generator_TablePropName="Escribanos" msprop:Generator_RowDeletingName="EscribanosRowDeleting" msprop:Generator_RowChangingName="EscribanosRowChanging" msprop:Generator_RowEvHandlerName="EscribanosRowChangeEventHandler" msprop:Generator_RowDeletedName="EscribanosRowDeleted" msprop:Generator_RowClassName="EscribanosRow" msprop:Generator_UserTableName="Escribanos" msprop:Generator_RowEvArgName="EscribanosRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ApyNom" msprop:Generator_ColumnVarNameInTable="columnApyNom" msprop:Generator_ColumnPropNameInRow="ApyNom" msprop:Generator_ColumnPropNameInTable="ApyNomColumn" msprop:Generator_UserColumnName="ApyNom" type="xs:string" minOccurs="0" />
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" type="xs:string" minOccurs="0" />
+              <xs:element name="Matricula" msprop:Generator_ColumnVarNameInTable="columnMatricula" msprop:Generator_ColumnPropNameInRow="Matricula" msprop:Generator_ColumnPropNameInTable="MatriculaColumn" msprop:Generator_UserColumnName="Matricula" type="xs:string" minOccurs="0" />
+              <xs:element name="Telefono" msprop:Generator_ColumnVarNameInTable="columnTelefono" msprop:Generator_ColumnPropNameInRow="Telefono" msprop:Generator_ColumnPropNameInTable="TelefonoColumn" msprop:Generator_UserColumnName="Telefono" type="xs:string" minOccurs="0" />
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

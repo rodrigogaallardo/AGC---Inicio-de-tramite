@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CCC09F9C-2254-4D74-9867-33A91C487544}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Reporting</RootNamespace>
+    <AssemblyName>Reporting</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalDecisions.CrystalReports.Engine.1.0.0\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalDecisions.ReportSource.1.0.0\lib\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalDecisions.Shared.1.0.0\lib\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalDecisions.Web.1.0.1\lib\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonClass\Definitions.cs" />
+    <Compile Include="CommonReport.cs" />
+    <Compile Include="Datasets\dsComprobante.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsComprobante.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsComprobanteAnt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsComprobanteAnt.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsComprobanteExt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsComprobanteExt.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsComprobanteExtDeEx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsComprobanteExtDeEx.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionEncomienda.cs">
+      <DependentUpon>dsImpresionEncomienda.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionEncomienda.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsImpresionEncomienda.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionEscribanos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsImpresionEscribanos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionProfesional.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsImpresionProfesional.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionSolicitud.cs">
+      <DependentUpon>dsImpresionSolicitud.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionSolicitud.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsImpresionSolicitud.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionSolicitudCpadron.cs">
+      <DependentUpon>dsImpresionSolicitudCpadron.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionSolicitudCpadron.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsImpresionSolicitudCpadron.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsImpresionTransf.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsImpresionTransf.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsOblea.cs">
+      <DependentUpon>dsOblea.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsOblea.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOblea.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Datasets\dsComprobante.xsc">
+      <DependentUpon>dsComprobante.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsComprobante.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsComprobante.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\dsComprobante.xss">
+      <DependentUpon>dsComprobante.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsComprobanteAnt.xsc">
+      <DependentUpon>dsComprobanteAnt.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsComprobanteAnt.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsComprobanteAnt.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\dsComprobanteAnt.xss">
+      <DependentUpon>dsComprobanteAnt.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsComprobanteExt.xsc">
+      <DependentUpon>dsComprobanteExt.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsComprobanteExt.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsComprobanteExt.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\dsComprobanteExt.xss">
+      <DependentUpon>dsComprobanteExt.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsComprobanteExtDeEx.xsc">
+      <DependentUpon>dsComprobanteExtDeEx.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsComprobanteExtDeEx.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsComprobanteExtDeEx.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\dsComprobanteExtDeEx.xss">
+      <DependentUpon>dsComprobanteExtDeEx.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionEncomienda.xsc">
+      <DependentUpon>dsImpresionEncomienda.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionEncomienda.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpresionEncomienda.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsImpresionEncomienda.xss">
+      <DependentUpon>dsImpresionEncomienda.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionEscribanos.xsc">
+      <DependentUpon>dsImpresionEscribanos.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionEscribanos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpresionEscribanos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsImpresionEscribanos.xss">
+      <DependentUpon>dsImpresionEscribanos.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionProfesional.xsc">
+      <DependentUpon>dsImpresionProfesional.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionProfesional.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpresionProfesional.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsImpresionProfesional.xss">
+      <DependentUpon>dsImpresionProfesional.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionSolicitud.xsc">
+      <DependentUpon>dsImpresionSolicitud.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionSolicitud.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpresionSolicitud.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsImpresionSolicitud.xss">
+      <DependentUpon>dsImpresionSolicitud.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionSolicitudCpadron.xsc">
+      <DependentUpon>dsImpresionSolicitudCpadron.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionSolicitudCpadron.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpresionSolicitudCpadron.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsImpresionSolicitudCpadron.xss">
+      <DependentUpon>dsImpresionSolicitudCpadron.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionTransf.xsc">
+      <DependentUpon>dsImpresionTransf.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsImpresionTransf.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpresionTransf.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\dsImpresionTransf.xss">
+      <DependentUpon>dsImpresionTransf.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsOblea.xsc">
+      <DependentUpon>dsOblea.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsOblea.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOblea.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsOblea.xss">
+      <DependentUpon>dsOblea.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinesLayer\BusinesLayer.csproj">
+      <Project>{8ff7afc2-3068-428a-b046-5213a9eed822}</Project>
+      <Name>BusinesLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAcess\DataAcess.csproj">
+      <Project>{9e8652c6-7eb7-486a-9e40-4999393d401e}</Project>
+      <Name>DataAcess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTrasnferObject\DataTransferObject.csproj">
+      <Project>{d19c2b35-ab4a-4eb2-be0f-e151f023fedb}</Project>
+      <Name>DataTransferObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExternalServiceMail\ExternalService.csproj">
+      <Project>{33f5fd19-535e-4bbe-8544-a6dc90aeb1f1}</Project>
+      <Name>ExternalService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBusinessLayer\IBusinessLayer.csproj">
+      <Project>{3e8e0dda-e025-4ca4-9169-f139d6d90b97}</Project>
+      <Name>IBusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StaticClass\StaticClass.csproj">
+      <Project>{63f81a1c-cb11-47fc-8095-df480c24250e}</Project>
+      <Name>StaticClass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

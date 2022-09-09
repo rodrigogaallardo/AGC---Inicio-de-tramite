@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsOblea" targetNamespace="http://tempuri.org/dsOblea.xsd" xmlns:mstns="http://tempuri.org/dsOblea.xsd" xmlns="http://tempuri.org/dsOblea.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsOblea" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsOblea" msprop:Generator_UserDSName="dsOblea">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Oblea" msprop:Generator_TableClassName="ObleaDataTable" msprop:Generator_TableVarName="tableOblea" msprop:Generator_RowChangedName="ObleaRowChanged" msprop:Generator_TablePropName="Oblea" msprop:Generator_RowDeletingName="ObleaRowDeleting" msprop:Generator_RowChangingName="ObleaRowChanging" msprop:Generator_RowEvHandlerName="ObleaRowChangeEventHandler" msprop:Generator_RowDeletedName="ObleaRowDeleted" msprop:Generator_RowClassName="ObleaRow" msprop:Generator_UserTableName="Oblea" msprop:Generator_RowEvArgName="ObleaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_solicitud" msprop:Generator_ColumnVarNameInTable="columnid_solicitud" msprop:Generator_ColumnPropNameInRow="id_solicitud" msprop:Generator_ColumnPropNameInTable="id_solicitudColumn" msprop:Generator_UserColumnName="id_solicitud" type="xs:int" minOccurs="0" />
+              <xs:element name="QrCode" msprop:Generator_ColumnVarNameInTable="columnQrCode" msprop:Generator_ColumnPropNameInRow="QrCode" msprop:Generator_ColumnPropNameInTable="QrCodeColumn" msprop:Generator_UserColumnName="QrCode" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="Plantas" msprop:Generator_ColumnVarNameInTable="columnPlantas" msprop:Generator_ColumnPropNameInRow="Plantas" msprop:Generator_ColumnPropNameInTable="PlantasColumn" msprop:Generator_UserColumnName="Plantas" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Ubicaciones" msprop:Generator_TableClassName="UbicacionesDataTable" msprop:Generator_TableVarName="tableUbicaciones" msprop:Generator_RowChangedName="UbicacionesRowChanged" msprop:Generator_TablePropName="Ubicaciones" msprop:Generator_RowDeletingName="UbicacionesRowDeleting" msprop:Generator_RowChangingName="UbicacionesRowChanging" msprop:Generator_RowEvHandlerName="UbicacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="UbicacionesRowDeleted" msprop:Generator_RowClassName="UbicacionesRow" msprop:Generator_UserTableName="Ubicaciones" msprop:Generator_RowEvArgName="UbicacionesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_solicitud" msprop:Generator_ColumnVarNameInTable="columnid_solicitud" msprop:Generator_ColumnPropNameInRow="id_solicitud" msprop:Generator_ColumnPropNameInTable="id_solicitudColumn" msprop:Generator_UserColumnName="id_solicitud" type="xs:int" minOccurs="0" />
+              <xs:element name="Seccion" msprop:Generator_ColumnVarNameInTable="columnSeccion" msprop:Generator_ColumnPropNameInRow="Seccion" msprop:Generator_ColumnPropNameInTable="SeccionColumn" msprop:Generator_UserColumnName="Seccion" type="xs:int" minOccurs="0" />
+              <xs:element name="Manzana" msprop:Generator_ColumnVarNameInTable="columnManzana" msprop:Generator_ColumnPropNameInRow="Manzana" msprop:Generator_ColumnPropNameInTable="ManzanaColumn" msprop:Generator_UserColumnName="Manzana" type="xs:string" minOccurs="0" />
+              <xs:element name="Parcela" msprop:Generator_ColumnVarNameInTable="columnParcela" msprop:Generator_ColumnPropNameInRow="Parcela" msprop:Generator_ColumnPropNameInTable="ParcelaColumn" msprop:Generator_UserColumnName="Parcela" type="xs:string" minOccurs="0" />
+              <xs:element name="Direccion" msprop:Generator_ColumnVarNameInTable="columnDireccion" msprop:Generator_ColumnPropNameInRow="Direccion" msprop:Generator_ColumnPropNameInTable="DireccionColumn" msprop:Generator_UserColumnName="Direccion" type="xs:string" minOccurs="0" />
+              <xs:element name="PartidaMatriz" msprop:Generator_ColumnVarNameInTable="columnPartidaMatriz" msprop:Generator_ColumnPropNameInRow="PartidaMatriz" msprop:Generator_ColumnPropNameInTable="PartidaMatrizColumn" msprop:Generator_UserColumnName="PartidaMatriz" type="xs:string" minOccurs="0" />
+              <xs:element name="PartidasHorizontales" msprop:Generator_ColumnVarNameInTable="columnPartidasHorizontales" msprop:Generator_ColumnPropNameInRow="PartidasHorizontales" msprop:Generator_ColumnPropNameInTable="PartidasHorizontalesColumn" msprop:Generator_UserColumnName="PartidasHorizontales" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Oblea_Ubicaciones" msdata:parent="Oblea" msdata:child="Ubicaciones" msdata:parentkey="id_solicitud" msdata:childkey="id_solicitud" msprop:Generator_UserChildTable="Ubicaciones" msprop:Generator_ChildPropName="GetUbicacionesRows" msprop:Generator_UserRelationName="Oblea_Ubicaciones" msprop:Generator_RelationVarName="relationOblea_Ubicaciones" msprop:Generator_UserParentTable="Oblea" msprop:Generator_ParentPropName="ObleaRow" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

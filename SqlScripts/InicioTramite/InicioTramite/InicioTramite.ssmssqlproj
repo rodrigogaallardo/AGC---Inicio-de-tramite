@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="InicioTramite">
+  <Items>
+    <LogicalFolder Name="Conexiones" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="nagpur.ar.most:sa">
+          <Created>2016-08-30T16:16:53.6462442-03:00</Created>
+          <Type>SQL</Type>
+          <Server>nagpur.ar.most</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>DGHP_Solicitudes</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Consulta</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Consultas" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="Administracion_Recursos.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:nagpur.ar.most:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>nagpur.ar.most</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Administracion_Recursos.sql</FullPath>
+        </FileNode>
+        <FileNode Name="ConsutasDireccionesCpadron.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>ConsutasDireccionesCpadron.sql</FullPath>
+        </FileNode>
+        <FileNode Name="DeleteStoresProcedures.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:nagpur.ar.most:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>nagpur.ar.most</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>DeleteStoresProcedures.sql</FullPath>
+        </FileNode>
+        <FileNode Name="FuncionDeComparacion.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:nagpur.ar.most:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>nagpur.ar.most</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>FuncionDeComparacion.sql</FullPath>
+        </FileNode>
+        <FileNode Name="InicioTramite.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:nagpur.ar.most:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>nagpur.ar.most</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>InicioTramite.sql</FullPath>
+        </FileNode>
+        <FileNode Name="CreacionTablaFase2.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:nagpur.ar.most:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>nagpur.ar.most</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>CreacionTablaFase2.sql</FullPath>
+        </FileNode>
+        <FileNode Name="ManejoEngine.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:nagpur.ar.most:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>nagpur.ar.most</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>ManejoEngine.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Varios" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

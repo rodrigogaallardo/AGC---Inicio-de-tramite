@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DataTrasnferObject.MenuesDTO>
+
+@{
+    ViewBag.Title = "MenuesDto";
+}
+
+<h2>MenuesDto</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_menu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_menu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.aclaracion_menu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pagina_menu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iconCssClass_menu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_menu_padre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nroOrden)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.visible)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_menu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion_menu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aclaracion_menu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pagina_menu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iconCssClass_menu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_menu_padre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nroOrden)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.visible)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

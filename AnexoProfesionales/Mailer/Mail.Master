@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Mail.Master.cs" Inherits="AnexoProfesionales.Mailer.Mailer" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+</head>
+<body style=" margin: 0px;padding: 0px;font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;">
+    
+    <form id="form1" runat="server">
+    <div style="width: 1000px">
+
+        <header>
+            
+
+            <img src="<%: HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +  ResolveUrl("~/Mailer/img/header.png") %>"
+                style="width: 1000px; height: 148px; max-height: 148px" />
+            
+            
+        </header>
+
+        <div style="padding: 20px 20px 20px 50px; min-height: 500px;">
+            
+            <h2>
+                <asp:Label ID="lblTitulo" runat="server" CssClass="color:#333;"></asp:Label>
+            </h2>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        
+        </div>
+
+        <footer >
+
+            <img src="<%: HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +  ResolveUrl("~/Mailer/img/footer.png") %>"
+                    style="width: 1000px; height: 95px; max-height: 95px" />
+
+           
+        </footer>
+    </div>
+    </form>
+</body>
+</html>

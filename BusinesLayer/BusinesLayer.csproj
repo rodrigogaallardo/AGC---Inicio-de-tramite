@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8FF7AFC2-3068-428A-B046-5213A9EED822}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinesLayer</RootNamespace>
+    <AssemblyName>BusinesLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementation\EncomiendaRubrosATAnteriorBL.cs" />
+    <Compile Include="EngineBL\EngineBL.cs" />
+    <Compile Include="Implementation\AmpliacionesBL.cs" />
+    <Compile Include="Implementation\AzraelBL.cs" />
+    <Compile Include="Implementation\CertificadosBL.cs" />
+    <Compile Include="Implementation\ConsejoProfesionalBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronDocumentosAdjuntosBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronEstadosBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronSolicitudesObservacionesBL.cs" />
+    <Compile Include="Implementation\DocumentosAdjuntosBL.cs" />
+    <Compile Include="Implementation\EmailServiceBL.cs" />
+    <Compile Include="Implementation\EncomiendaRectificatoriaBL.cs" />
+    <Compile Include="Implementation\EncomiendaRubrosCNBL.cs" />
+    <Compile Include="Implementation\Encomienda_RubrosCN_DepositoBL.cs" />
+    <Compile Include="Implementation\EncomiendaRubrosSubCNBL.cs" />
+    <Compile Include="Implementation\EncomiendaUbicacionesDistritoBL.cs" />
+    <Compile Include="Implementation\EncomiendaUbicacionesMixturasBL.cs" />
+    <Compile Include="Implementation\GrupoConsejosBL.cs" />
+    <Compile Include="Implementation\InstructivosBL.cs" />
+    <Compile Include="Implementation\Ley962TiposDeDocumentosRequeridosBL.cs" />
+    <Compile Include="Implementation\MailsBL.cs" />
+    <Compile Include="Implementation\PagosBoletasBL.cs" />
+    <Compile Include="Implementation\PDFBL.cs" />
+    <Compile Include="Implementation\PermisosBL.cs" />
+    <Compile Include="Implementation\RelRubrosCNSolicitudesNuevasBL.cs" />
+    <Compile Include="Implementation\EncomiendaRubrosCNATAnteriorBL.cs" />
+    <Compile Include="Implementation\RubrosCNBL.cs" />
+    <Compile Include="Implementation\RubrosDepositosCNBL.cs" />
+    <Compile Include="Implementation\RubrosImpactoAmbientalCNBL.cs" />
+    <Compile Include="Implementation\SGISolicitudesPagosBL.cs" />
+    <Compile Include="Implementation\SGITareaCalificarObsGrupoBL.cs" />
+    <Compile Include="Implementation\SGITareaCalificarObsDocsBL.cs" />
+    <Compile Include="Implementation\SGITramitesTareasBL.cs" />
+    <Compile Include="Implementation\SGITramitesTareasCpadronBL.cs" />
+    <Compile Include="Implementation\SGITramitesTareasHabBL.cs" />
+    <Compile Include="Implementation\SGITramitesTareasTransferenciasBL.cs" />
+    <Compile Include="Implementation\ConceptosBUIIndependientesBL.cs" />
+    <Compile Include="Implementation\SGITareaDocumentosAdjuntosBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesUbicacionFactoryBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesAvisoCaducidadBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesHistorialEstadosBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesNormativasBL.cs" />
+    <Compile Include="Implementation\TransferenciasNotificacionesBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesNotificacionesBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesNotificacionesMotivosBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesNuevasBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesPagosBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesRubrosBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesUbicacionesBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesUbicacionesDistritoBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesUbicacionesMixturasBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesUbicacionesPropiedadHorizontalBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesUbicacionesPuertasBL.cs" />
+    <Compile Include="Implementation\EscribanoBL.cs" />
+    <Compile Include="Implementation\ParametrosBL.cs" />
+    <Compile Include="Implementation\SSITDocumentosAdjuntosEntityBL.cs" />
+    <Compile Include="Implementation\SSITDocumentosAdjuntosBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesFirmantesPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesFirmantesPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesObservacionesBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesTitularesPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesTitularesPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesTitularesPersonasJuridicasPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\SSIT_Listado_ProfesionalesBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesDatosLocalBL.cs" />
+    <Compile Include="Implementation\TiposDeDocumentosRequeridosBL.cs" />
+    <Compile Include="Implementation\TiposDeTransmisionBL.cs" />
+    <Compile Include="Implementation\TramitesBL.cs" />
+    <Compile Include="Implementation\TransferenciaRubrosBL.cs" />
+    <Compile Include="Implementation\TransferenciasDatosLocalBL.cs" />
+    <Compile Include="Implementation\TransferenciasDocumentosAdjuntosBL.cs" />
+    <Compile Include="Implementation\TransferenciasFirmantesPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasFirmantesPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasFirmantesSolicitudPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasFirmantesSolicitudPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasPlantasBL.cs" />
+    <Compile Include="Implementation\TransferenciasSolicitudesBL.cs" />
+    <Compile Include="Implementation\TransferenciasSolicitudesHistorialEstadosBL.cs" />
+    <Compile Include="Implementation\TransferenciasSolicitudesObservacionesBL.cs" />
+    <Compile Include="Implementation\TransferenciasTitularesPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasTitularesPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasTitularesPersonasJuridicasPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasTitularesSolicitudPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasTitularesSolicitudPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasTitularesSolicitudPersonasJuridicasPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\TransferenciasUbicacionesPropiedadHorizontalBL.cs" />
+    <Compile Include="Implementation\TransferenciasUbicacionesPuertasBL.cs" />
+    <Compile Include="Implementation\TransferenciaUbicacionesBL.cs" />
+    <Compile Include="Implementation\TransferenciaUbicacionesMixturasBL.cs" />
+    <Compile Include="Implementation\TransfSolicitudesPagos.cs" />
+    <Compile Include="Implementation\UbicacionesCatalogoDistritosBL.cs" />
+    <Compile Include="Implementation\UbicacionesCatalogoDistritosSubzonasBL.cs" />
+    <Compile Include="Implementation\UbicacionesCatalogoDistritosZonasBL.cs" />
+    <Compile Include="Implementation\UsuarioBL.cs" />
+    <Compile Include="Implementation\WsEscribanosInstrumentoPrivadoBL.cs" />
+    <Compile Include="Implementation\WsEscribanosInstrumentoPublicoBL.cs" />
+    <Compile Include="Implementation\WsEscribanosInstrumentoJudicialBL.cs" />
+    <Compile Include="Implementation\WsEscribanosPersonasFisicasRepresentantesBL.cs" />
+    <Compile Include="Implementation\WsEscribanosPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\WsEscribanosDerechoOcupacionBL.cs" />
+    <Compile Include="Implementation\WsEscribanosPersonasJuridicasRepresentantesBL.cs" />
+    <Compile Include="Implementation\WsEscribanosPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\WsEscribanosActaNotarialBL.cs" />
+    <Compile Include="Implementation\CallesBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronDatosLocalBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronNormativasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronPlantasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronRubrosBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronSolicitudesBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronTitularesPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronTitularesPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronTitularesPersonasJuridicasPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronTitularesSolicitudPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronTitularesSolicitudPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronTitularesSolicitudPersonasJuridicasPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronUbicacionesBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronUbicacionesPuertasBL.cs" />
+    <Compile Include="Implementation\ConsultaPadronUbicacionPropiedadHorizontalBL.cs" />
+    <Compile Include="Implementation\EncomiendaBL.cs" />
+    <Compile Include="Implementation\EncomiendaConformacionLocalBL.cs" />
+    <Compile Include="Implementation\EncomiendaDatosLocalBL.cs" />
+    <Compile Include="Implementation\EncomiendaEstadosBL.cs" />
+    <Compile Include="Implementation\EncomiendaFirmantesPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\EncomiendaFirmantesPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\EncomiendaNormativasBL.cs" />
+    <Compile Include="Implementation\EncomiendaDocumentosAdjuntosBL.cs" />
+    <Compile Include="Implementation\ImpactoAmbientalBL.cs" />
+    <Compile Include="Implementation\EncomiendaTitularesPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\EncomiendaTitularesPersonasJuridicasBL.cs" />
+    <Compile Include="Implementation\EncomiendaTitularesPersonasJuridicasPersonasFisicasBL.cs" />
+    <Compile Include="Implementation\EncomiendaPlanosBL.cs" />
+    <Compile Include="Implementation\EncomiendaRelTiposDestinosTiposUsosBL.cs" />
+    <Compile Include="Implementation\EncomiendaCertificadoSobrecargaBL.cs" />
+    <Compile Include="Implementation\EncomiendaRubrosBL.cs" />
+    <Compile Include="Implementation\EntidadNormativaBL.cs" />
+    <Compile Include="Implementation\RubrosImpactoAmbientalBL.cs" />
+    <Compile Include="Implementation\SobrecargasEntityBL.cs" />
+    <Compile Include="Implementation\EncomiendaSobrecargaDetalle2BL.cs" />
+    <Compile Include="Implementation\EncomiendaSobrecargaDetalle1BL.cs" />
+    <Compile Include="Implementation\EncomiendaTiposUsosBL.cs" />
+    <Compile Include="Implementation\EncomiendaTiposDestinosBL.cs" />
+    <Compile Include="Implementation\EncomiendaTiposSobrecargasBL.cs" />
+    <Compile Include="Implementation\EncomiendaPlantasBL.cs" />
+    <Compile Include="Implementation\EncomiendaUbicacionesBL.cs" />
+    <Compile Include="Implementation\FirmantesBL.cs" />
+    <Compile Include="Implementation\LocalidadBL.cs" />
+    <Compile Include="Implementation\EncomiendaUbicacionesPuertasBL.cs" />
+    <Compile Include="Implementation\EncomiendaUbicacionesPropiedadHorizontalBL.cs" />
+    <Compile Include="Implementation\ProfesionalesBL.cs" />
+    <Compile Include="Implementation\ProvinciaBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesEncomiendaBL.cs" />
+    <Compile Include="Implementation\SSITSolicitudesBL.cs" />
+    <Compile Include="Implementation\SubTipoUbicacionesBL.cs" />
+    <Compile Include="Implementation\RubrosBL.cs" />
+    <Compile Include="Implementation\EncomiendaTiposCertificadosSobrecargaBL.cs" />
+    <Compile Include="Implementation\TipoActividadBL.cs" />
+    <Compile Include="Implementation\TipoDocumentacionRequeridaBL.cs" />
+    <Compile Include="Implementation\MenuesBL.cs" />
+    <Compile Include="Implementation\PerfilesBL.cs" />
+    <Compile Include="Implementation\TipoDocumentoPersonalBL.cs" />
+    <Compile Include="Implementation\TipoDestinoBL.cs" />
+    <Compile Include="Implementation\TiposDeDocumentosSistemaBL.cs" />
+    <Compile Include="Implementation\TipoTramiteBL.cs" />
+    <Compile Include="Implementation\TipoVentilacionBL.cs" />
+    <Compile Include="Implementation\TipoIluminacionBL.cs" />
+    <Compile Include="Implementation\TipoSuperficieBL.cs" />
+    <Compile Include="Implementation\TiposDePlanosBL.cs" />
+    <Compile Include="Implementation\TipoEstadoSolicitudBL.cs" />
+    <Compile Include="Implementation\TiposDeCaracterLegalBL.cs" />
+    <Compile Include="Implementation\TiposDeIngresosBrutosBL.cs" />
+    <Compile Include="Implementation\TipoSociedadBL.cs" />
+    <Compile Include="Implementation\TitularesBL.cs" />
+    <Compile Include="Implementation\TipoNormativaBL.cs" />
+    <Compile Include="Implementation\TiposDeUbicacionBL.cs" />
+    <Compile Include="Implementation\UbicacionesPropiedadhorizontalBL.cs" />
+    <Compile Include="Implementation\UbicacionesPuertasBL.cs" />
+    <Compile Include="Implementation\UbicacionesZonasMixturasBL.cs" />
+    <Compile Include="Implementation\ZonasPlaneamientoBL.cs" />
+    <Compile Include="MappingConfig\AutoMapperConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Implementation\UbicacionesBL.cs" />
+    <Compile Include="Implementation\RedistribucionUsoBL.cs" />
+    <Compile Include="Implementation\RubrosCNSubrubrosBL.cs" />
+    <Compile Include="TransferenciaUbicacionesDistritosBL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseRepository\BaseRepository.csproj">
+      <Project>{9469437f-ab0d-43b4-9084-e706b20e2c09}</Project>
+      <Name>BaseRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAcess\DataAcess.csproj">
+      <Project>{9e8652c6-7eb7-486a-9e40-4999393d401e}</Project>
+      <Name>DataAcess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTrasnferObject\DataTransferObject.csproj">
+      <Project>{d19c2b35-ab4a-4eb2-be0f-e151f023fedb}</Project>
+      <Name>DataTransferObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExternalServiceMail\ExternalService.csproj">
+      <Project>{33f5fd19-535e-4bbe-8544-a6dc90aeb1f1}</Project>
+      <Name>ExternalService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBaseRepository\IBaseRepository.csproj">
+      <Project>{faeffde8-f32e-472b-bb4a-2c068ea0e96d}</Project>
+      <Name>IBaseRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBusinessLayer\IBusinessLayer.csproj">
+      <Project>{3e8e0dda-e025-4ca4-9169-f139d6d90b97}</Project>
+      <Name>IBusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StaticClass\StaticClass.csproj">
+      <Project>{63f81a1c-cb11-47fc-8095-df480c24250e}</Project>
+      <Name>StaticClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnitOfWork\UnitOfWork.csproj">
+      <Project>{d1a5c3c8-4fda-4a23-879e-74b182c99880}</Project>
+      <Name>UnitOfWork</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

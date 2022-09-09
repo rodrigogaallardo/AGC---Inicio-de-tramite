@@ -1,0 +1,1599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E8652C6-7EB7-486A-9E40-4999393D401E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAcess</RootNamespace>
+    <AssemblyName>DataAcess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.8.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ANT_DocumentosAdjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Empresas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Empresas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Empresas_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Empresas_PersonasJuridicas_Firmantes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Encomiendas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Encomiendas_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Encomiendas_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Encomiendas_Titulares.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Rel_encreg_encrni.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Ubicaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Ubicaciones_Coordenadas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Ubicaciones_PropiedadHorizontal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Ubicaciones_Puertas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Ubicaciones_Ubicacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ANT_Ubicaciones_ViaPublica.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppConsole_ErrorLog.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APRA_TiposdeCertificados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APRA_TiposDeDocumentosSistema.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APRA_TiposDeTramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AreasHospitalarias.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Applications.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Membership.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Roles.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_SchemaVersions.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Users.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuditoriaDeTablas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AVH_visitas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BackupCalles.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BackupEscribanos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Barrios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CAA_DocumentosAdjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CAA_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CAA_Rel_CAA_DocAdjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CAA_Solicitudes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CAA_TiposDeCertificados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Calles.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Calles_Eliminadas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Calles_Excepcion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Categorias.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clanae.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="codigo_urbanistico.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comisarias.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CondicionesIncendio.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConformacionLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_DatosLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Solicitudes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Solicitudes_AvisoCaducidad.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cpadron_Solicitudes_Baja.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreateExcelFile.cs" />
+    <Compile Include="Cursos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cursos_Excepciones_Usuarios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cursos_Fechas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cursos_Inscriptos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatosBuscados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Disposiciones_Texto.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DistritosEscolares.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Documento.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dtproperties.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ELMAH_Error.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emails_Perfil_Config.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emails_Perfil_Relacion_Config.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emails_Templates.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_bk.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_DatosLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_DocumentosAdjuntos_borrados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Normativas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_RubrosCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_RubrosCN_AT_Anterior.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_RubrosCN_Deposito.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_RubrosCN_Subrubros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_SSIT_Solicitudes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Transf_Solicitudes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Ubicaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Ubicaciones_Distritos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Ubicaciones_Mixturas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Grupos_Circuitos_Tipo_Tramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Tipos_Tareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityCustom\AvisoNotificacionEntity.cs" />
+    <Compile Include="EntityCustom\clsItemGrillaNotificaciones.cs" />
+    <Compile Include="Comunas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conceptos_BUI_Independientes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsejoProfesional.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsejoProfesional_RolesPermitidos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_ConformacionLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_DocumentosAdjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Normativas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Planos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Plantas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Rubros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Solicitudes_Observaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Titulares_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Titulares_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Titulares_PersonasJuridicas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Titulares_Solicitud_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Titulares_Solicitud_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Ubicaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Ubicaciones_PropiedadHorizontal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPadron_Ubicaciones_Puertas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emails.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emails_Origenes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emails_Tipos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaDigital.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EncomiendaDigital.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaDigital.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaDigital.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EncomiendaDigital.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Empresas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Titulares_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Titulares_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Titulares_PersonasJuridicas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_TransicionEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Ubicaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Ubicaciones_PropiedadHorizontal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EncomiendaExt_Ubicaciones_Puertas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Certificado_Sobrecarga.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_ConformacionLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_DocumentosAdjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Firmantes_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Firmantes_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Planos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Plantas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Rectificatoria.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Rel_TiposDestinos_TiposUsos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Rel_TiposSobrecargas_TiposDestinos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Rubros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Rubros_AT_Anterior.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Sobrecargas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Sobrecarga_Detalle1.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Sobrecarga_Detalle2.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Tipos_Certificados_Sobrecarga.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Tipos_Destinos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Tipos_Sobrecargas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Tipos_Usos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Titulares_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Titulares_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Titulares_PersonasJuridicas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_TransicionEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Ubicaciones_PropiedadHorizontal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_Ubicaciones_Puertas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_URLxROL.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Encomienda_ZonasActualizadas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Circuitos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Config_BandejaAsignacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_EquipoDeTrabajo.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_GetTransicionesxResultado_Result.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_GruposDeTareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Grupos_Circuitos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Rel_Circuitos_TiposDeTramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Rel_GruposDeTareas_Tareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Rel_Perfiles_Tareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Rel_Resultados_Tareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Rel_Resultados_Tareas_Transiciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Resultados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Tareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENG_Transiciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntidadNormativa.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityCustom\ANT_Encomiendas.cs" />
+    <Compile Include="EntityCustom\AzraelEntity.cs" />
+    <Compile Include="EntityCustom\clsItemGrillaMails.cs" />
+    <Compile Include="EntityCustom\DispoEntity.cs" />
+    <Compile Include="EntityCustom\EncomiendaRubrosCNEntity.cs" />
+    <Compile Include="EntityCustom\MailsEntity.cs" />
+    <Compile Include="EntityCustom\EncomiendaAntenasEntity.cs" />
+    <Compile Include="EntityCustom\EncomiendaExternaHistorialEstadosEntity.cs" />
+    <Compile Include="EntityCustom\clsItemGrillaPagos.cs" />
+    <Compile Include="EntityCustom\ConsultaPadronPlantasEntity.cs" />
+    <Compile Include="EntityCustom\ConsultaPadronRubrosEntity.cs" />
+    <Compile Include="EntityCustom\EncomiendaPlantasEntity.cs" />
+    <Compile Include="EntityCustom\EncomiendaRubrosATAnteriorEntity.cs" />
+    <Compile Include="EntityCustom\EncomiendaRubrosEntity.cs" />
+    <Compile Include="EntityCustom\FirmantesEntity.cs" />
+    <Compile Include="EntityCustom\ItemDirectionEntity.cs" />
+    <Compile Include="EntityCustom\ItemPuertaEntity.cs" />
+    <Compile Include="EntityCustom\PagosEntity.cs" />
+    <Compile Include="EntityCustom\RubrosCNEntity.cs" />
+    <Compile Include="EntityCustom\RubrosEntity.cs" />
+    <Compile Include="EntityCustom\RubrosTipoDocReqEntity.cs" />
+    <Compile Include="EntityCustom\SGITareaCalificarObsDocsGrillaEntity.cs" />
+    <Compile Include="EntityCustom\SGITareaCalificarObsGrupoGrillaEntity.cs" />
+    <Compile Include="EntityCustom\SGITramitesTareasEntity.cs" />
+    <Compile Include="EntityCustom\SobrecargasEntity.cs" />
+    <Compile Include="EntityCustom\SSITDocumentosAdjuntosEntity.cs" />
+    <Compile Include="EntityCustom\SSITSolicitudesHistorialEstadosGrillaEntity.cs" />
+    <Compile Include="EntityCustom\SSITSolicitudesObservacionesEntity.cs" />
+    <Compile Include="EntityCustom\SsitSolicitudesUbicacionesModel.cs" />
+    <Compile Include="EntityCustom\TareasEntity.cs" />
+    <Compile Include="EntityCustom\TitularesEntity.cs" />
+    <Compile Include="EntityCustom\TramitesEntity.cs" />
+    <Compile Include="EntityCustom\TransferenciaRubrosEntity.cs" />
+    <Compile Include="EntityCustom\TransferenciasPlantasEntity.cs" />
+    <Compile Include="EntityCustom\TransferenciasSolicitudesHistorialEstadosGrillaEntity.cs" />
+    <Compile Include="EntityCustom\TransferenciasSolicitudesObservacionesEntity.cs" />
+    <Compile Include="EntityCustom\wsEscribanoActaNotarialEntity.cs" />
+    <Compile Include="EntityCustom\wsEscribanosPersonasFisicasEntity.cs" />
+    <Compile Include="EntityCustom\wsEscribanosPersonasFisicasRepresentantesEntity.cs" />
+    <Compile Include="EntityCustom\wsEscribanosPersonasJuridicasEntity.cs" />
+    <Compile Include="EntityCustom\wsEscribanosPersonasJuridicasRepresentantesEntity.cs" />
+    <Compile Include="Envio_Mail.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Envio_Mail_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Envio_Mail_Log.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Envio_Mail_Log_Errores.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Envio_Mail_Prioridades.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Envio_Mail_Proceso.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Envio_Mail_Send_Estado.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Envio_Mail_Send_Filtrados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Escribano.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja1.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja2.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja3.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja6.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja7.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja7_2.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja8.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja8_2.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas_Hoja9.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eximicion_CAA.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fichas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Files.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetZonaySubZonaByIdDistrito_Result.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GrupoConsejos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GrupoConsejos_Roles_Clasificacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImpactoAmbiental.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InicioTramite_Menues.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InicioTramite_Perfiles.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Instructivos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ley257_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ley257_Solicitudes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ley257_Solicitudes_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ley257_Solicitudes_Pagos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ley962_TiposDeDocumentosRequeridos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Localidad.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasBuscados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Niveles_Agrupamiento.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros_Bandeja_Rubro.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros_Bandeja_Superficie.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros_Observaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persona.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PersonasInhibidas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Profesional.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Profesional_historial.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Profesional_Perfiles_Inhibiciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provincia.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegionesSanitarias.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_Encomienda_Rectificatoria.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_Rubros_ImpactoAmbiental.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_Rubros_Solicitudes_Nuevas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_TipoExpediente_SubtipoExpediente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_TiposDeDocumentosRequeridos_ENG_Tareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_TiposDeDocumentosRequeridos_TipoNormativa.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_TipoTramite_TipoExpediente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_TipoTramite_TiposDeDocumentosRequeridos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_UsuariosProf_Roles_Clasificacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_Usuarios_GrupoConsejo.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rel_ZonasPlaneamiento_ZonasHabilitaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosBicicletas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCargasyDescargas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCN_Config_Incendio.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCN_Evaluar_Result.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCN_Historial.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCN_InformacionRelevante.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCN_Subrubros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCN_TiposDeDocumentosRequeridos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCondiciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosCondicionesCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosDepositosCategoriasCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosDepositosCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosDepositosCN_Evaluar_Result.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosDepositosCN_RangosSuperficie.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosEstacionamientos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosFormulasCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosImpactoAmbientalCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosZonasCondiciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RubrosZonasCondiciones_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_CircuitoAtomatico_Zonas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_CircuitoAtomatico_Zonas_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Config_Incendio.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Config_Incendio_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Config_Incendio_TiposDeDocumentosRequeridos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Config_Incendio_TiposDeDocumentosRequeridos_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Historial_Cambios_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_Historial_Cambios_UsuariosIntervinientes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_InformacionRelevante.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_InformacionRelevante_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_TiposDeDocumentosRequeridos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_TiposDeDocumentosRequeridos_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_TiposDeDocumentosRequeridos_Zonas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rubros_TiposDeDocumentosRequeridos_Zonas_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RULH_Log.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SADE_Estados_Expedientes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sectores_SADE.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_FiltrosBusqueda.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_LIZA_Procesos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_LIZA_Ticket.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Menues.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Perfiles.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Procesos_EE.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Profiles.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_SADE_Procesos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Solicitudes_Pagos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tareas_Pases_Sectores.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Aprobado.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Asignar_Calificador.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Asignar_Inspector.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Calificacion_Tecnica_Legal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Calificar.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Calificar_ObsDocs.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Calificar_ObsGrupo.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Carga_Tramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Dictamen_Asignar_Profesional.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Dictamen_GEDO.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Dictamen_Realizar_Dictamen.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Dictamen_Revisar_Tramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Dictamen_Revision.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Dictamen_Revision_Gerente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Dictamen_Revision_SubGerente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Documentos_Adjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Ejecutiva.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Ejecutiva_NumeroGedo.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Entregar_Tramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Enviar_AVH.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Enviar_DGFC.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Enviar_PVH.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Fin_Tramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Generar_Expediente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Generar_Expediente_Procesos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Generar_Ticket_Liza.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Gestion_Documental.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Informar_Doc_Sade.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Obtener_Ticket_Liza.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Pagos_log.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Rechazo_En_SADE.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Resultado_Inspector.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Revision_DGHP.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Revision_Dictamenes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Revision_Director.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Revision_Gerente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Revision_Pagos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Revision_SubGerente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Revision_Tecnica_Legal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Validar_Zonificacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Verificacion_AVH.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tarea_Visado.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tramites_Tareas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tramites_Tareas_CPADRON.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tramites_Tareas_Dispo_Considerando.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tramites_Tareas_HAB.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SGI_Tramites_Tareas_TRANSF.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Solicitud.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudDocumento.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudExpediente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudHistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudObservaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudPartida.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudPuerta.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudRubro.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudTipoActividad.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudZonasActualizadas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Solicitud_planoVisado.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_DocumentosAdjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Listado_Profesionales_Result.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Permisos_DatosAdicionales.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_AvisoCaducidad.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Baja.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_bk.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_DatosLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Encomienda.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Firmantes_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Firmantes_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_HistorialUsuarios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Normativas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Notificaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Notificaciones_motivos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Nuevas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Observaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Origen.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Pagos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_RubrosCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Titulares_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Titulares_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Ubicaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Ubicaciones_Distritos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Ubicaciones_Mixturas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSIT_Solicitudes_Ubicaciones_Puertas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubtipoExpediente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubTiposDeUbicacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sugerencias.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoActividad.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDestino.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDocumento.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDocumentoPersonal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoEstadoSolicitud.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoExpediente.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoInhibicion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoNormativa.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoPersona.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposDeCaracterLegal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposDeDocumentosRequeridos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposDeDocumentosSistema.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposDeInformes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposDeIngresosBrutos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposDePlanos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposdeTransmision.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposDeUbicacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoSector.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposMotivoBaja.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoSociedad.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoSuperficie.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoTramite.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoVerificacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tipo_Documentacion_Req.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipo_iluminacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipo_ventilacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TitularInhibido.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_ConformacionLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_DatosLocal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_DocumentosAdjuntos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Firmantes_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Firmantes_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Firmantes_Solicitud_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Firmantes_Solicitud_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Normativas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Plantas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Rubros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Solicitudes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Solicitudes_AvisoCaducidad.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Solicitudes_Baja.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Solicitudes_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Solicitudes_Notificaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Solicitudes_Observaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Solicitudes_Pagos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Titulares_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Titulares_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Titulares_PersonasJuridicas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Titulares_Solicitud_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Titulares_Solicitud_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Ubicaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Ubicaciones_Distritos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Ubicaciones_Mixturas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Ubicaciones_PropiedadHorizontal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transf_Ubicaciones_Puertas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransicionEstadoSolicitud.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Acciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_CatalogoDistritos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_CatalogoDistritos_Subzonas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_CatalogoDistritos_Zonas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Clausuras.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_DireccionesConformadas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Distritos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Distritos_Excepciones_Mixturas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Distritos_Excepciones_RubrosCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Distritos_temp.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_GruposDistritos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Historial_Cambios_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Historial_Cambios_UsuariosIntervinientes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Inhibiciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Operaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Operaciones_Detalle.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_PropiedadHorizontal.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_PropiedadHorizontal_Clausuras.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_PropiedadHorizontal_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_PropiedadHorizontal_Historial_Cambios_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_PropiedadHorizontal_Historial_Cambios_UsuariosIntervinientes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_PropiedadHorizontal_Inhibiciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Puertas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Puertas_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_Puertas_temp.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_temp.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_ZonasComplementarias.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_ZonasComplementarias_Historial_Cambios.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicaciones_ZonasMixtura.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vis_Certificados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Votos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsDatosCallejeroUSIG.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_ActaNotarial.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_DerechoOcupacion.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_InstrumentoJudicial.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_InstrumentoPrivado.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_InstrumentoPublico.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_PersonasFisicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_PersonasFisicas_Representantes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_PersonasJuridicas.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_PersonasJuridicas_Representantes.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsEscribanos_Tipos_Escrituras.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_BatchLog.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_BoletaUnica.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_BoletaUnica_Errores.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_BoletaUnica_Estados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_BoletaUnica_HistorialEstados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_BoletaUnica_HistorialEstados2.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_BoletaUnica_HistorialEstados3.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_Conceptos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_PagoElectronico.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_Parametros.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_Procesados.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wsPagos_Procesados_PagadosSinFecha.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zonas_Habilitaciones.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zonas_Planeamiento.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EncomiendaDigital.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EncomiendaDigital.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EncomiendaDigital.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EncomiendaDigital.edmx</DependentUpon>
+      <LastGenOutput>EncomiendaDigital.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EncomiendaDigital.edmx.diagram">
+      <DependentUpon>EncomiendaDigital.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EncomiendaDigital.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EncomiendaDigital.edmx</DependentUpon>
+      <LastGenOutput>EncomiendaDigital.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StaticClass\StaticClass.csproj">
+      <Project>{63f81a1c-cb11-47fc-8095-df480c24250e}</Project>
+      <Name>StaticClass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{705219D6-4CF3-4090-84EE-70E6CC02A7A3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Azrael</RootNamespace>
+    <AssemblyName>Azrael</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logoBA.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>92633BBADA5B972AD2B3AEF9E156FCC34FB4378B</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Azrael_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmFiles\frmDescargarFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFiles\frmDescargarFile.Designer.cs">
+      <DependentUpon>frmDescargarFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFiles\frmBuscarReplaceFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFiles\frmBuscarReplaceFile.Designer.cs">
+      <DependentUpon>frmBuscarReplaceFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFiles\frmMostrarIdFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFiles\frmMostrarIdFile.Designer.cs">
+      <DependentUpon>frmMostrarIdFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFiles\frmSubirFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFiles\frmSubirFile.Designer.cs">
+      <DependentUpon>frmSubirFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmDDRR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmDDRR.Designer.cs">
+      <DependentUpon>frmDDRR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmManifiestoTransmision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmManifiestoTransmision.Designer.cs">
+      <DependentUpon>frmManifiestoTransmision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFCertificadoHabilitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFCertificadoHabilitacion.Designer.cs">
+      <DependentUpon>frmPDFCertificadoHabilitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFObleaTransmision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFObleaTransmision.Designer.cs">
+      <DependentUpon>frmPDFObleaTransmision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFPlanchetaCpadron.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFPlanchetaCpadron.Designer.cs">
+      <DependentUpon>frmPDFPlanchetaCpadron.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFSolicitudHabilitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFSolicitudHabilitacion.Designer.cs">
+      <DependentUpon>frmPDFSolicitudHabilitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFOblea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFOblea.Designer.cs">
+      <DependentUpon>frmPDFOblea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFCertificado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFCertificado.Designer.cs">
+      <DependentUpon>frmPDFCertificado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFEncomienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes\frmPDFEncomienda.Designer.cs">
+      <DependentUpon>frmPDFEncomienda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="logoBA.ico" />
+    <EmbeddedResource Include="frmFiles\frmDescargarFile.resx">
+      <DependentUpon>frmDescargarFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFiles\frmBuscarReplaceFile.resx">
+      <DependentUpon>frmBuscarReplaceFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFiles\frmMostrarIdFile.resx">
+      <DependentUpon>frmMostrarIdFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFiles\frmSubirFile.resx">
+      <DependentUpon>frmSubirFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmDDRR.resx">
+      <DependentUpon>frmDDRR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmManifiestoTransmision.resx">
+      <DependentUpon>frmManifiestoTransmision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmPDFCertificadoHabilitacion.resx">
+      <DependentUpon>frmPDFCertificadoHabilitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmPDFObleaTransmision.resx">
+      <DependentUpon>frmPDFObleaTransmision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmPDFPlanchetaCpadron.resx">
+      <DependentUpon>frmPDFPlanchetaCpadron.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmPDFSolicitudHabilitacion.resx">
+      <DependentUpon>frmPDFSolicitudHabilitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Azrael_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Resources\Stop32.png" />
+    <None Include="Resources\Play32.png" />
+    <None Include="Resources\close32.png" />
+    <None Include="Resources\clear32.png" />
+    <None Include="Resources\cancel32.png" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmPDFOblea.resx">
+      <DependentUpon>frmPDFOblea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmPDFCertificado.resx">
+      <DependentUpon>frmPDFCertificado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportes\frmPDFEncomienda.resx">
+      <DependentUpon>frmPDFEncomienda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinesLayer\BusinesLayer.csproj">
+      <Project>{8ff7afc2-3068-428a-b046-5213a9eed822}</Project>
+      <Name>BusinesLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTrasnferObject\DataTransferObject.csproj">
+      <Project>{d19c2b35-ab4a-4eb2-be0f-e151f023fedb}</Project>
+      <Name>DataTransferObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExternalServiceMail\ExternalService.csproj">
+      <Project>{33f5fd19-535e-4bbe-8544-a6dc90aeb1f1}</Project>
+      <Name>ExternalService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBusinessLayer\IBusinessLayer.csproj">
+      <Project>{3e8e0dda-e025-4ca4-9169-f139d6d90b97}</Project>
+      <Name>IBusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporting\Reporting.csproj">
+      <Project>{ccc09f9c-2254-4d74-9867-33a91c487544}</Project>
+      <Name>Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StaticClass\StaticClass.csproj">
+      <Project>{63f81a1c-cb11-47fc-8095-df480c24250e}</Project>
+      <Name>StaticClass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

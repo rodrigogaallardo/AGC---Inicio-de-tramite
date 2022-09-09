@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DGHP_SolicitudesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DGHP_SolicitudesModelStoreContainer">
+          <EntitySet Name="BAFYCO_Menues" EntityType="DGHP_SolicitudesModel.Store.BAFYCO_Menues" store:Type="Tables" Schema="BAFYCO" />
+          <EntitySet Name="BAFYCO_Parametros" EntityType="DGHP_SolicitudesModel.Store.BAFYCO_Parametros" store:Type="Tables" Schema="BAFYCO" />
+          <EntitySet Name="BAFYCO_Perfiles" EntityType="DGHP_SolicitudesModel.Store.BAFYCO_Perfiles" store:Type="Tables" Schema="BAFYCO" />
+          <EntitySet Name="BAFYCO_Rel_Perfiles_Menues" EntityType="DGHP_SolicitudesModel.Store.BAFYCO_Rel_Perfiles_Menues" store:Type="Tables" Schema="BAFYCO" />
+          <EntitySet Name="BAFYCO_Rel_Usuarios_Perfiles" EntityType="DGHP_SolicitudesModel.Store.BAFYCO_Rel_Usuarios_Perfiles" store:Type="Tables" Schema="BAFYCO" />
+          <AssociationSet Name="FK_BAFYCO_Menues_BAFYCO_Menues" Association="DGHP_SolicitudesModel.Store.FK_BAFYCO_Menues_BAFYCO_Menues">
+            <End Role="BAFYCO_Menues" EntitySet="BAFYCO_Menues" />
+            <End Role="BAFYCO_Menues1" EntitySet="BAFYCO_Menues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAFYCO_Rel_Perfiles_Menues_BAFYCO_Menues" Association="DGHP_SolicitudesModel.Store.FK_BAFYCO_Rel_Perfiles_Menues_BAFYCO_Menues">
+            <End Role="BAFYCO_Menues" EntitySet="BAFYCO_Menues" />
+            <End Role="BAFYCO_Rel_Perfiles_Menues" EntitySet="BAFYCO_Rel_Perfiles_Menues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAFYCO_Rel_Perfiles_Menues_BAFYCO_Perfiles" Association="DGHP_SolicitudesModel.Store.FK_BAFYCO_Rel_Perfiles_Menues_BAFYCO_Perfiles">
+            <End Role="BAFYCO_Perfiles" EntitySet="BAFYCO_Perfiles" />
+            <End Role="BAFYCO_Rel_Perfiles_Menues" EntitySet="BAFYCO_Rel_Perfiles_Menues" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BAFYCO_Menues">
+          <Key>
+            <PropertyRef Name="id_menu" />
+          </Key>
+          <Property Name="id_menu" Type="int" Nullable="false" />
+          <Property Name="descripcion_menu" Type="nvarchar" MaxLength="200" />
+          <Property Name="aclaracion_menu" Type="nvarchar" MaxLength="300" />
+          <Property Name="pagina_menu" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="iconCssClass_menu" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_menu_padre" Type="int" />
+          <Property Name="nroOrden" Type="int" Nullable="false" />
+          <Property Name="visible" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="BAFYCO_Parametros">
+          <Key>
+            <PropertyRef Name="id_param" />
+          </Key>
+          <Property Name="id_param" Type="int" Nullable="false" />
+          <Property Name="cod_param" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="nom_param" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="valorchar_param" Type="nvarchar" MaxLength="1000" />
+          <Property Name="valornum_param" Type="decimal" Scale="4" />
+        </EntityType>
+        <EntityType Name="BAFYCO_Perfiles">
+          <Key>
+            <PropertyRef Name="id_perfil" />
+          </Key>
+          <Property Name="id_perfil" Type="int" Nullable="false" />
+          <Property Name="nombre_perfil" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="descripcion_perfil" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateUser" Type="uniqueidentifier" />
+          <Property Name="LastUpdateDate" Type="datetime" />
+          <Property Name="LastUpdateUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="BAFYCO_Rel_Perfiles_Menues">
+          <Key>
+            <PropertyRef Name="Id_perfil" />
+            <PropertyRef Name="id_menu" />
+          </Key>
+          <Property Name="Id_perfil" Type="int" Nullable="false" />
+          <Property Name="id_menu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BAFYCO_Rel_Usuarios_Perfiles">
+          <Key>
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="id_perfil" />
+          </Key>
+          <Property Name="userid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_perfil" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BAFYCO_Menues_BAFYCO_Menues">
+          <End Role="BAFYCO_Menues" Type="DGHP_SolicitudesModel.Store.BAFYCO_Menues" Multiplicity="0..1" />
+          <End Role="BAFYCO_Menues1" Type="DGHP_SolicitudesModel.Store.BAFYCO_Menues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAFYCO_Menues">
+              <PropertyRef Name="id_menu" />
+            </Principal>
+            <Dependent Role="BAFYCO_Menues1">
+              <PropertyRef Name="id_menu_padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAFYCO_Rel_Perfiles_Menues_BAFYCO_Menues">
+          <End Role="BAFYCO_Menues" Type="DGHP_SolicitudesModel.Store.BAFYCO_Menues" Multiplicity="1" />
+          <End Role="BAFYCO_Rel_Perfiles_Menues" Type="DGHP_SolicitudesModel.Store.BAFYCO_Rel_Perfiles_Menues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAFYCO_Menues">
+              <PropertyRef Name="id_menu" />
+            </Principal>
+            <Dependent Role="BAFYCO_Rel_Perfiles_Menues">
+              <PropertyRef Name="id_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAFYCO_Rel_Perfiles_Menues_BAFYCO_Perfiles">
+          <End Role="BAFYCO_Perfiles" Type="DGHP_SolicitudesModel.Store.BAFYCO_Perfiles" Multiplicity="1" />
+          <End Role="BAFYCO_Rel_Perfiles_Menues" Type="DGHP_SolicitudesModel.Store.BAFYCO_Rel_Perfiles_Menues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAFYCO_Perfiles">
+              <PropertyRef Name="id_perfil" />
+            </Principal>
+            <Dependent Role="BAFYCO_Rel_Perfiles_Menues">
+              <PropertyRef Name="Id_perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DGHP_SolicitudesModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DGHP_SolicitudesEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="BAFYCO_Menues" EntityType="DGHP_SolicitudesModel.BAFYCO_Menues" />
+          <EntitySet Name="BAFYCO_Parametros" EntityType="DGHP_SolicitudesModel.BAFYCO_Parametros" />
+          <EntitySet Name="BAFYCO_Perfiles" EntityType="DGHP_SolicitudesModel.BAFYCO_Perfiles" />
+          <EntitySet Name="BAFYCO_Rel_Usuarios_Perfiles" EntityType="DGHP_SolicitudesModel.BAFYCO_Rel_Usuarios_Perfiles" />
+          <AssociationSet Name="FK_BAFYCO_Menues_BAFYCO_Menues" Association="DGHP_SolicitudesModel.FK_BAFYCO_Menues_BAFYCO_Menues">
+            <End Role="BAFYCO_Menues" EntitySet="BAFYCO_Menues" />
+            <End Role="BAFYCO_Menues1" EntitySet="BAFYCO_Menues" />
+          </AssociationSet>
+          <AssociationSet Name="BAFYCO_Rel_Perfiles_Menues" Association="DGHP_SolicitudesModel.BAFYCO_Rel_Perfiles_Menues">
+            <End Role="BAFYCO_Menues" EntitySet="BAFYCO_Menues" />
+            <End Role="BAFYCO_Perfiles" EntitySet="BAFYCO_Perfiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BAFYCO_Menues">
+          <Key>
+            <PropertyRef Name="id_menu" />
+          </Key>
+          <Property Name="id_menu" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_menu" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="aclaracion_menu" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="pagina_menu" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="iconCssClass_menu" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="id_menu_padre" Type="Int32" />
+          <Property Name="nroOrden" Type="Int32" Nullable="false" />
+          <Property Name="visible" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="Guid" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="Guid" />
+          <NavigationProperty Name="BAFYCO_Menues1" Relationship="DGHP_SolicitudesModel.FK_BAFYCO_Menues_BAFYCO_Menues" FromRole="BAFYCO_Menues" ToRole="BAFYCO_Menues1" />
+          <NavigationProperty Name="BAFYCO_Menues2" Relationship="DGHP_SolicitudesModel.FK_BAFYCO_Menues_BAFYCO_Menues" FromRole="BAFYCO_Menues1" ToRole="BAFYCO_Menues" />
+          <NavigationProperty Name="BAFYCO_Perfiles" Relationship="DGHP_SolicitudesModel.BAFYCO_Rel_Perfiles_Menues" FromRole="BAFYCO_Menues" ToRole="BAFYCO_Perfiles" />
+        </EntityType>
+        <EntityType Name="BAFYCO_Parametros">
+          <Key>
+            <PropertyRef Name="id_param" />
+          </Key>
+          <Property Name="id_param" Type="Int32" Nullable="false" />
+          <Property Name="cod_param" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="nom_param" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="valorchar_param" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="valornum_param" Type="Decimal" Precision="18" Scale="4" />
+        </EntityType>
+        <EntityType Name="BAFYCO_Perfiles">
+          <Key>
+            <PropertyRef Name="id_perfil" />
+          </Key>
+          <Property Name="id_perfil" Type="Int32" Nullable="false" />
+          <Property Name="nombre_perfil" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="descripcion_perfil" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateUser" Type="Guid" />
+          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdateUser" Type="Guid" />
+          <NavigationProperty Name="BAFYCO_Menues" Relationship="DGHP_SolicitudesModel.BAFYCO_Rel_Perfiles_Menues" FromRole="BAFYCO_Perfiles" ToRole="BAFYCO_Menues" />
+        </EntityType>
+        <EntityType Name="BAFYCO_Rel_Usuarios_Perfiles">
+          <Key>
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="id_perfil" />
+          </Key>
+          <Property Name="userid" Type="Guid" Nullable="false" />
+          <Property Name="id_perfil" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BAFYCO_Menues_BAFYCO_Menues">
+          <End Role="BAFYCO_Menues" Type="DGHP_SolicitudesModel.BAFYCO_Menues" Multiplicity="0..1" />
+          <End Role="BAFYCO_Menues1" Type="DGHP_SolicitudesModel.BAFYCO_Menues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAFYCO_Menues">
+              <PropertyRef Name="id_menu" />
+            </Principal>
+            <Dependent Role="BAFYCO_Menues1">
+              <PropertyRef Name="id_menu_padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BAFYCO_Rel_Perfiles_Menues">
+          <End Role="BAFYCO_Menues" Type="DGHP_SolicitudesModel.BAFYCO_Menues" Multiplicity="*" />
+          <End Role="BAFYCO_Perfiles" Type="DGHP_SolicitudesModel.BAFYCO_Perfiles" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DGHP_SolicitudesModelStoreContainer" CdmEntityContainer="DGHP_SolicitudesEntities">
+          <EntitySetMapping Name="BAFYCO_Menues">
+            <EntityTypeMapping TypeName="DGHP_SolicitudesModel.BAFYCO_Menues">
+              <MappingFragment StoreEntitySet="BAFYCO_Menues">
+                <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+                <ScalarProperty Name="descripcion_menu" ColumnName="descripcion_menu" />
+                <ScalarProperty Name="aclaracion_menu" ColumnName="aclaracion_menu" />
+                <ScalarProperty Name="pagina_menu" ColumnName="pagina_menu" />
+                <ScalarProperty Name="iconCssClass_menu" ColumnName="iconCssClass_menu" />
+                <ScalarProperty Name="id_menu_padre" ColumnName="id_menu_padre" />
+                <ScalarProperty Name="nroOrden" ColumnName="nroOrden" />
+                <ScalarProperty Name="visible" ColumnName="visible" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BAFYCO_Parametros">
+            <EntityTypeMapping TypeName="DGHP_SolicitudesModel.BAFYCO_Parametros">
+              <MappingFragment StoreEntitySet="BAFYCO_Parametros">
+                <ScalarProperty Name="id_param" ColumnName="id_param" />
+                <ScalarProperty Name="cod_param" ColumnName="cod_param" />
+                <ScalarProperty Name="nom_param" ColumnName="nom_param" />
+                <ScalarProperty Name="valorchar_param" ColumnName="valorchar_param" />
+                <ScalarProperty Name="valornum_param" ColumnName="valornum_param" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BAFYCO_Perfiles">
+            <EntityTypeMapping TypeName="DGHP_SolicitudesModel.BAFYCO_Perfiles">
+              <MappingFragment StoreEntitySet="BAFYCO_Perfiles">
+                <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+                <ScalarProperty Name="nombre_perfil" ColumnName="nombre_perfil" />
+                <ScalarProperty Name="descripcion_perfil" ColumnName="descripcion_perfil" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BAFYCO_Rel_Usuarios_Perfiles">
+            <EntityTypeMapping TypeName="DGHP_SolicitudesModel.BAFYCO_Rel_Usuarios_Perfiles">
+              <MappingFragment StoreEntitySet="BAFYCO_Rel_Usuarios_Perfiles">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BAFYCO_Rel_Perfiles_Menues" TypeName="DGHP_SolicitudesModel.BAFYCO_Rel_Perfiles_Menues" StoreEntitySet="BAFYCO_Rel_Perfiles_Menues">
+            <EndProperty Name="BAFYCO_Menues">
+              <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+            </EndProperty>
+            <EndProperty Name="BAFYCO_Perfiles">
+              <ScalarProperty Name="id_perfil" ColumnName="Id_perfil" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

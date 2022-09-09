@@ -1,0 +1,231 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="AnexoProfesionales.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+    <title>AT - <%: Page.Title %></title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/jquery") %>
+        <%: Scripts.Render("~/bundles/jquery-ui") %>
+        <%: Scripts.Render("~/bundles/modernizr")%>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link rel="shortcut icon" href="<%: ResolveClientUrl("~/Content/img/app/favicon.ico")  %>" />
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <form id="Form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="300">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div id="page-wrap">
+            <header id="header">
+                <div class="navbar navbar-primary navbar-top" style="height: 90px !important">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <a class="navbar-brand bac-header2 " style="float: left; margin-top: -10px" href="http://www.buenosaires.gob.ar/agc" target="_blank"></a>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <a class="navbar-brand bac-header pull-right" style="margin-top: 25px; margin-top: 12px" href="http://www.buenosaires.gob.ar/" target="_blank">
+                                    <%--<img src="<%: ResolveClientUrl("~/Common/Images/icoBastrap.png")  %>" style="height:75%; width:165%; margin-left:-137px; margin-top:10px"/>--%>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <nav class="navbar navbar-default" role="navigation" style="box-shadow: 1px 1px 5px #EFEFEF;">
+                    <div class="container">
+
+
+                        <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled">
+                            <AnonymousTemplate>
+
+
+                                <div class="row">
+
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                                            <span class="sr-only">Cambiar navegación</span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    <div class="collapse navbar-collapse" id="Div1">
+                                        <ul class="nav navbar-nav ">
+                                            <li>
+                                                <asp:LinkButton ID="btnInicio" runat="server" PostBackUrl="~/" CausesValidation="false">
+                        <i class="imoon imoon-home"></i> <span class="text" style="font-size:16px !important;">Inicio</span></a>
+                                                </asp:LinkButton>
+                                            </li>
+                                        </ul>
+
+
+                                        <div class="collapse navbar-collapse" id="main-nav">
+                                            <ul class="nav navbar-nav navbar-right">
+
+                                                <%--                                                    <li >
+                                                        <asp:LinkButton ID="btnInicio" runat="server" PostBackUrl="~/Default"  CausesValidation="false">
+                                                        <i class="glyphicon  glyphicon-home"></i> <span class="text" >Inicio</span></a>
+                                                        </asp:LinkButton>
+                                                    </li>--%>
+
+                                                <li>
+                                                    <asp:LinkButton ID="btnLogin" runat="server" PostBackUrl="~/Default.aspx" CausesValidation="false">
+                                                    <i class="glyphicon glyphicon-user"></i> <span class="text">Iniciar sesión</span></a>
+                                                    </asp:LinkButton>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+
+                                <div class="row">
+
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav2">
+                                            <span class="sr-only">Cambiar navegación</span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+
+
+                                    </div>
+                                    <div class="collapse navbar-collapse" id="main-nav2">
+                                        <ul class="nav navbar-nav ">
+                                            <li>
+                                                <asp:LinkButton ID="btnInicio" runat="server" PostBackUrl="~/Default" CausesValidation="false">
+                        <i class="imoon imoon-home"></i> <span class="text" style="font-size:16px !important;">Inicio</span></a>
+                                                </asp:LinkButton>
+                                            </li>
+                                            <li>
+
+                                                <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Tramites/Bandeja" CausesValidation="false">
+                <i class="imoon imoon-inbox"></i> <span class="text" style="font-size:15px !important;">Bandeja de Tramites</span></a>
+                                                </asp:LinkButton>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="nav navbar-nav navbar-right">
+
+
+                                            <li class="dropdown navbar-color-a" id="menu-user">
+
+                                                <a title="" href="#" data-toggle="dropdown" data-target="#menu-user" class="dropdown-toggle">
+                                                    <i class="glyphicon glyphicon-user"></i>
+                                                    <span class="text">
+                                                        <asp:Label ID="lblUsername" runat="server"></asp:Label></span>
+                                                    <b class="caret" style="margin-left: 5px;"></b>
+                                                </a>
+                                                <ul class="dropdown-menu navbar-color-a">
+                                                    <li>
+                                                        <asp:LinkButton ID="btnChangePassword" runat="server" title="" PostBackUrl="~/Account/Manage">Modificar contrase&ntilde;a</asp:LinkButton></li>
+                                                    <li>
+                                                        <asp:LinkButton ID="btnEdituser" runat="server" title="" PostBackUrl="~/Account/Edit">Visualizar datos usuario</asp:LinkButton></li>
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <asp:LinkButton ID="btnLogOff" runat="server" title="" OnClick="LogOff" CausesValidation="false">
+                                                            <i class="glyphicon glyphicon-share-alt"></i> 
+                                                            <span class="text">Cerrar sesi&oacute;n</span>
+                                                </asp:LinkButton>
+
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+
+                    </div>
+                </nav>
+
+
+            </header>
+
+
+            <div id="body">
+                <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+                <div class="container">
+                    <section class="content-wrapper clear-fix mtop20">
+                        <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+                    </section>
+
+
+                </div>
+            </div>
+
+            <footer id="footer" class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <a class="navbar-brand bac-footer" href="http://www.buenosaires.gob.ar" target="_blank"></a>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="pull-right">
+                                <p>
+                                    Agencia Gubernamental de Control
+                                    <br />
+                                    <span class="text-muted">Ministerio de Justicia y Seguridad</span>
+                                </p>
+
+                                <div style="font-size: x-small" class="text-muted text-center">
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>
+                                            <asp:Label ID="lblVersion" Text="text" runat="server" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                // Hacer que el tamaño de la pagina sea el 100% de alto como minimo
+
+                var alto = $(document).height() - $("header").height() - $("#footer").height();
+
+                if (alto > $("#body").height()) {
+                    $("#body").css("min-height", alto - 80);
+                }
+
+            });
+
+        </script>
+    </form>
+</body>
+</html>

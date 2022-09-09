@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D19C2B35-AB4A-4EB2-BE0F-E151F023FEDB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataTransferObject</RootNamespace>
+    <AssemblyName>DataTransferObject</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AntEncomiendaEstados.cs" />
+    <Compile Include="ApplicationsDTO.cs" />
+    <Compile Include="AspnetUserDTO.cs" />
+    <Compile Include="AvisoNotificacionDTO.cs" />
+    <Compile Include="AzraelDTO.cs" />
+    <Compile Include="CertificadosDTO.cs" />
+    <Compile Include="Concepto_a_cobrar.cs" />
+    <Compile Include="CondicionesIncendioDTO.cs" />
+    <Compile Include="ConsejoProfesionalDTO.cs" />
+    <Compile Include="ConsultaPadronDocumentosAdjuntosDTO.cs" />
+    <Compile Include="ConsultaPadronEstadosDTO.cs" />
+    <Compile Include="ConsultaPadronSolicitudesObservacionesDTO.cs" />
+    <Compile Include="DocumentosAdjuntosDTO.cs" />
+    <Compile Include="Encomienda Externa\EncomiendaExternaDTO.cs" />
+    <Compile Include="Encomienda Externa\EncomiendaExternaTitularesPersonasFisicasDTO.cs" />
+    <Compile Include="Encomienda Externa\EncomiendaExternaTitularesPersonasJuridicasDTO.cs" />
+    <Compile Include="Encomienda Externa\EncomiendaExternaTitularesPersonasJuridicasPersonasFisicasDTO.cs" />
+    <Compile Include="Encomienda Externa\EncomiendaExternaUbicacionesDTO.cs" />
+    <Compile Include="Encomienda Externa\EncomiendaExternaUbicacionesPropiedadHorizontalDTO.cs" />
+    <Compile Include="EncomiendaAntenasDTO.cs" />
+    <Compile Include="EncomiendaExternaEstadoDTO.cs" />
+    <Compile Include="EncomiendaExternaHistorialEstadosDTO.cs" />
+    <Compile Include="EncomiendaRectificatoriaDTO.cs" />
+    <Compile Include="EncomiendaRubrosCNDTO.cs" />
+    <Compile Include="EncomiendaRubrosCNSubrubrosDTO.cs" />
+    <Compile Include="EncomiendaSSITSolicitudesDTO.cs" />
+    <Compile Include="EncomiendaTransfSolicitudesDTO.cs" />
+    <Compile Include="EncomiendaURLxROLDTO.cs" />
+    <Compile Include="Encomienda_RubrosCN_DepositoDTO.cs" />
+    <Compile Include="Encomienda_Ubicaciones_DistritosDTO.cs" />
+    <Compile Include="Encomienda_Ubicaciones_MixturasDTO.cs" />
+    <Compile Include="EngineResultadoTareaDTO.cs" />
+    <Compile Include="Engine\EngineTareaDTO.cs" />
+    <Compile Include="ConceptosBUIIndependientesDTO.cs" />
+    <Compile Include="ENG_CircuitosDTO.cs" />
+    <Compile Include="GrupoConsejosDTO.cs" />
+    <Compile Include="GrupoConsejosRolesClasificacionDTO.cs" />
+    <Compile Include="InstructivosDTO.cs" />
+    <Compile Include="ItemCertificadoDTO.cs" />
+    <Compile Include="Ley962TiposDeDocumentosRequeridosDTO.cs" />
+    <Compile Include="EMailDTO.cs" />
+    <Compile Include="MotivoNotificacionDTO.cs" />
+    <Compile Include="PersonaTadDTO.cs" />
+    <Compile Include="ProfesionalDTO.cs" />
+    <Compile Include="ProfesionalesPerfilesInhibicionesDTO.cs" />
+    <Compile Include="Profesional_historialDTO.cs" />
+    <Compile Include="RelRubrosSolicitudesNuevasDTO.cs" />
+    <Compile Include="ResultadoDTO.cs" />
+    <Compile Include="RolesDTO.cs" />
+    <Compile Include="RubrosCircuitoAtomaticoZonasDTO.cs" />
+    <Compile Include="EncomiendaRubrosCNATAnteriorDTO.cs" />
+    <Compile Include="RubrosCNDTO.cs" />
+    <Compile Include="RubrosCNSubRubrosDTO.cs" />
+    <Compile Include="RubrosDepositosCNDTO.cs" />
+    <Compile Include="RubrosDepositosCN_RangosSuperficieDTO.cs" />
+    <Compile Include="RubrosImpactoAmbientalCNDTO.cs" />
+    <Compile Include="RubrosTipoDocReqDTO.cs" />
+    <Compile Include="RubrosTiposDeDocumentosRequeridosDTO.cs" />
+    <Compile Include="RubrosTiposDeDocumentosRequeridosZonasDTO.cs" />
+    <Compile Include="SGIProfileDTO.cs" />
+    <Compile Include="SGISolicitudesPagosDTO.cs" />
+    <Compile Include="SGITareaCalificarObsDocsDTO.cs" />
+    <Compile Include="SGITramitesTareasConsultaPadronDTO.cs" />
+    <Compile Include="SGITramitesTareasDTO.cs" />
+    <Compile Include="SGITramitesTareasHabDTO.cs" />
+    <Compile Include="SGITareaDocumentosAdjuntosDTO.cs" />
+    <Compile Include="SolicitudDTO.cs" />
+    <Compile Include="SolicitudesAprobadasDTO.cs" />
+    <Compile Include="SSITPermisosDatosAdicionalesDTO.cs" />
+    <Compile Include="SSITSolicitudesAvisoCaducidadDTO.cs" />
+    <Compile Include="SSITSolicitudesDatosLocalDTO.cs" />
+    <Compile Include="SSITSolicitudesUbicacionBaseDTO.cs" />
+    <Compile Include="TransferenciasNotificacionesDTO.cs" />
+    <Compile Include="SSIT_Solicitudes_BajaDTO.cs" />
+    <Compile Include="SSITSolicitudesNormativasDTO.cs" />
+    <Compile Include="SSITSolicitudesNotificacionesDTO.cs" />
+    <Compile Include="SSITSolicitudesNuevasDTO.cs" />
+    <Compile Include="SSITSolicitudesOrigenDTO.cs" />
+    <Compile Include="SSITSolicitudesHistorialEstadosDTO.cs" />
+    <Compile Include="SGITareaCalificarObsGrupoDTO.cs" />
+    <Compile Include="SSITSolicitudesPagosDTO.cs" />
+    <Compile Include="SGITramitesTareasTransferenciasDTO.cs" />
+    <Compile Include="SSITSolicitudesRubrosCNDTO.cs" />
+    <Compile Include="SSITSolicitudesUbicacionesDistritoDTO.cs" />
+    <Compile Include="SSITSolicitudesUbicacionesMixturasDTO.cs" />
+    <Compile Include="SSITSolicitudesUbicacionModelDTO.cs" />
+    <Compile Include="SSITSolicitudesUbicacionesDTO.cs" />
+    <Compile Include="SSITSolicitudesUbicacionesPropiedadHorizontalDTO.cs" />
+    <Compile Include="SSITSolicitudesUbicacionesPuertasDTO.cs" />
+    <Compile Include="EscribanoDTO.cs" />
+    <Compile Include="SSITDocumentosAdjuntosEntityDTO.cs" />
+    <Compile Include="SSITDocumentosAdjuntosDTO.cs" />
+    <Compile Include="SSITSolicitudesFirmantesPersonasFisicasDTO.cs" />
+    <Compile Include="SSITSolicitudesFirmantesPersonasJuridicasDTO.cs" />
+    <Compile Include="SSITSolicitudesObservacionesDTO.cs" />
+    <Compile Include="SSITSolicitudesTitularesPersonasFisicasDTO.cs" />
+    <Compile Include="SSITSolicitudesTitularesPersonasJuridicasDTO.cs" />
+    <Compile Include="SSITSolicitudesTitularesPersonasJuridicasPersonasFisicasDTO.cs" />
+    <Compile Include="SSIT_Listado_ProfesionalesDTO.cs" />
+    <Compile Include="SSIT_Solicitudes_AvisoCaducidadDTO.cs" />
+    <Compile Include="SubTipoExpedienteDTO .cs" />
+    <Compile Include="TareasDTO.cs" />
+    <Compile Include="TipodeTransmisionDTO.cs" />
+    <Compile Include="TipoExpedienteDTO.cs" />
+    <Compile Include="TiposDeDocumentosRequeridosDTO.cs" />
+    <Compile Include="TiposDeTransmisionDTO.cs" />
+    <Compile Include="TramitesDTO.cs" />
+    <Compile Include="TransferenciaFirmantePersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciaFirmantePersonasJuridicasDTO.cs" />
+    <Compile Include="TransferenciaFirmantesSolicitudPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciaFirmantesSolicitudPersonasJuridicasDTO.cs" />
+    <Compile Include="TransferenciasDatosLocalDTO.cs" />
+    <Compile Include="TransferenciasDocumentosAdjuntosDTO.cs" />
+    <Compile Include="TransferenciasFirmantesPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciasFirmantesPersonasJuridicasDTO.cs" />
+    <Compile Include="TransferenciasFirmantesSolicitudPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciasFirmantesSolicitudPersonasJuridicasDTO.cs" />
+    <Compile Include="TransferenciasPlantasDTO.cs" />
+    <Compile Include="TransferenciasRubrosDTO.cs" />
+    <Compile Include="TransferenciasSolicitudesDTO.cs" />
+    <Compile Include="TransferenciasSolicitudesHistorialEstadosDTO.cs" />
+    <Compile Include="TransferenciasSolicitudesObservacionesDTO.cs" />
+    <Compile Include="TransferenciasTitularesCPPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciasTitularesCPPersonasJuridicasDTO.cs" />
+    <Compile Include="TransferenciasTitularesPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciasTitularesPersonasJuridicasDTO.cs" />
+    <Compile Include="TransferenciasTitularesPersonasJuridicasPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciasTitularesSolicitudPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciasTitularesSolicitudPersonasJuridicasDTO.cs" />
+    <Compile Include="TransferenciasTitularesSolicitudPersonasJuridicasPersonasFisicasDTO.cs" />
+    <Compile Include="TransferenciasUbicacionesPuertasDTO.cs" />
+    <Compile Include="TransferenciasUbicacionPropiedadHorizontalDTO.cs" />
+    <Compile Include="TransferenciaUbicacionesDistritosDTO.cs" />
+    <Compile Include="TransferenciaUbicacionesDTO.cs" />
+    <Compile Include="TransferenciaUbicacionesMixturasDTO.cs" />
+    <Compile Include="TransfSolicitudesPagosDTO.cs" />
+    <Compile Include="UbicacionesCatalogoDistritosDTO.cs" />
+    <Compile Include="UbicacionesCatalogoDistritosSubzonasDTO.cs" />
+    <Compile Include="UbicacionesDistritosDTO.cs" />
+    <Compile Include="UbicacionesGruposDistritosDTO.cs" />
+    <Compile Include="UsuarioConsejoDTO.cs" />
+    <Compile Include="UsuarioDTO.cs" />
+    <Compile Include="UsuariosProfesionalesRolesClasificacionDTO.cs" />
+    <Compile Include="wsEscribanosInstrumentoJudicialDTO.cs" />
+    <Compile Include="wsEscribanosInstrumentoPublicoDTO.cs" />
+    <Compile Include="wsEscribanosInstrumentoPrivadoDTO.cs" />
+    <Compile Include="wsEscribanosPersonasFisicasRepresentantesDTO.cs" />
+    <Compile Include="wsEscribanosPersonasFisicasDTO.cs" />
+    <Compile Include="wsEscribanosDerechoOcupacionDTO.cs" />
+    <Compile Include="wsEscribanosPersonasJuridicasRepresentantesDTO.cs" />
+    <Compile Include="wsEscribanosPersonasJuridicasDTO.cs" />
+    <Compile Include="wsEscribanosActaNotarialDTO.cs" />
+    <Compile Include="CallesDTO.cs" />
+    <Compile Include="ConsultaPadronConformacionLocalDTO.cs" />
+    <Compile Include="ConsultaPadronDatosLocalDTO.cs" />
+    <Compile Include="ConsultaPadronNormativasDTO.cs" />
+    <Compile Include="ConsultaPadronPlantasDTO.cs" />
+    <Compile Include="ConsultaPadronRubrosDTO.cs" />
+    <Compile Include="ConsultaPadronSolicitudesDTO.cs" />
+    <Compile Include="ConsultaPadronTitularesPersonasFisicasDTO.cs" />
+    <Compile Include="ConsultaPadronTitularesPersonasJuridicasDTO.cs" />
+    <Compile Include="ConsultaPadronTitularesPersonasJuridicasPersonasFisicasDTO.cs" />
+    <Compile Include="ConsultaPadronTitularesSolicitudPersonasFisicasDTO.cs" />
+    <Compile Include="ConsultaPadronTitularesSolicitudPersonasJuridicasDTO.cs" />
+    <Compile Include="ConsultaPadronTitularesSolicitudPersonasJuridicasPersonasFisicasDTO.cs" />
+    <Compile Include="ConsultaPadronUbicacionesDTO.cs" />
+    <Compile Include="ConsultaPadronUbicacionesPuertasDTO.cs" />
+    <Compile Include="ConsultaPadronUbicacionPropiedadHorizontalDTO.cs" />
+    <Compile Include="EncomiendaConformacionLocalDTO.cs" />
+    <Compile Include="EncomiendaDatosLocalDTO.cs" />
+    <Compile Include="EncomiendaDTO.cs" />
+    <Compile Include="EncomiendaEstadosDTO.cs" />
+    <Compile Include="EncomiendaFirmantesPersonasFisicasDTO.cs" />
+    <Compile Include="EncomiendaFirmantesPersonasJuridicasDTO.cs" />
+    <Compile Include="EncomiendaNormativasDTO.cs" />
+    <Compile Include="EncomiendaDocumentosAdjuntosDTO.cs" />
+    <Compile Include="EncomiendaTitularesPersonasFisicasDTO.cs" />
+    <Compile Include="EncomiendaTitularesPersonasJuridicasDTO.cs" />
+    <Compile Include="EncomiendaTitularesPersonasJuridicasPersonasFisicasDTO.cs" />
+    <Compile Include="EncomiendaPlanosDTO.cs" />
+    <Compile Include="EncomiendaRubrosDTO.cs" />
+    <Compile Include="EntidadNormativaDTO.cs" />
+    <Compile Include="ItemDirectionDTO.cs" />
+    <Compile Include="ItemPuertaDTO.cs" />
+    <Compile Include="RubrosImpactoAmbientalDTO.cs" />
+    <Compile Include="SobrecargasEntityDTO.cs" />
+    <Compile Include="EncomiendaSobrecargaDetalle2DTO.cs" />
+    <Compile Include="EncomiendaSobrecargaDetalle1DTO.cs" />
+    <Compile Include="EncomiendaCertificadoSobrecargaDTO.cs" />
+    <Compile Include="EncomiendaTiposUsosDTO.cs" />
+    <Compile Include="EncomiendaRelTiposDestinosTiposUsosDTO.cs" />
+    <Compile Include="EncomiendaTiposDestinosDTO.cs" />
+    <Compile Include="EncomiendaTiposCertificadosSobrecargaDTO.cs" />
+    <Compile Include="EncomiendaTiposSobrecargasDTO.cs" />
+    <Compile Include="EncomiendaPlantasDTO.cs" />
+    <Compile Include="EncomiendaUbicacionesDTO.cs" />
+    <Compile Include="FirmantesDTO.cs" />
+    <Compile Include="LocalidadDTO.cs" />
+    <Compile Include="EncomiendaUbicacionesPropiedadHorizontalDTO.cs" />
+    <Compile Include="EncomiendaUbicacionesPuertasDTO.cs" />
+    <Compile Include="MenuesDTO.cs" />
+    <Compile Include="ObjectDtoExample.cs" />
+    <Compile Include="ParametrosDTO.cs" />
+    <Compile Include="PerfilesDTO.cs" />
+    <Compile Include="ProfesionalesDTO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinciaDTO.cs" />
+    <Compile Include="RubrosDTO.cs" />
+    <Compile Include="SSITSolicitudesEncomiendaDTO.cs" />
+    <Compile Include="SSITSolicitudesDTO.cs" />
+    <Compile Include="SubTipoUbicacionesDTO.cs" />
+    <Compile Include="TipoActividadDTO.cs" />
+    <Compile Include="ImpactoAmbientalDTO.cs" />
+    <Compile Include="TiposDeDocumentosSistemaDTO.cs" />
+    <Compile Include="TipoTramiteDTO.cs" />
+    <Compile Include="TipoVentilacionDTO.cs" />
+    <Compile Include="TipoIluminacionDTO.cs" />
+    <Compile Include="TipoSuperficieDTO.cs" />
+    <Compile Include="TipoDocumentacionRequeridaDTO.cs" />
+    <Compile Include="TipoDestinoDTO.cs" />
+    <Compile Include="TiposDePlanosDTO.cs" />
+    <Compile Include="TipoDocumentoPersonalDTO.cs" />
+    <Compile Include="TipoEstadoSolicitudDTO.cs" />
+    <Compile Include="TiposDeCaracterLegalDTO.cs" />
+    <Compile Include="TiposDeIngresosBrutosDTO.cs" />
+    <Compile Include="TipoNormativaDTO.cs" />
+    <Compile Include="TiposDeUbicacionDTO.cs" />
+    <Compile Include="TipoSectorDTO.cs" />
+    <Compile Include="TipoSociedadDTO.cs" />
+    <Compile Include="TitularesDTO.cs" />
+    <Compile Include="UbicacionesDTO.cs" />
+    <Compile Include="UbicacionesInhibicionesDTO.cs" />
+    <Compile Include="UbicacionesPropiedadhorizontalDTO.cs" />
+    <Compile Include="UbicacionesPuertasDTO.cs" />
+    <Compile Include="UbicacionesZonasMixturasDTO.cs" />
+    <Compile Include="ZonasDistritosDTO.cs" />
+    <Compile Include="ZonasPlaneamientoDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAcess\DataAcess.csproj">
+      <Project>{9E8652C6-7EB7-486A-9E40-4999393D401E}</Project>
+      <Name>DataAcess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StaticClass\StaticClass.csproj">
+      <Project>{63f81a1c-cb11-47fc-8095-df480c24250e}</Project>
+      <Name>StaticClass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
