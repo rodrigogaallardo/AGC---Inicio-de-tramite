@@ -41,7 +41,7 @@ namespace BaseRepository
                 distrito = repoDis.GetDisrito(codigo);
                 IdDistrito = distrito.IdDistrito;
             }
-            
+
             var resolution = (from rub in _unitOfWork.Db.RubrosCN
                               join act in _unitOfWork.Db.TipoActividad on rub.IdTipoActividad equals act.Id
                               where (rub.Nombre.Contains(Rubro) || rub.Codigo.Contains(Rubro)) && !rub.SoloAPRA
@@ -92,7 +92,7 @@ namespace BaseRepository
             var resolution = (from rub in _unitOfWork.Db.RubrosCN
                               where (rub.Codigo.Contains(codigo) || rub.Nombre.Contains(codigo)) &&
                               (rub.VigenciaHasta_rubro > DateTime.Now || rub.VigenciaHasta_rubro == null) &&
-                              !rub.SoloAPRA 
+                              !rub.SoloAPRA
                               select rub);
             return resolution;
 
@@ -139,9 +139,18 @@ namespace BaseRepository
 
                         AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdDistrito", rubro.ZonaMixtura, 2);
 
-                        AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdZona", zonaSubZona.IdZona == null ? 0 : zonaSubZona.IdZona, 3);
+                        if (zonaSubZona != null)
+                        {
+                            AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdZona", zonaSubZona.IdZona == null ? 0 : zonaSubZona.IdZona, 3);
 
-                        AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdSubZona", zonaSubZona.IdSubZona == null ? 0 : zonaSubZona.IdSubZona, 4);
+                            AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdSubZona", zonaSubZona.IdSubZona == null ? 0 : zonaSubZona.IdSubZona, 4);
+                        }
+                        else
+                        {
+                            AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdZona", 0, 3);
+
+                            AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdSubZona", 0, 4);
+                        }
 
                         AddParam(cmd, DbType.Int32, ParameterDirection.Input, "@IdRubro", rubro.IdRubro, 5);
 
@@ -222,23 +231,23 @@ namespace BaseRepository
               .Where(x => x.id_tdocreq != 0)
               .Select(x => x.id_tdocreq).ToList();
 
-          var domains = (from rctddr in _unitOfWork.Db.RubrosCN_TiposDeDocumentosRequeridos
-                           join rc in _unitOfWork.Db.RubrosCN on new { Id_rubro = rctddr.id_rubro } equals new { Id_rubro = rc.IdRubro }                           
+            var domains = (from rctddr in _unitOfWork.Db.RubrosCN_TiposDeDocumentosRequeridos
+                           join rc in _unitOfWork.Db.RubrosCN on new { Id_rubro = rctddr.id_rubro } equals new { Id_rubro = rc.IdRubro }
                            where
                              lstRubrosCN.Contains(rctddr.id_rubro) && rctddr.obligatorio_rubtdocreq == true
                            select new
-                          {
-                              rctddr.id_tdocreq,
-                              rctddr.TiposDeDocumentosRequeridos.nombre_tdocreq,
-                          }).ToList();
+                           {
+                               rctddr.id_tdocreq,
+                               rctddr.TiposDeDocumentosRequeridos.nombre_tdocreq,
+                           }).ToList();
 
 
             domains = domains.Where(d => !(list.Contains(d.id_tdocreq))).ToList();
-                        
+
             string result = "";
             foreach (var item in domains)
             {
-                result += "- " + item.nombre_tdocreq+ ". ";
+                result += "- " + item.nombre_tdocreq + ". ";
             }
             return result;
         }
