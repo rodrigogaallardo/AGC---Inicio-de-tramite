@@ -234,12 +234,12 @@
                                     <h4 style="text-transform:uppercase">Nueva Redistribuci&oacute;n de Usos</h4>
                             </asp:LinkButton>
 
-                       <%--     <asp:LinkButton ID="lnkCrearPermisoMC" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/Permisos/Inicio">
+                            <asp:LinkButton ID="lnkCrearPermisoMC" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/Permisos/Inicio">
                                     <span class="bg-success-dk">
                                             <span class="glyphicon imoon-file fs48"></span>
                                         </span>
                                     <h4 style="text-transform:uppercase">Nuevo Permiso Accesorio Actividad M&uacute;sica y Canto</h4>
-                            </asp:LinkButton>--%>
+                            </asp:LinkButton>
 
                         </div>
 
@@ -286,12 +286,12 @@
                                             <h4  style="text-transform:uppercase">Instructivo Redistribución de Usos</h4>
                             </asp:LinkButton>
 
-                           <%-- <asp:LinkButton ID="linkDescargaInstPermisoMC" CssClass="col-md-3 col-sm-6 shortcut" runat="server" OnClick="linkDescargaInstPermisoMC_Click">
+                            <asp:LinkButton ID="linkDescargaInstPermisoMC" CssClass="col-md-3 col-sm-6 shortcut" runat="server" OnClick="linkDescargaInstPermisoMC_Click">
                                             <span class="bg-success-dk">
                                                 <span class="glyphicon imoon-download fs48"></span>
                                             </span>
                                             <h4  style="text-transform:uppercase">Instructivo Permiso Accesorio Actividad M&uacute;sica y Canto</h4>
-                            </asp:LinkButton>--%>
+                            </asp:LinkButton>
                         </div>
                     </td>
                     <td style="width: 100px; border-left: 1px solid #e2e2e2; padding-left: 20px; vertical-align: top">
