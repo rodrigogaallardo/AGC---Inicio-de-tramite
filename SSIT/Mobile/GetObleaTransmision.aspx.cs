@@ -177,10 +177,20 @@ namespace SSIT.Mobile
 
                 RubrosBL rubBL = new RubrosBL();
                 RubrosCNSubrubrosBL srub = new RubrosCNSubrubrosBL();
+                ConsultaPadronRubrosBL cprubBL = new ConsultaPadronRubrosBL();
          
                 ZonaMix.InnerText = "Mixtura";
                 var rubrosCN = encomienda.EncomiendaRubrosCNDTO;
+                var rubros = cprubBL.GetRubros(sol.IdConsultaPadron);
                 var srubCN = srub.GetSubRubrosByEncomienda(encomienda.IdEncomienda);
+                foreach (var rubro in rubros)
+                {
+                    EncomiendaRubrosCNDTO rubroCN = new EncomiendaRubrosCNDTO();
+                    rubroCN.CodigoRubro = rubro.CodidoRubro;
+                    rubroCN.DescripcionRubro = rubro.DescripcionRubro;
+                    rubroCN.SuperficieHabilitar = (decimal) rubro.SuperficieHabilitar;
+                    rubrosCN.Add(rubroCN);
+                }
                 grdRubros.DataSource = rubrosCN;
                 grdRubros.DataBind();
 

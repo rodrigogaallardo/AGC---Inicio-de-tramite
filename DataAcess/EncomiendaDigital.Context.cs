@@ -489,6 +489,7 @@ namespace DataAcess
         public DbSet<Transf_Solicitudes_Notificaciones> Transf_Solicitudes_Notificaciones { get; set; }
         public DbSet<CondicionesIncendio> CondicionesIncendio { get; set; }
         public DbSet<RubrosCN> RubrosCN { get; set; }
+        public DbSet<CPadron_RubrosCN> CPadron_RubrosCN { get; set; }
     
         public virtual int ENG_Bandeja_Asignar(Nullable<int> id_tramitetarea, Nullable<System.Guid> userid_a_asignar, Nullable<System.Guid> userid_asignador)
         {
