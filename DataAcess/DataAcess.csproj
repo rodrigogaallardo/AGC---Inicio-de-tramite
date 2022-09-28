@@ -203,6 +203,9 @@
     <Compile Include="CPadron_DatosLocal.cs">
       <DependentUpon>EncomiendaDigital.tt</DependentUpon>
     </Compile>
+    <Compile Include="CPadron_RubrosCN.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
     <Compile Include="CPadron_Solicitudes.cs">
       <DependentUpon>EncomiendaDigital.tt</DependentUpon>
     </Compile>
