@@ -46,7 +46,7 @@ namespace SSIT
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/select2").Include(
-            "~/Scripts/select2.js",
+            "~/Scripts/select2.full.js",
             "~/Scripts/Select2-locales/select2_locale_es.js"
             ));
 
