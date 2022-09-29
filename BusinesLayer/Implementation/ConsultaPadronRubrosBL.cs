@@ -16,6 +16,7 @@ namespace BusinesLayer.Implementation
     public class ConsultaPadronRubrosBL : IConsultaPadronRubrosBL<ConsultaPadronRubrosDTO>
     {
         private ConsultaPadronRubrosRepository repo = null;
+        private ConsultaPadronRubrosCNRepository repoCN = null;
         private RubrosRepository repoRubro = null;
         private ConsultaPadronConformacionLocalRepository repoConformacionLocal = null;
         private ConsultaPadronSolicitudesRepository repoConsulta = null;
@@ -306,11 +307,20 @@ namespace BusinesLayer.Implementation
             {
                 uowF = new TransactionScopeUnitOfWorkFactory();
                 repo = new ConsultaPadronRubrosRepository(this.uowF.GetUnitOfWork());
-
-                var elements = repo.GetRubros(IdSolicitud);
-                var elementsDto = maperBaseEntity.Map<IEnumerable<ConsultaPadronRubrosEntity>, IEnumerable<ConsultaPadronRubrosDTO>>(elements);
-
-                return elementsDto;
+                repoCN = new ConsultaPadronRubrosCNRepository(this.uowF.GetUnitOfWork());
+                var sol = new SSITSolicitudesRepository(this.uowF.GetUnitOfWork());
+                if (sol.GetByFKIdSolicitud(IdSolicitud).FirstOrDefault() != null)
+                {
+                    var elements = repo.GetRubros(IdSolicitud);
+                    var elementsDto = maperBaseEntity.Map<IEnumerable<ConsultaPadronRubrosEntity>, IEnumerable<ConsultaPadronRubrosDTO>>(elements);
+                    return elementsDto;
+                }
+                else
+                {
+                    var elements = repoCN.GetRubros(IdSolicitud);
+                    var elementsDto = maperBaseEntity.Map<IEnumerable<ConsultaPadronRubrosEntity>, IEnumerable<ConsultaPadronRubrosDTO>>(elements);
+                    return elementsDto;
+                }                
             }
             catch (Exception ex)
             {
