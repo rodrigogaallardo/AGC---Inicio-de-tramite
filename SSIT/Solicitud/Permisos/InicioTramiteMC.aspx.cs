@@ -139,7 +139,11 @@ namespace SSIT.Solicitud.Permisos
                     {
                         // Obtiene todos los datos de la solicitud anterior
                         solAnterior = blSol.Single(solAprobada.IdSolicitud);
-                        EncomiendaDTO encDTO = blEnc.GetUltimaEncomiendaAprobada(solAnterior.IdSolicitud);
+                        EncomiendaDTO encDTO;
+                        if (solAnterior != null)
+                            encDTO = blEnc.GetUltimaEncomiendaAprobada(solAprobada.IdSolicitud);
+                        else
+                            encDTO = null;
 
                         oSSITSolicitudesOrigenDTO = new DataTransferObject.SSITSolicitudesOrigenDTO();
 
@@ -152,36 +156,39 @@ namespace SSIT.Solicitud.Permisos
                         sol.Servidumbre_paso = solAprobada.Servidumbre_paso;
 
                         sol.SSITSolicitudesRubrosCNDTO = new List<SSITSolicitudesRubrosCNDTO>();
-                        foreach (var rubro in encDTO.EncomiendaRubrosCNDTO)
-                        {
-                            sol.SSITSolicitudesRubrosCNDTO.Add(new SSITSolicitudesRubrosCNDTO
-                            {
-                                CodigoRubro = rubro.CodigoRubro,
-                                CreateDate = DateTime.Now,
-                                CreateUser = userid,
-                                DescripcionRubro = rubro.DescripcionRubro,
-                                EsAnterior = rubro.EsAnterior,
-                                idImpactoAmbiental = rubro.idImpactoAmbiental,
-                                IdRubro = rubro.IdRubro,
-                                IdTipoActividad = rubro.IdTipoActividad,
-                                IdTipoExpediente = rubro.IdTipoExpediente,
-                                SuperficieHabilitar = rubro.SuperficieHabilitar,
-                                RestriccionSup = rubro.RestriccionSup,
-                                RestriccionZona = rubro.RestriccionZona
-                            });
-                        }
 
-                        foreach (var dl in encDTO.EncomiendaDatosLocalDTO)
+                        if (encDTO != null)
                         {
-                            sol.SSITSolicitudesDatosLocalDTO = new SSITSolicitudesDatosLocalDTO
+                            foreach (var rubro in encDTO.EncomiendaRubrosCNDTO)
                             {
-                                CreateDate = DateTime.Now,
-                                CreateUser = userid,
-                                superficie_cubierta_dl = (dl.superficie_cubierta_dl.HasValue ? dl.superficie_cubierta_dl.Value : 0),
-                                superficie_descubierta_dl = (dl.superficie_descubierta_dl.HasValue ? dl.superficie_descubierta_dl.Value : 0)
-                            };
-                        }
+                                sol.SSITSolicitudesRubrosCNDTO.Add(new SSITSolicitudesRubrosCNDTO
+                                {
+                                    CodigoRubro = rubro.CodigoRubro,
+                                    CreateDate = DateTime.Now,
+                                    CreateUser = userid,
+                                    DescripcionRubro = rubro.DescripcionRubro,
+                                    EsAnterior = rubro.EsAnterior,
+                                    idImpactoAmbiental = rubro.idImpactoAmbiental,
+                                    IdRubro = rubro.IdRubro,
+                                    IdTipoActividad = rubro.IdTipoActividad,
+                                    IdTipoExpediente = rubro.IdTipoExpediente,
+                                    SuperficieHabilitar = rubro.SuperficieHabilitar,
+                                    RestriccionSup = rubro.RestriccionSup,
+                                    RestriccionZona = rubro.RestriccionZona
+                                });
+                            }
 
+                            foreach (var dl in encDTO.EncomiendaDatosLocalDTO)
+                            {
+                                sol.SSITSolicitudesDatosLocalDTO = new SSITSolicitudesDatosLocalDTO
+                                {
+                                    CreateDate = DateTime.Now,
+                                    CreateUser = userid,
+                                    superficie_cubierta_dl = (dl.superficie_cubierta_dl.HasValue ? dl.superficie_cubierta_dl.Value : 0),
+                                    superficie_descubierta_dl = (dl.superficie_descubierta_dl.HasValue ? dl.superficie_descubierta_dl.Value : 0)
+                                };
+                            }
+                        }
                     }
                     else
                         sol.Servidumbre_paso = false;
