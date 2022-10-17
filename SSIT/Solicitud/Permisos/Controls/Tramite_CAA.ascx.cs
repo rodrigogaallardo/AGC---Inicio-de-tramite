@@ -102,8 +102,11 @@ namespace SSIT.Solicitud.Permisos.Controls
 
             if (txtNroCAA.Text.Trim().Length == 0 || txtCodSeguridadCAA.Text.Trim().Length == 0)
             {
-                args.Code = 5000;
-                args.Description = "Debe ingresar el Nro de CAA y el´código de seguridad.";
+                if (sol.IdTipoTramite != (int)Constantes.TipoDeTramite.Permisos || sol.IdTipoExpediente != (int)Constantes.TipoDeExpediente.MusicaCanto)
+                {
+                    args.Code = 5000;
+                    args.Description = "Debe ingresar el Nro de CAA y el código de seguridad.";
+                }
             }
 
             if (string.IsNullOrWhiteSpace(args.Description) && sol.IdEstado != (int) Constantes.TipoEstadoSolicitudEnum.COMP)
@@ -127,7 +130,14 @@ namespace SSIT.Solicitud.Permisos.Controls
             }
             else
             {
-                ret = true;
+                if (sol.IdTipoTramite == (int)Constantes.TipoDeTramite.Permisos && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto && (txtNroCAA.Text.Trim().Length == 0 || txtCodSeguridadCAA.Text.Trim().Length == 0))
+                {
+                    ret = false;
+                }
+                else
+                {
+                    ret = true;
+                }
             }
 
             return ret;
@@ -146,7 +156,7 @@ namespace SSIT.Solicitud.Permisos.Controls
             string codigo_seguridad_CAA = txtCodSeguridadCAA.Text.Trim().ToUpper();
             int id_solicitud_caa = 0;
             int.TryParse(txtNroCAA.Text.Trim(), out id_solicitud_caa);
-            
+
             if (ValidarDatosPermiso(id_solicitud_agc))
             {
                 ws_Interface_AGC servicio = new ws_Interface_AGC();
