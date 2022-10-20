@@ -287,7 +287,8 @@ namespace SSIT.Solicitud.Permisos
                     solDTO = blSol.Single(this.id_solicitud);
                     CargarDatos(solDTO);
                 }
-
+                RegenerarSolicitud(id_solicitud);
+                divbtnImprimirSolicitud.Visible = true;
             }
 
             catch (Exception ex)
