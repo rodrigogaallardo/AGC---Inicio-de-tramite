@@ -171,11 +171,21 @@
                     //validacion tipo
                     var format = $('#<%=hid_formato_archivo.ClientID%>').val();
                     var formatoIngresado = (uploadFile.name.split('.').pop()).toLowerCase();
-                    if (formatoIngresado != format) {
-                        $('#<%=val_upload_fileupload.ClientID%>').text("Solo se permiten archivos con tipo de formato *." + format);
-                        $('#<%=val_upload_fileupload.ClientID%>').show();
-                        goUpload = false;
+                    if (format == 'jpgpdf') {
+                        if (formatoIngresado != 'jpg' && formatoIngresado != 'pdf') {
+                            $('#<%=val_upload_fileupload.ClientID%>').text("Solo se permiten archivos con tipo de formato *.pdf o *.jpg");
+                            $('#<%=val_upload_fileupload.ClientID%>').show();
+                            goUpload = false;
+                        }
                     }
+                    else {
+                        if (formatoIngresado != format) {
+                            $('#<%=val_upload_fileupload.ClientID%>').text("Solo se permiten archivos con tipo de formato *." + format);
+                            $('#<%=val_upload_fileupload.ClientID%>').show();
+                            goUpload = false;
+                        }
+                    }
+                    
 
                     //validar tamaño
                     var max = $('#<%=hid_size_max.ClientID%>').val();
