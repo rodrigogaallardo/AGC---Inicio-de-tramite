@@ -155,7 +155,7 @@
                                                             <span class="text">Seleccionar archivo</span>
                                                             <input id="fileupload" type="file" name="files[]" multiple accept="application/pdf">
                                                         </span>                                                                
-                                                                <asp:HiddenField ID="hid_tamanio_max" runat="server" />                                
+                                                                &nbsp;<asp:HiddenField ID="hid_tamanio_max" runat="server" />                                
                                                                 <asp:HiddenField ID="hid_extension" runat="server" />
                                                         <asp:Button ID="btnSubirDocumento" runat="server" Text="Subir Documento" CssClass="btn btn-inverse" OnClick="btnSubirDocumento_Click" Style="display: none" />
                                                         <asp:HiddenField ID="hid_filename_documento" runat="server" />
@@ -220,7 +220,7 @@
             $(document).ready(function () {
                 $("#page_content").hide();
                 $("#Loading").show();
-                //$("#<%: btnCargarDatostramite.ClientID %> ").click();
+                //$("#: btnCargarDatostramite.ClientID  ").click();
 
                 init_Js_updpnlAgregarDocumentos();
 
@@ -231,7 +231,7 @@
           $(document).ready(function () {
               $("#page_content").hide();
               $("#Loading").show();
-              //$("#<%: btnCargarDatostramite.ClientID %> ").click();
+              //$("#: btnCargarDatostramite.ClientID  ").click();
 
                 init_Js_updpnlAgregarDocumentos();
 
