@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static SSIT.Solicitud.Permisos.Controls.Tramite_CAA;
 
 namespace SSIT.Solicitud.Permisos
 {
@@ -244,8 +245,17 @@ namespace SSIT.Solicitud.Permisos
             Guid userid = Functions.GetUserid();
             try
             {
-
+                SSITSolicitudesDTO solic = blSol.Single(this.id_solicitud);
                 var dtoRAC = visTramite_CAA.GenerarRAC(this.id_solicitud);
+                //var dtoRAC = new DtoRACGenerado();
+                //if (solic.IdTipoTramite == (int)Constantes.TipoDeTramite.Permisos && solic.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
+                //{
+                //    dtoRAC = null;
+                //}
+                //else
+                //{
+                //    dtoRAC = visTramite_CAA.GenerarRAC(this.id_solicitud);
+                //}
 
                 if (dtoRAC != null)
                 {
@@ -267,8 +277,20 @@ namespace SSIT.Solicitud.Permisos
                     solDTO = blSol.Single(this.id_solicitud);
                     CargarDatos(solDTO);
                 }
+                else
+                {
+                    SSITSolicitudesDTO solDTO = blSol.Single(this.id_solicitud);
+                    
+                    solDTO.IdEstado = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
+                    blPermisos.Update(solDTO);
 
+                    solDTO = blSol.Single(this.id_solicitud);
+                    CargarDatos(solDTO);
+                }
+                RegenerarSolicitud(id_solicitud);
+                divbtnImprimirSolicitud.Visible = true;
             }
+
             catch (Exception ex)
             {
                 MostrarMensajeAlertas(Functions.GetErrorMessage(ex));

@@ -58,8 +58,8 @@
                                 <label class="control-label col-sm-3">Ingrese el Nro. de solicitud de CAA:</label>
                                 <div class="col-sm-9">
                                     <asp:TextBox ID="txtNroCAA" runat="server" CssClass="form-control" Width="100px"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNroCAA" Display="Dynamic"
-                                        ErrorMessage="El Nro. de Solicitud es requerido." CssClass="alert alert-small alert-danger mbottom0 mtop5" ValidationGroup="BuscarCAA"></asp:RequiredFieldValidator>
+                                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNroCAA" Display="Dynamic"
+                                        ErrorMessage="El Nro. de Solicitud es requerido." CssClass="alert alert-small alert-danger mbottom0 mtop5" ValidationGroup="BuscarCAA"></asp:RequiredFieldValidator>--%>
                                 </div>
                             </div>
                             <div class="form-group">

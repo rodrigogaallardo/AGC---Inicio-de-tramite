@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSIT.Solicitud.Controls {
-    
-    
-    public partial class ucCargaDocumentos {
-        
+namespace SSIT.Solicitud.Controls
+{
+
+
+    public partial class ucCargaDocumentos
+    {
+
         /// <summary>
         /// pnlucCargaDocumento control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlucCargaDocumento;
-        
+
         /// <summary>
         /// updTiposDeDocumentosRequeridosCD control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updTiposDeDocumentosRequeridosCD;
-        
+
         /// <summary>
         /// hid_formato_archivo control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_formato_archivo;
-        
+
         /// <summary>
         /// hid_size_max control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_size_max;
-        
+
         /// <summary>
         /// hid_size_max_MB control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_size_max_MB;
-        
+
         /// <summary>
         /// hid_requiere_detalle control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_requiere_detalle;
-        
+
         /// <summary>
         /// ddlTiposDeDocumentosRequeridos control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTiposDeDocumentosRequeridos;
-        
+
         /// <summary>
         /// txtDetalle control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDetalle;
-        
+
         /// <summary>
         /// fileuploadUcCD control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileuploadUcCD;
-        
+
         /// <summary>
         /// btnSubirDocumentoUcCD control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubirDocumentoUcCD;
-        
+
         /// <summary>
         /// hid_filename_documentoUcCD control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_filename_documentoUcCD;
-        
+
         /// <summary>
         /// updFilesUcCD control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updFilesUcCD;
-        
+
         /// <summary>
         /// val_upload_fileupload control.
         /// </summary>
@@ -128,16 +130,16 @@ namespace SSIT.Solicitud.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label val_upload_fileupload;
-        
+
         /// <summary>
-        /// Control pnlErrorUcCD.
+        /// pnlErrorUcCD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlErrorUcCD;
-        
+
         /// <summary>
         /// lblErrorUcCD control.
         /// </summary>
