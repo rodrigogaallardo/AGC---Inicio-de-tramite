@@ -697,7 +697,7 @@ namespace AnexoProfesionales
             var sol = enc.EncomiendaSSITSolicitudesDTO.FirstOrDefault()?.SSITSolicitudesDTO;
             var trf = enc.EncomiendaTransfSolicitudesDTO.FirstOrDefault()?.TransferenciasSolicitudesDTO;
 
-            var heredada = trf?.idSolicitudRef > 0 || (sol?.IdTipoTramite == (int)TipoDeTramite.RedistribucionDeUso && sol?.SSITSolicitudesOrigenDTO != null);
+            var heredada = trf?.idSolicitudRef > 0;    // || (sol?.IdTipoTramite == (int)TipoDeTramite.RedistribucionDeUso && sol?.SSITSolicitudesOrigenDTO != null) ahora se pueden modificar ubicacion de una ampliación
 
             return !heredada && (enc.IdEstado == (int) Encomienda_Estados.Completa || enc.IdEstado == (int) Encomienda_Estados.Incompleta);
         }

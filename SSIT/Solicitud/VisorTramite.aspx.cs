@@ -407,7 +407,9 @@ namespace SSIT
             CargarCabecera(ssitDTO);
             MostrarMensajeAlertaFaltantes();
 
-            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM;
+            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || 
+                            id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM ||
+                            id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF;
             List<int> estadosAT = new List<int>();
             estadosAT.Add((int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo);
             estadosAT.Add((int)Constantes.Encomienda_Estados.Anulada);
@@ -888,7 +890,7 @@ namespace SSIT
                                 }
                             }
                         }
-                        LogError.Write("EnviarParticipantes");
+                        LogError.Write("EnviarParticipantes");  
                         if (sol.idTAD != null)
                         {
                             Functions.enviarParticipantes(sol);
@@ -964,7 +966,7 @@ namespace SSIT
 
             pdfSolicitud = ReportingEntity.Reporte;
             int id_file = ReportingEntity.Id_file;
-
+            
             if (DocAdjDTO != null)
             {
                 if (id_file != DocAdjDTO.id_file)
