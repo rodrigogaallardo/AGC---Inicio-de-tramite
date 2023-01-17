@@ -223,6 +223,11 @@ namespace SSIT
                 pnlModifTitulares.Visible = true;
                 pnlAgregarDocumentos.Visible = true;
                 visUbicaciones.Editable = false;
+                // se puede modificar la ubicacion incluso si tiene una solicitud de referencia
+                btnModificarUbicacion.Visible = true;
+                btnModificarUbicacion.PostBackUrl = string.Format("~/" + RouteConfig.EDITAR_UBICACION_TRANSFERENCIA + "{0}", IdSolicitud);
+
+                /* 
                 if (transferencia.idSolicitudRef == null)
                 {
                     pnlModifTitularesAnt.Visible = true;
@@ -246,6 +251,7 @@ namespace SSIT
                         btnModificarUbicacion.PostBackUrl = string.Format("~/" + RouteConfig.EDITAR_UBICACION_TRANSFERENCIA + "{0}", IdSolicitud);
                     }
                 }
+                */
             }
 
             lblNroSolicitud.Text = transferencia.IdSolicitud.ToString();
