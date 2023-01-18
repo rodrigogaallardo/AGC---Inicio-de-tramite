@@ -416,10 +416,12 @@ namespace SSIT
 
             #region DatosSolicitud
             visDatosSolicitud.Editable = editable;
-            visDatosSolicitud.EditableTitulares = editable || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
+            visDatosSolicitud.EditableTitulares = editable 
+                || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN;
 
+            /*
             // Si es una Ampliación / Redistribución de Uso y proviene de una solicitud SGI no se permite editar.
             if (ssitDTO.SSITSolicitudesOrigenDTO != null)
             {
@@ -433,6 +435,7 @@ namespace SSIT
                 bajaUbicacion = visDatosSolicitud.Editable;
                 
             }
+            */
             visDatosSolicitud.EditableExpRel = editable || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF;
 
             DateTime dt = DateTime.Now;
