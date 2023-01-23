@@ -134,7 +134,7 @@
 
         <asp:Panel ID="pnlRubrosAnteriores" runat="server" Visible="false">
             <div class="mtop10" id="TituloRubrosAnterioresAT" runat="server">
-                <strong>Listado de rubros de la habilitaci&oacute;n anterior</strong>
+                <strong>Listado de rubros de la habilitaci&oacute;n anterior (CPU)</strong>
             </div>
             <asp:GridView ID="grdRubrosIngresadosATAnterior" runat="server" AutoGenerateColumns="false"
                 AllowPaging="false" Style="border: none;" CssClass="table table-bordered mtop5"
@@ -178,7 +178,7 @@
 
         <asp:Panel ID="pnlRubrosCNAnteriores" runat="server" Visible="false">
             <div class="mtop10" id="TituloRubrosAnterioresCN" runat="server">
-                <strong>Listado de rubros de la habilitaci&oacute;n anterior</strong>
+                <strong>Listado de rubros de la habilitaci&oacute;n anterior (CUR)</strong>
             </div>
             <asp:GridView ID="grdRubrosCNIngresadosATAnterior" runat="server" AutoGenerateColumns="false"
                 AllowPaging="false" Style="border: none;" CssClass="table table-bordered mtop5"

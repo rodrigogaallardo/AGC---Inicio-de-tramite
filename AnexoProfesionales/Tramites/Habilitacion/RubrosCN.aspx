@@ -269,7 +269,7 @@
                 <asp:Panel ID="pnlRubrosCNATAnterior" runat="server" CssClass="box-panel mtop20" Visible="false">
                     <div style="margin: 20px; margin-top: -5px">
                         <div style="color: #377bb5">
-                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados</h4>
+                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados Trámite Anterior (CUR)</h4>
                             <hr />
                         </div>
                     </div>
@@ -340,12 +340,10 @@
         <%--Rubros Tramite Anterior--%>
         <asp:UpdatePanel ID="updRubrosATAnterior" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-
-
                 <asp:Panel ID="pnlRubrosATAnterior" runat="server" CssClass="box-panel mtop20" Visible="false">
                     <div style="margin: 20px; margin-top: -5px">
                         <div style="color: #377bb5">
-                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados</h4>
+                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados Trámite Anterior (CPU)</h4>
                             <hr />
                         </div>
                     </div>
@@ -359,11 +357,15 @@
                         </div>
                     </div>
 
-
-
-                    <asp:GridView ID="grdRubrosIngresadosATAnterior" runat="server" AutoGenerateColumns="false"
-                        AllowPaging="false" Style="border: none;" CssClass="table table-bordered mtop5"
-                        GridLines="None" Width="100% ">
+                    <asp:GridView
+                        ID="grdRubrosIngresadosATAnterior"
+                        runat="server"
+                        AutoGenerateColumns="false"
+                        AllowPaging="false"
+                        Style="border: none;"
+                        CssClass="table table-bordered mtop5"
+                        GridLines="None"
+                        Width="100% ">
                         <HeaderStyle CssClass="grid-header" />
                         <RowStyle CssClass="grid-row" />
                         <AlternatingRowStyle BackColor="#efefef" />
@@ -382,7 +384,8 @@
                             <asp:TemplateField ItemStyle-Width="140px">
                                 <ItemTemplate>
 
-                                    <asp:LinkButton ID="btnEliminarRubroATAnterior" runat="server" data-id-rubro-eliminar='<%# Eval("IdEncomiendaRubro") %>' CssClass="link-local">
+                                    <asp:LinkButton ID="btnEliminarRubroATAnterior" runat="server" data-id-rubro-eliminar='<%# Eval("IdEncomiendaRubro") %>' CssClass="link-local"
+                                        OnClientClick="return showConfirmarEliminarRubroATAnterior(this);">
                                         <i class="imoon imoon-close"></i>
                                         <span class="text">Eliminar</span>
                                     </asp:LinkButton>
@@ -412,8 +415,9 @@
                         </asp:TextBox>
 
                     </asp:Panel>
-                </asp:Panel>
 
+                    <asp:HiddenField ID="HiddenField1" runat="server" />
+                </asp:Panel>
             </ContentTemplate>
         </asp:UpdatePanel>
 
@@ -538,7 +542,7 @@
                         ID="grdRubrosCN_DepositoIngresado"
                         runat="server"
                         AutoGenerateColumns="false"
-                        Visible="false"
+                        Visible="true"
                         AllowPaging="false"
                         Style="border: none;"
                         CssClass="table table-bordered mtop5"
