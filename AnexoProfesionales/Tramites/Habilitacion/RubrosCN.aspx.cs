@@ -651,9 +651,11 @@ namespace AnexoProfesionales
                         //Si nuestro tramite actual heredó de una transferencia anterior y tiene rubros con el formato viejo se debe permitir asimilar los rubros.
                         //Caso contrario si tiene los rubros del formato nuevos no es necesario asimilar los rubros, oculto el botón.
                         var Encomienda = encBL.GetUltimaEncomiendaAprobada(id_sol_ref);
-                        var lstRubrosSolicitudAnterior = encRubrosCNBL.GetRubros(Encomienda.IdEncomienda);
-                        if (lstRubrosSolicitudAnterior.Count() > 0)
-                            btnAgregarRubros.Visible = false;
+                        //var lstRubrosSolicitudAnterior = encRubrosCNBL.GetRubros(Encomienda.IdEncomienda);
+                        //Si tiene rubros con codigo viejo, deja asimilar rubros
+                        //var lstRubrosSolicitudAnterior = encRubros.GetRubros(Encomienda.IdEncomienda);
+                        //if (lstRubrosSolicitudAnterior.Count() > 0)
+                        btnAgregarRubros.Visible = true;    // permite asimilar rubros siempre en una transferencia con solicitud origen segun indico mariela
 
                         digital = true;
                     }
