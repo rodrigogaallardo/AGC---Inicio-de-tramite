@@ -269,7 +269,7 @@
                 <asp:Panel ID="pnlRubrosCNATAnterior" runat="server" CssClass="box-panel mtop20" Visible="false">
                     <div style="margin: 20px; margin-top: -5px">
                         <div style="color: #377bb5">
-                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados Trámite Anterior (Codigo Nuevo)</h4>
+                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados Trámite Anterior (CUR)</h4>
                             <hr />
                         </div>
                     </div>
@@ -343,7 +343,7 @@
                 <asp:Panel ID="pnlRubrosATAnterior" runat="server" CssClass="box-panel mtop20" Visible="false">
                     <div style="margin: 20px; margin-top: -5px">
                         <div style="color: #377bb5">
-                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados Trámite Anterior (Codigo Viejo)</h4>
+                            <h4><i class="imoon imoon-hammer" style="margin-right: 10px"></i>Rubros Habilitados Trámite Anterior (CPU)</h4>
                             <hr />
                         </div>
                     </div>
