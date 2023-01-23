@@ -762,7 +762,7 @@ namespace BusinesLayer.Implementation
                 var rubrosImpactoAmbientalDTO = rubrosImpactoAmbiental.GetImpactoAmbiental(objectDto.SuperficieHabilitar, rubroEntity.id_rubro);
 
                 objectDto.CreateDate = DateTime.Now;
-                objectDto.DescripcionRubro = rubroEntity.nom_rubro.Substring(200);
+                objectDto.DescripcionRubro = rubroEntity.nom_rubro.Substring(0, 200);
                 objectDto.EsAnterior = rubroEntity.EsAnterior_Rubro;
                 if (rubrosImpactoAmbientalDTO != null)
                 {
