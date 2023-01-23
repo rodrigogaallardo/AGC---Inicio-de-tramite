@@ -596,8 +596,8 @@ namespace AnexoProfesionales
 
             grdSubRubrosIngresados.DataSource = lstSubRubrosSolicitud.ToList();
             grdSubRubrosIngresados.DataBind();
-            grdSubRubrosIngresados.Visible = (lstSubRubrosSolicitud.Count() > 0);
-            lblSubRubrosIngresados.Visible = (lstSubRubrosSolicitud.Count() > 0);
+            grdSubRubrosIngresados.Visible = true;
+            lblSubRubrosIngresados.Visible = true;
 
             List<Encomienda_RubrosCN_DepositoDTO> listRubDep = rubDepBL.GetByEncomienda(IdEncomienda);
             grdRubrosCN_DepositoIngresado.DataSource = listRubDep;
@@ -664,19 +664,20 @@ namespace AnexoProfesionales
                 var lstRubrosCNSolicitudATAnterior = encRubrosCNBL.GetRubrosCNATAnterior(IdEncomienda).ToList();
                 grdRubrosCNIngresadosATAnterior.DataSource = lstRubrosCNSolicitudATAnterior;
                 grdRubrosCNIngresadosATAnterior.DataBind();
-                pnlRubrosATAnterior.Visible = false;
+                pnlRubrosATAnterior.Visible = true;
                 pnlRubrosCNATAnterior.Visible = true;
-
+                // lo saque afuera para mostrar el mensaje si esta vacio
+                var lstRubrosSolicitudATAnterior = encRubros.GetRubrosATAnterior(IdEncomienda).ToList();
+                grdRubrosIngresadosATAnterior.DataSource = lstRubrosSolicitudATAnterior;
+                grdRubrosIngresadosATAnterior.DataBind();
                 //Si es una ampliacion digital
                 if (digital)
                 { 
                     //Verificar tipo de rubro de la herencia
                     if (id_sol_ref < parametrosDTO.ValornumParam)
                     {
-                        var lstRubrosSolicitudATAnterior = encRubros.GetRubrosATAnterior(IdEncomienda).ToList();
-                        grdRubrosIngresadosATAnterior.DataSource = lstRubrosSolicitudATAnterior;
-                        grdRubrosIngresadosATAnterior.DataBind();
-                        pnlRubrosATAnterior.Visible = lstRubrosSolicitudATAnterior.Count > 0;
+                        
+                        pnlRubrosATAnterior.Visible = true;
                         pnlRubrosCNATAnterior.Visible = true;
                     }
 

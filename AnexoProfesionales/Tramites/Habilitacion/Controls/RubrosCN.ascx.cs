@@ -122,26 +122,22 @@ namespace AnexoProfesionales.Controls
 
 
             if (lstRubrosSolicitudATAnterior.Count > 0)
-                TituloRubrosAnterioresCN.Visible = false;
+                TituloRubrosAnterioresCN.Visible = true;
 
             if (lstRubrosCNSolicitudATAnterior.Count > 0)
-                TituloRubrosAnterioresAT.Visible = false;
+                TituloRubrosAnterioresAT.Visible = true;
 
             var lstRubrosSolicitud = encomiendaRubros.GetRubros(encomienda.IdEncomienda);          
 
             grdRubrosIngresados.DataSource = lstRubrosSolicitud.ToList();
             grdRubrosIngresados.DataBind();
 
-            if (lstRubrosSolicitudATAnterior.Count > 0)
-            {
-                grdRubrosIngresadosATAnterior.DataSource = lstRubrosSolicitudATAnterior.ToList();
-                grdRubrosIngresadosATAnterior.DataBind();
-            }
-            else
-            {
-                grdRubrosCNIngresadosATAnterior.DataSource = lstRubrosCNSolicitudATAnterior.ToList();
-                grdRubrosCNIngresadosATAnterior.DataBind();
-            }
+            // Ahora muestra siempre los cuadros vacios
+            grdRubrosIngresadosATAnterior.DataSource = lstRubrosSolicitudATAnterior.ToList();
+            grdRubrosIngresadosATAnterior.DataBind();
+            grdRubrosCNIngresadosATAnterior.DataSource = lstRubrosCNSolicitudATAnterior.ToList();
+            grdRubrosCNIngresadosATAnterior.DataBind();
+
             pnlRubrosAnteriores.Visible = true;
             pnlRubrosCNAnteriores.Visible = true;
         }
