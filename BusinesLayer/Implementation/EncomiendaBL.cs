@@ -3144,10 +3144,14 @@ namespace BusinesLayer.Implementation
                         EncomiendaRubrosBL blRubros = new EncomiendaRubrosBL();
                         var lstRubros = blRubros.GetByFKIdEncomienda(id_encomienda_ant);
 
+                        EncomiendaRubrosCNBL blRubrosCN = new EncomiendaRubrosCNBL();
+                        var lstRubrosCN = blRubrosCN.GetByFKIdEncomienda(id_encomienda_ant);
+
                         if (id_tipotramite == (int)Constantes.TipoTramite.AMPLIACION ||
                             id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA ||
                             id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
                         {
+                            // por cada rubro codigo VIEJO lo copio y lo mando a la tabla rubros_AT_anterior
                             foreach (var rub in lstRubros)
                             {
                                 EncomiendaRubrosDTO r = new EncomiendaRubrosDTO();
@@ -3164,6 +3168,23 @@ namespace BusinesLayer.Implementation
                                 r.RestriccionZona = rub.RestriccionZona;
                                 r.SuperficieHabilitar = rub.SuperficieHabilitar;
                                 blRubros.InsertATAnterior(r);
+                            }
+                            // por cada rubro codigo NUEVO lo copio y lo mando a la tabla rubrosCN_AT_anterior
+                            foreach (var rub in lstRubrosCN)
+                            {
+                                EncomiendaRubrosCNDTO r = new EncomiendaRubrosCNDTO();
+                                r.CodigoRubro = rub.CodigoRubro;
+                                r.CreateDate = DateTime.Now;
+                                r.DescripcionRubro = rub.DescripcionRubro;
+                                r.EsAnterior = rub.EsAnterior;
+                                r.IdEncomienda = id_encomienda;
+                                r.idImpactoAmbiental = rub.idImpactoAmbiental;
+                                r.IdTipoActividad = rub.IdTipoActividad;
+                                r.RestriccionSup = rub.RestriccionSup;
+                                r.RestriccionZona = rub.RestriccionZona;
+                                r.SuperficieHabilitar = rub.SuperficieHabilitar;
+                                r.IdTipoExpediente = rub.IdTipoExpediente;
+                                blRubrosCN.InsertATAnterior(r);
                             }
                         }
                         else
