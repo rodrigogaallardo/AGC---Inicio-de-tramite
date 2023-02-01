@@ -694,12 +694,7 @@ namespace AnexoProfesionales
 
         public bool HabilitarModificarUbicacion(EncomiendaDTO enc)
         {
-            var sol = enc.EncomiendaSSITSolicitudesDTO.FirstOrDefault()?.SSITSolicitudesDTO;
-            var trf = enc.EncomiendaTransfSolicitudesDTO.FirstOrDefault()?.TransferenciasSolicitudesDTO;
-
-            var heredada = trf?.idSolicitudRef > 0 || (sol?.IdTipoTramite == (int)TipoDeTramite.RedistribucionDeUso && sol?.SSITSolicitudesOrigenDTO != null);
-
-            return !heredada && (enc.IdEstado == (int) Encomienda_Estados.Completa || enc.IdEstado == (int) Encomienda_Estados.Incompleta);
+            return (enc.IdEstado == (int) Encomienda_Estados.Completa || enc.IdEstado == (int) Encomienda_Estados.Incompleta);
         }
 
         public void ValidarPlantasSeleccionadas(EncomiendaDTO enc)

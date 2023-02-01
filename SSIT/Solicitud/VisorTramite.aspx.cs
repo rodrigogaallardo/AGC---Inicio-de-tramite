@@ -407,17 +407,21 @@ namespace SSIT
             CargarCabecera(ssitDTO);
             MostrarMensajeAlertaFaltantes();
 
-            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM;
+            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || 
+                            id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM ||
+                            id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF;
             List<int> estadosAT = new List<int>();
             estadosAT.Add((int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo);
             estadosAT.Add((int)Constantes.Encomienda_Estados.Anulada);
 
             #region DatosSolicitud
             visDatosSolicitud.Editable = editable;
-            visDatosSolicitud.EditableTitulares = editable || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
+            visDatosSolicitud.EditableTitulares = editable 
+                || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN;
 
+            /*
             // Si es una Ampliación / Redistribución de Uso y proviene de una solicitud SGI no se permite editar.
             if (ssitDTO.SSITSolicitudesOrigenDTO != null)
             {
@@ -431,6 +435,7 @@ namespace SSIT
                 bajaUbicacion = visDatosSolicitud.Editable;
                 
             }
+            */
             visDatosSolicitud.EditableExpRel = editable || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF;
 
             DateTime dt = DateTime.Now;
@@ -888,7 +893,7 @@ namespace SSIT
                                 }
                             }
                         }
-                        LogError.Write("EnviarParticipantes");
+                        LogError.Write("EnviarParticipantes");  
                         if (sol.idTAD != null)
                         {
                             Functions.enviarParticipantes(sol);
@@ -964,7 +969,7 @@ namespace SSIT
 
             pdfSolicitud = ReportingEntity.Reporte;
             int id_file = ReportingEntity.Id_file;
-
+            
             if (DocAdjDTO != null)
             {
                 if (id_file != DocAdjDTO.id_file)

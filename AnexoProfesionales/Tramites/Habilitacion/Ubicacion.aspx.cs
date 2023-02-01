@@ -98,13 +98,15 @@ namespace AnexoProfesionales
                         {
                             Server.Transfer("~/Errores/error3003.aspx");
                         }
+                        // Saco esta verificacion porque así lo pidieron #312
+                        // ahora permite modificar la ubicacion aunque sea una ampliacion
                         // Si proviende de una solicitud anterior se puede modificar la ubicacion par agregar puertas
-                        if (enc.IdTipoTramite != (int)Constantes.TipoDeTramite.Ampliacion &&
-                            encBL.PoseeHabilitacionConAnexoTecnicoAnterior(enc.IdEncomienda))
-                        {
-                            Server.Transfer("~/Errores/Error3006.aspx");
-                            //SoloEditarUbicacion = true;
-                        }
+                        //if (enc.IdTipoTramite != (int)Constantes.TipoDeTramite.Ampliacion &&
+                        //    encBL.PoseeHabilitacionConAnexoTecnicoAnterior(enc.IdEncomienda))
+                        //{
+                        //    Server.Transfer("~/Errores/Error3006.aspx");
+                        //    //SoloEditarUbicacion = true;
+                        //}
                     }
                 }
                 else

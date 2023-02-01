@@ -29,9 +29,16 @@ namespace AnexoProfesionales
             var prof = profBl.Get(  new Guid(user.ProviderUserKey.ToString()));
 
             if (prof.BajaLogica == true)
+            {
                 e.Authenticated = false;
+            }
             else
-                e.Authenticated = true;
+            {
+                if (LoginControl1.Password == user.GetPassword())
+                    e.Authenticated = true;
+                else
+                    e.Authenticated = false;
+            }
         }
 
 
