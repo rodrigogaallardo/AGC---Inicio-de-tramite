@@ -154,6 +154,10 @@
                     </tr>
                 </table>
 
+                  <asp:Panel ID="pnlMsgPlanoContraIncendios" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
+                    <asp:Label ID="lblMsgPlanoContraIncendios" Text="El Tramite XXXXXX requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente." ForeColor="Red" runat="server"></asp:Label>
+                </asp:Panel>
+
                 <asp:Panel ID="pnlTramiteIncompleto" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
                     <asp:Label ID="lblTextoTramiteIncompleto" runat="server"></asp:Label>
                 </asp:Panel>

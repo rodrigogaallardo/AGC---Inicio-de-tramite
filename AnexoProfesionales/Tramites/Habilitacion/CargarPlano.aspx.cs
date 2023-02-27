@@ -52,6 +52,21 @@ namespace AnexoProfesionales
                 CargarTiposDePlanos();
                 CargarPlanos(id_encomienda);
                 Titulo.CargarDatos(id_encomienda, "Carga de Planos");
+
+
+                #region ASOSA MENSAJE PLANO CONTRA INCENDIO
+                var condicionIncendioOk = true;
+
+                var superficie = enc.EncomiendaDatosLocalDTO.Select(x => x.superficie_cubierta_dl + x.superficie_descubierta_dl).FirstOrDefault();
+                condicionIncendioOk = !enc.EncomiendaRubrosCNDTO.Where(x => x.RubrosDTO.CondicionesIncendio.superficie < superficie).Any();
+                if (!condicionIncendioOk)
+                {
+                   lblMsgPlanoContraIncendios.Text = "El Tramite " + id_encomienda.ToString() + " requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente.";
+                    pnlMsgPlanoContraIncendios.Visible = true;  
+                }
+                #endregion
+
+
             }
         }
 

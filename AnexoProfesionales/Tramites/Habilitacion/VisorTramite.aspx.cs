@@ -202,6 +202,16 @@ namespace AnexoProfesionales
 
                 if (!condicionIncendioOk)
                 {
+                    #region ASOSA MENSAJE PLANO CONTRA INCENDIO
+                    ScriptManager sm = ScriptManager.GetCurrent(this);
+                    string cadena = "El Tramite "+ id_encomienda.ToString() + " requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente.";
+                    string script = string.Format("alert('{0}');", cadena);
+                    ScriptManager.RegisterStartupScript(this, typeof(System.Web.UI.Page), "alertScript", script, true);
+
+
+                    lblMsgPlanoContraIncendios.Text = "El Tramite " + id_encomienda.ToString() + " requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente.";
+                    pnlMsgPlanoContraIncendios.Visible = true;
+                    #endregion
                     mensaje.Add("Plano contra incendios");
                 }
 
