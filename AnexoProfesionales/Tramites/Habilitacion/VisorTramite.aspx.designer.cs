@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AnexoProfesionales {
-    
-    
-    public partial class VisorTramite {
-        
+namespace AnexoProfesionales
+{
+
+
+    public partial class VisorTramite
+    {
+
         /// <summary>
         /// updEstadoSolicitud control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updEstadoSolicitud;
-        
+
         /// <summary>
         /// hid_id_encomienda control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_id_encomienda;
-        
+
         /// <summary>
         /// hid_id_estado control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_id_estado;
-        
+
         /// <summary>
         /// lblNroEncomienda control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNroEncomienda;
-        
+
         /// <summary>
         /// lblTipoTramite control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTipoTramite;
-        
+
         /// <summary>
         /// lblFechaEncomienda control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFechaEncomienda;
-        
+
         /// <summary>
         /// lblEstadoSolicitud control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEstadoSolicitud;
-        
+
         /// <summary>
         /// pnlImpactoAmbiental control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlImpactoAmbiental;
-        
+
         /// <summary>
         /// lblTipoImpactoAmbiental control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTipoImpactoAmbiental;
-        
+
         /// <summary>
         /// divbtnConfirmarTramite control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel divbtnConfirmarTramite;
-        
+
         /// <summary>
         /// btnConfirmarTramite control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnConfirmarTramite;
-        
+
         /// <summary>
         /// divbtnImprimirSolicitud control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel divbtnImprimirSolicitud;
-        
+
         /// <summary>
         /// btnImprimirSolicitud control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink btnImprimirSolicitud;
-        
+
         /// <summary>
         /// pnlBandeja control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlBandeja;
-        
+
         /// <summary>
         /// btnBandeja control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnBandeja;
-        
+
         /// <summary>
         /// divbtnAnularTramite control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel divbtnAnularTramite;
-        
+
         /// <summary>
         /// btnAnularTramite control.
         /// </summary>
@@ -164,7 +166,25 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnAnularTramite;
-        
+
+        /// <summary>
+        /// pnlMsgPlanoContraIncendios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMsgPlanoContraIncendios;
+
+        /// <summary>
+        /// lblMsgPlanoContraIncendios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsgPlanoContraIncendios;
+
         /// <summary>
         /// pnlTramiteIncompleto control.
         /// </summary>
@@ -173,7 +193,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlTramiteIncompleto;
-        
+
         /// <summary>
         /// lblTextoTramiteIncompleto control.
         /// </summary>
@@ -182,7 +202,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTextoTramiteIncompleto;
-        
+
         /// <summary>
         /// updCargarDatos control.
         /// </summary>
@@ -191,7 +211,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updCargarDatos;
-        
+
         /// <summary>
         /// hid_mostrar_conformacionLocal control.
         /// </summary>
@@ -200,7 +220,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_mostrar_conformacionLocal;
-        
+
         /// <summary>
         /// btnCargarDatostramite control.
         /// </summary>
@@ -209,7 +229,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCargarDatostramite;
-        
+
         /// <summary>
         /// lbl_ubicacion_tituloControl control.
         /// </summary>
@@ -218,7 +238,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_ubicacion_tituloControl;
-        
+
         /// <summary>
         /// pnlModifUbicacion control.
         /// </summary>
@@ -227,7 +247,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlModifUbicacion;
-        
+
         /// <summary>
         /// btnModificarUbicacion control.
         /// </summary>
@@ -236,7 +256,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnModificarUbicacion;
-        
+
         /// <summary>
         /// visUbicaciones control.
         /// </summary>
@@ -245,7 +265,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.Ubicacion visUbicaciones;
-        
+
         /// <summary>
         /// lblTituloDatosLocal control.
         /// </summary>
@@ -254,7 +274,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTituloDatosLocal;
-        
+
         /// <summary>
         /// pnlModifDatosLocal control.
         /// </summary>
@@ -263,7 +283,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlModifDatosLocal;
-        
+
         /// <summary>
         /// btnModificarDatosLocal control.
         /// </summary>
@@ -272,7 +292,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnModificarDatosLocal;
-        
+
         /// <summary>
         /// visDatoslocal control.
         /// </summary>
@@ -281,7 +301,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.DatosLocal visDatoslocal;
-        
+
         /// <summary>
         /// Label2 control.
         /// </summary>
@@ -290,7 +310,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
+
         /// <summary>
         /// pnlModConformacionLocal control.
         /// </summary>
@@ -299,7 +319,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlModConformacionLocal;
-        
+
         /// <summary>
         /// btnModificarConformacionLocal control.
         /// </summary>
@@ -308,7 +328,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnModificarConformacionLocal;
-        
+
         /// <summary>
         /// visConformacionLocal control.
         /// </summary>
@@ -317,7 +337,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.ConformacionLocal visConformacionLocal;
-        
+
         /// <summary>
         /// Label5 control.
         /// </summary>
@@ -326,7 +346,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label5;
-        
+
         /// <summary>
         /// Panel3 control.
         /// </summary>
@@ -335,7 +355,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel3;
-        
+
         /// <summary>
         /// btnModificarCargarPlanos control.
         /// </summary>
@@ -344,7 +364,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnModificarCargarPlanos;
-        
+
         /// <summary>
         /// visCargaPlanos control.
         /// </summary>
@@ -353,7 +373,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.CargaPlanos visCargaPlanos;
-        
+
         /// <summary>
         /// lblTituloRubros control.
         /// </summary>
@@ -362,7 +382,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTituloRubros;
-        
+
         /// <summary>
         /// pnlModifRubros control.
         /// </summary>
@@ -371,7 +391,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlModifRubros;
-        
+
         /// <summary>
         /// btnModificarRubros control.
         /// </summary>
@@ -380,7 +400,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnModificarRubros;
-        
+
         /// <summary>
         /// visRubros control.
         /// </summary>
@@ -389,7 +409,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.Rubros visRubros;
-        
+
         /// <summary>
         /// visRubrosCN control.
         /// </summary>
@@ -398,7 +418,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.RubrosCN visRubrosCN;
-        
+
         /// <summary>
         /// pnlInfoAdicional control.
         /// </summary>
@@ -407,7 +427,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlInfoAdicional;
-        
+
         /// <summary>
         /// lblInfoAdicional control.
         /// </summary>
@@ -416,7 +436,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblInfoAdicional;
-        
+
         /// <summary>
         /// Label4 control.
         /// </summary>
@@ -425,7 +445,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
-        
+
         /// <summary>
         /// rbActBaileSI control.
         /// </summary>
@@ -434,7 +454,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbActBaileSI;
-        
+
         /// <summary>
         /// rbActBaileNo control.
         /// </summary>
@@ -443,7 +463,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbActBaileNo;
-        
+
         /// <summary>
         /// Label6 control.
         /// </summary>
@@ -452,7 +472,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label6;
-        
+
         /// <summary>
         /// rbLuminariaSi control.
         /// </summary>
@@ -461,7 +481,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbLuminariaSi;
-        
+
         /// <summary>
         /// rbLuminariaNo control.
         /// </summary>
@@ -470,7 +490,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbLuminariaNo;
-        
+
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -479,7 +499,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// pnlModifTitulares control.
         /// </summary>
@@ -488,7 +508,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlModifTitulares;
-        
+
         /// <summary>
         /// btnModificarTitulares control.
         /// </summary>
@@ -497,7 +517,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnModificarTitulares;
-        
+
         /// <summary>
         /// visTitulares control.
         /// </summary>
@@ -506,7 +526,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.Titulares visTitulares;
-        
+
         /// <summary>
         /// Label3 control.
         /// </summary>
@@ -515,7 +535,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-        
+
         /// <summary>
         /// upPnlDocumentos control.
         /// </summary>
@@ -524,7 +544,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upPnlDocumentos;
-        
+
         /// <summary>
         /// btnMostrarAgregadoDocumentos control.
         /// </summary>
@@ -533,7 +553,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnMostrarAgregadoDocumentos;
-        
+
         /// <summary>
         /// gridAgregados_db control.
         /// </summary>
@@ -542,7 +562,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridAgregados_db;
-        
+
         /// <summary>
         /// hid_id_docadjunto control.
         /// </summary>
@@ -551,7 +571,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_id_docadjunto;
-        
+
         /// <summary>
         /// updpnlAgregarDocumentos control.
         /// </summary>
@@ -560,7 +580,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updpnlAgregarDocumentos;
-        
+
         /// <summary>
         /// pnlAgregarDocumentos control.
         /// </summary>
@@ -569,7 +589,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlAgregarDocumentos;
-        
+
         /// <summary>
         /// hid_doc_id_solicitud control.
         /// </summary>
@@ -578,7 +598,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_doc_id_solicitud;
-        
+
         /// <summary>
         /// pnlDatosDocumento control.
         /// </summary>
@@ -587,7 +607,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlDatosDocumento;
-        
+
         /// <summary>
         /// ddlTiposDeDocumentosEscaneados control.
         /// </summary>
@@ -596,7 +616,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTiposDeDocumentosEscaneados;
-        
+
         /// <summary>
         /// ReqTipoDocEscaneado control.
         /// </summary>
@@ -605,7 +625,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel ReqTipoDocEscaneado;
-        
+
         /// <summary>
         /// btnSubirDocumento control.
         /// </summary>
@@ -614,7 +634,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubirDocumento;
-        
+
         /// <summary>
         /// hid_filename_documento control.
         /// </summary>
@@ -623,7 +643,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_filename_documento;
-        
+
         /// <summary>
         /// updFiles control.
         /// </summary>
@@ -632,7 +652,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updFiles;
-        
+
         /// <summary>
         /// pnlErrorFoto control.
         /// </summary>
@@ -641,7 +661,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlErrorFoto;
-        
+
         /// <summary>
         /// lblErrorDocumento control.
         /// </summary>
@@ -650,7 +670,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorDocumento;
-        
+
         /// <summary>
         /// updmpeInfo control.
         /// </summary>
@@ -659,7 +679,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updmpeInfo;
-        
+
         /// <summary>
         /// lblError control.
         /// </summary>
@@ -668,7 +688,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// updConfirmarAnular control.
         /// </summary>
@@ -677,7 +697,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updConfirmarAnular;
-        
+
         /// <summary>
         /// UpdateProgress2 control.
         /// </summary>
@@ -686,7 +706,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress2;
-        
+
         /// <summary>
         /// btnAnular_Si control.
         /// </summary>
@@ -695,7 +715,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAnular_Si;
-        
+
         /// <summary>
         /// updbtnConfirmarEliminarDocAdjunto control.
         /// </summary>
@@ -704,7 +724,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updbtnConfirmarEliminarDocAdjunto;
-        
+
         /// <summary>
         /// UpdateProgress6 control.
         /// </summary>
@@ -713,7 +733,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress6;
-        
+
         /// <summary>
         /// btnEliminarDocumentoAdjunto control.
         /// </summary>
@@ -722,7 +742,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnEliminarDocumentoAdjunto;
-        
+
         /// <summary>
         /// updConfirmarEliminar control.
         /// </summary>
@@ -731,7 +751,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updConfirmarEliminar;
-        
+
         /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
@@ -740,7 +760,7 @@ namespace AnexoProfesionales {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// btnEliminar control.
         /// </summary>
