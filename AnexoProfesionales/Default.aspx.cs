@@ -117,16 +117,17 @@ namespace AnexoProfesionales
             {
 
                 MembershipUser usu = Membership.GetUser((sender as Login).UserName);
-                UsuarioBL usuBL = new UsuarioBL();
+                ProfesionalesBL profBl = new ProfesionalesBL();
+                //UsuarioBL usuBL = new UsuarioBL();
 
                 string ret = "";
                 if (usu != null)
                 {
-                    var usuDTO = usuBL.Single((Guid)usu.ProviderUserKey);
+                    var proDTO = profBl.Get(new Guid(usu.ProviderUserKey.ToString()));
                     TextInfo txtInfo = new CultureInfo("es-AR", false).TextInfo;
 
-                    string Apellido = txtInfo.ToTitleCase((usuDTO.Apellido != null) ? usuDTO.Apellido.ToLower() : string.Empty);
-                    string Nombre = txtInfo.ToTitleCase((usuDTO.Nombre != null) ? usuDTO.Nombre.ToLower() : string.Empty);
+                    string Apellido = txtInfo.ToTitleCase((proDTO.Apellido != null) ? proDTO.Apellido.ToLower() : string.Empty);
+                    string Nombre = txtInfo.ToTitleCase((proDTO.Nombre != null) ? proDTO.Nombre.ToLower() : string.Empty);
 
                     ret = usu.UserName + " (" + Apellido + " " + Nombre + ")";
 
@@ -139,6 +140,7 @@ namespace AnexoProfesionales
                 }
             }
         }
+
 
     }
 }
