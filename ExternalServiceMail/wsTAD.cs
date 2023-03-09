@@ -112,16 +112,20 @@ namespace ExternalService
             else
             {
                 clsError error = null;
+                LogError.Write(new Exception(response.StatusCode + "\n" + response.StatusDescription + "\n" +  
+                    response.Content + "\n" +  response.Headers + "\n" + response.Request + "\n" + 
+                    response.ResponseUri + "\n" + response.ErrorException + "\n" + response.StatusDescription
+                    + "\n" + response.ErrorMessage));
                 try
                 {
                     error = JsonConvert.DeserializeObject<clsError>(response.Content);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw new Exception("500 - Error inesperado en el ESB.");
+                    throw new Exception("500 - Error inesperado en el ESB. Error al desserializar la respuesta.");
                 }
                 if (error.codigo == null && error.error == null)
-                    throw new Exception("500 - Error inesperado en el ESB.");
+                    throw new Exception("500 - Error inesperado en el ESB. Sin código de error.");
 
                 throw new Exception((error.codigo != null ? error.codigo.Value + " - " : "") + error.error);
             }
