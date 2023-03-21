@@ -55,14 +55,18 @@ namespace AnexoProfesionales
             }
 
             #region ASOSA MENSAJE PLANO CONTRA INCENDIO
-            var condicionIncendioOk = true;
-
-            var superficie = enc.EncomiendaDatosLocalDTO.Select(x => x.superficie_cubierta_dl + x.superficie_descubierta_dl).FirstOrDefault();
-            condicionIncendioOk = !enc.EncomiendaRubrosCNDTO.Where(x => x.RubrosDTO.CondicionesIncendio.superficie < superficie).Any();
-            if (!condicionIncendioOk)
+            if (Page.RouteData.Values["id_encomienda"] != null)
             {
-                lblMsgPlanoContraIncendios.Text = "El Tramite " + id_encomienda.ToString() + " requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente.";
-                pnlMsgPlanoContraIncendios.Visible = true;
+                var condicionIncendioOk = true;
+                this.id_encomienda = Convert.ToInt32(Page.RouteData.Values["id_encomienda"].ToString());
+                enc = encomiendaBL.Single(id_encomienda);
+                var superficie = enc.EncomiendaDatosLocalDTO.Select(x => x.superficie_cubierta_dl + x.superficie_descubierta_dl).FirstOrDefault();
+                condicionIncendioOk = !enc.EncomiendaRubrosCNDTO.Where(x => x.RubrosDTO.CondicionesIncendio.superficie < superficie).Any();
+                if (!condicionIncendioOk)
+                {
+                    lblMsgPlanoContraIncendios.Text = "El Tramite " + id_encomienda.ToString() + " requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente.";
+                    pnlMsgPlanoContraIncendios.Visible = true;
+                }
             }
             #endregion
         }
