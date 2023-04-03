@@ -109,7 +109,7 @@ namespace ExternalService
             client.ClearHandlers();
             client.AddHandler("application/json", new JsonDeserializer());
 
-            var request = new RestRequest("?IdFile=" + id_file, Method.DELETE);
+            var request = new RestRequest("?IdFile=" + id_file, Method.POST);
             request.AddParameter("redirect", "false");
             request.AddParameter("redirectUrl", "");
             request.AddHeader("Content-Type", "application/json charset=UTF-8");
