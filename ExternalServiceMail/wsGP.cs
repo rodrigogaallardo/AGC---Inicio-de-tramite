@@ -142,9 +142,12 @@ namespace ExternalService
             clsBody.operador = new clsOperador();
             clsBody.operador.cuit = p_cuitOperador;
             clsBody.operador.idPerfil = p_idPerfilOperador;
-            request.AddParameter("application/json; charset=utf-8", JsonConvert.SerializeObject(clsBody), ParameterType.RequestBody);
+            //request.AddParameter("application/json; charset=utf-8", JsonConvert.SerializeObject(clsBody), ParameterType.RequestBody);
+            request.AddParameter("application/json", JsonConvert.SerializeObject(clsBody), ParameterType.RequestBody);
+            LogError.Write(new Exception("REQUEST: " + request.ToString()));
 
             IRestResponse response = client.Execute(request);
+            LogError.Write(new Exception("RESPONSE: " + response.ToString()));
             if (response.StatusCode != System.Net.HttpStatusCode.Created)
             {
                 clsError error = null;
