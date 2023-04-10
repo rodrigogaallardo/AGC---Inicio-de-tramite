@@ -2566,8 +2566,10 @@ namespace BusinesLayer.Implementation
 
         private bool TienePlanoDeIncendio(int id_solicitud)
         {
-            SSITDocumentosAdjuntosBL solDocBL = new SSITDocumentosAdjuntosBL();
-            var DocAdj = solDocBL.GetByFKIdSolicitudTipoDocReq(id_solicitud, 66).FirstOrDefault();
+            EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
+            int id_encomienda = encSolBL.GetByFKIdSolicitud(id_solicitud).Max(x => x.id_encomienda);
+            EncomiendaPlanosBL encDocBL = new EncomiendaPlanosBL();
+            var DocAdj = encDocBL.GetByFKIdEncomiendaTipoPlano(id_encomienda, 2).FirstOrDefault();
             return DocAdj != null;
         }
     }
