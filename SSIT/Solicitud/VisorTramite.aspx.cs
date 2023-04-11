@@ -12,6 +12,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Configuration;
 using static StaticClass.Constantes;
+using Org.BouncyCastle.Utilities;
 
 namespace SSIT
 {
@@ -73,6 +74,18 @@ namespace SSIT
 
             string tieneOblea = visDocumentos.tieneOblea(id_solicitud);
             divbtnOblea.Visible = false;
+
+            string boletaCero_Habilitada = System.Configuration.ConfigurationManager.AppSettings["boletaCero_Habilitada"];
+            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+            if (boletaCero_Habilitada == "1")
+            {
+                DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                                "yyyyMMdd",
+                                                                System.Globalization.CultureInfo.InvariantCulture);
+                if (DateTime.Now > boletaCeroDate)
+                    liBui.Visible = false;
+            }
+
             if (tieneOblea != "")
             {
                 btnOblea.NavigateUrl = tieneOblea;
@@ -821,6 +834,19 @@ namespace SSIT
                 EncomiendaBL encBL = new EncomiendaBL();
                 var sol = blSol.Single(id_solicitud);
 
+                //********** DARIO BOLETA 0 - 06/04/2023 **********
+                string boletaCero_Habilitada = System.Configuration.ConfigurationManager.AppSettings["boletaCero_Habilitada"];
+                string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+                if (boletaCero_Habilitada == "1")
+                {
+                    DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde, 
+                                                                    "yyyyMMdd", 
+                                                                    System.Globalization.CultureInfo.InvariantCulture);
+                    if(DateTime.Now > boletaCeroDate)
+                        sol.ExencionPago = true;
+                }
+                //*************************************************
+
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 MembershipUser usuario = Membership.GetUser(userid);
                 int id_estado_ant = sol.IdEstado;
@@ -845,7 +871,8 @@ namespace SSIT
                     return;
                 }
 
-                if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF || id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO)
+                if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF || 
+                    id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO)
                 {
                     ExternalServiceReporting reportingService = new ExternalServiceReporting();
                     var ReportingEntity = reportingService.GetPDFOblea(id_solicitud, false);
