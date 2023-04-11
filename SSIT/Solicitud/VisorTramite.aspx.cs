@@ -75,16 +75,9 @@ namespace SSIT
             string tieneOblea = visDocumentos.tieneOblea(id_solicitud);
             divbtnOblea.Visible = false;
 
-            string boletaCero_Habilitada = System.Configuration.ConfigurationManager.AppSettings["boletaCero_Habilitada"];
-            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
-            if (boletaCero_Habilitada == "1")
-            {
-                DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
-                                                                "yyyyMMdd",
-                                                                System.Globalization.CultureInfo.InvariantCulture);
-                if (DateTime.Now > boletaCeroDate)
-                    liBui.Visible = false;
-            }
+            //si boleta cero esta activa, oculto panel de pagos
+            if(BoletaCeroActiva())
+                liBui.Visible = false;
 
             if (tieneOblea != "")
             {
@@ -835,16 +828,9 @@ namespace SSIT
                 var sol = blSol.Single(id_solicitud);
 
                 //********** DARIO BOLETA 0 - 06/04/2023 **********
-                string boletaCero_Habilitada = System.Configuration.ConfigurationManager.AppSettings["boletaCero_Habilitada"];
-                string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
-                if (boletaCero_Habilitada == "1")
-                {
-                    DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde, 
-                                                                    "yyyyMMdd", 
-                                                                    System.Globalization.CultureInfo.InvariantCulture);
-                    if(DateTime.Now > boletaCeroDate)
-                        sol.ExencionPago = true;
-                }
+                //si boleta cero esta activa, marco la solicitud como excenta de pago
+                if (BoletaCeroActiva())
+                    sol.ExencionPago = true;
                 //*************************************************
 
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
@@ -1065,6 +1051,22 @@ namespace SSIT
 
             lblError.Text = e.error;
             ScriptManager.RegisterStartupScript(updAlertas, updAlertas.GetType(), "showfrmError", "showfrmError();", true);
+        }
+
+        private bool BoletaCeroActiva()
+        {
+            string boletaCero_Habilitada = System.Configuration.ConfigurationManager.AppSettings["boletaCero_Habilitada"];
+            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+            if (boletaCero_Habilitada == "1")
+            {
+                DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                                "yyyyMMdd",
+                                                                System.Globalization.CultureInfo.InvariantCulture);
+                if (DateTime.Now > boletaCeroDate)
+                    return true;
+            }
+
+            return false;
         }
     }
 }
