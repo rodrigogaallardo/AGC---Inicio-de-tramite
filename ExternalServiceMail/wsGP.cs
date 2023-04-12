@@ -134,6 +134,7 @@ namespace ExternalService
             var client = new RestClient(uriString);
             client.ClearHandlers();
             client.AddHandler("application/json", new JsonDeserializer());
+            LogError.Write(new Exception("CLIENT: " + Funciones.GetDataFromClient(client)));
 
 
             var request = new RestRequest(Method.DELETE);
@@ -144,10 +145,10 @@ namespace ExternalService
             clsBody.operador.idPerfil = p_idPerfilOperador;
             //request.AddParameter("application/json; charset=utf-8", JsonConvert.SerializeObject(clsBody), ParameterType.RequestBody);
             request.AddParameter("application/json", JsonConvert.SerializeObject(clsBody), ParameterType.RequestBody);
-            LogError.Write(new Exception("REQUEST: " + request.ToString()));
+            LogError.Write(new Exception("REQUEST: " + Funciones.GetDataFromRequest(request)));
 
             IRestResponse response = client.Execute(request);
-            LogError.Write(new Exception("RESPONSE: " + response.ToString()));
+            LogError.Write(new Exception("RESPONSE: " + Funciones.GetDataFromResponse(response)));
             if (response.StatusCode != System.Net.HttpStatusCode.Created)
             {
                 clsError error = null;
