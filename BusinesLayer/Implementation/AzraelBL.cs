@@ -1,13 +1,19 @@
-﻿using System;
+﻿using AutoMapper;
+using BaseRepository;
+using BaseRepository.Engine;
+using Dal.UnitOfWork;
+using DataAcess;
+using DataAcess.EntityCustom;
+using DataTransferObject;
+using ExternalService;
+using ExternalService.ws_interface_AGC;
+using IBusinessLayer;
+using StaticClass;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using UnitOfWork;
-using ExternalService;
-using StaticClass;
-using DataTransferObject;
-using AutoMapper;
-using DataAcess.EntityCustom;
-using BaseRepository;
-using System.Collections.Generic;
 
 namespace BusinesLayer.Implementation
 {
@@ -33,6 +39,11 @@ namespace BusinesLayer.Implementation
                 cfg.CreateMap<AzraelBuscadorFileEntity, AzraelBuscadorFileDTO>().ReverseMap();
             });
             mapperBase = config.CreateMapper();
+            uowF = new TransactionScopeUnitOfWorkFactory(System.Transactions.IsolationLevel.ReadUncommitted);
+            using (IUnitOfWork unitOfWork = uowF.GetUnitOfWork(System.Transactions.IsolationLevel.ReadUncommitted))
+            {
+                repo = new AzraelRepository(unitOfWork);
+            }
         }
 
         public void GuardarPDFEncomienda(int id_encomienda, int id_file, string FileName, Guid UserId)
@@ -145,6 +156,31 @@ namespace BusinesLayer.Implementation
                 throw ex;
             }
         }
+
+        public void SetNewOblea(int id_solicitud, Guid userid, int id_file, string FileName)
+        {
+            SSITDocumentosAdjuntosBL solDocBL = new SSITDocumentosAdjuntosBL();
+            ExternalServiceFiles esf = new ExternalServiceFiles();
+            SSITDocumentosAdjuntosDTO solDocDTO;
+
+            solDocDTO = solDocBL.GetByFKIdSolicitudTipoDocSis(id_solicitud, (int)Constantes.TiposDeDocumentosSistema.OBLEA_SOLICITUD).FirstOrDefault();
+
+            if (solDocDTO != null)
+            {
+                solDocDTO = new SSITDocumentosAdjuntosDTO();
+                solDocDTO.id_solicitud = id_solicitud;
+                solDocDTO.id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.OBLEA_SOLICITUD;
+                solDocDTO.id_tdocreq = 0;
+                solDocDTO.generadoxSistema = true;
+                solDocDTO.CreateDate = DateTime.Now;
+                solDocDTO.CreateUser = userid;
+                solDocDTO.nombre_archivo = FileName;
+                solDocDTO.id_file = id_file;
+                solDocBL.Insert(solDocDTO, true);
+            }
+
+        }
+
 
         public void GuardarPDFSolicitud(int id_solicitud, int id_file, string FileName, Guid UserId)
         {
