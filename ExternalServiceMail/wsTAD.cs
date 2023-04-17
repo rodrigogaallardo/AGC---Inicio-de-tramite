@@ -120,7 +120,7 @@ namespace ExternalService
                 {
                     error = JsonConvert.DeserializeObject<clsError>(response.Content);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw new Exception("500 - Error inesperado en el ESB. Error al desserializar la respuesta.");
                 }
