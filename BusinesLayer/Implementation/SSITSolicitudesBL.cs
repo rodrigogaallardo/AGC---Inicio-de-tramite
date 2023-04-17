@@ -2569,8 +2569,10 @@ namespace BusinesLayer.Implementation
             EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
             int id_encomienda = encSolBL.GetByFKIdSolicitud(id_solicitud).Max(x => x.id_encomienda);
             EncomiendaPlanosBL encDocBL = new EncomiendaPlanosBL();
-            var DocAdj = encDocBL.GetByFKIdEncomiendaTipoPlano(id_encomienda, 2).FirstOrDefault();
-            return DocAdj != null;
+            var DocAdjAT = encDocBL.GetByFKIdEncomiendaTipoPlano(id_encomienda, 2).FirstOrDefault();
+            SSITDocumentosAdjuntosBL ssitDocBL = new SSITDocumentosAdjuntosBL();
+            var DocAdjSSIT = ssitDocBL.GetByFKIdSolicitudTipoDocReq(id_solicitud, 66).FirstOrDefault();
+            return DocAdjAT != null || DocAdjSSIT != null;
         }
     }
 }

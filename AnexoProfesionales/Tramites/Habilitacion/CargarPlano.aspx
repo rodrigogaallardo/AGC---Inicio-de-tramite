@@ -32,7 +32,7 @@
         <asp:HiddenField ID="hid_DecimalSeparator" runat="server" />
         <asp:HiddenField ID="hid_return_url" runat="server" />
         <asp:Panel ID="pnlMsgPlanoContraIncendios" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
-                    <asp:Label ID="lblMsgPlanoContraIncendios" Text="El Tramite XXXXXX requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente." ForeColor="Red" runat="server"></asp:Label>
+                    <asp:Label ID="lblMsgPlanoContraIncendios" Text="El trámite XXXXXX requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente." ForeColor="Red" runat="server"></asp:Label>
                 </asp:Panel>
 
         <p style="margin: auto; padding: 10px; line-height: 20px">

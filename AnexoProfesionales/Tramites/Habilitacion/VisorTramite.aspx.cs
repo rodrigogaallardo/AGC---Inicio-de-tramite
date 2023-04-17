@@ -204,12 +204,12 @@ namespace AnexoProfesionales
                 {
                     #region ASOSA MENSAJE PLANO CONTRA INCENDIO
                     ScriptManager sm = ScriptManager.GetCurrent(this);
-                    string cadena = "El Tramite "+ id_encomienda.ToString() + " requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente.";
+                    string cadena = "El trámite " + id_encomienda.ToString() + " requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente.";
                     string script = string.Format("alert('{0}');", cadena);
                     ScriptManager.RegisterStartupScript(this, typeof(System.Web.UI.Page), "alertScript", script, true);
 
 
-                    lblMsgPlanoContraIncendios.Text = "El Tramite " + id_encomienda.ToString() + " requiere Plano Contra Incendios, el mismo puede ser Inicial o Final segun normativa vigente.";
+                    lblMsgPlanoContraIncendios.Text = "El trámite " + id_encomienda.ToString() + " requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente.";
                     pnlMsgPlanoContraIncendios.Visible = true;
                     #endregion
                     mensaje.Add("Plano contra incendios");
