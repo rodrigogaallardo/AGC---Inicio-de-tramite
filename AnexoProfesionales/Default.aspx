@@ -28,7 +28,7 @@
                            <h2 class="titulo1 text-center" >Inicio de Sesión</h2>
                         
                         <asp:Panel ID="pnlLogin" runat="server" Style="margin-top: 10px">
-                            <asp:Login ID="LoginControl" runat="server" OnLoginError="LoginControl_LoginError"  UserNameRequiredErrorMessage="El Nombre de usuario es requerido" PasswordRequiredErrorMessage="La contraseña es requerida."
+                            <asp:Login ID="LoginControl" runat="server" OnLoggedIn="LoginControl_LoggedIn" OnLoginError="LoginControl_LoginError"  UserNameRequiredErrorMessage="El Nombre de usuario es requerido" PasswordRequiredErrorMessage="La contraseña es requerida."
                                 FailureText="Nombre de usuario o contraseña incorrecta.<br />Por favor, intente nuevamente."
                                 RememberMeText="Recordarme en este equipo." TitleText=""
                                  PasswordRecoveryText="Recuperar contraseña"

@@ -740,7 +740,7 @@ namespace BusinesLayer.Implementation
                         SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas itemTitNuevoPJPF = new SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas();
 
                         itemTitNuevoPJPF.id_personajuridica = itemTitNuevoPJ.id_personajuridica;
-                        itemTitNuevoPJPF.id_solicitud = itemTitPJPF.id_solicitud;
+                        itemTitNuevoPJPF.id_solicitud = idSolicitudDestino;
                         itemTitNuevoPJPF.Apellido = itemTitPJPF.Apellido;
                         itemTitNuevoPJPF.Email = itemTitPJPF.Email;
                         itemTitNuevoPJPF.firmante_misma_persona = itemTitPJPF.firmante_misma_persona;
