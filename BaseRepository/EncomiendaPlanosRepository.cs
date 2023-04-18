@@ -32,6 +32,17 @@ namespace BaseRepository
 	
 			return domains;
 		}
+        public IEnumerable<Encomienda_Planos> GetByFKIdEncomiendaTipoPlano(int IdEncomienda, int TipoPlano)
+        {
+            IEnumerable<Encomienda_Planos> domains = (from ep in _unitOfWork.Db.Encomienda_Planos
+                                                      where ep.id_encomienda == IdEncomienda
+                                                        && ep.id_tipo_plano == TipoPlano
+                                                      select ep
+                                                    );
+
+            return domains;
+        }
+        
         public bool existe(int id_tipo_plano, string nombre, int id_encomienda)
         {
             IEnumerable<Encomienda_Planos> domains = _unitOfWork.Db.Encomienda_Planos.Where(x =>

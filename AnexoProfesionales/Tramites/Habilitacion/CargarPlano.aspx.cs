@@ -53,6 +53,22 @@ namespace AnexoProfesionales
                 CargarPlanos(id_encomienda);
                 Titulo.CargarDatos(id_encomienda, "Carga de Planos");
             }
+
+            #region ASOSA MENSAJE PLANO CONTRA INCENDIO
+            if (Page.RouteData.Values["id_encomienda"] != null)
+            {
+                var condicionIncendioOk = true;
+                this.id_encomienda = Convert.ToInt32(Page.RouteData.Values["id_encomienda"].ToString());
+                enc = encomiendaBL.Single(id_encomienda);
+                var superficie = enc.EncomiendaDatosLocalDTO.Select(x => x.superficie_cubierta_dl + x.superficie_descubierta_dl).FirstOrDefault();
+                condicionIncendioOk = !enc.EncomiendaRubrosCNDTO.Where(x => x.RubrosDTO.CondicionesIncendio.superficie < superficie).Any();
+                if (!condicionIncendioOk)
+                {
+                    lblMsgPlanoContraIncendios.Text = "El trámite " + id_encomienda.ToString() + " requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente.";
+                    pnlMsgPlanoContraIncendios.Visible = true;
+                }
+            }
+            #endregion
         }
 
         private void ComprobarEncomienda()

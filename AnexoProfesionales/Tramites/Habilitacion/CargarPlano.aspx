@@ -31,6 +31,9 @@
         
         <asp:HiddenField ID="hid_DecimalSeparator" runat="server" />
         <asp:HiddenField ID="hid_return_url" runat="server" />
+        <asp:Panel ID="pnlMsgPlanoContraIncendios" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
+                    <asp:Label ID="lblMsgPlanoContraIncendios" Text="El trámite XXXXXX requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente." ForeColor="Red" runat="server"></asp:Label>
+                </asp:Panel>
 
         <p style="margin: auto; padding: 10px; line-height: 20px">
             En este paso deberá ingresar el/los plano/s del trámite.
@@ -314,10 +317,10 @@
              title: titulo,
              text: texto,
              image: '<%: ResolveUrl("~/Content/img/info32.png") %>',
-                sticky: false
-            });
+             sticky: false
+         });
 
-        }
+     }
 
      function init_fileUpload() {
          'use strict';
@@ -326,36 +329,36 @@
          $("#<%: hid_filename_plano_random.ClientID %>").val(nrorandom);
 
          var url = '<%: ResolveUrl("~/Scripts/jquery-fileupload/Upload.ashx?nrorandom=") %>' + nrorandom.toString();
-        $("[id*='fileupload']").fileupload({
-            url: url,
-            dataType: 'json',
-            formData: { folder: 'c:\Temporal' },
-            //acceptFileTypes: /(\.|\/)(dwf|dwf|)$/i,
-            add: function (e, data) {
-                var goUpload = true;
-                var uploadFile = data.files[0];
+         $("[id*='fileupload']").fileupload({
+             url: url,
+             dataType: 'json',
+             formData: { folder: 'c:\Temporal' },
+             //acceptFileTypes: /(\.|\/)(dwf|dwf|)$/i,
+             add: function (e, data) {
+                 var goUpload = true;
+                 var uploadFile = data.files[0];
 
-                if (!validar_input(uploadFile)) {
-                    goUpload = false;
-                }
+                 if (!validar_input(uploadFile)) {
+                     goUpload = false;
+                 }
 
-                if (goUpload == true) {
-                    $("[id*='progress']").show();
-                    data.submit();
-                }
+                 if (goUpload == true) {
+                     $("[id*='progress']").show();
+                     data.submit();
+                 }
+             },
+             done: function (e, data) {
+                 //var filename = nrorandom.toString() + "." + fileObj.name;
+                 $("#<%: hid_filename_plano.ClientID %>").val(data.files[0].name);
+                $("#<%: btnCargarPlano.ClientID %>").click();
+
             },
-            done: function (e, data) {
-                //var filename = nrorandom.toString() + "." + fileObj.name;
-                $("#<%: hid_filename_plano.ClientID %>").val(data.files[0].name);
-                    $("#<%: btnCargarPlano.ClientID %>").click();
-
-                },
             progressall: function (e, data) {
                 var porc = parseInt(data.loaded / data.total * 100, 10);
                 $('#progress .progress-bar').css(
-                        'width',
-                        porc + '%'
-                    );
+                    'width',
+                    porc + '%'
+                );
 
                 if (porc >= 100) {
                     $('#progress .progress-bar').text('Cargando archivo...espere');
@@ -370,19 +373,19 @@
             }
 
         }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
-        }
+     }
 
 
-        function progress(value) {
+     function progress(value) {
 
-            $("#progress .bar").css(
-                'width',
-                value + '%'
-            );
-        }
+         $("#progress .bar").css(
+             'width',
+             value + '%'
+         );
+     }
 
-        function validar_input(uploadFile) {
-            if ($('#<%=hid_requierre_detalle.ClientID%>').val() == 'True') {
+     function validar_input(uploadFile) {
+         if ($('#<%=hid_requierre_detalle.ClientID%>').val() == 'True') {
                 if ($('#<%=txtDetalle.ClientID%>').val() == null ||
                     $('#<%=txtDetalle.ClientID%>').val().trim() == '') {
                     alert('El Detalle es requerido.');
@@ -408,26 +411,26 @@
             var p = parseInt($('#<%=hid_tamanio_max.ClientID%>').val(), 10);
             if (uploadFile.size > p) { // 2mb
                 alert('El tamaño máximo permitido es de ' + $('#<%=hid_tamanio_max.ClientID%>').val() + ' MB');
-                return false;
-            }
+             return false;
+         }
 
-            return true;
-        }
+         return true;
+     }
 
-        function finalizarCarga222() {
+     function finalizarCarga222() {
 
-            $("#<%: txtDetalle.ClientID %>").prop("value", "");
+         $("#<%: txtDetalle.ClientID %>").prop("value", "");
 
-        return false;
+         return false;
 
-        }
+     }
      function ocultarBoton() {
 
-         $("#<%: btnCargarPlano.ClientID %>").css("display","none");
+         $("#<%: btnCargarPlano.ClientID %>").css("display", "none");
 
-              return false;
+         return false;
 
-          }
+     }
      function validarGuardar() {
          ocultarBotonesGuardado();
      }

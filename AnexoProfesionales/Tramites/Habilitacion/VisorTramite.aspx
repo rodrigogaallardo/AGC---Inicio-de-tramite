@@ -154,6 +154,10 @@
                     </tr>
                 </table>
 
+                  <asp:Panel ID="pnlMsgPlanoContraIncendios" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
+                    <asp:Label ID="lblMsgPlanoContraIncendios" Text="El trámite XXXXXX requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente." ForeColor="Red" runat="server"></asp:Label>
+                </asp:Panel>
+
                 <asp:Panel ID="pnlTramiteIncompleto" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
                     <asp:Label ID="lblTextoTramiteIncompleto" runat="server"></asp:Label>
                 </asp:Panel>

@@ -66,8 +66,11 @@ namespace ExternalService
             client.ClearHandlers();
             client.AddHandler("application/json", new JsonDeserializer());
 
-            var request = new RestRequest("Apoderamiento?cuitTitular=" + cuitTitular+"&cuitApoderado="+cuitApoderado, Method.GET);
-            
+            //var request = new RestRequest("Apoderamiento?cuitTitular=" + cuitTitular+"&cuitApoderado="+cuitApoderado, Method.GET);
+            var request = new RestRequest("Apoderamiento", Method.GET);
+            request.AddParameter("cuitTitular", cuitTitular);
+            request.AddParameter("cuitApoderado", cuitApoderado);
+
             request.AddHeader("Content-Type", "application/json charset=UTF-8");
             request.AddHeader("Accept", "application/json");
 

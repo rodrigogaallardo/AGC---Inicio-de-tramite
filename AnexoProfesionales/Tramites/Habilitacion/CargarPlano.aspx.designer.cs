@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace AnexoProfesionales {
-    
-    
-    public partial class CargarPlano {
-        
+namespace AnexoProfesionales
+{
+
+
+    public partial class CargarPlano
+    {
+
         /// <summary>
         /// Control Titulo.
         /// </summary>
@@ -20,7 +22,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AnexoProfesionales.Tramites.Habilitacion.Controls.Titulo Titulo;
-        
+
         /// <summary>
         /// Control hid_DecimalSeparator.
         /// </summary>
@@ -29,7 +31,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_DecimalSeparator;
-        
+
         /// <summary>
         /// Control hid_return_url.
         /// </summary>
@@ -38,7 +40,25 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_return_url;
-        
+
+        /// <summary>
+        /// Control pnlMsgPlanoContraIncendios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMsgPlanoContraIncendios;
+
+        /// <summary>
+        /// Control lblMsgPlanoContraIncendios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsgPlanoContraIncendios;
+
         /// <summary>
         /// Control pnlContenido.
         /// </summary>
@@ -47,7 +67,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlContenido;
-        
+
         /// <summary>
         /// Control hid_id_encomienda.
         /// </summary>
@@ -56,7 +76,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_id_encomienda;
-        
+
         /// <summary>
         /// Control updPnlCargarPlano.
         /// </summary>
@@ -65,7 +85,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPnlCargarPlano;
-        
+
         /// <summary>
         /// Control hid_tamanio.
         /// </summary>
@@ -74,7 +94,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_tamanio;
-        
+
         /// <summary>
         /// Control hid_tamanio_max.
         /// </summary>
@@ -83,7 +103,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_tamanio_max;
-        
+
         /// <summary>
         /// Control hid_requierre_detalle.
         /// </summary>
@@ -92,7 +112,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_requierre_detalle;
-        
+
         /// <summary>
         /// Control hid_extension.
         /// </summary>
@@ -101,7 +121,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_extension;
-        
+
         /// <summary>
         /// Control TipoDropDown.
         /// </summary>
@@ -110,7 +130,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList TipoDropDown;
-        
+
         /// <summary>
         /// Control lblDetalle.
         /// </summary>
@@ -119,7 +139,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDetalle;
-        
+
         /// <summary>
         /// Control txtDetalle.
         /// </summary>
@@ -128,7 +148,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDetalle;
-        
+
         /// <summary>
         /// Control hid_filename_plano_random.
         /// </summary>
@@ -137,7 +157,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_filename_plano_random;
-        
+
         /// <summary>
         /// Control hid_filename_plano.
         /// </summary>
@@ -146,7 +166,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_filename_plano;
-        
+
         /// <summary>
         /// Control btnCargarPlano.
         /// </summary>
@@ -155,7 +175,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCargarPlano;
-        
+
         /// <summary>
         /// Control updPnlGrillaPlanos.
         /// </summary>
@@ -164,7 +184,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPnlGrillaPlanos;
-        
+
         /// <summary>
         /// Control grdPlanos.
         /// </summary>
@@ -173,7 +193,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdPlanos;
-        
+
         /// <summary>
         /// Control alertPlanoIncendio.
         /// </summary>
@@ -182,7 +202,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label alertPlanoIncendio;
-        
+
         /// <summary>
         /// Control updBotonesGuardar.
         /// </summary>
@@ -191,7 +211,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updBotonesGuardar;
-        
+
         /// <summary>
         /// Control LinkButton1.
         /// </summary>
@@ -200,7 +220,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
-        
+
         /// <summary>
         /// Control UpdateProgress1.
         /// </summary>
@@ -209,7 +229,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// Control udpError.
         /// </summary>
@@ -218,7 +238,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel udpError;
-        
+
         /// <summary>
         /// Control updmpeInfo.
         /// </summary>
@@ -227,7 +247,7 @@ namespace AnexoProfesionales {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updmpeInfo;
-        
+
         /// <summary>
         /// Control lblError.
         /// </summary>

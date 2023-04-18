@@ -94,6 +94,7 @@
     <Compile Include="ConceptosBUIIndependientesRepository.cs" />
     <Compile Include="EncomiendaExternaHistorialEstadosRepository.cs" />
     <Compile Include="EncomiendaExternaRepository.cs" />
+    <Compile Include="EncomiendaSSITSolicitudesRepository.cs" />
     <Compile Include="EncomiendaRectificatoriaRepository.cs" />
     <Compile Include="EncomiendaRubrosATAnteriorRepository.cs" />
     <Compile Include="EncomiendaRubrosCNATAnteriorRepository.cs" />
