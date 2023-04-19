@@ -76,8 +76,11 @@ namespace SSIT
             divbtnOblea.Visible = false;
 
             //si boleta cero esta activa, oculto panel de pagos
-            if(BoletaCeroActiva())
+            if (BoletaCeroActiva())
+            {
                 liBui.Visible = false;
+                visPagosSolicitud.Visible = false;
+            }
 
             if (tieneOblea != "")
             {
@@ -1055,16 +1058,14 @@ namespace SSIT
 
         private bool BoletaCeroActiva()
         {
-            string boletaCero_Habilitada = System.Configuration.ConfigurationManager.AppSettings["boletaCero_Habilitada"];
+            
             string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
-            if (boletaCero_Habilitada == "1")
-            {
-                DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
-                                                                "yyyyMMdd",
-                                                                System.Globalization.CultureInfo.InvariantCulture);
-                if (DateTime.Now > boletaCeroDate)
-                    return true;
-            }
+
+            DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                            "yyyyMMdd",
+                                                            System.Globalization.CultureInfo.InvariantCulture);
+            if (DateTime.Now > boletaCeroDate)
+                return true;
 
             return false;
         }
