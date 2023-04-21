@@ -57,6 +57,7 @@
     <Compile Include="IConsultaPadronEstadosBL.cs" />
     <Compile Include="IConsultaPadronSolicitudesObservacionesBL.cs" />
     <Compile Include="IDocumentosAdjuntosBL.cs" />
+    <Compile Include="IEncomiendaSSITSolicitudesBL.cs" />
     <Compile Include="IEncomiendaRectificatoriaBL.cs" />
     <Compile Include="IEncomiendaRubrosATAnteriorBL.cs" />
     <Compile Include="IEncomiendaRubrosCNBL.cs" />
