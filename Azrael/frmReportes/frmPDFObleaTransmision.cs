@@ -181,8 +181,9 @@ namespace Azrael.frmReportes
                         try
                         {
                             ExternalServiceReporting service = new ExternalServiceReporting();
-                            ReportingEntity Report = service.GetPDFOblea(item.IdSolicitud, true);
-                            azBL.GuardarPDFOblea(item.IdSolicitud, Report.Id_file, Report.FileName, item.CreateUser);
+                            ReportingEntity Report = service.GetPDFObleaTransmision(item.IdSolicitud, true);
+                            //azBL.GuardarPDFOblea(item.IdSolicitud, Report.Id_file, Report.FileName, item.CreateUser);
+                            azBL.SetNewObleaTF(item.IdSolicitud, item.CreateUser, Report.Id_file, Report.FileName);
                             ContProcesados += 1;
                             backgroundWorker1.ReportProgress(ContProcesados);
                             if (backgroundWorker1.CancellationPending)
