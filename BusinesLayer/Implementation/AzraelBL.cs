@@ -181,6 +181,30 @@ namespace BusinesLayer.Implementation
 
         }
 
+        public void SetNewObleaTF(int id_solicitud, Guid userid, int id_file, string FileName)
+        {
+            TransferenciasDocumentosAdjuntosBL transfDocBL = new TransferenciasDocumentosAdjuntosBL();
+            ExternalServiceFiles esf = new ExternalServiceFiles();
+            TransferenciasDocumentosAdjuntosDTO transfDTO;
+
+            transfDTO = transfDocBL.GetByFKIdSolicitudTipoDocSis(id_solicitud, (int)Constantes.TiposDeDocumentosSistema.OBLEA_SOLICITUD).FirstOrDefault();
+
+            if (transfDTO != null)
+            {
+                transfDTO = new TransferenciasDocumentosAdjuntosDTO();
+                transfDTO.IdSolicitud = id_solicitud;
+                transfDTO.IdTipoDocsis = (int)Constantes.TiposDeDocumentosSistema.OBLEA_SOLICITUD;
+                transfDTO.IdTipoDocumentoRequerido = 0;
+                transfDTO.GeneradoxSistema = true;
+                transfDTO.CreateDate = DateTime.Now;
+                transfDTO.CreateUser = userid;
+                transfDTO.NombreArchivo = FileName;
+                transfDTO.IdFile = id_file;
+                transfDocBL.Insert(transfDTO, true);
+            }
+
+        }
+
 
         public void GuardarPDFSolicitud(int id_solicitud, int id_file, string FileName, Guid UserId)
         {
