@@ -2133,6 +2133,7 @@ namespace SSIT
             catch (Exception ex)
             {
                 resul = false;
+                LogError.Write(new Exception("Error en el servicio de Apoderamiento: " + ex.Message));
                 lblError.Text = "Error en el servicio de Apoderamiento: " + ex.Message;
                 this.EjecutarScript(updPanel, "showfrmError();");
                 // throw ex;
