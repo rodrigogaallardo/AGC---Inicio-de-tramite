@@ -7,10 +7,10 @@ using SSIT.Common;
 using StaticClass;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
-using System.Configuration;
 using static StaticClass.Constantes;
 
 namespace SSIT
@@ -407,7 +407,7 @@ namespace SSIT
             CargarCabecera(ssitDTO);
             MostrarMensajeAlertaFaltantes();
 
-            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || 
+            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP ||
                             id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM ||
                             id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF;
             List<int> estadosAT = new List<int>();
@@ -416,7 +416,7 @@ namespace SSIT
 
             #region DatosSolicitud
             visDatosSolicitud.Editable = editable;
-            visDatosSolicitud.EditableTitulares = editable 
+            visDatosSolicitud.EditableTitulares = editable
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN;
@@ -581,7 +581,7 @@ namespace SSIT
                 lblHabAnterior.Text = sol.SSITSolicitudesOrigenDTO.id_solicitud_origen != null ? sol.SSITSolicitudesOrigenDTO.id_solicitud_origen.ToString() : sol.SSITSolicitudesOrigenDTO.id_transf_origen.ToString();
             }
             else if (sol.EsECI && sol.IdTipoTramite == (int)Constantes.TipoTramite.HabilitacionECIAdecuacion && sol.NroExpedienteSadeRelacionado != null)
-            { 
+            {
                 lblHabAnterior.Text = sol.NroExpedienteSadeRelacionado;
             }
 
@@ -737,7 +737,7 @@ namespace SSIT
 
                         var mailService = new EmailServiceBL();
                         var idEmails = new List<int>();
-                        foreach(var email in emails.Where(em => em != null).Distinct())
+                        foreach (var email in emails.Where(em => em != null).Distinct())
                         {
                             var emailEntity = new EmailEntity
                             {
@@ -893,7 +893,7 @@ namespace SSIT
                                 }
                             }
                         }
-                        LogError.Write("EnviarParticipantes");  
+                        LogError.Write("EnviarParticipantes");
                         if (sol.idTAD != null)
                         {
                             Functions.enviarParticipantes(sol);
@@ -969,7 +969,7 @@ namespace SSIT
 
             pdfSolicitud = ReportingEntity.Reporte;
             int id_file = ReportingEntity.Id_file;
-            
+
             if (DocAdjDTO != null)
             {
                 if (id_file != DocAdjDTO.id_file)

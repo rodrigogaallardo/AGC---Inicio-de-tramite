@@ -1,18 +1,16 @@
-﻿using SSIT.App_Components;
+﻿using BusinesLayer.Implementation;
+using DataTransferObject;
+using ExternalService;
+using ExternalService.ws_interface_AGC;
+using SSIT.App_Components;
 using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinesLayer.Implementation;
-using DataTransferObject;
-using System.Web.Security;
-using ExternalService;
-using SSIT.Common;
 using static StaticClass.Constantes;
-using ExternalService.ws_interface_AGC;
 
 namespace SSIT.Solicitud.HabilitacionECI
 {
@@ -20,8 +18,9 @@ namespace SSIT.Solicitud.HabilitacionECI
     {
 
         public string HabilitacionECI { get; set; }
-        
-        public int Id_Solicitud {
+
+        public int Id_Solicitud
+        {
             get
             {
                 return Convert.ToInt32(hid_id_solicitud.Value);
@@ -75,13 +74,13 @@ namespace SSIT.Solicitud.HabilitacionECI
             string CodigoSeg = txtCodigoSeg.Text.Trim();
 
             var Solicitud = blSol.Single(Solicitud_Nro);
-            int IdTareaGenerarExpediente =  eng.getTareaGenerarExpediente(Solicitud_Nro);
+            int IdTareaGenerarExpediente = eng.getTareaGenerarExpediente(Solicitud_Nro);
             bool PasoGenerarExpediente = blSol.PasoGenerarExpediente(Solicitud_Nro, IdTareaGenerarExpediente);
-            
+
             try
             {
                 //Valido que sea una solicitud anterior al CUR
-                if(blSol.isRubroCur(Solicitud.IdSolicitud)  )
+                if (blSol.isRubroCur(Solicitud.IdSolicitud))
                 {
                     Id_Solicitud = 0;
                     lblError.Text = " Su solicitud no se encuentra en  condiciones de realizar la adecuacion ECI, por esta vía. Para mayor información, por favor acercarse a la Mesa de Ayuda de la AGC.";
@@ -141,7 +140,7 @@ namespace SSIT.Solicitud.HabilitacionECI
             int id_solicitudNew = 0;
             try
             {
-                if (Id_Solicitud>0)
+                if (Id_Solicitud > 0)
                 {
                     var solAprobada = sSITSolicitudesBL.Single(Id_Solicitud);
 
@@ -231,7 +230,7 @@ namespace SSIT.Solicitud.HabilitacionECI
                     string trata = parametrosBL.GetParametroChar("Trata.Habilitacion");
                     bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                    if (tad)
+                    if (!tad)
                     {
                         int idTAD = 0;
                         idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitudNew);

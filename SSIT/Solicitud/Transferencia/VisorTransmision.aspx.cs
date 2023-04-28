@@ -8,7 +8,6 @@ using SSIT.Solicitud.Transferencia.Controls;
 using StaticClass;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
@@ -672,19 +671,25 @@ namespace SSIT
 
             string dir = "";
 
+            string _noESB = parametrosBL.GetParametroChar("SSIT.NO.ESB");
+            bool.TryParse(_noESB, out bool noESB);
+
             List<int> lisSol = new List<int>();
             lisSol.Add(IdSolicitud);
             foreach (var item in TransferenciaBL.GetDireccionesTransf(lisSol).ToList())
                 dir += item.direccion + " / ";
+            if (!noESB)
+            {
+                try
+                {
+                    wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, sol.NumeroExpedienteSade, trata, dir);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
 
-            try
-            {
-                wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, sol.NumeroExpedienteSade, trata, dir);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
         private void enviarParticipantes(TransferenciasSolicitudesDTO sol)
         {
