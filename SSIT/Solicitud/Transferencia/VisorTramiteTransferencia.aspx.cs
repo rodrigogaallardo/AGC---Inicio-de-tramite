@@ -157,6 +157,7 @@ namespace SSIT
                 divbtnAnularTramite.Visible = true;
 
             }
+               
 
             if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM
                 || transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.COMP
@@ -231,6 +232,12 @@ namespace SSIT
             #endregion
 
             #region PAGOS
+            if (BoletaCeroActiva())
+            {
+                pnlPagos.Visible = false;
+                Pagos.Visible = false;
+            }
+
             Pagos.id_solicitud = IdSolicitud;
             Pagos.tipo_tramite = (int)Constantes.PagosTipoTramite.TR;
 
@@ -612,6 +619,21 @@ namespace SSIT
                 lblError.Text = ex.Message;
                 ScriptManager.RegisterClientScriptBlock(pnlDatosDocumento, pnlDatosDocumento.GetType(), "mostrarError", "showfrmError(); ", true);
             }
+        }
+
+        private bool BoletaCeroActiva(int IdTipoTramite = 0)
+        {
+
+            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+
+            DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                            "yyyyMMdd",
+                                                            System.Globalization.CultureInfo.InvariantCulture);
+
+            if (DateTime.Now > boletaCeroDate)
+                return true;
+
+            return false;
         }
     }
 }
