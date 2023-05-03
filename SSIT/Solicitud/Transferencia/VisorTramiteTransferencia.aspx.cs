@@ -621,7 +621,7 @@ namespace SSIT
             }
         }
 
-        private bool BoletaCeroActiva(int IdTipoTramite = 0)
+        private bool BoletaCeroActiva()
         {
 
             string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];

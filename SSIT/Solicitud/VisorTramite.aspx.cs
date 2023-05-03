@@ -80,7 +80,6 @@ namespace SSIT
             //si boleta cero esta activa, oculto panel de pagos
             SSITSolicitudesBL _blSol = new SSITSolicitudesBL();
             var _sol = _blSol.Single(id_solicitud);
-            //if (BoletaCeroActiva(_sol.IdTipoTramite))
             if (BoletaCeroActiva())
             {
                 liBui.Visible = false;
@@ -837,7 +836,6 @@ namespace SSIT
 
                 //********** DARIO BOLETA 0 - 06/04/2023 **********
                 //si boleta cero esta activa, marco la solicitud como excenta de pago
-                    //if (BoletaCeroActiva(sol.IdTipoTramite))
                     if (BoletaCeroActiva())
                         sol.ExencionPago = true;
                 //*************************************************
@@ -1062,7 +1060,7 @@ namespace SSIT
             ScriptManager.RegisterStartupScript(updAlertas, updAlertas.GetType(), "showfrmError", "showfrmError();", true);
         }
 
-        private bool BoletaCeroActiva(int IdTipoTramite = 0)
+        private bool BoletaCeroActiva()
         {
             
             string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
@@ -1070,8 +1068,6 @@ namespace SSIT
             DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
                                                             "yyyyMMdd",
                                                             System.Globalization.CultureInfo.InvariantCulture);
-            //if (IdTipoTramite != (int)Constantes.TipoTramite.HABILITACION)
-            //    return false;
 
             if (DateTime.Now > boletaCeroDate)
                 return true;
