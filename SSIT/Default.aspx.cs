@@ -1,5 +1,4 @@
-﻿using BusinesLayer;
-using BusinesLayer.Implementation;
+﻿using BusinesLayer.Implementation;
 using DataTransferObject;
 using ExternalService;
 using SSIT.Common;
@@ -21,7 +20,7 @@ namespace SSIT
 
             DivcontendorGral.Attributes.Add("class", "container-fluid");
             MembershipUser usu = Membership.GetUser();
-            
+
             if (usu == null)
             {
                 var navBarMaster = (HtmlControl)Master.FindControl("navBarMaster");
@@ -43,7 +42,7 @@ namespace SSIT
                 LinkButton linkDescargaInstAmpliaciones = (LinkButton)LoginView1.FindControl("linkDescargaInstAmpliaciones");
                 LinkButton linkDescargaInstECI = (LinkButton)LoginView1.FindControl("linkDescargaInstECI");
                 LinkButton linkDescargaInstPermisoMC = (LinkButton)LoginView1.FindControl("linkDescargaInstPermisoMC");
-                
+
 
                 LinkButton lnkCrearRedistribucionUso = (LinkButton)LoginView1.FindControl("lnkCrearRedistribucionUso");
                 LinkButton linkDescargaInstRedistUso = (LinkButton)LoginView1.FindControl("linkDescargaInstRedistUso");
@@ -203,7 +202,7 @@ namespace SSIT
                     string trata = parametrosBL.GetParametroChar("Trata.Habilitacion");
                     bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                    if (tad)
+                    if (!tad)
                     {
                         int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitud);
                         sol = blSol.Single(id_solicitud);
@@ -256,7 +255,7 @@ namespace SSIT
                 string trata = parametrosBL.GetParametroChar("Trata.Consulta.Padron");
                 bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                if (tad)
+                if (!tad)
                 {
                     int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, dto.IdConsultaPadron);
                     dto.idTAD = idTAD;

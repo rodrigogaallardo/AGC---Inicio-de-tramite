@@ -1,19 +1,16 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
+using ExternalService;
 using SSIT.App_Components;
+using SSIT.Solicitud.Consulta_Padron.Controls;
 using StaticClass;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ExternalService;
-using SSIT.Common;
-using Reporting;
-using SSIT.Consulta_Padron.Controls;
-using SSIT.Solicitud.Consulta_Padron.Controls;
-using System.Collections.Generic;
 
 namespace SSIT.Solicitud.Consulta_Padron
 {
@@ -74,7 +71,7 @@ namespace SSIT.Solicitud.Consulta_Padron
         }
 
         private void ComprobarSolicitud(ConsultaPadronSolicitudesDTO consultaPadronDTO)
-        {                
+        {
             if (consultaPadronDTO != null)
             {
                 /*Falta el userID y hacer overload de getuserid con el tipo de tramite*/
@@ -117,7 +114,7 @@ namespace SSIT.Solicitud.Consulta_Padron
             }
             else
             {
-                 visDatosSolicitud.Visible = false;
+                visDatosSolicitud.Visible = false;
             }
 
             #region Ubicacion
@@ -125,7 +122,7 @@ namespace SSIT.Solicitud.Consulta_Padron
             visUbicaciones.CargarDatos(consultaPadronDTO);
             btnModificarUbicacion.PostBackUrl = string.Format("~/" + RouteConfig.EDITAR_UBICACION_CPADRON + "{0}", IdSolicitud);
             #endregion
-            
+
             #region DatosLocal
             visDatoslocal.CargarDatos(consultaPadronDTO);
             btnModificarDatosLocal.PostBackUrl = string.Format("~/" + RouteConfig.EDITAR_DATOSLOCAL_CPADRON + "{0}", IdSolicitud);
@@ -143,7 +140,7 @@ namespace SSIT.Solicitud.Consulta_Padron
             #region Observaciones
             CargarObservaciones(consultaPadronDTO);
             #endregion
-            
+
             #region Titulares Habilitacion
             visTitularesHab.CargarDatos(consultaPadronDTO);
             btnModificarTitulares.PostBackUrl = string.Format("~/" + RouteConfig.EDITAR_TITULARES_CPADRON + "{0}", IdSolicitud);
@@ -162,9 +159,9 @@ namespace SSIT.Solicitud.Consulta_Padron
             #region Validaciones
             divbtnConfirmarTramite.Visible = false;
             divbtnAnularTramite.Visible = false;
-            
-            btnModificarDatosLocal.Visible = false;            
-            btnModificarTitulares.Visible = false;            
+
+            btnModificarDatosLocal.Visible = false;
+            btnModificarTitulares.Visible = false;
             btnModificarRubros.Visible = false;
             btnModificarUbicacion.Visible = false;
             btnModifTitularesSolicitud.Visible = false;
@@ -281,7 +278,7 @@ namespace SSIT.Solicitud.Consulta_Padron
                 LogError.Write(ex, ex.Message);
                 lblError.Text = ex.Message;
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "showfrmError", "showfrmError();", true);
-            }           
+            }
         }
 
         private void enviarCambio(ConsultaPadronSolicitudesDTO sol)
@@ -293,17 +290,23 @@ namespace SSIT.Solicitud.Consulta_Padron
             string trata = parametrosBL.GetParametroChar("Trata.Consulta.Padron");
             string dir = "";
 
+            string _noESB = parametrosBL.GetParametroChar("SSIT.NO.ESB");
+            bool.TryParse(_noESB, out bool noESB);
+
             List<int> lisSol = new List<int>();
             lisSol.Add(sol.IdConsultaPadron);
             foreach (var item in consultaBL.GetDireccionesCpadron(lisSol).ToList())
                 dir += item.direccion + " / ";
-            try
+            if (!noESB)
             {
-                wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdConsultaPadron, sol.NroExpedienteSade, trata, dir);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdConsultaPadron, sol.NroExpedienteSade, trata, dir);
+                }
+                catch (Exception ex)
+                {
                     throw ex;
+                }
             }
         }
         private void enviarParticipantes(ConsultaPadronSolicitudesDTO sol)
@@ -376,7 +379,7 @@ namespace SSIT.Solicitud.Consulta_Padron
             {
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 ConsultaPadronSolicitudesBL consultaBL = new ConsultaPadronSolicitudesBL();
-                consultaBL.AnularTramite(IdSolicitud, userid); 
+                consultaBL.AnularTramite(IdSolicitud, userid);
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "hidefrmConfirmarAnulacion", "hidefrmConfirmarAnulacion();", true);
             }
             catch (Exception ex)
@@ -401,7 +404,7 @@ namespace SSIT.Solicitud.Consulta_Padron
                 lnkModal.Attributes["data-target"] = "#" + pnlObservacionModal.ClientID;
 
                 //si algun registros tiene false, el total termina con false
-                
+
                 if (!row.Leido.Value)
                 {
                     lblAlertasSolicitud.Text = "Falta leer observaciones";
@@ -429,5 +432,5 @@ namespace SSIT.Solicitud.Consulta_Padron
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "showfrmError", "showfrmError();", true);
             }
         }
-    }  
+    }
 }

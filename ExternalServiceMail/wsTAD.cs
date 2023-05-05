@@ -1,16 +1,10 @@
 ﻿using ExternalService.Class;
 using Newtonsoft.Json;
 using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
 using StaticClass;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ExternalService
 {
@@ -68,7 +62,7 @@ namespace ExternalService
             }
             else
             {
-                clsError error=null;
+                clsError error = null;
                 try
                 {
                     error = JsonConvert.DeserializeObject<clsError>(response.Content);
@@ -86,7 +80,7 @@ namespace ExternalService
             return idTad;
         }
 
-        public static void actualizarTramite(string _urlESB,int idTramite, int idSolicitud, string numeroExpediente, string tipoTramite, string ubicacion)
+        public static void actualizarTramite(string _urlESB, int idTramite, int idSolicitud, string numeroExpediente, string tipoTramite, string ubicacion)
         {
             string uriString = _urlESB + "/tramites/" + idTramite;
 
@@ -101,6 +95,7 @@ namespace ExternalService
             clsBody.numeroExpediente = string.IsNullOrEmpty(numeroExpediente) ? string.Empty : numeroExpediente;
             clsBody.idSolicitud = idSolicitud.ToString();
 
+
             //request.AddParameter("application/json; charset=utf-8", JsonConvert.SerializeObject(clsBody), ParameterType.RequestBody);
             request.AddParameter("application/json", JsonConvert.SerializeObject(clsBody), ParameterType.RequestBody);
 
@@ -112,8 +107,8 @@ namespace ExternalService
             else
             {
                 clsError error = null;
-                LogError.Write(new Exception(response.StatusCode + "\n" + response.StatusDescription + "\n" +  
-                    response.Content + "\n" +  response.Headers + "\n" + response.Request + "\n" + 
+                LogError.Write(new Exception(response.StatusCode + "\n" + response.StatusDescription + "\n" +
+                    response.Content + "\n" + response.Headers + "\n" + response.Request + "\n" +
                     response.ResponseUri + "\n" + response.ErrorException + "\n" + response.StatusDescription
                     + "\n" + response.ErrorMessage));
                 try
@@ -138,7 +133,7 @@ namespace ExternalService
                 BaseUrl = new Uri(url)
             };
 
-            clientrest.Encoding = Encoding.GetEncoding("ISO-8859-1"); 
+            clientrest.Encoding = Encoding.GetEncoding("ISO-8859-1");
 
             RestRequest request = new RestRequest
             {
@@ -151,7 +146,7 @@ namespace ExternalService
 
             Encoding encoding = Encoding.GetEncoding("ISO-8859-1");
 
-            if(restResponse.RawBytes != null)
+            if (restResponse.RawBytes != null)
                 restResponse.Content = encoding.GetString(restResponse.RawBytes);
 
             try

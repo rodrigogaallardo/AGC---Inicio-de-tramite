@@ -1,15 +1,13 @@
-﻿using SSIT.App_Components;
+﻿using BusinesLayer.Implementation;
+using DataTransferObject;
+using ExternalService;
+using SSIT.App_Components;
 using StaticClass;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinesLayer.Implementation;
-using DataTransferObject;
-using System.Web.Security;
-using ExternalService;
 
 namespace SSIT.Solicitud.Transferencia
 {
@@ -58,7 +56,7 @@ namespace SSIT.Solicitud.Transferencia
 
             dto.IdTipoTramite = (int)Constantes.TipoDeTramite.ConsultaPadron;
             dto.IdEstado = (int)Constantes.TipoEstadoSolicitudEnum.INCOM;
-            dto.CreateUser = Guid.Parse("A153211F-CCF4-4E86-BB90-C8D030974DD9"); 
+            dto.CreateUser = Guid.Parse("A153211F-CCF4-4E86-BB90-C8D030974DD9");
             dto.CreateDate = DateTime.Now;
             dto.CodigoSeguridad = Funciones.getGenerarCodigoSeguridadEncomiendas();
             bl.Insert(dto);
@@ -71,12 +69,12 @@ namespace SSIT.Solicitud.Transferencia
                 string trata = parametrosBL.GetParametroChar("Trata.Consulta.Padron");
                 bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-               /* if (tad)
-                {
-                    int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, dto.IdConsultaPadron);
-                    dto.idTAD = idTAD;
-                    bl.Update(dto);
-                }      */          
+                /* if (tad)
+                 {
+                     int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, dto.IdConsultaPadron);
+                     dto.idTAD = idTAD;
+                     bl.Update(dto);
+                 }      */
             }
             catch (Exception ex)
             {
@@ -143,7 +141,7 @@ namespace SSIT.Solicitud.Transferencia
         protected void btnConfirmar_Click(object sender, EventArgs e)
         {
             lblError.Text = "";
-            
+
             try
             {
                 if (ddlTipoTransmision.SelectedValue.Length == 0)
@@ -152,7 +150,7 @@ namespace SSIT.Solicitud.Transferencia
                     this.EjecutarScript(updTramitesEncontrados, "showfrmError();");
                 }
                 else
-                { 
+                {
                     if (ValidarTramiteSeleccionado())
                     {
                         this.EjecutarScript(updTramitesEncontrados, "showfrmConfirmarNuevaTransmision();");
@@ -184,7 +182,7 @@ namespace SSIT.Solicitud.Transferencia
             {
                 if (ValidarTramiteSeleccionado())
                 {
-                    var solAprobada = SeleccionTramitesAprobados.GetTramiteSeleccionado();                    
+                    var solAprobada = SeleccionTramitesAprobados.GetTramiteSeleccionado();
                     Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
 
                     var cPadron = CrearCP(solAprobada, userid);
@@ -200,7 +198,7 @@ namespace SSIT.Solicitud.Transferencia
                             sol.idSolicitudRef = solAprobada.IdSolicitud;
                             url_destino = "~/" + RouteConfig.AGREGAR_TITULAR_TRANSFERENCIA + id_solicitud.ToString();
                         }
-                        else                        
+                        else
                             url_destino = "~/" + RouteConfig.CARGA_PLANCHETA_TRANSMISION + id_solicitud.ToString();
 
                         string cuit = Membership.GetUser().UserName;
@@ -209,7 +207,7 @@ namespace SSIT.Solicitud.Transferencia
                         string trata = parametrosBL.GetParametroChar("Trata.Transferencias");
                         bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                        if (tad)
+                        if (!tad)
                         {
                             int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitud);
 
