@@ -868,8 +868,8 @@ namespace BusinesLayer.Implementation
 
                 var listEnc = encomiendasEntity.Where(x => x.id_estado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo).ToList();
 
-                if (!listEnc.Any()) throw new Exception("El trámite no posee anexos técnicos aprobados.");   
-                
+                if (!listEnc.Any()) throw new Exception("El trámite no posee anexos técnicos aprobados.");
+
                 var encomienda = listEnc.OrderByDescending(x => x.id_encomienda).First();
 
                 EncomiendaBL encbl = new EncomiendaBL();
@@ -1095,7 +1095,7 @@ namespace BusinesLayer.Implementation
                                 {
                                     var id_circuito = blEng.GetIdCircuitoBySolicitud(solicitudEntity.id_solicitud);
                                     string cod_tarea_solicitud = id_circuito.ToString() + Engine.Sufijo_AsginacionCalificador;
-                                    idProximaTarea = blEng.GetIdTarea(Convert.ToInt32(cod_tarea_solicitud)); 
+                                    idProximaTarea = blEng.GetIdTarea(Convert.ToInt32(cod_tarea_solicitud));
                                 }
                             }
 
@@ -1795,6 +1795,9 @@ namespace BusinesLayer.Implementation
                     else if (sol.id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
                         trata = parametrosRepo.GetParametroChar("Trata.RedistribucionDeUso");
 
+                    string _noESB = parametrosRepo.GetParametroChar("SSIT.NO.ESB");
+                    bool.TryParse(_noESB, out bool noESB);
+
                     itemRepo = new ItemDirectionRepository(this.uowF.GetUnitOfWork());
                     List<int> lisSol = new List<int>();
                     lisSol.Add(IdSolicitud);
@@ -1802,8 +1805,11 @@ namespace BusinesLayer.Implementation
                     var listU = convertDirecciones(LstDoorsDirection);
 
                     string Direccion = listU.First().direccion;
+                    if (!noESB)
+                    {
+                        enviarActualizacionTramite(_urlESB, sol, trata, Direccion);
+                    }
 
-                    enviarActualizacionTramite(_urlESB, sol, trata, Direccion);
                 }
             }
             else if (sol.id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
@@ -1971,7 +1977,7 @@ namespace BusinesLayer.Implementation
                     NroUbicacion++;
                     var itemUbicCAA = lstUbicacionesCAA.FirstOrDefault(x => x.id_ubicacion == itemUbicHAB.id_ubicacion && x.id_subtipoubicacion == itemUbicHAB.id_subtipoubicacion);
                     if (itemUbicCAA == null)
-                    //if (itemUbicCAA != null)
+                        //if (itemUbicCAA != null)
                         lstErrores.Add(string.Format("No se encuentra la ubicación {0} en el CAA.", NroUbicacion));
                     else
                     {
@@ -1992,7 +1998,7 @@ namespace BusinesLayer.Implementation
                             }
 
                         }
-                        else 
+                        else
                         {
                             // evaluamos mixturas y distritos
                             var lstDistritosHAB = itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Distritos.ToList();
@@ -2002,7 +2008,7 @@ namespace BusinesLayer.Implementation
                             var cantidadMixturasHAB = (lstMixturasHAB.Select(t => t.IdZonaMixtura).Distinct().Count());
 
                             //Comparación de Distritos
-                            if (cantidadDistritosHAB != itemUbicCAA.Distritos.Count()) 
+                            if (cantidadDistritosHAB != itemUbicCAA.Distritos.Count())
                             {
                                 lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
                             }
@@ -2023,7 +2029,7 @@ namespace BusinesLayer.Implementation
                             {
                                 lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
                             }
-                            else if ( cantidadMixturasHAB == itemUbicCAA.Mixturas.Count() )
+                            else if (cantidadMixturasHAB == itemUbicCAA.Mixturas.Count())
                             {
                                 foreach (var itemMixtura in lstMixturasHAB)
                                 {
@@ -2035,7 +2041,7 @@ namespace BusinesLayer.Implementation
                                 }
                             }
                         }
-                                               
+
                         string local_subtipoubicacion_caa = "";
                         string local_subtipoubicacion_hab = "";
                         if (!string.IsNullOrEmpty(itemUbicCAA.local_subtipoubicacion))
@@ -2100,7 +2106,7 @@ namespace BusinesLayer.Implementation
                             lstErrores.Add(string.Format("No se encuentra el titular con CUIT {0} en el CAA.", itemTitPfHAB.Cuit));
 
                         //Mantis 0161160: Se eliminó validacion por Apellido, Nombres, TipoDoc, NroDoc
-                                              
+
                     }
                 }
 
@@ -2127,7 +2133,7 @@ namespace BusinesLayer.Implementation
                         else
                         {
                             //Mantis 0161160: Se eliminó validacion por Razon Social
-                           
+
 
                             //Comparacion de los titulares de Sociedades de Hecho
                             //--

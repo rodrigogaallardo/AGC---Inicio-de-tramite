@@ -4,9 +4,7 @@ using ExternalService;
 using SSIT.App_Components;
 using StaticClass;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -103,20 +101,20 @@ namespace SSIT.Solicitud.RedistribucionUso
 
                     if (solAprobada != null)
                     {
-                        
+
                         if (solAprobada.IdTipoExpediente == (int)Constantes.TipoDeExpediente.Simple &&
-                            solAprobada.IdSubTipoExpediente == (int) Constantes.SubtipoDeExpediente.SinPlanos)
+                            solAprobada.IdSubTipoExpediente == (int)Constantes.SubtipoDeExpediente.SinPlanos)
                         {
                             lblError.Text = "La habilitación que da origen a la Redistribución de Uso, NO puede ser una habilitación simple sin planos.";
                         }
-                        
+
                     }
 
                     if (lblError.Text.Length > 0)
                         this.EjecutarScript(updTramitesEncontrados, "showfrmError();");
                     else
                         this.EjecutarScript(updTramitesEncontrados, "showfrmConfirmarNuevaRedistribucionUso();");
-                    
+
                 }
                 else
                 {
@@ -164,7 +162,7 @@ namespace SSIT.Solicitud.RedistribucionUso
 
                     sol.CodigoSeguridad = Funciones.getGenerarCodigoSeguridadEncomiendas();
                     sol.IdEstado = (int)Constantes.TipoEstadoSolicitudEnum.INCOM;
-                    
+
                     sol.IdTipoTramite = (int)Constantes.TipoTramite.REDISTRIBUCION_USO;
                     sol.IdTipoExpediente = (int)Constantes.TipoDeExpediente.NoDefinido;
                     sol.IdSubTipoExpediente = (int)Constantes.SubtipoDeExpediente.NoDefinido;
@@ -186,7 +184,7 @@ namespace SSIT.Solicitud.RedistribucionUso
                     string trata = parametrosBL.GetParametroChar("Trata.RedistribucionDeUso");
                     bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                    if (tad)
+                    if (!tad)
                     {
                         int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitud);
                         sol = sSITSolicitudesBL.Single(id_solicitud);
