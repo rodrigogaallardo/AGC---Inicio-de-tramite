@@ -380,6 +380,7 @@ namespace BusinesLayer.Implementation
             var persona = wsTAD.GetPersonaTAD($"{url}{metodo}", cuit);
 
             var personaDTO = mapperBase.Map<PersonaTadDTO>(persona);
+            personaDTO.RazonSocial = personaDTO.RazonSocial.ToUpper().Replace('#', 'Ñ');
             return personaDTO;
         }
     }
