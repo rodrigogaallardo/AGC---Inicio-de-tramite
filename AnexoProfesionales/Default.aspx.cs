@@ -5,6 +5,8 @@ using System.Web.UI.WebControls;
 using BusinesLayer.Implementation;
 using DataTransferObject;
 using StaticClass;
+using System.Web;
+using System.Globalization;
 using AnexoProfesionales.Common;
 
 namespace AnexoProfesionales
@@ -26,19 +28,28 @@ namespace AnexoProfesionales
             MembershipUser user = Membership.GetUser(LoginControl1.UserName);
 
             ProfesionalesBL profBl = new ProfesionalesBL();
-            var prof = profBl.Get(  new Guid(user.ProviderUserKey.ToString()));
-
-            if (prof.BajaLogica == true)
+            ProfesionalDTO prof = new ProfesionalDTO();
+            if (user == null)
             {
-                e.Authenticated = false;
+                LoginControl1.FailureText = "El nombre de usuario no existe.";
             }
             else
             {
-                if (LoginControl1.Password == user.GetPassword())
-                    e.Authenticated = true;
-                else
+                prof = profBl.Get(new Guid(user.ProviderUserKey.ToString()));
+                if (prof.BajaLogica == true)
+                {
                     e.Authenticated = false;
+                }
+                else
+                {
+                    if (LoginControl1.Password == user.GetPassword())
+                        e.Authenticated = true;
+                    else
+                        e.Authenticated = false;
+                }
             }
+                
+            
         }
 
 
@@ -51,7 +62,7 @@ namespace AnexoProfesionales
             MembershipUser user = Membership.GetUser(LoginControl1.UserName);
 
             ProfesionalesBL profBl = new ProfesionalesBL();
-            var prof = profBl.Get(new Guid(user.ProviderUserKey.ToString()));
+            ProfesionalDTO prof = new ProfesionalDTO();
 
             try
             {
@@ -61,6 +72,7 @@ namespace AnexoProfesionales
                 }
                 else
                 {
+                    prof = profBl.Get(new Guid(user.ProviderUserKey.ToString()));
                     if (prof.BajaLogica == true)
                     {
                         LoginControl1.FailureText = "El Profesional fue dado de baja. No puede ingresar al Sistema Anexo Técnico.";
@@ -99,6 +111,36 @@ namespace AnexoProfesionales
             Response.Redirect("~/" + RouteConfig.INICIAR_ENCOMIENDA);
         }
 
-       
+        protected void LoginControl_LoggedIn(object sender, EventArgs e)
+        {
+            if (Request.Cookies[Constantes.UserNameCookie] != null)
+            {
+
+                MembershipUser usu = Membership.GetUser((sender as Login).UserName);
+                ProfesionalesBL profBl = new ProfesionalesBL();
+                //UsuarioBL usuBL = new UsuarioBL();
+
+                string ret = "";
+                if (usu != null)
+                {
+                    var proDTO = profBl.Get(new Guid(usu.ProviderUserKey.ToString()));
+                    TextInfo txtInfo = new CultureInfo("es-AR", false).TextInfo;
+
+                    string Apellido = txtInfo.ToTitleCase((proDTO.Apellido != null) ? proDTO.Apellido.ToLower() : string.Empty);
+                    string Nombre = txtInfo.ToTitleCase((proDTO.Nombre != null) ? proDTO.Nombre.ToLower() : string.Empty);
+
+                    ret = usu.UserName + " (" + Apellido + " " + Nombre + ")";
+
+                    var userNameCookie = new HttpCookie(Constantes.UserNameCookie)
+                    {
+                        Value = ret
+                    };
+
+                    Response.Cookies.Set(userNameCookie);
+                }
+            }
+        }
+
+
     }
 }

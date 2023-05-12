@@ -13,6 +13,8 @@ using System.Configuration;
 
 using RestSharp.Authenticators;
 using System.IO;
+using System.Web.Hosting;
+using StaticClass;
 
 namespace ExternalService
 {
@@ -109,7 +111,11 @@ namespace ExternalService
             client.ClearHandlers();
             client.AddHandler("application/json", new JsonDeserializer());
 
-            var request = new RestRequest("?IdFile=" + id_file, Method.DELETE);
+            var request = new RestRequest("?IdFile=" + id_file);
+            if (Funciones.isDesarrollo())
+                request.Method = Method.POST;
+            else
+                request.Method = Method.DELETE;
             request.AddParameter("redirect", "false");
             request.AddParameter("redirectUrl", "");
             request.AddHeader("Content-Type", "application/json charset=UTF-8");

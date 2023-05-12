@@ -505,6 +505,7 @@ namespace SSIT.Common
             }
             catch (Exception ex)
             {
+                LogError.Write(ex);
                 throw ex;
             }
         }

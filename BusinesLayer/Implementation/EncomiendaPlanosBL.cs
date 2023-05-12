@@ -72,6 +72,21 @@ namespace BusinesLayer.Implementation
             return elementsDto;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="IdEncomienda"></param>
+        /// <param name="TipoPlano"></param>
+        /// <returns></returns>	
+        public IEnumerable<EncomiendaPlanosDTO> GetByFKIdEncomiendaTipoPlano(int IdEncomienda, int TipoPlano)
+        {
+            uowF = new TransactionScopeUnitOfWorkFactory();
+            repo = new EncomiendaPlanosRepository(this.uowF.GetUnitOfWork());
+            var elements = repo.GetByFKIdEncomiendaTipoPlano(IdEncomienda, TipoPlano);
+            var elementsDto = mapperBase.Map<IEnumerable<Encomienda_Planos>, IEnumerable<EncomiendaPlanosDTO>>(elements);
+            return elementsDto;
+        }
+
         #region Métodos de inserccion
         /// <summary>
         /// Inserta la entidad para por parametro

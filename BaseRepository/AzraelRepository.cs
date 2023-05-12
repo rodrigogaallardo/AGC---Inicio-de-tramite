@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataAcess;
+using Dal.UnitOfWork;
+using System.Data.Entity.Core.Objects;
+using StaticClass;
+using DataAcess.EntityCustom;
 using System.Text;
 using System.Threading.Tasks;
-using DataAcess;
-using IBaseRepository;
-using Dal.UnitOfWork;
-using DataAcess.EntityCustom;
-using StaticClass;
 
 
 namespace BaseRepository

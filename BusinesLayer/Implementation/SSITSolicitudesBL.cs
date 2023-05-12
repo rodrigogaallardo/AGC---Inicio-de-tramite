@@ -934,7 +934,8 @@ namespace BusinesLayer.Implementation
                         string Direccion = listU.First().direccion;
 
                         if (solicitudEntity.FechaLibrado == null &&
-                            solicitudEntity.id_subtipoexpediente != (int)Constantes.SubtipoDeExpediente.HabilitacionPrevia)
+                            solicitudEntity.id_subtipoexpediente != (int)Constantes.SubtipoDeExpediente.HabilitacionPrevia &&
+                            !TienePlanoDeIncendio(id_solicitud))
                         {
                             solicitudEntity.FechaLibrado = DateTime.Now;
                             encuesta = getEncuesta(solicitudEntity, Direccion);
@@ -2561,6 +2562,17 @@ namespace BusinesLayer.Implementation
             unitOfWorkTran.Commit();
             unitOfWorkTran.Dispose();
             return elementEntityBaja.id_baja;
+        }
+
+        private bool TienePlanoDeIncendio(int id_solicitud)
+        {
+            EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
+            int id_encomienda = encSolBL.GetByFKIdSolicitud(id_solicitud).Max(x => x.id_encomienda);
+            EncomiendaPlanosBL encDocBL = new EncomiendaPlanosBL();
+            var DocAdjAT = encDocBL.GetByFKIdEncomiendaTipoPlano(id_encomienda, 2).FirstOrDefault();
+            SSITDocumentosAdjuntosBL ssitDocBL = new SSITDocumentosAdjuntosBL();
+            var DocAdjSSIT = ssitDocBL.GetByFKIdSolicitudTipoDocReq(id_solicitud, 66).FirstOrDefault();
+            return DocAdjAT != null || DocAdjSSIT != null;
         }
     }
 }
