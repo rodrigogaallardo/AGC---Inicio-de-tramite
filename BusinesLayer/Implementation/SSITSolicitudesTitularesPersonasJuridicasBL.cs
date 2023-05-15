@@ -211,7 +211,15 @@ namespace BusinesLayer.Implementation
 
                         var firPJ = repoFirPJ.GetByIdSolicitudIdPersonaJuridica(objectDto.IdSolicitud, objectDto.IdPersonaJuridica);
                         foreach (var fir in firPJ)
+                        {
+                            var titPJPFFir = repoTitPJPF.GetByFKIdFirmantePj(fir.id_firmante_pj);
+                            foreach(var tit in titPJPFFir)
+                            {
+                                repoTitPJPF.Delete(tit);
+                            }
                             repoFirPJ.Delete(fir);
+                        }
+                            
 
                         var titPJ = repo.GetByIdSolicitudIdPersonaJuridica(objectDto.IdSolicitud, objectDto.IdPersonaJuridica);
                         foreach (var tit in titPJ)
