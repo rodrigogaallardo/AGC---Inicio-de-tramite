@@ -1,23 +1,19 @@
-﻿using System;
-using System.Web.UI;
-using System.Configuration;
-using System.Web.Security;
-using System.Data;
-using BusinesLayer.Implementation;
-using System.Collections.Generic;
-using System.Linq;
-using SSIT.App_Components;
-using StaticClass;
+﻿using BusinesLayer.Implementation;
 using DataTransferObject;
 using ExternalService;
+using SSIT.App_Components;
+using StaticClass;
+using System;
+using System.Web.Security;
+using System.Web.UI;
 
 namespace SSIT.Solicitud.Transferencia
 {
     public partial class InicioTramite : BasePage
     {
-   
+
         protected override void OnUnload(EventArgs e)
-        {            
+        {
             base.OnUnload(e);
         }
 
@@ -26,14 +22,14 @@ namespace SSIT.Solicitud.Transferencia
             TransferenciasSolicitudesBL bl = new TransferenciasSolicitudesBL();
 
             lblError.Text = "";
-            
+
             int id_cpadron = 0;
             int id_solicitud = 0;
             TransferenciasSolicitudesDTO sol = null;
             if (Page.IsValid)
             {
                 int.TryParse(txtNroEncomienda.Text, out id_cpadron);
-                
+
                 try
                 {
                     Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
@@ -46,7 +42,7 @@ namespace SSIT.Solicitud.Transferencia
                     string trata = parametrosBL.GetParametroChar("Trata.Transferencias");
                     bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                    if (tad)
+                    if (!tad)
                     {
                         int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitud);
 

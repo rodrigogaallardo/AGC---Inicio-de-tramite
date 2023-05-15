@@ -1,18 +1,16 @@
-﻿using SSIT.App_Components;
+﻿using BusinesLayer.Implementation;
+using DataTransferObject;
+using ExternalService;
+using ExternalService.ws_interface_AGC;
+using SSIT.App_Components;
 using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinesLayer.Implementation;
-using DataTransferObject;
-using System.Web.Security;
-using ExternalService;
-using SSIT.Common;
 using static StaticClass.Constantes;
-using ExternalService.ws_interface_AGC;
 
 namespace SSIT.Solicitud.HabilitacionECI
 {
@@ -217,7 +215,7 @@ namespace SSIT.Solicitud.HabilitacionECI
                     string trata = parametrosBL.GetParametroChar("Trata.Habilitacion");
                     bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                    if (tad)
+                    if (!tad)
                     {
                         int idTAD = 0;
                         idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitud);

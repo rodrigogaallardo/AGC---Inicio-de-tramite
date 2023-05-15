@@ -1,12 +1,12 @@
-﻿using System;
-using SSIT.App_Components;
-using BusinesLayer.Implementation;
-using System.Web.UI;
-using static StaticClass.Constantes;
-using StaticClass;
-using System.Web.Security;
+﻿using BusinesLayer.Implementation;
 using DataTransferObject;
 using ExternalService;
+using SSIT.App_Components;
+using StaticClass;
+using System;
+using System.Web.Security;
+using System.Web.UI;
+using static StaticClass.Constantes;
 
 namespace SSIT.Solicitud.HabilitacionECI
 {
@@ -101,7 +101,7 @@ namespace SSIT.Solicitud.HabilitacionECI
                 string trata = parametrosBL.GetParametroChar("Trata.Habilitacion");
                 bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                if (tad)
+                if (!tad)
                 {
                     int idTAD = 0;
                     idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitud);

@@ -1,21 +1,19 @@
-﻿using SSIT.App_Components;
+﻿using BusinesLayer.Implementation;
+using DataTransferObject;
+using ExternalService;
+using SSIT.App_Components;
 using StaticClass;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinesLayer.Implementation;
-using DataTransferObject;
-using System.Web.Security;
-using ExternalService;
 
 namespace SSIT.Solicitud.Ampliacion
 {
     public partial class InicioTramite : SecurePage
     {
-        
+
         AmpliacionesBL blSol = new AmpliacionesBL();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -25,7 +23,7 @@ namespace SSIT.Solicitud.Ampliacion
             if (sm.IsInAsyncPostBack)
             {
                 ScriptManager.RegisterStartupScript(updDatos, updDatos.GetType(), "init_Js_updDatos", "init_Js_updDatos();", true);
-                
+
             }
 
 
@@ -40,9 +38,9 @@ namespace SSIT.Solicitud.Ampliacion
         {
             try
             {
-               
+
                 this.EjecutarScript(updCargarDatos, "finalizarCarga();");
-                
+
             }
             catch (Exception ex)
             {
@@ -56,13 +54,13 @@ namespace SSIT.Solicitud.Ampliacion
         protected void btnValidar_Click(object sender, EventArgs e)
         {
 
-            
+
             int? anio_expediente = null;
             int? nro_expediente = null;
             int? nro_partida_matriz = null;
             string cuit = txtCuit.Text.Trim();
 
-            if(txtExpediente_Anio.Text.Trim().Length > 0 && txtExpediente_Nro.Text.Trim().Length > 0)
+            if (txtExpediente_Anio.Text.Trim().Length > 0 && txtExpediente_Nro.Text.Trim().Length > 0)
             {
                 anio_expediente = int.Parse(txtExpediente_Anio.Text);
                 nro_expediente = int.Parse(txtExpediente_Nro.Text);
@@ -72,17 +70,17 @@ namespace SSIT.Solicitud.Ampliacion
                 nro_partida_matriz = int.Parse(txtNroPartidaMatriz.Text);
             }
 
-            var lstTramitesAprobados = blSol.GetSolicitudesAprobadas(anio_expediente, nro_expediente, nro_partida_matriz, cuit).OrderByDescending(o=> o.IdSolicitud).ToList();
+            var lstTramitesAprobados = blSol.GetSolicitudesAprobadas(anio_expediente, nro_expediente, nro_partida_matriz, cuit).OrderByDescending(o => o.IdSolicitud).ToList();
             SeleccionTramitesAprobados.LoadData(lstTramitesAprobados);
 
-            
-            if(SeleccionTramitesAprobados.Count > 0)
+
+            if (SeleccionTramitesAprobados.Count > 0)
                 btnConfirmar.Text = "Confirmar";
             else
                 btnConfirmar.Text = "Continuar";
 
             this.EjecutarScript(updBotonesValidar, "showfrmTramitesEncontrados();");
-            
+
         }
 
         private bool ValidarTramiteSeleccionado()
@@ -147,15 +145,15 @@ namespace SSIT.Solicitud.Ampliacion
 
                     sol.CodigoSeguridad = Funciones.getGenerarCodigoSeguridadEncomiendas();
                     sol.IdEstado = (int)Constantes.TipoEstadoSolicitudEnum.INCOM;
-                    
+
                     sol.IdTipoTramite = (int)Constantes.TipoTramite.AMPLIACION;
                     sol.IdTipoExpediente = (int)Constantes.TipoDeExpediente.NoDefinido;
                     sol.IdSubTipoExpediente = (int)Constantes.SubtipoDeExpediente.NoDefinido;
                     sol.CreateDate = DateTime.Now;
                     sol.CreateUser = userid;
                     sol.SSITSolicitudesOrigenDTO = oSSITSolicitudesOrigenDTO;
-                    
-                    
+
+
                     id_solicitud = blSol.Insert(sol);
 
 
@@ -170,7 +168,7 @@ namespace SSIT.Solicitud.Ampliacion
                     string trata = parametrosBL.GetParametroChar("Trata.Ampliacion");
                     bool tad = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.NO.TAD"));
 
-                    if (tad)
+                    if (!tad)
                     {
                         int idTAD = wsTAD.crearTramiteTAD(_urlESB, cuit, trata, null, Constantes.Sistema, id_solicitud);
                         sol = sSITSolicitudesBL.Single(id_solicitud);
@@ -200,5 +198,5 @@ namespace SSIT.Solicitud.Ampliacion
         }
 
     }
-    
+
 }
