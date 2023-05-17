@@ -11,6 +11,7 @@ using Dal.UnitOfWork;
 using DataAcess.EntityCustom;
 using ExternalService.Class;
 using ExternalService;
+using StaticClass;
 
 namespace BusinesLayer.Implementation
 {
@@ -380,7 +381,12 @@ namespace BusinesLayer.Implementation
             var persona = wsTAD.GetPersonaTAD($"{url}{metodo}", cuit);
 
             var personaDTO = mapperBase.Map<PersonaTadDTO>(persona);
-            personaDTO.RazonSocial = personaDTO.RazonSocial.ToUpper().Replace('#', 'Ñ');
+            if (personaDTO != null && personaDTO.RazonSocial != null)
+            {
+                LogError.Write("Razon Social (ANTES): " + personaDTO.RazonSocial);
+                personaDTO.RazonSocial = personaDTO.RazonSocial.ToUpper().Replace('#', 'Ñ');
+                LogError.Write("Razon Social (DESPUES): " + personaDTO.RazonSocial);
+            }
             return personaDTO;
         }
     }
