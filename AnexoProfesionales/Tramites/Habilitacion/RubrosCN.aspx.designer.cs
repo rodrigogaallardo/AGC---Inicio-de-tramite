@@ -969,6 +969,33 @@ namespace AnexoProfesionales
         protected global::System.Web.UI.WebControls.Button btnConfEliminarRubroATAnterior;
 
         /// <summary>
+        /// Control updConfirmarEliminarRubroCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updConfirmarEliminarRubroCNATAnterior;
+
+        /// <summary>
+        /// Control UpdateProgress61CN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress61CN;
+
+        /// <summary>
+        /// Control btnConfEliminarRubroCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfEliminarRubroCNATAnterior;
+
+        /// <summary>
         /// Control updBuscarRubros.
         /// </summary>
         /// <remarks>
@@ -1527,13 +1554,13 @@ namespace AnexoProfesionales
         protected global::System.Web.UI.WebControls.Panel pnlBotonesAgregarRubrosATAnterior;
 
         /// <summary>
-        /// Control UpdateProgress10.
+        /// Control UpdateProgress13.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress10;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress13;
 
         /// <summary>
         /// Control btnIngresarRubrosATAnterior.
@@ -1552,6 +1579,204 @@ namespace AnexoProfesionales
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton3ATAnterior;
+
+        /// <summary>
+        /// Control updBuscarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updBuscarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control pnlBuscarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBuscarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control txtSuperficieCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSuperficieCNATAnterior;
+
+        /// <summary>
+        /// Control txtBuscarCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarCNATAnterior;
+
+        /// <summary>
+        /// Control updBotonesBuscarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updBotonesBuscarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control pnlBotonesBuscarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBotonesBuscarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control UpdateProgressCN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressCN;
+
+        /// <summary>
+        /// Control BotonesBuscarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel BotonesBuscarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control btnBuscarCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnBuscarCNATAnterior;
+
+        /// <summary>
+        /// Control LinkButton2ATAnteriorCN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2ATAnteriorCN;
+
+        /// <summary>
+        /// Control pnlResultadoBusquedaRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlResultadoBusquedaRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control grdRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control updBotonesAgregarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updBotonesAgregarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control pnlGrupoAgregarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGrupoAgregarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control btnnuevaBusquedaCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnnuevaBusquedaCNATAnterior;
+
+        /// <summary>
+        /// Control updValidadorAgregarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updValidadorAgregarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control ValidadorAgregarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ValidadorAgregarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control lblValidadorAgregarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblValidadorAgregarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control pnlBotonesAgregarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBotonesAgregarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control UpdateProgress10.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress10;
+
+        /// <summary>
+        /// Control btnIngresarRubrosCNATAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnIngresarRubrosCNATAnterior;
+
+        /// <summary>
+        /// Control LinkButton3ATAnteriorCN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton3ATAnteriorCN;
 
         /// <summary>
         /// Control pnlfrmEditarSuperficieRubroActual.

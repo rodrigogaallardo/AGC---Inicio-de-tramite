@@ -1,17 +1,16 @@
 ﻿using AnexoProfesionales.App_Components;
 using BusinesLayer.Implementation;
 using DataTransferObject;
+using Newtonsoft.Json;
 using StaticClass;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ExternalService;
-using Newtonsoft.Json;
-using System.Configuration;
 using static StaticClass.Constantes;
 
 namespace AnexoProfesionales
@@ -26,6 +25,7 @@ namespace AnexoProfesionales
         EncomiendaRubrosCNATAnteriorBL encRubrosCNATA = new EncomiendaRubrosCNATAnteriorBL();
         EncomiendaRubrosATAnteriorBL encRubrosATA = new EncomiendaRubrosATAnteriorBL();
         Encomienda_RubrosCN_DepositoBL encRubDepBL = new Encomienda_RubrosCN_DepositoBL();
+
 
         private List<Tuple<string, int>> EncomiendaRubrosCNDeposito
         {
@@ -234,18 +234,18 @@ namespace AnexoProfesionales
                         {
                             encomiendaRubroDTO.idImpactoAmbiental = 3;
                         }
-                        
+
                         //var limitesuperficieRubro = rubBL.GetLimiteMixtura(encomiendaRubroDTO.CodigoRubro, encomiendaRubroDTO.IdEncomienda);
 
                         //if (decimal.Parse(limitesuperficieRubro) >= encomiendaRubroDTO.SuperficieHabilitar) 
                         //{
-                            var userLogued = (Guid)Membership.GetUser().ProviderUserKey;
-                            encRubrosCNBL.Insert(encomiendaRubroDTO, userLogued);
+                        var userLogued = (Guid)Membership.GetUser().ProviderUserKey;
+                        encRubrosCNBL.Insert(encomiendaRubroDTO, userLogued);
 
-                            rubros.Add(scod_rubro);
-                            chkRubroElegido.Checked = false;
-                            result = true;
-                            superaLimiteSuperficieRubro = false;
+                        rubros.Add(scod_rubro);
+                        chkRubroElegido.Checked = false;
+                        result = true;
+                        superaLimiteSuperficieRubro = false;
                         //}                        
                     }
                 }
@@ -268,7 +268,7 @@ namespace AnexoProfesionales
             if (!result)
             {
                 throw new ValidationException("Debe seleccionar los rubros/actividades que desea ingresar en la solicitud de Anexo.");
-            }            
+            }
         }
 
         private void DeshacerGuardarRubros()
@@ -612,8 +612,8 @@ namespace AnexoProfesionales
             var encTransf = encomiendaDTO.EncomiendaTransfSolicitudesDTO?.FirstOrDefault();
 
             //Corroboramos el tipo
-            if (encSol?.SSITSolicitudesDTO?.IdTipoTramite == (int)TipoTramite.AMPLIACION 
-                || encSol?.SSITSolicitudesDTO?.IdTipoTramite == (int)TipoTramite.REDISTRIBUCION_USO 
+            if (encSol?.SSITSolicitudesDTO?.IdTipoTramite == (int)TipoTramite.AMPLIACION
+                || encSol?.SSITSolicitudesDTO?.IdTipoTramite == (int)TipoTramite.REDISTRIBUCION_USO
                 || encTransf?.TransferenciasSolicitudesDTO?.idSolicitudRef != null)
             {
                 bool digital = false;
@@ -635,7 +635,7 @@ namespace AnexoProfesionales
                     var solicitud = new SSITSolicitudesBL().Single(encomiendaDTO.IdSolicitud);
                     if (solicitud?.SSITSolicitudesOrigenDTO != null && (solicitud.SSITSolicitudesOrigenDTO.id_solicitud_origen.HasValue || solicitud.SSITSolicitudesOrigenDTO.id_transf_origen.HasValue))
                     {
-                        id_sol_ref = solicitud.SSITSolicitudesOrigenDTO.id_solicitud_origen != null ? solicitud.SSITSolicitudesOrigenDTO.id_solicitud_origen.Value : 
+                        id_sol_ref = solicitud.SSITSolicitudesOrigenDTO.id_solicitud_origen != null ? solicitud.SSITSolicitudesOrigenDTO.id_solicitud_origen.Value :
                           solicitud.SSITSolicitudesOrigenDTO.id_transf_origen.Value;
                         digital = true;
                     }
@@ -672,11 +672,11 @@ namespace AnexoProfesionales
                 grdRubrosIngresadosATAnterior.DataBind();
                 //Si es una ampliacion digital
                 if (digital)
-                { 
+                {
                     //Verificar tipo de rubro de la herencia
                     if (id_sol_ref < parametrosDTO.ValornumParam)
                     {
-                        
+
                         pnlRubrosATAnterior.Visible = true;
                         pnlRubrosCNATAnterior.Visible = true;
                     }
@@ -1170,7 +1170,7 @@ namespace AnexoProfesionales
                 int id_encomiendarubro = int.Parse(hid_id_caarubro_eliminar.Value);
 
                 EliminarRubro(id_encomiendarubro);
-                
+
                 if (encRubrosCNBL.GetRubros(IdEncomienda).Count() > 0)
                     encRubrosCNBL.ActualizarSubTipoExpediente(IdEncomienda);
 
@@ -1216,6 +1216,32 @@ namespace AnexoProfesionales
                 CargarRubros(IdEncomienda);
 
                 this.EjecutarScript(updConfirmarEliminarRubro, "hidefrmConfirmarEliminarRubroATAnterior();");
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex, ex.Message);
+                lblError.Text = ex.Message;
+                this.EjecutarScript(updBotonesAgregarRubros, "showfrmError();");
+            }
+        }
+
+        //MODIFICO
+        protected void btnEliminarRubroCNATAnterior_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id_encomiendarubro = int.Parse(hid_id_caarubro_eliminar_ATAnterior.Value);
+                //var RubroCPU = encRubros.GetRubrosATAnterior(IdEncomienda);
+                var RubroCUR = encRubrosCNBL.GetRubrosCNATAnterior(IdEncomienda);
+
+                if (RubroCUR != null && RubroCUR.Count() > 0)
+                    encRubrosCNATA.Delete(id_encomiendarubro);
+                else
+                    encRubrosATA.Delete(id_encomiendarubro);
+
+                CargarRubros(IdEncomienda);
+
+                this.EjecutarScript(updConfirmarEliminarRubro, "hidefrmConfirmarEliminarRubroCNATAnterior();");
             }
             catch (Exception ex)
             {
@@ -1582,6 +1608,151 @@ namespace AnexoProfesionales
         }
         #endregion
 
+        #region "Paginacion grilla CNAT Anterior"
+
+        protected void grdRubrosCNATAnterior_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grdRubrosCNATAnterior.PageIndex = e.NewPageIndex;
+            BuscarRubrosCNATAnterior();
+        }
+
+        protected void cmdPageCNATAnterior(object sender, EventArgs e)
+        {
+            LinkButton cmdPage = (LinkButton)sender;
+
+            grdRubrosCNATAnterior.PageIndex = int.Parse(cmdPage.Text) - 1;
+            BuscarRubrosCNATAnterior();
+
+
+        }
+        protected void cmdAnteriorCNATAnterior_Click(object sender, EventArgs e)
+        {
+            grdRubrosCNATAnterior.PageIndex = grdRubrosCNATAnterior.PageIndex - 1;
+            BuscarRubrosCNATAnterior();
+
+        }
+        protected void cmdSiguienteCNATAnterior_Click(object sender, EventArgs e)
+        {
+            grdRubrosCNATAnterior.PageIndex = grdRubrosCNATAnterior.PageIndex + 1;
+            BuscarRubrosCNATAnterior();
+        }
+
+        protected void grdRubrosCNATAnterior_DataBound(object sender, EventArgs e)
+        {
+
+            GridView grid = grdRubrosCNATAnterior;
+            GridViewRow fila = (GridViewRow)grid.BottomPagerRow;
+            if (fila != null)
+            {
+                LinkButton btnAnterior = (LinkButton)fila.Cells[0].FindControl("cmdAnteriorCNATAnterior");
+                LinkButton btnSiguiente = (LinkButton)fila.Cells[0].FindControl("cmdSiguienteCNATAnterior");
+
+                if (grid.PageIndex == 0)
+                    btnAnterior.Visible = false;
+                else
+                    btnAnterior.Visible = true;
+
+                if (grid.PageIndex == grid.PageCount - 1)
+                    btnSiguiente.Visible = false;
+                else
+                    btnSiguiente.Visible = true;
+
+
+                // Ocultar todos los botones con Números de Página
+                for (int i = 1; i <= 19; i++)
+                {
+                    LinkButton btn = (LinkButton)fila.Cells[0].FindControl("cmdPageCNATAnterior" + i.ToString());
+                    btn.Visible = false;
+                }
+
+
+                if (grid.PageIndex == 0 || grid.PageCount <= 10)
+                {
+                    // Mostrar 10 botones o el máximo de páginas
+
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        if (i <= grid.PageCount)
+                        {
+                            LinkButton btn = (LinkButton)fila.Cells[0].FindControl("cmdPageCNATAnterior" + i.ToString());
+                            btn.Text = i.ToString();
+                            btn.Visible = true;
+                        }
+                    }
+                }
+                else
+                {
+                    // Mostrar 9 botones hacia la izquierda y 9 hacia la derecha
+                    // o bien los que sea posible en caso de no llegar a 9
+
+                    int CantBucles = 0;
+
+                    LinkButton btnPage10 = (LinkButton)fila.Cells[0].FindControl("cmdPageCNATAnterior10");
+                    btnPage10.Visible = true;
+                    btnPage10.Text = Convert.ToString(grid.PageIndex + 1);
+
+                    // Ubica los 9 botones hacia la izquierda
+                    for (int i = grid.PageIndex - 1; i >= grid.PageIndex - 9; i--)
+                    {
+                        CantBucles++;
+                        if (i >= 0)
+                        {
+                            LinkButton btn = (LinkButton)fila.Cells[0].FindControl("cmdPageCNATAnterior" + Convert.ToString(10 - CantBucles));
+                            btn.Visible = true;
+                            btn.Text = Convert.ToString(i + 1);
+                        }
+
+                    }
+
+                    CantBucles = 0;
+                    // Ubica los 9 botones hacia la derecha
+                    for (int i = grid.PageIndex + 1; i <= grid.PageIndex + 9; i++)
+                    {
+                        CantBucles++;
+                        if (i <= grid.PageCount - 1)
+                        {
+                            LinkButton btn = (LinkButton)fila.Cells[0].FindControl("cmdPageCNATAnterior" + Convert.ToString(10 + CantBucles));
+                            btn.Visible = true;
+                            btn.Text = Convert.ToString(i + 1);
+                        }
+                    }
+
+
+
+                }
+
+                //poner estilo sin seleccion a todos los botones
+                LinkButton cmdPage;
+                string btnPage = "";
+                for (int i = 1; i <= 19; i++)
+                {
+                    btnPage = "cmdPageCNATAnterior" + i.ToString();
+                    cmdPage = (LinkButton)fila.Cells[0].FindControl(btnPage);
+                    if (cmdPage != null)
+                        cmdPage.CssClass = "btn  btn-sm btn-default";
+
+                }
+
+
+                // busca el boton por el texto para marcarlo como seleccionado
+                string btnText = Convert.ToString(grid.PageIndex + 1);
+                foreach (Control ctl in fila.Cells[0].FindControl("pnlpagerCNATAnterior").Controls)
+                {
+                    if (ctl is LinkButton)
+                    {
+                        LinkButton btn = (LinkButton)ctl;
+                        if (btn.Text.Equals(btnText))
+                        {
+                            btn.CssClass = "btn btn-sm btn-info";
+                        }
+                    }
+                }
+
+            }
+        }
+
+        #endregion
+
         protected void btnBuscarATAnterior_Click(object sender, EventArgs e)
         {
             BuscarRubrosATAnterior();
@@ -1713,6 +1884,147 @@ namespace AnexoProfesionales
                 this.EjecutarScript(updBotonesAgregarRubrosATAnterior, "showfrmError();");
             }
         }
+
+        //BUSQUEDAS RUBROS CN ANTERIOR
+        protected void btnBuscarCNATAnterior_Click(object sender, EventArgs e)
+        {
+            BuscarRubrosCNATAnterior();
+            pnlResultadoBusquedaRubrosCNATAnterior.Style["display"] = "block";
+            pnlBotonesAgregarRubrosCNATAnterior.Style["display"] = "block";
+            pnlGrupoAgregarRubrosCNATAnterior.Style["display"] = "block";
+            pnlBuscarRubrosCNATAnterior.Style["display"] = "none";
+        }
+
+        private void BuscarRubrosCNATAnterior()
+        {
+            List<ZonasDistritosDTO> lstzonDist = new List<ZonasDistritosDTO>();
+            decimal dSuperficieDeclarada = 0;
+            decimal.TryParse(txtSuperficie.Text, out dSuperficieDeclarada);
+            DataList lst = (DataList)updInformacionTramite.FindControl("lstZD");
+
+            foreach (DataListItem item in lstZD.Items)
+            {
+                ZonasDistritosDTO zd = new ZonasDistritosDTO();
+                zd.Codigo = ((Label)item.FindControl("lblZD")).Text;
+                int.TryParse(((Label)item.FindControl("lblTipo")).Text, out int id);
+                zd.IdTipo = id;
+                lstzonDist.Add(zd);
+            }
+
+
+            decimal.TryParse(txtSuperficieCNATAnterior.Text, out dSuperficieDeclarada);
+
+            IEnumerable<RubrosCNDTO> ds = encRubrosCNBL.GetRubros(IdEncomienda, dSuperficieDeclarada, txtBuscarCNATAnterior.Text.Trim(), lstzonDist); // rblZonaDeclarada.SelectedValue           
+            grdRubrosCNATAnterior.DataSource = ds.ToList();
+            grdRubrosCNATAnterior.DataBind();
+        }
+
+        protected void grdRubrosCNATAnterior_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                // Llenar por default el campo de Superficie.
+                decimal dSuperficie = 0;
+                decimal.TryParse(txtSuperficieCNATAnterior.Text, out dSuperficie);
+
+                string Zona = DataBinder.Eval(e.Row.DataItem, "RestriccionZona").ToString();
+                //string Superficie = DataBinder.Eval(e.Row.DataItem, "RestriccionSup").ToString();
+                bool EsAnterior = (bool)DataBinder.Eval(e.Row.DataItem, "EsAnterior");
+                bool TieneNormativa = (bool)DataBinder.Eval(e.Row.DataItem, "TieneNormativa");
+                //int IdTipoTramite = (int)DataBinder.Eval(e.Row.DataItem, "IdTipoTramite");
+                CheckBox chkRubroElegido = (CheckBox)e.Row.Cells[4].FindControl("chkRubroElegidoCNATAnterior");
+                chkRubroElegido.Enabled = true;
+
+                if (EsAnterior)
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#fff5f3");
+
+            }
+        }
+
+        protected void btnnuevaBusquedaCNATAnterior_Click(object sender, EventArgs e)
+        {
+            txtSuperficieCNATAnterior.Text = hid_Superficie_Local.Value;
+            pnlResultadoBusquedaRubrosCNATAnterior.Style["display"] = "none";
+            pnlBotonesAgregarRubrosCNATAnterior.Style["display"] = "none";
+            pnlGrupoAgregarRubrosCNATAnterior.Style["display"] = "none";
+            pnlBuscarRubrosCNATAnterior.Style["display"] = "block";
+            pnlBotonesBuscarRubrosCNATAnterior.Style["display"] = "block";
+            BotonesBuscarRubrosCNATAnterior.Style["display"] = "block";
+            txtBuscarCNATAnterior.Text = "";
+            ValidadorAgregarRubrosCNATAnterior.Style["display"] = "none";
+            txtBuscarCNATAnterior.Focus();
+
+            updBotonesBuscarRubrosCNATAnterior.Update();
+            updBotonesAgregarRubrosCNATAnterior.Update();
+        }
+
+        protected void btnIngresarRubrosCNATAnterior_Click(object sender, EventArgs e)
+        {
+            decimal dSuperficie = 0;
+            int CantRubrosElegidos = 0;
+
+            try
+            {
+                List<string> lstcod_rubro = new List<string>();
+                foreach (GridViewRow row in grdRubrosCNATAnterior.Rows)
+                {
+                    CheckBox chkRubroElegidoATAnterior = (CheckBox)row.FindControl("chkRubroElegidoCNATAnterior");
+
+                    if (chkRubroElegidoATAnterior.Checked)
+                    {
+                        string scod_rubro = grdRubrosCNATAnterior.DataKeys[row.RowIndex].Values["Codigo"].ToString();
+                        lstcod_rubro.Add(scod_rubro);
+                    }
+                }
+
+                var encRubrosDTO = encRubros.GetByFKIdEncomienda(IdEncomienda);
+                lstcod_rubro.AddRange(encRubrosDTO.Select(s => s.CodigoRubro));
+
+                foreach (GridViewRow row in grdRubrosCNATAnterior.Rows)
+                {
+                    CheckBox chkRubroElegidoCNATAnterior = (CheckBox)row.FindControl("chkRubroElegidoCNATAnterior");
+
+                    if (chkRubroElegidoCNATAnterior.Checked)
+                    {
+                        string scod_rubro = grdRubrosCNATAnterior.DataKeys[row.RowIndex].Values["Codigo"].ToString();
+                        decimal.TryParse(grdRubrosCNATAnterior.DataKeys[row.RowIndex].Values["Superficie"].ToString(), out dSuperficie);
+
+                        EncomiendaRubrosCNDTO encomiendaRubroDTO = new EncomiendaRubrosCNDTO();
+                        encomiendaRubroDTO.IdEncomienda = IdEncomienda;
+                        encomiendaRubroDTO.SuperficieHabilitar = dSuperficie;
+                        encomiendaRubroDTO.CodigoRubro = scod_rubro;
+
+                        //encRubros.InsertATAnterior(encomiendaRubroDTO);
+                        encRubrosCNBL.InsertATAnterior(encomiendaRubroDTO);
+                        CantRubrosElegidos++;
+                    }
+                }
+
+                if (CantRubrosElegidos > 0)
+                {
+                    CargarDatosTramite(IdEncomienda);
+                    CargarRubros(IdEncomienda);
+
+                    ScriptManager.RegisterClientScriptBlock(updBotonesAgregarRubrosCNATAnterior, updBotonesAgregarRubros.GetType(), "hidefrmAgregarRubrosCNATAnterior", "hidefrmAgregarRubrosCNATAnterior();", true);
+                }
+                else
+                {
+                    throw new Exception("Debe seleccionar los rubros/actividades que desea ingresar en la solicitud de Anexo.");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex, ex.Message);
+                lblError.Text = ex.Message;
+                this.EjecutarScript(updBotonesAgregarRubrosCNATAnterior, "showfrmError();");
+            }
+        }
+
+
+
 
         protected void btnEditarRubro_Click(object sender, EventArgs e)
         {
@@ -1932,12 +2244,12 @@ namespace AnexoProfesionales
                     if (EncomiendaRubrosCNDeposito.Any(x => x.Item1 == idRubro && x.Item2 == deposito))
                     {
                         chkRubroElegido.Checked = true;
-                    }                    
+                    }
                     else
                     {
                         chkRubroElegido.Checked = false;
                     }
-                                       
+
                     chkRubroElegido.Enabled = ((clsItemGrillaSeleccionarDepositos)e.Row.DataItem).Resultado;
                 }
             }
