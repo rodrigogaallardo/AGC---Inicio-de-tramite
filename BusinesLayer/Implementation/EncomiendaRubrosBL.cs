@@ -1,15 +1,15 @@
 using AutoMapper;
 using BaseRepository;
-using IBusinessLayer;
 using Dal.UnitOfWork;
 using DataAcess;
+using DataAcess.EntityCustom;
 using DataTransferObject;
+using IBusinessLayer;
+using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnitOfWork;
-using StaticClass;
-using DataAcess.EntityCustom;
 
 
 namespace BusinesLayer.Implementation
@@ -19,7 +19,7 @@ namespace BusinesLayer.Implementation
         private EncomiendaRubrosRepository repo = null;
         private EncomiendaRepository repoEncomienda = null;
         private RubrosRepository repoRubro = null;
-       
+
 
         private SSITSolicitudesRepository repoSSIT = null;
         private IUnitOfWorkFactory uowF = null;
@@ -84,7 +84,7 @@ namespace BusinesLayer.Implementation
                     .ForMember(dest => dest.ley105, source => source.MapFrom(p => p.Ley105))
                     .ForMember(dest => dest.Rubros_TiposDeDocumentosRequeridos, source => source.MapFrom(p => p.RubrosTiposDeDocumentosRequeridosDTO));
                 #endregion
-                               
+
 
                 #region "Rubros_TiposDeDocumentosRequeridos"
                 cfg.CreateMap<RubrosTiposDeDocumentosRequeridosDTO, Rubros_TiposDeDocumentosRequeridos>()
@@ -143,7 +143,7 @@ namespace BusinesLayer.Implementation
             });
 
             mapperEncomiendaRubro = config2.CreateMapper();
-           
+
         }
 
         public IEnumerable<EncomiendaRubrosDTO> GetAll()
@@ -370,10 +370,10 @@ namespace BusinesLayer.Implementation
                         objectDto.EsAnterior = rubroEntity.EsAnterior_Rubro;
                         objectDto.IdTipoActividad = rubroEntity.id_tipoactividad;
                         objectDto.IdTipoDocumentoRequerido = rubroEntity.id_tipodocreq;
-                    
+
                     }
 
-		            var elementDto = mapperBase.Map<EncomiendaRubrosDTO, Encomienda_Rubros>(objectDto);                   
+                    var elementDto = mapperBase.Map<EncomiendaRubrosDTO, Encomienda_Rubros>(objectDto);
 
                     repo.Insert(elementDto);
 
@@ -452,7 +452,7 @@ namespace BusinesLayer.Implementation
             encomiendaEntity.id_subtipoexpediente = id_subtipoexpediente;
 
             repoSSIT = new SSITSolicitudesRepository(unitOfWork);
-            var ssits = new List<SSIT_Solicitudes>(); 
+            var ssits = new List<SSIT_Solicitudes>();
 
             foreach (var solicitud in ssits)
             {
@@ -591,7 +591,7 @@ namespace BusinesLayer.Implementation
                 throw ex;
             }
         }
-        
+
         public string GetCodigoZonaEncomienda(int IdEncomienda)
         {
             try
@@ -641,7 +641,8 @@ namespace BusinesLayer.Implementation
                 throw ex;
             }
         }
-    
+
+
 
         public IEnumerable<RubrosDTO> GetRubrosHistoricos(int IdEncomienda, decimal Superficie, string CodigoRubro, string CodZona)
         {
@@ -733,7 +734,7 @@ namespace BusinesLayer.Implementation
             }
         }
 
-        
+
         public bool InsertATAnterior(EncomiendaRubrosDTO objectDto)
         {
 
@@ -793,8 +794,8 @@ namespace BusinesLayer.Implementation
         {
 
             bool ret = TieneNormativa;
-            
-            if(!ret)
+
+            if (!ret)
             {
 
                 uowF = new TransactionScopeUnitOfWorkFactory();
