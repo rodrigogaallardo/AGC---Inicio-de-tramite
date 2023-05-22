@@ -105,6 +105,7 @@
     <Compile Include="EncomiendaUbicacionesMixturasRepository.cs" />
     <Compile Include="ENGGruposCircuitosTipoTramiteRepository.cs" />
     <Compile Include="GrupoConsejosRepository.cs" />
+    <Compile Include="InmuebleCatalogadoRepository.cs" />
     <Compile Include="InstructivosRepository.cs" />
     <Compile Include="Ley962TiposDeDocumentosRequeridosRepository.cs" />
     <Compile Include="MailsRepository.cs" />
