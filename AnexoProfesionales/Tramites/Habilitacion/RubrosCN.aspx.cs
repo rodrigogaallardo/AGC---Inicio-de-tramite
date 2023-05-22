@@ -1923,22 +1923,17 @@ namespace AnexoProfesionales
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-
                 // Llenar por default el campo de Superficie.
                 decimal dSuperficie = 0;
                 decimal.TryParse(txtSuperficieCNATAnterior.Text, out dSuperficie);
-
                 string Zona = DataBinder.Eval(e.Row.DataItem, "RestriccionZona").ToString();
-                //string Superficie = DataBinder.Eval(e.Row.DataItem, "RestriccionSup").ToString();
                 bool EsAnterior = (bool)DataBinder.Eval(e.Row.DataItem, "EsAnterior");
                 bool TieneNormativa = (bool)DataBinder.Eval(e.Row.DataItem, "TieneNormativa");
-                //int IdTipoTramite = (int)DataBinder.Eval(e.Row.DataItem, "IdTipoTramite");
                 CheckBox chkRubroElegido = (CheckBox)e.Row.Cells[4].FindControl("chkRubroElegidoCNATAnterior");
                 chkRubroElegido.Enabled = true;
 
                 if (EsAnterior)
                     e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#fff5f3");
-
             }
         }
 
