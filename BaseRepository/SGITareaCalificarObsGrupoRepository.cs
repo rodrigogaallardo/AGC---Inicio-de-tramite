@@ -40,8 +40,10 @@ namespace BaseRepository
                                                       select ha.id_tramitetarea).Max()
                            select new SGITareaCalificarObsGrupoGrillaEntity
                            {
+                               id_tramitetarea = tth.id_tramitetarea,
                                id_ObsGrupo = obs.id_ObsGrupo,
                                CreateDate = obs.CreateDate,
+                               LastUpdateDate = tth.SGI_Tramites_Tareas.FechaInicio_tramitetarea,
                                userApeNom = usr_sgi.Apellido + ", " + usr_sgi.Nombres,
                                Observaciones =                                                
                                         new SGITareaCalificarObsGrillaEntity
@@ -59,7 +61,12 @@ namespace BaseRepository
                                            id_certificado = obsDoc.id_certificado != null ? obsDoc.id_certificado.Value : 0
                                         }
                            });
-
+            var sig_correccionSol = (from tt in _unitOfWork.Db.SGI_Tramites_Tareas
+                                     join hab in _unitOfWork.Db.SGI_Tramites_Tareas_HAB on tt.id_tramitetarea equals hab.id_tramitetarea
+                                     join tskr in _unitOfWork.Db.ENG_Tareas on tt.id_tarea equals tskr.id_tarea
+                                     join users in _unitOfWork.Db.aspnet_Users on tt.UsuarioAsignado_tramitetarea equals users.UserId
+                                     where hab.id_solicitud == id_solicitud && hab.id_tramitetarea >= domains.First().id_tramitetarea && tskr.cod_tarea.ToString().Contains("25")
+                                     select tt.id_tramitetarea).Min();
             return domains;
         }
 

@@ -126,7 +126,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             public DateTime CreateDate { get; set; }
             public string userApeNom { get; set; }
             public int id_ObsGrupo { get; set; }
-
+            public DateTime DateObs { get; set; }
             public bool Equals(Observacion source, Observacion dest)
             { 
                 return (source.id_ObsGrupo == dest.id_ObsGrupo);
@@ -141,16 +141,19 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             //Observaciones nuevas
             SGITareaCalificarObsGrupoBL blGrupos = new SGITareaCalificarObsGrupoBL();
             var tareas = blGrupos.GetByFKIdSolicitud(id_solicitud).ToList();
-
+            //var correccionSolicitudObs = blGrupos.GetByFKIdSolicitud(id_solicitud).ToList();
             _tareasObservaciones = tareas.Select(p => p.SGITareaCalificarObsGrupo).ToList();
 
             var listDistinct = (from lst in tareas
                                 select new Observacion
                                 {
                                     CreateDate = lst.CreateDate,
+                                    DateObs = lst.DateObs,  //tiene que agarrar la fecha de la tarea correccion de la solicitud correspondiente
                                     id_ObsGrupo = lst.id_ObsGrupo,
                                     userApeNom = lst.userApeNom
                                 }).Distinct(new Observacion());
+
+
 
             datlstObservaciones.DataSource = listDistinct;
             datlstObservaciones.DataBind();
