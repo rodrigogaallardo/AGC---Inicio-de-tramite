@@ -19,7 +19,7 @@ namespace DataTransferObject
         public string userApeNom { get; set; }
         public DateTime CreateDate { get; set; }
         public SGITareaCalificarObsDocsGrillaDTO SGITareaCalificarObsGrupo { get; set; }
-        public DateTime DateObs { get; set; }
+        public DateTime LastUpdateDate { get; set; }
     }
 }
 
