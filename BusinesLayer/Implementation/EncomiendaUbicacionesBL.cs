@@ -502,6 +502,13 @@ namespace BusinesLayer.Implementation
             return repoGrupoDistritos.PoseeDistritosU(idEncomienda);
         }
 
+        public bool EsInmuebleCatalogado(int idEncomienda)
+        {
+            uowF = new TransactionScopeUnitOfWorkFactory();
+            InmuebleCatalogadoRepository repoInmuebleCatalogado = new InmuebleCatalogadoRepository(this.uowF.GetUnitOfWork());
+            return repoInmuebleCatalogado.EsInmuebleCatalogado(idEncomienda);
+        }
+
     }
 }
 

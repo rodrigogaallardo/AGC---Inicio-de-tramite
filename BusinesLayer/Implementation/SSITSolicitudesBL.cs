@@ -923,7 +923,9 @@ namespace BusinesLayer.Implementation
 
                     var repoNor = new EncomiendaNormativasRepository(unitOfWork);
                     var listNor = repoNor.GetByFKIdEncomienda(encomienda.id_encomienda);
-                    if (listNor.Count() == 0 && !encubicbl.PoseeDistritosU(encomienda.id_encomienda))
+                    //aqui..
+                    if (listNor.Count() == 0 && !encubicbl.PoseeDistritosU(encomienda.id_encomienda) &&
+                        !encubicbl.EsInmuebleCatalogado(encomienda.id_encomienda))
                     {
                         itemRepo = new ItemDirectionRepository(unitOfWork);
                         List<int> lisSol = new List<int>();
