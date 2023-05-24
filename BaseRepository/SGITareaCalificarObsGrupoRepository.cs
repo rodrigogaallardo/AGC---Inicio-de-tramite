@@ -27,6 +27,7 @@ namespace BaseRepository
         /// <returns></returns>	
         public IEnumerable<SGITareaCalificarObsGrupoGrillaEntity> GetByFKIdSolicitud(int id_solicitud)
         {
+
             var domains = (from obs in _unitOfWork.Db.SGI_Tarea_Calificar_ObsGrupo
                            join tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB on obs.id_tramitetarea equals tth.id_tramitetarea
                            join asp in _unitOfWork.Db.aspnet_Users on obs.CreateUser equals asp.UserId 
