@@ -35,6 +35,7 @@ namespace DataTransferObject
         public string cod_tipodocsis { get; set; }
         public string filename { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime ObsDate { get; set; }
         public string Url { get; set; }
     }
 }

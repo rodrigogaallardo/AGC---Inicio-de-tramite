@@ -146,7 +146,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                                 select new Observacion
                                 {
                                     CreateDate = lst.CreateDate,
-                                    DateObs = lst.LastUpdateDate,  //tiene que agarrar la fecha de la tarea correccion de la solicitud correspondiente
+                                    DateObs = lst.SGITareaCalificarObsGrupo.ObsDate,  //tiene que agarrar la fecha de la tarea correccion de la solicitud correspondiente
                                     id_ObsGrupo = lst.id_ObsGrupo,
                                     userApeNom = lst.userApeNom
                                 }).Distinct(new Observacion());

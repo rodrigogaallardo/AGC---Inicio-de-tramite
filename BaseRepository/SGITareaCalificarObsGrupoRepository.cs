@@ -66,14 +66,13 @@ namespace BaseRepository
                            && tth.id_tramitetarea <= (from ha in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
                                                       join ta in _unitOfWork.Db.SGI_Tramites_Tareas on ha.id_tramitetarea equals ta.id_tramitetarea
                                                       where ha.id_solicitud == id_solicitud
-                                                      && ta.ENG_Tareas.cod_tarea.ToString().Contains("25")
+                                                      && ta.ENG_Tareas.cod_tarea.ToString().Substring(ta.ENG_Tareas.cod_tarea.ToString().Length - 2) == "25"
                                                       select ha.id_tramitetarea).Max()
                            select new SGITareaCalificarObsGrupoGrillaEntity
                            {
                                id_tramitetarea = tth.id_tramitetarea,
                                id_ObsGrupo = obs.id_ObsGrupo,
                                CreateDate = obs.CreateDate,
-                               LastUpdateDate = tth.SGI_Tramites_Tareas.FechaInicio_tramitetarea,
                                userApeNom = usr_sgi.Apellido + ", " + usr_sgi.Nombres,
                                Observaciones =                                                
                                         new SGITareaCalificarObsGrillaEntity
@@ -89,17 +88,18 @@ namespace BaseRepository
                                            filename = obsDoc.id_file != null ? _unitOfWork.Db.Files.Where(x => x.id_file == obsDoc.id_file.Value).Select(x => x.FileName).FirstOrDefault():"",
                                            id_file = obsDoc.id_file != null ? obsDoc.id_file.Value : 0,
                                            id_certificado = obsDoc.id_certificado != null ? obsDoc.id_certificado.Value : 0,
-                                           LastUpdateDate = (from tt in _unitOfWork.Db.SGI_Tramites_Tareas
+                                           ObsDate = (from tt in _unitOfWork.Db.SGI_Tramites_Tareas
                                                              join hab in _unitOfWork.Db.SGI_Tramites_Tareas_HAB on tt.id_tramitetarea equals hab.id_tramitetarea
                                                              join tskr in _unitOfWork.Db.ENG_Tareas on tt.id_tarea equals tskr.id_tarea
-                                                             join users in _unitOfWork.Db.aspnet_Users on tt.UsuarioAsignado_tramitetarea equals users.UserId
                                                              where hab.id_solicitud == id_solicitud && hab.id_tramitetarea > tth.id_tramitetarea
+                                                             && tskr.cod_tarea.ToString().Substring(tskr.cod_tarea.ToString().Length - 2) == "25"
                                                              select tt.FechaInicio_tramitetarea).Min()
                                         }
                            });
             
             return domains;
         }
+
 
         /// <summary>
         /// 
