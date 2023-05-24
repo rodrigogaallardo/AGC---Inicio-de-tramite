@@ -96,10 +96,9 @@
                                             <div class="widget-title" Style="background:#ffffff;background-image: none;">
                                                 <span class="icon"><i class="imoon imoon-list-alt" Style="color:#337ab7"></i></span>
                                                 <h5>
-                                                    <label> <%# Convert.ToDateTime(Eval("CreateDate")).ToString("dd/MM/yyyy HH:mm") %></label>
+                                                    <label> <%# Convert.ToDateTime(Eval("DateObs")).ToString("dd/MM/yyyy HH:mm") %></label>
                                                     <label> - Calificador: </label>
                                                     <label><%# Eval("userApeNom") %></label>
-                                                    <label> <%# Convert.ToDateTime(Eval("DateObs")).ToString("dd/MM/yyyy HH:mm") %></label>
                                                 </h5>
                                                 <span class="btn-right"><i class="imoon imoon-chevron-up" Style="color:#344882"></i></span>
                                             </div>
