@@ -63,7 +63,58 @@ namespace SSIT.Account
                         if (datosToken == null)
                             throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
 
+                        #region MiBA ASOSA
+                        DatosMiBA datosMiBA = new DatosMiBA();
 
+                        Servicio servicio = new Servicio();
+                        servicio.Exp_time = DateTime.Now.ToLongDateString();  //ASOSA
+                        servicio.Nombre = datosMiBA.personaLogin.persona.terminosYCondiciones.nivelAcceso.nombre;//ASOSA
+                        datosToken.Servicio = servicio;
+
+                        Autenticado autenticado = new Autenticado();
+                        autenticado.Cuit = datosMiBA.personaLogin.persona.cuit;
+                        autenticado.Nombre = datosMiBA.personaLogin.persona.nombres + " " + datosMiBA.personaLogin.persona.apellidos;
+                        autenticado.Isib = "??";
+                        autenticado.Codcalle = "";
+                        autenticado.Calle = datosMiBA.personaLogin.calle;
+                        autenticado.Puerta = datosMiBA.personaLogin.altura;
+                        autenticado.Codpostal = datosMiBA.personaLogin.codigoPostal;
+                        autenticado.Codlocalidad = datosMiBA.personaLogin.localidad.id.ToString();
+                        autenticado.Localidad = datosMiBA.personaLogin.localidad.nombre;
+                        autenticado.Codprov = datosMiBA.personaLogin.provincia.id.ToString();
+                        autenticado.Provincia = datosMiBA.personaLogin.provincia.nombre;
+                        autenticado.Telefono = datosMiBA.personaLogin.persona.telefono;
+                        autenticado.Email = datosMiBA.personaLogin.persona.email;
+                        autenticado.Nivel =  datosMiBA.personaLogin.persona.terminosYCondiciones.nivelAcceso.id.ToString();//ASOSA
+                        autenticado.TipoDocumento = datosMiBA.personaLogin.persona.tipoDocumento;
+                        autenticado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
+                        datosToken.Autenticado = autenticado;
+
+                        Representados representados = new Representados ();
+                        Representado representado = new Representado();
+
+                        representado.Cuit = datosMiBA.apoderado.persona.cuit;
+                        representado.Nombre = datosMiBA.apoderado.persona.nombres + " " + datosMiBA.apoderado.persona.apellidos;
+                        representado.Isib = "";
+                        representado.Codcalle = datosMiBA.apoderado.persona.cuit;
+                        representado.Calle = datosMiBA.poderdantes[0].apoderado.calle;
+                        representado.Puerta = datosMiBA.apoderado.altura;
+                        representado.Codpostal = datosMiBA.apoderado.codigoPostal;
+                        representado.Codlocalidad = datosMiBA.apoderado.localidad.id.ToString();
+                        representado.Localidad = datosMiBA.apoderado.localidad.nombre;
+                        representado.Codprov = datosMiBA.apoderado.provincia.id.ToString();
+                        representado.Provincia = datosMiBA.apoderado.provincia.nombre;
+                        representado.Telefono = datosMiBA.apoderado.persona.telefono;
+                        representado.Email = datosMiBA.apoderado.persona.email;
+                        representado.TipoRepresentacion = "";//ASOSA
+                        representado.TipoDocumento = datosMiBA.apoderado.persona.tipoDocumento;
+                        representado.Documento = datosMiBA.apoderado.persona.numeroDocumento;
+                        representado.Elegido = true.ToString();
+                        representados.Representado = representado;
+                        datosToken.Representados = representados;
+
+
+                        #endregion
 
                         string username = datosToken.Autenticado.Cuit.ToString();
 
