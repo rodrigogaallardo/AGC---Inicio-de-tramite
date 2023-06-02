@@ -216,7 +216,7 @@
                     <div class="box-panel">
                         <div style="margin: 20px; margin-top: -5px">
                             <div style="margin-top: 5px; color: #377bb5">
-                                <h4></i>Panel de Trámite</h4>
+                                <h4></i>Panel de Trámite!</h4>
                                 <hr />
                             </div>
                         </div>

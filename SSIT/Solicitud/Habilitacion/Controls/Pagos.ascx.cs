@@ -229,7 +229,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             if (tipo_tramite == Constantes.PagosTipoTramite.CAA)
             {
-                pnlGenerarBoletaUnica.Visible = HabilitarGeneracionManual && HabilitarGeneracionPago(tipo_tramite, solicitud.IdSolicitud, lstEncomiendas);
+                pnlGenerarBoletaUnica.Visible = HabilitarGeneracionManual && HabilitarGeneracionPago(tipo_tramite, solicitud.IdSolicitud, 
+                                                                                                        lstEncomiendas);
             }
             else
             {

@@ -27,7 +27,8 @@
                         Generar boleta de pago para ser abonada en las cajas de tesorer&iacute;a de la Ciudad.
                     </div>
                     <div class="form-group">
-                        <asp:LinkButton ID="lnkGenerarBoletaUnica" runat="server" OnClick="lnkGenerarBoletaUnica_Click" OnClientClick="$(this).hide();"
+                        <asp:LinkButton ID="lnkGenerarBoletaUnica" runat="server" OnClick="lnkGenerarBoletaUnica_Click" 
+                            OnClientClick="$(this).hide();"
                             CssClass="btn btn-primary"> 
                                 <i></i>
                                 <span class="text">Generar Boleta</span>
