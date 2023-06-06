@@ -66,6 +66,9 @@ namespace AnexoProfesionales
                 {
                     lblMsgPlanoContraIncendios.Text = "El trámite " + id_encomienda.ToString() + " requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente.";
                     pnlMsgPlanoContraIncendios.Visible = true;
+                    pnlLeyenda.Visible = true;
+                    pnlLeyenda2.Visible = true;
+
                 }
             }
             #endregion

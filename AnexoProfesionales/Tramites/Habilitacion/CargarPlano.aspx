@@ -31,10 +31,16 @@
         
         <asp:HiddenField ID="hid_DecimalSeparator" runat="server" />
         <asp:HiddenField ID="hid_return_url" runat="server" />
-        <asp:Panel ID="pnlMsgPlanoContraIncendios" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
-                    <asp:Label ID="lblMsgPlanoContraIncendios" Text="El trámite XXXXXX requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente." ForeColor="Red" runat="server"></asp:Label>
-                </asp:Panel>
+       <asp:Panel ID="pnlMsgPlanoContraIncendios" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
+           <asp:Label ID="lblMsgPlanoContraIncendios" Text="El trámite XXXXXX requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente." ForeColor="Red" runat="server"></asp:Label>
+       </asp:Panel>
 
+       <asp:Panel ID="pnlLeyenda" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
+           <asp:Label ID="lblLeyenda" Text="La instalación materializada debe coincidir con el Plano Registrado" ForeColor="Red" runat="server"></asp:Label>
+       </asp:Panel>
+       <asp:Panel ID="pnlLeyenda2" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
+           <p runat="server"><font color="red">De tener IFCI -Instalación Fija contra Incendio-, deberá contar con una empresa mantenedora, adjuntando código QR con información completa y APTO para su USO. Puede obtener dicha Oblea QR mediante el <a href="https://instalaciones.agcontrol.gob.ar/" target="_blank">Sitio de Instalaciones</a></font></p>
+       </asp:Panel>
         <p style="margin: auto; padding: 10px; line-height: 20px">
             En este paso deberá ingresar el/los plano/s del trámite.
         </p>
