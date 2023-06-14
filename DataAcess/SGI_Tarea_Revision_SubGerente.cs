@@ -11,7 +11,7 @@ namespace DataAcess
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class SGI_Tarea_Revision_SubGerente
     {
         public int id_revision_subGerente { get; set; }
@@ -24,7 +24,7 @@ namespace DataAcess
         public string observacion_plancheta { get; set; }
         public string observacion_providencia { get; set; }
         public string observaciones_contribuyente { get; set; }
-
+    
         public virtual SGI_Tramites_Tareas SGI_Tramites_Tareas { get; set; }
     }
 }
