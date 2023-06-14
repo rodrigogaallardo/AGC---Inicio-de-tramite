@@ -1,20 +1,20 @@
 using AutoMapper;
 using BaseRepository;
-using IBusinessLayer;
+using BaseRepository.Engine;
+using BusinesLayer.MappingConfig;
 using Dal.UnitOfWork;
 using DataAcess;
 using DataAcess.EntityCustom;
 using DataTransferObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnitOfWork;
-using StaticClass;
 using ExternalService;
 using ExternalService.ws_interface_AGC;
-using BusinesLayer.MappingConfig;
+using IBusinessLayer;
+using StaticClass;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
-using BaseRepository.Engine;
+using System.Linq;
+using UnitOfWork;
 
 namespace BusinesLayer.Implementation
 {
@@ -2178,7 +2178,7 @@ namespace BusinesLayer.Implementation
                     {
                         listEnco = repo.GetByFKIdSolicitud(id_sol_o).Where(x => x.id_estado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo
                         || x.id_estado == (int)Constantes.Encomienda_Estados.Vencida);
-                    }                    
+                    }
                 }
                 else if (sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
                 {
@@ -2273,7 +2273,7 @@ namespace BusinesLayer.Implementation
                         sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
                     {
                         int? id_solicitud_origen = null;
-                        
+
                         if (sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
                         {
                             if (sol.SSIT_Solicitudes_Origen.Count == 0)
@@ -2425,7 +2425,7 @@ namespace BusinesLayer.Implementation
                         u.IdZonaPlaneamiento = ubi.IdZonaPlaneamiento;
                         u.LocalSubtipoUbicacion = ubi.LocalSubtipoUbicacion;
                         u.InmuebleCatalogado = ubic.EsUbicacionProtegida;
-                        
+
                         var lhor = blHor.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.PropiedadesHorizontales = new List<UbicacionesPropiedadhorizontalDTO>();
                         foreach (var hor in lhor)
@@ -2434,7 +2434,7 @@ namespace BusinesLayer.Implementation
                             h.IdPropiedadHorizontal = hor.IdPropiedadHorizontal.Value;
                             u.PropiedadesHorizontales.Add(h);
                         }
-                        
+
                         var lpuer = blPuer.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.Puertas = new List<UbicacionesPuertasDTO>();
                         foreach (var puer in lpuer)
@@ -2444,7 +2444,7 @@ namespace BusinesLayer.Implementation
                             p.NroPuertaUbic = puer.NroPuerta;
                             u.Puertas.Add(p);
                         }
-                        
+
                         var ldistrito = blDistrito.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.EncomiendaUbicacionesDistritosDTO = new List<Encomienda_Ubicaciones_DistritosDTO>();
                         foreach (var distri in ldistrito)
@@ -2455,7 +2455,7 @@ namespace BusinesLayer.Implementation
                             d.IdSubZona = distri.IdSubZona;
                             u.EncomiendaUbicacionesDistritosDTO.Add(d);
                         }
-                        
+
                         var lmixtura = blMixtura.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.EncomiendaUbicacionesMixturasDTO = new List<Encomienda_Ubicaciones_MixturasDTO>();
                         foreach (var mixtu in lmixtura)
@@ -2900,7 +2900,7 @@ namespace BusinesLayer.Implementation
                     TransferenciaUbicacionesBL blTransfUbic = new TransferenciaUbicacionesBL();
                     TransferenciaUbicacionesMixturasBL blTransfubicMixturas = new TransferenciaUbicacionesMixturasBL();
                     TransferenciaUbicacionesDistritosBL blTransfUbicDistritos = new TransferenciaUbicacionesDistritosBL();
-                    
+
                     var encAnt = Single(id_encomienda_ant);
                     var lubi = blUbi.GetByFKIdEncomienda(id_encomienda_ant);
                     foreach (var ubi in lubi)
@@ -2935,7 +2935,7 @@ namespace BusinesLayer.Implementation
 
                         u.EncomiendaUbicacionesMixturasDTO = new List<Encomienda_Ubicaciones_MixturasDTO>();
                         u.EncomiendaUbicacionesDistritosDTO = new List<Encomienda_Ubicaciones_DistritosDTO>();
-                        if (encAnt.IdSolicitud > nroSolReferencia) 
+                        if (encAnt.IdSolicitud > nroSolReferencia)
                         {
                             var lmixturas = blMixturas.GetByFKIdEncomiendaUbicacion(ubi.IdEncomiendaUbicacion);
                             foreach (var mixtura in lmixturas)
@@ -2944,7 +2944,7 @@ namespace BusinesLayer.Implementation
                                 m.IdZonaMixtura = mixtura.IdZonaMixtura;
                                 u.EncomiendaUbicacionesMixturasDTO.Add(m);
                             }
-                            
+
 
                             var ldistrito = blDistrito.GetByFKIdEncomiendaUbicacion(ubi.IdEncomiendaUbicacion);
                             foreach (var distrito in ldistrito)
@@ -2955,7 +2955,7 @@ namespace BusinesLayer.Implementation
                                 d.IdSubZona = distrito.IdSubZona;
                                 u.EncomiendaUbicacionesDistritosDTO.Add(d);
                             }
-                            
+
                             //Si no existen Distritos y Mixturas en la encomienda de la solicitud de la cual hereda --> verifico en la solicitud actual.
                             // Mantis 0164787: JADHE 63917 - AT - Error al crear AT
                             if (!lmixturas.ToList().Any() && !ldistrito.ToList().Any())

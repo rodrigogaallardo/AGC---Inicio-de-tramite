@@ -193,7 +193,7 @@
             <div class="col-sm-3" style="width: 100px; margin-left: 10px; margin-top: 10px">
                 <asp:RadioButton ID="opt5_si" runat="server" GroupName="EstacionamientoBicicleta" Text="Sí" Enabled="false" />
                 <label></label>
-                <asp:RadioButton ID="opt5_no" runat="server" GroupName="EstacionamientoBicicleta" Text="No" Enabled="false"/>
+                <asp:RadioButton ID="opt5_no" runat="server" GroupName="EstacionamientoBicicleta" Text="No" Enabled="false" />
             </div>
         </div>
 
@@ -372,21 +372,27 @@
     <br />
     <br />
     <div class="box-shadow" style="margin-left: 50px">
-        <b>Posee mas de 350 asistentes?:</b>
+        <b>¿Posee mas de 350 asistentes?:</b>
         <asp:RadioButton ID="asistentes_SI" runat="server" GroupName="Asistentes" Text="Sí" Enabled="false" />
         <asp:RadioButton ID="asistentes_NO" runat="server" GroupName="Asistentes" Text="No" Enabled="false" />
     </div>
     <%--SobreCarga--%>
     <div class="box-shadow" style="margin-left: 50px">
-        <b>Posee planta/s por debajo de la planta/s a habilitar?:</b>
+        <b>¿Posee planta/s por debajo de la planta/s a habilitar?:</b>
         <asp:RadioButton ID="optsCertificadoSobrecarga_SI" runat="server" GroupName="Sobrecarga" Text="Sí" Enabled="false" />
         <asp:RadioButton ID="optsCertificadoSobrecarga_NO" runat="server" GroupName="Sobrecarga" Text="No" Enabled="false" />
     </div>
 
     <div class="box-shadow" style="margin-left: 50px">
-        <b>Posee productos inflamables?:</b>
+        <b>¿Posee productos inflamables?:</b>
         <asp:RadioButton ID="productosInflamables_SI" runat="server" GroupName="productosInflamables" Text="Sí" Enabled="false" />
         <asp:RadioButton ID="productosInflamables_NO" runat="server" GroupName="productosInflamables" Text="No" Enabled="false" />
+    </div>
+
+    <div class="box-shadow" style="margin-left: 50px">
+        <b>¿Se acoge a los beneficios de la DI-2023-2-GCABA-UERESGP?:</b>
+        <asp:RadioButton ID="AcogeBeneficio_SI" runat="server" GroupName="acogeBeneficio" Text="Sí" Enabled="false" />
+        <asp:RadioButton ID="AcogeBeneficio_NO" runat="server" GroupName="acogeBeneficio" Text="No" Enabled="false" />
     </div>
 </asp:Panel>
 <script type="text/javascript">
