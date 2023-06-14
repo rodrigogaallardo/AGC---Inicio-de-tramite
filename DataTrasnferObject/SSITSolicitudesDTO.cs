@@ -52,9 +52,7 @@ namespace DataTransferObject
         public virtual TipoEstadoSolicitudDTO TipoEstadoSolicitudDTO { get; set; }
         public virtual SSITSolicitudesDatosLocalDTO SSITSolicitudesDatosLocalDTO { get; set; }
         public virtual SSITPermisosDatosAdicionalesDTO SSITPermisosDatosAdicionalesDTO { get; set; }
-
-
-
+        
     }
 
 }
