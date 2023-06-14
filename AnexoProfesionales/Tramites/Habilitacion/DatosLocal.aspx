@@ -845,6 +845,7 @@
             $("#ReqCertificadoDeSobrecarga").hide();
             $("#ValAsistentes").hide();
             $("#ValProductosInflamables").hide();
+            $("#ValAcogeBeneficio").hide();
             $("#ReqCantidadArtefactosSanitarios").hide();
             $("#ReqDF").hide();
             $("#ValSuperficieSanitariosLey962").hide();
@@ -897,6 +898,11 @@
 
             if (!$("#<%: productosInflamables_SI.ClientID %>").is(":checked") && !$("#<%: productosInflamables_NO.ClientID %>").is(":checked")) {
                 $("#ValProductosInflamables").show();
+                ret = false;
+            }
+
+            if (!$("#<%: AcogeBeneficio_SI.ClientID %>").is(":checked") && !$("#<%: AcogeBeneficio_NO.ClientID %>").is(":checked")) {
+                $("#ValAcogeBeneficio").show();
                 ret = false;
             }
 

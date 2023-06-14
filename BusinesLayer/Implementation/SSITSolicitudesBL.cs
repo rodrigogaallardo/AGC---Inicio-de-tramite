@@ -2599,12 +2599,10 @@ namespace BusinesLayer.Implementation
 
         private bool AcogeBeneficiosUERESGP(int id_solicitud)
         {
-            EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
-            int id_encomienda = encSolBL.GetByFKIdSolicitud(id_solicitud).Max(x => x.id_encomienda);
             EncomiendaBL encBl = new EncomiendaBL();
-            var datoSolicitudEnc = encBl.GetByFKIdSolicitud(id_encomienda);
+            var datoSolicitudEnc = encBl.GetByFKIdSolicitud(id_solicitud);
             var enc = datoSolicitudEnc.OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
-            return (bool)enc.AcogeBeneficios;
+            return enc.AcogeBeneficios;
         }
     }
 }

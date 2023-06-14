@@ -237,8 +237,8 @@ namespace AnexoProfesionales
             productosInflamables_SI.Checked = EncDto.ProductosInflamables;
             productosInflamables_NO.Checked = !EncDto.ProductosInflamables;
 
-            AcogeBeneficio_SI.Checked = (bool)EncDto.AcogeBeneficios;
-            AcogeBeneficio_NO.Checked = (bool)!EncDto.AcogeBeneficios;
+            AcogeBeneficio_SI.Checked = EncDto.AcogeBeneficios;
+            AcogeBeneficio_NO.Checked = !EncDto.AcogeBeneficios;
 
             if (!rbtnCumpleLey962.Checked && !rbtnEximidoLey962.Checked)
             {
