@@ -49,7 +49,7 @@ namespace DataTransferObject
         public Nullable<bool> EsActBaile { get; set; }
         public Nullable<bool> EsLuminaria { get; set; }
         public bool ProductosInflamables { get; set; }
-        public Nullable<bool> AcogeBeneficios { get; set; }
+        public bool AcogeBeneficios { get; set; }
         public bool EsECI
         {
             get

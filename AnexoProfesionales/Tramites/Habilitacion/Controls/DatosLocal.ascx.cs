@@ -124,8 +124,8 @@ namespace AnexoProfesionales.Controls
             productosInflamables_SI.Checked = encomienda.ProductosInflamables;
             productosInflamables_NO.Checked = !encomienda.ProductosInflamables;
 
-            AcogeBeneficio_SI.Checked = (bool)encomienda.AcogeBeneficios;
-            AcogeBeneficio_NO.Checked = (bool)!encomienda.AcogeBeneficios;
+            AcogeBeneficio_SI.Checked = encomienda.AcogeBeneficios;
+            AcogeBeneficio_NO.Checked = !encomienda.AcogeBeneficios;
 
             txtSuperficieCubierta.Text = SuperficieCubierta.ToString();
             txtSuperficieDescubierta.Text = SuperficieDescubierta.ToString();
