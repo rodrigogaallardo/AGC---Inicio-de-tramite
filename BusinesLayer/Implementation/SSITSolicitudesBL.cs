@@ -937,7 +937,7 @@ namespace BusinesLayer.Implementation
 
                         if (solicitudEntity.FechaLibrado == null &&
                             solicitudEntity.id_subtipoexpediente != (int)Constantes.SubtipoDeExpediente.HabilitacionPrevia &&
-                            !TienePlanoDeIncendio(id_solicitud) && !NoAcogeBeneficiosUERESGP(id_solicitud))
+                            !TienePlanoDeIncendio(id_solicitud) && !AcogeBeneficiosUERESGP(id_solicitud))
                         {
                             solicitudEntity.FechaLibrado = DateTime.Now;
                             encuesta = getEncuesta(solicitudEntity, Direccion);
@@ -2597,7 +2597,7 @@ namespace BusinesLayer.Implementation
             return DocAdjAT != null || DocAdjSSIT != null;
         }
 
-        private bool NoAcogeBeneficiosUERESGP(int id_solicitud)
+        private bool AcogeBeneficiosUERESGP(int id_solicitud)
         {
             EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
             int id_encomienda = encSolBL.GetByFKIdSolicitud(id_solicitud).Max(x => x.id_encomienda);
