@@ -937,7 +937,7 @@ namespace BusinesLayer.Implementation
 
                         if (solicitudEntity.FechaLibrado == null &&
                             solicitudEntity.id_subtipoexpediente != (int)Constantes.SubtipoDeExpediente.HabilitacionPrevia &&
-                            !TienePlanoDeIncendio(id_solicitud))
+                            !TienePlanoDeIncendio(id_solicitud) && !NoAcogeBeneficiosUERESGP(id_solicitud))
                         {
                             solicitudEntity.FechaLibrado = DateTime.Now;
                             encuesta = getEncuesta(solicitudEntity, Direccion);
@@ -1347,12 +1347,12 @@ namespace BusinesLayer.Implementation
                 if (BoletaCeroActiva() == false)
                 {
                     if (SSITentity.id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
-                {
-                    //0144521: JADHE 56637 - SSIT - RDU del 2018 pide BUI
-                    DateTime fechaValida = new DateTime(2020, 1, 1);
-                    if (SSITentity.CreateDate > fechaValida)
-                        ValidarPagoSSIT(id_solicitud);
-                }
+                    {
+                        //0144521: JADHE 56637 - SSIT - RDU del 2018 pide BUI
+                        DateTime fechaValida = new DateTime(2020, 1, 1);
+                        if (SSITentity.CreateDate > fechaValida)
+                            ValidarPagoSSIT(id_solicitud);
+                    }
 
                     if (SSITentity.id_tipotramite != (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
                     {
@@ -2585,7 +2585,7 @@ namespace BusinesLayer.Implementation
 
             return false;
         }
-            
+
         private bool TienePlanoDeIncendio(int id_solicitud)
         {
             EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
@@ -2595,6 +2595,16 @@ namespace BusinesLayer.Implementation
             SSITDocumentosAdjuntosBL ssitDocBL = new SSITDocumentosAdjuntosBL();
             var DocAdjSSIT = ssitDocBL.GetByFKIdSolicitudTipoDocReq(id_solicitud, 66).FirstOrDefault();
             return DocAdjAT != null || DocAdjSSIT != null;
+        }
+
+        private bool NoAcogeBeneficiosUERESGP(int id_solicitud)
+        {
+            EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
+            int id_encomienda = encSolBL.GetByFKIdSolicitud(id_solicitud).Max(x => x.id_encomienda);
+            EncomiendaBL encBl = new EncomiendaBL();
+            var datoSolicitudEnc = encBl.GetByFKIdSolicitud(id_encomienda);
+            var enc = datoSolicitudEnc.OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
+            return (bool)enc.AcogeBeneficios;
         }
     }
 }
