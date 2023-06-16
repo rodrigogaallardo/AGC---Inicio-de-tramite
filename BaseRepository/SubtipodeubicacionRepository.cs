@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Dal.UnitOfWork;
+using DataAcess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAcess;
-using IBaseRepository;
-using Dal.UnitOfWork;
 
 namespace BaseRepository
 {
@@ -34,6 +31,17 @@ namespace BaseRepository
 
                          select tu);
             return query;
+        }
+
+        public SubTiposDeUbicacion GetSubTipoUbicacion(int IdUbicacion)
+        {
+            var dataEsp = (from ubic in _unitOfWork.Db.Ubicaciones
+                           join stu in _unitOfWork.Db.SubTiposDeUbicacion on ubic.id_subtipoubicacion equals stu.id_subtipoubicacion
+                           where ubic.id_ubicacion == IdUbicacion
+                           select stu
+                           ).FirstOrDefault();
+
+            return dataEsp;
         }
     }
 }

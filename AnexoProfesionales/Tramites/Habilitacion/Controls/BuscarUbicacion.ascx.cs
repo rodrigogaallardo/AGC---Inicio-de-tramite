@@ -1,13 +1,11 @@
 ﻿using AnexoProfesionales.App_Components;
 using AnexoProfesionales.Common;
 using BusinesLayer.Implementation;
-using AnexoProfesionales.Tramites.Habilitacion.Controls;
 using DataTransferObject;
 using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -27,7 +25,7 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
         public string vDeptoLocalOtros { get; set; }
         public string vDepto { get; set; }
         public string vLocal { get; set; }
-        public string vTorre { get; set; }        
+        public string vTorre { get; set; }
         public decimal vAnchoCalle { get; set; }
         public bool vInmuebleCatalogado_SI { get; set; }
         public bool vInmuebleCatalogado_NO { get; set; }
@@ -146,10 +144,10 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
 
                 EncomiendaUbicacionesBL encomiendaUbicacionesBL = new EncomiendaUbicacionesBL();
                 var dto = encomiendaUbicacionesBL.Single(IdEncomiendaUbicacion);
-                 UbicacionesBL ubicacionesBL = new UbicacionesBL();
-                 if (dto != null)
-                     result = new List<UbicacionesDTO>() { ubicacionesBL.Single(dto.IdUbicacion.Value) };
-                
+                UbicacionesBL ubicacionesBL = new UbicacionesBL();
+                if (dto != null)
+                    result = new List<UbicacionesDTO>() { ubicacionesBL.Single(dto.IdUbicacion.Value) };
+
                 gridubicacion.DataSource = result;
                 gridubicacion.DataBind();
                 pnlResultados.Update();
@@ -201,7 +199,7 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
         }
         protected void btnEditarUbicacion_Click(object sender, EventArgs e)
         {
-            
+
             int idubicacion = (int)gridubicacion.DataKeys[gridubicacion.Rows.Count - 1].Value;
             EncomiendaUbicacionesBL encomiendaUbicacionBL = new EncomiendaUbicacionesBL();
 
@@ -212,9 +210,9 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
                 lstValidacionesUbicacion.Items.Add("Debe tildar al menos 1 puerta.");
 
             ValidarPuertas(row, ref lstValidacionesUbicacion);
-            
-            var result = encomiendaUbicacionBL.GetByFKIdEncomienda(IdEncomienda).Where(x=>x.IdUbicacion == idubicacion).FirstOrDefault();
-            
+
+            var result = encomiendaUbicacionBL.GetByFKIdEncomienda(IdEncomienda).Where(x => x.IdUbicacion == idubicacion).FirstOrDefault();
+
             if (lstValidacionesUbicacion.Items.Count == 0)
             {
                 encomiendaUbicacionBL.Delete(result);
@@ -269,7 +267,7 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
                 case 1:
                     int vNroPartida = int.Parse(txtNroPartida.Text.Trim());
                     result = ubicacionesBL.Buscar(vNroPartida, optTipoPartidaHorizontal.Checked, FechaActual);
-                    
+
                     break;
                 case 2:
                     int vNroPuerta = int.Parse(txtNroPuerta.Text.Trim());
@@ -682,34 +680,39 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
                 lstPuertas.DataSource = puertas.ToList();
                 lstPuertas.DataBind();
 
-                if (hid_tabselected.Value == "3")
+                if (hid_tabselected.Value != "0")
                 {
                     Panel pnlTipoUbicacion = (Panel)e.Row.FindControl("pnlTipoUbicacion");
                     Panel pnlSMP = (Panel)e.Row.FindControl("pnlSMP");
+                    Label lblTipoUbicacion1 = (Label)e.Row.FindControl("lblTipoUbicacion1");
                     Label lblTipoUbicacion = (Label)e.Row.FindControl("lblTipoUbicacion");
+                    Label lblSubTipoUbicacion1 = (Label)e.Row.FindControl("lblSubTipoUbicacion1");
                     Label lblSubTipoUbicacion = (Label)e.Row.FindControl("lblSubTipoUbicacion");
                     Label lblLocal = (Label)e.Row.FindControl("lblLocal");
 
-                    //var dataEsp = (from ubic in db.Ubicaciones
-                    //               join stu in db.SubTiposDeUbicacion on ubic.id_subtipoubicacion equals stu.id_subtipoubicacion
-                    //               join tu in db.TiposDeUbicacion on stu.id_tipoubicacion equals tu.id_tipoubicacion
-                    //               where ubic.id_ubicacion == id_ubicacion
-                    //               select new
-                    //               {
-                    //                   tu.descripcion_tipoubicacion,
-                    //                   stu.descripcion_subtipoubicacion
-                    //               }).FirstOrDefault();
-                    TiposDeUbicacionBL tipoUbicacion = new TiposDeUbicacionBL();
-                    var dataEsp = tipoUbicacion.Get(id_ubicacion);
+                    TiposDeUbicacionBL tipoUbicacionBL = new TiposDeUbicacionBL();
+                    var dataEsp = tipoUbicacionBL.Get(id_ubicacion);
+                    SubTipoUbicacionesBL subTipoUbicacionBL = new SubTipoUbicacionesBL();
+                    var dataSubTipo = subTipoUbicacionBL.GetSubTipoUbicacion(id_ubicacion);
                     if (dataEsp != null)
                     {
                         lblTipoUbicacion.Text = dataEsp.DescripcionTipoUbicacion;
-                        //lblSubTipoUbicacion.Text = dataEsp.descripcion_subtipoubicacion;
+                        lblTipoUbicacion1.Text = dataEsp.DescripcionTipoUbicacion;
+                        lblSubTipoUbicacion1.Text = dataSubTipo.descripcion_subtipoubicacion;
+                        lblSubTipoUbicacion.Text = dataSubTipo.descripcion_subtipoubicacion;
                         lblLocal.Text = txtDescUbicacion.Text;
                     }
 
-                    pnlTipoUbicacion.Visible = true;
-                    pnlSMP.Visible = false;
+                    if (hid_tabselected.Value == "3")
+                    {
+                        pnlTipoUbicacion.Visible = true;
+                        pnlSMP.Visible = false;
+                    }
+                    else
+                    {
+                        pnlTipoUbicacion.Visible = false;
+                        pnlSMP.Visible = true;
+                    }
 
                 }
 
@@ -748,7 +751,7 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
                     string Depto = encUbicDTO.Depto ?? "";
                     string Torre = encUbicDTO.Torre ?? "";
                     string AnchoCalle = encUbicDTO.AnchoCalle.ToString() ?? "";
-                   
+
 
                     txtOtros.Text = Otros.Trim();
                     txtLocal.Text = Local.Trim();
@@ -845,10 +848,10 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
         protected void ddlTipoDeUbicacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id_tipoubicacion = int.Parse(ddlTipoDeUbicacion.SelectedValue);
-            if (id_tipoubicacion == 1) //Si es subte desabilito la validacion del local
-                ReqtxtDescUbicacion.Enabled = false;
-            else
-                ReqtxtDescUbicacion.Enabled = true;
+            //if (id_tipoubicacion == 1) //Si es subte desabilito la validacion del local
+            //    ReqtxtDescUbicacion.Enabled = false;
+            //else
+            //    ReqtxtDescUbicacion.Enabled = true;
 
             CargarComboSubTipoUbicacion(id_tipoubicacion);
         }
@@ -1005,11 +1008,11 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
                 args.vInmuebleCatalogado_NO = !inmuebleCatalogado_SI.Checked;
                 args.vInmuebleCatalogado_SI = inmuebleCatalogado_SI.Checked;
                 // Agrega los datos de las ubicaciones especiales
-                if (hid_tabselected.Value.Equals("3") && ddlSubTipoUbicacion.SelectedValue.Length > 0)
-                {
-                    args.id_subtipoubicacion = int.Parse(ddlSubTipoUbicacion.SelectedValue);
-                    args.local_subtipoubicacion = txtDescUbicacion.Text.Trim();
-                }
+
+                SSITSolicitudesUbicacionesBL solbl = new SSITSolicitudesUbicacionesBL();
+
+                args.id_subtipoubicacion = solbl.getIdSubTipoUbicacionByIdUbicacion(args.id_ubicacion);
+                args.local_subtipoubicacion = txtDescUbicacion.Text.Trim();
 
 
                 // agrega las calles seleccionadas
@@ -1093,9 +1096,9 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
             if (Edicion)
             {
                 if (encomiendaUbicacionesPuertasBL == null)
-                    encomiendaUbicacionesPuertasBL = new EncomiendaUbicacionesPuertasBL ();
+                    encomiendaUbicacionesPuertasBL = new EncomiendaUbicacionesPuertasBL();
 
-                if (lstPuertasEncDTO== null)
+                if (lstPuertasEncDTO == null)
                     lstPuertasEncDTO = encomiendaUbicacionesPuertasBL.GetByFKIdEncomiendaUbicacion(idUbicacion).ToList();
 
                 var Codigo = Convert.ToInt32((e.Item.FindControl("hid_codigo_calle") as HiddenField).Value);
@@ -1106,7 +1109,15 @@ namespace AnexoProfesionales.Tramites.Habilitacion.Controls
             }
 
             TextBox txtNroPuerta = (TextBox)e.Item.FindControl("txtNroPuerta");
-            LinkButton lnkAgregarOtraPuerta = (LinkButton) e.Item.FindControl("lnkAgregarOtraPuerta");
+            LinkButton lnkAgregarOtraPuerta = (LinkButton)e.Item.FindControl("lnkAgregarOtraPuerta");
+
+            SSITSolicitudesUbicacionesBL ubicacionesBL = new SSITSolicitudesUbicacionesBL();
+            UbicacionesPuertasDTO ubi = e.Item.DataItem as UbicacionesPuertasDTO;
+
+            if (ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(ubi.IdUbicacion))
+            {
+                txtNroPuerta.Text += "t";
+            }
             txtNroPuerta.Enabled = PermitirPuertasOficiales;
             lnkAgregarOtraPuerta.Visible = PermitirPuertasOficiales;
 
