@@ -558,7 +558,7 @@
                         </div>
                         <div class="row" style="margin-bottom: 15px; margin-left: -40px; margin-top: 20px;">
                             <div class="form-group">
-                                <asp:Label ID="Label11" runat="server" CssClass="control-label col-sm-6" Font-Bold="true">Posee mas de 350 asistentes?:</asp:Label>
+                                <asp:Label ID="Label11" runat="server" CssClass="control-label col-sm-6" Font-Bold="true">¿Posee mas de 350 asistentes?:</asp:Label>
                                 <div class="col-sm-3" style="width: 100px;">
                                     <asp:RadioButton ID="asistentes_SI" runat="server" GroupName="Asistentes" Text="Sí" AutoPostBack="true" />
                                     <asp:RadioButton ID="asistentes_NO" runat="server" Checked="true" GroupName="Asistentes" Text="No" AutoPostBack="true" />
@@ -569,7 +569,7 @@
                             </div>
                             <%--SobreCarga--%>
                             <div class="form-group">
-                                <asp:Label ID="Label10" runat="server" CssClass="control-label col-sm-6" Font-Bold="true">Posee planta/s por debajo de la planta/s a habilitar?:</asp:Label>
+                                <asp:Label ID="Label10" runat="server" CssClass="control-label col-sm-6" Font-Bold="true">¿Posee planta/s por debajo de la planta/s a habilitar?:</asp:Label>
                                 <div class="col-sm-3" style="width: 100px;">
                                     <asp:RadioButton ID="optsCertificadoSobrecarga_SI" runat="server" GroupName="Sobrecarga" Text="Sí" AutoPostBack="true"
                                         OnCheckedChanged="optsCertificadoSobrecarga_SI_CheckedChanged" />
@@ -593,7 +593,7 @@
                             </div>
 
                             <div class="form-group">
-                                <asp:Label ID="Label13" runat="server" CssClass="control-label col-sm-6" Font-Bold="true">Posee productos inflamables?:</asp:Label>
+                                <asp:Label ID="Label13" runat="server" CssClass="control-label col-sm-6" Font-Bold="true">¿Posee productos inflamables?:</asp:Label>
                                 <div class="col-sm-3" style="width: 100px;">
                                     <asp:RadioButton ID="productosInflamables_SI" runat="server" GroupName="productosInflamables" Text="Sí" AutoPostBack="true" />
                                     <asp:RadioButton ID="productosInflamables_NO" runat="server" Checked="true" GroupName="productosInflamables" Text="No" AutoPostBack="true" />
@@ -602,6 +602,18 @@
                                     </div>
                                 </div>
                             </div>
+
+                             <div class="form-group">
+                                <asp:Label ID="Label14" runat="server" CssClass="control-label col-sm-6" Font-Bold="true"> ¿Se acoge a los beneficios de la DI-2023-2-GCABA-UERESGP?:</asp:Label>
+                                <div class="col-sm-3" style="width: 100px;">
+                                    <asp:RadioButton ID="AcogeBeneficio_SI" runat="server" GroupName="acogeBeneficio" Text="Sí" AutoPostBack="true" />
+                                    <asp:RadioButton ID="AcogeBeneficio_NO" runat="server" Checked="true" GroupName="acogeBeneficio" Text="No" AutoPostBack="true" />
+                                    <div id="ValAcogeBeneficio" class="alert alert-small alert-danger" style="display: none">
+                                        Debe seleccionar una opción
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </ContentTemplate>
@@ -833,6 +845,7 @@
             $("#ReqCertificadoDeSobrecarga").hide();
             $("#ValAsistentes").hide();
             $("#ValProductosInflamables").hide();
+            $("#ValAcogeBeneficio").hide();
             $("#ReqCantidadArtefactosSanitarios").hide();
             $("#ReqDF").hide();
             $("#ValSuperficieSanitariosLey962").hide();
@@ -885,6 +898,11 @@
 
             if (!$("#<%: productosInflamables_SI.ClientID %>").is(":checked") && !$("#<%: productosInflamables_NO.ClientID %>").is(":checked")) {
                 $("#ValProductosInflamables").show();
+                ret = false;
+            }
+
+            if (!$("#<%: AcogeBeneficio_SI.ClientID %>").is(":checked") && !$("#<%: AcogeBeneficio_NO.ClientID %>").is(":checked")) {
+                $("#ValAcogeBeneficio").show();
                 ret = false;
             }
 
