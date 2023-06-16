@@ -1,10 +1,10 @@
+using Dal.UnitOfWork;
+using DataAcess;
+using DataAcess.EntityCustom;
+using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataAcess;
-using Dal.UnitOfWork;
-using StaticClass;
-using DataAcess.EntityCustom;
 using static StaticClass.Constantes;
 
 namespace BaseRepository
@@ -128,7 +128,7 @@ namespace BaseRepository
             var ret = (from enc in _unitOfWork.Db.Encomienda
                        join encSol in _unitOfWork.Db.Encomienda_SSIT_Solicitudes on enc.id_encomienda equals encSol.id_encomienda
                        where encSol.id_solicitud == IdSolicitud
-                       select enc);                   
+                       select enc);
             return ret;
         }
 
@@ -288,7 +288,7 @@ namespace BaseRepository
 
                     if (plantasencomiendas == null)
                         return false;
-                 }
+                }
 
                 var sumTotDatosLocalEncomienda1 = encomienda1.Encomienda_DatosLocal.Sum(x => x.superficie_cubierta_dl + x.superficie_descubierta_dl);
                 var sumTotDatosLocalEncomienda2 = encomienda2.Encomienda_DatosLocal.Sum(x => x.superficie_cubierta_dl + x.superficie_descubierta_dl);
@@ -562,8 +562,14 @@ namespace BaseRepository
 
         public bool esUbicacionEspecialConObjetoTerritorialByIdUbicacion(int idUbicacion)
         {
+
+            var sbUbicacionesOT = _unitOfWork.Db.SubTiposDeUbicacion
+              .Where(x => x.id_tipoubicacion == (int)Constantes.TiposDeUbicacion.ObjetoTerritorial)
+              .Select(x => x.id_subtipoubicacion).ToList();
+
             var result = from ubi in _unitOfWork.Db.Ubicaciones
-                         where ((int)Constantes.TiposDeUbicacion.ObjetoTerritorial == idUbicacion)
+                         join sub in _unitOfWork.Db.SubTiposDeUbicacion on ubi.id_subtipoubicacion equals sub.id_subtipoubicacion
+                         where (sbUbicacionesOT.Contains(sub.id_subtipoubicacion) && (ubi.id_ubicacion == idUbicacion))
                          select new
                          {
                              ubi.id_ubicacion
