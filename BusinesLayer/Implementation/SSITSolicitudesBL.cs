@@ -593,10 +593,10 @@ namespace BusinesLayer.Implementation
                     {
                         int idUbi = direccion.idUbicacion ?? 0;
 
-                        if (ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(idUbi))
-                        {
-                            direccion.puerta += "t";
-                        }
+                        //if (ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(idUbi))
+                        //{
+                        //    direccion.puerta += "t";
+                        //}
                         if (Direccion_armada.Length == 0)
                         {
                             Direccion_armada += direccion.calle + " " + direccion.puerta;
