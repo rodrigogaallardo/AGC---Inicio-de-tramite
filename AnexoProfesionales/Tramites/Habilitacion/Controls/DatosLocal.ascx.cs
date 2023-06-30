@@ -164,6 +164,7 @@ namespace AnexoProfesionales.Controls
 
             txtCantidadArtefactosSanitarios.Text = CantidadSanitarios.ToString();
             txtSuperficieSanitarios.Text = SuperficieSanitarios.ToString();
+            
 
             #region EstacionamientoBicicleta solo se muestra en automaticas
 
