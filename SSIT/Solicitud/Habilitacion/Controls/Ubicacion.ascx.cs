@@ -223,7 +223,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion.Trim() : "";
                     lblSubTipoUbicacion.Text = item.SubTipoUbicacionesDTO.descripcion_subtipoubicacion.Trim();
                     lblTextOtros.Text = item.LocalSubtipoUbicacion != null ? item.LocalSubtipoUbicacion : "";
-                    lbl_seccion.Text = item.UbicacionesDTO.Seccion.Value.ToString();
+                    if (item.UbicacionesDTO.Seccion != null)
+                        lbl_seccion.Text = item.UbicacionesDTO.Seccion.Value.ToString();
+                    else
+                        lbl_seccion.Text = string.Empty;
                     lbl_manzana.Text = item.UbicacionesDTO.Manzana.Trim();
                     lbl_parcela.Text = item.UbicacionesDTO.Parcela.Trim();
 
