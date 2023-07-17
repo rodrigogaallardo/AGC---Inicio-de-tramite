@@ -459,6 +459,7 @@ namespace AnexoProfesionales
                 blEncDl.Insert(enDl);
             else
             {
+                enDl.sobrecarga_corresponde_dl = optsCertificadoSobrecarga_SI.Checked;
                 blEncDl.Update(enDl);
                 if (!SobrecargaCorresponde)
                 {
@@ -506,20 +507,20 @@ namespace AnexoProfesionales
 
             Response.Redirect(string.Format("~/" + RouteConfig.VISOR_ENCOMIENDA + "{0}", id_encomienda));
 
-            //if (hid_return_url.Value.Contains("Editar"))
-            //{
-            //    if (SobrecargaCorresponde)
-            //        Response.Redirect(string.Format("~/" + RouteConfig.EDITAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
-            //    else
-            //        Response.Redirect(string.Format("~/" + RouteConfig.VISOR_ENCOMIENDA + "{0}", id_encomienda));
-            //}
-            //else
-            //{
-            //    if (SobrecargaCorresponde)
-            //        Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
-            //    else
-            //        Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_RUBROS + "{0}", id_encomienda));
-            //}
+            if (hid_return_url.Value.Contains("Editar"))
+            {
+                if (SobrecargaCorresponde)
+                    Response.Redirect(string.Format("~/" + RouteConfig.EDITAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
+                else
+                    Response.Redirect(string.Format("~/" + RouteConfig.VISOR_ENCOMIENDA + "{0}", id_encomienda));
+            }
+            else
+            {
+                if (SobrecargaCorresponde)
+                    Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
+                else
+                    Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_RUBROS + "{0}", id_encomienda));
+            }
 
         }
 
