@@ -728,6 +728,11 @@ namespace BusinesLayer.Implementation
                     var elementEntitySol = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDto);
                     var insertSolOk = repo.Insert(elementEntitySol);
 
+                    if(elementEntitySol.FechaLibrado != null)
+                    {
+                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(elementEntitySol.id_solicitud, elementEntitySol.FechaLibrado, DateTime.Now, elementEntitySol.CreateUser);
+                    }
+
 
                     unitOfWork.Commit();
                     objectDto.IdSolicitud = elementEntitySol.id_solicitud;
@@ -753,9 +758,6 @@ namespace BusinesLayer.Implementation
                 {
                     repo = new SSITSolicitudesRepository(unitOfWork);
                     var elementDTO = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDTO);
-
-
-
                     repo.Update(elementDTO);
                     unitOfWork.Commit();
                 }
@@ -1904,6 +1906,9 @@ namespace BusinesLayer.Implementation
                     solicitudEntity.LastUpdateUser = userid;
                     solicitudEntity.LastUpdateDate = DateTime.Now;
                     repo.Update(solicitudEntity);
+
+                    unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(solicitudEntity.id_solicitud, DateTime.Now , DateTime.Now, userid);
+
                     unitOfWork.Commit();
                 }
             }

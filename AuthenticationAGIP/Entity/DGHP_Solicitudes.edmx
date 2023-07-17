@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DGHP_SolicitudesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DGHP_SolicitudesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="aspnet_Users">
           <Key>
             <PropertyRef Name="UserId" />
@@ -24,17 +24,22 @@
           <Property Name="id_param" Type="int" Nullable="false" />
           <Property Name="cod_param" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="nom_param" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="valorchar_param" Type="nvarchar" MaxLength="1000" />
+          <Property Name="valorchar_param" Type="nvarchar" MaxLength="4000" />
           <Property Name="valornum_param" Type="decimal" Precision="18" Scale="4" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
+        <Function Name="SSIT_Solicitudes_Historial_LibradoUso_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_solicitud" Type="int" Mode="In" />
+          <Parameter Name="fechaLibrado" Type="date" Mode="In" />
+          <Parameter Name="createDate" Type="date" Mode="In" />
+          <Parameter Name="createUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <EntityContainer Name="DGHP_SolicitudesModelStoreContainer">
           <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DGHP_SolicitudesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -57,7 +62,7 @@
           <Property Name="id_param" Type="Int32" Nullable="false" />
           <Property Name="cod_param" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="nom_param" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="valorchar_param" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="valorchar_param" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="valornum_param" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
@@ -65,6 +70,12 @@
         <EntityContainer Name="DGHP_SolicitudesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" />
           <EntitySet Name="Parametros" EntityType="Self.Parametros" />
+          <FunctionImport Name="SSIT_Solicitudes_Historial_LibradoUso_INSERT">
+            <Parameter Name="id_solicitud" Mode="In" Type="Int32" />
+            <Parameter Name="fechaLibrado" Mode="In" Type="DateTime" />
+            <Parameter Name="createDate" Mode="In" Type="DateTime" />
+            <Parameter Name="createUser" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -98,6 +109,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SSIT_Solicitudes_Historial_LibradoUso_INSERT" FunctionName="DGHP_SolicitudesModel.Store.SSIT_Solicitudes_Historial_LibradoUso_INSERT" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

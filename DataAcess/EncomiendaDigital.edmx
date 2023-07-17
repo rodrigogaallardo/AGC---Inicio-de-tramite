@@ -15375,6 +15375,12 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="MsgError" Type="nvarchar" Mode="InOut" />
         </Function>
+        <Function Name="SSIT_Solicitudes_Historial_LibradoUso_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_solicitud" Type="int" Mode="In" />
+          <Parameter Name="fechaLibrado" Type="date" Mode="In" />
+          <Parameter Name="createDate" Type="date" Mode="In" />
+          <Parameter Name="createUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="SSIT_Transferir_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid_nuevo" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="userid_anterior" Type="uniqueidentifier" Mode="In" />
@@ -22638,6 +22644,12 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="TipoActividad" EntitySet="TipoActividad" />
             <End Role="CPadron_RubrosCN" EntitySet="CPadron_RubrosCN" />
           </AssociationSet>
+          <FunctionImport Name="SSIT_Solicitudes_Historial_LibradoUso_INSERT">
+            <Parameter Name="id_solicitud" Mode="In" Type="Int32" />
+            <Parameter Name="fechaLibrado" Mode="In" Type="DateTime" />
+            <Parameter Name="createDate" Mode="In" Type="DateTime" />
+            <Parameter Name="createUser" Mode="In" Type="Guid" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -46012,6 +46024,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SSIT_Solicitudes_Historial_LibradoUso_INSERT" FunctionName="EncmiendaEntityes.Store.SSIT_Solicitudes_Historial_LibradoUso_INSERT" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
