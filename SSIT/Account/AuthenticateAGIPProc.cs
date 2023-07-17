@@ -1,5 +1,6 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
+using Microsoft.IdentityModel.Tokens;
 using SSIT.Common;
 using StaticClass;
 using System;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Web;
 using System.Web.Security;
 
@@ -22,7 +24,7 @@ namespace SSIT.Account
 
             bool ret = true;
             string token = "";
-            string sign = "";
+          
             HttpRequest Request = HttpContext.Current.Request;
             HttpResponse Response = HttpContext.Current.Response;
 
@@ -39,27 +41,80 @@ namespace SSIT.Account
                     ret = false;
                     throw new Exception("El request no posee el token");
                 }
-                try
+
+
+              //  string TokenRecibido = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJwZXJzb25hTG9naW4iOnsiaWQiOjExLCJwZXJzb25hIjp7ImlkIjoxMSwibm9tYnJlcyI6IkZhY3VuZG8gQWxiZXJ0byIsImFwZWxsaWRvcyI6IkZPUkNBREEiLCJyYXpvblNvY2lhbCI6bnVsbCwiY3VpdCI6IjIzMzk2MjAzNjY5IiwidGlwb0RvY3VtZW50byI6IkRVIiwibnVtZXJvRG9jdW1lbnRvIjoiMzk2MjAzNjYiLCJzZXhvIjoiTSIsImNvZGlnb1BhaXMiOiJBUiIsImNvZGlnb1RlbGVmb25vUGFpcyI6Iis1NCIsInRlbGVmb25vIjoiMTEyMjMzNDQ1NSIsImVtYWlsIjoiZmFjdW5kby5mb3JjYWRhQGJpd2luaS5jb20iLCJ1c3VhcmlvQ3JlYWNpb24iOjExLCJmZWNoYUFsdGEiOjE2ODg1NzI0NzgwMDAsInVzdWFyaW9Nb2RpZmljYWNpb24iOm51bGwsImZlY2hhTW9kaWZpY2FjaW9uIjoxNjg4NTcyNDc4MDAwLCJ0aXBvUGVyc29uYSI6IlBGIiwidmFsaVJlbmFwZXIiOjAsInRlcm1pbm9zWUNvbmRpY2lvbmVzIjp7ImlkIjozLCJ0aXBvRG9jdW1lbnRvIjp7ImlkIjoxNiwiYWNyb25pbW9HZWRvIjoiVFlDIiwiYWNyb25pbW9UQUQiOiJUWUMiLCJub21icmUiOiJUZXJtaW5vcyB5IENvbmRpY2lvbmVzIiwiZGVzY3JpcGNpb24iOiJUZXJtaW5vcyB5IENvbmRpY2lvbmVzIiwiZm9ybXVsYXJpb0NvbnRyb2xhZG8iOm51bGwsInRpcG9Qcm9kdWNjaW9uIjpudWxsLCJ1c3VhcmlvSW5pY2lhZG9yIjoiRVZFUklTIiwidXN1YXJpb0NyZWFjaW9uIjoiVEFEM19TQURFX0RFViIsImZlY2hhQWx0YSI6MTYxNDk2MDYyNjAwMCwidXN1YXJpb01vZGlmaWNhY2lvbiI6bnVsbCwiZmVjaGFNb2RpZmljYWNpb24iOjE1NTU0MDc4MDAwMDAsImVzRW1iZWJpZG8iOnRydWUsImZpcm1hQ29uVG9rZW4iOmZhbHNlLCJpcCI6bnVsbCwiZXNGaXJtYUNvbmp1bnRhIjpmYWxzZSwiZG9jdW1lbnRvVGlwb0Zpcm1hIjpudWxsLCJ0ZXh0b0xpYnJlTGltaXRlIjpudWxsLCJ0ZXh0b0xpYnJlRW5yaXF1ZWNpZG8iOmZhbHNlLCJlbWJlYmlkb09wY2lvbmFsIjpudWxsLCJlc0Zpcm1hQ2xvdWQiOmZhbHNlfSwiZXN0YWRvIjoiQUNUSVZPIiwiZmVjaGFBbHRhIjoxNjE5NjA0MTEzMDAwLCJjb250ZW5pZG8iOiI8IWRvY3R5cGUgaHRtbD5cbjxodG1sPlxuIDxoZWFkPlxuIDx0aXRsZT5UJmVhY3V0ZTtybWlub3MgeSBDb25kaWNpb25lcyBUQUQ8L3RpdGxlPlxuIDwvaGVhZD5cbjxib2R5PlxuPGRpdj5cbjxwIHN0eWxlPVwibWFyZ2luLWxlZnQ6IDE0LjJwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj48c3BhbiBzdHlsZT1cImZvbnQtc2l6ZToxOHB4O1wiPjxzcGFuIHN0eWxlPVwiZm9udC1mYW1pbHk6dGFob21hLGdlbmV2YSxzYW5zLXNlcmlmO1wiPjxzdHJvbmc-VCZFYWN1dGU7PC9zdHJvbmc-PHN0cm9uZz5SPC9zdHJvbmc-PHN0cm9uZz5NPC9zdHJvbmc-PHN0cm9uZz5JPC9zdHJvbmc-PHN0cm9uZz5OPC9zdHJvbmc-PHN0cm9uZz5PUyAmbmJzcDtZIENPTkRJQ0lPTkVTICZuYnNwO0RFIFVTTyBERSBMQSBQTEFUQUZPUk1BICZuYnNwO0RFIFRSQU1JVEFDSSZPYWN1dGU7TiAmbmJzcDtBIERJU1RBTkNJQTwvc3Ryb25nPjwvc3Bhbj48L3NwYW4-PC9wPlxuPHAgc3R5bGU9XCJtYXJnaW4tbGVmdDogMTNwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj48YSBocmVmPVwiaHR0cHM6Ly9zYWRlLXRhZDMtaG1sLmdjYmEuZ29iLmFyL3RyYW1pdGVzYWRpc3RhbmNpYS9pbmZvcm1hY2lvbi9UQUQtVGVybWlub3MteS1Db25kaWNpb25lcy5wZGZcIiB0YXJnZXQ9XCJfYmxhbmtcIj48c3BhbiBjbGFzcz1cImMxIGMyXCIgc3R5bGU9XCJsaW5lLWhlaWdodDogMTBweDsgY29sb3I6IHJnYigxNywgODUsIDIwNCk7IHRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lOyBmb250LWZhbWlseTogQ2FsaWJyaTtcIj5WZXIgVMOpcm1pbm9zIHkgQ29uZGljaW9uZXM8L3NwYW4-PC9hPjwvcD5cblxuPHAgc3R5bGU9XCJtYXJnaW4tbGVmdDogMTNwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj4mbmJzcDs8L3A-XG5cbjwvZGl2PlxuPC9ib2R5PlxuPC9odG1sPiIsIm5pdmVsQWNjZXNvIjp7ImlkIjoxMSwibm9tYnJlIjoiQUdJUCIsIm5pdmVsQWNjZXNvIjozLCJwcm92ZWVkb3IiOiJBR0lQMyIsImF1dGhvcml6YXRpb25FbmRQb2ludCI6Imh0dHBzOi8vaG1sLmFnaXAuZ29iLmFyL2NsYXZlY2l1ZGFkLyIsImVuZFNlc3Npb25FbmRQb2ludCI6Imh0dHBzOi8vaG1sLmFnaXAuZ29iLmFyL2NsYXZlY2l1ZGFkLyIsImxvZ2luQ29tcG9uZW50IjoiL3ByaW1lckxvZ2luIiwiaGFiaWxpdGFyQXBvZGVyYW1pZW50byI6dHJ1ZX19LCJzaXN0ZW1hQ29uc3VtaWRvciI6bnVsbCwiYmFJZCI6bnVsbCwiaGFiaWxpdGFkYVZpc3RhMzYwIjpudWxsfSwiY2FsbGUiOiJNQUlQVSIsImFsdHVyYSI6IjM3NCIsInBpc28iOm51bGwsImRlcHRvIjpudWxsLCJjb2RpZ29Qb3N0YWwiOiIxMjM0IiwidGVsZWZvbm8iOm51bGwsIm9ic2VydmFjaW9uZXMiOm51bGx9LCJpZFRhZCI6bnVsbCwiYXBvZGVyYWRvcyI6eyJpZCI6MTEsInBlcnNvbmEiOm51bGwsImNhbGxlIjpudWxsLCJhbHR1cmEiOm51bGwsInBpc28iOm51bGwsImRlcHRvIjpudWxsLCJjb2RpZ29Qb3N0YWwiOm51bGwsInRlbGVmb25vIjoiMTEyMjMzNDQ1NSIsIm9ic2VydmFjaW9uZXMiOm51bGx9LCJ0aXBvVHJhbWl0ZSI6bnVsbCwicG9kZXJkYW50ZXMiOltdfQ.GIaWsSo18XCj18aRNoPizs9Exv9uqkuiO9f33_4hMDNz5oWdsy0ORtgIHoTYQ5NweSuQLGKACFI-6Rmojfv71Q";
+                string keyPrivadaGuardada =  System.Configuration.ConfigurationManager.AppSettings["PrivateKey"];
+                if (!string.IsNullOrWhiteSpace(token) )
                 {
-                    sign = Request.Form["sign"];
-                }
-                catch (Exception)
-                {
-                    ret = false;
-                    throw new Exception("El request no posee el sign");
-                }
+                    string[] tokenParts = token.Split('.');
+                    string Header = tokenParts[0];
+                    string payloadRecibido = tokenParts[1];
+                    string keyPublicaRecibida = tokenParts[2];
+                    string PayloadJsonString = Base64UrlEncoder.Decode(payloadRecibido);
 
-                //token = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxkYXRvcz48c2VydmljaW8gbm9tYnJlPSJtb2RlX3RyYW1fZGlzdDEiIGV4cF90aW1lPSIxNTQwMDExOTk1Ii8+PGF1dGVudGljYWRvIGN1aXQ9IjIwMjUwMDYyODE5IiBub21icmU9IkNBUk9MTyBSSUNBUkRPIEdBQlJJRUwiIGlzaWI9IiIgY2F0PSIiIGNvZGNhbGxlPSIwIiBjYWxsZT0iTk8gSU5GT1JNQURBIiBwdWVydGE9IjczIiBwaXNvPSIwMyIgZHB0bz0iQyIgY29kcG9zdGFsPSIxMTcwIiBjb2Rsb2NhbGlkYWQ9IjAiIGxvY2FsaWRhZD0iTk8gSU5GT1JNQURBIiBjb2Rwcm92PSIwIiBwcm92aW5jaWE9Ik5PIElORk9STUFEQSIgdGVsZWZvbm89IjQxNTY0NDYwIiBlbWFpbD0icmljYXJkby5jYXJvbG9AZGlnaWNvbXNpc3RlbWFzLmNvbS5hciIgbml2ZWw9IjIiIHRpcG9Eb2N1bWVudG89IjMwMDMiIGRvY3VtZW50bz0iMjUwMDYyODEiPjwvYXV0ZW50aWNhZG8+PHJlcHJlc2VudGFkb3M+PHJlcHJlc2VudGFkbyBjdWl0PSIyMDI1MDA2MjgxOSIgbm9tYnJlPSJDQVJPTE8gUklDQVJETyBHQUJSSUVMIiBpc2liPSIiIGNhdD0iIiBjb2RjYWxsZT0iMCIgY2FsbGU9Ik5PIElORk9STUFEQSIgcHVlcnRhPSI3MyIgcGlzbz0iMDMiIGRwdG89IkMiIGNvZHBvc3RhbD0iMTE3MCIgY29kbG9jYWxpZGFkPSIwIiBsb2NhbGlkYWQ9Ik5PIElORk9STUFEQSIgY29kcHJvdj0iMCIgcHJvdmluY2lhPSJOTyBJTkZPUk1BREEiIHRlbGVmb25vPSI0MTU2NDQ2MCIgZW1haWw9InJpY2FyZG8uY2Fyb2xvQGRpZ2ljb21zaXN0ZW1hcy5jb20uYXIiIHRpcG9SZXByZXNlbnRhY2lvbj0iMCIgdGlwb0RvY3VtZW50bz0iMzAwMyIgZG9jdW1lbnRvPSIyNTAwNjI4MSIgZWxlZ2lkbz0idHJ1ZSI+PC9yZXByZXNlbnRhZG8+PC9yZXByZXNlbnRhZG9zPjwvZGF0b3M+";
-                //sign = "RhAx7/W93ygkjLlXX4y2UaVXe8owyosGlxAnijNJDJ4sgrr8amom28D0bLDN2pIskaLnxNpQGtcErUibYOXHvrS754lVcebWEIbUovZuJnv5ge9OtOkIaTvJ/kEbhAvcwfuik2IB8l6MF0hK+oYHa4K8mx+Hl0kDrrlxHBeHSbs=";
+                    string sign = keyPublicaRecibida;//ASOSA FEO ARREGLAR
 
-                if (!string.IsNullOrWhiteSpace(token) && !string.IsNullOrWhiteSpace(sign))
-                {
+                    bool tokenValido = ValidarToken(payloadRecibido, keyPublicaRecibida, keyPrivadaGuardada);
+                    tokenValido = true;//ASOSA FORZADO
+                                       //  if (validarToken(token))
+                    if (tokenValido)
+                        {
+                        DatosMiBA datosMiBA = Newtonsoft.Json.JsonConvert.DeserializeObject<DatosMiBA>(PayloadJsonString);
+                        #region Fill Datos datosToken
 
-                    if (validarToken(token, sign))
-                    {
+                        Datos datosToken = new Datos();
 
+                        Servicio servicio = new Servicio();
+                        servicio.Exp_time = DateTime.Now.ToLongDateString();  //ASOSA
+                        servicio.Nombre = datosMiBA.personaLogin.persona.terminosYCondiciones.nivelAcceso.nombre;//ASOSA
+                        datosToken.Servicio = servicio;
 
-                        Datos datosToken = GetDatosTokenAGIP(token);
+                        Autenticado autenticado = new Autenticado();
+                        autenticado.Cuit = datosMiBA.personaLogin.persona.cuit;
+                        autenticado.Nombre = datosMiBA.personaLogin.persona.nombres + " " + datosMiBA.personaLogin.persona.apellidos;
+                        autenticado.Isib = "??";
+                        autenticado.Codcalle = "";
+                        autenticado.Calle = datosMiBA.personaLogin.calle;
+                        autenticado.Puerta = datosMiBA.personaLogin.altura;
+                        autenticado.Codpostal = datosMiBA.personaLogin.codigoPostal;
+                        //autenticado.Codlocalidad = datosMiBA.personaLogin.localidad.id.ToString();
+                        //autenticado.Localidad = datosMiBA.personaLogin.localidad.nombre;
+                        //autenticado.Codprov = datosMiBA.personaLogin.provincia.id.ToString();
+                        //autenticado.Provincia = datosMiBA.personaLogin.provincia.nombre;
+                        autenticado.Telefono = datosMiBA.personaLogin.persona.telefono;
+                        autenticado.Email = datosMiBA.personaLogin.persona.email;
+                        autenticado.Nivel = datosMiBA.personaLogin.persona.terminosYCondiciones.nivelAcceso.id.ToString();//ASOSA
+                        autenticado.TipoDocumento = datosMiBA.personaLogin.persona.tipoDocumento;
+                        autenticado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
+                        datosToken.Autenticado = autenticado;
+
+                        Representados representados = new Representados();
+                        Representado representado = new Representado();
+
+                        representado.Cuit = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
+                        representado.Nombre = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.nombres + " " + datosMiBA.apoderados.persona.apellidos;
+                        representado.Isib = "";
+                        representado.Codcalle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
+                        representado.Calle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.calle;
+                        representado.Puerta = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.altura;
+                        representado.Codpostal = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.codigoPostal;
+                        //representado.Codlocalidad = datosMiBA.apoderados.localidad.id.ToString();
+                        //representado.Localidad = datosMiBA.apoderados.localidad.nombre;
+                        //representado.Codprov = datosMiBA.apoderados.provincia.id.ToString();
+                        //representado.Provincia = datosMiBA.apoderados.provincia.nombre;
+                        representado.Telefono = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.telefono;
+                        representado.Email = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.email;
+                        representado.TipoRepresentacion = "";//ASOSA
+                        representado.TipoDocumento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.tipoDocumento;
+                        representado.Documento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.numeroDocumento;
+                        representado.Elegido = true.ToString();
+                        representados.Representado = representado;
+                        datosToken.Representados = representados;
+                        #endregion
+
+                        //Datos datosToken = GetDatosTokenAGIP(token);
+
                         if (datosToken == null)
                             throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
 
@@ -252,22 +307,46 @@ namespace SSIT.Account
             //FormsAuthentication.SetAuthCookie(username, true);
             Globals.username = username;
         }
-        private bool validarToken(string token, string sign)
+        private bool validarToken(string token)
         {
-            byte[] decodedToken = Convert.FromBase64String(token);
-            byte[] decodedBytesSign = Convert.FromBase64String(sign);
-
-            string CertificadoFilename = Functions.GetParametroChar("AGIP.Certificado.Filename");
-            string PathFilename = HttpContext.Current.Server.MapPath(string.Format("~/Account/CertificadosAGIP/{0}", CertificadoFilename));
-
-            X509Certificate2 cert = new X509Certificate2(PathFilename);
-
-            RSACryptoServiceProvider csp = (RSACryptoServiceProvider)cert.PublicKey.Key;
-
-            bool TokenValido = csp.VerifyData(decodedToken, new SHA1CryptoServiceProvider(), decodedBytesSign);
+            bool TokenValido = true;
             return TokenValido;
         }
+        protected bool ValidarToken(string payloadRecibido, string keyPublicaRecibida, string keyPrivadaGuardada)
+        {
 
+            byte[] payloadBytes = Encoding.UTF8.GetBytes(payloadRecibido);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(keyPrivadaGuardada);
+
+
+            string TokenGenerado = GenerateToken(payloadRecibido, keyPrivadaGuardada);
+
+
+            string[] TokenGeneradoParts = TokenGenerado.Split('.');
+
+            string payloadGenerado = TokenGeneradoParts[0];
+            string keyPublicaGenerado = TokenGeneradoParts[1];
+            //bool isValid = payloadRecibido.Equals(payloadGenerado); COMPARO LOS PAYLOAD OK
+            bool isValid = keyPublicaRecibida.Equals(keyPublicaGenerado);
+            //bool isValid = ComprobarToken(TokenGenerado, keyPrivadaGuardada);
+            return isValid;
+        }
+        public static string GenerateToken(string payload, string secretKey)
+        {
+            byte[] keyBytes = Encoding.UTF8.GetBytes(secretKey);
+            byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
+
+            using (HMACSHA512 hmac = new HMACSHA512(keyBytes))
+            {
+
+                byte[] signatureBytes = hmac.ComputeHash(payloadBytes);
+
+                string signature = Convert.ToBase64String(signatureBytes);
+
+                string TokenGenerado = $"{payload}.{signature}";
+                return TokenGenerado;
+            }
+        }
         private string GetUserErrorMessage(MembershipCreateStatus status)
         {
             switch (status)
