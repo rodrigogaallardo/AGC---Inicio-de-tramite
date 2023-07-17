@@ -1,16 +1,15 @@
 ﻿using BusinesLayer.Implementation;
+using DataTransferObject;
 using ExternalService.ws_interface_AGC;
+using SSIT.Common;
 using StaticClass;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SSIT.Common;
-using DataTransferObject;
-using System.Configuration;
 using static StaticClass.Constantes;
 
 namespace SSIT.Mobile
@@ -78,7 +77,11 @@ namespace SSIT.Mobile
             string dispo_nro_expediente = "";
 
             SSITSolicitudesBL blSol = new SSITSolicitudesBL();
+
             var sol = blSol.Single(id_solicitud);
+            EncomiendaBL encBl = new EncomiendaBL();
+            var datoSolicitudEnc = encBl.GetByFKIdSolicitud(id_solicitud);
+            var enc = datoSolicitudEnc.OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
 
 
 
@@ -95,8 +98,11 @@ namespace SSIT.Mobile
             if (sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.VENCIDA)
             {
                 if (sol.FechaLibrado == null &&
-                    (sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO ))
-                    lblFechaLibrado.Text = "<font color='red'><b>EL PRESENTE TRAMITE NO SE ENCUENTRA LIBRADO AL USO</b></font>";
+                    (sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO) && enc.AcogeBeneficios == true)
+                    lblFechaLibrado.Text = "<font color='red'><b>EL PRESENTE TRAMITE NO SE ENCUENTRA LIBRADO AL USO, YA QUE SE ACOGE A LOS BENEFICIOS DE LA DI-2023-2-GCABA-UERESGP. </b></font>";
+                else if (sol.FechaLibrado == null &&
+                ((sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO) && (enc.AcogeBeneficios == false || enc.AcogeBeneficios == null)))
+                    lblFechaLibrado.Text = "<font color='red'><b>EL PRESENTE TRAMITE NO SE ENCUENTRA LIBRADO AL USO. </b></font>";
                 else if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.CADUCO)
                     lblFechaLibrado.Text = "<font color='red'><b>TRAMITE CADUCO, NO LIBRADO AL USO</b></font>";
                 else
@@ -138,7 +144,6 @@ namespace SSIT.Mobile
 
             EncomiendaBL blEnc = new EncomiendaBL();
             var listEnc = blEnc.GetByFKIdSolicitud(id_solicitud).Where(x => x.IdEstado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo).ToList();
-
             var encomienda = listEnc.OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
 
             if (encomienda != null)

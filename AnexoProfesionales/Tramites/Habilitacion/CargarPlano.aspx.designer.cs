@@ -60,6 +60,33 @@ namespace AnexoProfesionales
         protected global::System.Web.UI.WebControls.Label lblMsgPlanoContraIncendios;
 
         /// <summary>
+        /// Control pnlLeyenda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlLeyenda;
+
+        /// <summary>
+        /// Control lblLeyenda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLeyenda;
+
+        /// <summary>
+        /// Control pnlLeyenda2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlLeyenda2;
+
+        /// <summary>
         /// Control pnlContenido.
         /// </summary>
         /// <remarks>

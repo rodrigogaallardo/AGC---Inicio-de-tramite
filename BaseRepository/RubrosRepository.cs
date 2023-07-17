@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Dal.UnitOfWork;
 using DataAcess;
-using Dal.UnitOfWork;
 using DataAcess.EntityCustom;
 using StaticClass;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BaseRepository
 {
@@ -161,6 +161,7 @@ namespace BaseRepository
                 return resolution;
             }
         }
+
 
 
         public IEnumerable<RubrosEntity> GetRubrosHistoricos(string CodZona, decimal Superficie, string CodigoRubro, bool TieneNormativa, int IdTipoTramite)

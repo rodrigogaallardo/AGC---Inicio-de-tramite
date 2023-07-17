@@ -101,25 +101,24 @@
                                                 <li>Subtipo de Ubicaci&oacute;n:
                                             <asp:Label ID="lblSubTipoUbicacionview" runat="server" Font-Bold="true"></asp:Label></li>
                                             </ul>
-                                            <div>
+                                            <%--  <div>
                                                 <strong>Local:</strong>
                                                 <asp:Label ID="lblLocalview" runat="server"></asp:Label>
-                                            </div>
+                                            </div>--%>
                                         </asp:Panel>
 
                                         <asp:Panel ID="pnlPartidasHorizontalesview" runat="server">
-                                            <ul>
-                                                <li>Partida/s Horizontal/es:
-                                     
-                                                <asp:DataList ID="dtlPartidaHorizontales_db" runat="server" Font-Bold="true" RepeatDirection="Horizontal"
-                                                    RepeatColumns="1" CellSpacing="10">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblPartidahorizontal_db" runat="server" Text='<% #Bind("DescripcionCompleta")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:DataList>
-                                                    <asp:Label ID="lblEmptyDataPartidasHorizontales_db" runat="server" Text="No posee" Visible="false" CssClass="col-sm-2"></asp:Label>
-                                                </li>
-                                            </ul>
+                                            <asp:DataList ID="dtlPartidaHorizontales_db" runat="server" Font-Bold="true" RepeatDirection="Horizontal"
+                                                RepeatColumns="1" CellSpacing="10">
+                                                <ItemTemplate>
+                                                    <ul>
+                                                        <li><span style="font-weight: normal;">Partida/s Horizontal/es:</span>
+                                                            <asp:Label ID="lblPartidahorizontal_db" runat="server" Text='<% #Bind("DescripcionCompleta")%>'></asp:Label>
+                                                        </li>
+                                                    </ul>
+                                                </ItemTemplate>
+                                            </asp:DataList>
+                                            <asp:Label ID="lblEmptyDataPartidasHorizontales_db" runat="server" Text="No posee" Visible="false" CssClass="col-sm-2"></asp:Label>
                                         </asp:Panel>
 
                                         <ul>
@@ -128,22 +127,19 @@
                                             </li>
                                         </ul>
                                         <asp:Panel ID="pnlPuertasview" runat="server">
-
-                                            <ul>
-                                                <li>Puertas:
-                                        
-                                                <asp:DataList ID="dtlPuertas_db" runat="server" RepeatDirection="Horizontal" RepeatColumns="1"
-                                                    CellSpacing="10" Font-Bold="true">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblPuertas_db" runat="server" Text='<% #Bind("NombreCalle")%>'></asp:Label>
-                                                        <asp:Label ID="lnkNroPuerta_db" runat="server" Text='<% #Bind("NroPuerta")%>' CssClass="pleft5"></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:DataList>
-
-                                                </li>
-
-                                            </ul>
+                                            <asp:DataList ID="dtlPuertas_db" runat="server" RepeatDirection="Horizontal" RepeatColumns="1"
+                                                CellSpacing="10" Font-Bold="true">
+                                                <ItemTemplate>
+                                                    <ul>
+                                                        <li><span style="font-weight: normal;">Puertas:</span>
+                                                            <asp:Label ID="lblPuertas_db" runat="server" Text='<% #Bind("NombreCalle")%>'></asp:Label>
+                                                            <asp:Label ID="lnkNroPuerta_db" runat="server" Text='<% #Bind("NroPuerta")%>' CssClass="pleft5"></asp:Label>
+                                                        </li>
+                                                    </ul>
+                                                </ItemTemplate>
+                                            </asp:DataList>
                                         </asp:Panel>
+
                                         <asp:UpdatePanel ID="UpnDeptoLocalview" runat="server" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:Panel ID="pnlDeptoLocalview" runat="server">
