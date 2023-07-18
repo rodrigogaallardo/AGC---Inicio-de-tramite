@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
-    <form method="get" action="http://localhost:56469/Account/AuthenticateAGIP.aspx">
+    <form method="get" action="http://localhost:56469/">
         url:
         <input type="text" name="url" value="http://localhost:56469/Account/AuthenticateAGIP.aspx"><br>
         returnUrl:
