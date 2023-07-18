@@ -64,8 +64,8 @@ namespace SSIT.Account
                     string sign = keyPublicaRecibida;//ASOSA FEO ARREGLAR
 
                     bool tokenValido = ValidarToken(Header +"."+ payloadRecibido, keyPublicaRecibida, keyPrivadaGuardada);
+                    Console.Write("TokenValido:" + tokenValido);
                     tokenValido = true;//ASOSA FORZADO
-
                     if (tokenValido)
                         {
                         DatosMiBA datosMiBA = Newtonsoft.Json.JsonConvert.DeserializeObject<DatosMiBA>(PayloadJsonString);

@@ -104,10 +104,12 @@ namespace SSIT
         public void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             // Esto sirve para que cuando redirigen con el token autologuea
+            Console.Write("Application_AuthenticateRequest - Token: " + Request.Form["Token"]);
+            Console.Write("Application_AuthenticateRequest - AbsoluteURI: " + Request.Url.AbsoluteUri);
             if (Request.Form["token"] != null && !Request.Url.AbsoluteUri.Contains("AuthenticateAGIP"))
             {
                 string returnUrl = Request.Url.AbsoluteUri;
-
+                Console.Write("Application_AuthenticateRequest - Llamo al AuthenticateAGIPProc");
                 Account.AuthenticateAGIPProc auth = new Account.AuthenticateAGIPProc();
                 auth.ReadData();
                 Response.Redirect(returnUrl);
