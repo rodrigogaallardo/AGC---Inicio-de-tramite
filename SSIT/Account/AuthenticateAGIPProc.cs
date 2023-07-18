@@ -29,22 +29,26 @@ namespace SSIT.Account
             HttpResponse Response = HttpContext.Current.Response;
 
             string returnUrl = (!string.IsNullOrEmpty(Request.QueryString["returnUrl"]) ? Request.QueryString["returnUrl"] : "");
+            Console.Write("returnUrl:" + returnUrl);
             try
             {
 
                 try
                 {
                     token = Request.Form["token"];
+                   
                 }
                 catch (Exception)
                 {
                     ret = false;
                     throw new Exception("El request no posee el token");
                 }
+               
 
-
-              //  string TokenRecibido = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJwZXJzb25hTG9naW4iOnsiaWQiOjExLCJwZXJzb25hIjp7ImlkIjoxMSwibm9tYnJlcyI6IkZhY3VuZG8gQWxiZXJ0byIsImFwZWxsaWRvcyI6IkZPUkNBREEiLCJyYXpvblNvY2lhbCI6bnVsbCwiY3VpdCI6IjIzMzk2MjAzNjY5IiwidGlwb0RvY3VtZW50byI6IkRVIiwibnVtZXJvRG9jdW1lbnRvIjoiMzk2MjAzNjYiLCJzZXhvIjoiTSIsImNvZGlnb1BhaXMiOiJBUiIsImNvZGlnb1RlbGVmb25vUGFpcyI6Iis1NCIsInRlbGVmb25vIjoiMTEyMjMzNDQ1NSIsImVtYWlsIjoiZmFjdW5kby5mb3JjYWRhQGJpd2luaS5jb20iLCJ1c3VhcmlvQ3JlYWNpb24iOjExLCJmZWNoYUFsdGEiOjE2ODg1NzI0NzgwMDAsInVzdWFyaW9Nb2RpZmljYWNpb24iOm51bGwsImZlY2hhTW9kaWZpY2FjaW9uIjoxNjg4NTcyNDc4MDAwLCJ0aXBvUGVyc29uYSI6IlBGIiwidmFsaVJlbmFwZXIiOjAsInRlcm1pbm9zWUNvbmRpY2lvbmVzIjp7ImlkIjozLCJ0aXBvRG9jdW1lbnRvIjp7ImlkIjoxNiwiYWNyb25pbW9HZWRvIjoiVFlDIiwiYWNyb25pbW9UQUQiOiJUWUMiLCJub21icmUiOiJUZXJtaW5vcyB5IENvbmRpY2lvbmVzIiwiZGVzY3JpcGNpb24iOiJUZXJtaW5vcyB5IENvbmRpY2lvbmVzIiwiZm9ybXVsYXJpb0NvbnRyb2xhZG8iOm51bGwsInRpcG9Qcm9kdWNjaW9uIjpudWxsLCJ1c3VhcmlvSW5pY2lhZG9yIjoiRVZFUklTIiwidXN1YXJpb0NyZWFjaW9uIjoiVEFEM19TQURFX0RFViIsImZlY2hhQWx0YSI6MTYxNDk2MDYyNjAwMCwidXN1YXJpb01vZGlmaWNhY2lvbiI6bnVsbCwiZmVjaGFNb2RpZmljYWNpb24iOjE1NTU0MDc4MDAwMDAsImVzRW1iZWJpZG8iOnRydWUsImZpcm1hQ29uVG9rZW4iOmZhbHNlLCJpcCI6bnVsbCwiZXNGaXJtYUNvbmp1bnRhIjpmYWxzZSwiZG9jdW1lbnRvVGlwb0Zpcm1hIjpudWxsLCJ0ZXh0b0xpYnJlTGltaXRlIjpudWxsLCJ0ZXh0b0xpYnJlRW5yaXF1ZWNpZG8iOmZhbHNlLCJlbWJlYmlkb09wY2lvbmFsIjpudWxsLCJlc0Zpcm1hQ2xvdWQiOmZhbHNlfSwiZXN0YWRvIjoiQUNUSVZPIiwiZmVjaGFBbHRhIjoxNjE5NjA0MTEzMDAwLCJjb250ZW5pZG8iOiI8IWRvY3R5cGUgaHRtbD5cbjxodG1sPlxuIDxoZWFkPlxuIDx0aXRsZT5UJmVhY3V0ZTtybWlub3MgeSBDb25kaWNpb25lcyBUQUQ8L3RpdGxlPlxuIDwvaGVhZD5cbjxib2R5PlxuPGRpdj5cbjxwIHN0eWxlPVwibWFyZ2luLWxlZnQ6IDE0LjJwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj48c3BhbiBzdHlsZT1cImZvbnQtc2l6ZToxOHB4O1wiPjxzcGFuIHN0eWxlPVwiZm9udC1mYW1pbHk6dGFob21hLGdlbmV2YSxzYW5zLXNlcmlmO1wiPjxzdHJvbmc-VCZFYWN1dGU7PC9zdHJvbmc-PHN0cm9uZz5SPC9zdHJvbmc-PHN0cm9uZz5NPC9zdHJvbmc-PHN0cm9uZz5JPC9zdHJvbmc-PHN0cm9uZz5OPC9zdHJvbmc-PHN0cm9uZz5PUyAmbmJzcDtZIENPTkRJQ0lPTkVTICZuYnNwO0RFIFVTTyBERSBMQSBQTEFUQUZPUk1BICZuYnNwO0RFIFRSQU1JVEFDSSZPYWN1dGU7TiAmbmJzcDtBIERJU1RBTkNJQTwvc3Ryb25nPjwvc3Bhbj48L3NwYW4-PC9wPlxuPHAgc3R5bGU9XCJtYXJnaW4tbGVmdDogMTNwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj48YSBocmVmPVwiaHR0cHM6Ly9zYWRlLXRhZDMtaG1sLmdjYmEuZ29iLmFyL3RyYW1pdGVzYWRpc3RhbmNpYS9pbmZvcm1hY2lvbi9UQUQtVGVybWlub3MteS1Db25kaWNpb25lcy5wZGZcIiB0YXJnZXQ9XCJfYmxhbmtcIj48c3BhbiBjbGFzcz1cImMxIGMyXCIgc3R5bGU9XCJsaW5lLWhlaWdodDogMTBweDsgY29sb3I6IHJnYigxNywgODUsIDIwNCk7IHRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lOyBmb250LWZhbWlseTogQ2FsaWJyaTtcIj5WZXIgVMOpcm1pbm9zIHkgQ29uZGljaW9uZXM8L3NwYW4-PC9hPjwvcD5cblxuPHAgc3R5bGU9XCJtYXJnaW4tbGVmdDogMTNwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj4mbmJzcDs8L3A-XG5cbjwvZGl2PlxuPC9ib2R5PlxuPC9odG1sPiIsIm5pdmVsQWNjZXNvIjp7ImlkIjoxMSwibm9tYnJlIjoiQUdJUCIsIm5pdmVsQWNjZXNvIjozLCJwcm92ZWVkb3IiOiJBR0lQMyIsImF1dGhvcml6YXRpb25FbmRQb2ludCI6Imh0dHBzOi8vaG1sLmFnaXAuZ29iLmFyL2NsYXZlY2l1ZGFkLyIsImVuZFNlc3Npb25FbmRQb2ludCI6Imh0dHBzOi8vaG1sLmFnaXAuZ29iLmFyL2NsYXZlY2l1ZGFkLyIsImxvZ2luQ29tcG9uZW50IjoiL3ByaW1lckxvZ2luIiwiaGFiaWxpdGFyQXBvZGVyYW1pZW50byI6dHJ1ZX19LCJzaXN0ZW1hQ29uc3VtaWRvciI6bnVsbCwiYmFJZCI6bnVsbCwiaGFiaWxpdGFkYVZpc3RhMzYwIjpudWxsfSwiY2FsbGUiOiJNQUlQVSIsImFsdHVyYSI6IjM3NCIsInBpc28iOm51bGwsImRlcHRvIjpudWxsLCJjb2RpZ29Qb3N0YWwiOiIxMjM0IiwidGVsZWZvbm8iOm51bGwsIm9ic2VydmFjaW9uZXMiOm51bGx9LCJpZFRhZCI6bnVsbCwiYXBvZGVyYWRvcyI6eyJpZCI6MTEsInBlcnNvbmEiOm51bGwsImNhbGxlIjpudWxsLCJhbHR1cmEiOm51bGwsInBpc28iOm51bGwsImRlcHRvIjpudWxsLCJjb2RpZ29Qb3N0YWwiOm51bGwsInRlbGVmb25vIjoiMTEyMjMzNDQ1NSIsIm9ic2VydmFjaW9uZXMiOm51bGx9LCJ0aXBvVHJhbWl0ZSI6bnVsbCwicG9kZXJkYW50ZXMiOltdfQ.GIaWsSo18XCj18aRNoPizs9Exv9uqkuiO9f33_4hMDNz5oWdsy0ORtgIHoTYQ5NweSuQLGKACFI-6Rmojfv71Q";
+                //  string TokenRecibido = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJwZXJzb25hTG9naW4iOnsiaWQiOjExLCJwZXJzb25hIjp7ImlkIjoxMSwibm9tYnJlcyI6IkZhY3VuZG8gQWxiZXJ0byIsImFwZWxsaWRvcyI6IkZPUkNBREEiLCJyYXpvblNvY2lhbCI6bnVsbCwiY3VpdCI6IjIzMzk2MjAzNjY5IiwidGlwb0RvY3VtZW50byI6IkRVIiwibnVtZXJvRG9jdW1lbnRvIjoiMzk2MjAzNjYiLCJzZXhvIjoiTSIsImNvZGlnb1BhaXMiOiJBUiIsImNvZGlnb1RlbGVmb25vUGFpcyI6Iis1NCIsInRlbGVmb25vIjoiMTEyMjMzNDQ1NSIsImVtYWlsIjoiZmFjdW5kby5mb3JjYWRhQGJpd2luaS5jb20iLCJ1c3VhcmlvQ3JlYWNpb24iOjExLCJmZWNoYUFsdGEiOjE2ODg1NzI0NzgwMDAsInVzdWFyaW9Nb2RpZmljYWNpb24iOm51bGwsImZlY2hhTW9kaWZpY2FjaW9uIjoxNjg4NTcyNDc4MDAwLCJ0aXBvUGVyc29uYSI6IlBGIiwidmFsaVJlbmFwZXIiOjAsInRlcm1pbm9zWUNvbmRpY2lvbmVzIjp7ImlkIjozLCJ0aXBvRG9jdW1lbnRvIjp7ImlkIjoxNiwiYWNyb25pbW9HZWRvIjoiVFlDIiwiYWNyb25pbW9UQUQiOiJUWUMiLCJub21icmUiOiJUZXJtaW5vcyB5IENvbmRpY2lvbmVzIiwiZGVzY3JpcGNpb24iOiJUZXJtaW5vcyB5IENvbmRpY2lvbmVzIiwiZm9ybXVsYXJpb0NvbnRyb2xhZG8iOm51bGwsInRpcG9Qcm9kdWNjaW9uIjpudWxsLCJ1c3VhcmlvSW5pY2lhZG9yIjoiRVZFUklTIiwidXN1YXJpb0NyZWFjaW9uIjoiVEFEM19TQURFX0RFViIsImZlY2hhQWx0YSI6MTYxNDk2MDYyNjAwMCwidXN1YXJpb01vZGlmaWNhY2lvbiI6bnVsbCwiZmVjaGFNb2RpZmljYWNpb24iOjE1NTU0MDc4MDAwMDAsImVzRW1iZWJpZG8iOnRydWUsImZpcm1hQ29uVG9rZW4iOmZhbHNlLCJpcCI6bnVsbCwiZXNGaXJtYUNvbmp1bnRhIjpmYWxzZSwiZG9jdW1lbnRvVGlwb0Zpcm1hIjpudWxsLCJ0ZXh0b0xpYnJlTGltaXRlIjpudWxsLCJ0ZXh0b0xpYnJlRW5yaXF1ZWNpZG8iOmZhbHNlLCJlbWJlYmlkb09wY2lvbmFsIjpudWxsLCJlc0Zpcm1hQ2xvdWQiOmZhbHNlfSwiZXN0YWRvIjoiQUNUSVZPIiwiZmVjaGFBbHRhIjoxNjE5NjA0MTEzMDAwLCJjb250ZW5pZG8iOiI8IWRvY3R5cGUgaHRtbD5cbjxodG1sPlxuIDxoZWFkPlxuIDx0aXRsZT5UJmVhY3V0ZTtybWlub3MgeSBDb25kaWNpb25lcyBUQUQ8L3RpdGxlPlxuIDwvaGVhZD5cbjxib2R5PlxuPGRpdj5cbjxwIHN0eWxlPVwibWFyZ2luLWxlZnQ6IDE0LjJwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj48c3BhbiBzdHlsZT1cImZvbnQtc2l6ZToxOHB4O1wiPjxzcGFuIHN0eWxlPVwiZm9udC1mYW1pbHk6dGFob21hLGdlbmV2YSxzYW5zLXNlcmlmO1wiPjxzdHJvbmc-VCZFYWN1dGU7PC9zdHJvbmc-PHN0cm9uZz5SPC9zdHJvbmc-PHN0cm9uZz5NPC9zdHJvbmc-PHN0cm9uZz5JPC9zdHJvbmc-PHN0cm9uZz5OPC9zdHJvbmc-PHN0cm9uZz5PUyAmbmJzcDtZIENPTkRJQ0lPTkVTICZuYnNwO0RFIFVTTyBERSBMQSBQTEFUQUZPUk1BICZuYnNwO0RFIFRSQU1JVEFDSSZPYWN1dGU7TiAmbmJzcDtBIERJU1RBTkNJQTwvc3Ryb25nPjwvc3Bhbj48L3NwYW4-PC9wPlxuPHAgc3R5bGU9XCJtYXJnaW4tbGVmdDogMTNwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj48YSBocmVmPVwiaHR0cHM6Ly9zYWRlLXRhZDMtaG1sLmdjYmEuZ29iLmFyL3RyYW1pdGVzYWRpc3RhbmNpYS9pbmZvcm1hY2lvbi9UQUQtVGVybWlub3MteS1Db25kaWNpb25lcy5wZGZcIiB0YXJnZXQ9XCJfYmxhbmtcIj48c3BhbiBjbGFzcz1cImMxIGMyXCIgc3R5bGU9XCJsaW5lLWhlaWdodDogMTBweDsgY29sb3I6IHJnYigxNywgODUsIDIwNCk7IHRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lOyBmb250LWZhbWlseTogQ2FsaWJyaTtcIj5WZXIgVMOpcm1pbm9zIHkgQ29uZGljaW9uZXM8L3NwYW4-PC9hPjwvcD5cblxuPHAgc3R5bGU9XCJtYXJnaW4tbGVmdDogMTNwdDsgdGV4dC1hbGlnbjoganVzdGlmeTtcIj4mbmJzcDs8L3A-XG5cbjwvZGl2PlxuPC9ib2R5PlxuPC9odG1sPiIsIm5pdmVsQWNjZXNvIjp7ImlkIjoxMSwibm9tYnJlIjoiQUdJUCIsIm5pdmVsQWNjZXNvIjozLCJwcm92ZWVkb3IiOiJBR0lQMyIsImF1dGhvcml6YXRpb25FbmRQb2ludCI6Imh0dHBzOi8vaG1sLmFnaXAuZ29iLmFyL2NsYXZlY2l1ZGFkLyIsImVuZFNlc3Npb25FbmRQb2ludCI6Imh0dHBzOi8vaG1sLmFnaXAuZ29iLmFyL2NsYXZlY2l1ZGFkLyIsImxvZ2luQ29tcG9uZW50IjoiL3ByaW1lckxvZ2luIiwiaGFiaWxpdGFyQXBvZGVyYW1pZW50byI6dHJ1ZX19LCJzaXN0ZW1hQ29uc3VtaWRvciI6bnVsbCwiYmFJZCI6bnVsbCwiaGFiaWxpdGFkYVZpc3RhMzYwIjpudWxsfSwiY2FsbGUiOiJNQUlQVSIsImFsdHVyYSI6IjM3NCIsInBpc28iOm51bGwsImRlcHRvIjpudWxsLCJjb2RpZ29Qb3N0YWwiOiIxMjM0IiwidGVsZWZvbm8iOm51bGwsIm9ic2VydmFjaW9uZXMiOm51bGx9LCJpZFRhZCI6bnVsbCwiYXBvZGVyYWRvcyI6eyJpZCI6MTEsInBlcnNvbmEiOm51bGwsImNhbGxlIjpudWxsLCJhbHR1cmEiOm51bGwsInBpc28iOm51bGwsImRlcHRvIjpudWxsLCJjb2RpZ29Qb3N0YWwiOm51bGwsInRlbGVmb25vIjoiMTEyMjMzNDQ1NSIsIm9ic2VydmFjaW9uZXMiOm51bGx9LCJ0aXBvVHJhbWl0ZSI6bnVsbCwicG9kZXJkYW50ZXMiOltdfQ.GIaWsSo18XCj18aRNoPizs9Exv9uqkuiO9f33_4hMDNz5oWdsy0ORtgIHoTYQ5NweSuQLGKACFI-6Rmojfv71Q";
                 string keyPrivadaGuardada =  System.Configuration.ConfigurationManager.AppSettings["PrivateKey"];
+                Console.Write("token:" + token);
+                Console.Write("keyPrivadaGuardada:" + keyPrivadaGuardada);
                 if (!string.IsNullOrWhiteSpace(token) )
                 {
                     string[] tokenParts = token.Split('.');
@@ -52,12 +56,16 @@ namespace SSIT.Account
                     string payloadRecibido = tokenParts[1];
                     string keyPublicaRecibida = tokenParts[2];
                     string PayloadJsonString = Base64UrlEncoder.Decode(payloadRecibido);
+                    Console.Write("Header:" + Header);
+                    Console.Write("payloadRecibido:" + payloadRecibido);
+                    Console.Write("keyPublicaRecibida:" + keyPublicaRecibida);
+                    Console.Write("PayloadJsonString:" + PayloadJsonString);
 
                     string sign = keyPublicaRecibida;//ASOSA FEO ARREGLAR
 
-                    bool tokenValido = ValidarToken(payloadRecibido, keyPublicaRecibida, keyPrivadaGuardada);
+                    bool tokenValido = ValidarToken(Header +"."+ payloadRecibido, keyPublicaRecibida, keyPrivadaGuardada);
                     tokenValido = true;//ASOSA FORZADO
-                                       //  if (validarToken(token))
+
                     if (tokenValido)
                         {
                         DatosMiBA datosMiBA = Newtonsoft.Json.JsonConvert.DeserializeObject<DatosMiBA>(PayloadJsonString);
@@ -73,7 +81,7 @@ namespace SSIT.Account
                         Autenticado autenticado = new Autenticado();
                         autenticado.Cuit = datosMiBA.personaLogin.persona.cuit;
                         autenticado.Nombre = datosMiBA.personaLogin.persona.nombres + " " + datosMiBA.personaLogin.persona.apellidos;
-                        autenticado.Isib = "??";
+                        autenticado.Isib = "";
                         autenticado.Codcalle = "";
                         autenticado.Calle = datosMiBA.personaLogin.calle;
                         autenticado.Puerta = datosMiBA.personaLogin.altura;
@@ -112,8 +120,6 @@ namespace SSIT.Account
                         representados.Representado = representado;
                         datosToken.Representados = representados;
                         #endregion
-
-                        //Datos datosToken = GetDatosTokenAGIP(token);
 
                         if (datosToken == null)
                             throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
@@ -324,8 +330,8 @@ namespace SSIT.Account
 
             string[] TokenGeneradoParts = TokenGenerado.Split('.');
 
-            string payloadGenerado = TokenGeneradoParts[0];
-            string keyPublicaGenerado = TokenGeneradoParts[1];
+            string payloadGenerado = TokenGeneradoParts[1];
+            string keyPublicaGenerado = TokenGeneradoParts[2];
             //bool isValid = payloadRecibido.Equals(payloadGenerado); COMPARO LOS PAYLOAD OK
             bool isValid = keyPublicaRecibida.Equals(keyPublicaGenerado);
             //bool isValid = ComprobarToken(TokenGenerado, keyPrivadaGuardada);
