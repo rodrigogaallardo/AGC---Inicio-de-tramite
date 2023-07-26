@@ -130,199 +130,19 @@ namespace SSIT.Account
 
     #endregion
 
-    #region MiBA
-    //public class DatosMiBA
-    //{
-    //    public Personalogin personaLogin { get; set; }
-    //    public Apoderado apoderado { get; set; }
-    //    public int idTipoTramite { get; set; }
-    //    public int idTramite { get; set; }
-    //    public Poderdante[] poderdantes { get; set; }
-    //}
-
-    //public class Personalogin
-    //{
-    //    public Persona persona { get; set; }
-    //    public string calle { get; set; }
-    //    public string altura { get; set; }
-    //    public object piso { get; set; }
-    //    public object depto { get; set; }
-    //    public string codigoPostal { get; set; }
-    //    public object telefono { get; set; }
-    //    public object observaciones { get; set; }
-    //    public Provincia provincia { get; set; }
-    //    public Localidad localidad { get; set; }
-    //    public Departamento departamento { get; set; }
-    //    public Pais pais { get; set; }
-    //}
-
-    //public class Persona
-    //{
-    //    public int id { get; set; }
-    //    public string nombres { get; set; }
-    //    public string apellidos { get; set; }
-    //    public object razonSocial { get; set; }
-    //    public string cuit { get; set; }
-    //    public string tipoDocumento { get; set; }
-    //    public string numeroDocumento { get; set; }
-    //    public string sexo { get; set; }
-    //    public string codigoPais { get; set; }
-    //    public string codigoTelefonoPais { get; set; }
-    //    public string telefono { get; set; }
-    //    public string email { get; set; }
-    //    public int usuarioCreacion { get; set; }
-    //    public long fechaAlta { get; set; }
-    //    public int usuarioModificacion { get; set; }
-    //    public long fechaModificacion { get; set; }
-    //    public string tipoPersona { get; set; }
-    //    public int valiRenaper { get; set; }
-    //    public Terminosycondiciones terminosYCondiciones { get; set; }
-    //    public Sistemaconsumidor sistemaConsumidor { get; set; }
-    //    public object habilitadaVista360 { get; set; }
-    //}
-
-    //public class Terminosycondiciones
-    //{
-    //    public int id { get; set; }
-    //    public Tipodocumento tipoDocumento { get; set; }
-    //    public string estado { get; set; }
-    //    public long fechaAlta { get; set; }
-    //    public string contenido { get; set; }
-    //    public Nivelacceso nivelAcceso { get; set; }
-    //}
-
-    //public class Tipodocumento
-    //{
-    //    public int id { get; set; }
-    //    public string acronimoGedo { get; set; }
-    //    public string acronimoTAD { get; set; }
-    //    public string nombre { get; set; }
-    //    public string descripcion { get; set; }
-    //    public object formularioControlado { get; set; }
-    //    public object tipoProduccion { get; set; }
-    //    public string usuarioIniciador { get; set; }
-    //    public string usuarioCreacion { get; set; }
-    //    public long fechaAlta { get; set; }
-    //    public object usuarioModificacion { get; set; }
-    //    public long fechaModificacion { get; set; }
-    //    public bool esEmbebido { get; set; }
-    //    public bool firmaConToken { get; set; }
-    //    public object ip { get; set; }
-    //    public bool esFirmaConjunta { get; set; }
-    //    public object documentoTipoFirma { get; set; }
-    //    public object textoLibreLimite { get; set; }
-    //    public bool textoLibreEnriquecido { get; set; }
-    //    public object embebidoOpcional { get; set; }
-    //}
-
-    //public class Nivelacceso
-    //{
-    //    public int id { get; set; }
-    //    public string nombre { get; set; }
-    //    public int nivelAcceso { get; set; }
-    //    public string proveedor { get; set; }
-    //    public string authorizationEndPoint { get; set; }
-    //    public string endSessionEndPoint { get; set; }
-    //    public string loginComponent { get; set; }
-    //    public bool habilitarApoderamiento { get; set; }
-    //}
-
-    //public class Sistemaconsumidor
-    //{
-    //    public int id { get; set; }
-    //    public string nombre { get; set; }
-    //    public long fechaCreacion { get; set; }
-    //    public bool visible { get; set; }
-    //}
-
-    //public class Provincia
-    //{
-    //    public int id { get; set; }
-    //    public string nombre { get; set; }
-    //}
-
-    //public class Localidad
-    //{
-    //    public int id { get; set; }
-    //    public string nombre { get; set; }
-    //    public Departamento departamento { get; set; }
-    //    public Provincia provincia { get; set; }
-    //}
-
-    //public class Departamento
-    //{
-    //    public int id { get; set; }
-    //    public string nombre { get; set; }
-    //    public Provincia provincia { get; set; }
-    //    public int orden { get; set; }
-    //}
-
-    //public class Pais
-    //{
-    //    public int id { get; set; }
-    //    public string codigo { get; set; }
-    //    public string descripcion { get; set; }
-    //}
-
-    //public class Apoderado
-    //{
-    //    public Persona persona { get; set; }
-    //    public string calle { get; set; }
-    //    public string altura { get; set; }
-    //    public string piso { get; set; }
-    //    public string depto { get; set; }
-    //    public string codigoPostal { get; set; }
-    //    public object telefono { get; set; }
-    //    public object observaciones { get; set; }
-    //    public Provincia provincia { get; set; }
-    //    public Localidad localidad { get; set; }
-    //    public Departamento departamento { get; set; }
-    //    public Pais pais { get; set; }
-    //}
-
-
-    //public class Poderdante
-    //{
-    //    public int id { get; set; }
-    //    public Apoderado apoderado { get; set; }
-    //    public Poderdante poderdante { get; set; }
-    //    public bool permisoMisDatos { get; set; }
-    //    public bool permisoApoderamiento { get; set; }
-    //    public bool permisoAllTipoTramite { get; set; }
-    //    public long fechaAlta { get; set; }
-    //    public object fechaBaja { get; set; }
-    //    public long? fechaVencimiento { get; set; }
-    //    public object fechaRechazo { get; set; }
-    //    public Personadocumentopoder personaDocumentoPoder { get; set; }
-    //    public bool permisoNotifExterna { get; set; }
-    //    public bool permisoHabilitacionesAGC { get; set; }
-    //    public bool habilitadoNefGenerales { get; set; }
-    //    public bool habilitadoNefConfidenciales { get; set; }
-    //    public bool habilitadaVista360 { get; set; }
-    //}
-
-    //public class Personadocumentopoder
-    //{
-    //}
-
-
-
-
-    #endregion
-
-
-    #region MiBa New
+    #region MiBa 
     public class DatosMiBA
     {
         public Personalogin personaLogin { get; set; }
-        public Apoderado apoderado { get; set; }
-        public int idTipoTramite { get; set; }
-        public int idTramite { get; set; }
-        public Poderdante[] poderdantes { get; set; }
+        public object idTad { get; set; }
+        public Apoderados apoderados { get; set; }
+        public object tipoTramite { get; set; }
+        public object[] poderdantes { get; set; }
     }
 
     public class Personalogin
     {
+        public int id { get; set; }
         public Persona persona { get; set; }
         public string calle { get; set; }
         public string altura { get; set; }
@@ -331,10 +151,6 @@ namespace SSIT.Account
         public string codigoPostal { get; set; }
         public object telefono { get; set; }
         public object observaciones { get; set; }
-        public Provincia provincia { get; set; }
-        public Localidad localidad { get; set; }
-        public Departamento departamento { get; set; }
-        public Pais pais { get; set; }
     }
 
     public class Persona
@@ -353,12 +169,13 @@ namespace SSIT.Account
         public string email { get; set; }
         public int usuarioCreacion { get; set; }
         public long fechaAlta { get; set; }
-        public int usuarioModificacion { get; set; }
+        public object usuarioModificacion { get; set; }
         public long fechaModificacion { get; set; }
         public string tipoPersona { get; set; }
         public int valiRenaper { get; set; }
         public Terminosycondiciones terminosYCondiciones { get; set; }
-        public Sistemaconsumidor sistemaConsumidor { get; set; }
+        public object sistemaConsumidor { get; set; }
+        public object baId { get; set; }
         public object habilitadaVista360 { get; set; }
     }
 
@@ -394,6 +211,7 @@ namespace SSIT.Account
         public object textoLibreLimite { get; set; }
         public bool textoLibreEnriquecido { get; set; }
         public object embebidoOpcional { get; set; }
+        public bool esFirmaCloud { get; set; }
     }
 
     public class Nivelacceso
@@ -408,83 +226,17 @@ namespace SSIT.Account
         public bool habilitarApoderamiento { get; set; }
     }
 
-    public class Sistemaconsumidor
+    public class Apoderados
     {
         public int id { get; set; }
-        public string nombre { get; set; }
-        public long fechaCreacion { get; set; }
-        public bool visible { get; set; }
-    }
-
-    public class Provincia
-    {
-        public int id { get; set; }
-        public string nombre { get; set; }
-    }
-
-    public class Localidad
-    {
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public Departamento departamento { get; set; }
-        public Provincia provincia { get; set; }
-    }
-
-    public class Departamento
-    {
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public Provincia provincia { get; set; }
-        public int orden { get; set; }
-    }
-
-    public class Pais
-    {
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string descripcion { get; set; }
-    }
-
-    public class Apoderado
-    {
         public Persona persona { get; set; }
         public string calle { get; set; }
         public string altura { get; set; }
         public string piso { get; set; }
         public string depto { get; set; }
         public string codigoPostal { get; set; }
-        public object telefono { get; set; }
-        public object observaciones { get; set; }
-        public Provincia provincia { get; set; }
-        public Localidad localidad { get; set; }
-        public Departamento departamento { get; set; }
-        public Pais pais { get; set; }
-    }
-
-    public class Poderdante
-    {
-        public int id { get; set; }
-        public Apoderado apoderado { get; set; }
-        public Poderdante poderdante { get; set; }
-        public bool permisoMisDatos { get; set; }
-        public bool permisoApoderamiento { get; set; }
-        public bool permisoAllTipoTramite { get; set; }
-        public long fechaAlta { get; set; }
-        public object fechaBaja { get; set; }
-        public long? fechaVencimiento { get; set; }
-        public object fechaRechazo { get; set; }
-        public Personadocumentopoder personaDocumentoPoder { get; set; }
-        public bool permisoNotifExterna { get; set; }
-        public bool permisoHabilitacionesAGC { get; set; }
-        public bool habilitadoNefGenerales { get; set; }
-        public bool habilitadoNefConfidenciales { get; set; }
-        public bool habilitadaVista360 { get; set; }
-    }
-
-  
-
-    public class Personadocumentopoder
-    {
+        public string telefono { get; set; }
+        public string observaciones { get; set; }
     }
 
 
