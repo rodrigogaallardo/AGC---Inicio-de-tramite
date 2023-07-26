@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BuscarUbicacion.ascx.cs" Inherits="SSIT.Solicitud.Habilitacion.Controls.BuscarUbicacion" %>
 <%@ Register Src="~/Solicitud/Habilitacion/Controls/ZonaPlaneamiento.ascx" TagPrefix="uc" TagName="ZonaPlaneamiento" %>
-<%@ register src="~/Solicitud/Controls/ucNuevaPuerta.ascx" tagprefix="uc1" tagname="ucNuevaPuerta" %>
+<%@ Register Src="~/Solicitud/Controls/ucNuevaPuerta.ascx" TagPrefix="uc1" TagName="ucNuevaPuerta" %>
 
 
 <%: Scripts.Render("~/bundles/autoNumeric") %>
@@ -209,7 +209,7 @@
                                         <asp:TextBox ID="txtSeccion" runat="server" Width="90px" MaxLength="3" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label1" runat="server" Text="Manzana:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="6" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label2" runat="server" Text="Parcela:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
                                         <asp:TextBox ID="txtParcela" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
@@ -465,24 +465,24 @@
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Ubicación" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center"  ItemStyle-Width="200px">
+                                    <asp:TemplateField HeaderText="Ubicación" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" ItemStyle-Width="200px">
                                         <ItemTemplate>
-                                            <div style="margin-top:50px">
-                                            <asp:Label runat="server" CssClass="mtop40" Text='<%# Item.direccion %>' />
+                                            <div style="margin-top: 50px">
+                                                <asp:Label runat="server" CssClass="mtop40" Text='<%# Item.direccion %>' />
 
-                                            <asp:Label runat="server" CssClass="mtop40" Text='<%# Item.Numero %>' />
+                                                <asp:Label runat="server" CssClass="mtop40" Text='<%# Item.Numero %>' />
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
                                     <asp:TemplateField HeaderText="Agregar Ubicación" HeaderStyle-CssClass="text-center" ItemStyle-CssClass="text-center mtop40">
-                                        <ItemTemplate>                                            
-                                              <div style="margin-top:50px">
-                                            <asp:LinkButton ID="lnkubicacion" ToolTip="Agregar Ubicación" CssClass="btn btn-primary" Style="vertical-align: central !important" OnClick="lnkUbicacion_Click" runat="server" CommandArgument='<%# Item.idUbicacion %>'>
+                                        <ItemTemplate>
+                                            <div style="margin-top: 50px">
+                                                <asp:LinkButton ID="lnkubicacion" ToolTip="Agregar Ubicación" CssClass="btn btn-primary" Style="vertical-align: central !important" OnClick="lnkUbicacion_Click" runat="server" CommandArgument='<%# Item.idUbicacion %>'>
                                                     
                                                     <i class="imoon imoon-ok"></i>
-                                            </asp:LinkButton>
-                                                    </div>
+                                                </asp:LinkButton>
+                                            </div>
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="180px" />
                                     </asp:TemplateField>
@@ -559,23 +559,22 @@
                                                     <td style="width: auto; padding-left: 10px; vertical-align: text-top">
                                                         <asp:Panel ID="pnlPuertas" runat="server">
                                                             <div style="overflow: auto; max-height: 800px">
-                                                                <div class="box-panel" style="margin-left:5px; width: 700px; margin-top:5px">
+                                                                <div class="box-panel" style="margin-left: 5px; width: 700px; margin-top: 5px">
                                                                     <div id="lblSeleccionarPuerta" runat="server">
                                                                         <h5><i class="imoon imoon-office" style="margin-right: 4px"></i>Puertas -
                                                                 <label style="font-weight: bold !important">Debe seleccionar con un Click la puerta correspondiente</label></h5>
                                                                     </div>
                                                                     <label id="lblPartidaInhibida" class="alert alert-warning" runat="server" style="background-color: #fcda59; display: none"><i class="imoon imoon-notification" style="margin-right: 4px"></i>Se pone en conocimiento que el domicilio declarado por usted presenta irregularidades. Por favor acerquese a nuestras oficinas ubicadas en TTE. GRAL. JUAN DOMINGO PERON 2941.</label>
                                                                     <hr style="margin-top: -5px"></hr>
-                                                                   
-                                                                   <div class="alert alert-small alert-warning">
+
+                                                                    <div class="alert alert-small alert-warning">
                                                                         Si al intentar seleccionar las puertas, la calle no existe en el sistema. Haga click 
-                                                                        <asp:LinkButton ID="btnNuevaPuerta" runat="server" Text="aquí" OnClick="btnNuevaPuerta_Click" style="color: #377bb5;"
-                                                                            CommandArgument="<%# Item.IdUbicacion %>"
-                                                                            ></asp:LinkButton>
-                                                                    </div>                                                           
+                                                                        <asp:LinkButton ID="btnNuevaPuerta" runat="server" Text="aquí" OnClick="btnNuevaPuerta_Click" Style="color: #377bb5;"
+                                                                            CommandArgument="<%# Item.IdUbicacion %>"></asp:LinkButton>
+                                                                    </div>
                                                                     <p>La parcela que usted ingresó tiene las siguientes puertas registradas: </p>
                                                                     <br />
-                                                                    <asp:UpdatePanel ID="updPuertas" runat="server" style="margin-left:5px; width: 700px;">
+                                                                    <asp:UpdatePanel ID="updPuertas" runat="server" style="margin-left: 5px; width: 700px;">
                                                                         <ContentTemplate>
                                                                             <asp:DataList ID="lstPuertas"
                                                                                 runat="server"
@@ -598,15 +597,13 @@
                                                                                             <asp:TextBox ID="txtNroPuerta" runat="server" Text='<%# Eval("NroPuertaUbic") %>' Width="65px" CssClass="form-control grid-txtNroPuerta" Enabled="false" ReadOnly="true"></asp:TextBox>
 
 
-<%--                                                                                            <asp:LinkButton ID="lnkAgregarOtraPuerta" runat="server" Text="Agregar otra puerta" Style="display: inline"
+                                                                                            <%--                                                                                            <asp:LinkButton ID="lnkAgregarOtraPuerta" runat="server" Text="Agregar otra puerta" Style="display: inline"
                                                                                                 data-toggle="tooltip"
                                                                                                 ToolTip="Agrega otra puerta en la misma calle y dentro de la misma cuadra." CssClass="AgregarOtraPuerta mleft5"
                                                                                                 Font-Size="9pt" OnClick="lnkAgregarOtraPuerta_Click" CommandArgument='<%# Eval("IdUbicacionPuerta")  %>'>
                                                                                             </asp:LinkButton>--%>
-
-
                                                                                         </div>
-                                                                                         <br />
+                                                                                        <br />
                                                                                     </div>
 
 
@@ -622,7 +619,7 @@
 
                                                                 <%--Depto / Local / Otros--%>
 
-                                                                <asp:Panel ID="pnlDeptoLocal" runat="server" Visible="true" CssClass="box-panel pbottom10" style="margin-left:5px; width: 700px;">
+                                                                <asp:Panel ID="pnlDeptoLocal" runat="server" Visible="true" CssClass="box-panel pbottom10" Style="margin-left: 5px; width: 700px;">
 
                                                                     <div class=" form-horizontal form-group">
 
@@ -680,7 +677,7 @@
                                                                 <%--Grilla para seleccionar partida horizontal--%>
                                                                 <asp:UpdatePanel ID="updPartidasHorizontales" runat="server">
                                                                     <ContentTemplate>
-                                                                        <asp:Panel ID="pnlPartidasHorizontales" runat="server" Style="border-bottom: solid 1px #e1e1e1; display: none; margin-left:5px; width: 700px;" CssClass="BuscarUbicacion-pnlPartidasHorizontales box-panel">
+                                                                        <asp:Panel ID="pnlPartidasHorizontales" runat="server" Style="border-bottom: solid 1px #e1e1e1; display: none; margin-left: 5px; width: 700px;" CssClass="BuscarUbicacion-pnlPartidasHorizontales box-panel">
                                                                             <div class="titulo-1" style="border-bottom: solid 1px #e1e1e1; padding-top: 5px; font-size: medium">
                                                                                 <b>Partidas Horizontales o Subdivisiones:</b>
                                                                             </div>
@@ -793,7 +790,7 @@
                             <ContentTemplate>
                                 <asp:Panel ID="pnlbotonesingreso" runat="server">
 
-                                    <div class="form-inline text-center mtop5" style="margin-left:80px">
+                                    <div class="form-inline text-center mtop5" style="margin-left: 80px">
 
                                         <div class="form-group">
                                             <asp:LinkButton ID="btnNuevaBusqueda" runat="server" CssClass="btn btn-default"
@@ -890,7 +887,7 @@
     <%--Modal Confirmar Anulación--%>
     <asp:UpdatePanel ID="udpModalSinPartida" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <div id="frmConfirmarNoPH" class="modal fade" role="dialog" style="margin-top:510px">
+            <div id="frmConfirmarNoPH" class="modal fade" role="dialog" style="margin-top: 510px">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -928,26 +925,26 @@
                     </div>
                 </div>
             </div>
- 
+
         </ContentTemplate>
     </asp:UpdatePanel>
     <!-- /.modal -->
-  <asp:UpdatePanel ID="udpfrmSolicitarNuevaPuerta" runat="server" UpdateMode="Conditional">
-   <ContentTemplate>
-    <%-- Modal Solicitar nueva puerta por mail --%>
-    <div id="frmSolicitarNuevaPuerta" class="modal fade" role="dialog" >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" style="margin-top: -8px">Solicitar Nueva Puerta</h4>
-                </div>
-                <div class="modal-body">
-                     <uc1:ucNuevaPuerta runat="server" id="NuevaPuerta" /> 
+    <asp:UpdatePanel ID="udpfrmSolicitarNuevaPuerta" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <%-- Modal Solicitar nueva puerta por mail --%>
+            <div id="frmSolicitarNuevaPuerta" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" style="margin-top: -8px">Solicitar Nueva Puerta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <uc1:ucNuevaPuerta runat="server" ID="NuevaPuerta" />
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-            </ContentTemplate>
+        </ContentTemplate>
     </asp:UpdatePanel>
     <!-- /.modal -->
 
@@ -1113,15 +1110,14 @@
                                 showfrmConfirmarNoPH();
                                 ret = false;
                             }
-                           
+
                         }
                     });
                 }
             }
 
 
-            if (ret)
-            {
+            if (ret) {
                 $("#<%: btnIngresarUbicacion.ClientID %>").hide();
                 $("#<%: btnEditarUbicacion.ClientID %>").hide();
                 $("#<%: btnNuevaBusqueda.ClientID %>").hide();
@@ -1130,9 +1126,9 @@
             }
             return ret;
         }
-        
+
         function showfrmSolicitarNuevaPuerta() {
-            
+
             $("#frmSolicitarNuevaPuerta").modal("show");
             return false;
         }

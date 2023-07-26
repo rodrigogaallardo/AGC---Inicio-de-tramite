@@ -207,7 +207,7 @@
                                         <asp:TextBox ID="txtSeccion" runat="server" Width="90px" MaxLength="3" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label1" runat="server" Text="Manzana:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="6" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label2" runat="server" Text="Parcela:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
                                         <asp:TextBox ID="txtParcela" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
@@ -677,7 +677,7 @@
                                                                     <br />
                                                                     <br />
                                                                     <div class="form-horizontal form-group">
-<%--                                                                        <asp:Label ID="Label11" class="control-label col-sm-2" runat="server"><b>Ancho Calle:</b></asp:Label>
+                                                                        <%--                                                                        <asp:Label ID="Label11" class="control-label col-sm-2" runat="server"><b>Ancho Calle:</b></asp:Label>
                                                                         <div class="col-sm-4">
                                                                             <asp:TextBox ID="txtAnchoCalle" runat="server" MaxLength="50" Width="100px" CssClass="form-control"></asp:TextBox>
                                                                             <div style="font-size: 8pt; font-weight: bold; color: #9a9a9a; width: 350px;">
@@ -701,12 +701,12 @@
                                                                 </asp:Panel>
                                                                 <br />
                                                                 <br />
-                                                                <asp:Panel ID="pnlInmueble" runat="server" Enabled ="false" CssClass="box-panel pbottom10" Style="margin-left: 5px; width: 700px;">
+                                                                <asp:Panel ID="pnlInmueble" runat="server" Enabled="false" CssClass="box-panel pbottom10" Style="margin-left: 5px; width: 700px;">
                                                                     <div class="form-group">
                                                                         <asp:Label ID="Label13" runat="server" CssClass="control-label col-sm-3" Font-Bold="true">Inmueble Catalogado:</asp:Label>
                                                                         <div class="col-sm-2" style="width: 100px;">
-                                                                            <asp:RadioButton ID="inmuebleCatalogado_SI" runat="server" GroupName="inmueble" Text="Sí" AutoPostBack="true" Checked='<%# Eval("EsUbicacionProtegida") %>'/>
-                                                                            <asp:RadioButton ID="inmuebleCatalogado_NO" runat="server" GroupName="inmueble" Text="No" AutoPostBack="true" Checked='<%# !(bool)Eval("EsUbicacionProtegida") %>'/>
+                                                                            <asp:RadioButton ID="inmuebleCatalogado_SI" runat="server" GroupName="inmueble" Text="Sí" AutoPostBack="true" Checked='<%# Eval("EsUbicacionProtegida") %>' />
+                                                                            <asp:RadioButton ID="inmuebleCatalogado_NO" runat="server" GroupName="inmueble" Text="No" AutoPostBack="true" Checked='<%# !(bool)Eval("EsUbicacionProtegida") %>' />
                                                                             <div id="ValAsistentes" class="alert alert-small alert-danger" style="display: none">
                                                                                 Debe seleccionar una opción
                                                                             </div>
@@ -1137,19 +1137,19 @@
             if (value) {
                 validarIngresarUbicacion();
                 eval($("#<%: btnIngresarUbicacion.ClientID %>").prop("href"));
-                  ret = false;
-              }
-
-              if (vconfirm) {
-                  $("#<%: btnIngresarUbicacion.ClientID %>").hide();
-                $("#<%: btnNuevaBusqueda.ClientID %>").hide();
-                $("#<%: btnCerrar5.ClientID %>").hide();
-                vconfirm = false;
+                ret = false;
             }
-            else {
-                $("#<%: btnIngresarUbicacion.ClientID %>").show();
-                $("#<%: btnNuevaBusqueda.ClientID %>").show();
-                $("#<%: btnCerrar5.ClientID %>").show();
+
+            if (vconfirm) {
+                $("#<%: btnIngresarUbicacion.ClientID %>").hide();
+                  $("#<%: btnNuevaBusqueda.ClientID %>").hide();
+                  $("#<%: btnCerrar5.ClientID %>").hide();
+                  vconfirm = false;
+              }
+              else {
+                  $("#<%: btnIngresarUbicacion.ClientID %>").show();
+                  $("#<%: btnNuevaBusqueda.ClientID %>").show();
+                  $("#<%: btnCerrar5.ClientID %>").show();
             }
 
             return ret;
