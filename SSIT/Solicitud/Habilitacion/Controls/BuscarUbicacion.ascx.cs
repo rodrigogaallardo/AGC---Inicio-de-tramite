@@ -2,14 +2,11 @@
 using DataTransferObject;
 using SSIT.App_Components;
 using SSIT.Common;
-using SSIT.Solicitud.Habilitacion.Controls;
 using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace SSIT.Solicitud.Habilitacion.Controls
@@ -389,7 +386,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 GridView grdresdireccion = (GridView)e.Row.FindControl("grdresdireccion");
-                
+
                 ItemDirectionDTO itemUbicacion = (ItemDirectionDTO)e.Row.DataItem;
 
                 Image imgFoto = (Image)e.Row.FindControl("imgFoto");
@@ -622,25 +619,40 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 lstPuertas.DataSource = puertas.ToList();
                 lstPuertas.DataBind();
 
-                if (hid_tabselected.Value == "3")
+                if (hid_tabselected.Value != "0")
                 {
                     Panel pnlTipoUbicacion = (Panel)e.Row.FindControl("pnlTipoUbicacion");
                     Panel pnlSMP = (Panel)e.Row.FindControl("pnlSMP");
+                    Label lblTipoUbicacion1 = (Label)e.Row.FindControl("lblTipoUbicacion1");
                     Label lblTipoUbicacion = (Label)e.Row.FindControl("lblTipoUbicacion");
+                    Label lblSubTipoUbicacion1 = (Label)e.Row.FindControl("lblSubTipoUbicacion1");
                     Label lblSubTipoUbicacion = (Label)e.Row.FindControl("lblSubTipoUbicacion");
                     Label lblLocal = (Label)e.Row.FindControl("lblLocal");
 
                     TiposDeUbicacionBL tipoUbicacionBL = new TiposDeUbicacionBL();
                     var dataEsp = tipoUbicacionBL.Get(id_ubicacion);
+                    SubTipoUbicacionesBL subTipoUbicacionBL = new SubTipoUbicacionesBL();
+                    var dataSubTipo = subTipoUbicacionBL.GetSubTipoUbicacion(id_ubicacion);
                     if (dataEsp != null)
                     {
                         lblTipoUbicacion.Text = dataEsp.DescripcionTipoUbicacion;
-                        //lblSubTipoUbicacion.Text = dataEsp.descripcion_subtipoubicacion;
+                        lblTipoUbicacion1.Text = dataEsp.DescripcionTipoUbicacion;
+                        lblSubTipoUbicacion1.Text = dataSubTipo.descripcion_subtipoubicacion;
+                        lblSubTipoUbicacion.Text = dataSubTipo.descripcion_subtipoubicacion;
                         lblLocal.Text = txtDescUbicacion.Text;
                     }
 
-                    pnlTipoUbicacion.Visible = true;
-                    pnlSMP.Visible = false;
+                    if (hid_tabselected.Value == "3")
+                    {
+                        pnlTipoUbicacion.Visible = true;
+                        pnlSMP.Visible = false;
+                    }
+                    else
+                    {
+                        pnlTipoUbicacion.Visible = false;
+                        pnlSMP.Visible = true;
+                    }
+
 
                 }
 
@@ -789,8 +801,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         protected void ddlTipoDeUbicacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id_tipoubicacion = int.Parse(ddlTipoDeUbicacion.SelectedValue);
-            
-            if (id_tipoubicacion == (int)Constantes.TiposDeUbicacion.ObjetoTerritorial) 
+
+            if (id_tipoubicacion == (int)Constantes.TiposDeUbicacion.ObjetoTerritorial)
                 ReqtxtDescUbicacion.Enabled = false;
             else
                 ReqtxtDescUbicacion.Enabled = true;

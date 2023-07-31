@@ -5,13 +5,11 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AnexoProfesionales.Tramites.Habilitacion.Controls;
-using System.Configuration;
 
 namespace AnexoProfesionales.Controls
 {
@@ -111,7 +109,7 @@ namespace AnexoProfesionales.Controls
 
         protected void gridubicacion_db_OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
-            
+
             EncomiendaUbicacionesBL encBL = new EncomiendaUbicacionesBL();
             ParametrosBL paramBL = new ParametrosBL();
 
@@ -179,12 +177,8 @@ namespace AnexoProfesionales.Controls
                     if (item.Ubicacion.Seccion.HasValue)
                         lbl_seccion.Text = item.Ubicacion.Seccion.Value.ToString();
 
-                    if (ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(item.Ubicacion.IdUbicacion))
-                    {
-                        lbl_manzana.Text = 'T' + item.Ubicacion.Manzana.Trim();
-                        lbl_parcela.Text = item.Ubicacion.Parcela.Trim() + 't';
-                    }
-                    else
+
+                    if (!ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(item.Ubicacion.IdUbicacion))
                     {
                         lbl_manzana.Text = item.Ubicacion.Manzana.Trim();
                         lbl_parcela.Text = item.Ubicacion.Parcela.Trim();
@@ -194,13 +188,22 @@ namespace AnexoProfesionales.Controls
 
                 pnlSMP.Visible = RequiereSMP;
 
-                if (!id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ParcelaComun))
+
+                if (id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ParcelaComun) || !id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ObjetoTerritorial)
+                  || id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ObjetoTerritorial))
                 {
                     pnlTipoUbicacion.Visible = true;
-                    lblTipoUbicacion.Text = item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion.Trim();
+                    lblTipoUbicacion.Text = item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion != null ?
+                        item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion.Trim() : "";
                     lblSubTipoUbicacion.Text = item.SubTipoUbicacionesDTO.descripcion_subtipoubicacion.Trim();
-                    lblLocal.Text = item.LocalSubtipoUbicacion.Trim();
+                    lblTextOtros.Text = item.LocalSubtipoUbicacion != null ? item.LocalSubtipoUbicacion : "";
+                    lbl_seccion.Text = item.Ubicacion.Seccion.Value.ToString();
+                    lbl_manzana.Text = item.Ubicacion.Manzana.Trim();
+                    lbl_parcela.Text = item.Ubicacion.Parcela.Trim();
+
                     pnlDeptoLocal.Visible = false;
+                    pnlSMP.Visible = true;
+
                 }
                 else
                     pnlDeptoLocal.Visible = true;// Solo aparece cuando es parcela común, para el resto lo tomna del campo local que pone al buscar

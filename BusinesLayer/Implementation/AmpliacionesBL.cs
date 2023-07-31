@@ -324,9 +324,15 @@ namespace BusinesLayer.Implementation
                     repoAmp = new SSITSolicitudesOrigenRepository(unitOfWork);
 
                     var elementEntitySol = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDto);
-
+                    
                     var insertSolOk = repoSol.Insert(elementEntitySol);
                     objectDto.IdSolicitud = elementEntitySol.id_solicitud;
+
+                    if(elementEntitySol.FechaLibrado != null)
+                    {
+                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(elementEntitySol.id_solicitud, elementEntitySol.FechaLibrado, DateTime.Now, elementEntitySol.CreateUser);
+
+                    }
 
                     if (objectDto.SSITSolicitudesOrigenDTO != null)
                     {
@@ -740,7 +746,7 @@ namespace BusinesLayer.Implementation
                         SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas itemTitNuevoPJPF = new SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas();
 
                         itemTitNuevoPJPF.id_personajuridica = itemTitNuevoPJ.id_personajuridica;
-                        itemTitNuevoPJPF.id_solicitud = itemTitPJPF.id_solicitud;
+                        itemTitNuevoPJPF.id_solicitud = idSolicitudDestino;
                         itemTitNuevoPJPF.Apellido = itemTitPJPF.Apellido;
                         itemTitNuevoPJPF.Email = itemTitPJPF.Email;
                         itemTitNuevoPJPF.firmante_misma_persona = itemTitPJPF.firmante_misma_persona;

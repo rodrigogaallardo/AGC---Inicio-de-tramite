@@ -593,10 +593,10 @@ namespace BusinesLayer.Implementation
                     {
                         int idUbi = direccion.idUbicacion ?? 0;
 
-                        if (ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(idUbi))
-                        {
-                            direccion.puerta += "t";
-                        }
+                        //if (ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(idUbi))
+                        //{
+                        //    direccion.puerta += "t";
+                        //}
                         if (Direccion_armada.Length == 0)
                         {
                             Direccion_armada += direccion.calle + " " + direccion.puerta;
@@ -728,6 +728,11 @@ namespace BusinesLayer.Implementation
                     var elementEntitySol = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDto);
                     var insertSolOk = repo.Insert(elementEntitySol);
 
+                    if(elementEntitySol.FechaLibrado != null)
+                    {
+                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(elementEntitySol.id_solicitud, elementEntitySol.FechaLibrado, DateTime.Now, elementEntitySol.CreateUser);
+                    }
+
 
                     unitOfWork.Commit();
                     objectDto.IdSolicitud = elementEntitySol.id_solicitud;
@@ -753,9 +758,6 @@ namespace BusinesLayer.Implementation
                 {
                     repo = new SSITSolicitudesRepository(unitOfWork);
                     var elementDTO = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDTO);
-
-
-
                     repo.Update(elementDTO);
                     unitOfWork.Commit();
                 }
@@ -862,14 +864,16 @@ namespace BusinesLayer.Implementation
             {
                 repo = new SSITSolicitudesRepository(unitOfWork);
 
+                bool estaLibrado = false;
+
                 var solicitudEntity = repo.Single(id_solicitud);
 
                 var encomiendasEntity = solicitudEntity.Encomienda_SSIT_Solicitudes.Select(x => x.Encomienda);
 
                 var listEnc = encomiendasEntity.Where(x => x.id_estado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo).ToList();
 
-                if (!listEnc.Any()) throw new Exception("El trámite no posee anexos técnicos aprobados.");   
-                
+                if (!listEnc.Any()) throw new Exception("El trámite no posee anexos técnicos aprobados.");
+
                 var encomienda = listEnc.OrderByDescending(x => x.id_encomienda).First();
 
                 EncomiendaBL encbl = new EncomiendaBL();
@@ -923,7 +927,9 @@ namespace BusinesLayer.Implementation
 
                     var repoNor = new EncomiendaNormativasRepository(unitOfWork);
                     var listNor = repoNor.GetByFKIdEncomienda(encomienda.id_encomienda);
-                    if (listNor.Count() == 0 && !encubicbl.PoseeDistritosU(encomienda.id_encomienda))
+                    //aqui..
+                    if (listNor.Count() == 0 && !encubicbl.PoseeDistritosU(encomienda.id_encomienda) &&
+                        !encubicbl.EsInmuebleCatalogado(encomienda.id_encomienda))
                     {
                         itemRepo = new ItemDirectionRepository(unitOfWork);
                         List<int> lisSol = new List<int>();
@@ -934,9 +940,11 @@ namespace BusinesLayer.Implementation
                         string Direccion = listU.First().direccion;
 
                         if (solicitudEntity.FechaLibrado == null &&
-                            solicitudEntity.id_subtipoexpediente != (int)Constantes.SubtipoDeExpediente.HabilitacionPrevia)
+                            solicitudEntity.id_subtipoexpediente != (int)Constantes.SubtipoDeExpediente.HabilitacionPrevia &&
+                            !TienePlanoDeIncendio(id_solicitud) && !AcogeBeneficiosUERESGP(id_solicitud))
                         {
                             solicitudEntity.FechaLibrado = DateTime.Now;
+                            estaLibrado = true;
                             encuesta = getEncuesta(solicitudEntity, Direccion);
                         }
 
@@ -1020,13 +1028,20 @@ namespace BusinesLayer.Implementation
                 {
                     solicitudEntity.id_estado = (int)Constantes.TipoEstadoSolicitudEnum.PING;
                     repo.Update(solicitudEntity);
+                    if (estaLibrado)
+                    {
+                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(solicitudEntity.id_solicitud, solicitudEntity.FechaLibrado, DateTime.Now, solicitudEntity.CreateUser);
+                    }
                 }
                 else
                 {
                     if (id_estado_ant != (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN)
                         solicitudEntity.id_estado = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
                     repo.Update(solicitudEntity);
-
+                    if (estaLibrado)
+                    {
+                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(solicitudEntity.id_solicitud, solicitudEntity.FechaLibrado, DateTime.Now, solicitudEntity.CreateUser);
+                    }
                     if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF)
                     {
                         SGITramitesTareasDTO tramite = blEng.GetUltimaTareaHabilitacionAbierta(solicitudEntity.id_solicitud);
@@ -1094,7 +1109,7 @@ namespace BusinesLayer.Implementation
                                 {
                                     var id_circuito = blEng.GetIdCircuitoBySolicitud(solicitudEntity.id_solicitud);
                                     string cod_tarea_solicitud = id_circuito.ToString() + Engine.Sufijo_AsginacionCalificador;
-                                    idProximaTarea = blEng.GetIdTarea(Convert.ToInt32(cod_tarea_solicitud)); 
+                                    idProximaTarea = blEng.GetIdTarea(Convert.ToInt32(cod_tarea_solicitud));
                                 }
                             }
 
@@ -1341,110 +1356,112 @@ namespace BusinesLayer.Implementation
                 #region Pagos
                 var repoDoc = new SSITDocumentosAdjuntosRepository(this.uowF.GetUnitOfWork());
                 var listDocSsit = repoDoc.GetByFKIdSolicitud(id_solicitud);
-
-                if (SSITentity.id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
+                if (BoletaCeroActiva() == false)
                 {
-                    //0144521: JADHE 56637 - SSIT - RDU del 2018 pide BUI
-                    DateTime fechaValida = new DateTime(2020, 1, 1);
-                    if (SSITentity.CreateDate > fechaValida)
-                        ValidarPagoSSIT(id_solicitud);
-                }
-
-                if (SSITentity.id_tipotramite != (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
-                {
-                    SSITSolicitudesBL ssitBL = new SSITSolicitudesBL();
-                    var ssitDTO = ssitBL.Single(encDTO.IdSolicitud); //EncomiendaSSITSolicitudesDTO.Select(x => x.id_solicitud).FirstOrDefault()
-
-                    int ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.SinExencion;
-
-                    bool tieneRubroProTeatro = lstRubros.Where(x => x.EsProTeatro).Any() ||
-                                               lstRubrosCN.Where(x => x.Codigo == Constantes.RubrosCN.Teatro_Independiente).Any();
-                    if (tieneRubroProTeatro)
-                        ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.ProTeatro;
-
-                    if (tieneRubroEstadio)
-                        ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.Estadio;
-
-                    /*******************************************************************************************
-                    // 0139531: JADHE 53779 - SSIT - REQ - Eximir pago BUI Centro Culturales por Sociedad civil
-                    // PENDIENTE DE CONFIRMACION POR FALTA DE TIPIFICADO
-                    bool esSocCivil = false;
-                    SSITSolicitudesTitularesPersonasJuridicasBL persJuridicas = new SSITSolicitudesTitularesPersonasJuridicasBL();
-                    var solicPersJuridicas = persJuridicas.GetByFKIdSolicitud(encDTO.IdSolicitud);
-                    foreach (var pj in solicPersJuridicas)
+                    if (SSITentity.id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
                     {
-                        if (pj.IdTipoSociedad == (int)Constantes.TipoSociedad.Sociedad_Civil)
-                        {
-                            esSocCivil = true;
-                            break;
-                        }
-                    }
-                    bool tieneRubroCCultural = lstRubros.Where(x => x.EsCentroCultural).Any() ||
-                        lstRubrosCN.Where(x => x.Codigo == Constantes.RubrosCN.Centro_Cultural_A ||
-                        x.Codigo == Constantes.RubrosCN.Centro_Cultural_B ||
-                        x.Codigo == Constantes.RubrosCN.Centro_Cultural_C).Any(); 
-                    if (tieneRubroCCultural) // && esSocCivil (Pendiente de confirmacion)
-                        ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.CentroCultural;
-
-                    ***********************************************************************************************/
-
-                    bool tieneRubroCCultural = lstRubros.Where(x => x.EsCentroCultural).Any();
-                    if (tieneRubroCCultural)
-                        ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.CentroCultural;
-
-                    //Valido que sea una ECI 
-                    bool esEci = (encDTO != null && encDTO.EsECI && SSITentity != null && (bool)SSITentity.EsECI);
-                    if (esEci)
-                    {
-                        ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.EsECI;
-                    }
-                    switch (ExcepcionRubro)
-                    {
-                        case (int)Constantes.TieneRubroConExencionPago.ProTeatro:
-                            bool tieneDocProTeatro = listDocSsit.Any(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.ConstanciaInicioTramiteIGJoINAES ||
-                                                      x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.CertificadoProTeatro);
-                            if (!tieneDocProTeatro)
-                            {
-                                ValidarPagoSSIT(id_solicitud);
-                                if (EximirCAA == false)
-                                    ValidarPagoCAA(solicitud_caa);
-                            }
-                            break;
-                        case (int)Constantes.TieneRubroConExencionPago.Estadio:
-                            bool tieneChkEstadio = ssitDTO.ExencionPago;
-                            if (!tieneChkEstadio)
-                                ValidarPagoSSIT(id_solicitud);
-
-                            if (solicitud_caa.id_solicitud > 0 && EximirCAA == false)
-                                ValidarPagoCAA(solicitud_caa);
-                            break;
-                        case (int)Constantes.TieneRubroConExencionPago.CentroCultural:
-                            bool tieneDocCCultural = listDocSsit.Where(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.ConstanciaInicioTramiteIGJoINAES).Any();
-                            if (!tieneDocCCultural)
-                            {
-                                ValidarPagoSSIT(id_solicitud);
-                                if (EximirCAA == false)
-                                    ValidarPagoCAA(solicitud_caa);
-                            }
-                            break;
-                        case (int)Constantes.TieneRubroConExencionPago.EsECI:
-                            //Valido que solo tenga mas de ese rubro para que no sea excepcion de pago
-                            if (encDTO.EncomiendaRubrosCNDTO.Count > 1 && encDTO.IdTipoTramite != (int)Constantes.TipoTramite.HabilitacionECIAdecuacion)
-                            {
-                                ValidarPagoSSIT(id_solicitud);
-                                if (EximirCAA == false)
-                                    ValidarPagoCAA(solicitud_caa);
-                            }
-                            else
-                            {
-                                ValidarPagoCAA(solicitud_caa);
-                            }
-                            break;
-                        default:
+                        //0144521: JADHE 56637 - SSIT - RDU del 2018 pide BUI
+                        DateTime fechaValida = new DateTime(2020, 1, 1);
+                        if (SSITentity.CreateDate > fechaValida)
                             ValidarPagoSSIT(id_solicitud);
-                            if (EximirCAA == false)
-                                ValidarPagoCAA(solicitud_caa);
-                            break;
+                    }
+
+                    if (SSITentity.id_tipotramite != (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
+                    {
+                        SSITSolicitudesBL ssitBL = new SSITSolicitudesBL();
+                        var ssitDTO = ssitBL.Single(encDTO.IdSolicitud); //EncomiendaSSITSolicitudesDTO.Select(x => x.id_solicitud).FirstOrDefault()
+
+                        int ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.SinExencion;
+
+                        bool tieneRubroProTeatro = lstRubros.Where(x => x.EsProTeatro).Any() ||
+                                                   lstRubrosCN.Where(x => x.Codigo == Constantes.RubrosCN.Teatro_Independiente).Any();
+                        if (tieneRubroProTeatro)
+                            ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.ProTeatro;
+
+                        if (tieneRubroEstadio)
+                            ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.Estadio;
+
+                        /*******************************************************************************************
+                        // 0139531: JADHE 53779 - SSIT - REQ - Eximir pago BUI Centro Culturales por Sociedad civil
+                        // PENDIENTE DE CONFIRMACION POR FALTA DE TIPIFICADO
+                        bool esSocCivil = false;
+                        SSITSolicitudesTitularesPersonasJuridicasBL persJuridicas = new SSITSolicitudesTitularesPersonasJuridicasBL();
+                        var solicPersJuridicas = persJuridicas.GetByFKIdSolicitud(encDTO.IdSolicitud);
+                        foreach (var pj in solicPersJuridicas)
+                        {
+                            if (pj.IdTipoSociedad == (int)Constantes.TipoSociedad.Sociedad_Civil)
+                            {
+                                esSocCivil = true;
+                                break;
+                            }
+                        }
+                        bool tieneRubroCCultural = lstRubros.Where(x => x.EsCentroCultural).Any() ||
+                            lstRubrosCN.Where(x => x.Codigo == Constantes.RubrosCN.Centro_Cultural_A ||
+                            x.Codigo == Constantes.RubrosCN.Centro_Cultural_B ||
+                            x.Codigo == Constantes.RubrosCN.Centro_Cultural_C).Any(); 
+                        if (tieneRubroCCultural) // && esSocCivil (Pendiente de confirmacion)
+                            ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.CentroCultural;
+
+                        ***********************************************************************************************/
+
+                        bool tieneRubroCCultural = lstRubros.Where(x => x.EsCentroCultural).Any();
+                        if (tieneRubroCCultural)
+                            ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.CentroCultural;
+
+                        //Valido que sea una ECI 
+                        bool esEci = (encDTO != null && encDTO.EsECI && SSITentity != null && (bool)SSITentity.EsECI);
+                        if (esEci)
+                        {
+                            ExcepcionRubro = (int)Constantes.TieneRubroConExencionPago.EsECI;
+                        }
+                        switch (ExcepcionRubro)
+                        {
+                            case (int)Constantes.TieneRubroConExencionPago.ProTeatro:
+                                bool tieneDocProTeatro = listDocSsit.Any(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.ConstanciaInicioTramiteIGJoINAES ||
+                                                          x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.CertificadoProTeatro);
+                                if (!tieneDocProTeatro)
+                                {
+                                    ValidarPagoSSIT(id_solicitud);
+                                    if (EximirCAA == false)
+                                        ValidarPagoCAA(solicitud_caa);
+                                }
+                                break;
+                            case (int)Constantes.TieneRubroConExencionPago.Estadio:
+                                bool tieneChkEstadio = ssitDTO.ExencionPago;
+                                if (!tieneChkEstadio)
+                                    ValidarPagoSSIT(id_solicitud);
+
+                                if (solicitud_caa.id_solicitud > 0 && EximirCAA == false)
+                                    ValidarPagoCAA(solicitud_caa);
+                                break;
+                            case (int)Constantes.TieneRubroConExencionPago.CentroCultural:
+                                bool tieneDocCCultural = listDocSsit.Where(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.ConstanciaInicioTramiteIGJoINAES).Any();
+                                if (!tieneDocCCultural)
+                                {
+                                    ValidarPagoSSIT(id_solicitud);
+                                    if (EximirCAA == false)
+                                        ValidarPagoCAA(solicitud_caa);
+                                }
+                                break;
+                            case (int)Constantes.TieneRubroConExencionPago.EsECI:
+                                //Valido que solo tenga mas de ese rubro para que no sea excepcion de pago
+                                if (encDTO.EncomiendaRubrosCNDTO.Count > 1 && encDTO.IdTipoTramite != (int)Constantes.TipoTramite.HabilitacionECIAdecuacion)
+                                {
+                                    ValidarPagoSSIT(id_solicitud);
+                                    if (EximirCAA == false)
+                                        ValidarPagoCAA(solicitud_caa);
+                                }
+                                else
+                                {
+                                    ValidarPagoCAA(solicitud_caa);
+                                }
+                                break;
+                            default:
+                                ValidarPagoSSIT(id_solicitud);
+                                if (EximirCAA == false)
+                                    ValidarPagoCAA(solicitud_caa);
+                                break;
+                        }
                     }
                 }
                 #endregion
@@ -1792,6 +1809,9 @@ namespace BusinesLayer.Implementation
                     else if (sol.id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
                         trata = parametrosRepo.GetParametroChar("Trata.RedistribucionDeUso");
 
+                    string _noESB = parametrosRepo.GetParametroChar("SSIT.NO.ESB");
+                    bool.TryParse(_noESB, out bool noESB);
+
                     itemRepo = new ItemDirectionRepository(this.uowF.GetUnitOfWork());
                     List<int> lisSol = new List<int>();
                     lisSol.Add(IdSolicitud);
@@ -1799,8 +1819,11 @@ namespace BusinesLayer.Implementation
                     var listU = convertDirecciones(LstDoorsDirection);
 
                     string Direccion = listU.First().direccion;
+                    if (!noESB)
+                    {
+                        enviarActualizacionTramite(_urlESB, sol, trata, Direccion);
+                    }
 
-                    enviarActualizacionTramite(_urlESB, sol, trata, Direccion);
                 }
             }
             else if (sol.id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
@@ -1893,6 +1916,9 @@ namespace BusinesLayer.Implementation
                     solicitudEntity.LastUpdateUser = userid;
                     solicitudEntity.LastUpdateDate = DateTime.Now;
                     repo.Update(solicitudEntity);
+
+                    unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(solicitudEntity.id_solicitud, DateTime.Now , DateTime.Now, userid);
+
                     unitOfWork.Commit();
                 }
             }
@@ -1968,7 +1994,7 @@ namespace BusinesLayer.Implementation
                     NroUbicacion++;
                     var itemUbicCAA = lstUbicacionesCAA.FirstOrDefault(x => x.id_ubicacion == itemUbicHAB.id_ubicacion && x.id_subtipoubicacion == itemUbicHAB.id_subtipoubicacion);
                     if (itemUbicCAA == null)
-                    //if (itemUbicCAA != null)
+                        //if (itemUbicCAA != null)
                         lstErrores.Add(string.Format("No se encuentra la ubicación {0} en el CAA.", NroUbicacion));
                     else
                     {
@@ -1989,7 +2015,7 @@ namespace BusinesLayer.Implementation
                             }
 
                         }
-                        else 
+                        else
                         {
                             // evaluamos mixturas y distritos
                             var lstDistritosHAB = itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Distritos.ToList();
@@ -1999,7 +2025,7 @@ namespace BusinesLayer.Implementation
                             var cantidadMixturasHAB = (lstMixturasHAB.Select(t => t.IdZonaMixtura).Distinct().Count());
 
                             //Comparación de Distritos
-                            if (cantidadDistritosHAB != itemUbicCAA.Distritos.Count()) 
+                            if (cantidadDistritosHAB != itemUbicCAA.Distritos.Count())
                             {
                                 lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
                             }
@@ -2020,7 +2046,7 @@ namespace BusinesLayer.Implementation
                             {
                                 lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
                             }
-                            else if ( cantidadMixturasHAB == itemUbicCAA.Mixturas.Count() )
+                            else if (cantidadMixturasHAB == itemUbicCAA.Mixturas.Count())
                             {
                                 foreach (var itemMixtura in lstMixturasHAB)
                                 {
@@ -2032,7 +2058,7 @@ namespace BusinesLayer.Implementation
                                 }
                             }
                         }
-                                               
+
                         string local_subtipoubicacion_caa = "";
                         string local_subtipoubicacion_hab = "";
                         if (!string.IsNullOrEmpty(itemUbicCAA.local_subtipoubicacion))
@@ -2097,7 +2123,7 @@ namespace BusinesLayer.Implementation
                             lstErrores.Add(string.Format("No se encuentra el titular con CUIT {0} en el CAA.", itemTitPfHAB.Cuit));
 
                         //Mantis 0161160: Se eliminó validacion por Apellido, Nombres, TipoDoc, NroDoc
-                                              
+
                     }
                 }
 
@@ -2124,7 +2150,7 @@ namespace BusinesLayer.Implementation
                         else
                         {
                             //Mantis 0161160: Se eliminó validacion por Razon Social
-                           
+
 
                             //Comparacion de los titulares de Sociedades de Hecho
                             //--
@@ -2561,6 +2587,37 @@ namespace BusinesLayer.Implementation
             unitOfWorkTran.Commit();
             unitOfWorkTran.Dispose();
             return elementEntityBaja.id_baja;
+        }
+
+        private bool BoletaCeroActiva()
+        {
+            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+            DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                            "yyyyMMdd",
+                                                            System.Globalization.CultureInfo.InvariantCulture);
+            if (DateTime.Now > boletaCeroDate)
+                return true;
+
+            return false;
+        }
+
+        private bool TienePlanoDeIncendio(int id_solicitud)
+        {
+            EncomiendaSSITSolicitudesBL encSolBL = new EncomiendaSSITSolicitudesBL();
+            int id_encomienda = encSolBL.GetByFKIdSolicitud(id_solicitud).Max(x => x.id_encomienda);
+            EncomiendaPlanosBL encDocBL = new EncomiendaPlanosBL();
+            var DocAdjAT = encDocBL.GetByFKIdEncomiendaTipoPlano(id_encomienda, 2).FirstOrDefault();
+            SSITDocumentosAdjuntosBL ssitDocBL = new SSITDocumentosAdjuntosBL();
+            var DocAdjSSIT = ssitDocBL.GetByFKIdSolicitudTipoDocReq(id_solicitud, 66).FirstOrDefault();
+            return DocAdjAT != null || DocAdjSSIT != null;
+        }
+
+        private bool AcogeBeneficiosUERESGP(int id_solicitud)
+        {
+            EncomiendaBL encBl = new EncomiendaBL();
+            var datoSolicitudEnc = encBl.GetByFKIdSolicitud(id_solicitud);
+            var enc = datoSolicitudEnc.OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
+            return enc.AcogeBeneficios;
         }
     }
 }

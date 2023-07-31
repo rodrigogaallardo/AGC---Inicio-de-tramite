@@ -1,11 +1,11 @@
-﻿using IBusinessLayer;
-using DataTransferObject;
-using DataAcess;
+﻿using AutoMapper;
 using BaseRepository;
-using UnitOfWork;
-using AutoMapper;
-using System.Collections.Generic;
+using DataAcess;
+using DataTransferObject;
+using IBusinessLayer;
 using System;
+using System.Collections.Generic;
+using UnitOfWork;
 
 namespace BusinesLayer.Implementation
 {
@@ -43,6 +43,24 @@ namespace BusinesLayer.Implementation
                 throw ex;
             }
         }
+
+        public SubTipoUbicacionesDTO GetSubTipoUbicacion(int IdTipoUbicacion)
+        {
+            try
+            {
+                uowF = new TransactionScopeUnitOfWorkFactory();
+                repo = new SubTipoUbicacioneRepository(this.uowF.GetUnitOfWork());
+                var entity = repo.GetSubTipoUbicacion(IdTipoUbicacion);
+                var entityDto = mapperBase.Map<SubTiposDeUbicacion, SubTipoUbicacionesDTO>((SubTiposDeUbicacion)entity);
+
+                return entityDto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public SubTipoUbicacionesDTO Single(int IdSubTipoUbicacion)
         {
             try

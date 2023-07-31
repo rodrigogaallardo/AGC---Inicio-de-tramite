@@ -8,7 +8,6 @@ using SSIT.Solicitud.Transferencia.Controls;
 using StaticClass;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
@@ -315,30 +314,43 @@ namespace SSIT
             #endregion
 
             #region PAGOS
-            Pagos.id_solicitud = IdSolicitud;
-            Pagos.tipo_tramite = (int)Constantes.PagosTipoTramite.TR;
-            updBoxPagos.Visible = false;
-            if ((transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia) || (transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_nominacion))
+            if (BoletaCeroActiva())
             {
-                Constantes.BUI_EstadoPago[] arrEstadosPago = new Constantes.BUI_EstadoPago[] { Constantes.BUI_EstadoPago.Pagado/*, Constantes.BUI_EstadoPago.SinPagar*/ };
+                pnlPagos.Visible = false;
+                Pagos.Visible = false;
+                updBoxPagos.Visible = false;
 
-                try
-                {
-                    validarDocumentos(transferencia);
-
-                    TransferenciaBL.validarEncomienda(IdSolicitud);
-                    if (!arrEstadosPago.Contains(Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
-                        Pagos.HabilitarGeneracionManual = true;
-                }
-                catch (Exception ex)
-                {
-                    LogError.Write(ex);
-                    MostrarMensajeAlertas(ex.Message);
-                }
-                Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
-
-                updBoxPagos.Visible = true;
+                liBui.Visible = false;
             }
+            else
+            {
+
+                Pagos.id_solicitud = IdSolicitud;
+                Pagos.tipo_tramite = (int)Constantes.PagosTipoTramite.TR;
+                updBoxPagos.Visible = false;
+                if ((transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia) || (transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_nominacion))
+                {
+                    Constantes.BUI_EstadoPago[] arrEstadosPago = new Constantes.BUI_EstadoPago[] { Constantes.BUI_EstadoPago.Pagado/*, Constantes.BUI_EstadoPago.SinPagar*/ };
+
+                    try
+                    {
+                        validarDocumentos(transferencia);
+
+                        TransferenciaBL.validarEncomienda(IdSolicitud);
+                        if (!arrEstadosPago.Contains(Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
+                            Pagos.HabilitarGeneracionManual = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        LogError.Write(ex);
+                        MostrarMensajeAlertas(ex.Message);
+                    }
+                    Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
+
+                    updBoxPagos.Visible = true;
+                }
+            }
+
             #endregion
 
             var trDocAdjDTO = transferencia.Documentos.Any(p => p.IdTipoDocsis == (int)Constantes.TiposDeDocumentosSistema.MANIFIESTO_TRANSMISION);
@@ -449,34 +461,37 @@ namespace SSIT
                 validarDocumentos(transferencia);
 
                 //valido pago
-                if ((transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia) || (transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_nominacion))
+                if (BoletaCeroActiva() == false)
                 {
-                    PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-                    var lstPagos = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
-                    if (lstPagos == null)
-                        throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
-
-                    //0148737: JADHE 57779 - SSIT - Error al presentar
-                    DateTime fecha = new DateTime(2020, 01, 01);
-                    if (transferencia.CreateDate > fecha)
+                    if ((transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia) || (transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_nominacion))
                     {
-                        if (!lstPagos.Any(p => p.id_estado_pago == (int)Constantes.BUI_EstadoPago.Pagado))
-                        {
+                        PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
+                        var lstPagos = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
+                        if (lstPagos == null)
                             throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+
+                        //0148737: JADHE 57779 - SSIT - Error al presentar
+                        DateTime fecha = new DateTime(2020, 01, 01);
+                        if (transferencia.CreateDate > fecha)
+                        {
+                            if (!lstPagos.Any(p => p.id_estado_pago == (int)Constantes.BUI_EstadoPago.Pagado))
+                            {
+                                throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                            }
+                        }
+
+                        //0145298: JADHE 57098 - SGI - TRM 2019 piden BUI
+                        TransferenciasSolicitudesBL blTransferencia = new TransferenciasSolicitudesBL();
+                        TransferenciasSolicitudesDTO tranf = blTransferencia.Single(transferencia.IdSolicitud);
+                        if (tranf.TipoTransmision.id_tipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia)
+                        {
+                            var ret = pagosBoletaBL.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud);
+                            if (ret != Constantes.BUI_EstadoPago.Pagado)
+                                throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
                         }
                     }
-
-                    //0145298: JADHE 57098 - SGI - TRM 2019 piden BUI
-                    TransferenciasSolicitudesBL blTransferencia = new TransferenciasSolicitudesBL();
-                    TransferenciasSolicitudesDTO tranf = blTransferencia.Single(transferencia.IdSolicitud);
-                    if (tranf.TipoTransmision.id_tipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia)
-                    {
-                        var ret = pagosBoletaBL.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud);
-                        if (ret != Constantes.BUI_EstadoPago.Pagado)
-                            throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
-                    }
                 }
-                //valido AT
+                    //valido AT
                 TransferenciaBL.validarEncomienda(IdSolicitud);
                 RegenerarSolicitud(IdSolicitud);
                 if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF || id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO)
@@ -672,19 +687,25 @@ namespace SSIT
 
             string dir = "";
 
+            string _noESB = parametrosBL.GetParametroChar("SSIT.NO.ESB");
+            bool.TryParse(_noESB, out bool noESB);
+
             List<int> lisSol = new List<int>();
             lisSol.Add(IdSolicitud);
             foreach (var item in TransferenciaBL.GetDireccionesTransf(lisSol).ToList())
                 dir += item.direccion + " / ";
+            if (!noESB)
+            {
+                try
+                {
+                    wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, sol.NumeroExpedienteSade, trata, dir);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
 
-            try
-            {
-                wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, sol.NumeroExpedienteSade, trata, dir);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
         private void enviarParticipantes(TransferenciasSolicitudesDTO sol)
         {
@@ -951,5 +972,20 @@ namespace SSIT
 
         }
         #endregion
+
+        private bool BoletaCeroActiva()
+        {
+
+            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+
+            DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                            "yyyyMMdd",
+                                                            System.Globalization.CultureInfo.InvariantCulture);
+
+            if (DateTime.Now > boletaCeroDate)
+                return true;
+
+            return false;
+        }
     }
 }

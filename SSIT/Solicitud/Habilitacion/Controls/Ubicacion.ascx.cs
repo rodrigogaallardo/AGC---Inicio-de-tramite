@@ -1,16 +1,14 @@
-﻿using SSIT.Common;
-using BusinesLayer.Implementation;
+﻿using BusinesLayer.Implementation;
 using DataTransferObject;
+using SSIT.Common;
 using StaticClass;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SSIT.Solicitud.Habilitacion.Controls;
 
 namespace SSIT.Solicitud.Habilitacion.Controls
 {
@@ -197,7 +195,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 if (item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.RequiereSMP.HasValue)
                     RequiereSMP = item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.RequiereSMP.Value;
 
-                    SSITSolicitudesUbicacionesBL ubicacionesBL = new SSITSolicitudesUbicacionesBL();
+                SSITSolicitudesUbicacionesBL ubicacionesBL = new SSITSolicitudesUbicacionesBL();
                 if (RequiereSMP)
                 {
                     if (item.UbicacionesDTO.NroPartidaMatriz.HasValue)
@@ -206,12 +204,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     if (item.UbicacionesDTO.Seccion.HasValue)
                         lbl_seccion.Text = item.UbicacionesDTO.Seccion.Value.ToString();
 
-                    if (ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(item.UbicacionesDTO.IdUbicacion))
-                    {
-                        lbl_manzana.Text = 'T' + item.UbicacionesDTO.Manzana.Trim();
-                        lbl_parcela.Text = item.UbicacionesDTO.Parcela.Trim() + 't';
-                    }
-                    else
+                    if (!ubicacionesBL.esUbicacionEspecialConObjetoTerritorialByIdUbicacion(item.UbicacionesDTO.IdUbicacion))
                     {
                         lbl_manzana.Text = item.UbicacionesDTO.Manzana.Trim();
                         lbl_parcela.Text = item.UbicacionesDTO.Parcela.Trim();
@@ -221,15 +214,24 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
                 pnlSMP.Visible = RequiereSMP;
 
-                if (!id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ParcelaComun) || !id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ObjetoTerritorial))
+
+                if (id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ParcelaComun) || !id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ObjetoTerritorial)
+                   || id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ObjetoTerritorial))
                 {
                     pnlTipoUbicacion.Visible = true;
                     lblTipoUbicacion.Text = item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion != null ?
                         item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion.Trim() : "";
                     lblSubTipoUbicacion.Text = item.SubTipoUbicacionesDTO.descripcion_subtipoubicacion.Trim();
-                    lblTextOtros.Text = item.LocalSubtipoUbicacion != null ? item.LocalSubtipoUbicacion  : "";
+                    lblTextOtros.Text = item.LocalSubtipoUbicacion != null ? item.LocalSubtipoUbicacion : "";
+                    if (item.UbicacionesDTO.Seccion != null)
+                        lbl_seccion.Text = item.UbicacionesDTO.Seccion.Value.ToString();
+                    else
+                        lbl_seccion.Text = string.Empty;
+                    lbl_manzana.Text = item.UbicacionesDTO.Manzana.Trim();
+                    lbl_parcela.Text = item.UbicacionesDTO.Parcela.Trim();
 
                     pnlDeptoLocal.Visible = false;
+                    pnlSMP.Visible = true;
 
                 }
                 else

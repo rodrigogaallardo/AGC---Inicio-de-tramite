@@ -63,7 +63,10 @@ namespace ExternalService
             client.ClearHandlers();
             client.AddHandler("application/json", new JsonDeserializer());
 
-            var request = new RestRequest(string.Format("?id_tramite={0}&guardar={1}", id_tramite, guardar), Method.GET);
+            //var request = new RestRequest(string.Format("?id_tramite={0}&guardar={1}", id_tramite, guardar), Method.GET);
+            var request = new RestRequest(Method.GET);
+            request.AddParameter("id_tramite", id_tramite);
+            request.AddParameter("guardar", guardar);
             request.AddHeader("Content-Type", "application/json charset=UTF-8");
             request.AddHeader("Accept", "application/json");
             request.AddHeader("Token", _token);

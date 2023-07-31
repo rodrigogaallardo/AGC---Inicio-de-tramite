@@ -528,18 +528,42 @@
                                                                     <asp:Label Font-Bold="true" ID="grd_manzana" runat="server" Text="<%# Item.Manzana %>" CssClass="label-azul"></asp:Label>
                                                                 Parcela:
                                                                     <asp:Label Font-Bold="true" ID="grd_parcela" runat="server" Text="<%# Item.Parcela %>" CssClass="label-azul"></asp:Label>
+                                                                <div>
+                                                                    Tipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblTipoUbicacion1" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
+                                                                <div style="display: block;">
+                                                                    Subtipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblSubTipoUbicacion1" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
                                                             </div>
                                                         </asp:Panel>
 
                                                         <asp:Panel ID="pnlTipoUbicacion" runat="server" Style="padding-top: 3px" Visible="false">
-                                                            <div>
+                                                            <%-- <div>
                                                                 Ubicaci&oacute;n:
                                                                     <asp:Label ID="lblTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
-                                                            </div>
+                                                            </div>--%>
                                                             <div>
+                                                                Sección:
+                                                                    <asp:Label Font-Bold="true" ID="grd_seccion1" runat="server" Text="<%# Item.Seccion %>" CssClass="label-azul"></asp:Label>
+                                                                Manzana: 
+                                                                    <asp:Label Font-Bold="true" ID="grd_manzana1" runat="server" Text="<%# Item.Manzana %>" CssClass="label-azul"></asp:Label>
+                                                                Parcela:
+                                                                    <asp:Label Font-Bold="true" ID="grd_parcela1" runat="server" Text="<%# Item.Parcela %>" CssClass="label-azul"></asp:Label>
+                                                                <div>
+                                                                    Tipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
+                                                                <div style="display: block;">
+                                                                    Subtipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblSubTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
+                                                            </div>
+                                                            <%--<div>
                                                                 Detalle:
                                                                     <asp:Label ID="lblSubTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
-                                                            </div>
+                                                            </div>--%>
                                                             <div>
                                                                 Local:
                                                                     <asp:Label ID="lblLocal" runat="server" CssClass="label-azul"></asp:Label>

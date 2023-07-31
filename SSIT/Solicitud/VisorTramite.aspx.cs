@@ -7,11 +7,13 @@ using SSIT.Common;
 using StaticClass;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
-using System.Configuration;
 using static StaticClass.Constantes;
+using Org.BouncyCastle.Utilities;
+using DataAcess;
 
 namespace SSIT
 {
@@ -64,7 +66,8 @@ namespace SSIT
             ScriptManager sm = ScriptManager.GetCurrent(this);
             if (sm.IsInAsyncPostBack)
             {
-                ScriptManager.RegisterStartupScript(updCargarDatos, updCargarDatos.GetType(), "init_Js_updCargarDatos", "init_Js_updCargarDatos();", true);
+                ScriptManager.RegisterStartupScript(updCargarDatos, updCargarDatos.GetType(), "init_Js_updCargarDatos", 
+                    "init_Js_updCargarDatos();", true);
             }
             int nroSolReferencia = 0;
             int.TryParse(ConfigurationManager.AppSettings["NroSolicitudReferencia"], out nroSolReferencia);
@@ -73,6 +76,16 @@ namespace SSIT
 
             string tieneOblea = visDocumentos.tieneOblea(id_solicitud);
             divbtnOblea.Visible = false;
+
+            //si boleta cero esta activa, oculto panel de pagos
+            SSITSolicitudesBL _blSol = new SSITSolicitudesBL();
+            var _sol = _blSol.Single(id_solicitud);
+            if (BoletaCeroActiva())
+            {
+                liBui.Visible = false;
+                visPagosSolicitud.Visible = false;
+            }
+
             if (tieneOblea != "")
             {
                 btnOblea.NavigateUrl = tieneOblea;
@@ -407,7 +420,7 @@ namespace SSIT
             CargarCabecera(ssitDTO);
             MostrarMensajeAlertaFaltantes();
 
-            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || 
+            bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP ||
                             id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM ||
                             id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF;
             List<int> estadosAT = new List<int>();
@@ -416,7 +429,7 @@ namespace SSIT
 
             #region DatosSolicitud
             visDatosSolicitud.Editable = editable;
-            visDatosSolicitud.EditableTitulares = editable 
+            visDatosSolicitud.EditableTitulares = editable
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO
                 || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN;
@@ -550,10 +563,10 @@ namespace SSIT
             {
                 switch (sol.IdTipoTramite)
                 {
-                    case (int)TipoTramite.HabilitacionECIAdecuacion:
+                    case (int)StaticClass.Constantes.TipoTramite.HabilitacionECIAdecuacion:
                         lblTipoTramite.Text = TipoTramiteDescripcion.AdecuacionECI + " - " + sol.TipoExpedienteDescripcion;
                         break;
-                    case (int)TipoTramite.HabilitacionECIHabilitacion:
+                    case (int)StaticClass.Constantes.TipoTramite.HabilitacionECIHabilitacion:
                         lblTipoTramite.Text = TipoTramiteDescripcion.HabilitacionECI + " - " + sol.TipoExpedienteDescripcion;
                         break;
 
@@ -581,7 +594,7 @@ namespace SSIT
                 lblHabAnterior.Text = sol.SSITSolicitudesOrigenDTO.id_solicitud_origen != null ? sol.SSITSolicitudesOrigenDTO.id_solicitud_origen.ToString() : sol.SSITSolicitudesOrigenDTO.id_transf_origen.ToString();
             }
             else if (sol.EsECI && sol.IdTipoTramite == (int)Constantes.TipoTramite.HabilitacionECIAdecuacion && sol.NroExpedienteSadeRelacionado != null)
-            { 
+            {
                 lblHabAnterior.Text = sol.NroExpedienteSadeRelacionado;
             }
 
@@ -737,7 +750,7 @@ namespace SSIT
 
                         var mailService = new EmailServiceBL();
                         var idEmails = new List<int>();
-                        foreach(var email in emails.Where(em => em != null).Distinct())
+                        foreach (var email in emails.Where(em => em != null).Distinct())
                         {
                             var emailEntity = new EmailEntity
                             {
@@ -821,6 +834,12 @@ namespace SSIT
                 EncomiendaBL encBL = new EncomiendaBL();
                 var sol = blSol.Single(id_solicitud);
 
+                //********** DARIO BOLETA 0 - 06/04/2023 **********
+                //si boleta cero esta activa, marco la solicitud como excenta de pago
+                    if (BoletaCeroActiva())
+                        sol.ExencionPago = true;
+                //*************************************************
+
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 MembershipUser usuario = Membership.GetUser(userid);
                 int id_estado_ant = sol.IdEstado;
@@ -845,7 +864,8 @@ namespace SSIT
                     return;
                 }
 
-                if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF || id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO)
+                if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF || 
+                    id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO)
                 {
                     ExternalServiceReporting reportingService = new ExternalServiceReporting();
                     var ReportingEntity = reportingService.GetPDFOblea(id_solicitud, false);
@@ -893,7 +913,7 @@ namespace SSIT
                                 }
                             }
                         }
-                        LogError.Write("EnviarParticipantes");  
+                        LogError.Write("EnviarParticipantes");
                         if (sol.idTAD != null)
                         {
                             Functions.enviarParticipantes(sol);
@@ -969,7 +989,7 @@ namespace SSIT
 
             pdfSolicitud = ReportingEntity.Reporte;
             int id_file = ReportingEntity.Id_file;
-            
+
             if (DocAdjDTO != null)
             {
                 if (id_file != DocAdjDTO.id_file)
@@ -1038,6 +1058,21 @@ namespace SSIT
 
             lblError.Text = e.error;
             ScriptManager.RegisterStartupScript(updAlertas, updAlertas.GetType(), "showfrmError", "showfrmError();", true);
+        }
+
+        private bool BoletaCeroActiva()
+        {
+            
+            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+
+            DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                            "yyyyMMdd",
+                                                            System.Globalization.CultureInfo.InvariantCulture);
+
+            if (DateTime.Now > boletaCeroDate)
+                return true;
+
+            return false;
         }
     }
 }

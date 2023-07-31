@@ -96,7 +96,7 @@
                                             <div class="widget-title" Style="background:#ffffff;background-image: none;">
                                                 <span class="icon"><i class="imoon imoon-list-alt" Style="color:#337ab7"></i></span>
                                                 <h5>
-                                                    <label> <%# Convert.ToDateTime(Eval("CreateDate")).ToString("dd/MM/yyyy HH:mm") %></label>
+                                                    <label> <%# Convert.ToDateTime(Eval("DateObs")).ToString("dd/MM/yyyy HH:mm") %></label>
                                                     <label> - Calificador: </label>
                                                     <label><%# Eval("userApeNom") %></label>
                                                 </h5>

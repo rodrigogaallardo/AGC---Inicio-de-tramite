@@ -1,14 +1,13 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
 using ExternalService;
+using ExternalService.Class;
 using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.Security;
-using ExternalService.Class;
 using static StaticClass.Constantes;
 
 namespace SSIT.Common
@@ -218,7 +217,7 @@ namespace SSIT.Common
                 }
                 catch (Exception ex)
                 {
-                        throw new Exception("Error en el mensaje de resouesta del servicio TAD de actualizarTramite: " + ex.Message);
+                    throw new Exception("Error en el mensaje de resouesta del servicio TAD de actualizarTramite: " + ex.Message);
                 }
             }
         }
@@ -304,9 +303,9 @@ namespace SSIT.Common
                 }
 
                 // alta solicitante/apoderado
-                    wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
-                    solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
-                    solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
+                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
+                solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
+                solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
@@ -398,13 +397,13 @@ namespace SSIT.Common
                 foreach (var item in lstParticipantesGP)
                 {
                     //desvincular todos los  participantes                    
-                        wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                    wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
                 }
 
                 // alta solicitante/apoderado
-                    wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, "",
-                    solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
-                    solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
+                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, "",
+                solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
+                solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, "",
@@ -434,17 +433,25 @@ namespace SSIT.Common
                 trata = parametrosBL.GetParametroChar("Trata.RedistribucionDeUso");
             string dir = "";
 
+            string _noESB = parametrosBL.GetParametroChar("SSIT.NO.ESB");
+            bool.TryParse(_noESB, out bool noESB);
+
             List<int> lisSol = new List<int>();
             lisSol.Add(sol.IdSolicitud);
             dir = sol.Nombre_calle + " " + sol.Altura_calle + " " + sol.Piso + " U.F " + sol.UnidadFuncional;
-            try
+            if (!noESB)
             {
-                wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, "", trata, dir);
-            }
-            catch (Exception ex)
-            {
+
+                try
+                {
+                    wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, "", trata, dir);
+                }
+                catch (Exception ex)
+                {
                     throw new Exception("Error en el mensaje de resouesta del servicio TAD de enviarCambio: " + ex.Message); ;
+                }
             }
+
         }
         public static CuitsRelacionadosPOST isCuitsRelacionados(string cuitAValidar, bool cuitAValidarSpecified, string cuitRepresentado, bool cuitRepresentadoSpecified, Guid user)
         {
@@ -505,6 +512,7 @@ namespace SSIT.Common
             }
             catch (Exception ex)
             {
+                LogError.Write(ex);
                 throw ex;
             }
         }

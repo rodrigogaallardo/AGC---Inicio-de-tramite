@@ -309,10 +309,10 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtDescUbicacion" runat="server" MaxLength="25" Width="150px" CssClass="form-control"></asp:TextBox>
-                                                <div>
+                                                <%-- <div>
                                                     <asp:RequiredFieldValidator ID="ReqtxtDescUbicacion" runat="server" ControlToValidate="txtDescUbicacion" CssClass="field-validation-error"
                                                         Display="Dynamic" ErrorMessage="Debe ingresar el Nº de local." ValidationGroup="Buscar4"></asp:RequiredFieldValidator>
-                                                </div>
+                                                </div>--%>
                                             </td>
                                         </tr>
                                     </table>
@@ -529,17 +529,33 @@
                                                                     <asp:Label Font-Bold="true" ID="grd_manzana" runat="server" Text="<%# Item.Manzana %>" CssClass="label-azul"></asp:Label>
                                                                 Parcela:
                                                                     <asp:Label Font-Bold="true" ID="grd_parcela" runat="server" Text="<%# Item.Parcela %>" CssClass="label-azul"></asp:Label>
+                                                                <div>
+                                                                    Tipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblTipoUbicacion1" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
+                                                                <div style="display: block;">
+                                                                    Subtipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblSubTipoUbicacion1" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
                                                             </div>
                                                         </asp:Panel>
 
                                                         <asp:Panel ID="pnlTipoUbicacion" runat="server" Style="padding-top: 3px" Visible="false">
                                                             <div>
-                                                                Ubicaci&oacute;n:
-                                                                    <asp:Label ID="lblTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
-                                                            </div>
-                                                            <div>
-                                                                Detalle:
-                                                                    <asp:Label ID="lblSubTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
+                                                                Sección:
+                                                                    <asp:Label Font-Bold="true" ID="grd_seccion1" runat="server" Text="<%# Item.Seccion %>" CssClass="label-azul"></asp:Label>
+                                                                Manzana: 
+                                                                    <asp:Label Font-Bold="true" ID="grd_manzana1" runat="server" Text="<%# Item.Manzana %>" CssClass="label-azul"></asp:Label>
+                                                                Parcela:
+                                                                    <asp:Label Font-Bold="true" ID="grd_parcela1" runat="server" Text="<%# Item.Parcela %>" CssClass="label-azul"></asp:Label>
+                                                                <div>
+                                                                    Tipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
+                                                                <div style="display: block;">
+                                                                    Subtipo Ubicación:
+                                                                    <asp:Label Font-Bold="true" ID="lblSubTipoUbicacion" runat="server" CssClass="label-azul"></asp:Label>
+                                                                </div>
                                                             </div>
                                                             <div>
                                                                 Local:
