@@ -44,19 +44,7 @@ namespace SSIT.Account
                     ret = false;
                     throw new Exception("El request no posee el token");
                 }
-                //try
-                //{
-                //    sign = Request.Form["sign"];
-                //}
-                //catch (Exception)
-                //{
-                //    ret = false;
-                //    throw new Exception("El request no posee el sign");
-                //}
-
-                //token = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxkYXRvcz48c2VydmljaW8gbm9tYnJlPSJtb2RlX3RyYW1fZGlzdDEiIGV4cF90aW1lPSIxNTQwMDExOTk1Ii8+PGF1dGVudGljYWRvIGN1aXQ9IjIwMjUwMDYyODE5IiBub21icmU9IkNBUk9MTyBSSUNBUkRPIEdBQlJJRUwiIGlzaWI9IiIgY2F0PSIiIGNvZGNhbGxlPSIwIiBjYWxsZT0iTk8gSU5GT1JNQURBIiBwdWVydGE9IjczIiBwaXNvPSIwMyIgZHB0bz0iQyIgY29kcG9zdGFsPSIxMTcwIiBjb2Rsb2NhbGlkYWQ9IjAiIGxvY2FsaWRhZD0iTk8gSU5GT1JNQURBIiBjb2Rwcm92PSIwIiBwcm92aW5jaWE9Ik5PIElORk9STUFEQSIgdGVsZWZvbm89IjQxNTY0NDYwIiBlbWFpbD0icmljYXJkby5jYXJvbG9AZGlnaWNvbXNpc3RlbWFzLmNvbS5hciIgbml2ZWw9IjIiIHRpcG9Eb2N1bWVudG89IjMwMDMiIGRvY3VtZW50bz0iMjUwMDYyODEiPjwvYXV0ZW50aWNhZG8+PHJlcHJlc2VudGFkb3M+PHJlcHJlc2VudGFkbyBjdWl0PSIyMDI1MDA2MjgxOSIgbm9tYnJlPSJDQVJPTE8gUklDQVJETyBHQUJSSUVMIiBpc2liPSIiIGNhdD0iIiBjb2RjYWxsZT0iMCIgY2FsbGU9Ik5PIElORk9STUFEQSIgcHVlcnRhPSI3MyIgcGlzbz0iMDMiIGRwdG89IkMiIGNvZHBvc3RhbD0iMTE3MCIgY29kbG9jYWxpZGFkPSIwIiBsb2NhbGlkYWQ9Ik5PIElORk9STUFEQSIgY29kcHJvdj0iMCIgcHJvdmluY2lhPSJOTyBJTkZPUk1BREEiIHRlbGVmb25vPSI0MTU2NDQ2MCIgZW1haWw9InJpY2FyZG8uY2Fyb2xvQGRpZ2ljb21zaXN0ZW1hcy5jb20uYXIiIHRpcG9SZXByZXNlbnRhY2lvbj0iMCIgdGlwb0RvY3VtZW50bz0iMzAwMyIgZG9jdW1lbnRvPSIyNTAwNjI4MSIgZWxlZ2lkbz0idHJ1ZSI+PC9yZXByZXNlbnRhZG8+PC9yZXByZXNlbnRhZG9zPjwvZGF0b3M+";
-                //sign = "RhAx7/W93ygkjLlXX4y2UaVXe8owyosGlxAnijNJDJ4sgrr8amom28D0bLDN2pIskaLnxNpQGtcErUibYOXHvrS754lVcebWEIbUovZuJnv5ge9OtOkIaTvJ/kEbhAvcwfuik2IB8l6MF0hK+oYHa4K8mx+Hl0kDrrlxHBeHSbs=";
-
+                
                 if (!string.IsNullOrWhiteSpace(token))
                 {
 
@@ -328,19 +316,11 @@ namespace SSIT.Account
         }
         private bool validarToken(string token, string sign)
         {
-            //byte[] decodedToken = Convert.FromBase64String(token);
-            //byte[] decodedBytesSign = Convert.FromBase64String(sign);
-
-            //string CertificadoFilename = Functions.GetParametroChar("AGIP.Certificado.Filename");
-            //string PathFilename = HttpContext.Current.Server.MapPath(string.Format("~/Account/CertificadosAGIP/{0}", CertificadoFilename));
-
-            //X509Certificate2 cert = new X509Certificate2(PathFilename);
-
-            //RSACryptoServiceProvider csp = (RSACryptoServiceProvider)cert.PublicKey.Key;
-
-            //bool TokenValido = csp.VerifyData(decodedToken, new SHA1CryptoServiceProvider(), decodedBytesSign);
-            //return TokenValido;
-            return true;
+            string keyPrivada = System.Configuration.ConfigurationManager.AppSettings["keyPrivada"];
+            bool TokenValido= false;
+            JWT jwt = new JWT(token);
+            TokenValido = jwt.ValidateJwt();
+            return TokenValido;
         }
 
         private string GetUserErrorMessage(MembershipCreateStatus status)

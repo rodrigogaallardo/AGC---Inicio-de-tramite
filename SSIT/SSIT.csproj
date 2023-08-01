@@ -877,6 +877,7 @@
     <Compile Include="Account\ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\JWT.cs" />
     <Compile Include="App_Components\BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
