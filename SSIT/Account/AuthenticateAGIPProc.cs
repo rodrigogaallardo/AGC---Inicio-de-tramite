@@ -6,10 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Security;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SSIT.Account
 {
@@ -39,31 +44,19 @@ namespace SSIT.Account
                     ret = false;
                     throw new Exception("El request no posee el token");
                 }
-                try
-                {
-                    sign = Request.Form["sign"];
-                }
-                catch (Exception)
-                {
-                    ret = false;
-                    throw new Exception("El request no posee el sign");
-                }
-
-                //token = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxkYXRvcz48c2VydmljaW8gbm9tYnJlPSJtb2RlX3RyYW1fZGlzdDEiIGV4cF90aW1lPSIxNTQwMDExOTk1Ii8+PGF1dGVudGljYWRvIGN1aXQ9IjIwMjUwMDYyODE5IiBub21icmU9IkNBUk9MTyBSSUNBUkRPIEdBQlJJRUwiIGlzaWI9IiIgY2F0PSIiIGNvZGNhbGxlPSIwIiBjYWxsZT0iTk8gSU5GT1JNQURBIiBwdWVydGE9IjczIiBwaXNvPSIwMyIgZHB0bz0iQyIgY29kcG9zdGFsPSIxMTcwIiBjb2Rsb2NhbGlkYWQ9IjAiIGxvY2FsaWRhZD0iTk8gSU5GT1JNQURBIiBjb2Rwcm92PSIwIiBwcm92aW5jaWE9Ik5PIElORk9STUFEQSIgdGVsZWZvbm89IjQxNTY0NDYwIiBlbWFpbD0icmljYXJkby5jYXJvbG9AZGlnaWNvbXNpc3RlbWFzLmNvbS5hciIgbml2ZWw9IjIiIHRpcG9Eb2N1bWVudG89IjMwMDMiIGRvY3VtZW50bz0iMjUwMDYyODEiPjwvYXV0ZW50aWNhZG8+PHJlcHJlc2VudGFkb3M+PHJlcHJlc2VudGFkbyBjdWl0PSIyMDI1MDA2MjgxOSIgbm9tYnJlPSJDQVJPTE8gUklDQVJETyBHQUJSSUVMIiBpc2liPSIiIGNhdD0iIiBjb2RjYWxsZT0iMCIgY2FsbGU9Ik5PIElORk9STUFEQSIgcHVlcnRhPSI3MyIgcGlzbz0iMDMiIGRwdG89IkMiIGNvZHBvc3RhbD0iMTE3MCIgY29kbG9jYWxpZGFkPSIwIiBsb2NhbGlkYWQ9Ik5PIElORk9STUFEQSIgY29kcHJvdj0iMCIgcHJvdmluY2lhPSJOTyBJTkZPUk1BREEiIHRlbGVmb25vPSI0MTU2NDQ2MCIgZW1haWw9InJpY2FyZG8uY2Fyb2xvQGRpZ2ljb21zaXN0ZW1hcy5jb20uYXIiIHRpcG9SZXByZXNlbnRhY2lvbj0iMCIgdGlwb0RvY3VtZW50bz0iMzAwMyIgZG9jdW1lbnRvPSIyNTAwNjI4MSIgZWxlZ2lkbz0idHJ1ZSI+PC9yZXByZXNlbnRhZG8+PC9yZXByZXNlbnRhZG9zPjwvZGF0b3M+";
-                //sign = "RhAx7/W93ygkjLlXX4y2UaVXe8owyosGlxAnijNJDJ4sgrr8amom28D0bLDN2pIskaLnxNpQGtcErUibYOXHvrS754lVcebWEIbUovZuJnv5ge9OtOkIaTvJ/kEbhAvcwfuik2IB8l6MF0hK+oYHa4K8mx+Hl0kDrrlxHBeHSbs=";
-
-                if (!string.IsNullOrWhiteSpace(token) && !string.IsNullOrWhiteSpace(sign))
+                
+                if (!string.IsNullOrWhiteSpace(token))
                 {
 
                     if (validarToken(token, sign))
                     {
 
 
-                        Datos datosToken = GetDatosTokenAGIP(token);
+                        Datos datosToken = GetDatosTokenMiBA(token,ref sign);
                         if (datosToken == null)
                             throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
 
-
+                    
 
                         string username = datosToken.Autenticado.Cuit.ToString();
 
@@ -97,7 +90,7 @@ namespace SSIT.Account
                         url = Functions.GetParametroChar("TAD.Url");
                     else
                     {
-                        url = "~/"+RouteConfig.HOME;
+                        url = "~/" + RouteConfig.HOME;
                     }
 
                     Response.Redirect(url);
@@ -133,6 +126,76 @@ namespace SSIT.Account
             if (ret.Autenticado.Email.Substring(ret.Autenticado.Email.Length - 1).Equals("."))
                 ret.Autenticado.Email = ret.Autenticado.Email.Remove(ret.Autenticado.Email.Length - 1);
             return ret;
+
+        }
+        private Datos GetDatosTokenMiBA(string token, ref string sign  )
+        {
+          
+            string[] tokenParts = token.Split('.');
+            string Header = tokenParts[0];
+            string payloadRecibido = tokenParts[1];
+            string keyPublicaRecibida = tokenParts[2];
+
+            string PayloadJsonString = Base64UrlEncoder.Decode(payloadRecibido);
+
+            DatosMiBA datosMiBA = Newtonsoft.Json.JsonConvert.DeserializeObject<DatosMiBA>(PayloadJsonString);
+
+
+
+            #region Fill Datos datosToken
+
+            Datos datosToken = new Datos();
+
+            Servicio servicio = new Servicio();
+            servicio.Exp_time = DateTime.Now.ToLongDateString();  //ASOSA
+            servicio.Nombre = datosMiBA.personaLogin.persona.terminosYCondiciones.nivelAcceso.nombre;//ASOSA
+            datosToken.Servicio = servicio;
+
+            Autenticado autenticado = new Autenticado();
+            autenticado.Cuit = datosMiBA.personaLogin.persona.cuit;
+            autenticado.Nombre = datosMiBA.personaLogin.persona.nombres + " " + datosMiBA.personaLogin.persona.apellidos;
+            autenticado.Isib = "??";
+            autenticado.Codcalle = "";
+            autenticado.Calle = datosMiBA.personaLogin.calle;
+            autenticado.Puerta = datosMiBA.personaLogin.altura;
+            autenticado.Codpostal = datosMiBA.personaLogin.codigoPostal;
+            //autenticado.Codlocalidad = datosMiBA.personaLogin.localidad.id.ToString();
+            //autenticado.Localidad = datosMiBA.personaLogin.localidad.nombre;
+            //autenticado.Codprov = datosMiBA.personaLogin.provincia.id.ToString();
+            //autenticado.Provincia = datosMiBA.personaLogin.provincia.nombre;
+            autenticado.Telefono = datosMiBA.personaLogin.persona.telefono;
+            autenticado.Email = datosMiBA.personaLogin.persona.email;
+            autenticado.Nivel = datosMiBA.personaLogin.persona.terminosYCondiciones.nivelAcceso.id.ToString();//ASOSA
+            autenticado.TipoDocumento = datosMiBA.personaLogin.persona.tipoDocumento;
+            autenticado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
+            datosToken.Autenticado = autenticado;
+
+            Representados representados = new Representados();
+            Representado representado = new Representado();
+
+            representado.Cuit = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
+            representado.Nombre = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.nombres + " " + datosMiBA.apoderados.persona.apellidos;
+            representado.Isib = "";
+            representado.Codcalle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
+            representado.Calle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.calle;
+            representado.Puerta = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.altura;
+            representado.Codpostal = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.codigoPostal;
+            //representado.Codlocalidad = datosMiBA.apoderados.localidad.id.ToString();
+            //representado.Localidad = datosMiBA.apoderados.localidad.nombre;
+            //representado.Codprov = datosMiBA.apoderados.provincia.id.ToString();
+            //representado.Provincia = datosMiBA.apoderados.provincia.nombre;
+            representado.Telefono = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.telefono;
+            representado.Email = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.email;
+            representado.TipoRepresentacion = "";//ASOSA
+            representado.TipoDocumento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.tipoDocumento;
+            representado.Documento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.numeroDocumento;
+            representado.Elegido = true.ToString();
+            representados.Representado = representado;
+            datosToken.Representados = representados;
+            #endregion
+
+            sign = keyPublicaRecibida.ToString();   
+            return datosToken;
 
         }
 
@@ -196,7 +259,7 @@ namespace SSIT.Account
                 Membership.UpdateUser(usu);
             }
 
-            actualizarProfile(userid, datosToken,token, signU);
+            actualizarProfile(userid, datosToken, token, signU);
 
         }
 
@@ -215,14 +278,14 @@ namespace SSIT.Account
             usuario.UserId = userid;
             usuario.CUIT = datosToken.Autenticado.Cuit.ToString();
             usuario.UserName = datosToken.Autenticado.Cuit.ToString();
-            if(!string.IsNullOrWhiteSpace(datosToken.Autenticado.Email))
-                usuario.Email= datosToken.Autenticado.Email.Trim(); 
+            if (!string.IsNullOrWhiteSpace(datosToken.Autenticado.Email))
+                usuario.Email = datosToken.Autenticado.Email.Trim();
             usuario.TipoPersona = 0;
             usuario.UserDni = Convert.ToInt32(datosToken.Autenticado.Documento);
             usuario.RazonSocial = "";
             var na = datosToken.Autenticado.Nombre;
-            usuario.Apellido =na.Substring(0,na.IndexOf(" "));
-            usuario.Nombre = na.Substring(na.IndexOf(" ") + 1).Trim(); 
+            usuario.Apellido = na.Substring(0, na.IndexOf(" "));
+            usuario.Nombre = na.Substring(na.IndexOf(" ") + 1).Trim();
             usuario.Calle = datosToken.Autenticado.Calle;
             usuario.NroPuerta = Convert.ToInt32(datosToken.Autenticado.Puerta);
             usuario.Piso = datosToken.Autenticado.Piso;
@@ -246,7 +309,7 @@ namespace SSIT.Account
             string hashCookies = FormsAuthentication.Encrypt(ticket);
 
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hashCookies);
-            
+
             System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
             //
             //FormsAuthentication.SetAuthCookie(username, true);
@@ -254,17 +317,10 @@ namespace SSIT.Account
         }
         private bool validarToken(string token, string sign)
         {
-            byte[] decodedToken = Convert.FromBase64String(token);
-            byte[] decodedBytesSign = Convert.FromBase64String(sign);
-
-            string CertificadoFilename = Functions.GetParametroChar("AGIP.Certificado.Filename");
-            string PathFilename = HttpContext.Current.Server.MapPath(string.Format("~/Account/CertificadosAGIP/{0}", CertificadoFilename));
-
-            X509Certificate2 cert = new X509Certificate2(PathFilename);
-
-            RSACryptoServiceProvider csp = (RSACryptoServiceProvider)cert.PublicKey.Key;
-
-            bool TokenValido = csp.VerifyData(decodedToken, new SHA1CryptoServiceProvider(), decodedBytesSign);
+            string keyPrivada = System.Configuration.ConfigurationManager.AppSettings["keyPrivada"];
+            bool TokenValido= false;
+            JWT jwt = new JWT(token);
+            TokenValido = jwt.ValidateJwt();
             return TokenValido;
         }
 
