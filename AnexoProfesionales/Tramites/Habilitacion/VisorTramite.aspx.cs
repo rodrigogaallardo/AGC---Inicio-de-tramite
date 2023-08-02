@@ -202,6 +202,16 @@ namespace AnexoProfesionales
 
                 if (!condicionIncendioOk)
                 {
+                    #region ASOSA MENSAJE PLANO CONTRA INCENDIO
+                    ScriptManager sm = ScriptManager.GetCurrent(this);
+                    string cadena = "El trámite " + id_encomienda.ToString() + " requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente.";
+                    string script = string.Format("alert('{0}');", cadena);
+                    ScriptManager.RegisterStartupScript(this, typeof(System.Web.UI.Page), "alertScript", script, true);
+
+
+                    lblMsgPlanoContraIncendios.Text = "El trámite " + id_encomienda.ToString() + " requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente.";
+                    pnlMsgPlanoContraIncendios.Visible = true;
+                    #endregion
                     mensaje.Add("Plano contra incendios");
                 }
 
@@ -314,13 +324,13 @@ namespace AnexoProfesionales
             }
             #endregion
             #region CertificadoSobrecarga
-            //hid_mostrar_certificadoSobrecarga.Value = "false";
-            //if (enDl!=null && enDl.sobrecarga_corresponde_dl.Value)
-            //{
-            //    hid_mostrar_certificadoSobrecarga.Value = "true";
-            //    visCertificadoSobrecarga.CargarDatos(enc);
-            //    btnModificarCertificadoSobrecarga.PostBackUrl = string.Format("~/" + RouteConfig.EDITAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda);
-            //}
+            hid_mostrar_certificadoSobrecarga.Value = "false";
+            if (enDl!=null && enDl.sobrecarga_corresponde_dl.Value)
+            {
+                hid_mostrar_certificadoSobrecarga.Value = "true";
+                visCertificadoSobrecarga.cargarDatos(id_encomienda);
+                btnModificarCertificadoSobrecarga.PostBackUrl = string.Format("~/" + RouteConfig.EDITAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda);
+            }
             #endregion
             #region Planos
             visCargaPlanos.CargarDatos(enc);
@@ -382,7 +392,7 @@ namespace AnexoProfesionales
             divbtnImprimirSolicitud.Visible = false;
 
             btnModificarDatosLocal.Visible = false;
-            //btnModificarCertificadoSobrecarga.Visible = false;
+            btnModificarCertificadoSobrecarga.Visible = false;
 
             if (enc.EncomiendaTitularesPersonasJuridicasDTO.Count() == 0 && enc.EncomiendaTitularesPersonasFisicasDTO.Count() == 0)
                 btnModificarTitulares.Visible = false;
@@ -421,8 +431,8 @@ namespace AnexoProfesionales
                 if (hid_mostrar_conformacionLocal.Value == "true")
                     btnModificarConformacionLocal.Visible = true;
 
-                //if (hid_mostrar_certificadoSobrecarga.Value == "true")
-                //    btnModificarCertificadoSobrecarga.Visible = true;
+                if (hid_mostrar_certificadoSobrecarga.Value == "true")
+                    btnModificarCertificadoSobrecarga.Visible = true;
             }
 
             //SSITSolicitudesBL solBL = new SSITSolicitudesBL();

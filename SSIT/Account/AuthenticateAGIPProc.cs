@@ -123,7 +123,8 @@ namespace SSIT.Account
                 var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Datos));
                 ret = (Datos)serializer.Deserialize(stream);
             }
-
+            if (ret.Autenticado.Email.Substring(ret.Autenticado.Email.Length - 1).Equals("."))
+                ret.Autenticado.Email = ret.Autenticado.Email.Remove(ret.Autenticado.Email.Length - 1);
             return ret;
 
         }

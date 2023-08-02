@@ -188,7 +188,7 @@ namespace AnexoProfesionales
                 CroquisUbicacion = enDl.croquis_ubicacion_dl;
 
 
-                SobrecargaCorresponde = enDl.dj_certificado_sobrecarga == null ? false: enDl.dj_certificado_sobrecarga.Value;
+                SobrecargaCorresponde = enDl.dj_certificado_sobrecarga == null ? false : enDl.dj_certificado_sobrecarga.Value;
                 if (SobrecargaCorresponde)
                 {
                     divcheckDeclaracion.Visible = true;
@@ -237,6 +237,9 @@ namespace AnexoProfesionales
             productosInflamables_SI.Checked = EncDto.ProductosInflamables;
             productosInflamables_NO.Checked = !EncDto.ProductosInflamables;
 
+            AcogeBeneficio_SI.Checked = EncDto.AcogeBeneficios;
+            AcogeBeneficio_NO.Checked = !EncDto.AcogeBeneficios;
+
             if (!rbtnCumpleLey962.Checked && !rbtnEximidoLey962.Checked)
             {
                 rbtnCumpleLey962.Checked = true;
@@ -244,7 +247,7 @@ namespace AnexoProfesionales
             txtSuperficieCubierta.Text = SuperficieCubierta.ToString();
             txtSuperficieDescubierta.Text = SuperficieDescubierta.ToString();
             txtSuperficieTotal.Text = Convert.ToString(SuperficieCubierta + SuperficieDescubierta);
-           // txtSupSemiCubierta
+            // txtSupSemiCubierta
 
             txtSuperficieCubiertaAmp.Text = SuperficieCubiertaAmp.ToString();
             txtSuperficieDescubiertaAmp.Text = SuperficieDescubiertaAmp.ToString();
@@ -292,7 +295,7 @@ namespace AnexoProfesionales
 
             txtLocalVenta.Text = LocalVenta.ToString();
 
-            txtCantOperarios.Text = CantidadOperarios.ToString();            
+            txtCantOperarios.Text = CantidadOperarios.ToString();
 
             optsCertificadoSobrecarga_SI.Checked = SobrecargaCorresponde;
             optsCertificadoSobrecarga_NO.Checked = !SobrecargaCorresponde;
@@ -456,6 +459,7 @@ namespace AnexoProfesionales
                 blEncDl.Insert(enDl);
             else
             {
+                enDl.sobrecarga_corresponde_dl = optsCertificadoSobrecarga_SI.Checked;
                 blEncDl.Update(enDl);
                 if (!SobrecargaCorresponde)
                 {
@@ -484,39 +488,40 @@ namespace AnexoProfesionales
                     }
                 }
             }
-           
+
             EncomiendaBL encBL = new EncomiendaBL();
             EncomiendaDTO encDTO = new EncomiendaDTO();
             encDTO = encBL.Single(id_encomienda);
             encDTO.Asistentes350 = asistentes_SI.Checked;
             encDTO.ProductosInflamables = productosInflamables_SI.Checked;
+            encDTO.AcogeBeneficios = AcogeBeneficio_SI.Checked;
             encBL.Update(encDTO);
 
             //llamo al actualizart porq si cambio el local de venta e impacta en el tipo
-            var repoRubro = new EncomiendaRubrosCNBL(); 
-            if(encDTO.EncomiendaRubrosCNDTO.Count > 0)
+            var repoRubro = new EncomiendaRubrosCNBL();
+            if (encDTO.EncomiendaRubrosCNDTO.Count > 0)
                 repoRubro.ActualizarSubTipoExpediente(id_encomienda);
 
-            
-            
+
+
 
             Response.Redirect(string.Format("~/" + RouteConfig.VISOR_ENCOMIENDA + "{0}", id_encomienda));
 
-            //if (hid_return_url.Value.Contains("Editar"))
-            //{
-            //    if (SobrecargaCorresponde)
-            //        Response.Redirect(string.Format("~/" + RouteConfig.EDITAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
-            //    else
-            //        Response.Redirect(string.Format("~/" + RouteConfig.VISOR_ENCOMIENDA + "{0}", id_encomienda));
-            //}
-            //else
-            //{
-            //    if (SobrecargaCorresponde)
-            //        Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
-            //    else
-            //        Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_RUBROS + "{0}", id_encomienda));
-            //}
-            
+            if (hid_return_url.Value.Contains("Editar"))
+            {
+                if (SobrecargaCorresponde)
+                    Response.Redirect(string.Format("~/" + RouteConfig.EDITAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
+                else
+                    Response.Redirect(string.Format("~/" + RouteConfig.VISOR_ENCOMIENDA + "{0}", id_encomienda));
+            }
+            else
+            {
+                if (SobrecargaCorresponde)
+                    Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_CERTIFICADOSOBRECARGA + "{0}", id_encomienda));
+                else
+                    Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_RUBROS + "{0}", id_encomienda));
+            }
+
         }
 
         protected void optsCertificadoSobrecarga_SI_CheckedChanged(object sender, EventArgs e)

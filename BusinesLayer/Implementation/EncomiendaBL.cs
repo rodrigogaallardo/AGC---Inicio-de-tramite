@@ -1,20 +1,20 @@
 using AutoMapper;
 using BaseRepository;
-using IBusinessLayer;
+using BaseRepository.Engine;
+using BusinesLayer.MappingConfig;
 using Dal.UnitOfWork;
 using DataAcess;
 using DataAcess.EntityCustom;
 using DataTransferObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnitOfWork;
-using StaticClass;
 using ExternalService;
 using ExternalService.ws_interface_AGC;
-using BusinesLayer.MappingConfig;
+using IBusinessLayer;
+using StaticClass;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
-using BaseRepository.Engine;
+using System.Linq;
+using UnitOfWork;
 
 namespace BusinesLayer.Implementation
 {
@@ -2178,7 +2178,7 @@ namespace BusinesLayer.Implementation
                     {
                         listEnco = repo.GetByFKIdSolicitud(id_sol_o).Where(x => x.id_estado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo
                         || x.id_estado == (int)Constantes.Encomienda_Estados.Vencida);
-                    }                    
+                    }
                 }
                 else if (sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
                 {
@@ -2273,7 +2273,7 @@ namespace BusinesLayer.Implementation
                         sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
                     {
                         int? id_solicitud_origen = null;
-                        
+
                         if (sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
                         {
                             if (sol.SSIT_Solicitudes_Origen.Count == 0)
@@ -2425,7 +2425,7 @@ namespace BusinesLayer.Implementation
                         u.IdZonaPlaneamiento = ubi.IdZonaPlaneamiento;
                         u.LocalSubtipoUbicacion = ubi.LocalSubtipoUbicacion;
                         u.InmuebleCatalogado = ubic.EsUbicacionProtegida;
-                        
+
                         var lhor = blHor.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.PropiedadesHorizontales = new List<UbicacionesPropiedadhorizontalDTO>();
                         foreach (var hor in lhor)
@@ -2434,7 +2434,7 @@ namespace BusinesLayer.Implementation
                             h.IdPropiedadHorizontal = hor.IdPropiedadHorizontal.Value;
                             u.PropiedadesHorizontales.Add(h);
                         }
-                        
+
                         var lpuer = blPuer.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.Puertas = new List<UbicacionesPuertasDTO>();
                         foreach (var puer in lpuer)
@@ -2444,7 +2444,7 @@ namespace BusinesLayer.Implementation
                             p.NroPuertaUbic = puer.NroPuerta;
                             u.Puertas.Add(p);
                         }
-                        
+
                         var ldistrito = blDistrito.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.EncomiendaUbicacionesDistritosDTO = new List<Encomienda_Ubicaciones_DistritosDTO>();
                         foreach (var distri in ldistrito)
@@ -2455,7 +2455,7 @@ namespace BusinesLayer.Implementation
                             d.IdSubZona = distri.IdSubZona;
                             u.EncomiendaUbicacionesDistritosDTO.Add(d);
                         }
-                        
+
                         var lmixtura = blMixtura.GetByFKIdSolicitudUbicacion(ubi.IdSolicitudUbicacion);
                         u.EncomiendaUbicacionesMixturasDTO = new List<Encomienda_Ubicaciones_MixturasDTO>();
                         foreach (var mixtu in lmixtura)
@@ -2900,7 +2900,7 @@ namespace BusinesLayer.Implementation
                     TransferenciaUbicacionesBL blTransfUbic = new TransferenciaUbicacionesBL();
                     TransferenciaUbicacionesMixturasBL blTransfubicMixturas = new TransferenciaUbicacionesMixturasBL();
                     TransferenciaUbicacionesDistritosBL blTransfUbicDistritos = new TransferenciaUbicacionesDistritosBL();
-                    
+
                     var encAnt = Single(id_encomienda_ant);
                     var lubi = blUbi.GetByFKIdEncomienda(id_encomienda_ant);
                     foreach (var ubi in lubi)
@@ -2935,7 +2935,7 @@ namespace BusinesLayer.Implementation
 
                         u.EncomiendaUbicacionesMixturasDTO = new List<Encomienda_Ubicaciones_MixturasDTO>();
                         u.EncomiendaUbicacionesDistritosDTO = new List<Encomienda_Ubicaciones_DistritosDTO>();
-                        if (encAnt.IdSolicitud > nroSolReferencia) 
+                        if (encAnt.IdSolicitud > nroSolReferencia)
                         {
                             var lmixturas = blMixturas.GetByFKIdEncomiendaUbicacion(ubi.IdEncomiendaUbicacion);
                             foreach (var mixtura in lmixturas)
@@ -2944,7 +2944,7 @@ namespace BusinesLayer.Implementation
                                 m.IdZonaMixtura = mixtura.IdZonaMixtura;
                                 u.EncomiendaUbicacionesMixturasDTO.Add(m);
                             }
-                            
+
 
                             var ldistrito = blDistrito.GetByFKIdEncomiendaUbicacion(ubi.IdEncomiendaUbicacion);
                             foreach (var distrito in ldistrito)
@@ -2955,7 +2955,7 @@ namespace BusinesLayer.Implementation
                                 d.IdSubZona = distrito.IdSubZona;
                                 u.EncomiendaUbicacionesDistritosDTO.Add(d);
                             }
-                            
+
                             //Si no existen Distritos y Mixturas en la encomienda de la solicitud de la cual hereda --> verifico en la solicitud actual.
                             // Mantis 0164787: JADHE 63917 - AT - Error al crear AT
                             if (!lmixturas.ToList().Any() && !ldistrito.ToList().Any())
@@ -3096,42 +3096,42 @@ namespace BusinesLayer.Implementation
                             cs.id_tipo_sobrecarga = certSobre.id_tipo_sobrecarga;
                             int id_sobrecarga = blCertSobre.Insert(cs);
 
-                            //EncomiendaSobrecargaDetalle1BL blSob1 = new EncomiendaSobrecargaDetalle1BL();
-                            //EncomiendaSobrecargaDetalle2BL blSob2 = new EncomiendaSobrecargaDetalle2BL();
-                            //var listSob1 = blSob1.GetByFKIdSobrecarga(certSobre.id_sobrecarga);
-                            //foreach (var sob1 in listSob1)
-                            //{
-                            //    EncomiendaSobrecargaDetalle1DTO s1 = new EncomiendaSobrecargaDetalle1DTO();
-                            //    s1.detalle = sob1.detalle;
-                            //    s1.id_sobrecarga = id_sobrecarga;
-                            //    s1.id_tipo_destino = sob1.id_tipo_destino;
-                            //    s1.id_tipo_uso = sob1.id_tipo_uso;
-                            //    s1.losa_sobre = sob1.losa_sobre;
-                            //    s1.valor = sob1.valor;
-                            //    var pl = listPlantas.Where(x => x.id_encomiendatiposector == sob1.id_encomiendatiposector).First();
-                            //    int id_encomiendatiposector = 0;
-                            //    foreach (var p in listPlantasNew)
-                            //    {
-                            //        if (p.IdTipoSector == pl.IdTipoSector && p.Descripcion == pl.Descripcion)
-                            //        {
-                            //            id_encomiendatiposector = p.id_encomiendatiposector;
-                            //            break;
-                            //        }
-                            //    }
-                            //    s1.id_encomiendatiposector = id_encomiendatiposector;
-                            //    int id_sobrecarga_detalle1 = blSob1.Insert(s1);
-                            //    var listSob2 = blSob2.GetByFKIdSobrecargaDetalle1(sob1.id_sobrecarga_detalle1);
-                            //    foreach (var sob2 in listSob2)
-                            //    {
-                            //        EncomiendaSobrecargaDetalle2DTO s2 = new EncomiendaSobrecargaDetalle2DTO();
-                            //        s2.id_sobrecarga_detalle1 = id_sobrecarga_detalle1;
-                            //        s2.id_tipo_uso_1 = sob2.id_tipo_uso_1;
-                            //        s2.id_tipo_uso_2 = sob2.id_tipo_uso_2;
-                            //        s2.valor_1 = sob2.valor_1;
-                            //        s2.valor_2 = sob2.valor_2;
-                            //        blSob2.Insert(s2);
-                            //    }
-                            //}
+                            EncomiendaSobrecargaDetalle1BL blSob1 = new EncomiendaSobrecargaDetalle1BL();
+                            EncomiendaSobrecargaDetalle2BL blSob2 = new EncomiendaSobrecargaDetalle2BL();
+                            var listSob1 = blSob1.GetByFKIdSobrecarga(certSobre.id_sobrecarga);
+                            foreach (var sob1 in listSob1)
+                            {
+                                EncomiendaSobrecargaDetalle1DTO s1 = new EncomiendaSobrecargaDetalle1DTO();
+                                s1.detalle = sob1.detalle;
+                                s1.id_sobrecarga = id_sobrecarga;
+                                s1.id_tipo_destino = sob1.id_tipo_destino;
+                                s1.id_tipo_uso = sob1.id_tipo_uso;
+                                s1.losa_sobre = sob1.losa_sobre;
+                                s1.valor = sob1.valor;
+                                var pl = listPlantas.Where(x => x.id_encomiendatiposector == sob1.id_encomiendatiposector).First();
+                                int id_encomiendatiposector = 0;
+                                foreach (var p in listPlantasNew)
+                                {
+                                    if (p.IdTipoSector == pl.IdTipoSector && p.Descripcion == pl.Descripcion)
+                                    {
+                                        id_encomiendatiposector = p.id_encomiendatiposector;
+                                        break;
+                                    }
+                                }
+                                s1.id_encomiendatiposector = id_encomiendatiposector;
+                                int id_sobrecarga_detalle1 = blSob1.Insert(s1);
+                                var listSob2 = blSob2.GetByFKIdSobrecargaDetalle1(sob1.id_sobrecarga_detalle1);
+                                foreach (var sob2 in listSob2)
+                                {
+                                    EncomiendaSobrecargaDetalle2DTO s2 = new EncomiendaSobrecargaDetalle2DTO();
+                                    s2.id_sobrecarga_detalle1 = id_sobrecarga_detalle1;
+                                    s2.id_tipo_uso_1 = sob2.id_tipo_uso_1;
+                                    s2.id_tipo_uso_2 = sob2.id_tipo_uso_2;
+                                    s2.valor_1 = sob2.valor_1;
+                                    s2.valor_2 = sob2.valor_2;
+                                    blSob2.Insert(s2);
+                                }
+                            }
 
                         }
                         #endregion
@@ -4102,9 +4102,9 @@ namespace BusinesLayer.Implementation
 
                 #region "Validación de sobrecarga"
 
-                //if (enc.id_tipotramite != (int)Constantes.TipoDeTramite.RedistribucionDeUso
-                //    && datosLocal.sobrecarga_corresponde_dl && !datosLocal.Encomienda_Certificado_Sobrecarga.Any(x => x.Encomienda_Sobrecarga_Detalle1.Any()))
-                //    listaErrores.Add(Errors.ENCOMIENDA_FALTA_SOBRECARGA);
+                if (enc.id_tipotramite != (int)Constantes.TipoDeTramite.RedistribucionDeUso
+                    && datosLocal.sobrecarga_corresponde_dl && !datosLocal.Encomienda_Certificado_Sobrecarga.Any(x => x.Encomienda_Sobrecarga_Detalle1.Any()))
+                    listaErrores.Add(Errors.ENCOMIENDA_FALTA_SOBRECARGA);
 
                 #endregion
 

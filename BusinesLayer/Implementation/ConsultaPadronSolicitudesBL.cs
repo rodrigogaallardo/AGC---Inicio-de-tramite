@@ -1544,7 +1544,14 @@ namespace BusinesLayer.Implementation
                             n.IdConsultaPadron = idCP;
                             n.IdEntidadNormativa = nor.IdEntidadNormativa;
                             n.IdTipoNormativa = nor.IdTipoNormativa;
-                            n.NumeroNormativa = (nor.NroNormativa).Substring(0,15);
+                            if (nor.NroNormativa.Length >= 15)
+                            {
+                                n.NumeroNormativa = nor.NroNormativa.Substring(0, 15);
+                            }
+                            else
+                            {
+                                n.NumeroNormativa = nor.NroNormativa;
+                            }
                             blNor.Insert(n);
                         }
                         #endregion

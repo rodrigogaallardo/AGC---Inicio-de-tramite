@@ -1,18 +1,16 @@
 using AutoMapper;
 using BaseRepository;
-using IBusinessLayer;
+using BaseRepository.Engine;
 using Dal.UnitOfWork;
 using DataAcess;
+using DataAcess.EntityCustom;
 using DataTransferObject;
+using IBusinessLayer;
+using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnitOfWork;
-using StaticClass;
-using DataAcess.EntityCustom;
-using BaseRepository.Engine;
-using System.Web.Security;
-using System.Linq.Expressions;
 
 namespace BusinesLayer.Implementation
 {
@@ -318,16 +316,16 @@ namespace BusinesLayer.Implementation
                     repo = new EncomiendaRubrosCNRepository(unitOfWork);
                     repoEncomienda = new EncomiendaRepository(unitOfWork);
                     repoEncRubSubrub = new EncomiendaRubrosCNSubrubrosRepository(unitOfWork);
-                    
+
                     var encomiendaEntity = repoEncomienda.Single(objectDto.IdEncomienda);
                     if (encomiendaEntity.id_estado != (int)Constantes.TipoEstadoSolicitudEnum.COMP && encomiendaEntity.id_estado != (int)Constantes.TipoEstadoSolicitudEnum.INCOM)
                         throw new Exception(Errors.ENCOMIENDA_CAMBIOS);
 
                     repo = new EncomiendaRubrosCNRepository(unitOfWork);
                     var elemnt = repo.Single(objectDto.IdEncomiendaRubro);
-                    
+
                     repoEncRubSubrub.RemoveRange(elemnt.Encomienda_RubrosCN_Subrubros);
-                    
+
                     repo.Delete(elemnt);
 
                     encomiendaEntity.id_tipoexpediente = 0;

@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\EncomiendaSSITSolicitudesBL.cs" />
     <Compile Include="Implementation\EncomiendaRubrosATAnteriorBL.cs" />
     <Compile Include="EngineBL\EngineBL.cs" />
     <Compile Include="Implementation\AmpliacionesBL.cs" />

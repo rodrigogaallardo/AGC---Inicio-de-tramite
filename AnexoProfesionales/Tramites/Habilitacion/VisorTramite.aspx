@@ -7,6 +7,7 @@
 <%@ Register Src="~/Tramites/Habilitacion/Controls/DatosLocal.ascx" TagPrefix="uc" TagName="DatosLocal" %>
 <%@ Register Src="~/Tramites/Habilitacion/Controls/CargaPlanos.ascx" TagPrefix="uc" TagName="CargaPlanos" %>
 <%@ Register Src="~/Tramites/Habilitacion/Controls/RubrosCN.ascx" TagPrefix="uc" TagName="RubrosCN" %>
+<%@ Register Src="~/Tramites/Habilitacion/Controls/SobreCargaDatos.ascx" TagPrefix="uc" TagName="CertificadoSobrecarga" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -154,6 +155,10 @@
                     </tr>
                 </table>
 
+                  <asp:Panel ID="pnlMsgPlanoContraIncendios" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
+                    <asp:Label ID="lblMsgPlanoContraIncendios" Text="El trámite XXXXXX requiere la presentación de Plano Conforme a Obra de Instalación de Prevención contra Incendio registrado por la DGROC o Plano de Instalación de Prevención contra Incendio registrado por la DGROC, correspondiendo para este último una verificación in situ conforme lo establecido en la normativa vigente." ForeColor="Red" runat="server"></asp:Label>
+                </asp:Panel>
+
                 <asp:Panel ID="pnlTramiteIncompleto" runat="server" CssClass="alert alert-success mtop10" Visible="false" Width="100%">
                     <asp:Label ID="lblTextoTramiteIncompleto" runat="server"></asp:Label>
                 </asp:Panel>
@@ -166,7 +171,7 @@
             <ContentTemplate>
 
                 <asp:HiddenField ID="hid_mostrar_conformacionLocal" runat="server" />
-                <%--<asp:HiddenField ID="hid_mostrar_certificadoSobrecarga" runat="server" />--%>
+                <asp:HiddenField ID="hid_mostrar_certificadoSobrecarga" runat="server" />
                 <asp:Button ID="btnCargarDatostramite" runat="server" Style="display: none" OnClick="btnCargarDatostramite_Click" />
 
 
@@ -260,7 +265,7 @@
                 </div>
 
                     <%-- Certificado de Sobrecarga--%>
-<%--                <div id="box_certificadoSobrecarga" class="accordion-group widget-box"  style="background:#ffffff">
+                <div id="box_certificadoSobrecarga" class="accordion-group widget-box"  style="background:#ffffff">
 
                     <div class="accordion-heading">
                         <a id="A6" data-parent="#collapse-group" href="#collapse_certificadoSobrecarga"
@@ -269,7 +274,7 @@
                             <div class="widget-title">
                                 <span class="icon"><i class="imoon imoon-office" style="color:#344882;"></i></span>
                                 <h5>
-                                    <asp:Label ID="Label4" runat="server" Text="Certificado de Sobrecarga"></asp:Label></h5>
+                                    <asp:Label ID="LabelS" runat="server" Text="Certificado de Sobrecarga"></asp:Label></h5>
                                 <span class="btn-right"><i class="imoon imoon-chevron-down" style="color:#344882;"></i></span>
                             </div>
                         </a>
@@ -287,10 +292,10 @@
 
                             <uc:CertificadoSobrecarga ID="visCertificadoSobrecarga" runat="server" />
            
-                        <%--Botón de Modificación de Datos del Local  
+                        <%--Botón de Modificación de Datos del Local  --%>
 
                     </div>
-                </div>--%>
+                </div>
 
                     <%--Carga de Planos--%>
                 <div id="box_cargarPlano" class="accordion-group widget-box" style="background:#ffffff">
@@ -863,13 +868,13 @@
                 $("#box_conformacionLocal").hide();
             }
 
-<%--            var mostrar_CertificadoSobrecarga = $("#<%: hid_mostrar_certificadoSobrecarga.ClientID %>").val();
+            var mostrar_CertificadoSobrecarga = $("#<%: hid_mostrar_certificadoSobrecarga.ClientID %>").val();
 
             if (mostrar_CertificadoSobrecarga == "true") {
                 $("#box_certificadoSobrecarga").show();
             } else {
                 $("#box_certificadoSobrecarga").hide();
-            }--%>
+            }
             DatosDocumentoAgregarToggle();
             return false;
         }

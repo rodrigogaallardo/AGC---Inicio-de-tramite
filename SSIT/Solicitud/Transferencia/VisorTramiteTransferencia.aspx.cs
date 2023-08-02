@@ -7,7 +7,6 @@ using SSIT.Solicitud.Controls;
 using StaticClass;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
@@ -157,6 +156,7 @@ namespace SSIT
                 divbtnAnularTramite.Visible = true;
 
             }
+               
 
             if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM
                 || transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.COMP
@@ -231,6 +231,12 @@ namespace SSIT
             #endregion
 
             #region PAGOS
+            if (BoletaCeroActiva())
+            {
+                pnlPagos.Visible = false;
+                Pagos.Visible = false;
+            }
+
             Pagos.id_solicitud = IdSolicitud;
             Pagos.tipo_tramite = (int)Constantes.PagosTipoTramite.TR;
 
@@ -425,19 +431,26 @@ namespace SSIT
 
             string dir = "";
 
+            string _noESB = parametrosBL.GetParametroChar("SSIT.NO.ESB");
+            bool.TryParse(_noESB, out bool noESB);
+
+
             List<int> lisSol = new List<int>();
             lisSol.Add(IdSolicitud);
             foreach (var item in TransferenciaBL.GetDireccionesTransf(lisSol).ToList())
                 dir += item.direccion + " / ";
-
-            try
+            if (!noESB)
             {
-                wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, sol.NumeroExpedienteSade, trata, dir);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    wsTAD.actualizarTramite(_urlESB, sol.idTAD.Value, sol.IdSolicitud, sol.NumeroExpedienteSade, trata, dir);
+                }
+                catch (Exception ex)
+                {
                     throw ex;
+                }
             }
+
         }
         private void enviarParticipantes(TransferenciasSolicitudesDTO sol)
         {
@@ -612,6 +625,21 @@ namespace SSIT
                 lblError.Text = ex.Message;
                 ScriptManager.RegisterClientScriptBlock(pnlDatosDocumento, pnlDatosDocumento.GetType(), "mostrarError", "showfrmError(); ", true);
             }
+        }
+
+        private bool BoletaCeroActiva()
+        {
+
+            string boletaCero_FechaDesde = System.Configuration.ConfigurationManager.AppSettings["boletaCero_FechaDesde"];
+
+            DateTime boletaCeroDate = DateTime.ParseExact(boletaCero_FechaDesde,
+                                                            "yyyyMMdd",
+                                                            System.Globalization.CultureInfo.InvariantCulture);
+
+            if (DateTime.Now > boletaCeroDate)
+                return true;
+
+            return false;
         }
     }
 }

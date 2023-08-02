@@ -1,13 +1,9 @@
 ﻿using AnexoProfesionales.Common;
 using BusinesLayer.Implementation;
 using DataTransferObject;
-using StaticClass;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace AnexoProfesionales.Controls
 {
@@ -128,6 +124,9 @@ namespace AnexoProfesionales.Controls
             productosInflamables_SI.Checked = encomienda.ProductosInflamables;
             productosInflamables_NO.Checked = !encomienda.ProductosInflamables;
 
+            AcogeBeneficio_SI.Checked = encomienda.AcogeBeneficios;
+            AcogeBeneficio_NO.Checked = !encomienda.AcogeBeneficios;
+
             txtSuperficieCubierta.Text = SuperficieCubierta.ToString();
             txtSuperficieDescubierta.Text = SuperficieDescubierta.ToString();
             txtSuperficieTotal.Text = Convert.ToString(SuperficieCubierta + SuperficieDescubierta);
@@ -164,6 +163,7 @@ namespace AnexoProfesionales.Controls
 
             txtCantidadArtefactosSanitarios.Text = CantidadSanitarios.ToString();
             txtSuperficieSanitarios.Text = SuperficieSanitarios.ToString();
+            
 
             #region EstacionamientoBicicleta solo se muestra en automaticas
 
@@ -184,7 +184,7 @@ namespace AnexoProfesionales.Controls
                 {
                     optsCertificadoSobrecarga_SI.Checked = false;
                     optsCertificadoSobrecarga_NO.Checked = true;
-                } 
+                }
             }
             else
             {

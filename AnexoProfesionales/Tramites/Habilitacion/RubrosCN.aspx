@@ -276,7 +276,7 @@
                     <%-- contenido del box Rubros Tramite Anterior --%>
                     <div class="row mbottom10">
                         <div class="col-sm-12 text-right pright15">
-                            <asp:LinkButton ID="btnAgregarRubrosCNATAnterior" runat="server" CssClass="btn btn-default pbottom5" OnClientClick="return showfrmAgregarRubrosATAnterior();">
+                            <asp:LinkButton ID="btnAgregarRubrosCNATAnterior" runat="server" CssClass="btn btn-default pbottom5" OnClientClick="return showfrmAgregarRubrosCNATAnterior();">
                                 <i class="imoon imoon-plus"></i>
                                 <span class="text">Agregar Rubro</span>
                             </asp:LinkButton>
@@ -311,7 +311,7 @@
                                 <ItemTemplate>
 
                                     <asp:LinkButton ID="btnEliminarRubroCNATAnterior" runat="server" data-id-rubroant-eliminar='<%# Eval("IdEncomiendaRubro") %>' CssClass="link-local"
-                                        OnClientClick="return showConfirmarEliminarRubroATAnterior(this);">
+                                        OnClientClick="return showConfirmarEliminarRubroCNATAnterior(this);">
                                         <i class="imoon imoon-close"></i>
                                         <span class="text">Eliminar</span>
                                     </asp:LinkButton>
@@ -384,7 +384,7 @@
                             <asp:TemplateField ItemStyle-Width="140px">
                                 <ItemTemplate>
 
-                                    <asp:LinkButton ID="btnEliminarRubroATAnterior" runat="server" data-id-rubro-eliminar='<%# Eval("IdEncomiendaRubro") %>' CssClass="link-local"
+                                    <asp:LinkButton ID="btnEliminarRubroATAnterior" runat="server" data-id-rubroant-eliminar='<%# Eval("IdEncomiendaRubro") %>' CssClass="link-local"
                                         OnClientClick="return showConfirmarEliminarRubroATAnterior(this);">
                                         <i class="imoon imoon-close"></i>
                                         <span class="text">Eliminar</span>
@@ -1023,6 +1023,58 @@
     </div>
     <!-- /.modal -->
 
+    <div id="frmConfirmarEliminarRubroCNATAnterior" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="margin-top: -8px">Eliminar Rubro</h4>
+                </div>
+                <div class="modal-body">
+                    <table style="border-collapse: separate; border-spacing: 5px">
+                        <tr>
+                            <td style="text-align: center; vertical-align: text-top">
+                                <i class="imoon imoon-remove-circle fs64 color-blue"></i>
+                            </td>
+                            <td style="vertical-align: middle">
+                                <label class="mleft10">¿ Est&aacute; seguro de eliminar el Rubro ?</label>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="modal-footer mleft20 mright20">
+
+                    <asp:UpdatePanel ID="updConfirmarEliminarRubroCNATAnterior" runat="server">
+                        <ContentTemplate>
+
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <asp:UpdateProgress ID="UpdateProgress61CN" runat="server" AssociatedUpdatePanelID="updConfirmarEliminarRubroCNATAnterior">
+                                        <ProgressTemplate>
+                                            <img src="<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>" />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                                <div id="pnlBotonesConfirmacionEliminarRubroCNATAnterior" class="form-group">
+                                    <asp:Button ID="btnConfEliminarRubroCNATAnterior"
+                                        runat="server"
+                                        CssClass="btn btn-primary"
+                                        Text="Sí"
+                                        OnClientClick="ocultarBotonesConfirmacionEliminarRubroCNATAnterior();"
+                                        OnClick="btnEliminarRubroCNATAnterior_Click" />
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <%--Modal form Agregar Rubros--%>
     <div id="frmAgregarRubros" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -1131,7 +1183,7 @@
                                             <asp:TemplateField HeaderText="Ingresar">
                                                 <ItemTemplate>
                                                     <asp:CheckBox ID="chkRubroElegido" runat="server" Enabled="false" OnCheckedChanged="chkRubroElegido_CheckedChanged"
-                                                        AutoPostBack="true"/>
+                                                        AutoPostBack="true" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:BoundField DataField="Mensaje" HeaderText="Mensaje" />
@@ -1485,13 +1537,13 @@
     </div>
     <!-- /.modal -->
 
-    
+
     <div id="frmAlert" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" style="margin-top:-8px">Advertencia</h4>
+                    <h4 class="modal-title" style="margin-top: -8px">Advertencia</h4>
                 </div>
                 <div class="modal-body">
                     <table style="border-collapse: separate; border-spacing: 5px">
@@ -1760,7 +1812,7 @@
 
                                             <asp:Panel ID="pnlBotonesAgregarRubrosATAnterior" runat="server" CssClass="col-sm-3 text-right">
 
-                                                <asp:UpdateProgress ID="UpdateProgress10" AssociatedUpdatePanelID="updBotonesAgregarRubrosATAnterior"
+                                                <asp:UpdateProgress ID="UpdateProgress13" AssociatedUpdatePanelID="updBotonesAgregarRubrosATAnterior"
                                                     runat="server" DisplayAfter="200">
                                                     <ProgressTemplate>
                                                         <img src="<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>" />
@@ -1797,6 +1849,239 @@
         </div>
     </div>
     <!-- /.modal -->
+
+    <div id="frmAgregarRubrosCNATAnterior" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="margin-top: -8px">Agregar Rubros</h4>
+                </div>
+                <div class="modal-body pbottom20">
+                    <asp:UpdatePanel ID="updBuscarRubrosCNATAnterior" runat="server">
+                        <ContentTemplate>
+
+                            <asp:Panel ID="pnlBuscarRubrosCNATAnterior" runat="server" CssClass="form-horizontal" DefaultButton="btnBuscar">
+
+                                <div class="form-group">
+                                    <h3 class="pleft20 col-sm-12">B&uacute;squeda de Rubros</h3>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Superficie del rubro:</label>
+                                    <div class="col-sm-1">
+                                        <asp:TextBox ID="txtSuperficieCNATAnterior" runat="server" Width="100px" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-8 pleft40">
+                                        <div id="Req_SuperficieCNATAnterior" class="alert alert-danger mbottom0" style="display: none">
+                                            La superficie a habilitar debe ser un número entre 1 y la superficie total del local.
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" style="margin-top: -15px">Ingrese el código o parte de la descipción del rubro a buscar:</label>
+                                    <div class="col-sm-9">
+                                        <asp:TextBox ID="txtBuscarCNATAnterior" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-offset-3 col-sm-9 ptop5">
+                                        <div id="Req_txtBuscarCNATAnterior" class="alert alert-danger mbottom0" style="display: none">
+                                            Debe ingresar al menos 3 caracteres para iniciar la b&uacute;squeda.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mbottom0 mtop0" />
+
+
+                                <asp:UpdatePanel ID="updBotonesBuscarRubrosCNATAnterior" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+
+                                        <asp:Panel ID="pnlBotonesBuscarRubrosCNATAnterior" runat="server" CssClass="form-inline text-right">
+                                            <div class="form-group">
+                                                <asp:UpdateProgress ID="UpdateProgressCN" AssociatedUpdatePanelID="updBotonesBuscarRubrosCNATAnterior"
+                                                    runat="server" DisplayAfter="200">
+                                                    <ProgressTemplate>
+                                                        <img src="<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>" />
+                                                        Buscando...
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
+                                            </div>
+
+                                            <asp:Panel ID="BotonesBuscarRubrosCNATAnterior" runat="server" CssClas="form-group" DefaultButton="btnBuscar">
+                                                <asp:LinkButton ID="btnBuscarCNATAnterior" runat="server" CssClass="btn btn-primary" OnClick="btnBuscarCNATAnterior_Click" OnClientClick="return validarBuscarCNATAnterior();">
+												    <i class="imoon imoon-search"></i>
+												    <span class="text">Buscar</span>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="LinkButton2ATAnteriorCN" runat="server" CssClass="btn btn-default" data-dismiss="modal">
+												    <i class="imoon imoon-close"></i>
+												    <span class="text">Cerrar</span>
+                                                </asp:LinkButton>
+                                            </asp:Panel>
+                                        </asp:Panel>
+
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+
+                            </asp:Panel>
+
+                            <asp:Panel ID="pnlResultadoBusquedaRubrosCNATAnterior" runat="server" CssClass="form-horizontal" Style="display: none">
+
+                                <div style="max-height: 500px; overflow-y: auto">
+
+                                    <asp:GridView ID="grdRubrosCNATAnterior" runat="server"
+                                        AutoGenerateColumns="false"
+                                        DataKeyNames="IdRubro,Codigo,Superficie"
+                                        AllowPaging="true"
+                                        PageSize="10"
+                                        Style="border: none;"
+                                        CssClass="table table-bordered mtop5"
+                                        ItemType="DataTransferObject.RubrosDTO"
+                                        GridLines="None"
+                                        Width="100%"
+                                        OnPageIndexChanging="grdRubros_PageIndexChanging"
+                                        OnDataBound="grdRubrosCNATAnterior_DataBound"
+                                        OnRowDataBound="grdRubrosCNATAnterior_RowDataBound">
+                                        <HeaderStyle CssClass="grid-header" />
+                                        <RowStyle CssClass="grid-row" />
+                                        <AlternatingRowStyle BackColor="#efefef" />
+                                        <Columns>
+
+                                            <asp:BoundField DataField="Codigo" HeaderText="Código" />
+                                            <asp:BoundField DataField="Nombre" HeaderText="Descripción" />
+                                            <asp:BoundField DataField="TipoActividadNombre" HeaderText="Actividad" />
+                                            <asp:BoundField DataField="Superficie" HeaderText="Superficie" Visible="true" />
+                                            <asp:TemplateField HeaderText="Ingresar">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox ID="chkRubroElegidoCNATAnterior" runat="server" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                        </Columns>
+                                        <PagerTemplate>
+
+                                            <asp:UpdatePanel ID="updPnlpagerCNATAnterior" runat="server">
+                                                <ContentTemplate>
+
+                                                    <asp:Panel ID="pnlpagerCNATAnterior" runat="server" Style="padding: 10px; text-align: center; border-top: solid 1px #e1e1e1">
+
+                                                        <asp:LinkButton ID="cmdAnteriorCNATAnterior" runat="server" Text="<<" OnClick="cmdAnteriorCNATAnterior_Click"
+                                                            CssClass="btn btn-sm btn-default" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior1" runat="server" Text="1" OnClick="cmdPageCNATAnterior" CssClass="btn btn-default" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior2" runat="server" Text="2" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior3" runat="server" Text="3" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior4" runat="server" Text="4" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior5" runat="server" Text="5" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior6" runat="server" Text="6" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior7" runat="server" Text="7" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior8" runat="server" Text="8" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior9" runat="server" Text="9" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior10" runat="server" Text="10" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior11" runat="server" Text="11" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior12" runat="server" Text="12" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior13" runat="server" Text="13" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior14" runat="server" Text="14" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior15" runat="server" Text="15" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior16" runat="server" Text="16" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior17" runat="server" Text="17" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior18" runat="server" Text="18" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdPageCNATAnterior19" runat="server" Text="19" OnClick="cmdPageCNATAnterior" CssClass="btn" />
+                                                        <asp:LinkButton ID="cmdSiguienteCNATAnterior" runat="server" Text=">>" OnClick="cmdSiguienteCNATAnterior_Click"
+                                                            CssClass="btn btn-sm btn-default" />
+
+                                                        <div style="display: inline-table">
+
+                                                            <asp:UpdateProgress ID="UpdateProgress17CN" AssociatedUpdatePanelID="updPnlpagerCNATAnterior" runat="server"
+                                                                DisplayAfter="0">
+                                                                <ProgressTemplate>
+                                                                    <img src="<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>" alt="" />
+                                                                </ProgressTemplate>
+                                                            </asp:UpdateProgress>
+                                                        </div>
+
+                                                    </asp:Panel>
+
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+
+                                        </PagerTemplate>
+                                        <EmptyDataTemplate>
+
+                                            <div class="mtop10">
+
+                                                <img src='<%: ResolveUrl("~/Content/img/app/NoRecords.png") %>' alt="" />
+                                                <span class="mleft10">No se encontraron registros.</span>
+
+                                            </div>
+
+                                        </EmptyDataTemplate>
+                                    </asp:GridView>
+
+                                </div>
+
+                                <asp:UpdatePanel ID="updBotonesAgregarRubrosCNATAnterior" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+
+                                        <asp:Panel ID="pnlGrupoAgregarRubrosCNATAnterior" runat="server" CssClass="row ptop10 pleft10 pright10" Style="display: none">
+                                            <div class="col-sm-2">
+
+                                                <asp:LinkButton ID="btnnuevaBusquedaCNATAnterior" runat="server" CssClass="btn btn-default" OnClick="btnnuevaBusquedaCNATAnterior_Click">
+												    <i class="imoon imoon-search"></i>
+												    <span class="text">Nueva B&uacute;squeda</span>
+                                                </asp:LinkButton>
+                                            </div>
+
+                                            <div class="col-sm-7 pleft20">
+
+                                                <asp:UpdatePanel ID="updValidadorAgregarRubrosCNATAnterior" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:Panel ID="ValidadorAgregarRubrosCNATAnterior" runat="server" CssClass="alert alert-danger mbottom0" Style="display: none">
+                                                            <asp:Label ID="lblValidadorAgregarRubrosCNATAnterior" runat="server"></asp:Label>
+                                                        </asp:Panel>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+
+                                            </div>
+
+
+                                            <asp:Panel ID="pnlBotonesAgregarRubrosCNATAnterior" runat="server" CssClass="col-sm-3 text-right">
+
+                                                <asp:UpdateProgress ID="UpdateProgress10" AssociatedUpdatePanelID="updBotonesAgregarRubrosCNATAnterior"
+                                                    runat="server" DisplayAfter="200">
+                                                    <ProgressTemplate>
+                                                        <img src="<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>" />
+                                                        Procesando...
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
+
+
+                                                <div id="BotonesAgregarRubrosCNATAnterior" class="form-group">
+                                                    <asp:LinkButton ID="btnIngresarRubrosCNATAnterior" runat="server" CssClass="btn btn-primary" OnClick="btnIngresarRubrosCNATAnterior_Click" OnClientClick="ocultarBotonesAgregarRubrosCNATAnterior();">
+													    <i class="imoon imoon-plus"></i>
+													    <span class="text">Agregar</span>
+                                                    </asp:LinkButton>
+                                                    <asp:LinkButton ID="LinkButton3ATAnteriorCN" runat="server" CssClass="btn btn-default" data-dismiss="modal">
+													    <i class="imoon imoon-close"></i>
+													    <span class="text">Cerrar</span>
+                                                    </asp:LinkButton>
+                                                </div>
+
+                                            </asp:Panel>
+                                        </asp:Panel>
+
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+
+                            </asp:Panel>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
@@ -1851,7 +2136,8 @@
                                 runat="server" DisplayAfter="200">
                                 <ProgressTemplate>
                                     <img src="<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>" />
-                                    Procesando...</ProgressTemplate>
+                                    Procesando...
+                                </ProgressTemplate>
                             </asp:UpdateProgress>
 
 
@@ -2030,13 +2316,13 @@
 
         function showfrmAgregarRubros() {
 
-            
+
             var id_tipo_tramie = parseInt($("#<%:hid_id_tipo_tramite.ClientID %>").val());
             if (id_tipo_tramie == <%: (int) StaticClass.Constantes.TipoTramite.AMPLIACION %> )
-                $("#<%: txtSuperficie.ClientID %>").val($("#<%: hid_Superficie_Total_Ampliar.ClientID %>").val());       
-       
+                $("#<%: txtSuperficie.ClientID %>").val($("#<%: hid_Superficie_Total_Ampliar.ClientID %>").val());
+
             else {
-                
+
                 $("#<%: txtSuperficie.ClientID %>").val($("#<%: hid_Superficie_Local.ClientID %>").val());
             }
             $("#<%: txtBuscar.ClientID %>").val("");
@@ -2059,417 +2345,535 @@
             });
 
             return false;
+        }
+
+        function hidefrmAgregarRubros() {
+            $("#frmAgregarRubros").modal("hide");
+            return false;
+        }
+        function hidefrmAgregarSubRubros() {
+            $("#frmAgregarSubRubros").modal("hide");
+            //Cierro la de rubros
+            mostrarBotonesAgregarRubros();
+            //hidefrmAgregarRubros();
+            return false;
+        }
+        function ocultarBotonesBusquedaRubros() {
+            $("#<%: BotonesBuscarRubros.ClientID %>").hide();
+            return false;
+        }
+
+        function ocultarBotonesConfirmacionEliminarRubro() {
+            $("#pnlBotonesConfirmacionEliminarRubro").hide();
+            return false;
+        }
+
+        function ocultarValidadorAgregarRubros() {
+
+            $("#<%: ValidadorAgregarRubros.ClientID %>").hide();
+            return false;
+        }
+
+        function ocultarBotonesAgregarRubros() {
+
+            $("#BotonesAgregarRubros").hide();
+            return false;
+        }
+
+        function mostrarBotonesAgregarRubros() {
+
+            $("#BotonesAgregarRubros").show();
+            return false;
+        }
+
+        function ocultarBotonesAgregarSubRubros() {
+
+            $("#BotonesAgregarSubRubros").hide();
+            return false;
+        }
+        function showConfirmarEliminarRubro(obj) {
+
+            var id_caarubro_eliminar = $(obj).attr("data-id-rubro-eliminar");
+            $("#<%: hid_id_caarubro_eliminar.ClientID %>").val(id_caarubro_eliminar);
+
+            $("#frmConfirmarEliminarRubro").modal("show");
+            return false;
+        }
+
+        function hidefrmConfirmarEliminarRubro() {
+
+            $("#frmConfirmarEliminarRubro").modal("hide");
+            return false;
+        }
+
+        function validarAgregarNormativa() {
+            var ret = true;
+
+            var formatoNumero = /^\d+$/;
+
+            $("#ReqtxtNormativa").hide();
+            $("#ValFormato_Dispo").hide();
+
+            var div = $("#NroDispo");
+
+            if ($("#<%: txtNroNormativa.ClientID %>").val().length == 0 &&
+                !div.is(':visible')) {
+                $("#ReqtxtNormativa").show();
+                ret = false;
             }
 
-            function hidefrmAgregarRubros() {
-                $("#frmAgregarRubros").modal("hide");
-                return false;
-            }
-            function hidefrmAgregarSubRubros() {
-                $("#frmAgregarSubRubros").modal("hide");
-                //Cierro la de rubros
-                mostrarBotonesAgregarRubros();
-                //hidefrmAgregarRubros();
-                return false;
-            }
-            function ocultarBotonesBusquedaRubros() {
-                $("#<%: BotonesBuscarRubros.ClientID %>").hide();
-                return false;
+
+            return ret;
+
+        }
+
+        function validarAgregarRubroNoContemplado() {
+            var ret = true;
+
+            $("#Req_TxtSuperficie").hide();
+            if ($("#<%: txtSuperficieRubro_runc.ClientID %>").val().length == 0) {
+                $("#Req_TxtSuperficie").show();
+                ret = false;
             }
 
-            function ocultarBotonesConfirmacionEliminarRubro() {
-                $("#pnlBotonesConfirmacionEliminarRubro").hide();
-                return false;
+            $("#Req_txtDesc_runc").hide();
+            if ($("#<%: txtDesc_runc.ClientID %>").val().length == 0) {
+                $("#Req_TxtReq_txtDesc_runcSuperficie").show();
+                ret = false;
             }
+            return ret;
+        }
 
-            function ocultarValidadorAgregarRubros() {
+        function validarBuscar() {
 
-                $("#<%: ValidadorAgregarRubros.ClientID %>").hide();
-                return false;
-            }
+            var ret = true;
+            $("#Req_Superficie").hide();
+            $("#Req_txtBuscar").hide();
 
-            function ocultarBotonesAgregarRubros() {
+            var id_tipo_Tramite = $("#<%: hid_id_tipo_tramite.ClientID %>").val();
 
-                $("#BotonesAgregarRubros").hide();
-                return false;
-            }
+            var value1 = $("#<%: txtSuperficie.ClientID %>").val();
+            var value2 = $("#<%: hid_Superficie_Local.ClientID %>").val();
 
-            function mostrarBotonesAgregarRubros() {
-
-                $("#BotonesAgregarRubros").show();
-                return false;
-            }
-
-            function ocultarBotonesAgregarSubRubros() {
-
-                $("#BotonesAgregarSubRubros").hide();
-                return false;
-            }
-            function showConfirmarEliminarRubro(obj) {
-
-                var id_caarubro_eliminar = $(obj).attr("data-id-rubro-eliminar");
-                $("#<%: hid_id_caarubro_eliminar.ClientID %>").val(id_caarubro_eliminar);
-
-                $("#frmConfirmarEliminarRubro").modal("show");
-                return false;
-            }
-
-            function hidefrmConfirmarEliminarRubro() {
-
-                $("#frmConfirmarEliminarRubro").modal("hide");
-                return false;
-            }
-
-            function validarAgregarNormativa() {
-                var ret = true;
-          
-                var formatoNumero = /^\d+$/;
-
-                $("#ReqtxtNormativa").hide();
-                $("#ValFormato_Dispo").hide();
-
-                var div = $("#NroDispo");
-
-                if ($("#<%: txtNroNormativa.ClientID %>").val().length == 0 &&
-                   !div.is(':visible')) {
-                    $("#ReqtxtNormativa").show();
-                    ret = false;
-                }    
-            
-
-                return ret;
-
-            }
-
-            function validarAgregarRubroNoContemplado() {
-                var ret = true;
-
-                $("#Req_TxtSuperficie").hide();
-                if ($("#<%: txtSuperficieRubro_runc.ClientID %>").val().length == 0) {
-                    $("#Req_TxtSuperficie").show();
-                    ret = false;
-                }
-
-                $("#Req_txtDesc_runc").hide();
-                if ($("#<%: txtDesc_runc.ClientID %>").val().length == 0) {
-                    $("#Req_TxtReq_txtDesc_runcSuperficie").show();
-                    ret = false;
-                }
-                return ret;
-            }
-
-            function validarBuscar() {
-
-                var ret = true;
-                $("#Req_Superficie").hide();
-                $("#Req_txtBuscar").hide();
-            
-                var id_tipo_Tramite = $("#<%: hid_id_tipo_tramite.ClientID %>").val();
-                
-                var value1 = $("#<%: txtSuperficie.ClientID %>").val();
-                var value2 = $("#<%: hid_Superficie_Local.ClientID %>").val();
-                               
-                if (id_tipo_Tramite == 3) { //StaticClass.Constantes.TipoTramite.AMPLIACION
+            if (id_tipo_Tramite == 3) { //StaticClass.Constantes.TipoTramite.AMPLIACION
                 value2 = $("#<%: hid_Superficie_Total_Ampliar.ClientID %>").val();
-                }
-            
-                var ContarComas = (value1.split(',').length - 1);
-                var ContarPuntos = (value1.split('.').length - 1);
-
-                value1 = value1.replace('.', ',');
-
-                var superficie = value1;
-                var superficieMaxima = value2;
-
-                var superficie = Number.parseFloat(value1).toFixed(2);
-                var superficieMaxima = Number.parseFloat(value1).toFixed(2);
-
-                if (superficie <= 0 || superficie > superficieMaxima) {
-                    $("#Req_Superficie").css("display", "inline-block");
-                    ret = false;
-                }
-
-                if ($("#<%: txtBuscar.ClientID %>").val().length < 3) {
-                    $("#Req_txtBuscar").css("display", "inline-block");
-                    ret = false;
-                }
-
-                if (ret) {
-                    ocultarBotonesBusquedaRubros();
-                    $("#<%: pnlGrupoAgregarRubros.ClientID %>").css("display", "block");
-                }
-
-                return ret;
             }
 
-        
-            function validarGuardar() {
-                var ret = true;
+            var ContarComas = (value1.split(',').length - 1);
+            var ContarPuntos = (value1.split('.').length - 1);
 
-                var hid_tiene_rubros_ofc_comercial = $("#<%: hid_tiene_rubros_ofc_comercial.ClientID %>").val();
+            value1 = value1.replace('.', ',');
 
-                var isCheckedOficinaComercial = document.getElementById('<%=chkOficinaComercial.ClientID%>').checked;
+            var superficie = value1;
+            var superficieMaxima = value2;
 
-                if (hid_tiene_rubros_ofc_comercial == "1") {
-                    if (!isCheckedOficinaComercial) {
-                        ret = false;
-                        $("#frmMensajeRubrosOfcComercial").modal("show");
-                    }
-                }
+            var superficie = Number.parseFloat(value1).toFixed(2);
+            var superficieMaxima = Number.parseFloat(value1).toFixed(2);
 
-                //Valido si es un ECI
-                $("#Req_ActBailer").hide();
-                $("#Req_Luminaria").hide();
-                var hid_EsECI = $("#<%: hidEsECI.ClientID %>").val();
-                if(hid_EsECI=="true")
-                {
-                    try
-                    {
-                        //Valido si ha seleccionado EsActBaile
-                        var EsActBaileSi = $('#<%:rbActBaileSI.ClientID%>').is(':checked');
-                        var EsActBaileNo = $('#<%:rbActBaileNo.ClientID%>').is(':checked');
-
-                        if(!EsActBaileSi && !EsActBaileNo)
-                        {
-                            $("#Req_ActBailer").css("display", "inline-block");
-                            ret=false;
-                        }
-
-                        //Valido si ha seleccionado EsLuminaria
-                        var EsLuminariaSi = $('#<%:rbLuminariaSi.ClientID%>').is(':checked');
-                        var EsLuminariaNo = $('#<%:rbLuminariaNo.ClientID%>').is(':checked');
-                        if(!EsLuminariaSi && !EsLuminariaNo)
-                        {
-                            $("#Req_Luminaria").css("display", "inline-block");
-                            ret=false;
-                        }
-                    }
-                    catch(e)
-                    {
-                        alert("Validacion esECI:" + e.message);
-                    }
-                }
-
-                if (ret)
-                    ocultarBotonesGuardado();
-
-                return ret;
+            if (superficie <= 0 || superficie > superficieMaxima) {
+                $("#Req_Superficie").css("display", "inline-block");
+                ret = false;
             }
 
-            // ---------------------------------------
-            // Funciones para Rubros de AT Anterior
-            // ---------------------------------------
+            if ($("#<%: txtBuscar.ClientID %>").val().length < 3) {
+                $("#Req_txtBuscar").css("display", "inline-block");
+                ret = false;
+            }
 
-            function showfrmAgregarRubrosATAnterior() {
+            if (ret) {
+                ocultarBotonesBusquedaRubros();
+                $("#<%: pnlGrupoAgregarRubros.ClientID %>").css("display", "block");
+            }
 
-            
-                $("#<%: txtSuperficieATAnterior.ClientID %>").val($("#<%: hid_Superficie_Local.ClientID %>").val());
-                $("#<%: txtBuscarATAnterior.ClientID %>").val("");
-                $("#<%: pnlBuscarRubrosATAnterior.ClientID %>").show();
-                $("#<%: pnlResultadoBusquedaRubrosATAnterior.ClientID %>").hide();
-                $("#<%: pnlBotonesAgregarRubrosATAnterior.ClientID %>").hide();
-                $("#<%: pnlBotonesBuscarRubrosATAnterior.ClientID %>").show();
-
-                $("#<%: BotonesBuscarRubrosATAnterior.ClientID %>").show();
+            return ret;
+        }
 
 
-                $("#frmAgregarRubrosATAnterior").on("shown.bs.modal", function (e) {
-                    $("#<%: txtBuscarATAnterior.ClientID %>").focus();
-                });
+        function validarGuardar() {
+            var ret = true;
 
-                $("#frmAgregarRubrosATAnterior").modal({
-                    "show": true,
-                    "backdrop": "static"
+            var hid_tiene_rubros_ofc_comercial = $("#<%: hid_tiene_rubros_ofc_comercial.ClientID %>").val();
 
-                });
+            var isCheckedOficinaComercial = document.getElementById('<%=chkOficinaComercial.ClientID%>').checked;
 
-                return false;
+            if (hid_tiene_rubros_ofc_comercial == "1") {
+                if (!isCheckedOficinaComercial) {
+                    ret = false;
+                    $("#frmMensajeRubrosOfcComercial").modal("show");
                 }
+            }
 
-                function validarBuscarATAnterior() {
+            //Valido si es un ECI
+            $("#Req_ActBailer").hide();
+            $("#Req_Luminaria").hide();
+            var hid_EsECI = $("#<%: hidEsECI.ClientID %>").val();
+            if (hid_EsECI == "true") {
+                try {
+                    //Valido si ha seleccionado EsActBaile
+                    var EsActBaileSi = $('#<%:rbActBaileSI.ClientID%>').is(':checked');
+                    var EsActBaileNo = $('#<%:rbActBaileNo.ClientID%>').is(':checked');
 
-                    var ret = true;
-                    $("#Req_SuperficieATAnterior").hide();
-                    $("#Req_txtBuscarATAnterior").hide();
-
-                    var value1 = $("#<%: txtSuperficieATAnterior.ClientID %>").val();
-                    var value2 = $("#<%: hid_Superficie_Local.ClientID %>").val();
-
-                    var ContarComas = (value1.split(',').length - 1);
-                    var ContarPuntos = (value1.split('.').length - 1);
-
-                    value1 = value1.replace('.', ',');
-
-                    //alert('value1 '+value1);
-                    //alert('value2 '+value2);
-
-                    var superficie = value1;
-                    var superficieMaxima = value2;
-
-
-                    if (ContarComas + ContarPuntos > 1) {
+                    if (!EsActBaileSi && !EsActBaileNo) {
+                        $("#Req_ActBailer").css("display", "inline-block");
                         ret = false;
                     }
 
-                    var superficie = Number.parseFloat(value1).toFixed(2);
-                    var superficieMaxima = Number.parseFloat(value1).toFixed(2);
-
-                    //alert('superficie(parseFloat) =' + superficie);
-                    //alert('superficieMax(parseFloat) ='+ superficieMaxima);
-                    
-                    if (superficie <= 0 || superficie > superficieMaxima) {
-                        $("#Req_SuperficieATAnterior").css("display", "inline-block");
+                    //Valido si ha seleccionado EsLuminaria
+                    var EsLuminariaSi = $('#<%:rbLuminariaSi.ClientID%>').is(':checked');
+                    var EsLuminariaNo = $('#<%:rbLuminariaNo.ClientID%>').is(':checked');
+                    if (!EsLuminariaSi && !EsLuminariaNo) {
+                        $("#Req_Luminaria").css("display", "inline-block");
                         ret = false;
                     }
-
-                    if ($("#<%: txtBuscarATAnterior.ClientID %>").val().length < 3) {
-                        $("#Req_txtBuscarATAnterior").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if (ret) {
-                        ocultarBotonesBusquedaRubrosATAnterior();
-                        $("#<%: pnlGrupoAgregarRubrosATAnterior.ClientID %>").css("display", "block");
-                    }
-
-                    return ret;
                 }
-
-                function ocultarBotonesAgregarRubrosATAnterior() {
-
-                    $("#BotonesAgregarRubrosATAnterior").hide();
-                    return false;
+                catch (e) {
+                    alert("Validacion esECI:" + e.message);
                 }
+            }
 
-                function hidefrmAgregarRubrosATAnterior() {
+            if (ret)
+                ocultarBotonesGuardado();
 
-                    $("#frmAgregarRubrosATAnterior").modal("hide");
-                    return false;
-                }
+            return ret;
+        }
 
-                function ocultarBotonesBusquedaRubrosATAnterior() {
-                    $("#<%: BotonesBuscarRubrosATAnterior.ClientID %>").hide();
-                    return false;
-                }
+        // ---------------------------------------
+        // Funciones para Rubros de AT Anterior
+        // ---------------------------------------
 
-                function ocultarBotonesConfirmacionEliminarRubroATAnterior() {
-                    $("#pnlBotonesConfirmacionEliminarRubroATAnterior").hide();
-                    return false;
-                }
-
-                function ocultarValidadorAgregarRubrosATAnterior() {
-
-                    $("#<%: ValidadorAgregarRubrosATAnterior.ClientID %>").hide();
-                    return false;
-                }
-        
-                function showConfirmarEliminarRubroATAnterior(obj) {
-
-                    var id_caarubro_eliminar_ATAnterior = $(obj).attr("data-id-rubroant-eliminar");
-                    $("#<%: hid_id_caarubro_eliminar_ATAnterior.ClientID %>").val(id_caarubro_eliminar_ATAnterior);
-
-                    $("#frmConfirmarEliminarRubroATAnterior").modal("show");
-                    return false;
-                }
-
-                function hidefrmConfirmarEliminarRubroATAnterior() {
-
-                    $("#frmConfirmarEliminarRubroATAnterior").modal("hide");
-                    return false;
-                }
+        function showfrmAgregarRubrosATAnterior() {
 
 
-                function init_Js_updEditarSuperficieRubroActual() {
+            $("#<%: txtSuperficieATAnterior.ClientID %>").val($("#<%: hid_Superficie_Local.ClientID %>").val());
+            $("#<%: txtBuscarATAnterior.ClientID %>").val("");
+            $("#<%: pnlBuscarRubrosATAnterior.ClientID %>").show();
+            $("#<%: pnlResultadoBusquedaRubrosATAnterior.ClientID %>").hide();
+            $("#<%: pnlBotonesAgregarRubrosATAnterior.ClientID %>").hide();
+            $("#<%: pnlBotonesBuscarRubrosATAnterior.ClientID %>").show();
 
-                    $("#<%: txtSuperficieRubroActual.ClientID %>").autoNumeric("init", { aSep: '.', mDec: 2, vMax: '999999.99', aDec: '<%: System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() %>' });
-
-                    $("#<%: txtSuperficieRubroActual.ClientID %>").on("keyup", function (e) {
-                        if (e.keyCode != 13) { 
-                            $("#Req_SuperficieRubroActual").hide();
-                            $("#Val_SuperficieRubroActual_Mayor").hide();
-                        }
-                    });
-
-                    return false;
-                }
+            $("#<%: BotonesBuscarRubrosATAnterior.ClientID %>").show();
 
 
-                function showfrmEditarSuperficieRubroActual() {
-                    $("#frmEditarSuperficieRubroActual").modal({
-                        backdrop: "static",
-                        keyboard: false,
-                        show: true
-                    });
-                    return false;
-                }
+            $("#frmAgregarRubrosATAnterior").on("shown.bs.modal", function (e) {
+                $("#<%: txtBuscarATAnterior.ClientID %>").focus();
+            });
 
-                function hidefrmEditarSuperficieRubroActual() {
-                    $("#frmEditarSuperficieRubroActual").modal("hide");
-                    return false;
-                }
+            $("#frmAgregarRubrosATAnterior").modal({
+                "show": true,
+                "backdrop": "static"
 
-                function validarGuardarSuperficieRubroActual() {
+            });
 
-                    var ret = true;
-            
+            return false;
+        }
+
+        function validarBuscarATAnterior() {
+
+            var ret = true;
+            $("#Req_SuperficieATAnterior").hide();
+            $("#Req_txtBuscarATAnterior").hide();
+
+            var value1 = $("#<%: txtSuperficieATAnterior.ClientID %>").val();
+            var value2 = $("#<%: hid_Superficie_Local.ClientID %>").val();
+
+            var ContarComas = (value1.split(',').length - 1);
+            var ContarPuntos = (value1.split('.').length - 1);
+
+            value1 = value1.replace('.', ',');
+
+            //alert('value1 '+value1);
+            //alert('value2 '+value2);
+
+            var superficie = value1;
+            var superficieMaxima = value2;
+
+
+            if (ContarComas + ContarPuntos > 1) {
+                ret = false;
+            }
+
+            var superficie = Number.parseFloat(value1).toFixed(2);
+            var superficieMaxima = Number.parseFloat(value1).toFixed(2);
+
+            //alert('superficie(parseFloat) =' + superficie);
+            //alert('superficieMax(parseFloat) ='+ superficieMaxima);
+
+            if (superficie <= 0 || superficie > superficieMaxima) {
+                $("#Req_SuperficieATAnterior").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($("#<%: txtBuscarATAnterior.ClientID %>").val().length < 3) {
+                $("#Req_txtBuscarATAnterior").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                ocultarBotonesBusquedaRubrosATAnterior();
+                $("#<%: pnlGrupoAgregarRubrosATAnterior.ClientID %>").css("display", "block");
+            }
+
+            return ret;
+        }
+
+        function ocultarBotonesAgregarRubrosATAnterior() {
+
+            $("#BotonesAgregarRubrosATAnterior").hide();
+            return false;
+        }
+
+        function hidefrmAgregarRubrosATAnterior() {
+
+            $("#frmAgregarRubrosATAnterior").modal("hide");
+            return false;
+        }
+
+        function ocultarBotonesBusquedaRubrosATAnterior() {
+            $("#<%: BotonesBuscarRubrosATAnterior.ClientID %>").hide();
+            return false;
+        }
+
+        function ocultarBotonesConfirmacionEliminarRubroATAnterior() {
+            $("#pnlBotonesConfirmacionEliminarRubroATAnterior").hide();
+            return false;
+        }
+
+        function ocultarValidadorAgregarRubrosATAnterior() {
+
+            $("#<%: ValidadorAgregarRubrosATAnterior.ClientID %>").hide();
+            return false;
+        }
+
+        function showConfirmarEliminarRubroATAnterior(obj) {
+
+            var id_caarubro_eliminar_ATAnterior = $(obj).attr("data-id-rubroant-eliminar");
+            $("#<%: hid_id_caarubro_eliminar_ATAnterior.ClientID %>").val(id_caarubro_eliminar_ATAnterior);
+
+            $("#frmConfirmarEliminarRubroATAnterior").modal("show");
+            return false;
+        }
+
+        function hidefrmConfirmarEliminarRubroATAnterior() {
+
+            $("#frmConfirmarEliminarRubroATAnterior").modal("hide");
+            return false;
+        }
+
+
+        // ---------------------------------------
+        // Funciones para Rubros de CNAT Anterior
+        // ---------------------------------------
+
+        function showfrmAgregarRubrosCNATAnterior() {
+
+
+            $("#<%: txtSuperficieCNATAnterior.ClientID %>").val($("#<%: hid_Superficie_Local.ClientID %>").val());
+            $("#<%: txtBuscarCNATAnterior.ClientID %>").val("");
+            $("#<%: pnlBuscarRubrosCNATAnterior.ClientID %>").show();
+            $("#<%: pnlResultadoBusquedaRubrosCNATAnterior.ClientID %>").hide();
+            $("#<%: pnlBotonesAgregarRubrosCNATAnterior.ClientID %>").hide();
+            $("#<%: pnlBotonesBuscarRubrosCNATAnterior.ClientID %>").show();
+
+            $("#<%: BotonesBuscarRubrosCNATAnterior.ClientID %>").show();
+
+
+            $("#frmAgregarRubrosCNATAnterior").on("shown.bs.modal", function (e) {
+                $("#<%: txtBuscarCNATAnterior.ClientID %>").focus();
+            });
+
+            $("#frmAgregarRubrosCNATAnterior").modal({
+                "show": true,
+                "backdrop": "static"
+
+            });
+
+            return false;
+        }
+
+        function validarBuscarCNATAnterior() {
+
+            var ret = true;
+            $("#Req_SuperficieCNATAnterior").hide();
+            $("#Req_txtBuscarCNATAnterior").hide();
+
+            var value1 = $("#<%: txtSuperficieCNATAnterior.ClientID %>").val();
+            var value2 = $("#<%: hid_Superficie_Local.ClientID %>").val();
+
+            var ContarComas = (value1.split(',').length - 1);
+            var ContarPuntos = (value1.split('.').length - 1);
+
+            value1 = value1.replace('.', ',');
+
+            //alert('value1 '+value1);
+            //alert('value2 '+value2);
+
+            var superficie = value1;
+            var superficieMaxima = value2;
+
+
+            if (ContarComas + ContarPuntos > 1) {
+                ret = false;
+            }
+
+            var superficie = Number.parseFloat(value1).toFixed(2);
+            var superficieMaxima = Number.parseFloat(value1).toFixed(2);
+
+            //alert('superficie(parseFloat) =' + superficie);
+            //alert('superficieMax(parseFloat) ='+ superficieMaxima);
+
+            if (superficie <= 0 || superficie > superficieMaxima) {
+                $("#Req_SuperficieATAnterior").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($("#<%: txtBuscarCNATAnterior.ClientID %>").val().length < 3) {
+                $("#Req_txtBuscarATAnterior").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                ocultarBotonesBusquedaRubrosATAnterior();
+                $("#<%: pnlGrupoAgregarRubrosCNATAnterior.ClientID %>").css("display", "block");
+            }
+
+            return ret;
+        }
+
+        function ocultarBotonesAgregarRubrosCNATAnterior() {
+
+            $("#BotonesAgregarRubrosCNATAnterior").hide();
+            return false;
+        }
+
+        function hidefrmAgregarRubrosCNATAnterior() {
+
+            $("#frmAgregarRubrosCNATAnterior").modal("hide");
+            return false;
+        }
+
+        function ocultarBotonesBusquedaRubrosCNATAnterior() {
+            $("#<%: BotonesBuscarRubrosCNATAnterior.ClientID %>").hide();
+            return false;
+        }
+
+        function ocultarBotonesConfirmacionEliminarRubroCNATAnterior() {
+            $("#pnlBotonesConfirmacionEliminarRubroCNATAnterior").hide();
+            return false;
+        }
+
+        function ocultarValidadorAgregarRubrosCNATAnterior() {
+
+            $("#<%: ValidadorAgregarRubrosCNATAnterior.ClientID %>").hide();
+            return false;
+        }
+
+        function showConfirmarEliminarRubroCNATAnterior(obj) {
+
+            var id_caarubro_eliminar_CNATAnterior = $(obj).attr("data-id-rubroant-eliminar");
+            $("#<%: hid_id_caarubro_eliminar_ATAnterior.ClientID %>").val(id_caarubro_eliminar_CNATAnterior);
+
+            $("#frmConfirmarEliminarRubroCNATAnterior").modal("show");
+            return false;
+        }
+
+        function hidefrmConfirmarEliminarRubroCNATAnterior() {
+
+            $("#frmConfirmarEliminarRubroCNATAnterior").modal("hide");
+            return false;
+        }
+
+
+        function init_Js_updEditarSuperficieRubroActual() {
+
+            $("#<%: txtSuperficieRubroActual.ClientID %>").autoNumeric("init", { aSep: '.', mDec: 2, vMax: '999999.99', aDec: '<%: System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() %>' });
+
+            $("#<%: txtSuperficieRubroActual.ClientID %>").on("keyup", function (e) {
+                if (e.keyCode != 13) {
                     $("#Req_SuperficieRubroActual").hide();
                     $("#Val_SuperficieRubroActual_Mayor").hide();
-
-                    var superficie_maxima = 0.0;
-                    var superficie_rubro = 0.0;
-                    var str_superficie_maxima = $("#<%: txtSuperficieMaximaRubroActual.ClientID %>").val();
-                    var str_superficie_rubro = $("#<%: txtSuperficieRubroActual.ClientID %>").val();    
-                    str_superficie_maxima = str_superficie_maxima.replace(",", ".");
-                    str_superficie_rubro = str_superficie_rubro.replace(",", ".");
-
-                    if (str_superficie_maxima.length > 0) {
-                        superficie_maxima = parseFloat(str_superficie_maxima);
-                    }
-                    if (str_superficie_rubro.length > 0) {
-                        superficie_rubro = parseFloat(str_superficie_rubro);
-                    }
-
-                    if (superficie_rubro > superficie_maxima) {
-                        $("#Val_SuperficieRubroActual_Mayor").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if ($("#<%: txtSuperficieRubroActual.ClientID %>").val().length == 0 || superficie_rubro <= 0) {
-                        $("#Req_SuperficieRubroActual").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if (ret) {
-                        $("#BotonesAceptarEditarSuperficieRubroActual").hide();
-                    }
-
-                    return ret;
-
                 }
+            });
 
-                function showCargarndoRubros(obj) {
+            return false;
+        }
 
-                    var obj_id = $(obj).attr("id");
-                    var obj_img_id = obj_id.replace("btnEditarRubro", "imgLaodingRubros");
 
-                    $("#" + obj_id).hide();
-                    $("#" + obj_img_id).show();
+        function showfrmEditarSuperficieRubroActual() {
+            $("#frmEditarSuperficieRubroActual").modal({
+                backdrop: "static",
+                keyboard: false,
+                show: true
+            });
+            return false;
+        }
 
-                    return true;
+        function hidefrmEditarSuperficieRubroActual() {
+            $("#frmEditarSuperficieRubroActual").modal("hide");
+            return false;
+        }
 
-                }
+        function validarGuardarSuperficieRubroActual() {
 
-                function MostrarNroDispo(){
-                    $("#NroDispo").css("display", "inline-block");
-                    $("#NroNormativa").css("display", "none");                
-                    return false;
-                }
+            var ret = true;
 
-                function OcultarNroDispo(){
-                    $("#NroDispo").css("display", "none");
-                    $("#NroNormativa").css("display", "inline");   
-                    return false;
-                }
+            $("#Req_SuperficieRubroActual").hide();
+            $("#Val_SuperficieRubroActual_Mayor").hide();
+
+            var superficie_maxima = 0.0;
+            var superficie_rubro = 0.0;
+            var str_superficie_maxima = $("#<%: txtSuperficieMaximaRubroActual.ClientID %>").val();
+            var str_superficie_rubro = $("#<%: txtSuperficieRubroActual.ClientID %>").val();
+            str_superficie_maxima = str_superficie_maxima.replace(",", ".");
+            str_superficie_rubro = str_superficie_rubro.replace(",", ".");
+
+            if (str_superficie_maxima.length > 0) {
+                superficie_maxima = parseFloat(str_superficie_maxima);
+            }
+            if (str_superficie_rubro.length > 0) {
+                superficie_rubro = parseFloat(str_superficie_rubro);
+            }
+
+            if (superficie_rubro > superficie_maxima) {
+                $("#Val_SuperficieRubroActual_Mayor").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($("#<%: txtSuperficieRubroActual.ClientID %>").val().length == 0 || superficie_rubro <= 0) {
+                $("#Req_SuperficieRubroActual").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                $("#BotonesAceptarEditarSuperficieRubroActual").hide();
+            }
+
+            return ret;
+
+        }
+
+        function showCargarndoRubros(obj) {
+
+            var obj_id = $(obj).attr("id");
+            var obj_img_id = obj_id.replace("btnEditarRubro", "imgLaodingRubros");
+
+            $("#" + obj_id).hide();
+            $("#" + obj_img_id).show();
+
+            return true;
+
+        }
+
+        function MostrarNroDispo() {
+            $("#NroDispo").css("display", "inline-block");
+            $("#NroNormativa").css("display", "none");
+            return false;
+        }
+
+        function OcultarNroDispo() {
+            $("#NroDispo").css("display", "none");
+            $("#NroNormativa").css("display", "inline");
+            return false;
+        }
 
     </script>
 </asp:Content>

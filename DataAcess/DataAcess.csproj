@@ -587,6 +587,7 @@
     <Compile Include="EntityCustom\SGITareaCalificarObsDocsGrillaEntity.cs" />
     <Compile Include="EntityCustom\SGITareaCalificarObsGrupoGrillaEntity.cs" />
     <Compile Include="EntityCustom\SGITramitesTareasEntity.cs" />
+    <Compile Include="EntityCustom\SGI_siguiente_correccionSolEntity.cs" />
     <Compile Include="EntityCustom\SobrecargasEntity.cs" />
     <Compile Include="EntityCustom\SSITDocumentosAdjuntosEntity.cs" />
     <Compile Include="EntityCustom\SSITSolicitudesHistorialEstadosGrillaEntity.cs" />

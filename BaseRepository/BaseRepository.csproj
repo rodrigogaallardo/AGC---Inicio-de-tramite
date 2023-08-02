@@ -94,6 +94,7 @@
     <Compile Include="ConceptosBUIIndependientesRepository.cs" />
     <Compile Include="EncomiendaExternaHistorialEstadosRepository.cs" />
     <Compile Include="EncomiendaExternaRepository.cs" />
+    <Compile Include="EncomiendaSSITSolicitudesRepository.cs" />
     <Compile Include="EncomiendaRectificatoriaRepository.cs" />
     <Compile Include="EncomiendaRubrosATAnteriorRepository.cs" />
     <Compile Include="EncomiendaRubrosCNATAnteriorRepository.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="EncomiendaUbicacionesMixturasRepository.cs" />
     <Compile Include="ENGGruposCircuitosTipoTramiteRepository.cs" />
     <Compile Include="GrupoConsejosRepository.cs" />
+    <Compile Include="InmuebleCatalogadoRepository.cs" />
     <Compile Include="InstructivosRepository.cs" />
     <Compile Include="Ley962TiposDeDocumentosRequeridosRepository.cs" />
     <Compile Include="MailsRepository.cs" />
