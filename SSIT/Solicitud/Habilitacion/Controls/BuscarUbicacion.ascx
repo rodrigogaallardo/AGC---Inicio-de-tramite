@@ -209,7 +209,7 @@
                                         <asp:TextBox ID="txtSeccion" runat="server" Width="90px" MaxLength="3" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label1" runat="server" Text="Manzana:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="6" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label2" runat="server" Text="Parcela:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
                                         <asp:TextBox ID="txtParcela" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
@@ -1134,15 +1134,14 @@
                                 showfrmConfirmarNoPH();
                                 ret = false;
                             }
-                           
+
                         }
                     });
                 }
             }
 
 
-            if (ret)
-            {
+            if (ret) {
                 $("#<%: btnIngresarUbicacion.ClientID %>").hide();
                 $("#<%: btnEditarUbicacion.ClientID %>").hide();
                 $("#<%: btnNuevaBusqueda.ClientID %>").hide();
@@ -1151,9 +1150,9 @@
             }
             return ret;
         }
-        
+
         function showfrmSolicitarNuevaPuerta() {
-            
+
             $("#frmSolicitarNuevaPuerta").modal("show");
             return false;
         }

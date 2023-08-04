@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BuscarUbicacion.ascx.cs" Inherits="SSIT.Solicitud.Consulta_Padron.Controls.BuscarUbicacion" %>
-<%@ register src="~/Solicitud/Controls/ucNuevaPuerta.ascx" tagprefix="uc1" tagname="ucNuevaPuerta" %>
+<%@ Register Src="~/Solicitud/Controls/ucNuevaPuerta.ascx" TagPrefix="uc1" TagName="ucNuevaPuerta" %>
 <%@ Register Src="~/Solicitud/Habilitacion/Controls/ZonaPlaneamiento.ascx" TagPrefix="uc" TagName="ZonaPlaneamiento" %>
 
 <%: Scripts.Render("~/bundles/autoNumeric") %>
@@ -205,7 +205,7 @@
                                         <asp:TextBox ID="txtSeccion" runat="server" Width="90px" MaxLength="3" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label1" runat="server" Text="Manzana:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="6" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label2" runat="server" Text="Parcela:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
                                         <asp:TextBox ID="txtParcela" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
@@ -358,72 +358,77 @@
                 </div>
 
             </asp:Panel>
-            
-           <asp:UpdatePanel ID="updpnlmessages" runat="server" UpdateMode="Conditional">
-             <ContentTemplate>
-              <asp:Panel runat="server" ID="pnlAviso" Visible="false">                                
-                <div class="box-panel">                    
-                    <div class="col-sm-12">
-                        <div>
-                        <i class="imoon-black imoon-warning fs48 color-yellow"></i><br />
-                        </div>
-                        <div class="mtop15 text-justify" id="divAtencion" runat="server">
-                            <b>ATENCIÓN:</b>&nbsp;La puerta ingresada para su consulta no existe catrastalmente
+
+            <asp:UpdatePanel ID="updpnlmessages" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <asp:Panel runat="server" ID="pnlAviso" Visible="false">
+                        <div class="box-panel">
+                            <div class="col-sm-12">
+                                <div>
+                                    <i class="imoon-black imoon-warning fs48 color-yellow"></i>
+                                    <br />
+                                </div>
+                                <div class="mtop15 text-justify" id="divAtencion" runat="server">
+                                    <b>ATENCIÓN:</b>&nbsp;La puerta ingresada para su consulta no existe catrastalmente
                             Por favor, seleccione una puerta de la parcela que corresponde,
                             en las opciones que se encuentran dentro de los resultados de busqueda.
-                        </div>                     
-                        
-                        <div class="margin-10-top">
-                            <asp:Linkbutton runat="server" type="button" class="btn btn-primary" id="btnRegistro" onclick="btnRegistro_Click" >¿Cómo registro mi puerta? </asp:Linkbutton>                            
+                                </div>
+
+                                <div class="margin-10-top">
+                                    <asp:LinkButton runat="server" type="button" class="btn btn-primary" ID="btnRegistro" OnClick="btnRegistro_Click">¿Cómo registro mi puerta? </asp:LinkButton>
+                                </div>
+                                <div id="divRegistro" runat="server" style="display: none" class="margin-10-top">
+                                    <b>Requisitos Del Trámite</b><br />
+                                    <br />
+
+                                    Solicitar el alta de nuevos números domiciliarios.<br>
+                                    Quién puede realizar el trámite: profesionales habilitados o particulares.<br>
+                                    Los interesados en iniciar este trámite ante la Dirección General de Registro de Obras y Catastro (DGROC) deberán completar los datos requeridos en el formulario y adjuntar la documentación que a continuación se detalla:<br>
+                                    <ul>
+                                        <li>Informe de dominio extendido por el registro de la propiedad inmueble</li>
+                                        <li>Comprobante de pago<br>
+                                        </li>
+                                        <li>Adicionalmente, según el caso deberán presentar:<br>
+                                            <ul>
+                                                <li>En caso de edificios sometidos al régimen de la ley 13.512 deberá presentarse el consentimiento de la totalidad de los copropietarios.</li>
+                                                <li>Otra documentación</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                    <br>
+                                    A efectos del inicio del presente trámite, la persona deberá ser designada por el propietario como apoderado (en el sistema TAD) como requisito indispensable para la tramitación.
+                                    <br>
+                                    El pago se puede realizar a través de <a href="https://sir.buenosaires.gob.ar/" target="_blank">https://sir.buenosaires.gob.ar/<br>
+                                    </a>
+                                    Concepto: Certificado de Numeración Domiciliaria (Form:1200).<br>
+                                    Para solicitar incorporar una presentación sobre el expediente o realizar una consulta, por favor hacerlo al siguiente mail: <a href="mailto:consultacatastro@buenosaires.gob.ar">consultacatastro@buenosaires.gob.ar</a><br>
+                                    <div class="margin-10-top">
+                                        <asp:LinkButton runat="server" type="button" class="btn btn-primary pull-right" ID="btnRegistroSalir" OnClick="btnRegistroSalir_Click"><i class="imoon imoon-arrow-left"></i><span class="text">Volver</span></asp:LinkButton>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <div id="divRegistro" runat="server" style="display:none" class="margin-10-top">
-                          <b>Requisitos Del Trámite</b><br /><br />
-
-                        Solicitar el alta de nuevos números domiciliarios.<br>
-                        Quién puede realizar el trámite: profesionales habilitados o particulares.<br>
-                        Los interesados en iniciar este trámite ante la Dirección General de Registro de Obras y Catastro (DGROC) deberán completar los datos requeridos en el formulario y adjuntar la documentación que a continuación se detalla:<br>
-                            <ul>
-                              <li>Informe de dominio extendido por el registro de la propiedad inmueble</li>
-                              <li>Comprobante de pago<br></li>
-                               <li>Adicionalmente, según el caso deberán presentar:<br>
-                                <ul>
-          	                        <li>En caso de edificios sometidos al régimen de la ley 13.512 deberá presentarse el consentimiento de la totalidad de los copropietarios.</li>
-          	                        <li>Otra documentación</li>
-                                </ul>
-                              </li>      
-                            </ul>
-		
-                            <br>
-                            A efectos del inicio del presente trámite, la persona deberá ser designada por el propietario como apoderado (en el sistema TAD) como requisito indispensable para la tramitación. <br>
-                        El pago se puede realizar a través de <a href="https://sir.buenosaires.gob.ar/" target="_blank">https://sir.buenosaires.gob.ar/<br></a> 
-                        Concepto: Certificado de Numeración Domiciliaria (Form:1200).<br>
-                        Para solicitar incorporar una presentación sobre el expediente o realizar una consulta, por favor hacerlo al siguiente mail: <a href="mailto:consultacatastro@buenosaires.gob.ar" >consultacatastro@buenosaires.gob.ar</a><br>
-                            <div class="margin-10-top">
-                            <asp:Linkbutton runat="server" type="button" class="btn btn-primary pull-right" id="btnRegistroSalir" onclick="btnRegistroSalir_Click" ><i class="imoon imoon-arrow-left"></i><span class="text">Volver</span></asp:LinkButton>
-                            </div>
-
-                                </div>
-                                </div>
-                            </div>
                         </div>
 
 
                             </div>
                         </div>   
-                  <br />                 
-                         <div class="modal-footer" id="footBtnContinuarAviso" runat="server" style="display:none;">
-                            <div class="form-group">                                                          
+                  <br />
+                        <div class="modal-footer" id="footBtnContinuarAviso" runat="server" style="display: none;">
+                            <div class="form-group">
                                 <div class="form-inline text-right">
                                     <div class="form-group">
                                         <asp:LinkButton ID="lnkCerrar" runat="server" CssClass="btn btn-default btn-primary" OnClick="btnContinuarAviso_Click"><i class="imoon imoon-arrow-left"></i>
-                                         <span class="text">Volver</span></asp:LinkButton>    
+                                         <span class="text">Volver</span></asp:LinkButton>
                                     </div>
                                 </div>
                             </div>
-                          </div>
+                        </div>
                     </asp:Panel>
-                  </ContentTemplate>
-               </asp:UpdatePanel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <%--Resultados de la búsqueda--%>
             <asp:UpdatePanel ID="pnlResultados" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
@@ -434,19 +439,19 @@
                         <legend>Resultados de la b&uacute;squeda
                             <asp:Label ID="lblCantResultados" runat="server" Style="padding-left: 10px; font-size: small; font-style: italic"></asp:Label>
                         </legend>
-                                  
-                                <asp:HiddenField ID="hid_id_selectedubicacion" runat="server" Value="" />
-                                 <div style="max-height:50vh;overflow:auto" >
-                                    <div class="form-inline"  style="display:none" >
-                                        <asp:Label ID="lblfoto" runat="server" CssClass="label-primary" Text="Foto" Width="10%"></asp:Label>
-                                        <asp:Label ID="Label3" runat="server" CssClass="label-primary" Text="direccion" Width="60%"></asp:Label>
-                                        <asp:Label ID="Label4" runat="server" CssClass="label-primary" Text="agregar ubicacion" Width="30%"></asp:Label>
-                                    </div>
-                                    <asp:GridView ID="grdResultados" runat="server" AutoGenerateColumns="false" DataKeyNames="IdUbicacion"
-                                    AllowPaging="true" PageSize="10" AllowSorting="false" GridLines="None" CssClass="table table-bordered mtop5"
-                                     ItemType="DataTransferObject.ItemDirectionDTO" OnRowDataBound="grdResultados_RowDataBound"  >
-                                
-                                            <Columns>
+
+                        <asp:HiddenField ID="hid_id_selectedubicacion" runat="server" Value="" />
+                        <div style="max-height: 50vh; overflow: auto">
+                            <div class="form-inline" style="display: none">
+                                <asp:Label ID="lblfoto" runat="server" CssClass="label-primary" Text="Foto" Width="10%"></asp:Label>
+                                <asp:Label ID="Label3" runat="server" CssClass="label-primary" Text="direccion" Width="60%"></asp:Label>
+                                <asp:Label ID="Label4" runat="server" CssClass="label-primary" Text="agregar ubicacion" Width="30%"></asp:Label>
+                            </div>
+                            <asp:GridView ID="grdResultados" runat="server" AutoGenerateColumns="false" DataKeyNames="IdUbicacion"
+                                AllowPaging="true" PageSize="10" AllowSorting="false" GridLines="None" CssClass="table table-bordered mtop5"
+                                ItemType="DataTransferObject.ItemDirectionDTO" OnRowDataBound="grdResultados_RowDataBound">
+
+                                <Columns>
 
 
                                     <asp:TemplateField HeaderText="Foto" HeaderStyle-CssClass="text-center" ItemStyle-CssClass="text-center mtop40">
@@ -456,30 +461,30 @@
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Ubicación" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center"  ItemStyle-Width="200px">
+                                    <asp:TemplateField HeaderText="Ubicación" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" ItemStyle-Width="200px">
                                         <ItemTemplate>
-                                            <div style="margin-top:50px">
-                                            <asp:Label ID="Label6" runat="server" CssClass="mtop40" Text='<%# Item.direccion %>' />
+                                            <div style="margin-top: 50px">
+                                                <asp:Label ID="Label6" runat="server" CssClass="mtop40" Text='<%# Item.direccion %>' />
 
-                                            <asp:Label ID="Label10" runat="server" CssClass="mtop40" Text='<%# Item.Numero %>' />
+                                                <asp:Label ID="Label10" runat="server" CssClass="mtop40" Text='<%# Item.Numero %>' />
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
                                     <asp:TemplateField HeaderText="Agregar Ubicación" HeaderStyle-CssClass="text-center" ItemStyle-CssClass="text-center mtop40">
                                         <ItemTemplate>
-                                              <div style="margin-top:50px">
-                                            <asp:LinkButton ID="lnkubicacion" ToolTip="Agregar Ubicación" CssClass="btn btn-primary" Style="vertical-align: central !important" OnClick="lnkUbicacion_Click" runat="server" CommandArgument='<%# Item.idUbicacion %>'>
+                                            <div style="margin-top: 50px">
+                                                <asp:LinkButton ID="lnkubicacion" ToolTip="Agregar Ubicación" CssClass="btn btn-primary" Style="vertical-align: central !important" OnClick="lnkUbicacion_Click" runat="server" CommandArgument='<%# Item.idUbicacion %>'>
                                                     
                                                     <i class="imoon imoon-ok"></i>
-                                            </asp:LinkButton>
-                                                    </div>
+                                                </asp:LinkButton>
+                                            </div>
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="180px" />
                                     </asp:TemplateField>
                                 </Columns>
-                                </asp:GridView>
-                               </div>
+                            </asp:GridView>
+                        </div>
 
                         <fieldset>
 
@@ -541,11 +546,11 @@
                                                         <br />
                                                         <div style="min-height: 250px; min-width: 300px">
                                                             <img id="imgCargando" src='<%: ResolveUrl("~/Content/img/app/Loading128x128.gif") %>' alt="" style="margin-left: 60px; margin-top: 40px" />
-                                                            <img id="imgFotoParcela" class="img-polaroid" src="<%# GetUrlFoto(300,250,Item.Seccion,Item.Manzana,Item.Parcela ) %>" onload="fotoCargada('imgCargando',this);" onerror="noExisteFotoParcela(this);" style="display: none; border: solid 2px #939393; border-radius:12px;  width:290px " />
+                                                            <img id="imgFotoParcela" class="img-polaroid" src="<%# GetUrlFoto(300,250,Item.Seccion,Item.Manzana,Item.Parcela ) %>" onload="fotoCargada('imgCargando',this);" onerror="noExisteFotoParcela(this);" style="display: none; border: solid 2px #939393; border-radius: 12px; width: 290px" />
                                                             <br />
-                                                            <img ID="imgMapa1" src="<%# GetUrlMapa(Item.Seccion,Item.Manzana,Item.Parcela, Item.Direccion) %>" onload="fotoCargada('imgCargando',this);" onerror="noExisteFotoParcela(this);" style="display: none; border: solid 2px #939393; border-radius:12px;  width:290px " />
+                                                            <img id="imgMapa1" src="<%# GetUrlMapa(Item.Seccion,Item.Manzana,Item.Parcela, Item.Direccion) %>" onload="fotoCargada('imgCargando',this);" onerror="noExisteFotoParcela(this);" style="display: none; border: solid 2px #939393; border-radius: 12px; width: 290px" />
                                                             <br />
-                                                            <img ID="imgMapa2" src="<%# GetUrlCroquis(Item.Seccion,Item.Manzana,Item.Parcela, Item.Direccion) %>" onload="fotoCargada('imgCargando',this);" onerror="noExisteFotoParcela(this);" style="display: none; border: solid 2px #939393; border-radius:12px;  width:290px " />
+                                                            <img id="imgMapa2" src="<%# GetUrlCroquis(Item.Seccion,Item.Manzana,Item.Parcela, Item.Direccion) %>" onload="fotoCargada('imgCargando',this);" onerror="noExisteFotoParcela(this);" style="display: none; border: solid 2px #939393; border-radius: 12px; width: 290px" />
                                                         </div>
                                                     </td>
                                                     <td style="width: 10px; border-right: solid 1px #eeeeee"></td>
@@ -553,137 +558,141 @@
 
                                                         <asp:Panel ID="pnlPuertas" runat="server">
                                                             <div style="overflow: auto; max-height: 800px">
-                                                                <div class="box-panel" style="margin-left:5px; width: 710px;">
+                                                                <div class="box-panel" style="margin-left: 5px; width: 710px;">
                                                                     <div id="lblSeleccionarPuerta" runat="server">
                                                                         <h5><i class="imoon imoon-office" style="margin-right: 4px"></i>Puertas -
                                                                 <label style="font-weight: bold !important">Debe seleccionar con un Click la puerta correspondiente</label></h5>
                                                                     </div>
                                                                     <label id="lblPartidaInhibida" class="alert alert-warning" runat="server" style="background-color: #fcda59; display: none"><i class="imoon imoon-notification" style="margin-right: 4px"></i>Se pone en conocimiento que el domicilio declarado por usted presenta irregularidades. Por favor acerquese a nuestras oficinas ubicadas en TTE. GRAL. JUAN DOMINGO PERON 2941.</label>
                                                                     <hr style="margin-top: -5px"></hr>
-                                                                   
-                                                                   <div class="alert alert-small alert-warning">
+
+                                                                    <div class="alert alert-small alert-warning">
                                                                         Si al intentar seleccionar las puertas, la calle no existe en el sistema. Haga click 
-                                                                        <asp:LinkButton ID="btnNuevaPuerta" runat="server" Text="aquí" OnClick="btnNuevaPuerta_Click" style="color: #377bb5;"
-                                                                            CommandArgument="<%# Item.IdUbicacion %>"
-                                                                            ></asp:LinkButton>
+                                                                        <asp:LinkButton ID="btnNuevaPuerta" runat="server" Text="aquí" OnClick="btnNuevaPuerta_Click" Style="color: #377bb5;"
+                                                                            CommandArgument="<%# Item.IdUbicacion %>"></asp:LinkButton>
                                                                     </div>
-                                                           
+
                                                                     <p>La parcela que usted ingresó tiene las siguientes puertas registradas: </p>
                                                                     <br />
 
 
-                                                                <asp:UpdatePanel ID="updPuertas" runat="server" >
-                                                                    <ContentTemplate>
+                                                                    <asp:UpdatePanel ID="updPuertas" runat="server">
+                                                                        <ContentTemplate>
 
-                                                                        <asp:DataList ID="lstPuertas"
-                                                                            runat="server"
-                                                                            RepeatColumns="1"
-                                                                            RepeatDirection="Vertical"
-                                                                            RepeatLayout="Table"
-                                                                            Width="100%"
-                                                                            OnItemDataBound="lstPuertas_ItemDataBound">
-                                                                            <ItemTemplate>
-                                                                                <asp:HiddenField ID="hid_ubic_puerta" runat="server" Value='<%# Eval("IdUbicacionPuerta") %>' />
-                                                                                <asp:HiddenField ID="hid_codigo_calle" runat="server" Value='<%# Eval("CodigoCalle") %>' />
-                                                                                <asp:HiddenField ID="hid_NroPuerta_ubic" runat="server" Value='<%# Eval("NroPuertaUbic") %>' />
-                                                                                <asp:HiddenField ID="hid_Nueva_puerta" runat="server" Value='<%# Eval("NuevaPuerta") %>' />
+                                                                            <asp:DataList ID="lstPuertas"
+                                                                                runat="server"
+                                                                                RepeatColumns="1"
+                                                                                RepeatDirection="Vertical"
+                                                                                RepeatLayout="Table"
+                                                                                Width="100%"
+                                                                                OnItemDataBound="lstPuertas_ItemDataBound">
+                                                                                <ItemTemplate>
+                                                                                    <asp:HiddenField ID="hid_ubic_puerta" runat="server" Value='<%# Eval("IdUbicacionPuerta") %>' />
+                                                                                    <asp:HiddenField ID="hid_codigo_calle" runat="server" Value='<%# Eval("CodigoCalle") %>' />
+                                                                                    <asp:HiddenField ID="hid_NroPuerta_ubic" runat="server" Value='<%# Eval("NroPuertaUbic") %>' />
+                                                                                    <asp:HiddenField ID="hid_Nueva_puerta" runat="server" Value='<%# Eval("NuevaPuerta") %>' />
 
-                                                                                <div class="form-inline">
-                                                                                    <div class="control-group">
-                                                                                        <label class="checkbox">
-                                                                                            <asp:CheckBox ID="chkPuerta" CssClass="chkPuertaClass" runat="server" />
-                                                                                            <asp:Label ID="lblnombreCalle" runat="server" Text='<%# Eval("Nombre_calle") %>'></asp:Label>
-                                                                                        </label>
-                                                                                        <asp:TextBox ID="txtNroPuerta" Enabled="false" runat="server" Text='<%# Eval("NroPuertaUbic") %>' Width="65px" CssClass="form-control grid-txtNroPuerta" ReadOnly="true"></asp:TextBox>
+                                                                                    <div class="form-inline">
+                                                                                        <div class="control-group">
+                                                                                            <label class="checkbox">
+                                                                                                <asp:CheckBox ID="chkPuerta" CssClass="chkPuertaClass" runat="server" />
+                                                                                                <asp:Label ID="lblnombreCalle" runat="server" Text='<%# Eval("Nombre_calle") %>'></asp:Label>
+                                                                                            </label>
+                                                                                            <asp:TextBox ID="txtNroPuerta" Enabled="false" runat="server" Text='<%# Eval("NroPuertaUbic") %>' Width="65px" CssClass="form-control grid-txtNroPuerta" ReadOnly="true"></asp:TextBox>
 
-<%--                                                                                        <asp:LinkButton ID="lnkAgregarOtraPuerta" runat="server" Text="Agregar otra puerta" Style="display: inline"
+                                                                                            <%--                                                                                        <asp:LinkButton ID="lnkAgregarOtraPuerta" runat="server" Text="Agregar otra puerta" Style="display: inline"
                                                                                         data-toggle="tooltip" OnClick="lnkAgregarOtraPuerta_Click" CommandArgument='<%# Eval("IdUbicacionPuerta") %>'
                                                                                         ToolTip="Agrega otra puerta en la misma calle y dentro de la misma cuadra." CssClass="AgregarOtraPuerta"
                                                                                         Font-Size="9pt" >
                                                                                         </asp:LinkButton>--%>
+                                                                                        </div>
+                                                                                        <br />
                                                                                     </div>
+
+
+                                                                                </ItemTemplate>
+
+                                                                            </asp:DataList>
+
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
+                                                                </div>
+                                                                <br />
+                                                                <br />
+
+                                                                <%--Depto / Local / Otros--%>
+
+                                                                <asp:Panel ID="pnlDeptoLocal" runat="server" Visible="true" CssClass="box-panel pbottom10" Style="margin-left: 5px; width: 710px;">
+
+                                                                    <div class=" form-horizontal form-group">
+
+                                                                        <asp:Label ID="Label7" class="control-label col-sm-2" runat="server"><b>Otros:</b></asp:Label>
+                                                                        <div class="col-sm-4">
+                                                                            <asp:TextBox ID="txtOtros" runat="server" MaxLength="50" Width="250px" CssClass="form-control"></asp:TextBox>
+                                                                            <div style="font-size: 8pt; font-weight: bold; color: #9a9a9a; width: 350px;">
+                                                                                * Indicar los textos completos del sector deseado.
                                                                                     <br />
-                                                                                </div>
+                                                                                Ej: "Oficina 23 y 24", "Sección 18", etc.
+                                                                              
+                                                                             
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <asp:Label ID="Label8" runat="server" CssClass="control-label col-sm-2"><b>Local:</b></asp:Label>
+                                                                        <div class="col-sm-4">
+                                                                            <asp:TextBox ID="txtLocal" runat="server" MaxLength="8" Width="80px" CssClass="form-control"></asp:TextBox>
+                                                                            <div style="font-size: 8pt; font-weight: bold; width: 200px; color: #9a9a9a">
+                                                                                * Indicar únicamente el nº o letra del local.
+                                                                            </div>
+                                                                        </div>
 
 
-                                                                            </ItemTemplate>
+                                                                    </div>
 
-                                                                        </asp:DataList>
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
 
+                                                                    <div class="form-horizontal form-group">
+                                                                        <asp:Label ID="Label5" runat="server" class="col-sm-2 control-label"><b>Depto:</b></asp:Label>
+                                                                        <div class="col-sm-4">
+                                                                            <asp:TextBox ID="txtDepto" runat="server" MaxLength="3" Width="80px" CssClass="form-control"></asp:TextBox>
+                                                                            <div style="font-size: 8pt; font-weight: bold; width: 200px; color: #9a9a9a">
+                                                                                * Indicar únicamente el nº o letra del departamento.
+                                            
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                        <asp:Label ID="Label9" runat="server" CssClass="control-label col-sm-2"><b>Torre:</b></asp:Label>
+                                                                        <div class="col-sm-2">
+                                                                            <asp:TextBox ID="txtTorre" runat="server" MaxLength="3" Width="80px" CssClass="form-control"></asp:TextBox>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </asp:Panel>
+
+                                                                <br />
+                                                                <br />
+                                                                <%--Grilla para seleccionar partida horizontal--%>
+                                                                <asp:UpdatePanel ID="updPartidasHorizontales" runat="server">
+                                                                    <ContentTemplate>
+                                                                        <asp:Panel ID="pnlPartidasHorizontales" runat="server" Style="border-bottom: solid 1px #e1e1e1; display: none; margin-left: 5px; width: 710px;" CssClass="BuscarUbicacion-pnlPartidasHorizontales box-panel">
+                                                                            <div class="titulo-1" style="border-bottom: solid 1px #e1e1e1; padding-top: 5px; font-size: medium">
+                                                                                <b>Partidas Horizontales o Subdivisiones:</b>
+                                                                            </div>
+                                                                            <asp:Panel ID="pnlChecksListPHorizontales" runat="server" Style="overflow: auto; max-height: 135px">
+                                                                                <asp:CheckBoxList ID="CheckBoxListPHorizontales" Style="width: 660px" runat="server" RepeatDirection="Vertical"
+                                                                                    RepeatLayout="Table" RepeatColumns="3" CellPadding="1" Font-Size="9pt" OnDataBound="CheckBoxListPHorizontales_DataBound">
+                                                                                </asp:CheckBoxList>
+                                                                            </asp:Panel>
+                                                                        </asp:Panel>
                                                                     </ContentTemplate>
                                                                 </asp:UpdatePanel>
                                                             </div>
-                                                                <br /><br />
-                                                                  
-                                                              <%--Depto / Local / Otros--%>
-                                                  
-                                                                   <asp:Panel ID="pnlDeptoLocal" runat="server" Visible="true" CssClass="box-panel pbottom10" style="margin-left:5px; width: 710px;">
-                                                                    
-                                                                        <div class=" form-horizontal form-group">
-                                                                          
-                                                                            <asp:label ID="Label7" class="control-label col-sm-2" runat="server"><b>Otros:</b></asp:label>
-                                                                               <div class="col-sm-4">
-                                                                                <asp:TextBox ID="txtOtros" runat="server" MaxLength="50" Width="250px" CssClass="form-control"></asp:TextBox>
-                                                                                <div style="font-size: 8pt; font-weight: bold; color: #9a9a9a; width: 350px; " >
-                                                                                    * Indicar los textos completos del sector deseado.
-                                                                                    <br />
-                                                                                    Ej: "Oficina 23 y 24", "Sección 18", etc.
-                                                                              
-                                                                             
-                                                                               </div>
-                                                                             </div>
-                                                                                                       
-                                                                            <asp:label ID="Label8" runat="server" CssClass="control-label col-sm-2"><b>Local:</b></asp:label>
-                                                                            <div class="col-sm-4">
-                                                                              <asp:TextBox ID="txtLocal" runat="server" MaxLength="8" Width="80px" CssClass="form-control"></asp:TextBox>
-                                                                             <div style="font-size: 8pt; font-weight: bold; width: 200px; color: #9a9a9a">
-                                                                                * Indicar únicamente el nº o letra del local.
-                                                                              </div>
-                                                                            </div>
-                        
-                                                                         
-                                                                            </div>
-                                                                       
-                                                                         <br /> <br /> <br /><br />
-                                                                    
-                                                                        <div class="form-horizontal form-group">
-                                                                           <asp:label ID="Label5" runat="server" class="col-sm-2 control-label"><b>Depto:</b></asp:label>
-                                                                            <div class="col-sm-4">
-                                                                              <asp:TextBox ID="txtDepto" runat="server" MaxLength="3" Width="80px" CssClass="form-control"></asp:TextBox>
-                                                                                 <div style="font-size: 8pt; font-weight: bold; width: 200px; color: #9a9a9a">
-                                                                                    * Indicar únicamente el nº o letra del departamento.
-                                            
-                                                                               </div>
-                                                                            </div>
-                                                
-
-                                                                         
-                                                                            <asp:label ID="Label9" runat="server" CssClass="control-label col-sm-2"><b>Torre:</b></asp:label>
-                                                                          <div class="col-sm-2" >
-                                                                              <asp:TextBox ID="txtTorre" runat="server" MaxLength="3" Width="80px" CssClass="form-control"></asp:TextBox>
-                                                                       
-                                                                          </div>
-                                                                         </div>
-  
-                                                                      </asp:Panel>
-
-                                                                     <br /><br />
-                                                                        <%--Grilla para seleccionar partida horizontal--%>
-                                                                      <asp:UpdatePanel ID="updPartidasHorizontales" runat="server">
-                                                                            <ContentTemplate>
-                                                                                <asp:Panel ID="pnlPartidasHorizontales" runat="server" Style="border-bottom: solid 1px #e1e1e1; display: none; margin-left:5px; width: 710px;" CssClass="BuscarUbicacion-pnlPartidasHorizontales box-panel" >
-                                                                                    <div class="titulo-1" style="border-bottom: solid 1px #e1e1e1; padding-top: 5px; font-size: medium">
-                                                                                        <b>Partidas Horizontales o Subdivisiones:</b>
-                                                                                    </div>
-                                                                                    <asp:Panel ID="pnlChecksListPHorizontales" runat="server" Style="overflow: auto; max-height: 135px">
-                                                                                        <asp:CheckBoxList ID="CheckBoxListPHorizontales" Style="width:660px" runat="server" RepeatDirection="Vertical"
-                                                                                            RepeatLayout="Table" RepeatColumns="3" CellPadding="1" Font-Size="9pt" OnDataBound="CheckBoxListPHorizontales_DataBound" >
-                                                                                        </asp:CheckBoxList>
-                                                                                    </asp:Panel>
-                                                                                </asp:Panel>
-                                                                            </ContentTemplate>
-                                                                        </asp:UpdatePanel>
-                                                                </div>
                                                         </asp:Panel>
 
                                                     </td>
@@ -703,7 +712,7 @@
                                                                         el botón "Agregar otra puerta" y cambiar su numeración por la correcta.</li>
                                                 </ul>
                                             </div>
-                                           
+
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -783,23 +792,23 @@
                             <ContentTemplate>
                                 <asp:Panel ID="pnlbotonesingreso" runat="server">
 
-                                    <div class="form-inline text-center mtop5" style="margin-left:80px">
+                                    <div class="form-inline text-center mtop5" style="margin-left: 80px">
 
                                         <div class="form-group">
                                             <asp:LinkButton ID="btnNuevaBusqueda" runat="server" CssClass="btn btn-default"
-                                                 OnClick="btnNuevaBusquedar_Click">
+                                                OnClick="btnNuevaBusquedar_Click">
                                                 <i class="imoon-white imoon-search"></i>
                                                 <span class="text">Nueva Busqueda</span>
                                             </asp:LinkButton>
                                         </div>
                                         <div class="form-group">
                                             <asp:LinkButton ID="btnIngresarUbicacion" runat="server" CssClass="btn btn-primary"
-                                                 OnClick="btnIngresarUbicacion_Click" OnClientClick="return validarIngresarUbicacion();">
+                                                OnClick="btnIngresarUbicacion_Click" OnClientClick="return validarIngresarUbicacion();">
                                                 <i class="imoon-white imoon-plus"></i>
                                                 <span class="text">Aceptar</span>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="btnEditarUbicacion" runat="server" CssClass="btn btn-primary"
-                                                 OnClick="btnEditarUbicacion_Click" OnClientClick="return validarIngresarUbicacion();" Visible="false">
+                                                OnClick="btnEditarUbicacion_Click" OnClientClick="return validarIngresarUbicacion();" Visible="false">
                                                 <i class="imoon-white imoon-plus"></i>
                                                 <span class="text">Aceptar</span>
                                             </asp:LinkButton>
@@ -824,19 +833,19 @@
                                     </div>
 
 
-                               </asp:Panel>     
+                                </asp:Panel>
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
                     </asp:Panel>
 
-                    
+
 
                 </ContentTemplate>
             </asp:UpdatePanel>
-         <div id="box_zonaPlaneamiento" >
-              <uc:ZonaPlaneamiento runat="server" ID="ZonaPlaneamiento" />
-           </div>
+            <div id="box_zonaPlaneamiento">
+                <uc:ZonaPlaneamiento runat="server" ID="ZonaPlaneamiento" />
+            </div>
 
         </ContentTemplate>
 
@@ -845,64 +854,64 @@
 
 
     <%--Modal Confirmar Anulación--%>
-    <asp:updatepanel ID="udpModalSinPartida" runat="server" UpdateMode="Conditional">
-<ContentTemplate>
-    <div id="frmConfirmarNoPH" class="modal fade" role="dialog" style="margin-top:510px">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" style="margin-top: -8px">Unidades Funcionales</h4>
-                </div>
-                <div class="modal-body">
-                    <table style="border-collapse: separate; border-spacing: 5px">
-                        <tr>
-                            <td style="text-align: center; vertical-align: text-top">
-                                <i class="imoon imoon-info fs64 color-blue"></i>
-                            </td>
-                            <td style="vertical-align: middle">
-                                <div>
-                                    El domicilio ingresado tiene unidades funcionales (UF). 
+    <asp:UpdatePanel ID="udpModalSinPartida" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div id="frmConfirmarNoPH" class="modal fade" role="dialog" style="margin-top: 510px">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" style="margin-top: -8px">Unidades Funcionales</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table style="border-collapse: separate; border-spacing: 5px">
+                                <tr>
+                                    <td style="text-align: center; vertical-align: text-top">
+                                        <i class="imoon imoon-info fs64 color-blue"></i>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <div>
+                                            El domicilio ingresado tiene unidades funcionales (UF). 
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <div class="modal-footer mleft20 mright20">
+
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <asp:LinkButton ID="btnEditarSinPartida" runat="server" Text="Continuar sin UF" CssClass="btn btn-default" OnClick="btnEditarUbicacion_Click" Visible="false" OnClientClick="return hidefrmConfirmarNoPHEdit(true)"></asp:LinkButton>
+                                    <button id="btnGuardarSinPartida" runat="server" type="button" class="btn btn-default" onclick="return hidefrmConfirmarNoPH(true);">Continuar sin UF</button>
+                                    <button type="button" class="btn btn-default" onclick="return hidefrmConfirmarNoPH(false);">Seleccionar una UF</button>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
 
-                </div>
-                <div class="modal-footer mleft20 mright20">
-
-                <div class="form-inline">
-                    <div class="form-group">
-                        <asp:Linkbutton ID="btnEditarSinPartida" runat="server" Text="Continuar sin UF" CssClass="btn btn-default" OnClick="btnEditarUbicacion_Click" Visible="false" OnClientClick="return hidefrmConfirmarNoPHEdit(true)"></asp:Linkbutton>
-                            <button id="btnGuardarSinPartida" runat="server" type="button" class="btn btn-default" onclick="return hidefrmConfirmarNoPH(true);">Continuar sin UF</button>
-                            <button type="button" class="btn btn-default" onclick="return hidefrmConfirmarNoPH(false);">Seleccionar una UF</button>
+                        </div>
                     </div>
                 </div>
-
-                </div>
             </div>
-        </div>
-    </div>
-      </ContentTemplate>
-</asp:updatepanel>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- /.modal -->
 
-  <asp:UpdatePanel ID="udpfrmSolicitarNuevaPuerta" runat="server" UpdateMode="Conditional">
-   <ContentTemplate>
-    <%-- Modal Solicitar nueva puerta por mail --%>
-    <div id="frmSolicitarNuevaPuerta" class="modal fade" role="dialog" >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" style="margin-top: -8px">Solicitar Nueva Puerta</h4>
-                </div>
-                <div class="modal-body">
-                     <uc1:ucNuevaPuerta runat="server" id="NuevaPuerta" /> 
+    <asp:UpdatePanel ID="udpfrmSolicitarNuevaPuerta" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <%-- Modal Solicitar nueva puerta por mail --%>
+            <div id="frmSolicitarNuevaPuerta" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" style="margin-top: -8px">Solicitar Nueva Puerta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <uc1:ucNuevaPuerta runat="server" ID="NuevaPuerta" />
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-            </ContentTemplate>
+        </ContentTemplate>
     </asp:UpdatePanel>
     <!-- /.modal -->
 
@@ -1025,7 +1034,7 @@
             return ret;
         }
 
-        function validarIngresarUbicacion() {            
+        function validarIngresarUbicacion() {
 
             var ret = true;
             var puerta = false;
