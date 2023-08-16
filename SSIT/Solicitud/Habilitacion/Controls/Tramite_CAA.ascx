@@ -28,7 +28,7 @@
                             <span class="text">Ingresar a SIPSA</span>
                         </asp:LinkButton>
                     </div>
-                    <asp:UpdatePanel ID="updBuscarCAA" runat="server" visible="false">
+                    <asp:UpdatePanel ID="updBuscarCAA" runat="server" Visible="false">
                         <ContentTemplate>
                             <asp:Panel ID="pnlBuscarCAA" runat="server">
                                 <div class="ptop10">
@@ -78,6 +78,13 @@
                             </asp:Panel>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                      <div class="text-left mtop10" visible="false" runat="server" id="DivBtnSIPSAExpress">
+                        <strong>Para tramitar su Certificado de Aptitud Ambiental inicie su solicitud por aquí:</strong>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary" PostBackUrl="~/TADRedirect.aspx" OnClientClick="window.document.forms[0].target='_blank';">
+                            <i class="imoon imoon-file4"></i>
+                            <span class="text">Generar CAA</span>
+                        </asp:LinkButton>
+                    </div>
                     <div style="padding: 0px 10px 10px 10px; width: auto">
                         <div class="mtop10">
                             <strong>Listado de Certificados de Aptitud Ambiental</strong>

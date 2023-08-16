@@ -55,6 +55,7 @@ namespace DataAcess
         public Nullable<int> idCondicionIncendio { get; set; }
         public bool SoloAPRA { get; set; }
         public Nullable<bool> SinBanioPCD { get; set; }
+        public bool CondicionExpress { get; set; }
     
         public virtual CondicionesIncendio CondicionesIncendio { get; set; }
         public virtual ICollection<Encomienda_RubrosCN> Encomienda_RubrosCN { get; set; }

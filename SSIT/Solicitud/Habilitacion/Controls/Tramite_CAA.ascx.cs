@@ -151,10 +151,36 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             //el Btn Ingresar A SIPSA y Buscar solo se muestran cuando la sol esta en estado datos Confirmados y Observado
             if (MostrarPanelesCAA.Contains(sol.IdEstado))
             {
-                updBuscarCAA.Visible = true;
-                DivBtnSIPSA.Visible = true;
+                bool CondicionExpress = false;
+                foreach (var _encomiendas in lst_encomiendas)
+                {
+                    foreach (var rubrosCN in _encomiendas.EncomiendaRubrosCNDTO)
+                    {
+                        if (rubrosCN.RubrosDTO.CondicionExpress == true)
+                        {
+                            CondicionExpress = true;
+                        }
+                        else
+                        {
+                            CondicionExpress = false;
+                            goto Found;
+                        }
+                    }
+                }
+
+            Found:
+                if (CondicionExpress == true)
+                {
+                    DivBtnSIPSAExpress.Visible = true;
+                }
+                else
+                {
+                    updBuscarCAA.Visible = true;
+                    DivBtnSIPSA.Visible = true;
+                }
             }
-            
+
+
             grdArchivosCAA.Visible = true;
             id_encomienda = 0;
 

@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSIT.Solicitud.Habilitacion.Controls {
-    
-    
-    public partial class Tramite_CAA {
-        
+namespace SSIT.Solicitud.Habilitacion.Controls
+{
+
+
+    public partial class Tramite_CAA
+    {
+
         /// <summary>
         /// lbl_titulares_tituloControl control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_titulares_tituloControl;
-        
+
         /// <summary>
         /// updTramiteCAA control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updTramiteCAA;
-        
+
         /// <summary>
         /// DivBtnSIPSA control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBtnSIPSA;
-        
+
         /// <summary>
         /// btnGenerarCAA control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnGenerarCAA;
-        
+
         /// <summary>
         /// updBuscarCAA control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updBuscarCAA;
-        
+
         /// <summary>
         /// pnlBuscarCAA control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlBuscarCAA;
-        
+
         /// <summary>
         /// txtNroCAA control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNroCAA;
-        
+
         /// <summary>
         /// RequiredFieldValidator1 control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
+
         /// <summary>
         /// txtCodSeguridadCAA control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCodSeguridadCAA;
-        
+
         /// <summary>
         /// btnBuscarCAA control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnBuscarCAA;
-        
+
         /// <summary>
         /// RequiredFieldValidator2 control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
+
         /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// pnlErrorBuscarCAA control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlErrorBuscarCAA;
-        
+
         /// <summary>
         /// lblErrorBuscarCAA control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorBuscarCAA;
-        
+
         /// <summary>
         /// lstMensajesCAA control.
         /// </summary>
@@ -146,7 +148,25 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.BulletedList lstMensajesCAA;
-        
+
+        /// <summary>
+        /// DivBtnSIPSAExpress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBtnSIPSAExpress;
+
+        /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
         /// <summary>
         /// grdArchivosCAA control.
         /// </summary>
