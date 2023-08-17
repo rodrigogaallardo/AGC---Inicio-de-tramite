@@ -589,12 +589,13 @@
                                                                     <div class="alert alert-small alert-warning">
                                                                         Si al intentar seleccionar las puertas, la calle no existe en el sistema. Haga click 
                                                                         <asp:LinkButton ID="btnNuevaPuerta" runat="server" Text="aquí" OnClick="btnNuevaPuerta_Click" Style="color: #377bb5;"
-                                                                            CommandArgument="<%# Item.IdUbicacion %>"></asp:LinkButton>
+                                                                            CommandArgument="<%# Item.IdUbicacion %>"></asp:LinkButton>                                                                        
                                                                     </div>
-
+                                                                    <div class="alert alert-small alert-warning">
+                                                                        De corresponder puerta alfanumerica, coloquelo en otros
+                                                                    </div>
                                                                     <p>La parcela que usted ingresó tiene las siguientes puertas registradas: </p>
                                                                     <br />
-
 
                                                                     <asp:UpdatePanel ID="updPuertas" runat="server" style="width: 720px">
                                                                         <ContentTemplate>
