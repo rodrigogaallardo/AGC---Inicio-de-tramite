@@ -596,6 +596,9 @@
                                                                         <asp:LinkButton ID="btnNuevaPuerta" runat="server" Text="aquí" OnClick="btnNuevaPuerta_Click" Style="color: #377bb5;"
                                                                             CommandArgument="<%# Item.IdUbicacion %>"></asp:LinkButton>
                                                                     </div>
+                                                                    <div class="alert alert-small alert-warning">
+                                                                        De corresponder puerta alfanumerica, coloquelo en otros
+                                                                    </div>
                                                                     <p>La parcela que usted ingresó tiene las siguientes puertas registradas: </p>
                                                                     <br />
                                                                     <asp:UpdatePanel ID="updPuertas" runat="server" style="margin-left: 5px; width: 700px;">
@@ -653,9 +656,9 @@
                                                                             <div style="font-size: 8pt; font-weight: bold; color: #9a9a9a; width: 350px;">
                                                                                 * Indicar los textos completos del sector deseado.
                                                                                         <br />
-                                                                                Ej: "Oficina 23 y 24", "Sección 18", etc.
-                                                                              
-                                                                             
+                                                                                Ej: "Oficina 23 y 24", "Sección 18", etc.                                                                             
+                                                                              <br />
+                                                                                Si es una puerta alfanumerica, ingresar aqui el componente Alfabetico de la misma.
                                                                             </div>
                                                                         </div>
 

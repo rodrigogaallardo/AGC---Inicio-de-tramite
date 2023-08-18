@@ -2962,8 +2962,6 @@ namespace BusinesLayer.Implementation
                             {
                                 var TransfUbic = blTransfUbic.GetByFKIdSolicitud(id_solicitud);
                                 int idSolicitudUbicacion = TransfUbic.FirstOrDefault().IdTransferenciaUbicacion;
-
-                                //int idUbicacion = Convert.ToInt32(TransfUbic.FirstOrDefault().IdUbicacion);
                                 int idUbicacion = Convert.ToInt32(ubi.IdUbicacion);
 
                                 var lmixturasTransfSoli = blTransfubicMixturas.GetByFKIdSolicitudUbicacion(idSolicitudUbicacion);
