@@ -656,8 +656,8 @@
                                                                                 * Indicar los textos completos del sector deseado.
                                                                                     <br />
                                                                                 Ej: "Oficina 23 y 24", "Sección 18", etc.
-                                                                              
-                                                                             
+                                                                                <br />
+                                                                                Si es una puerta alfanumerica, ingresar aqui el componente Alfabetico de la misma.
                                                                             </div>
                                                                         </div>
 
