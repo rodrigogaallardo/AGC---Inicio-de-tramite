@@ -790,7 +790,7 @@
                                                 Debe ingresar el Nro de Ing. Brutos.
                                             </div>
                                             <div id="ValFormato_IngresosBrutosPJ" class="field-validation-error" style="display: none;">
-                                                El CUIT ingresado no corresponde a u    sica. Ej: 20012345673.
+                                                El CUIT ingresado no corresponde a una Persona Física. Ej: 20012345673.
                                             </div>
                                         </div>
 
