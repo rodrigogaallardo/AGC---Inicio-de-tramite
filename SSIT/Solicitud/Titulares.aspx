@@ -570,8 +570,8 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <asp:Label runat="server" class="control-label col-sm-2">C.U.I.T. (*):</asp:Label>
-                                                            <div class="col-sm-3">
-                                                                <asp:TextBox ID="txtCuitFirPF" runat="server" MaxLength="11" Width="150px" CssClass="form-control"></asp:TextBox>
+                                                            <div class="col-sm-2">
+                                                                <asp:TextBox ID="txtCuitFirPF" runat="server" MaxLength="11" Width="150 px" CssClass="form-control"></asp:TextBox>
                                                                 <div id="Req_CuitFirPF" class="field-validation-error" style="display: none;">
                                                                     Debe ingresar el CUIT.
                                                                 </div>
@@ -588,8 +588,22 @@
                                                                     El CUIT ingresado es distinto al DNI.
                                                                 </div>
                                                             </div>
-                                                        </div>
-
+                                                            <asp:UpdatePanel ID="updValidarCuitPF2" runat="server">
+                                                                <ContentTemplate>
+                                                                    <div class="form-group">
+                                                                        <asp:LinkButton ID="validarCuitOtroFirmante" runat="server" CssClass="btn btn-primary" OnClick="validarCuitOtroFirmante_Click" OnClientClick="return validarCuitOtroFirmante(this);">
+                                                        <i class="imoon imoon-ok"></i>
+                                                        <span class="text">Validar CUIT</span>
+                                                                        </asp:LinkButton>
+                                                                        <asp:UpdateProgress ID="UpdateProgress14" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPF2">
+                                                                            <ProgressTemplate>
+                                                                                <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
+                                                                            </ProgressTemplate>
+                                                                        </asp:UpdateProgress>
+                                                                    </div>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </div>             
                                                     </div>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
@@ -709,7 +723,6 @@
                                                 </div>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
-
                                     </div>
                                 </div>
 
@@ -1224,27 +1237,44 @@
                                             </asp:Panel>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <asp:Label runat="server" class="control-label col-sm-3">Cuit (*):</asp:Label>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="txtCuitFirPJ" runat="server" MaxLength="50" CssClass="form-control"></asp:TextBox>
-                                            <div id="Req_CuitFirPJ" class="field-validation-error" style="display: none;">
-                                                Debe ingresar el CUIT.
-                                            </div>
-                                            <div id="ValFormato_txtCuitFirPJ" class="field-validation-error" style="display: none;">
-                                                El CUIT ingresado no corresponde a una Persona Física. Ej: 20012345673
-                                            </div>
+                                    <div class="form-horizontal pright10">
+                                        <div class="form-group">
+                                            <asp:Label runat="server" class="control-label col-sm-3">Cuit (*):</asp:Label>
+                                            <div class="col-sm-6">
+                                                <asp:TextBox ID="txtCuitFirPJ" runat="server" MaxLength="20" Width="260px" CssClass="form-control"></asp:TextBox>
+                                                <div id="Req_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    Debe ingresar el CUIT.
+                                                </div>
+                                                <div id="ValFormato_txtCuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El CUIT ingresado no corresponde a una Persona Física. Ej: 20012345673
+                                                </div>
 
-                                            <div id="ValCantidad_CuitFirPJ" class="field-validation-error" style="display: none;">
-                                                El cuit debe contener 11 dígitos sin guiones.
-                                            </div>
+                                                <div id="ValCantidad_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El cuit debe contener 11 dígitos sin guiones.
+                                                </div>
 
-                                            <div id="ValDV_CuitFirPJ" class="field-validation-error" style="display: none;">
-                                                El CUIT ingresado es inv&aacute;lido.
+                                                <div id="ValDV_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El CUIT ingresado es inv&aacute;lido.
+                                                </div>
+                                                <div id="ValDNI_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El CUIT ingresado es distinto al DNI.
+                                                </div>
                                             </div>
-                                            <div id="ValDNI_CuitFirPJ" class="field-validation-error" style="display: none;">
-                                                El CUIT ingresado es distinto al DNI.
-                                            </div>
+                                            <asp:UpdatePanel ID="updValidarCuitPFPJ" runat="server">
+                                                <ContentTemplate>
+                                                    <div class="form-group">
+                                                        <asp:LinkButton ID="updValidarCuitOtroPJButton" runat="server" CssClass="btn btn-primary" OnClick="validarCuitOtroPJButton_Click" OnClientClick="return validarOtroPJCuitPJ(this);">
+                                                            <i class="imoon imoon-ok"></i>
+                                                            <span class="text">Validar CUIT</span>
+                                                        </asp:LinkButton>
+                                                        <asp:UpdateProgress ID="UpdateProgress17" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPFPJ">
+                                                            <ProgressTemplate>
+                                                                <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
+                                                            </ProgressTemplate>
+                                                        </asp:UpdateProgress>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -2188,6 +2218,38 @@
             return ret;
         }
 
+                function validarCuitOtroFirmante(btn) {
+            var ret = true;
+
+            var formatoCUIT = /[2]\d{10}$/;
+            $("#Req_CuitFirPF").hide();
+            $("#ValCantidad_CuitFirPF").hide();
+            $("#ValFormato_CuitFirPF").hide();
+            $("#ValDV_CuitFirPF").hide();
+            if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length == 0) {
+                $("#Req_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length < 11) {
+                $("#ValCantidad_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formatoCUIT.test($.trim($("#<%: txtCuitFirPF.ClientID %>").val()))) {
+                $("#ValFormato_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!ValidarCuitSinGuiones($("#<%: txtCuitFirPF.ClientID %>")[0])) {
+                $("#ValDV_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                $(btn).hide();
+            }
+
+            return ret;
+        }
+
         function validarCuitPJ(btn) {
             var ret = true;
 
@@ -2211,6 +2273,38 @@
             }
             else if (!ValidarCuitSinGuiones($("#<%: txtCuitPJ.ClientID %>")[0])) {
                 $("#ValDV_CuitPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                $(btn).hide();
+            }
+
+            return ret;
+        }
+
+        function validarOtroPJCuitPJ(btn) {
+            var ret = true;
+
+            var formatoCUIT = /[2]\d{10}$/;
+            $("#Req_CuitFirPJ").hide();
+            $("#ValDV_CuitFirPJ").hide();
+            $("#ValCantidad_CuitFirPJ").hide();
+            $("#ValFormato_txtCuitFirPJ").hide();
+            if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length == 0) {
+                $("#Req_CuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length != 11) {
+                $("#ValCantidad_CuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formatoCUIT.test($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()))) {
+                $("#ValFormato_txtCuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!ValidarCuitSinGuiones($("#<%: txtCuitFirPJ.ClientID %>")[0])) {
+                $("#ValDV_CuitFirPJ").css("display", "inline-block");
                 ret = false;
             }
 
