@@ -609,6 +609,33 @@ namespace SSIT
         protected global::System.Web.UI.WebControls.TextBox txtCuitFirPF;
 
         /// <summary>
+        /// Control updValidarCuitPF2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updValidarCuitPF2;
+
+        /// <summary>
+        /// Control validarCuitOtroFirmante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton validarCuitOtroFirmante;
+
+        /// <summary>
+        /// Control UpdateProgress14.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress14;
+
+        /// <summary>
         /// Control updBotonesAgregarPF.
         /// </summary>
         /// <remarks>
@@ -1228,6 +1255,33 @@ namespace SSIT
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCuitFirPJ;
+
+        /// <summary>
+        /// Control updValidarCuitPFPJ.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updValidarCuitPFPJ;
+
+        /// <summary>
+        /// Control updValidarCuitOtroPJButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton updValidarCuitOtroPJButton;
+
+        /// <summary>
+        /// Control UpdateProgress17.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress17;
 
         /// <summary>
         /// Control txtEmailFirPJ.
