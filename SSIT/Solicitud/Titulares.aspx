@@ -329,7 +329,7 @@
                                   <div class="form-horizontal pright20">
                                     <div class="form-group">
                                         <div class="col-sm-11" style="text-align: center;">
-                                       <span style="color:red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos están correctos en el perfil de TAD enviar mail a gestioncolaborativa.buenosaires.gob.ar/prestaciones"</span>
+                                        <span style="color:red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos están correctos en el perfil de TAD enviar mail a <a href="https://gestioncolaborativa.buenosaires.gob.ar/prestaciones">https://gestioncolaborativa.buenosaires.gob.ar/prestaciones</a>"</span>
                                       </div>
                                     </div>
                                 </div>
