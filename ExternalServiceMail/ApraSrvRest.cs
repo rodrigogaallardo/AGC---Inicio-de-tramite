@@ -19,6 +19,9 @@ using Newtonsoft.Json.Linq;
 using System.Collections;
 using ExternalService.Class.Express;
 using ExternalService.Class;
+using ExternalService.ws_interface_AGC;
+using System.Web.Services.Description;
+using System.Runtime.InteropServices;
 
 namespace ExternalService
 {
@@ -39,24 +42,7 @@ namespace ExternalService
 
         static HttpClient client = new HttpClient();
 
-        public async Task<string> LoginAsync2()
-        {
-            var query = new Dictionary<string, string>()
-            {
-                ["usuario"] = "ws-ssit",
-                ["password"] = "prueba123"
-            };
-
-            var json = JsonConvert.SerializeObject(query);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var url = "https://clientes.grupomost.com/ws.rest.apra.agc/api/login";
-            var client = new HttpClient();
-            var response = await client.PostAsync(url, data);
-            string result = response.Content.ReadAsStringAsync().Result;
-
-            return result;
-        }
+       
         private async Task<TokenResponse> LoginAsync()
         {
             TokenResponse tokenResponse;
@@ -102,7 +88,7 @@ namespace ExternalService
             return tokenResponse;
         }
         //Post
-        public async Task<string> GenerarCAAAutomatico(int IdEncomienda, string codSeguridad)
+        public async Task<GenerarCAAAutomaticoResponse> GenerarCAAAutomatico(int IdEncomienda, string codSeguridad)
         {
             try
             {
@@ -133,19 +119,19 @@ namespace ExternalService
                         string content = response.Content;
                         GenerarCAAAutomaticoResponse generarCAAAutomaticoResponse = new GenerarCAAAutomaticoResponse();
                         generarCAAAutomaticoResponse = JsonConvert.DeserializeObject<GenerarCAAAutomaticoResponse>(content);
-                        return JsonConvert.SerializeObject(content);
+                        return generarCAAAutomaticoResponse;
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return null;
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return null;
                 }
             }
             catch (Exception ex)
             {
-                return ($"Error generico al ejecutar  GetCaa. Mensaje: {ex.Message}");
+                return null;
             }
 
         }
@@ -192,7 +178,7 @@ namespace ExternalService
             }
         }
 
-        public async Task<string> GetBUIsCAA(int id_solicitud)
+        public async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
         {
             try
             {
@@ -215,27 +201,27 @@ namespace ExternalService
                         string content = response.Content;
                         List<GetBUIsCAAResponse> getBUIsCAAResponseList = new List<GetBUIsCAAResponse>();
                         getBUIsCAAResponseList = JsonConvert.DeserializeObject<List<GetBUIsCAAResponse>>(content);
-                        return JsonConvert.SerializeObject(content);
+                        return getBUIsCAAResponseList;
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return null;
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return null;
                 }
 
             }
             catch (Exception ex)
             {
-                return ($"Error generico al ejecutar  GetCaa. Mensaje: {ex.Message}");
+                return null;
             }
 
 
 
 
         }
-        public async Task<string> GetBUIsPagos(List<int> id_pagoList)
+        public async Task<List<GetBUIsPagosResponse>> GetBUIsPagos(List<int> id_pagoList)
         {
             try
             {
@@ -261,24 +247,25 @@ namespace ExternalService
                         string content = response.Content;
                         List<GetBUIsPagosResponse> getBUIsPagosResponseList = new List<GetBUIsPagosResponse>();
                         getBUIsPagosResponseList = JsonConvert.DeserializeObject<List<GetBUIsPagosResponse>>(content);
-                        return JsonConvert.SerializeObject(content);
+                       // return JsonConvert.SerializeObject(content);
+                        return getBUIsPagosResponseList;
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return null;
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return null;
                 }
             }
             catch (Exception ex)
             {
-                return ($"Error generico al ejecutar  GetCaa. Mensaje: {ex.Message}");
+                return null;
             }
 
         }
 
-        public async Task<string> GetIdPagosCAAsbyEncomiendas(List<int> IdEncomiendaList)
+        public async Task<List<int>> GetIdPagosCAAsbyEncomiendas(List<int> IdEncomiendaList)
         {
             try
             {
@@ -305,23 +292,24 @@ namespace ExternalService
                         string content = response.Content;
                         List<int> getCAAByEncomiendasResponseList = new List<int>();
                         getCAAByEncomiendasResponseList = JsonConvert.DeserializeObject<List<int>>(content);
-                        return JsonConvert.SerializeObject(content);
+                        //return JsonConvert.SerializeObject(content);
+                        return getCAAByEncomiendasResponseList;
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return null;
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return null;
                 }
             }
             catch (Exception ex)
             {
-                return ($"Error generico al ejecutar  GetIdPagosCAAsbyEncomiendas. Mensaje: {ex.Message}");
+                return null;
             }
 
         }
-        public async Task<string> GetCAAsByEncomiendas(List<int> IdEncomiendaList)
+        public async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(List<int> IdEncomiendaList)
         {
             try
             {
@@ -347,20 +335,23 @@ namespace ExternalService
                     {
                         string content = response.Content;
                         List<GetCAAsByEncomiendasResponse> getCAAsByEncomiendasResponseList = new List<GetCAAsByEncomiendasResponse>();
+                        DtoCAA[] l = JsonConvert.DeserializeObject<DtoCAA[]>(content);
+
+
                         getCAAsByEncomiendasResponseList = JsonConvert.DeserializeObject<List<GetCAAsByEncomiendasResponse>>(content);
-                        return JsonConvert.SerializeObject(content);
+                        return getCAAsByEncomiendasResponseList;
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return null;
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return null;
                 }
             }
             catch (Exception ex)
             {
-                return ($"Error generico al ejecutar  GetCaa. Mensaje: {ex.Message}");
+                return null;
             }
            
         }

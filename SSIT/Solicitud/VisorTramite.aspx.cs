@@ -14,6 +14,7 @@ using System.Web.UI;
 using static StaticClass.Constantes;
 using Org.BouncyCastle.Utilities;
 using DataAcess;
+using ExternalService.Class.Express;
 
 namespace SSIT
 {
@@ -96,7 +97,7 @@ namespace SSIT
 
         }
 
-        private void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
+        private  void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
         {
             int id_solicitud = sol.IdSolicitud;
             if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG)
@@ -269,6 +270,13 @@ namespace SSIT
                     string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
                     string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
                     DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_id_Encomiendas.ToArray(), ref ws_resultado_CAA);
+
+                    #region Rest ASOSA
+                    ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+                   // List<GetCAAsByEncomiendasResponse> l2 = apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());//OkOk
+                     #endregion
+
+
 
                     var caaActual = l.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(o => o.id_caa).FirstOrDefault();
 
