@@ -570,7 +570,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <asp:Label runat="server" class="control-label col-sm-2">C.U.I.T. (*):</asp:Label>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <asp:TextBox ID="txtCuitFirPF" runat="server" MaxLength="11" Width="150 px" CssClass="form-control"></asp:TextBox>
                                                                 <div id="Req_CuitFirPF" class="field-validation-error" style="display: none;">
                                                                     Debe ingresar el CUIT.
