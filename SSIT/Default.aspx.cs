@@ -1,9 +1,11 @@
 ﻿using BusinesLayer.Implementation;
+using DataAcess;
 using DataTransferObject;
 using ExternalService;
 using SSIT.Common;
 using StaticClass;
 using System;
+using System.Collections.Generic;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -14,8 +16,55 @@ namespace SSIT
 {
     public partial class _Default : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected  void Page_Load(object sender, EventArgs e)
         {
+
+            #region ASOSA BORRAR TEST WEBAPI
+
+
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            //var query = new Dictionary<int, string>()
+            //{
+            //    ["usuario"] = 1,
+            //    ["password"] = ""
+            //};
+
+            var GenerarCAAAutomatico = apraSrvRest.GenerarCAAAutomatico(0, "string");//Ok
+
+            var GetCaa = apraSrvRest.GetCaa(200000);//OKOk
+
+            var GetBUIsCAA = apraSrvRest.GetBUIsCAA(200001);//OKOk
+
+            List<int> id_pagoList = new List<int>();
+            id_pagoList.Add(200000);
+            id_pagoList.Add(200001);
+            id_pagoList.Add(200002);
+            var GetBUIsPagos =  apraSrvRest.GetBUIsPagos(id_pagoList);//OKOk
+
+
+
+            List<int> id_EncomiendasList = new List<int>();
+            id_EncomiendasList.Add(200000);
+            id_EncomiendasList.Add(200001);
+            var GetIdPagosCAAsbyEncomiendas = apraSrvRest.GetIdPagosCAAsbyEncomiendas(id_EncomiendasList);//OkOk
+
+
+             id_EncomiendasList = new List<int>();
+            id_EncomiendasList.Add(200000);
+            id_EncomiendasList.Add(200001);
+            var GetCAAsByEncomiendas = apraSrvRest.GetCAAsByEncomiendas(id_EncomiendasList);//OkOk
+
+
+            int IdSolicitud = 1;
+            string codSeguridad = "xxx";
+
+            var ValidarCodigoSeguridad = apraSrvRest.ValidarCodigoSeguridad(IdSolicitud, codSeguridad);
+
+            int id_encomienda = 3;
+            var AsociarAnexoTecnico = apraSrvRest.AsociarAnexoTecnico(IdSolicitud, codSeguridad, id_encomienda);
+            #endregion
+
+
             var DivcontendorGral = (HtmlControl)Master.FindControl("contendorGral");
 
             DivcontendorGral.Attributes.Add("class", "container-fluid");
