@@ -207,7 +207,7 @@
                                         <asp:TextBox ID="txtSeccion" runat="server" Width="90px" MaxLength="3" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label1" runat="server" Text="Manzana:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="6" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label2" runat="server" Text="Parcela:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
                                         <asp:TextBox ID="txtParcela" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
@@ -594,7 +594,6 @@
                                                                     <div class="alert alert-small alert-warning">
                                                                         De corresponder puerta alfanumerica, coloquelo en otros
                                                                     </div>
-
                                                                     <p>La parcela que usted ingresó tiene las siguientes puertas registradas: </p>
                                                                     <br />
 
@@ -657,7 +656,7 @@
                                                                                 * Indicar los textos completos del sector deseado.
                                                                                 <br/>
                                                                                 Ej: "Oficina 23 y 24", "Sección 18", etc.
-                                                                                <br/>
+                                                                                <br />
                                                                                 Si es una puerta alfanumerica, ingresar aqui el componente Alfabetico de la misma.
                                                                             </div>
                                                                         </div>
@@ -1160,14 +1159,14 @@
 
             if (vconfirm) {
                 $("#<%: btnIngresarUbicacion.ClientID %>").hide();
-                $("#<%: btnNuevaBusqueda.ClientID %>").hide();
-                $("#<%: btnCerrar5.ClientID %>").hide();
-                vconfirm = false;
-            }
-            else {
-                $("#<%: btnIngresarUbicacion.ClientID %>").show();
-                $("#<%: btnNuevaBusqueda.ClientID %>").show();
-                $("#<%: btnCerrar5.ClientID %>").show();
+                  $("#<%: btnNuevaBusqueda.ClientID %>").hide();
+                  $("#<%: btnCerrar5.ClientID %>").hide();
+                  vconfirm = false;
+              }
+              else {
+                  $("#<%: btnIngresarUbicacion.ClientID %>").show();
+                  $("#<%: btnNuevaBusqueda.ClientID %>").show();
+                  $("#<%: btnCerrar5.ClientID %>").show();
             }
 
             return ret;
