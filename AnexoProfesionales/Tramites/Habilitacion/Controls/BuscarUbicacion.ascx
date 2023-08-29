@@ -654,7 +654,7 @@
                                                                             <asp:TextBox ID="txtOtros" runat="server" MaxLength="50" Width="250px" CssClass="form-control"></asp:TextBox>
                                                                             <div style="font-size: 8pt; font-weight: bold; color: #9a9a9a; width: 350px;">
                                                                                 * Indicar los textos completos del sector deseado.
-                                                                                    <br />
+                                                                                <br/>
                                                                                 Ej: "Oficina 23 y 24", "Sección 18", etc.
                                                                                 <br />
                                                                                 Si es una puerta alfanumerica, ingresar aqui el componente Alfabetico de la misma.
