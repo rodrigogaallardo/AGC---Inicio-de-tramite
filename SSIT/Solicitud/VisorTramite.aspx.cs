@@ -15,6 +15,7 @@ using static StaticClass.Constantes;
 using Org.BouncyCastle.Utilities;
 using DataAcess;
 using ExternalService.Class.Express;
+using System.Threading.Tasks;
 
 namespace SSIT
 {
@@ -64,6 +65,8 @@ namespace SSIT
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+
             ScriptManager sm = ScriptManager.GetCurrent(this);
             if (sm.IsInAsyncPostBack)
             {
@@ -94,10 +97,13 @@ namespace SSIT
                 if (id_solicitud <= nroSolReferencia)
                     divbtnImprimirSolicitud.Visible = false;
             }
-
+            #region ASOSA ASYNC
+            //GetBUIsCAA(200001);
+            //List<GetCAAsByEncomiendasResponse> l2 = await  GetBUIsCAA(200001);
+            #endregion
         }
 
-        private  void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
+        private   void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
         {
             int id_solicitud = sol.IdSolicitud;
             if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG)
@@ -271,12 +277,12 @@ namespace SSIT
                     string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
                     DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_id_Encomiendas.ToArray(), ref ws_resultado_CAA);
 
-                    #region Rest ASOSA
-                    ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-                   // List<GetCAAsByEncomiendasResponse> l2 = apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());//OkOk
-                     #endregion
 
 
+                    #region ASOSA ASYNC
+                    GetBUIsCAA(200001);
+                    //List<GetCAAsByEncomiendasResponse> l2 = await  GetCAAsByEncomiendas(lst_id_Encomiendas);
+                    #endregion
 
                     var caaActual = l.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(o => o.id_caa).FirstOrDefault();
 
@@ -301,14 +307,34 @@ namespace SSIT
                     this.MostrarMensajeAlertas("Debera tener una boleta de AGC abonada y la boleta del ultimo Certificado de Aptitud Ambiental (CAA) abonada.");
             }
         }
+
+        #region ASOSA ASYNC
+        private async Task GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            List<GetCAAsByEncomiendasResponse> l2 = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+
+        }
+        private async Task GetBUIsCAA(int id_solicitud)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            List<GetBUIsCAAResponse> l2 = await apraSrvRest.GetBUIsCAA(id_solicitud);
+           
+        }
+        #endregion
         private void CargarDatos(SSITSolicitudesDTO sol)
         {
+       
             EncomiendaBL blEnc = new EncomiendaBL();
             var lstEnc = blEnc.GetByFKIdSolicitud(id_solicitud);
             CargarDatos(sol, lstEnc);
         }
         protected void btnCargarDatostramite_Click(object sender, EventArgs e)
         {
+            #region ASOSA ASYNC
+
+            RegisterAsyncTask(new PageAsyncTask(() => GetBUIsCAA(200001)));
+            #endregion
             try
             {
                 this.id_solicitud = id_solicitud;

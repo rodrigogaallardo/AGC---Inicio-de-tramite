@@ -309,6 +309,7 @@ namespace ExternalService
             }
 
         }
+
         public async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(List<int> IdEncomiendaList)
         {
             try
@@ -356,7 +357,7 @@ namespace ExternalService
            
         }
 
-
+    
         public async Task<string> ValidarCodigoSeguridad(int IdSolicitud, string codSeguridad)
         {
             try
@@ -380,7 +381,7 @@ namespace ExternalService
                         string content = response.Content;
                         bool validarCodigoSeguridadResponse = new bool();
                         validarCodigoSeguridadResponse = JsonConvert.DeserializeObject<bool>(content);
-                        return JsonConvert.SerializeObject(content);
+                         return JsonConvert.SerializeObject(content);
                     }
                     else
                         return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
@@ -474,3 +475,7 @@ namespace ExternalService
 
 
 }
+
+
+
+
