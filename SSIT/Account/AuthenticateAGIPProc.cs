@@ -154,15 +154,11 @@ namespace SSIT.Account
             Autenticado autenticado = new Autenticado();
             autenticado.Cuit = datosMiBA.personaLogin.persona.cuit;
             autenticado.Nombre = datosMiBA.personaLogin.persona.nombres + " " + datosMiBA.personaLogin.persona.apellidos;
-            autenticado.Isib = "??";
+            autenticado.Isib = "";
             autenticado.Codcalle = "";
             autenticado.Calle = datosMiBA.personaLogin.calle;
             autenticado.Puerta = datosMiBA.personaLogin.altura;
             autenticado.Codpostal = datosMiBA.personaLogin.codigoPostal;
-            //autenticado.Codlocalidad = datosMiBA.personaLogin.localidad.id.ToString();
-            //autenticado.Localidad = datosMiBA.personaLogin.localidad.nombre;
-            //autenticado.Codprov = datosMiBA.personaLogin.provincia.id.ToString();
-            //autenticado.Provincia = datosMiBA.personaLogin.provincia.nombre;
             autenticado.Telefono = datosMiBA.personaLogin.persona.telefono;
             autenticado.Email = datosMiBA.personaLogin.persona.email;
             autenticado.Nivel = datosMiBA.personaLogin.persona.terminosYCondiciones.nivelAcceso.id.ToString();//ASOSA
@@ -173,23 +169,38 @@ namespace SSIT.Account
             Representados representados = new Representados();
             Representado representado = new Representado();
 
-            representado.Cuit = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
-            representado.Nombre = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.nombres + " " + datosMiBA.apoderados.persona.apellidos;
-            representado.Isib = "";
-            representado.Codcalle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
-            representado.Calle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.calle;
-            representado.Puerta = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.altura;
-            representado.Codpostal = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.codigoPostal;
-            //representado.Codlocalidad = datosMiBA.apoderados.localidad.id.ToString();
-            //representado.Localidad = datosMiBA.apoderados.localidad.nombre;
-            //representado.Codprov = datosMiBA.apoderados.provincia.id.ToString();
-            //representado.Provincia = datosMiBA.apoderados.provincia.nombre;
-            representado.Telefono = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.telefono;
-            representado.Email = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.email;
-            representado.TipoRepresentacion = "";//ASOSA
-            representado.TipoDocumento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.tipoDocumento;
-            representado.Documento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.numeroDocumento;
-            representado.Elegido = true.ToString();
+            if (datosMiBA.apoderados != null)
+            {
+                representado.Cuit = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
+                representado.Nombre = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.nombres + " " + datosMiBA.apoderados.persona.apellidos;
+                representado.Isib = "";
+                representado.Codcalle = "";
+                representado.Calle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.calle;
+                representado.Puerta = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.altura;
+                representado.Codpostal = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.codigoPostal;
+                representado.Telefono = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.telefono;
+                representado.Email = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.email;
+                representado.TipoRepresentacion = "";//ASOSA
+                representado.TipoDocumento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.tipoDocumento;
+                representado.Documento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.numeroDocumento;
+                representado.Elegido = true.ToString();
+            }
+            else
+            {
+                representado.Cuit = datosMiBA.personaLogin.persona.cuit;
+                representado.Nombre = datosMiBA.personaLogin.persona.nombres + " " + datosMiBA.personaLogin.persona.apellidos;
+                representado.Isib = "";
+                representado.Codcalle = "";
+                representado.Calle = datosMiBA.personaLogin.calle;
+                representado.Puerta = datosMiBA.personaLogin.altura;
+                representado.Codpostal = datosMiBA.personaLogin.codigoPostal;
+                representado.Telefono = datosMiBA.personaLogin.persona.telefono;
+                representado.Email = datosMiBA.personaLogin.persona.email;
+                representado.TipoRepresentacion = "";
+                representado.TipoDocumento = datosMiBA.personaLogin.persona.tipoDocumento;
+                representado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
+                representado.Elegido = true.ToString();
+            }
             representados.Representado = representado;
             datosToken.Representados = representados;
             #endregion
