@@ -594,7 +594,6 @@
                                                                     <div class="alert alert-small alert-warning">
                                                                         De corresponder puerta alfanumerica, coloquelo en otros
                                                                     </div>
-
                                                                     <p>La parcela que usted ingresó tiene las siguientes puertas registradas: </p>
                                                                     <br />
 

@@ -2199,7 +2199,7 @@ namespace SSIT
             updAgregarPersonaJuridica.Update();
         }
 
-        protected void validarCuitOtroPJButton_Click(object sender, EventArgs e)
+        protected void validarCuitOtroPJButton_Click (object sender, EventArgs e)
         {
             try
             {
@@ -2264,7 +2264,6 @@ namespace SSIT
             txtApellidoFirPF.Text = datos.Apellidos;
             txtNombresFirPF.Text = datos.Nombres;
             txtNroDocumentoFirPF.Text = datos.Documento;
-
         }
 
         private void AutoCompleteFormDatosFJ(PersonaTAD datos)
