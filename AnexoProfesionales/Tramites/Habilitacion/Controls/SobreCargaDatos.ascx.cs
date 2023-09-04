@@ -92,7 +92,7 @@ namespace AnexoProfesionales
         public void cargarDatos(int id_encomienda)
         {
             EncomiendaPlantasBL blEncPlantas = new EncomiendaPlantasBL();
-
+            EncomiendaTiposDestinosBL blTipos = new EncomiendaTiposDestinosBL();
             List<EncomiendaPlantasDTO> lstPlantasDTO = blEncPlantas.GetByFKIdEncomienda(id_encomienda).ToList();
 
             ddlPlantas.DataSource = lstPlantasDTO;
@@ -101,6 +101,11 @@ namespace AnexoProfesionales
             ddlPlantas.DataBind();
             ddlPlantas.Items.Insert(0, new ListItem("", "0"));
 
+            ddlDestino.DataSource = blTipos.GetByFKIdTipoSobrecarga(1);
+            ddlDestino.DataTextField = "descripcion";
+            ddlDestino.DataValueField = "id_tipo_destino";
+            ddlDestino.DataBind();
+            ddlDestino.Items.Insert(0, new ListItem("", "0"));
         }
         public void changedTiposSobrecargas(int id_tipoSobrecarga)
         {

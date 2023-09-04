@@ -22,7 +22,7 @@
                             <div class="widget-content">
                               <div class="form-horizontal">               
                                     <div class="form-group form-group-sm">                                       
-                                        <asp:label ID="lblTipoDestino" runat="server" CssClass="control-label col-sm-2" ></asp:label>
+                                        <asp:label ID="lblTipoDestino" runat="server" CssClass="control-label col-sm-2" >Destino:</asp:label>
                                          <div class="col-sm-3">
                                            <asp:DropDownList ID="ddlDestino" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlDestino_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
@@ -59,7 +59,7 @@
                                                 Debe ingresar el Uso.
                                             </div>
                                         </div> 
-                                       <asp:label ID="lblSobrecarga" runat="server" CssClass="control-label col-sm-2" ></asp:label>
+                                       <asp:label ID="lblSobrecarga" runat="server" CssClass="control-label col-sm-2" >Sobrecarga:</asp:label>
                                        <div class="col-sm-3">
                                             <asp:TextBox ID="txtSobrecarga" CssClass="form-control" runat="server" MaxLength="6" Width="200px"></asp:TextBox>
                                             <asp:TextBox ID="txtDetalle" CssClass="form-control" runat="server" MaxLength="100" Width="150px" Visible="false"></asp:TextBox>
@@ -76,13 +76,13 @@
                                     </div>  
                                                                   
                                     <div class="form-group form-group-sm">
-                                       <asp:label ID="lblUso1" runat="server" CssClass="control-label col-sm-2" ></asp:label>
+                                       <asp:label ID="lblUso1" runat="server" CssClass="control-label col-sm-2" >Tipo uso 1:</asp:label>
                                        <div class="col-sm-3">
                                             <asp:DropDownList ID="ddlUsos1" runat="server" CssClass="form-control" width="200px" Height="30px"></asp:DropDownList>
                                         </div>
                                        
                                       
-                                       <asp:label ID="lblTxtUso1" runat="server" CssClass="control-label col-sm-2" ></asp:label>
+                                       <asp:label ID="lblTxtUso1" runat="server" CssClass="control-label col-sm-2" >Uso mínimo 1:</asp:label>
                                        <div class="col-sm-3"  >
                                             <asp:TextBox ID="txtUso1" runat="server" CssClass="form-control" width="200px" Height="30px"></asp:TextBox>
                                            <asp:HiddenField ID="hid_min_uso1_req" runat="server" />
@@ -97,13 +97,13 @@
                                   </div>
 
                                     <div class="form-group form-group-sm">
-                                         <asp:label ID="lblUso2" runat="server" CssClass="control-label col-sm-2" ></asp:label>
+                                         <asp:label ID="lblUso2" runat="server" CssClass="control-label col-sm-2" >Tipo uso 2:</asp:label>
                                           <div class="col-sm-3">
                                             <asp:DropDownList ID="ddlUsos2" runat="server" CssClass="form-control" width="200px" Height="30px"></asp:DropDownList>
                                           </div>
 
                                        
-                                       <asp:label ID="lblTxtUso2" runat="server" CssClass="control-label col-sm-2" ></asp:label>
+                                       <asp:label ID="lblTxtUso2" runat="server" CssClass="control-label col-sm-2" >Uso mínimo 2:</asp:label>
                                        <div class="col-sm-3"  >
                                             <asp:TextBox ID="txtUso2" runat="server" CssClass="form-control" width="200px" Height="30px"></asp:TextBox>
                                             <asp:HiddenField ID="hid_min_uso2_req" runat="server" />
