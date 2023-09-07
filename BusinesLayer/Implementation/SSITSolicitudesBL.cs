@@ -728,11 +728,6 @@ namespace BusinesLayer.Implementation
                     var elementEntitySol = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDto);
                     var insertSolOk = repo.Insert(elementEntitySol);
 
-                    if(elementEntitySol.FechaLibrado != null)
-                    {
-                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(elementEntitySol.id_solicitud, elementEntitySol.FechaLibrado, DateTime.Now, elementEntitySol.CreateUser);
-                    }
-
 
                     unitOfWork.Commit();
                     objectDto.IdSolicitud = elementEntitySol.id_solicitud;
@@ -758,6 +753,9 @@ namespace BusinesLayer.Implementation
                 {
                     repo = new SSITSolicitudesRepository(unitOfWork);
                     var elementDTO = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDTO);
+
+
+
                     repo.Update(elementDTO);
                     unitOfWork.Commit();
                 }
@@ -864,8 +862,6 @@ namespace BusinesLayer.Implementation
             {
                 repo = new SSITSolicitudesRepository(unitOfWork);
 
-                bool estaLibrado = false;
-
                 var solicitudEntity = repo.Single(id_solicitud);
 
                 var encomiendasEntity = solicitudEntity.Encomienda_SSIT_Solicitudes.Select(x => x.Encomienda);
@@ -944,7 +940,6 @@ namespace BusinesLayer.Implementation
                             !TienePlanoDeIncendio(id_solicitud) && !AcogeBeneficiosUERESGP(id_solicitud))
                         {
                             solicitudEntity.FechaLibrado = DateTime.Now;
-                            estaLibrado = true;
                             encuesta = getEncuesta(solicitudEntity, Direccion);
                         }
 
@@ -1028,20 +1023,13 @@ namespace BusinesLayer.Implementation
                 {
                     solicitudEntity.id_estado = (int)Constantes.TipoEstadoSolicitudEnum.PING;
                     repo.Update(solicitudEntity);
-                    if (estaLibrado)
-                    {
-                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(solicitudEntity.id_solicitud, solicitudEntity.FechaLibrado, DateTime.Now, solicitudEntity.CreateUser);
-                    }
                 }
                 else
                 {
                     if (id_estado_ant != (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN)
                         solicitudEntity.id_estado = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
                     repo.Update(solicitudEntity);
-                    if (estaLibrado)
-                    {
-                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(solicitudEntity.id_solicitud, solicitudEntity.FechaLibrado, DateTime.Now, solicitudEntity.CreateUser);
-                    }
+
                     if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF)
                     {
                         SGITramitesTareasDTO tramite = blEng.GetUltimaTareaHabilitacionAbierta(solicitudEntity.id_solicitud);
@@ -1916,9 +1904,6 @@ namespace BusinesLayer.Implementation
                     solicitudEntity.LastUpdateUser = userid;
                     solicitudEntity.LastUpdateDate = DateTime.Now;
                     repo.Update(solicitudEntity);
-
-                    unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(solicitudEntity.id_solicitud, DateTime.Now , DateTime.Now, userid);
-
                     unitOfWork.Commit();
                 }
             }

@@ -306,12 +306,6 @@ namespace BusinesLayer.Implementation
                     var elementEntitySol = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDto);
 
                     var insertSolOk = repoSol.Insert(elementEntitySol);
-
-                    if(elementEntitySol.FechaLibrado != null)
-                    {
-                        unitOfWork.Db.SSIT_Solicitudes_Historial_LibradoUso_INSERT(elementEntitySol.id_solicitud, elementEntitySol.FechaLibrado, DateTime.Now, elementEntitySol.CreateUser);
-                    }
-
                     objectDto.IdSolicitud = elementEntitySol.id_solicitud;
 
                     if (objectDto.SSITSolicitudesOrigenDTO != null)
