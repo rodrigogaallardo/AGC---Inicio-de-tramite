@@ -10,10 +10,9 @@
 
 #pragma warning disable 1591
 
-namespace Reporting.Datasets
-{
-
-
+namespace Reporting.Datasets {
+    
+    
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>
@@ -23,29 +22,27 @@ namespace Reporting.Datasets
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("dsComprobanteAnt")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class dsComprobanteAnt : global::System.Data.DataSet
-    {
-
+    public partial class dsComprobanteAnt : global::System.Data.DataSet {
+        
         private ANT_Ubicaciones_PropiedadHorizontalDataTable tableANT_Ubicaciones_PropiedadHorizontal;
-
+        
         private ANT_Ubicaciones_CoordenadasDataTable tableANT_Ubicaciones_Coordenadas;
-
+        
         private ANT_Ubicaciones_PuertasDataTable tableANT_Ubicaciones_Puertas;
-
+        
         private ANT_Ubicaciones_Via_PublicaDataTable tableANT_Ubicaciones_Via_Publica;
-
+        
         private ANT_UbicacionesDataTable tableANT_Ubicaciones;
-
+        
         private DatosCabeceraDataTable tableDatosCabecera;
-
+        
         private ANT_TitularesDataTable tableANT_Titulares;
-
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public dsComprobanteAnt()
-        {
+        public dsComprobanteAnt() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -53,14 +50,12 @@ namespace Reporting.Datasets
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected dsComprobanteAnt(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                base(info, context, false)
-        {
-            if ((this.IsBinarySerialized(info, context) == true))
-            {
+        protected dsComprobanteAnt(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                base(info, context, false) {
+            if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
                 global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
                 this.Tables.CollectionChanged += schemaChangedHandler1;
@@ -68,36 +63,28 @@ namespace Reporting.Datasets
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
-            if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema))
-            {
+            if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["ANT_Ubicaciones_PropiedadHorizontal"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_PropiedadHorizontal"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_PropiedadHorizontalDataTable(ds.Tables["ANT_Ubicaciones_PropiedadHorizontal"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones_Coordenadas"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_Coordenadas"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_CoordenadasDataTable(ds.Tables["ANT_Ubicaciones_Coordenadas"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones_Puertas"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_Puertas"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_PuertasDataTable(ds.Tables["ANT_Ubicaciones_Puertas"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones_Via_Publica"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_Via_Publica"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_Via_PublicaDataTable(ds.Tables["ANT_Ubicaciones_Via_Publica"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones"] != null)) {
                     base.Tables.Add(new ANT_UbicacionesDataTable(ds.Tables["ANT_Ubicaciones"]));
                 }
-                if ((ds.Tables["DatosCabecera"] != null))
-                {
+                if ((ds.Tables["DatosCabecera"] != null)) {
                     base.Tables.Add(new DatosCabeceraDataTable(ds.Tables["DatosCabecera"]));
                 }
-                if ((ds.Tables["ANT_Titulares"] != null))
-                {
+                if ((ds.Tables["ANT_Titulares"] != null)) {
                     base.Tables.Add(new ANT_TitularesDataTable(ds.Tables["ANT_Titulares"]));
                 }
                 this.DataSetName = ds.DataSetName;
@@ -109,8 +96,7 @@ namespace Reporting.Datasets
                 this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
                 this.InitVars();
             }
-            else
-            {
+            else {
                 this.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
             }
             this.GetSerializationData(info, context);
@@ -118,197 +104,163 @@ namespace Reporting.Datasets
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ANT_Ubicaciones_PropiedadHorizontalDataTable ANT_Ubicaciones_PropiedadHorizontal
-        {
-            get
-            {
+        public ANT_Ubicaciones_PropiedadHorizontalDataTable ANT_Ubicaciones_PropiedadHorizontal {
+            get {
                 return this.tableANT_Ubicaciones_PropiedadHorizontal;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ANT_Ubicaciones_CoordenadasDataTable ANT_Ubicaciones_Coordenadas
-        {
-            get
-            {
+        public ANT_Ubicaciones_CoordenadasDataTable ANT_Ubicaciones_Coordenadas {
+            get {
                 return this.tableANT_Ubicaciones_Coordenadas;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ANT_Ubicaciones_PuertasDataTable ANT_Ubicaciones_Puertas
-        {
-            get
-            {
+        public ANT_Ubicaciones_PuertasDataTable ANT_Ubicaciones_Puertas {
+            get {
                 return this.tableANT_Ubicaciones_Puertas;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ANT_Ubicaciones_Via_PublicaDataTable ANT_Ubicaciones_Via_Publica
-        {
-            get
-            {
+        public ANT_Ubicaciones_Via_PublicaDataTable ANT_Ubicaciones_Via_Publica {
+            get {
                 return this.tableANT_Ubicaciones_Via_Publica;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ANT_UbicacionesDataTable ANT_Ubicaciones
-        {
-            get
-            {
+        public ANT_UbicacionesDataTable ANT_Ubicaciones {
+            get {
                 return this.tableANT_Ubicaciones;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DatosCabeceraDataTable DatosCabecera
-        {
-            get
-            {
+        public DatosCabeceraDataTable DatosCabecera {
+            get {
                 return this.tableDatosCabecera;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ANT_TitularesDataTable ANT_Titulares
-        {
-            get
-            {
+        public ANT_TitularesDataTable ANT_Titulares {
+            get {
                 return this.tableANT_Titulares;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
-        public override global::System.Data.SchemaSerializationMode SchemaSerializationMode
-        {
-            get
-            {
+        public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
+            get {
                 return this._schemaSerializationMode;
             }
-            set
-            {
+            set {
                 this._schemaSerializationMode = value;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataTableCollection Tables
-        {
-            get
-            {
+        public new global::System.Data.DataTableCollection Tables {
+            get {
                 return base.Tables;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataRelationCollection Relations
-        {
-            get
-            {
+        public new global::System.Data.DataRelationCollection Relations {
+            get {
                 return base.Relations;
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void InitializeDerivedDataSet()
-        {
+        protected override void InitializeDerivedDataSet() {
             this.BeginInit();
             this.InitClass();
             this.EndInit();
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public override global::System.Data.DataSet Clone()
-        {
+        public override global::System.Data.DataSet Clone() {
             dsComprobanteAnt cln = ((dsComprobanteAnt)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override bool ShouldSerializeTables()
-        {
+        protected override bool ShouldSerializeTables() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override bool ShouldSerializeRelations()
-        {
+        protected override bool ShouldSerializeRelations() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader)
-        {
-            if ((this.DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema))
-            {
+        protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader) {
+            if ((this.DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["ANT_Ubicaciones_PropiedadHorizontal"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_PropiedadHorizontal"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_PropiedadHorizontalDataTable(ds.Tables["ANT_Ubicaciones_PropiedadHorizontal"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones_Coordenadas"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_Coordenadas"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_CoordenadasDataTable(ds.Tables["ANT_Ubicaciones_Coordenadas"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones_Puertas"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_Puertas"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_PuertasDataTable(ds.Tables["ANT_Ubicaciones_Puertas"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones_Via_Publica"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones_Via_Publica"] != null)) {
                     base.Tables.Add(new ANT_Ubicaciones_Via_PublicaDataTable(ds.Tables["ANT_Ubicaciones_Via_Publica"]));
                 }
-                if ((ds.Tables["ANT_Ubicaciones"] != null))
-                {
+                if ((ds.Tables["ANT_Ubicaciones"] != null)) {
                     base.Tables.Add(new ANT_UbicacionesDataTable(ds.Tables["ANT_Ubicaciones"]));
                 }
-                if ((ds.Tables["DatosCabecera"] != null))
-                {
+                if ((ds.Tables["DatosCabecera"] != null)) {
                     base.Tables.Add(new DatosCabeceraDataTable(ds.Tables["DatosCabecera"]));
                 }
-                if ((ds.Tables["ANT_Titulares"] != null))
-                {
+                if ((ds.Tables["ANT_Titulares"] != null)) {
                     base.Tables.Add(new ANT_TitularesDataTable(ds.Tables["ANT_Titulares"]));
                 }
                 this.DataSetName = ds.DataSetName;
@@ -320,96 +272,77 @@ namespace Reporting.Datasets
                 this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
                 this.InitVars();
             }
-            else
-            {
+            else {
                 this.ReadXml(reader);
                 this.InitVars();
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable()
-        {
+        protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable() {
             global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
             this.WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
             stream.Position = 0;
             return global::System.Xml.Schema.XmlSchema.Read(new global::System.Xml.XmlTextReader(stream), null);
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal void InitVars()
-        {
+        internal void InitVars() {
             this.InitVars(true);
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal void InitVars(bool initTable)
-        {
+        internal void InitVars(bool initTable) {
             this.tableANT_Ubicaciones_PropiedadHorizontal = ((ANT_Ubicaciones_PropiedadHorizontalDataTable)(base.Tables["ANT_Ubicaciones_PropiedadHorizontal"]));
-            if ((initTable == true))
-            {
-                if ((this.tableANT_Ubicaciones_PropiedadHorizontal != null))
-                {
+            if ((initTable == true)) {
+                if ((this.tableANT_Ubicaciones_PropiedadHorizontal != null)) {
                     this.tableANT_Ubicaciones_PropiedadHorizontal.InitVars();
                 }
             }
             this.tableANT_Ubicaciones_Coordenadas = ((ANT_Ubicaciones_CoordenadasDataTable)(base.Tables["ANT_Ubicaciones_Coordenadas"]));
-            if ((initTable == true))
-            {
-                if ((this.tableANT_Ubicaciones_Coordenadas != null))
-                {
+            if ((initTable == true)) {
+                if ((this.tableANT_Ubicaciones_Coordenadas != null)) {
                     this.tableANT_Ubicaciones_Coordenadas.InitVars();
                 }
             }
             this.tableANT_Ubicaciones_Puertas = ((ANT_Ubicaciones_PuertasDataTable)(base.Tables["ANT_Ubicaciones_Puertas"]));
-            if ((initTable == true))
-            {
-                if ((this.tableANT_Ubicaciones_Puertas != null))
-                {
+            if ((initTable == true)) {
+                if ((this.tableANT_Ubicaciones_Puertas != null)) {
                     this.tableANT_Ubicaciones_Puertas.InitVars();
                 }
             }
             this.tableANT_Ubicaciones_Via_Publica = ((ANT_Ubicaciones_Via_PublicaDataTable)(base.Tables["ANT_Ubicaciones_Via_Publica"]));
-            if ((initTable == true))
-            {
-                if ((this.tableANT_Ubicaciones_Via_Publica != null))
-                {
+            if ((initTable == true)) {
+                if ((this.tableANT_Ubicaciones_Via_Publica != null)) {
                     this.tableANT_Ubicaciones_Via_Publica.InitVars();
                 }
             }
             this.tableANT_Ubicaciones = ((ANT_UbicacionesDataTable)(base.Tables["ANT_Ubicaciones"]));
-            if ((initTable == true))
-            {
-                if ((this.tableANT_Ubicaciones != null))
-                {
+            if ((initTable == true)) {
+                if ((this.tableANT_Ubicaciones != null)) {
                     this.tableANT_Ubicaciones.InitVars();
                 }
             }
             this.tableDatosCabecera = ((DatosCabeceraDataTable)(base.Tables["DatosCabecera"]));
-            if ((initTable == true))
-            {
-                if ((this.tableDatosCabecera != null))
-                {
+            if ((initTable == true)) {
+                if ((this.tableDatosCabecera != null)) {
                     this.tableDatosCabecera.InitVars();
                 }
             }
             this.tableANT_Titulares = ((ANT_TitularesDataTable)(base.Tables["ANT_Titulares"]));
-            if ((initTable == true))
-            {
-                if ((this.tableANT_Titulares != null))
-                {
+            if ((initTable == true)) {
+                if ((this.tableANT_Titulares != null)) {
                     this.tableANT_Titulares.InitVars();
                 }
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitClass()
-        {
+        private void InitClass() {
             this.DataSetName = "dsComprobanteAnt";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/dsComprobanteAnt.xsd";
@@ -430,70 +363,60 @@ namespace Reporting.Datasets
             this.tableANT_Titulares = new ANT_TitularesDataTable();
             base.Tables.Add(this.tableANT_Titulares);
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeANT_Ubicaciones_PropiedadHorizontal()
-        {
+        private bool ShouldSerializeANT_Ubicaciones_PropiedadHorizontal() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeANT_Ubicaciones_Coordenadas()
-        {
+        private bool ShouldSerializeANT_Ubicaciones_Coordenadas() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeANT_Ubicaciones_Puertas()
-        {
+        private bool ShouldSerializeANT_Ubicaciones_Puertas() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeANT_Ubicaciones_Via_Publica()
-        {
+        private bool ShouldSerializeANT_Ubicaciones_Via_Publica() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeANT_Ubicaciones()
-        {
+        private bool ShouldSerializeANT_Ubicaciones() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeDatosCabecera()
-        {
+        private bool ShouldSerializeDatosCabecera() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeANT_Titulares()
-        {
+        private bool ShouldSerializeANT_Titulares() {
             return false;
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e)
-        {
-            if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove))
-            {
+        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
+            if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
             }
         }
-
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-        {
+        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
             dsComprobanteAnt ds = new dsComprobanteAnt();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
@@ -502,43 +425,34 @@ namespace Reporting.Datasets
             sequence.Items.Add(any);
             type.Particle = sequence;
             global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-            if (xs.Contains(dsSchema.TargetNamespace))
-            {
+            if (xs.Contains(dsSchema.TargetNamespace)) {
                 global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                 global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                try
-                {
+                try {
                     global::System.Xml.Schema.XmlSchema schema = null;
                     dsSchema.Write(s1);
-                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                    {
+                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                         schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                         s2.SetLength(0);
                         schema.Write(s2);
-                        if ((s1.Length == s2.Length))
-                        {
+                        if ((s1.Length == s2.Length)) {
                             s1.Position = 0;
                             s2.Position = 0;
-                            for (; ((s1.Position != s1.Length)
-                                        && (s1.ReadByte() == s2.ReadByte()));)
-                            {
+                            for (; ((s1.Position != s1.Length) 
+                                        && (s1.ReadByte() == s2.ReadByte())); ) {
                                 ;
                             }
-                            if ((s1.Position == s1.Length))
-                            {
+                            if ((s1.Position == s1.Length)) {
                                 return type;
                             }
                         }
                     }
                 }
-                finally
-                {
-                    if ((s1 != null))
-                    {
+                finally {
+                    if ((s1 != null)) {
                         s1.Close();
                     }
-                    if ((s2 != null))
-                    {
+                    if ((s2 != null)) {
                         s2.Close();
                     }
                 }
@@ -546,179 +460,156 @@ namespace Reporting.Datasets
             xs.Add(dsSchema);
             return type;
         }
-
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ANT_Ubicaciones_PropiedadHorizontalRowChangeEventHandler(object sender, ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent e);
-
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ANT_Ubicaciones_CoordenadasRowChangeEventHandler(object sender, ANT_Ubicaciones_CoordenadasRowChangeEvent e);
-
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ANT_Ubicaciones_PuertasRowChangeEventHandler(object sender, ANT_Ubicaciones_PuertasRowChangeEvent e);
-
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ANT_Ubicaciones_Via_PublicaRowChangeEventHandler(object sender, ANT_Ubicaciones_Via_PublicaRowChangeEvent e);
-
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ANT_UbicacionesRowChangeEventHandler(object sender, ANT_UbicacionesRowChangeEvent e);
-
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void DatosCabeceraRowChangeEventHandler(object sender, DatosCabeceraRowChangeEvent e);
-
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ANT_TitularesRowChangeEventHandler(object sender, ANT_TitularesRowChangeEvent e);
-
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ANT_Ubicaciones_PropiedadHorizontalDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_PropiedadHorizontalRow>
-        {
-
+        public partial class ANT_Ubicaciones_PropiedadHorizontalDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_PropiedadHorizontalRow> {
+            
             private global::System.Data.DataColumn columnid_ubicacion;
-
+            
             private global::System.Data.DataColumn columnNroPartidaHorizontal;
-
+            
             private global::System.Data.DataColumn columnpiso;
-
+            
             private global::System.Data.DataColumn columndepto;
-
+            
             private global::System.Data.DataColumn columnUnidadFuncional;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PropiedadHorizontalDataTable()
-            {
+            public ANT_Ubicaciones_PropiedadHorizontalDataTable() {
                 this.TableName = "ANT_Ubicaciones_PropiedadHorizontal";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_PropiedadHorizontalDataTable(global::System.Data.DataTable table)
-            {
+            internal ANT_Ubicaciones_PropiedadHorizontalDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-                {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-                {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace))
-                {
+                if ((table.Namespace != table.DataSet.Namespace)) {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ANT_Ubicaciones_PropiedadHorizontalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                    base(info, context)
-            {
+            protected ANT_Ubicaciones_PropiedadHorizontalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
                 this.InitVars();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_ubicacionColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_ubicacionColumn {
+                get {
                     return this.columnid_ubicacion;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NroPartidaHorizontalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn NroPartidaHorizontalColumn {
+                get {
                     return this.columnNroPartidaHorizontal;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pisoColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn pisoColumn {
+                get {
                     return this.columnpiso;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn deptoColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn deptoColumn {
+                get {
                     return this.columndepto;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UnidadFuncionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn UnidadFuncionalColumn {
+                get {
                     return this.columnUnidadFuncional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count
-            {
-                get
-                {
+            public int Count {
+                get {
                     return this.Rows.Count;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PropiedadHorizontalRow this[int index]
-            {
-                get
-                {
+            public ANT_Ubicaciones_PropiedadHorizontalRow this[int index] {
+                get {
                     return ((ANT_Ubicaciones_PropiedadHorizontalRow)(this.Rows[index]));
                 }
             }
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PropiedadHorizontalRowChangeEventHandler ANT_Ubicaciones_PropiedadHorizontalRowChanging;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PropiedadHorizontalRowChangeEventHandler ANT_Ubicaciones_PropiedadHorizontalRowChanged;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PropiedadHorizontalRowChangeEventHandler ANT_Ubicaciones_PropiedadHorizontalRowDeleting;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PropiedadHorizontalRowChangeEventHandler ANT_Ubicaciones_PropiedadHorizontalRowDeleted;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddANT_Ubicaciones_PropiedadHorizontalRow(ANT_Ubicaciones_PropiedadHorizontalRow row)
-            {
+            public void AddANT_Ubicaciones_PropiedadHorizontalRow(ANT_Ubicaciones_PropiedadHorizontalRow row) {
                 this.Rows.Add(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PropiedadHorizontalRow AddANT_Ubicaciones_PropiedadHorizontalRow(int id_ubicacion, int NroPartidaHorizontal, string piso, string depto, string UnidadFuncional)
-            {
+            public ANT_Ubicaciones_PropiedadHorizontalRow AddANT_Ubicaciones_PropiedadHorizontalRow(int id_ubicacion, int NroPartidaHorizontal, string piso, string depto, string UnidadFuncional) {
                 ANT_Ubicaciones_PropiedadHorizontalRow rowANT_Ubicaciones_PropiedadHorizontalRow = ((ANT_Ubicaciones_PropiedadHorizontalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id_ubicacion,
@@ -730,38 +621,34 @@ namespace Reporting.Datasets
                 this.Rows.Add(rowANT_Ubicaciones_PropiedadHorizontalRow);
                 return rowANT_Ubicaciones_PropiedadHorizontalRow;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone()
-            {
+            public override global::System.Data.DataTable Clone() {
                 ANT_Ubicaciones_PropiedadHorizontalDataTable cln = ((ANT_Ubicaciones_PropiedadHorizontalDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance()
-            {
+            protected override global::System.Data.DataTable CreateInstance() {
                 return new ANT_Ubicaciones_PropiedadHorizontalDataTable();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars()
-            {
+            internal void InitVars() {
                 this.columnid_ubicacion = base.Columns["id_ubicacion"];
                 this.columnNroPartidaHorizontal = base.Columns["NroPartidaHorizontal"];
                 this.columnpiso = base.Columns["piso"];
                 this.columndepto = base.Columns["depto"];
                 this.columnUnidadFuncional = base.Columns["UnidadFuncional"];
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass()
-            {
+            private void InitClass() {
                 this.columnid_ubicacion = new global::System.Data.DataColumn("id_ubicacion", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_ubicacion);
                 this.columnNroPartidaHorizontal = new global::System.Data.DataColumn("NroPartidaHorizontal", typeof(int), null, global::System.Data.MappingType.Element);
@@ -777,83 +664,70 @@ namespace Reporting.Datasets
                 this.columndepto.MaxLength = 5;
                 this.columnUnidadFuncional.MaxLength = 10;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PropiedadHorizontalRow NewANT_Ubicaciones_PropiedadHorizontalRow()
-            {
+            public ANT_Ubicaciones_PropiedadHorizontalRow NewANT_Ubicaciones_PropiedadHorizontalRow() {
                 return ((ANT_Ubicaciones_PropiedadHorizontalRow)(this.NewRow()));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-            {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new ANT_Ubicaciones_PropiedadHorizontalRow(builder);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType()
-            {
+            protected override global::System.Type GetRowType() {
                 return typeof(ANT_Ubicaciones_PropiedadHorizontalRow);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowChanged != null))
-                {
+                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowChanged != null)) {
                     this.ANT_Ubicaciones_PropiedadHorizontalRowChanged(this, new ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent(((ANT_Ubicaciones_PropiedadHorizontalRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowChanging != null))
-                {
+                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowChanging != null)) {
                     this.ANT_Ubicaciones_PropiedadHorizontalRowChanging(this, new ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent(((ANT_Ubicaciones_PropiedadHorizontalRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowDeleted != null))
-                {
+                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowDeleted != null)) {
                     this.ANT_Ubicaciones_PropiedadHorizontalRowDeleted(this, new ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent(((ANT_Ubicaciones_PropiedadHorizontalRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowDeleting != null))
-                {
+                if ((this.ANT_Ubicaciones_PropiedadHorizontalRowDeleting != null)) {
                     this.ANT_Ubicaciones_PropiedadHorizontalRowDeleting(this, new ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent(((ANT_Ubicaciones_PropiedadHorizontalRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveANT_Ubicaciones_PropiedadHorizontalRow(ANT_Ubicaciones_PropiedadHorizontalRow row)
-            {
+            public void RemoveANT_Ubicaciones_PropiedadHorizontalRow(ANT_Ubicaciones_PropiedadHorizontalRow row) {
                 this.Rows.Remove(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-            {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsComprobanteAnt ds = new dsComprobanteAnt();
@@ -878,43 +752,34 @@ namespace Reporting.Datasets
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace))
-                {
+                if (xs.Contains(dsSchema.TargetNamespace)) {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try
-                    {
+                    try {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                        {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length))
-                            {
+                            if ((s1.Length == s2.Length)) {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                            && (s1.ReadByte() == s2.ReadByte()));)
-                                {
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length))
-                                {
+                                if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally
-                    {
-                        if ((s1 != null))
-                        {
+                    finally {
+                        if ((s1 != null)) {
                             s1.Close();
                         }
-                        if ((s2 != null))
-                        {
+                        if ((s2 != null)) {
                             s2.Close();
                         }
                     }
@@ -923,182 +788,155 @@ namespace Reporting.Datasets
                 return type;
             }
         }
-
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ANT_Ubicaciones_CoordenadasDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_CoordenadasRow>
-        {
-
+        public partial class ANT_Ubicaciones_CoordenadasDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_CoordenadasRow> {
+            
             private global::System.Data.DataColumn columnid_antubicacion;
-
+            
             private global::System.Data.DataColumn columnlatitud_grados;
-
+            
             private global::System.Data.DataColumn columnlatitud_minutos;
-
+            
             private global::System.Data.DataColumn columnlatitud_segundos;
-
+            
             private global::System.Data.DataColumn columnlongitud_grados;
-
+            
             private global::System.Data.DataColumn columnlongitud_minutos;
-
+            
             private global::System.Data.DataColumn columnlongitud_segundos;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_CoordenadasDataTable()
-            {
+            public ANT_Ubicaciones_CoordenadasDataTable() {
                 this.TableName = "ANT_Ubicaciones_Coordenadas";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_CoordenadasDataTable(global::System.Data.DataTable table)
-            {
+            internal ANT_Ubicaciones_CoordenadasDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-                {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-                {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace))
-                {
+                if ((table.Namespace != table.DataSet.Namespace)) {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ANT_Ubicaciones_CoordenadasDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                    base(info, context)
-            {
+            protected ANT_Ubicaciones_CoordenadasDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
                 this.InitVars();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_antubicacionColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_antubicacionColumn {
+                get {
                     return this.columnid_antubicacion;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn latitud_gradosColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn latitud_gradosColumn {
+                get {
                     return this.columnlatitud_grados;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn latitud_minutosColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn latitud_minutosColumn {
+                get {
                     return this.columnlatitud_minutos;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn latitud_segundosColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn latitud_segundosColumn {
+                get {
                     return this.columnlatitud_segundos;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn longitud_gradosColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn longitud_gradosColumn {
+                get {
                     return this.columnlongitud_grados;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn longitud_minutosColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn longitud_minutosColumn {
+                get {
                     return this.columnlongitud_minutos;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn longitud_segundosColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn longitud_segundosColumn {
+                get {
                     return this.columnlongitud_segundos;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count
-            {
-                get
-                {
+            public int Count {
+                get {
                     return this.Rows.Count;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_CoordenadasRow this[int index]
-            {
-                get
-                {
+            public ANT_Ubicaciones_CoordenadasRow this[int index] {
+                get {
                     return ((ANT_Ubicaciones_CoordenadasRow)(this.Rows[index]));
                 }
             }
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_CoordenadasRowChangeEventHandler ANT_Ubicaciones_CoordenadasRowChanging;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_CoordenadasRowChangeEventHandler ANT_Ubicaciones_CoordenadasRowChanged;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_CoordenadasRowChangeEventHandler ANT_Ubicaciones_CoordenadasRowDeleting;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_CoordenadasRowChangeEventHandler ANT_Ubicaciones_CoordenadasRowDeleted;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddANT_Ubicaciones_CoordenadasRow(ANT_Ubicaciones_CoordenadasRow row)
-            {
+            public void AddANT_Ubicaciones_CoordenadasRow(ANT_Ubicaciones_CoordenadasRow row) {
                 this.Rows.Add(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_CoordenadasRow AddANT_Ubicaciones_CoordenadasRow(int id_antubicacion, int latitud_grados, int latitud_minutos, int latitud_segundos, int longitud_grados, int longitud_minutos, int longitud_segundos)
-            {
+            public ANT_Ubicaciones_CoordenadasRow AddANT_Ubicaciones_CoordenadasRow(int id_antubicacion, int latitud_grados, int latitud_minutos, int latitud_segundos, int longitud_grados, int longitud_minutos, int longitud_segundos) {
                 ANT_Ubicaciones_CoordenadasRow rowANT_Ubicaciones_CoordenadasRow = ((ANT_Ubicaciones_CoordenadasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id_antubicacion,
@@ -1112,27 +950,24 @@ namespace Reporting.Datasets
                 this.Rows.Add(rowANT_Ubicaciones_CoordenadasRow);
                 return rowANT_Ubicaciones_CoordenadasRow;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone()
-            {
+            public override global::System.Data.DataTable Clone() {
                 ANT_Ubicaciones_CoordenadasDataTable cln = ((ANT_Ubicaciones_CoordenadasDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance()
-            {
+            protected override global::System.Data.DataTable CreateInstance() {
                 return new ANT_Ubicaciones_CoordenadasDataTable();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars()
-            {
+            internal void InitVars() {
                 this.columnid_antubicacion = base.Columns["id_antubicacion"];
                 this.columnlatitud_grados = base.Columns["latitud_grados"];
                 this.columnlatitud_minutos = base.Columns["latitud_minutos"];
@@ -1141,11 +976,10 @@ namespace Reporting.Datasets
                 this.columnlongitud_minutos = base.Columns["longitud_minutos"];
                 this.columnlongitud_segundos = base.Columns["longitud_segundos"];
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass()
-            {
+            private void InitClass() {
                 this.columnid_antubicacion = new global::System.Data.DataColumn("id_antubicacion", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_antubicacion);
                 this.columnlatitud_grados = new global::System.Data.DataColumn("latitud_grados", typeof(int), null, global::System.Data.MappingType.Element);
@@ -1164,83 +998,70 @@ namespace Reporting.Datasets
                 this.columnlatitud_grados.AllowDBNull = false;
                 this.columnlongitud_grados.AllowDBNull = false;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_CoordenadasRow NewANT_Ubicaciones_CoordenadasRow()
-            {
+            public ANT_Ubicaciones_CoordenadasRow NewANT_Ubicaciones_CoordenadasRow() {
                 return ((ANT_Ubicaciones_CoordenadasRow)(this.NewRow()));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-            {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new ANT_Ubicaciones_CoordenadasRow(builder);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType()
-            {
+            protected override global::System.Type GetRowType() {
                 return typeof(ANT_Ubicaciones_CoordenadasRow);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ANT_Ubicaciones_CoordenadasRowChanged != null))
-                {
+                if ((this.ANT_Ubicaciones_CoordenadasRowChanged != null)) {
                     this.ANT_Ubicaciones_CoordenadasRowChanged(this, new ANT_Ubicaciones_CoordenadasRowChangeEvent(((ANT_Ubicaciones_CoordenadasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ANT_Ubicaciones_CoordenadasRowChanging != null))
-                {
+                if ((this.ANT_Ubicaciones_CoordenadasRowChanging != null)) {
                     this.ANT_Ubicaciones_CoordenadasRowChanging(this, new ANT_Ubicaciones_CoordenadasRowChangeEvent(((ANT_Ubicaciones_CoordenadasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ANT_Ubicaciones_CoordenadasRowDeleted != null))
-                {
+                if ((this.ANT_Ubicaciones_CoordenadasRowDeleted != null)) {
                     this.ANT_Ubicaciones_CoordenadasRowDeleted(this, new ANT_Ubicaciones_CoordenadasRowChangeEvent(((ANT_Ubicaciones_CoordenadasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ANT_Ubicaciones_CoordenadasRowDeleting != null))
-                {
+                if ((this.ANT_Ubicaciones_CoordenadasRowDeleting != null)) {
                     this.ANT_Ubicaciones_CoordenadasRowDeleting(this, new ANT_Ubicaciones_CoordenadasRowChangeEvent(((ANT_Ubicaciones_CoordenadasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveANT_Ubicaciones_CoordenadasRow(ANT_Ubicaciones_CoordenadasRow row)
-            {
+            public void RemoveANT_Ubicaciones_CoordenadasRow(ANT_Ubicaciones_CoordenadasRow row) {
                 this.Rows.Remove(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-            {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsComprobanteAnt ds = new dsComprobanteAnt();
@@ -1265,43 +1086,34 @@ namespace Reporting.Datasets
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace))
-                {
+                if (xs.Contains(dsSchema.TargetNamespace)) {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try
-                    {
+                    try {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                        {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length))
-                            {
+                            if ((s1.Length == s2.Length)) {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                            && (s1.ReadByte() == s2.ReadByte()));)
-                                {
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length))
-                                {
+                                if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally
-                    {
-                        if ((s1 != null))
-                        {
+                    finally {
+                        if ((s1 != null)) {
                             s1.Close();
                         }
-                        if ((s2 != null))
-                        {
+                        if ((s2 != null)) {
                             s2.Close();
                         }
                     }
@@ -1310,134 +1122,115 @@ namespace Reporting.Datasets
                 return type;
             }
         }
-
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ANT_Ubicaciones_PuertasDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_PuertasRow>
-        {
-
+        public partial class ANT_Ubicaciones_PuertasDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_PuertasRow> {
+            
             private global::System.Data.DataColumn columnid_antubicacion;
-
+            
             private global::System.Data.DataColumn columnCalle;
-
+            
             private global::System.Data.DataColumn columnNroPuerta;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PuertasDataTable()
-            {
+            public ANT_Ubicaciones_PuertasDataTable() {
                 this.TableName = "ANT_Ubicaciones_Puertas";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_PuertasDataTable(global::System.Data.DataTable table)
-            {
+            internal ANT_Ubicaciones_PuertasDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-                {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-                {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace))
-                {
+                if ((table.Namespace != table.DataSet.Namespace)) {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ANT_Ubicaciones_PuertasDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                    base(info, context)
-            {
+            protected ANT_Ubicaciones_PuertasDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
                 this.InitVars();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_antubicacionColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_antubicacionColumn {
+                get {
                     return this.columnid_antubicacion;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CalleColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn CalleColumn {
+                get {
                     return this.columnCalle;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NroPuertaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn NroPuertaColumn {
+                get {
                     return this.columnNroPuerta;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count
-            {
-                get
-                {
+            public int Count {
+                get {
                     return this.Rows.Count;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PuertasRow this[int index]
-            {
-                get
-                {
+            public ANT_Ubicaciones_PuertasRow this[int index] {
+                get {
                     return ((ANT_Ubicaciones_PuertasRow)(this.Rows[index]));
                 }
             }
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PuertasRowChangeEventHandler ANT_Ubicaciones_PuertasRowChanging;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PuertasRowChangeEventHandler ANT_Ubicaciones_PuertasRowChanged;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PuertasRowChangeEventHandler ANT_Ubicaciones_PuertasRowDeleting;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_PuertasRowChangeEventHandler ANT_Ubicaciones_PuertasRowDeleted;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddANT_Ubicaciones_PuertasRow(ANT_Ubicaciones_PuertasRow row)
-            {
+            public void AddANT_Ubicaciones_PuertasRow(ANT_Ubicaciones_PuertasRow row) {
                 this.Rows.Add(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PuertasRow AddANT_Ubicaciones_PuertasRow(int id_antubicacion, string Calle, int NroPuerta)
-            {
+            public ANT_Ubicaciones_PuertasRow AddANT_Ubicaciones_PuertasRow(int id_antubicacion, string Calle, int NroPuerta) {
                 ANT_Ubicaciones_PuertasRow rowANT_Ubicaciones_PuertasRow = ((ANT_Ubicaciones_PuertasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id_antubicacion,
@@ -1447,36 +1240,32 @@ namespace Reporting.Datasets
                 this.Rows.Add(rowANT_Ubicaciones_PuertasRow);
                 return rowANT_Ubicaciones_PuertasRow;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone()
-            {
+            public override global::System.Data.DataTable Clone() {
                 ANT_Ubicaciones_PuertasDataTable cln = ((ANT_Ubicaciones_PuertasDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance()
-            {
+            protected override global::System.Data.DataTable CreateInstance() {
                 return new ANT_Ubicaciones_PuertasDataTable();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars()
-            {
+            internal void InitVars() {
                 this.columnid_antubicacion = base.Columns["id_antubicacion"];
                 this.columnCalle = base.Columns["Calle"];
                 this.columnNroPuerta = base.Columns["NroPuerta"];
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass()
-            {
+            private void InitClass() {
                 this.columnid_antubicacion = new global::System.Data.DataColumn("id_antubicacion", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_antubicacion);
                 this.columnCalle = new global::System.Data.DataColumn("Calle", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1488,83 +1277,70 @@ namespace Reporting.Datasets
                 this.columnCalle.MaxLength = 100;
                 this.columnNroPuerta.AllowDBNull = false;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PuertasRow NewANT_Ubicaciones_PuertasRow()
-            {
+            public ANT_Ubicaciones_PuertasRow NewANT_Ubicaciones_PuertasRow() {
                 return ((ANT_Ubicaciones_PuertasRow)(this.NewRow()));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-            {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new ANT_Ubicaciones_PuertasRow(builder);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType()
-            {
+            protected override global::System.Type GetRowType() {
                 return typeof(ANT_Ubicaciones_PuertasRow);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ANT_Ubicaciones_PuertasRowChanged != null))
-                {
+                if ((this.ANT_Ubicaciones_PuertasRowChanged != null)) {
                     this.ANT_Ubicaciones_PuertasRowChanged(this, new ANT_Ubicaciones_PuertasRowChangeEvent(((ANT_Ubicaciones_PuertasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ANT_Ubicaciones_PuertasRowChanging != null))
-                {
+                if ((this.ANT_Ubicaciones_PuertasRowChanging != null)) {
                     this.ANT_Ubicaciones_PuertasRowChanging(this, new ANT_Ubicaciones_PuertasRowChangeEvent(((ANT_Ubicaciones_PuertasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ANT_Ubicaciones_PuertasRowDeleted != null))
-                {
+                if ((this.ANT_Ubicaciones_PuertasRowDeleted != null)) {
                     this.ANT_Ubicaciones_PuertasRowDeleted(this, new ANT_Ubicaciones_PuertasRowChangeEvent(((ANT_Ubicaciones_PuertasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ANT_Ubicaciones_PuertasRowDeleting != null))
-                {
+                if ((this.ANT_Ubicaciones_PuertasRowDeleting != null)) {
                     this.ANT_Ubicaciones_PuertasRowDeleting(this, new ANT_Ubicaciones_PuertasRowChangeEvent(((ANT_Ubicaciones_PuertasRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveANT_Ubicaciones_PuertasRow(ANT_Ubicaciones_PuertasRow row)
-            {
+            public void RemoveANT_Ubicaciones_PuertasRow(ANT_Ubicaciones_PuertasRow row) {
                 this.Rows.Remove(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-            {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsComprobanteAnt ds = new dsComprobanteAnt();
@@ -1589,43 +1365,34 @@ namespace Reporting.Datasets
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace))
-                {
+                if (xs.Contains(dsSchema.TargetNamespace)) {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try
-                    {
+                    try {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                        {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length))
-                            {
+                            if ((s1.Length == s2.Length)) {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                            && (s1.ReadByte() == s2.ReadByte()));)
-                                {
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length))
-                                {
+                                if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally
-                    {
-                        if ((s1 != null))
-                        {
+                    finally {
+                        if ((s1 != null)) {
                             s1.Close();
                         }
-                        if ((s2 != null))
-                        {
+                        if ((s2 != null)) {
                             s2.Close();
                         }
                     }
@@ -1634,110 +1401,95 @@ namespace Reporting.Datasets
                 return type;
             }
         }
-
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ANT_Ubicaciones_Via_PublicaDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_Via_PublicaRow>
-        {
-
+        public partial class ANT_Ubicaciones_Via_PublicaDataTable : global::System.Data.TypedTableBase<ANT_Ubicaciones_Via_PublicaRow> {
+            
             private global::System.Data.DataColumn columnobservaciones;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_Via_PublicaDataTable()
-            {
+            public ANT_Ubicaciones_Via_PublicaDataTable() {
                 this.TableName = "ANT_Ubicaciones_Via_Publica";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_Via_PublicaDataTable(global::System.Data.DataTable table)
-            {
+            internal ANT_Ubicaciones_Via_PublicaDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-                {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-                {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace))
-                {
+                if ((table.Namespace != table.DataSet.Namespace)) {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ANT_Ubicaciones_Via_PublicaDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                    base(info, context)
-            {
+            protected ANT_Ubicaciones_Via_PublicaDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
                 this.InitVars();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn observacionesColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn observacionesColumn {
+                get {
                     return this.columnobservaciones;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count
-            {
-                get
-                {
+            public int Count {
+                get {
                     return this.Rows.Count;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_Via_PublicaRow this[int index]
-            {
-                get
-                {
+            public ANT_Ubicaciones_Via_PublicaRow this[int index] {
+                get {
                     return ((ANT_Ubicaciones_Via_PublicaRow)(this.Rows[index]));
                 }
             }
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_Via_PublicaRowChangeEventHandler ANT_Ubicaciones_Via_PublicaRowChanging;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_Via_PublicaRowChangeEventHandler ANT_Ubicaciones_Via_PublicaRowChanged;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_Via_PublicaRowChangeEventHandler ANT_Ubicaciones_Via_PublicaRowDeleting;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_Ubicaciones_Via_PublicaRowChangeEventHandler ANT_Ubicaciones_Via_PublicaRowDeleted;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddANT_Ubicaciones_Via_PublicaRow(ANT_Ubicaciones_Via_PublicaRow row)
-            {
+            public void AddANT_Ubicaciones_Via_PublicaRow(ANT_Ubicaciones_Via_PublicaRow row) {
                 this.Rows.Add(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_Via_PublicaRow AddANT_Ubicaciones_Via_PublicaRow(string observaciones)
-            {
+            public ANT_Ubicaciones_Via_PublicaRow AddANT_Ubicaciones_Via_PublicaRow(string observaciones) {
                 ANT_Ubicaciones_Via_PublicaRow rowANT_Ubicaciones_Via_PublicaRow = ((ANT_Ubicaciones_Via_PublicaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         observaciones};
@@ -1745,116 +1497,99 @@ namespace Reporting.Datasets
                 this.Rows.Add(rowANT_Ubicaciones_Via_PublicaRow);
                 return rowANT_Ubicaciones_Via_PublicaRow;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone()
-            {
+            public override global::System.Data.DataTable Clone() {
                 ANT_Ubicaciones_Via_PublicaDataTable cln = ((ANT_Ubicaciones_Via_PublicaDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance()
-            {
+            protected override global::System.Data.DataTable CreateInstance() {
                 return new ANT_Ubicaciones_Via_PublicaDataTable();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars()
-            {
+            internal void InitVars() {
                 this.columnobservaciones = base.Columns["observaciones"];
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass()
-            {
+            private void InitClass() {
                 this.columnobservaciones = new global::System.Data.DataColumn("observaciones", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnobservaciones);
                 this.columnobservaciones.AllowDBNull = false;
                 this.columnobservaciones.MaxLength = 500;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_Via_PublicaRow NewANT_Ubicaciones_Via_PublicaRow()
-            {
+            public ANT_Ubicaciones_Via_PublicaRow NewANT_Ubicaciones_Via_PublicaRow() {
                 return ((ANT_Ubicaciones_Via_PublicaRow)(this.NewRow()));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-            {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new ANT_Ubicaciones_Via_PublicaRow(builder);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType()
-            {
+            protected override global::System.Type GetRowType() {
                 return typeof(ANT_Ubicaciones_Via_PublicaRow);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ANT_Ubicaciones_Via_PublicaRowChanged != null))
-                {
+                if ((this.ANT_Ubicaciones_Via_PublicaRowChanged != null)) {
                     this.ANT_Ubicaciones_Via_PublicaRowChanged(this, new ANT_Ubicaciones_Via_PublicaRowChangeEvent(((ANT_Ubicaciones_Via_PublicaRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ANT_Ubicaciones_Via_PublicaRowChanging != null))
-                {
+                if ((this.ANT_Ubicaciones_Via_PublicaRowChanging != null)) {
                     this.ANT_Ubicaciones_Via_PublicaRowChanging(this, new ANT_Ubicaciones_Via_PublicaRowChangeEvent(((ANT_Ubicaciones_Via_PublicaRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ANT_Ubicaciones_Via_PublicaRowDeleted != null))
-                {
+                if ((this.ANT_Ubicaciones_Via_PublicaRowDeleted != null)) {
                     this.ANT_Ubicaciones_Via_PublicaRowDeleted(this, new ANT_Ubicaciones_Via_PublicaRowChangeEvent(((ANT_Ubicaciones_Via_PublicaRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ANT_Ubicaciones_Via_PublicaRowDeleting != null))
-                {
+                if ((this.ANT_Ubicaciones_Via_PublicaRowDeleting != null)) {
                     this.ANT_Ubicaciones_Via_PublicaRowDeleting(this, new ANT_Ubicaciones_Via_PublicaRowChangeEvent(((ANT_Ubicaciones_Via_PublicaRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveANT_Ubicaciones_Via_PublicaRow(ANT_Ubicaciones_Via_PublicaRow row)
-            {
+            public void RemoveANT_Ubicaciones_Via_PublicaRow(ANT_Ubicaciones_Via_PublicaRow row) {
                 this.Rows.Remove(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-            {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsComprobanteAnt ds = new dsComprobanteAnt();
@@ -1879,43 +1614,34 @@ namespace Reporting.Datasets
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace))
-                {
+                if (xs.Contains(dsSchema.TargetNamespace)) {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try
-                    {
+                    try {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                        {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length))
-                            {
+                            if ((s1.Length == s2.Length)) {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                            && (s1.ReadByte() == s2.ReadByte()));)
-                                {
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length))
-                                {
+                                if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally
-                    {
-                        if ((s1 != null))
-                        {
+                    finally {
+                        if ((s1 != null)) {
                             s1.Close();
                         }
-                        if ((s2 != null))
-                        {
+                        if ((s2 != null)) {
                             s2.Close();
                         }
                     }
@@ -1924,230 +1650,195 @@ namespace Reporting.Datasets
                 return type;
             }
         }
-
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ANT_UbicacionesDataTable : global::System.Data.TypedTableBase<ANT_UbicacionesRow>
-        {
-
+        public partial class ANT_UbicacionesDataTable : global::System.Data.TypedTableBase<ANT_UbicacionesRow> {
+            
             private global::System.Data.DataColumn columnid_antubicacion;
-
+            
             private global::System.Data.DataColumn columnid_encomienda;
-
+            
             private global::System.Data.DataColumn columnid_ubicacion;
-
+            
             private global::System.Data.DataColumn columnSeccion;
-
+            
             private global::System.Data.DataColumn columnManzana;
-
+            
             private global::System.Data.DataColumn columnparcela;
-
+            
             private global::System.Data.DataColumn columnNroPartidaMatriz;
-
+            
             private global::System.Data.DataColumn columnlocal_subtipoubicacion;
-
+            
             private global::System.Data.DataColumn columnZonaParcela;
-
+            
             private global::System.Data.DataColumn columnDirecciones;
-
+            
             private global::System.Data.DataColumn columnDeptoLocal;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_UbicacionesDataTable()
-            {
+            public ANT_UbicacionesDataTable() {
                 this.TableName = "ANT_Ubicaciones";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_UbicacionesDataTable(global::System.Data.DataTable table)
-            {
+            internal ANT_UbicacionesDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-                {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-                {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace))
-                {
+                if ((table.Namespace != table.DataSet.Namespace)) {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ANT_UbicacionesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                    base(info, context)
-            {
+            protected ANT_UbicacionesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
                 this.InitVars();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_antubicacionColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_antubicacionColumn {
+                get {
                     return this.columnid_antubicacion;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_encomiendaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_encomiendaColumn {
+                get {
                     return this.columnid_encomienda;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_ubicacionColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_ubicacionColumn {
+                get {
                     return this.columnid_ubicacion;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SeccionColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn SeccionColumn {
+                get {
                     return this.columnSeccion;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ManzanaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn ManzanaColumn {
+                get {
                     return this.columnManzana;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn parcelaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn parcelaColumn {
+                get {
                     return this.columnparcela;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NroPartidaMatrizColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn NroPartidaMatrizColumn {
+                get {
                     return this.columnNroPartidaMatriz;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn local_subtipoubicacionColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn local_subtipoubicacionColumn {
+                get {
                     return this.columnlocal_subtipoubicacion;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ZonaParcelaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn ZonaParcelaColumn {
+                get {
                     return this.columnZonaParcela;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DireccionesColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn DireccionesColumn {
+                get {
                     return this.columnDirecciones;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DeptoLocalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn DeptoLocalColumn {
+                get {
                     return this.columnDeptoLocal;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count
-            {
-                get
-                {
+            public int Count {
+                get {
                     return this.Rows.Count;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_UbicacionesRow this[int index]
-            {
-                get
-                {
+            public ANT_UbicacionesRow this[int index] {
+                get {
                     return ((ANT_UbicacionesRow)(this.Rows[index]));
                 }
             }
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_UbicacionesRowChangeEventHandler ANT_UbicacionesRowChanging;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_UbicacionesRowChangeEventHandler ANT_UbicacionesRowChanged;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_UbicacionesRowChangeEventHandler ANT_UbicacionesRowDeleting;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_UbicacionesRowChangeEventHandler ANT_UbicacionesRowDeleted;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddANT_UbicacionesRow(ANT_UbicacionesRow row)
-            {
+            public void AddANT_UbicacionesRow(ANT_UbicacionesRow row) {
                 this.Rows.Add(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_UbicacionesRow AddANT_UbicacionesRow(int id_antubicacion, int id_encomienda, int id_ubicacion, int Seccion, string Manzana, string parcela, int NroPartidaMatriz, string local_subtipoubicacion, string ZonaParcela, string Direcciones, string DeptoLocal)
-            {
+            public ANT_UbicacionesRow AddANT_UbicacionesRow(int id_antubicacion, int id_encomienda, int id_ubicacion, int Seccion, string Manzana, string parcela, int NroPartidaMatriz, string local_subtipoubicacion, string ZonaParcela, string Direcciones, string DeptoLocal) {
                 ANT_UbicacionesRow rowANT_UbicacionesRow = ((ANT_UbicacionesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id_antubicacion,
@@ -2165,27 +1856,24 @@ namespace Reporting.Datasets
                 this.Rows.Add(rowANT_UbicacionesRow);
                 return rowANT_UbicacionesRow;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone()
-            {
+            public override global::System.Data.DataTable Clone() {
                 ANT_UbicacionesDataTable cln = ((ANT_UbicacionesDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance()
-            {
+            protected override global::System.Data.DataTable CreateInstance() {
                 return new ANT_UbicacionesDataTable();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars()
-            {
+            internal void InitVars() {
                 this.columnid_antubicacion = base.Columns["id_antubicacion"];
                 this.columnid_encomienda = base.Columns["id_encomienda"];
                 this.columnid_ubicacion = base.Columns["id_ubicacion"];
@@ -2198,11 +1886,10 @@ namespace Reporting.Datasets
                 this.columnDirecciones = base.Columns["Direcciones"];
                 this.columnDeptoLocal = base.Columns["DeptoLocal"];
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass()
-            {
+            private void InitClass() {
                 this.columnid_antubicacion = new global::System.Data.DataColumn("id_antubicacion", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_antubicacion);
                 this.columnid_encomienda = new global::System.Data.DataColumn("id_encomienda", typeof(int), null, global::System.Data.MappingType.Element);
@@ -2225,7 +1912,7 @@ namespace Reporting.Datasets
                 base.Columns.Add(this.columnDirecciones);
                 this.columnDeptoLocal = new global::System.Data.DataColumn("DeptoLocal", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDeptoLocal);
-                this.columnManzana.MaxLength = 6;
+                this.columnManzana.MaxLength = 4;
                 this.columnparcela.MaxLength = 4;
                 this.columnlocal_subtipoubicacion.MaxLength = 25;
                 this.columnZonaParcela.MaxLength = 15;
@@ -2233,83 +1920,70 @@ namespace Reporting.Datasets
                 this.columnDirecciones.MaxLength = 1000;
                 this.columnDeptoLocal.MaxLength = 50;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_UbicacionesRow NewANT_UbicacionesRow()
-            {
+            public ANT_UbicacionesRow NewANT_UbicacionesRow() {
                 return ((ANT_UbicacionesRow)(this.NewRow()));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-            {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new ANT_UbicacionesRow(builder);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType()
-            {
+            protected override global::System.Type GetRowType() {
                 return typeof(ANT_UbicacionesRow);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ANT_UbicacionesRowChanged != null))
-                {
+                if ((this.ANT_UbicacionesRowChanged != null)) {
                     this.ANT_UbicacionesRowChanged(this, new ANT_UbicacionesRowChangeEvent(((ANT_UbicacionesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ANT_UbicacionesRowChanging != null))
-                {
+                if ((this.ANT_UbicacionesRowChanging != null)) {
                     this.ANT_UbicacionesRowChanging(this, new ANT_UbicacionesRowChangeEvent(((ANT_UbicacionesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ANT_UbicacionesRowDeleted != null))
-                {
+                if ((this.ANT_UbicacionesRowDeleted != null)) {
                     this.ANT_UbicacionesRowDeleted(this, new ANT_UbicacionesRowChangeEvent(((ANT_UbicacionesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ANT_UbicacionesRowDeleting != null))
-                {
+                if ((this.ANT_UbicacionesRowDeleting != null)) {
                     this.ANT_UbicacionesRowDeleting(this, new ANT_UbicacionesRowChangeEvent(((ANT_UbicacionesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveANT_UbicacionesRow(ANT_UbicacionesRow row)
-            {
+            public void RemoveANT_UbicacionesRow(ANT_UbicacionesRow row) {
                 this.Rows.Remove(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-            {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsComprobanteAnt ds = new dsComprobanteAnt();
@@ -2334,43 +2008,34 @@ namespace Reporting.Datasets
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace))
-                {
+                if (xs.Contains(dsSchema.TargetNamespace)) {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try
-                    {
+                    try {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                        {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length))
-                            {
+                            if ((s1.Length == s2.Length)) {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                            && (s1.ReadByte() == s2.ReadByte()));)
-                                {
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length))
-                                {
+                                if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally
-                    {
-                        if ((s1 != null))
-                        {
+                    finally {
+                        if ((s1 != null)) {
                             s1.Close();
                         }
-                        if ((s2 != null))
-                        {
+                        if ((s2 != null)) {
                             s2.Close();
                         }
                     }
@@ -2379,242 +2044,205 @@ namespace Reporting.Datasets
                 return type;
             }
         }
-
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DatosCabeceraDataTable : global::System.Data.TypedTableBase<DatosCabeceraRow>
-        {
-
+        public partial class DatosCabeceraDataTable : global::System.Data.TypedTableBase<DatosCabeceraRow> {
+            
             private global::System.Data.DataColumn columnid_encomienda;
-
+            
             private global::System.Data.DataColumn columnid_profesional;
-
+            
             private global::System.Data.DataColumn columnFechaEncomienda;
-
+            
             private global::System.Data.DataColumn columntipoTramite;
-
+            
             private global::System.Data.DataColumn columnApellidoProfesional;
-
+            
             private global::System.Data.DataColumn columnNombresProfesional;
-
+            
             private global::System.Data.DataColumn columnMatriculaProfesional;
-
+            
             private global::System.Data.DataColumn columnConsejoProfesional;
-
+            
             private global::System.Data.DataColumn columnCodigoSeguridad;
-
+            
             private global::System.Data.DataColumn columntipoDocProfesional;
-
+            
             private global::System.Data.DataColumn columnnroDocProfesional;
-
+            
             private global::System.Data.DataColumn columnlogo_consejo;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DatosCabeceraDataTable()
-            {
+            public DatosCabeceraDataTable() {
                 this.TableName = "DatosCabecera";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DatosCabeceraDataTable(global::System.Data.DataTable table)
-            {
+            internal DatosCabeceraDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-                {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-                {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace))
-                {
+                if ((table.Namespace != table.DataSet.Namespace)) {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected DatosCabeceraDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                    base(info, context)
-            {
+            protected DatosCabeceraDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
                 this.InitVars();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_encomiendaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_encomiendaColumn {
+                get {
                     return this.columnid_encomienda;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_profesionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_profesionalColumn {
+                get {
                     return this.columnid_profesional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FechaEncomiendaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn FechaEncomiendaColumn {
+                get {
                     return this.columnFechaEncomienda;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn tipoTramiteColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn tipoTramiteColumn {
+                get {
                     return this.columntipoTramite;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ApellidoProfesionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn ApellidoProfesionalColumn {
+                get {
                     return this.columnApellidoProfesional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NombresProfesionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn NombresProfesionalColumn {
+                get {
                     return this.columnNombresProfesional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MatriculaProfesionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn MatriculaProfesionalColumn {
+                get {
                     return this.columnMatriculaProfesional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ConsejoProfesionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn ConsejoProfesionalColumn {
+                get {
                     return this.columnConsejoProfesional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CodigoSeguridadColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn CodigoSeguridadColumn {
+                get {
                     return this.columnCodigoSeguridad;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn tipoDocProfesionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn tipoDocProfesionalColumn {
+                get {
                     return this.columntipoDocProfesional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn nroDocProfesionalColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn nroDocProfesionalColumn {
+                get {
                     return this.columnnroDocProfesional;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn logo_consejoColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn logo_consejoColumn {
+                get {
                     return this.columnlogo_consejo;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count
-            {
-                get
-                {
+            public int Count {
+                get {
                     return this.Rows.Count;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DatosCabeceraRow this[int index]
-            {
-                get
-                {
+            public DatosCabeceraRow this[int index] {
+                get {
                     return ((DatosCabeceraRow)(this.Rows[index]));
                 }
             }
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DatosCabeceraRowChangeEventHandler DatosCabeceraRowChanging;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DatosCabeceraRowChangeEventHandler DatosCabeceraRowChanged;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DatosCabeceraRowChangeEventHandler DatosCabeceraRowDeleting;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DatosCabeceraRowChangeEventHandler DatosCabeceraRowDeleted;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddDatosCabeceraRow(DatosCabeceraRow row)
-            {
+            public void AddDatosCabeceraRow(DatosCabeceraRow row) {
                 this.Rows.Add(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DatosCabeceraRow AddDatosCabeceraRow(int id_encomienda, int id_profesional, System.DateTime FechaEncomienda, string tipoTramite, string ApellidoProfesional, string NombresProfesional, string MatriculaProfesional, string ConsejoProfesional, string CodigoSeguridad, string tipoDocProfesional, int nroDocProfesional, byte[] logo_consejo)
-            {
+            public DatosCabeceraRow AddDatosCabeceraRow(int id_encomienda, int id_profesional, System.DateTime FechaEncomienda, string tipoTramite, string ApellidoProfesional, string NombresProfesional, string MatriculaProfesional, string ConsejoProfesional, string CodigoSeguridad, string tipoDocProfesional, int nroDocProfesional, byte[] logo_consejo) {
                 DatosCabeceraRow rowDatosCabeceraRow = ((DatosCabeceraRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id_encomienda,
@@ -2633,27 +2261,24 @@ namespace Reporting.Datasets
                 this.Rows.Add(rowDatosCabeceraRow);
                 return rowDatosCabeceraRow;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone()
-            {
+            public override global::System.Data.DataTable Clone() {
                 DatosCabeceraDataTable cln = ((DatosCabeceraDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance()
-            {
+            protected override global::System.Data.DataTable CreateInstance() {
                 return new DatosCabeceraDataTable();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars()
-            {
+            internal void InitVars() {
                 this.columnid_encomienda = base.Columns["id_encomienda"];
                 this.columnid_profesional = base.Columns["id_profesional"];
                 this.columnFechaEncomienda = base.Columns["FechaEncomienda"];
@@ -2667,11 +2292,10 @@ namespace Reporting.Datasets
                 this.columnnroDocProfesional = base.Columns["nroDocProfesional"];
                 this.columnlogo_consejo = base.Columns["logo_consejo"];
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass()
-            {
+            private void InitClass() {
                 this.columnid_encomienda = new global::System.Data.DataColumn("id_encomienda", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_encomienda);
                 this.columnid_profesional = new global::System.Data.DataColumn("id_profesional", typeof(int), null, global::System.Data.MappingType.Element);
@@ -2697,83 +2321,70 @@ namespace Reporting.Datasets
                 this.columnlogo_consejo = new global::System.Data.DataColumn("logo_consejo", typeof(byte[]), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlogo_consejo);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DatosCabeceraRow NewDatosCabeceraRow()
-            {
+            public DatosCabeceraRow NewDatosCabeceraRow() {
                 return ((DatosCabeceraRow)(this.NewRow()));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-            {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new DatosCabeceraRow(builder);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType()
-            {
+            protected override global::System.Type GetRowType() {
                 return typeof(DatosCabeceraRow);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.DatosCabeceraRowChanged != null))
-                {
+                if ((this.DatosCabeceraRowChanged != null)) {
                     this.DatosCabeceraRowChanged(this, new DatosCabeceraRowChangeEvent(((DatosCabeceraRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.DatosCabeceraRowChanging != null))
-                {
+                if ((this.DatosCabeceraRowChanging != null)) {
                     this.DatosCabeceraRowChanging(this, new DatosCabeceraRowChangeEvent(((DatosCabeceraRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.DatosCabeceraRowDeleted != null))
-                {
+                if ((this.DatosCabeceraRowDeleted != null)) {
                     this.DatosCabeceraRowDeleted(this, new DatosCabeceraRowChangeEvent(((DatosCabeceraRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.DatosCabeceraRowDeleting != null))
-                {
+                if ((this.DatosCabeceraRowDeleting != null)) {
                     this.DatosCabeceraRowDeleting(this, new DatosCabeceraRowChangeEvent(((DatosCabeceraRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveDatosCabeceraRow(DatosCabeceraRow row)
-            {
+            public void RemoveDatosCabeceraRow(DatosCabeceraRow row) {
                 this.Rows.Remove(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-            {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsComprobanteAnt ds = new dsComprobanteAnt();
@@ -2798,43 +2409,34 @@ namespace Reporting.Datasets
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace))
-                {
+                if (xs.Contains(dsSchema.TargetNamespace)) {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try
-                    {
+                    try {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                        {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length))
-                            {
+                            if ((s1.Length == s2.Length)) {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                            && (s1.ReadByte() == s2.ReadByte()));)
-                                {
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length))
-                                {
+                                if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally
-                    {
-                        if ((s1 != null))
-                        {
+                    finally {
+                        if ((s1 != null)) {
                             s1.Close();
                         }
-                        if ((s2 != null))
-                        {
+                        if ((s2 != null)) {
                             s2.Close();
                         }
                     }
@@ -2843,278 +2445,235 @@ namespace Reporting.Datasets
                 return type;
             }
         }
-
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ANT_TitularesDataTable : global::System.Data.TypedTableBase<ANT_TitularesRow>
-        {
-
+        public partial class ANT_TitularesDataTable : global::System.Data.TypedTableBase<ANT_TitularesRow> {
+            
             private global::System.Data.DataColumn columnid_persona;
-
+            
             private global::System.Data.DataColumn columnid_encomienda;
-
+            
             private global::System.Data.DataColumn columnTipoPersona;
-
+            
             private global::System.Data.DataColumn columnRazonSocial;
-
+            
             private global::System.Data.DataColumn columnTipoSociedad;
-
+            
             private global::System.Data.DataColumn columnApellido;
-
+            
             private global::System.Data.DataColumn columnNombres;
-
+            
             private global::System.Data.DataColumn columnTipoDoc;
-
+            
             private global::System.Data.DataColumn columnNroDoc;
-
+            
             private global::System.Data.DataColumn columnTipoIIBB;
-
+            
             private global::System.Data.DataColumn columnNroIIBB;
-
+            
             private global::System.Data.DataColumn columncuit;
-
+            
             private global::System.Data.DataColumn columnMuestraEnTitulares;
-
+            
             private global::System.Data.DataColumn columnMuestraEnPlancheta;
-
+            
             private global::System.Data.DataColumn columnEmail;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_TitularesDataTable()
-            {
+            public ANT_TitularesDataTable() {
                 this.TableName = "ANT_Titulares";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_TitularesDataTable(global::System.Data.DataTable table)
-            {
+            internal ANT_TitularesDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-                {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-                {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace))
-                {
+                if ((table.Namespace != table.DataSet.Namespace)) {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ANT_TitularesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-                    base(info, context)
-            {
+            protected ANT_TitularesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
                 this.InitVars();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_personaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_personaColumn {
+                get {
                     return this.columnid_persona;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_encomiendaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn id_encomiendaColumn {
+                get {
                     return this.columnid_encomienda;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TipoPersonaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn TipoPersonaColumn {
+                get {
                     return this.columnTipoPersona;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RazonSocialColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn RazonSocialColumn {
+                get {
                     return this.columnRazonSocial;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TipoSociedadColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn TipoSociedadColumn {
+                get {
                     return this.columnTipoSociedad;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ApellidoColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn ApellidoColumn {
+                get {
                     return this.columnApellido;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NombresColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn NombresColumn {
+                get {
                     return this.columnNombres;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TipoDocColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn TipoDocColumn {
+                get {
                     return this.columnTipoDoc;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NroDocColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn NroDocColumn {
+                get {
                     return this.columnNroDoc;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TipoIIBBColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn TipoIIBBColumn {
+                get {
                     return this.columnTipoIIBB;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NroIIBBColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn NroIIBBColumn {
+                get {
                     return this.columnNroIIBB;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cuitColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn cuitColumn {
+                get {
                     return this.columncuit;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MuestraEnTitularesColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn MuestraEnTitularesColumn {
+                get {
                     return this.columnMuestraEnTitulares;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MuestraEnPlanchetaColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn MuestraEnPlanchetaColumn {
+                get {
                     return this.columnMuestraEnPlancheta;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EmailColumn
-            {
-                get
-                {
+            public global::System.Data.DataColumn EmailColumn {
+                get {
                     return this.columnEmail;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count
-            {
-                get
-                {
+            public int Count {
+                get {
                     return this.Rows.Count;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_TitularesRow this[int index]
-            {
-                get
-                {
+            public ANT_TitularesRow this[int index] {
+                get {
                     return ((ANT_TitularesRow)(this.Rows[index]));
                 }
             }
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_TitularesRowChangeEventHandler ANT_TitularesRowChanging;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_TitularesRowChangeEventHandler ANT_TitularesRowChanged;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_TitularesRowChangeEventHandler ANT_TitularesRowDeleting;
-
+            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event ANT_TitularesRowChangeEventHandler ANT_TitularesRowDeleted;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddANT_TitularesRow(ANT_TitularesRow row)
-            {
+            public void AddANT_TitularesRow(ANT_TitularesRow row) {
                 this.Rows.Add(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_TitularesRow AddANT_TitularesRow(int id_persona, int id_encomienda, string TipoPersona, string RazonSocial, string TipoSociedad, string Apellido, string Nombres, string TipoDoc, string NroDoc, string TipoIIBB, string NroIIBB, string cuit, int MuestraEnTitulares, int MuestraEnPlancheta, string Email)
-            {
+            public ANT_TitularesRow AddANT_TitularesRow(int id_persona, int id_encomienda, string TipoPersona, string RazonSocial, string TipoSociedad, string Apellido, string Nombres, string TipoDoc, string NroDoc, string TipoIIBB, string NroIIBB, string cuit, int MuestraEnTitulares, int MuestraEnPlancheta, string Email) {
                 ANT_TitularesRow rowANT_TitularesRow = ((ANT_TitularesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id_persona,
@@ -3136,27 +2695,24 @@ namespace Reporting.Datasets
                 this.Rows.Add(rowANT_TitularesRow);
                 return rowANT_TitularesRow;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone()
-            {
+            public override global::System.Data.DataTable Clone() {
                 ANT_TitularesDataTable cln = ((ANT_TitularesDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance()
-            {
+            protected override global::System.Data.DataTable CreateInstance() {
                 return new ANT_TitularesDataTable();
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars()
-            {
+            internal void InitVars() {
                 this.columnid_persona = base.Columns["id_persona"];
                 this.columnid_encomienda = base.Columns["id_encomienda"];
                 this.columnTipoPersona = base.Columns["TipoPersona"];
@@ -3173,11 +2729,10 @@ namespace Reporting.Datasets
                 this.columnMuestraEnPlancheta = base.Columns["MuestraEnPlancheta"];
                 this.columnEmail = base.Columns["Email"];
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass()
-            {
+            private void InitClass() {
                 this.columnid_persona = new global::System.Data.DataColumn("id_persona", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_persona);
                 this.columnid_encomienda = new global::System.Data.DataColumn("id_encomienda", typeof(int), null, global::System.Data.MappingType.Element);
@@ -3235,83 +2790,70 @@ namespace Reporting.Datasets
                 this.columnEmail.ReadOnly = true;
                 this.columnEmail.MaxLength = 70;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_TitularesRow NewANT_TitularesRow()
-            {
+            public ANT_TitularesRow NewANT_TitularesRow() {
                 return ((ANT_TitularesRow)(this.NewRow()));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-            {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new ANT_TitularesRow(builder);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType()
-            {
+            protected override global::System.Type GetRowType() {
                 return typeof(ANT_TitularesRow);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ANT_TitularesRowChanged != null))
-                {
+                if ((this.ANT_TitularesRowChanged != null)) {
                     this.ANT_TitularesRowChanged(this, new ANT_TitularesRowChangeEvent(((ANT_TitularesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ANT_TitularesRowChanging != null))
-                {
+                if ((this.ANT_TitularesRowChanging != null)) {
                     this.ANT_TitularesRowChanging(this, new ANT_TitularesRowChangeEvent(((ANT_TitularesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ANT_TitularesRowDeleted != null))
-                {
+                if ((this.ANT_TitularesRowDeleted != null)) {
                     this.ANT_TitularesRowDeleted(this, new ANT_TitularesRowChangeEvent(((ANT_TitularesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-            {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ANT_TitularesRowDeleting != null))
-                {
+                if ((this.ANT_TitularesRowDeleting != null)) {
                     this.ANT_TitularesRowDeleting(this, new ANT_TitularesRowChangeEvent(((ANT_TitularesRow)(e.Row)), e.Action));
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveANT_TitularesRow(ANT_TitularesRow row)
-            {
+            public void RemoveANT_TitularesRow(ANT_TitularesRow row) {
                 this.Rows.Remove(row);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-            {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsComprobanteAnt ds = new dsComprobanteAnt();
@@ -3336,43 +2878,34 @@ namespace Reporting.Datasets
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace))
-                {
+                if (xs.Contains(dsSchema.TargetNamespace)) {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try
-                    {
+                    try {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
-                        {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length))
-                            {
+                            if ((s1.Length == s2.Length)) {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length)
-                                            && (s1.ReadByte() == s2.ReadByte()));)
-                                {
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length))
-                                {
+                                if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally
-                    {
-                        if ((s1 != null))
-                        {
+                    finally {
+                        if ((s1 != null)) {
                             s1.Close();
                         }
-                        if ((s2 != null))
-                        {
+                        if ((s2 != null)) {
                             s2.Close();
                         }
                     }
@@ -3381,2132 +2914,1730 @@ namespace Reporting.Datasets
                 return type;
             }
         }
-
+        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ANT_Ubicaciones_PropiedadHorizontalRow : global::System.Data.DataRow
-        {
-
+        public partial class ANT_Ubicaciones_PropiedadHorizontalRow : global::System.Data.DataRow {
+            
             private ANT_Ubicaciones_PropiedadHorizontalDataTable tableANT_Ubicaciones_PropiedadHorizontal;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_PropiedadHorizontalRow(global::System.Data.DataRowBuilder rb) :
-                    base(rb)
-            {
+            internal ANT_Ubicaciones_PropiedadHorizontalRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
                 this.tableANT_Ubicaciones_PropiedadHorizontal = ((ANT_Ubicaciones_PropiedadHorizontalDataTable)(this.Table));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_ubicacion
-            {
-                get
-                {
+            public int id_ubicacion {
+                get {
                     return ((int)(this[this.tableANT_Ubicaciones_PropiedadHorizontal.id_ubicacionColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_PropiedadHorizontal.id_ubicacionColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int NroPartidaHorizontal
-            {
-                get
-                {
-                    try
-                    {
+            public int NroPartidaHorizontal {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones_PropiedadHorizontal.NroPartidaHorizontalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NroPartidaHorizontal\' in table \'ANT_Ubicaciones_PropiedadHo" +
                                 "rizontal\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_PropiedadHorizontal.NroPartidaHorizontalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string piso
-            {
-                get
-                {
-                    try
-                    {
+            public string piso {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones_PropiedadHorizontal.pisoColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'piso\' in table \'ANT_Ubicaciones_PropiedadHorizontal\' is DBN" +
                                 "ull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_PropiedadHorizontal.pisoColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string depto
-            {
-                get
-                {
-                    try
-                    {
+            public string depto {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones_PropiedadHorizontal.deptoColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'depto\' in table \'ANT_Ubicaciones_PropiedadHorizontal\' is DB" +
                                 "Null.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_PropiedadHorizontal.deptoColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string UnidadFuncional
-            {
-                get
-                {
-                    try
-                    {
+            public string UnidadFuncional {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones_PropiedadHorizontal.UnidadFuncionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'UnidadFuncional\' in table \'ANT_Ubicaciones_PropiedadHorizon" +
                                 "tal\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_PropiedadHorizontal.UnidadFuncionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNroPartidaHorizontalNull()
-            {
+            public bool IsNroPartidaHorizontalNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_PropiedadHorizontal.NroPartidaHorizontalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNroPartidaHorizontalNull()
-            {
+            public void SetNroPartidaHorizontalNull() {
                 this[this.tableANT_Ubicaciones_PropiedadHorizontal.NroPartidaHorizontalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IspisoNull()
-            {
+            public bool IspisoNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_PropiedadHorizontal.pisoColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetpisoNull()
-            {
+            public void SetpisoNull() {
                 this[this.tableANT_Ubicaciones_PropiedadHorizontal.pisoColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsdeptoNull()
-            {
+            public bool IsdeptoNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_PropiedadHorizontal.deptoColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetdeptoNull()
-            {
+            public void SetdeptoNull() {
                 this[this.tableANT_Ubicaciones_PropiedadHorizontal.deptoColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsUnidadFuncionalNull()
-            {
+            public bool IsUnidadFuncionalNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_PropiedadHorizontal.UnidadFuncionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetUnidadFuncionalNull()
-            {
+            public void SetUnidadFuncionalNull() {
                 this[this.tableANT_Ubicaciones_PropiedadHorizontal.UnidadFuncionalColumn] = global::System.Convert.DBNull;
             }
         }
-
+        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ANT_Ubicaciones_CoordenadasRow : global::System.Data.DataRow
-        {
-
+        public partial class ANT_Ubicaciones_CoordenadasRow : global::System.Data.DataRow {
+            
             private ANT_Ubicaciones_CoordenadasDataTable tableANT_Ubicaciones_Coordenadas;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_CoordenadasRow(global::System.Data.DataRowBuilder rb) :
-                    base(rb)
-            {
+            internal ANT_Ubicaciones_CoordenadasRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
                 this.tableANT_Ubicaciones_Coordenadas = ((ANT_Ubicaciones_CoordenadasDataTable)(this.Table));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_antubicacion
-            {
-                get
-                {
+            public int id_antubicacion {
+                get {
                     return ((int)(this[this.tableANT_Ubicaciones_Coordenadas.id_antubicacionColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Coordenadas.id_antubicacionColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int latitud_grados
-            {
-                get
-                {
+            public int latitud_grados {
+                get {
                     return ((int)(this[this.tableANT_Ubicaciones_Coordenadas.latitud_gradosColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Coordenadas.latitud_gradosColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int latitud_minutos
-            {
-                get
-                {
-                    try
-                    {
+            public int latitud_minutos {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones_Coordenadas.latitud_minutosColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'latitud_minutos\' in table \'ANT_Ubicaciones_Coordenadas\' is " +
                                 "DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Coordenadas.latitud_minutosColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int latitud_segundos
-            {
-                get
-                {
-                    try
-                    {
+            public int latitud_segundos {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones_Coordenadas.latitud_segundosColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'latitud_segundos\' in table \'ANT_Ubicaciones_Coordenadas\' is" +
                                 " DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Coordenadas.latitud_segundosColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int longitud_grados
-            {
-                get
-                {
+            public int longitud_grados {
+                get {
                     return ((int)(this[this.tableANT_Ubicaciones_Coordenadas.longitud_gradosColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Coordenadas.longitud_gradosColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int longitud_minutos
-            {
-                get
-                {
-                    try
-                    {
+            public int longitud_minutos {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones_Coordenadas.longitud_minutosColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'longitud_minutos\' in table \'ANT_Ubicaciones_Coordenadas\' is" +
                                 " DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Coordenadas.longitud_minutosColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int longitud_segundos
-            {
-                get
-                {
-                    try
-                    {
+            public int longitud_segundos {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones_Coordenadas.longitud_segundosColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'longitud_segundos\' in table \'ANT_Ubicaciones_Coordenadas\' i" +
                                 "s DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Coordenadas.longitud_segundosColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Islatitud_minutosNull()
-            {
+            public bool Islatitud_minutosNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_Coordenadas.latitud_minutosColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setlatitud_minutosNull()
-            {
+            public void Setlatitud_minutosNull() {
                 this[this.tableANT_Ubicaciones_Coordenadas.latitud_minutosColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Islatitud_segundosNull()
-            {
+            public bool Islatitud_segundosNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_Coordenadas.latitud_segundosColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setlatitud_segundosNull()
-            {
+            public void Setlatitud_segundosNull() {
                 this[this.tableANT_Ubicaciones_Coordenadas.latitud_segundosColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Islongitud_minutosNull()
-            {
+            public bool Islongitud_minutosNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_Coordenadas.longitud_minutosColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setlongitud_minutosNull()
-            {
+            public void Setlongitud_minutosNull() {
                 this[this.tableANT_Ubicaciones_Coordenadas.longitud_minutosColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Islongitud_segundosNull()
-            {
+            public bool Islongitud_segundosNull() {
                 return this.IsNull(this.tableANT_Ubicaciones_Coordenadas.longitud_segundosColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setlongitud_segundosNull()
-            {
+            public void Setlongitud_segundosNull() {
                 this[this.tableANT_Ubicaciones_Coordenadas.longitud_segundosColumn] = global::System.Convert.DBNull;
             }
         }
-
+        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ANT_Ubicaciones_PuertasRow : global::System.Data.DataRow
-        {
-
+        public partial class ANT_Ubicaciones_PuertasRow : global::System.Data.DataRow {
+            
             private ANT_Ubicaciones_PuertasDataTable tableANT_Ubicaciones_Puertas;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_PuertasRow(global::System.Data.DataRowBuilder rb) :
-                    base(rb)
-            {
+            internal ANT_Ubicaciones_PuertasRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
                 this.tableANT_Ubicaciones_Puertas = ((ANT_Ubicaciones_PuertasDataTable)(this.Table));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_antubicacion
-            {
-                get
-                {
+            public int id_antubicacion {
+                get {
                     return ((int)(this[this.tableANT_Ubicaciones_Puertas.id_antubicacionColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Puertas.id_antubicacionColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Calle
-            {
-                get
-                {
+            public string Calle {
+                get {
                     return ((string)(this[this.tableANT_Ubicaciones_Puertas.CalleColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Puertas.CalleColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int NroPuerta
-            {
-                get
-                {
+            public int NroPuerta {
+                get {
                     return ((int)(this[this.tableANT_Ubicaciones_Puertas.NroPuertaColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Puertas.NroPuertaColumn] = value;
                 }
             }
         }
-
+        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ANT_Ubicaciones_Via_PublicaRow : global::System.Data.DataRow
-        {
-
+        public partial class ANT_Ubicaciones_Via_PublicaRow : global::System.Data.DataRow {
+            
             private ANT_Ubicaciones_Via_PublicaDataTable tableANT_Ubicaciones_Via_Publica;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_Ubicaciones_Via_PublicaRow(global::System.Data.DataRowBuilder rb) :
-                    base(rb)
-            {
+            internal ANT_Ubicaciones_Via_PublicaRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
                 this.tableANT_Ubicaciones_Via_Publica = ((ANT_Ubicaciones_Via_PublicaDataTable)(this.Table));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string observaciones
-            {
-                get
-                {
+            public string observaciones {
+                get {
                     return ((string)(this[this.tableANT_Ubicaciones_Via_Publica.observacionesColumn]));
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones_Via_Publica.observacionesColumn] = value;
                 }
             }
         }
-
+        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ANT_UbicacionesRow : global::System.Data.DataRow
-        {
-
+        public partial class ANT_UbicacionesRow : global::System.Data.DataRow {
+            
             private ANT_UbicacionesDataTable tableANT_Ubicaciones;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_UbicacionesRow(global::System.Data.DataRowBuilder rb) :
-                    base(rb)
-            {
+            internal ANT_UbicacionesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
                 this.tableANT_Ubicaciones = ((ANT_UbicacionesDataTable)(this.Table));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_antubicacion
-            {
-                get
-                {
-                    try
-                    {
+            public int id_antubicacion {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones.id_antubicacionColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'id_antubicacion\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.id_antubicacionColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_encomienda
-            {
-                get
-                {
-                    try
-                    {
+            public int id_encomienda {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones.id_encomiendaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'id_encomienda\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.id_encomiendaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_ubicacion
-            {
-                get
-                {
-                    try
-                    {
+            public int id_ubicacion {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones.id_ubicacionColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'id_ubicacion\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.id_ubicacionColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Seccion
-            {
-                get
-                {
-                    try
-                    {
+            public int Seccion {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones.SeccionColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Seccion\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.SeccionColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Manzana
-            {
-                get
-                {
-                    try
-                    {
+            public string Manzana {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones.ManzanaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Manzana\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.ManzanaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string parcela
-            {
-                get
-                {
-                    try
-                    {
+            public string parcela {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones.parcelaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'parcela\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.parcelaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int NroPartidaMatriz
-            {
-                get
-                {
-                    try
-                    {
+            public int NroPartidaMatriz {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Ubicaciones.NroPartidaMatrizColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NroPartidaMatriz\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.NroPartidaMatrizColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string local_subtipoubicacion
-            {
-                get
-                {
-                    try
-                    {
+            public string local_subtipoubicacion {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones.local_subtipoubicacionColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'local_subtipoubicacion\' in table \'ANT_Ubicaciones\' is DBNul" +
                                 "l.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.local_subtipoubicacionColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ZonaParcela
-            {
-                get
-                {
-                    try
-                    {
+            public string ZonaParcela {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones.ZonaParcelaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ZonaParcela\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.ZonaParcelaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Direcciones
-            {
-                get
-                {
-                    try
-                    {
+            public string Direcciones {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones.DireccionesColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Direcciones\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.DireccionesColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DeptoLocal
-            {
-                get
-                {
-                    try
-                    {
+            public string DeptoLocal {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Ubicaciones.DeptoLocalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DeptoLocal\' in table \'ANT_Ubicaciones\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Ubicaciones.DeptoLocalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isid_antubicacionNull()
-            {
+            public bool Isid_antubicacionNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.id_antubicacionColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setid_antubicacionNull()
-            {
+            public void Setid_antubicacionNull() {
                 this[this.tableANT_Ubicaciones.id_antubicacionColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isid_encomiendaNull()
-            {
+            public bool Isid_encomiendaNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.id_encomiendaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setid_encomiendaNull()
-            {
+            public void Setid_encomiendaNull() {
                 this[this.tableANT_Ubicaciones.id_encomiendaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isid_ubicacionNull()
-            {
+            public bool Isid_ubicacionNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.id_ubicacionColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setid_ubicacionNull()
-            {
+            public void Setid_ubicacionNull() {
                 this[this.tableANT_Ubicaciones.id_ubicacionColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSeccionNull()
-            {
+            public bool IsSeccionNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.SeccionColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSeccionNull()
-            {
+            public void SetSeccionNull() {
                 this[this.tableANT_Ubicaciones.SeccionColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsManzanaNull()
-            {
+            public bool IsManzanaNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.ManzanaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetManzanaNull()
-            {
+            public void SetManzanaNull() {
                 this[this.tableANT_Ubicaciones.ManzanaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsparcelaNull()
-            {
+            public bool IsparcelaNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.parcelaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetparcelaNull()
-            {
+            public void SetparcelaNull() {
                 this[this.tableANT_Ubicaciones.parcelaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNroPartidaMatrizNull()
-            {
+            public bool IsNroPartidaMatrizNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.NroPartidaMatrizColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNroPartidaMatrizNull()
-            {
+            public void SetNroPartidaMatrizNull() {
                 this[this.tableANT_Ubicaciones.NroPartidaMatrizColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Islocal_subtipoubicacionNull()
-            {
+            public bool Islocal_subtipoubicacionNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.local_subtipoubicacionColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setlocal_subtipoubicacionNull()
-            {
+            public void Setlocal_subtipoubicacionNull() {
                 this[this.tableANT_Ubicaciones.local_subtipoubicacionColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsZonaParcelaNull()
-            {
+            public bool IsZonaParcelaNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.ZonaParcelaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetZonaParcelaNull()
-            {
+            public void SetZonaParcelaNull() {
                 this[this.tableANT_Ubicaciones.ZonaParcelaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDireccionesNull()
-            {
+            public bool IsDireccionesNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.DireccionesColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDireccionesNull()
-            {
+            public void SetDireccionesNull() {
                 this[this.tableANT_Ubicaciones.DireccionesColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDeptoLocalNull()
-            {
+            public bool IsDeptoLocalNull() {
                 return this.IsNull(this.tableANT_Ubicaciones.DeptoLocalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDeptoLocalNull()
-            {
+            public void SetDeptoLocalNull() {
                 this[this.tableANT_Ubicaciones.DeptoLocalColumn] = global::System.Convert.DBNull;
             }
         }
-
+        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DatosCabeceraRow : global::System.Data.DataRow
-        {
-
+        public partial class DatosCabeceraRow : global::System.Data.DataRow {
+            
             private DatosCabeceraDataTable tableDatosCabecera;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DatosCabeceraRow(global::System.Data.DataRowBuilder rb) :
-                    base(rb)
-            {
+            internal DatosCabeceraRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
                 this.tableDatosCabecera = ((DatosCabeceraDataTable)(this.Table));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_encomienda
-            {
-                get
-                {
-                    try
-                    {
+            public int id_encomienda {
+                get {
+                    try {
                         return ((int)(this[this.tableDatosCabecera.id_encomiendaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'id_encomienda\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.id_encomiendaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_profesional
-            {
-                get
-                {
-                    try
-                    {
+            public int id_profesional {
+                get {
+                    try {
                         return ((int)(this[this.tableDatosCabecera.id_profesionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'id_profesional\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.id_profesionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime FechaEncomienda
-            {
-                get
-                {
-                    try
-                    {
+            public System.DateTime FechaEncomienda {
+                get {
+                    try {
                         return ((global::System.DateTime)(this[this.tableDatosCabecera.FechaEncomiendaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'FechaEncomienda\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.FechaEncomiendaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string tipoTramite
-            {
-                get
-                {
-                    try
-                    {
+            public string tipoTramite {
+                get {
+                    try {
                         return ((string)(this[this.tableDatosCabecera.tipoTramiteColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'tipoTramite\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.tipoTramiteColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ApellidoProfesional
-            {
-                get
-                {
-                    try
-                    {
+            public string ApellidoProfesional {
+                get {
+                    try {
                         return ((string)(this[this.tableDatosCabecera.ApellidoProfesionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ApellidoProfesional\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.ApellidoProfesionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NombresProfesional
-            {
-                get
-                {
-                    try
-                    {
+            public string NombresProfesional {
+                get {
+                    try {
                         return ((string)(this[this.tableDatosCabecera.NombresProfesionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NombresProfesional\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.NombresProfesionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string MatriculaProfesional
-            {
-                get
-                {
-                    try
-                    {
+            public string MatriculaProfesional {
+                get {
+                    try {
                         return ((string)(this[this.tableDatosCabecera.MatriculaProfesionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'MatriculaProfesional\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.MatriculaProfesionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ConsejoProfesional
-            {
-                get
-                {
-                    try
-                    {
+            public string ConsejoProfesional {
+                get {
+                    try {
                         return ((string)(this[this.tableDatosCabecera.ConsejoProfesionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ConsejoProfesional\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.ConsejoProfesionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CodigoSeguridad
-            {
-                get
-                {
-                    try
-                    {
+            public string CodigoSeguridad {
+                get {
+                    try {
                         return ((string)(this[this.tableDatosCabecera.CodigoSeguridadColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'CodigoSeguridad\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.CodigoSeguridadColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string tipoDocProfesional
-            {
-                get
-                {
-                    try
-                    {
+            public string tipoDocProfesional {
+                get {
+                    try {
                         return ((string)(this[this.tableDatosCabecera.tipoDocProfesionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'tipoDocProfesional\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.tipoDocProfesionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int nroDocProfesional
-            {
-                get
-                {
-                    try
-                    {
+            public int nroDocProfesional {
+                get {
+                    try {
                         return ((int)(this[this.tableDatosCabecera.nroDocProfesionalColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'nroDocProfesional\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.nroDocProfesionalColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte[] logo_consejo
-            {
-                get
-                {
-                    try
-                    {
+            public byte[] logo_consejo {
+                get {
+                    try {
                         return ((byte[])(this[this.tableDatosCabecera.logo_consejoColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'logo_consejo\' in table \'DatosCabecera\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableDatosCabecera.logo_consejoColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isid_encomiendaNull()
-            {
+            public bool Isid_encomiendaNull() {
                 return this.IsNull(this.tableDatosCabecera.id_encomiendaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setid_encomiendaNull()
-            {
+            public void Setid_encomiendaNull() {
                 this[this.tableDatosCabecera.id_encomiendaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isid_profesionalNull()
-            {
+            public bool Isid_profesionalNull() {
                 return this.IsNull(this.tableDatosCabecera.id_profesionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setid_profesionalNull()
-            {
+            public void Setid_profesionalNull() {
                 this[this.tableDatosCabecera.id_profesionalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsFechaEncomiendaNull()
-            {
+            public bool IsFechaEncomiendaNull() {
                 return this.IsNull(this.tableDatosCabecera.FechaEncomiendaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetFechaEncomiendaNull()
-            {
+            public void SetFechaEncomiendaNull() {
                 this[this.tableDatosCabecera.FechaEncomiendaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IstipoTramiteNull()
-            {
+            public bool IstipoTramiteNull() {
                 return this.IsNull(this.tableDatosCabecera.tipoTramiteColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SettipoTramiteNull()
-            {
+            public void SettipoTramiteNull() {
                 this[this.tableDatosCabecera.tipoTramiteColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsApellidoProfesionalNull()
-            {
+            public bool IsApellidoProfesionalNull() {
                 return this.IsNull(this.tableDatosCabecera.ApellidoProfesionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetApellidoProfesionalNull()
-            {
+            public void SetApellidoProfesionalNull() {
                 this[this.tableDatosCabecera.ApellidoProfesionalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNombresProfesionalNull()
-            {
+            public bool IsNombresProfesionalNull() {
                 return this.IsNull(this.tableDatosCabecera.NombresProfesionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNombresProfesionalNull()
-            {
+            public void SetNombresProfesionalNull() {
                 this[this.tableDatosCabecera.NombresProfesionalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsMatriculaProfesionalNull()
-            {
+            public bool IsMatriculaProfesionalNull() {
                 return this.IsNull(this.tableDatosCabecera.MatriculaProfesionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetMatriculaProfesionalNull()
-            {
+            public void SetMatriculaProfesionalNull() {
                 this[this.tableDatosCabecera.MatriculaProfesionalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsConsejoProfesionalNull()
-            {
+            public bool IsConsejoProfesionalNull() {
                 return this.IsNull(this.tableDatosCabecera.ConsejoProfesionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetConsejoProfesionalNull()
-            {
+            public void SetConsejoProfesionalNull() {
                 this[this.tableDatosCabecera.ConsejoProfesionalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCodigoSeguridadNull()
-            {
+            public bool IsCodigoSeguridadNull() {
                 return this.IsNull(this.tableDatosCabecera.CodigoSeguridadColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCodigoSeguridadNull()
-            {
+            public void SetCodigoSeguridadNull() {
                 this[this.tableDatosCabecera.CodigoSeguridadColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IstipoDocProfesionalNull()
-            {
+            public bool IstipoDocProfesionalNull() {
                 return this.IsNull(this.tableDatosCabecera.tipoDocProfesionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SettipoDocProfesionalNull()
-            {
+            public void SettipoDocProfesionalNull() {
                 this[this.tableDatosCabecera.tipoDocProfesionalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsnroDocProfesionalNull()
-            {
+            public bool IsnroDocProfesionalNull() {
                 return this.IsNull(this.tableDatosCabecera.nroDocProfesionalColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetnroDocProfesionalNull()
-            {
+            public void SetnroDocProfesionalNull() {
                 this[this.tableDatosCabecera.nroDocProfesionalColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Islogo_consejoNull()
-            {
+            public bool Islogo_consejoNull() {
                 return this.IsNull(this.tableDatosCabecera.logo_consejoColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setlogo_consejoNull()
-            {
+            public void Setlogo_consejoNull() {
                 this[this.tableDatosCabecera.logo_consejoColumn] = global::System.Convert.DBNull;
             }
         }
-
+        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ANT_TitularesRow : global::System.Data.DataRow
-        {
-
+        public partial class ANT_TitularesRow : global::System.Data.DataRow {
+            
             private ANT_TitularesDataTable tableANT_Titulares;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ANT_TitularesRow(global::System.Data.DataRowBuilder rb) :
-                    base(rb)
-            {
+            internal ANT_TitularesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
                 this.tableANT_Titulares = ((ANT_TitularesDataTable)(this.Table));
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_persona
-            {
-                get
-                {
-                    try
-                    {
+            public int id_persona {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Titulares.id_personaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'id_persona\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.id_personaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_encomienda
-            {
-                get
-                {
-                    try
-                    {
+            public int id_encomienda {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Titulares.id_encomiendaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'id_encomienda\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.id_encomiendaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string TipoPersona
-            {
-                get
-                {
-                    try
-                    {
+            public string TipoPersona {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.TipoPersonaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'TipoPersona\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.TipoPersonaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string RazonSocial
-            {
-                get
-                {
-                    try
-                    {
+            public string RazonSocial {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.RazonSocialColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'RazonSocial\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.RazonSocialColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string TipoSociedad
-            {
-                get
-                {
-                    try
-                    {
+            public string TipoSociedad {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.TipoSociedadColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'TipoSociedad\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.TipoSociedadColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Apellido
-            {
-                get
-                {
-                    try
-                    {
+            public string Apellido {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.ApellidoColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Apellido\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.ApellidoColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Nombres
-            {
-                get
-                {
-                    try
-                    {
+            public string Nombres {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.NombresColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Nombres\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.NombresColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string TipoDoc
-            {
-                get
-                {
-                    try
-                    {
+            public string TipoDoc {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.TipoDocColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'TipoDoc\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.TipoDocColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NroDoc
-            {
-                get
-                {
-                    try
-                    {
+            public string NroDoc {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.NroDocColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NroDoc\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.NroDocColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string TipoIIBB
-            {
-                get
-                {
-                    try
-                    {
+            public string TipoIIBB {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.TipoIIBBColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'TipoIIBB\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.TipoIIBBColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NroIIBB
-            {
-                get
-                {
-                    try
-                    {
+            public string NroIIBB {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.NroIIBBColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NroIIBB\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.NroIIBBColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string cuit
-            {
-                get
-                {
-                    try
-                    {
+            public string cuit {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.cuitColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'cuit\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.cuitColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int MuestraEnTitulares
-            {
-                get
-                {
-                    try
-                    {
+            public int MuestraEnTitulares {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Titulares.MuestraEnTitularesColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'MuestraEnTitulares\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.MuestraEnTitularesColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int MuestraEnPlancheta
-            {
-                get
-                {
-                    try
-                    {
+            public int MuestraEnPlancheta {
+                get {
+                    try {
                         return ((int)(this[this.tableANT_Titulares.MuestraEnPlanchetaColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'MuestraEnPlancheta\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.MuestraEnPlanchetaColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Email
-            {
-                get
-                {
-                    try
-                    {
+            public string Email {
+                get {
+                    try {
                         return ((string)(this[this.tableANT_Titulares.EmailColumn]));
                     }
-                    catch (global::System.InvalidCastException e)
-                    {
+                    catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Email\' in table \'ANT_Titulares\' is DBNull.", e);
                     }
                 }
-                set
-                {
+                set {
                     this[this.tableANT_Titulares.EmailColumn] = value;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isid_personaNull()
-            {
+            public bool Isid_personaNull() {
                 return this.IsNull(this.tableANT_Titulares.id_personaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setid_personaNull()
-            {
+            public void Setid_personaNull() {
                 this[this.tableANT_Titulares.id_personaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isid_encomiendaNull()
-            {
+            public bool Isid_encomiendaNull() {
                 return this.IsNull(this.tableANT_Titulares.id_encomiendaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setid_encomiendaNull()
-            {
+            public void Setid_encomiendaNull() {
                 this[this.tableANT_Titulares.id_encomiendaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsTipoPersonaNull()
-            {
+            public bool IsTipoPersonaNull() {
                 return this.IsNull(this.tableANT_Titulares.TipoPersonaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetTipoPersonaNull()
-            {
+            public void SetTipoPersonaNull() {
                 this[this.tableANT_Titulares.TipoPersonaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRazonSocialNull()
-            {
+            public bool IsRazonSocialNull() {
                 return this.IsNull(this.tableANT_Titulares.RazonSocialColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRazonSocialNull()
-            {
+            public void SetRazonSocialNull() {
                 this[this.tableANT_Titulares.RazonSocialColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsTipoSociedadNull()
-            {
+            public bool IsTipoSociedadNull() {
                 return this.IsNull(this.tableANT_Titulares.TipoSociedadColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetTipoSociedadNull()
-            {
+            public void SetTipoSociedadNull() {
                 this[this.tableANT_Titulares.TipoSociedadColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsApellidoNull()
-            {
+            public bool IsApellidoNull() {
                 return this.IsNull(this.tableANT_Titulares.ApellidoColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetApellidoNull()
-            {
+            public void SetApellidoNull() {
                 this[this.tableANT_Titulares.ApellidoColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNombresNull()
-            {
+            public bool IsNombresNull() {
                 return this.IsNull(this.tableANT_Titulares.NombresColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNombresNull()
-            {
+            public void SetNombresNull() {
                 this[this.tableANT_Titulares.NombresColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsTipoDocNull()
-            {
+            public bool IsTipoDocNull() {
                 return this.IsNull(this.tableANT_Titulares.TipoDocColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetTipoDocNull()
-            {
+            public void SetTipoDocNull() {
                 this[this.tableANT_Titulares.TipoDocColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNroDocNull()
-            {
+            public bool IsNroDocNull() {
                 return this.IsNull(this.tableANT_Titulares.NroDocColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNroDocNull()
-            {
+            public void SetNroDocNull() {
                 this[this.tableANT_Titulares.NroDocColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsTipoIIBBNull()
-            {
+            public bool IsTipoIIBBNull() {
                 return this.IsNull(this.tableANT_Titulares.TipoIIBBColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetTipoIIBBNull()
-            {
+            public void SetTipoIIBBNull() {
                 this[this.tableANT_Titulares.TipoIIBBColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNroIIBBNull()
-            {
+            public bool IsNroIIBBNull() {
                 return this.IsNull(this.tableANT_Titulares.NroIIBBColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNroIIBBNull()
-            {
+            public void SetNroIIBBNull() {
                 this[this.tableANT_Titulares.NroIIBBColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IscuitNull()
-            {
+            public bool IscuitNull() {
                 return this.IsNull(this.tableANT_Titulares.cuitColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetcuitNull()
-            {
+            public void SetcuitNull() {
                 this[this.tableANT_Titulares.cuitColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsMuestraEnTitularesNull()
-            {
+            public bool IsMuestraEnTitularesNull() {
                 return this.IsNull(this.tableANT_Titulares.MuestraEnTitularesColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetMuestraEnTitularesNull()
-            {
+            public void SetMuestraEnTitularesNull() {
                 this[this.tableANT_Titulares.MuestraEnTitularesColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsMuestraEnPlanchetaNull()
-            {
+            public bool IsMuestraEnPlanchetaNull() {
                 return this.IsNull(this.tableANT_Titulares.MuestraEnPlanchetaColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetMuestraEnPlanchetaNull()
-            {
+            public void SetMuestraEnPlanchetaNull() {
                 this[this.tableANT_Titulares.MuestraEnPlanchetaColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsEmailNull()
-            {
+            public bool IsEmailNull() {
                 return this.IsNull(this.tableANT_Titulares.EmailColumn);
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetEmailNull()
-            {
+            public void SetEmailNull() {
                 this[this.tableANT_Titulares.EmailColumn] = global::System.Convert.DBNull;
             }
         }
-
+        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent : global::System.EventArgs
-        {
-
+        public class ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent : global::System.EventArgs {
+            
             private ANT_Ubicaciones_PropiedadHorizontalRow eventRow;
-
+            
             private global::System.Data.DataRowAction eventAction;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent(ANT_Ubicaciones_PropiedadHorizontalRow row, global::System.Data.DataRowAction action)
-            {
+            public ANT_Ubicaciones_PropiedadHorizontalRowChangeEvent(ANT_Ubicaciones_PropiedadHorizontalRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PropiedadHorizontalRow Row
-            {
-                get
-                {
+            public ANT_Ubicaciones_PropiedadHorizontalRow Row {
+                get {
                     return this.eventRow;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action
-            {
-                get
-                {
+            public global::System.Data.DataRowAction Action {
+                get {
                     return this.eventAction;
                 }
             }
         }
-
+        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ANT_Ubicaciones_CoordenadasRowChangeEvent : global::System.EventArgs
-        {
-
+        public class ANT_Ubicaciones_CoordenadasRowChangeEvent : global::System.EventArgs {
+            
             private ANT_Ubicaciones_CoordenadasRow eventRow;
-
+            
             private global::System.Data.DataRowAction eventAction;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_CoordenadasRowChangeEvent(ANT_Ubicaciones_CoordenadasRow row, global::System.Data.DataRowAction action)
-            {
+            public ANT_Ubicaciones_CoordenadasRowChangeEvent(ANT_Ubicaciones_CoordenadasRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_CoordenadasRow Row
-            {
-                get
-                {
+            public ANT_Ubicaciones_CoordenadasRow Row {
+                get {
                     return this.eventRow;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action
-            {
-                get
-                {
+            public global::System.Data.DataRowAction Action {
+                get {
                     return this.eventAction;
                 }
             }
         }
-
+        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ANT_Ubicaciones_PuertasRowChangeEvent : global::System.EventArgs
-        {
-
+        public class ANT_Ubicaciones_PuertasRowChangeEvent : global::System.EventArgs {
+            
             private ANT_Ubicaciones_PuertasRow eventRow;
-
+            
             private global::System.Data.DataRowAction eventAction;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PuertasRowChangeEvent(ANT_Ubicaciones_PuertasRow row, global::System.Data.DataRowAction action)
-            {
+            public ANT_Ubicaciones_PuertasRowChangeEvent(ANT_Ubicaciones_PuertasRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_PuertasRow Row
-            {
-                get
-                {
+            public ANT_Ubicaciones_PuertasRow Row {
+                get {
                     return this.eventRow;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action
-            {
-                get
-                {
+            public global::System.Data.DataRowAction Action {
+                get {
                     return this.eventAction;
                 }
             }
         }
-
+        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ANT_Ubicaciones_Via_PublicaRowChangeEvent : global::System.EventArgs
-        {
-
+        public class ANT_Ubicaciones_Via_PublicaRowChangeEvent : global::System.EventArgs {
+            
             private ANT_Ubicaciones_Via_PublicaRow eventRow;
-
+            
             private global::System.Data.DataRowAction eventAction;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_Via_PublicaRowChangeEvent(ANT_Ubicaciones_Via_PublicaRow row, global::System.Data.DataRowAction action)
-            {
+            public ANT_Ubicaciones_Via_PublicaRowChangeEvent(ANT_Ubicaciones_Via_PublicaRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_Ubicaciones_Via_PublicaRow Row
-            {
-                get
-                {
+            public ANT_Ubicaciones_Via_PublicaRow Row {
+                get {
                     return this.eventRow;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action
-            {
-                get
-                {
+            public global::System.Data.DataRowAction Action {
+                get {
                     return this.eventAction;
                 }
             }
         }
-
+        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ANT_UbicacionesRowChangeEvent : global::System.EventArgs
-        {
-
+        public class ANT_UbicacionesRowChangeEvent : global::System.EventArgs {
+            
             private ANT_UbicacionesRow eventRow;
-
+            
             private global::System.Data.DataRowAction eventAction;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_UbicacionesRowChangeEvent(ANT_UbicacionesRow row, global::System.Data.DataRowAction action)
-            {
+            public ANT_UbicacionesRowChangeEvent(ANT_UbicacionesRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_UbicacionesRow Row
-            {
-                get
-                {
+            public ANT_UbicacionesRow Row {
+                get {
                     return this.eventRow;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action
-            {
-                get
-                {
+            public global::System.Data.DataRowAction Action {
+                get {
                     return this.eventAction;
                 }
             }
         }
-
+        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class DatosCabeceraRowChangeEvent : global::System.EventArgs
-        {
-
+        public class DatosCabeceraRowChangeEvent : global::System.EventArgs {
+            
             private DatosCabeceraRow eventRow;
-
+            
             private global::System.Data.DataRowAction eventAction;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DatosCabeceraRowChangeEvent(DatosCabeceraRow row, global::System.Data.DataRowAction action)
-            {
+            public DatosCabeceraRowChangeEvent(DatosCabeceraRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DatosCabeceraRow Row
-            {
-                get
-                {
+            public DatosCabeceraRow Row {
+                get {
                     return this.eventRow;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action
-            {
-                get
-                {
+            public global::System.Data.DataRowAction Action {
+                get {
                     return this.eventAction;
                 }
             }
         }
-
+        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ANT_TitularesRowChangeEvent : global::System.EventArgs
-        {
-
+        public class ANT_TitularesRowChangeEvent : global::System.EventArgs {
+            
             private ANT_TitularesRow eventRow;
-
+            
             private global::System.Data.DataRowAction eventAction;
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_TitularesRowChangeEvent(ANT_TitularesRow row, global::System.Data.DataRowAction action)
-            {
+            public ANT_TitularesRowChangeEvent(ANT_TitularesRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ANT_TitularesRow Row
-            {
-                get
-                {
+            public ANT_TitularesRow Row {
+                get {
                     return this.eventRow;
                 }
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action
-            {
-                get
-                {
+            public global::System.Data.DataRowAction Action {
+                get {
                     return this.eventAction;
                 }
             }
