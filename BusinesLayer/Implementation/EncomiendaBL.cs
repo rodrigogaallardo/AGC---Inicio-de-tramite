@@ -3096,42 +3096,42 @@ namespace BusinesLayer.Implementation
                             cs.id_tipo_sobrecarga = certSobre.id_tipo_sobrecarga;
                             int id_sobrecarga = blCertSobre.Insert(cs);
 
-                            EncomiendaSobrecargaDetalle1BL blSob1 = new EncomiendaSobrecargaDetalle1BL();
-                            EncomiendaSobrecargaDetalle2BL blSob2 = new EncomiendaSobrecargaDetalle2BL();
-                            var listSob1 = blSob1.GetByFKIdSobrecarga(certSobre.id_sobrecarga);
-                            foreach (var sob1 in listSob1)
-                            {
-                                EncomiendaSobrecargaDetalle1DTO s1 = new EncomiendaSobrecargaDetalle1DTO();
-                                s1.detalle = sob1.detalle;
-                                s1.id_sobrecarga = id_sobrecarga;
-                                s1.id_tipo_destino = sob1.id_tipo_destino;
-                                s1.id_tipo_uso = sob1.id_tipo_uso;
-                                s1.losa_sobre = sob1.losa_sobre;
-                                s1.valor = sob1.valor;
-                                var pl = listPlantas.Where(x => x.id_encomiendatiposector == sob1.id_encomiendatiposector).First();
-                                int id_encomiendatiposector = 0;
-                                foreach (var p in listPlantasNew)
-                                {
-                                    if (p.IdTipoSector == pl.IdTipoSector && p.Descripcion == pl.Descripcion)
-                                    {
-                                        id_encomiendatiposector = p.id_encomiendatiposector;
-                                        break;
-                                    }
-                                }
-                                s1.id_encomiendatiposector = id_encomiendatiposector;
-                                int id_sobrecarga_detalle1 = blSob1.Insert(s1);
-                                var listSob2 = blSob2.GetByFKIdSobrecargaDetalle1(sob1.id_sobrecarga_detalle1);
-                                foreach (var sob2 in listSob2)
-                                {
-                                    EncomiendaSobrecargaDetalle2DTO s2 = new EncomiendaSobrecargaDetalle2DTO();
-                                    s2.id_sobrecarga_detalle1 = id_sobrecarga_detalle1;
-                                    s2.id_tipo_uso_1 = sob2.id_tipo_uso_1;
-                                    s2.id_tipo_uso_2 = sob2.id_tipo_uso_2;
-                                    s2.valor_1 = sob2.valor_1;
-                                    s2.valor_2 = sob2.valor_2;
-                                    blSob2.Insert(s2);
-                                }
-                            }
+                            //EncomiendaSobrecargaDetalle1BL blSob1 = new EncomiendaSobrecargaDetalle1BL();
+                            //EncomiendaSobrecargaDetalle2BL blSob2 = new EncomiendaSobrecargaDetalle2BL();
+                            //var listSob1 = blSob1.GetByFKIdSobrecarga(certSobre.id_sobrecarga);
+                            //foreach (var sob1 in listSob1)
+                            //{
+                            //    EncomiendaSobrecargaDetalle1DTO s1 = new EncomiendaSobrecargaDetalle1DTO();
+                            //    s1.detalle = sob1.detalle;
+                            //    s1.id_sobrecarga = id_sobrecarga;
+                            //    s1.id_tipo_destino = sob1.id_tipo_destino;
+                            //    s1.id_tipo_uso = sob1.id_tipo_uso;
+                            //    s1.losa_sobre = sob1.losa_sobre;
+                            //    s1.valor = sob1.valor;
+                            //    var pl = listPlantas.Where(x => x.id_encomiendatiposector == sob1.id_encomiendatiposector).First();
+                            //    int id_encomiendatiposector = 0;
+                            //    foreach (var p in listPlantasNew)
+                            //    {
+                            //        if (p.IdTipoSector == pl.IdTipoSector && p.Descripcion == pl.Descripcion)
+                            //        {
+                            //            id_encomiendatiposector = p.id_encomiendatiposector;
+                            //            break;
+                            //        }
+                            //    }
+                            //    s1.id_encomiendatiposector = id_encomiendatiposector;
+                            //    int id_sobrecarga_detalle1 = blSob1.Insert(s1);
+                            //    var listSob2 = blSob2.GetByFKIdSobrecargaDetalle1(sob1.id_sobrecarga_detalle1);
+                            //    foreach (var sob2 in listSob2)
+                            //    {
+                            //        EncomiendaSobrecargaDetalle2DTO s2 = new EncomiendaSobrecargaDetalle2DTO();
+                            //        s2.id_sobrecarga_detalle1 = id_sobrecarga_detalle1;
+                            //        s2.id_tipo_uso_1 = sob2.id_tipo_uso_1;
+                            //        s2.id_tipo_uso_2 = sob2.id_tipo_uso_2;
+                            //        s2.valor_1 = sob2.valor_1;
+                            //        s2.valor_2 = sob2.valor_2;
+                            //        blSob2.Insert(s2);
+                            //    }
+                            //}
 
                         }
                         #endregion
@@ -4102,9 +4102,9 @@ namespace BusinesLayer.Implementation
 
                 #region "Validación de sobrecarga"
 
-                if (enc.id_tipotramite != (int)Constantes.TipoDeTramite.RedistribucionDeUso
-                    && datosLocal.sobrecarga_corresponde_dl && !datosLocal.Encomienda_Certificado_Sobrecarga.Any(x => x.Encomienda_Sobrecarga_Detalle1.Any()))
-                    listaErrores.Add(Errors.ENCOMIENDA_FALTA_SOBRECARGA);
+                //if (enc.id_tipotramite != (int)Constantes.TipoDeTramite.RedistribucionDeUso
+                //    && datosLocal.sobrecarga_corresponde_dl && !datosLocal.Encomienda_Certificado_Sobrecarga.Any(x => x.Encomienda_Sobrecarga_Detalle1.Any()))
+                //    listaErrores.Add(Errors.ENCOMIENDA_FALTA_SOBRECARGA);
 
                 #endregion
 
