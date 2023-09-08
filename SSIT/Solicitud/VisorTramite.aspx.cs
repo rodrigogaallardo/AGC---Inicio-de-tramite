@@ -98,16 +98,9 @@ namespace SSIT
                     divbtnImprimirSolicitud.Visible = false;
             }
             #region ASOSA ASYNC
-            RegisterAsyncTask(new PageAsyncTask(Goku));
             //GetBUIsCAA(200001);
             //List<GetCAAsByEncomiendasResponse> l2 = await GetBUIsCAA(200001);
             #endregion
-        }
-
-        private async Task<List<GetBUIsCAAResponse>> Goku()
-        {
-            List<GetBUIsCAAResponse> l2 = await GetBUIsCAA(200001);
-            return l2;
         }
 
         private   void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
@@ -287,9 +280,24 @@ namespace SSIT
 
 
                     #region ASOSA ASYNC
-                    GetBUIsCAA(200001);
+                    //GetBUIsCAA(200001);
                     //List<GetCAAsByEncomiendasResponse> l2 = await  GetCAAsByEncomiendas(lst_id_Encomiendas);
                     #endregion
+
+                    #region krasorx async
+                    List<GetCAAsByEncomiendasResponse> lstCaa = null;
+                    RegisterAsyncTask(new PageAsyncTask(async () =>
+                    {
+                        lstCaa = await GetCAAsByEncomiendas(lst_id_Encomiendas);
+                    }));
+                    ExecuteRegisteredAsyncTasks();
+                    #endregion
+
+                    var caaActualTest = lstCaa.Where
+                        (y => y.id_estado
+                            .Equals((int)Constantes.CAA_EstadoSolicitud.Aprobado))
+                            .OrderByDescending(o => o.id_tad)
+                            .FirstOrDefault();
 
                     var caaActual = l.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(o => o.id_caa).FirstOrDefault();
 
@@ -316,11 +324,11 @@ namespace SSIT
         }
 
         #region ASOSA ASYNC
-        private async Task GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        private async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             List<GetCAAsByEncomiendasResponse> l2 = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
-
+            return l2;
         }
         private async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
         {
