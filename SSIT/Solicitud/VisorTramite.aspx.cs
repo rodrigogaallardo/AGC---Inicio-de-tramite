@@ -98,9 +98,16 @@ namespace SSIT
                     divbtnImprimirSolicitud.Visible = false;
             }
             #region ASOSA ASYNC
+            RegisterAsyncTask(new PageAsyncTask(Goku));
             //GetBUIsCAA(200001);
             //List<GetCAAsByEncomiendasResponse> l2 = await GetBUIsCAA(200001);
             #endregion
+        }
+
+        private async Task<List<GetBUIsCAAResponse>> Goku()
+        {
+            List<GetBUIsCAAResponse> l2 = await GetBUIsCAA(200001);
+            return l2;
         }
 
         private   void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
@@ -315,11 +322,11 @@ namespace SSIT
             List<GetCAAsByEncomiendasResponse> l2 = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
 
         }
-        private async Task GetBUIsCAA(int id_solicitud)
+        private async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             List<GetBUIsCAAResponse> l2 = await apraSrvRest.GetBUIsCAA(id_solicitud);
-           
+            return l2;
         }
         #endregion
         private void CargarDatos(SSITSolicitudesDTO sol)
