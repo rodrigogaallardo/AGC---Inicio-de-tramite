@@ -167,8 +167,8 @@ namespace SSIT.Account
         public string codigoTelefonoPais { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-        public int usuarioCreacion { get; set; }
-        public long fechaAlta { get; set; }
+        public int? usuarioCreacion { get; set; }
+        public long? fechaAlta { get; set; }
         public object usuarioModificacion { get; set; }
         public long fechaModificacion { get; set; }
         public string tipoPersona { get; set; }
