@@ -2605,10 +2605,8 @@ namespace BusinesLayer.Implementation
             return enc.AcogeBeneficios;
         }
 
-        public bool ObtenerObservacionLibradoUsoOblea(int id_solicitud, ref string observacion)
+        public string ObtenerObservacionLibradoUsoOblea(int id_solicitud)
         {
-            bool tieneObservacion = false;
-            observacion = string.Empty;
             string observacionLibrado = string.Empty;
             DateTime? fechaLibrado;
 
@@ -2623,9 +2621,9 @@ namespace BusinesLayer.Implementation
                     uowF = new TransactionScopeUnitOfWorkFactory();
                     repo = new SSITSolicitudesRepository(this.uowF.GetUnitOfWork());
                     observacionLibrado = repo.ObtenerObservacionLibradoUsoOblea(id_solicitud);
-                    if (observacionLibrado != null)
+                    if (string.IsNullOrEmpty(observacionLibrado))
                     {
-                        tieneObservacion = true;
+                        return null;
                     }
                 }
                 catch (Exception ex)
@@ -2633,7 +2631,7 @@ namespace BusinesLayer.Implementation
                     throw ex;
                 }
             }
-            return tieneObservacion;
+            return observacionLibrado;
         }
     }
 }

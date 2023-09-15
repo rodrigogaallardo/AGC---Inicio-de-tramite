@@ -111,7 +111,7 @@
                     </td>
                 </tr>
                 <tr>
-                   <td> <asp:Label ID="ObservLibradoUso" Text="Observaciones del Librado al Uso" runat="server" Visible="true" /></td>
+                   <td> <asp:Label ID="ObservLibradoUso" Text="Observaciones del Librado al Uso:" runat="server" Visible="true" /></td>
                     <td colspan="3">
                         <b>
                             <asp:Label ID="lblObservacionesLibrarUso" runat="server"></asp:Label>

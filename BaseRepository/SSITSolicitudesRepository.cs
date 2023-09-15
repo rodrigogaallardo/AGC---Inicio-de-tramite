@@ -524,53 +524,32 @@ namespace BaseRepository
         {
             string observacion = string.Empty;
 
-            var query = _unitOfWork.Db.SGI_Tramites_Tareas_HAB
-                        .Where(tth => tth.id_solicitud == idSolicitud)
-                        .Join(_unitOfWork.Db.SGI_Tarea_Calificar,
-                              tth => tth.id_tramitetarea,
-                              tc => tc.id_tramitetarea,
-                              (tth, tc) => new { Tarea = tth, Calificacion = tc })
-                        .Where(joinResult => joinResult.Calificacion.Observaciones_LibradoUso != null)
-                        .Select(joinResult => new
-                        {
-                            Observaciones_LibradoUso = joinResult.Calificacion.Observaciones_LibradoUso,
-                            CreateDate = joinResult.Calificacion.CreateDate
-                        })
-                        .Union(
-                            _unitOfWork.Db.SGI_Tramites_Tareas_HAB
-                                .Where(tth => tth.id_solicitud == idSolicitud)
-                                .Join(_unitOfWork.Db.SGI_Tarea_Revision_Gerente,
-                                      tth => tth.id_tramitetarea,
-                                      trg => trg.id_tramitetarea,
-                                      (tth, trg) => new { Tarea = tth, Calificacion = trg })
-                                .Where(joinResult => joinResult.Calificacion.Observaciones_LibradoUso != null)
-                                .Select(joinResult => new
-                                {
-                                    Observaciones_LibradoUso = joinResult.Calificacion.Observaciones_LibradoUso,
-                                    CreateDate = joinResult.Calificacion.CreateDate
-                                })
-                            )
-                        .Union(
-                            _unitOfWork.Db.SGI_Tramites_Tareas_HAB
-                                .Where(tth => tth.id_solicitud == idSolicitud)
-                                .Join(_unitOfWork.Db.SGI_Tarea_Revision_SubGerente,
-                                      tth => tth.id_tramitetarea,
-                                      trsg => trsg.id_tramitetarea,
-                                      (tth, trsg) => new { Tarea = tth, Calificacion = trsg })
-                                .Where(joinResult => joinResult.Calificacion.Observaciones_LibradoUso != null)
-                                .Select(joinResult => new
-                                {
-                                    Observaciones_LibradoUso = joinResult.Calificacion.Observaciones_LibradoUso,
-                                    CreateDate = joinResult.Calificacion.CreateDate
-                                })
-                        )
-                        .OrderByDescending(result => result.CreateDate)
-                        .FirstOrDefault();
+            var query = (from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
+                         join calificacion in _unitOfWork.Db.SGI_Tarea_Calificar on tth.id_tramitetarea equals calificacion.id_tramitetarea
+                         where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                         select new
+                         {
+                            calificacion.Observaciones_LibradoUso,
+                            calificacion.CreateDate
+                         }).Union(from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
+                                  join calificacion in _unitOfWork.Db.SGI_Tarea_Revision_Gerente on tth.id_tramitetarea equals calificacion.id_tramitetarea
+                                  where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                                  select new
+                                  {
+                                      calificacion.Observaciones_LibradoUso,
+                                      calificacion.CreateDate
+                                  }).Union(from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
+                                           join calificacion in _unitOfWork.Db.SGI_Tarea_Revision_SubGerente on tth.id_tramitetarea equals calificacion.id_tramitetarea
+                                           where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                                           select new
+                                           {
+                                               calificacion.Observaciones_LibradoUso,
+                                               calificacion.CreateDate
+                                           }).OrderByDescending(result => result.CreateDate).FirstOrDefault();
 
             if (query != null)
             {
                 observacion = query.Observaciones_LibradoUso;
-
             }
             return observacion;
         }
