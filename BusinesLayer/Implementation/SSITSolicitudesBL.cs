@@ -727,10 +727,30 @@ namespace BusinesLayer.Implementation
 
                     var elementEntitySol = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDto);
                     var insertSolOk = repo.Insert(elementEntitySol);
-
-
-                    unitOfWork.Commit();
                     objectDto.IdSolicitud = elementEntitySol.id_solicitud;
+                    unitOfWork.Commit();
+
+                    if (elementEntitySol.FechaLibrado != null)
+                    {
+                        var cmd = unitOfWork.Db.Database.Connection.CreateCommand();
+                        cmd.CommandText = string.Format("EXEC SSIT_Solicitudes_Historial_LibradoUso_INSERT {0} {0} '{0}'", elementEntitySol.id_solicitud, -1, elementEntitySol.CreateUser);
+                        cmd.CommandTimeout = 120;
+                        try
+                        {
+                            unitOfWork.Db.Database.Connection.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception exe)
+                        {
+                            throw exe;
+                        }
+                        finally
+                        {
+                            unitOfWork.Db.Database.Connection.Close();
+                            cmd.Dispose();
+                        }
+                    }
+
                     return elementEntitySol.id_solicitud;
                 }
             }
@@ -753,9 +773,6 @@ namespace BusinesLayer.Implementation
                 {
                     repo = new SSITSolicitudesRepository(unitOfWork);
                     var elementDTO = mapperBase.Map<SSITSolicitudesDTO, SSIT_Solicitudes>(objectDTO);
-
-
-
                     repo.Update(elementDTO);
                     unitOfWork.Commit();
                 }
@@ -862,6 +879,8 @@ namespace BusinesLayer.Implementation
             {
                 repo = new SSITSolicitudesRepository(unitOfWork);
 
+                bool estaLibrado = false;
+
                 var solicitudEntity = repo.Single(id_solicitud);
 
                 var encomiendasEntity = solicitudEntity.Encomienda_SSIT_Solicitudes.Select(x => x.Encomienda);
@@ -939,6 +958,7 @@ namespace BusinesLayer.Implementation
                             solicitudEntity.id_subtipoexpediente != (int)Constantes.SubtipoDeExpediente.HabilitacionPrevia &&
                             !TienePlanoDeIncendio(id_solicitud) && !AcogeBeneficiosUERESGP(id_solicitud))
                         {
+                            estaLibrado = true;
                             solicitudEntity.FechaLibrado = DateTime.Now;
                             encuesta = getEncuesta(solicitudEntity, Direccion);
                         }
@@ -1023,12 +1043,54 @@ namespace BusinesLayer.Implementation
                 {
                     solicitudEntity.id_estado = (int)Constantes.TipoEstadoSolicitudEnum.PING;
                     repo.Update(solicitudEntity);
+                    unitOfWork.Commit();
+                    if (estaLibrado)
+                    {
+                        var cmd = unitOfWork.Db.Database.Connection.CreateCommand();
+                        cmd.CommandText = string.Format("EXEC SSIT_Solicitudes_Historial_LibradoUso_INSERT {0} {0} '{0}'", solicitudEntity.id_solicitud, -1, solicitudEntity.id_solicitud);
+                        cmd.CommandTimeout = 120;
+                        try
+                        {
+                            unitOfWork.Db.Database.Connection.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception exe)
+                        {
+                            throw exe;
+                        }
+                        finally
+                        {
+                            unitOfWork.Db.Database.Connection.Close();
+                            cmd.Dispose();
+                        }
+                    }
                 }
                 else
                 {
                     if (id_estado_ant != (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN)
                         solicitudEntity.id_estado = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
                     repo.Update(solicitudEntity);
+                    unitOfWork.Commit();
+                    if (estaLibrado)
+                    {
+                        var cmd = unitOfWork.Db.Database.Connection.CreateCommand();
+                        cmd.CommandText = string.Format("EXEC SSIT_Solicitudes_Historial_LibradoUso_INSERT {0} {0} '{0}'", solicitudEntity.id_solicitud, -1, solicitudEntity.id_solicitud);
+                        cmd.CommandTimeout = 120;
+                        try
+                        {
+                            unitOfWork.Db.Database.Connection.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception exe)
+                        {
+                            throw exe;
+                        }
+                        finally
+                        {
+                            unitOfWork.Db.Database.Connection.Close();
+                            cmd.Dispose();
+                        }
+                    }
 
                     if (id_estado_ant == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF)
                     {
@@ -1904,6 +1966,23 @@ namespace BusinesLayer.Implementation
                     solicitudEntity.LastUpdateUser = userid;
                     solicitudEntity.LastUpdateDate = DateTime.Now;
                     repo.Update(solicitudEntity);
+                    var cmd = unitOfWork.Db.Database.Connection.CreateCommand();
+                    cmd.CommandText = string.Format("EXEC SSIT_Solicitudes_Historial_LibradoUso_INSERT {0} {0} '{0}'", id_solicitud, 1, userid);
+                    cmd.CommandTimeout = 120;
+                    try
+                    {
+                        unitOfWork.Db.Database.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception exe)
+                    {
+                        throw exe;
+                    }
+                    finally
+                    {
+                        unitOfWork.Db.Database.Connection.Close();
+                        cmd.Dispose();
+                    }
                     unitOfWork.Commit();
                 }
             }
