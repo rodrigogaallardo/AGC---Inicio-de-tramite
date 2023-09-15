@@ -9,6 +9,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.UI.WebControls;
+//using ExternalService;
+using ExternalService.Class.Express;
+using System.Threading.Tasks;
+using System.Web.Security;
 
 namespace SSIT.Solicitud.Habilitacion.Controls
 {
@@ -124,6 +128,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         }
 
         private SSITSolicitudesBL blSol = new SSITSolicitudesBL();
+        private EncomiendaBL encBL = new EncomiendaBL();
         public void Cargar_Datos(int id_solicitud)
         {
             pnlErrorBuscarCAA.Visible = false;
@@ -270,7 +275,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
         }
 
-
+        //pasar a rest
         protected void btnBuscarCAA_Click(object sender, EventArgs e)
         {
             bool RecargarPagina = false;
@@ -358,6 +363,71 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             }
             btnBuscarCAA.Enabled = true;
         }
+
+
+        private async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            List<GetCAAsByEncomiendasResponse> lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
+        }
+        private async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            List<GetBUIsCAAResponse> lstBuis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+            return lstBuis;
+        }
+        private async Task<GenerarCAAAutomaticoResponse> GenerarCAAAutomaticos(int IdEncomienda, string codSeguridad)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GenerarCAAAutomaticoResponse CAAAutomatico = await apraSrvRest.GenerarCAAAutomatico(IdEncomienda, codSeguridad);
+            return CAAAutomatico;
+        }
+        private async Task<GetCAAResponse> GetCAA(int id_caa)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAResponse jsonCaa = await apraSrvRest.GetCaa(id_caa);
+            return jsonCaa;
+        }
+
+        private byte[] GetCAA_fileBytes(Task<string> json)
+        {
+            byte[] file = null;
+            return file;
+        }
+
+        private bool GetCAA_fileInfo(GetCAAResponse response)
+        {
+            bool subioFile = false;
+            ExternalService.ExternalServiceFiles files_service = new ExternalService.ExternalServiceFiles();
+            string fileName = response.certificado.fileName;
+            string contentType = response.certificado.contentType;
+            string extension = response.certificado.extension;
+            byte[] rawBytes = Convert.FromBase64String(response.certificado.rawBytes);
+            int size = response.certificado.size;
+            int id_tipocertificado = response.id_tipocertificado;//verificar si es como tenemos en TiposDeDocumentosRequeridos
+
+            SSITSolicitudesBL blSol = new SSITSolicitudesBL();
+            EncomiendaBL encomiendaBL = new EncomiendaBL();
+            Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
+            encomiendaBL.InsertarCAA_DocAdjuntos_Hab(id_solicitud,userid, rawBytes, fileName, extension);
+
+            subioFile = true;
+            return subioFile;
+        }
+
+        protected async void linkBtnGenerarCAA_Click(object sender, EventArgs e)
+        {
+            EncomiendaDTO Encomienda = encBL.Single(id_encomienda);
+            string codSeguridad = Encomienda.CodigoSeguridad;
+                 
+            var CAA_id = GenerarCAAAutomaticos(id_encomienda, codSeguridad);
+            // si esto ya me lo devuelve como id entonces lo mando de una
+            GetCAAResponse caa = await GetCAA(CAA_id.Id);
+            var fileInfo = GetCAA_fileInfo(caa);
+
+        }
+
     }
 
 
