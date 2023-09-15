@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnitOfWork;
 using System.Configuration;
+using System.Runtime.Remoting.Contexts;
 
 namespace BusinesLayer.Implementation
 {
@@ -327,6 +328,28 @@ namespace BusinesLayer.Implementation
 
                     var insertSolOk = repoSol.Insert(elementEntitySol);
                     objectDto.IdSolicitud = elementEntitySol.id_solicitud;
+                    unitOfWork.Commit();
+
+                    if (elementEntitySol.FechaLibrado != null)
+                    {
+                        var cmd = unitOfWork.Db.Database.Connection.CreateCommand();
+                        cmd.CommandText = string.Format("EXEC SSIT_Solicitudes_Historial_LibradoUso_INSERT {0} {0} '{0}'", elementEntitySol.id_solicitud, -1, elementEntitySol.CreateUser);
+                        cmd.CommandTimeout = 120;
+                        try
+                        {
+                            unitOfWork.Db.Database.Connection.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception exe)
+                        {
+                            throw exe;
+                        }
+                        finally
+                        {
+                            unitOfWork.Db.Database.Connection.Close();
+                            cmd.Dispose();
+                        }
+                    }
 
                     if (objectDto.SSITSolicitudesOrigenDTO != null)
                     {
