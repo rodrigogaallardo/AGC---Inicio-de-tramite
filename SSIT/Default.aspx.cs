@@ -21,7 +21,7 @@ namespace SSIT
 
             #region ASOSA BORRAR TEST WEBAPI
 
-
+            /*
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             //var query = new Dictionary<int, string>()
             //{
@@ -62,6 +62,7 @@ namespace SSIT
 
             int id_encomienda = 3;
             var AsociarAnexoTecnico = apraSrvRest.AsociarAnexoTecnico(IdSolicitud, codSeguridad, id_encomienda);
+            */
             #endregion
 
 

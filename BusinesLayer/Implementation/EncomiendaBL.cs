@@ -4806,6 +4806,52 @@ namespace BusinesLayer.Implementation
             var profesional = elementsDto.LastOrDefault()?.ProfesionalDTO;
             return profesional;
         }
+        /// <summary>
+        /// Inserta en el CAA en la base de files y guarda el id_file en DGHP_Solicitudes
+        /// </summary>
+        /// <param name="id_solicitud"></param>
+        /// <param name="userid"></param>
+        /// <param name="bytes"></param>
+        /// <param name="filename"></param>
+        /// <param name="extension"></param>
+        public void InsertarCAA_DocAdjuntos_Hab(int id_solicitud, Guid userid, byte[] bytes, string filename, string extension)
+        {
+            try
+            {
+                uowF = new TransactionScopeUnitOfWorkFactory(System.Transactions.IsolationLevel.ReadUncommitted);
+                using (IUnitOfWork unitOfWork = this.uowF.GetUnitOfWork(System.Transactions.IsolationLevel.ReadUncommitted))
+                {
+                    ExternalServiceFiles esf = new ExternalServiceFiles();
+                    var repoDoc = new SSITDocumentosAdjuntosRepository(unitOfWork);
+                    string arch = filename + extension;
+                    int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
+
+                    var DocAdj = repoDoc.GetByFKIdSolicitudTipoDocSis(id_solicitud, id_tipodocsis).FirstOrDefault();
+
+                    if (DocAdj == null)
+                    {
+                        int id_file = esf.addFile(arch, bytes);
+                        DocAdj = new SSIT_DocumentosAdjuntos();
+                        DocAdj.id_solicitud = id_solicitud;
+                        DocAdj.id_tdocreq = 16;
+                        DocAdj.tdocreq_detalle = "";
+                        DocAdj.generadoxSistema = true;
+                        DocAdj.CreateDate = DateTime.Now;
+                        DocAdj.CreateUser = userid;
+                        DocAdj.nombre_archivo = arch;
+                        DocAdj.id_file = id_file;
+                        DocAdj.id_tipodocsis = id_tipodocsis;
+                        repoDoc.Insert(DocAdj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex, ex.Message);
+                throw ex;
+            }
+        }
+
     }
 }
 

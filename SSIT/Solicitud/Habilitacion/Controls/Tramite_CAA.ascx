@@ -3,6 +3,7 @@
 <link href="<%: ResolveUrl("~/Content/css/shortcuts.css") %>" rel="stylesheet" />
 
 <%@ Import Namespace="SSIT.Common" %>
+<asp:HiddenField ID="hid_id_encomienda_in_caa" runat="server" />
 
 <div id="box_titulares" class="accordion-group widget-box" style="background-color: #ffffff">
     <div class="accordion-heading">
@@ -80,7 +81,7 @@
                     </asp:UpdatePanel>
                       <div class="text-left mtop10" visible="false" runat="server" id="DivBtnSIPSAExpress">
                         <strong>Para tramitar su Certificado de Aptitud Ambiental inicie su solicitud por aquí:</strong>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary" PostBackUrl="~/TADRedirect.aspx" OnClientClick="window.document.forms[0].target='_blank';">
+                        <asp:LinkButton ID="linkBtnGenerarCAA" runat="server" CssClass="btn btn-primary" OnClick="linkBtnGenerarCAA_Click">
                             <i class="imoon imoon-file4"></i>
                             <span class="text">Generar CAA</span>
                         </asp:LinkButton>

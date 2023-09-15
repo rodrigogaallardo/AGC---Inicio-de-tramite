@@ -137,7 +137,7 @@ namespace ExternalService
         }
       
         //Gets
-        public async Task<string> GetCaa(int id_solicitud)
+        public async Task<GetCAAResponse> GetCaa(int id_solicitud)
         {
             try
             {
@@ -161,20 +161,20 @@ namespace ExternalService
                         GetCAAResponse getCAAResponse = new GetCAAResponse();
                         getCAAResponse = JsonConvert.DeserializeObject<GetCAAResponse>(content);
 
-                        return JsonConvert.SerializeObject(content);
+                        return getCAAResponse;//JsonConvert.SerializeObject(content);
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return null;//($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return null;//($"Error al realizar la solicitud HTTP: {ex.Message}");
                 }
 
             }
             catch (Exception ex)
             {
-                return ($"Error generico al ejecutar  GetCaa. Mensaje: {ex.Message}");
+                return null;// ($"Error generico al ejecutar  GetCaa. Mensaje: {ex.Message}");
             }
         }
 
