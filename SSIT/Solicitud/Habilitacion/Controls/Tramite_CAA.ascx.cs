@@ -433,12 +433,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             int size = response.certificado.size;
             int id_tipocertificado = response.id_tipocertificado;//verificar si es como tenemos en TiposDeDocumentosRequeridos
 
-            SSITSolicitudesBL blSol = new SSITSolicitudesBL();
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
-            encomiendaBL.InsertarCAA_DocAdjuntos_Hab(id_solicitud,userid, rawBytes, fileName, extension);
+            subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado);   //deberia devolver un bool para saber si subio el archivo en la base de files
 
-            subioFile = true;
             return subioFile;
         }
 
@@ -450,7 +448,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             var CAA_id = GenerarCAAAutomaticos(id_encomienda, codSeguridad);
             // si esto ya me lo devuelve como id entonces lo mando de una
             GetCAAResponse caa = await GetCAA(CAA_id.Id);
-            var fileInfo = GetCAA_fileInfo(caa);
+            var fileInfo = GetCAA_fileInfo(caa); // esto no necesita retornar nada
 
         }
 

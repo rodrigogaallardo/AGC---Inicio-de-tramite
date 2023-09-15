@@ -21,14 +21,14 @@ namespace SSIT
 
             #region ASOSA BORRAR TEST WEBAPI
 
-            /*
+            
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             //var query = new Dictionary<int, string>()
             //{
             //    ["usuario"] = 1,
             //    ["password"] = ""
             //};
-
+            /*
             var GenerarCAAAutomatico = apraSrvRest.GenerarCAAAutomatico(0, "string");//Ok
 
             var GetCaa = apraSrvRest.GetCaa(200000);//OKOk
