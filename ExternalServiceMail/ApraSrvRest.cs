@@ -49,11 +49,20 @@ namespace ExternalService
             var tokenResponseApplication = System.Web.HttpContext.Current.Application["TokenResponse"];
             if (tokenResponseApplication != null)
             {
-                tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(tokenResponseApplication.ToString());
-                if (tokenResponse.expires.AddMinutes(-10) > DateTime.Now)
+                try
                 {
-                    return tokenResponse;
+                    tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(tokenResponseApplication.ToString());
+                    if (tokenResponse.expires.AddMinutes(-10) > DateTime.Now)
+                    {
+                        return tokenResponse;
+                    }
                 }
+                catch (JsonException jex)
+                {
+
+                    tokenResponseApplication = null;
+                }
+                
             }
 
             string usuario = this.Usuario;
