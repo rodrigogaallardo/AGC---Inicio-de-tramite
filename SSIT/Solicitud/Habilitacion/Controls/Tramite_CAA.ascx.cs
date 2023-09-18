@@ -287,7 +287,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     item.codigo_tipocertificado = _caaAct.codigo_tipocertificado;
                     item.nombre_tipocertificado = _caaAct.nombre_tipocertificado;
                     lstArchivosCAA.Add(item);
-                }
+                
+                }*/
                 grdArchivosCAA.DataSource = lstArchivosCAA;
                 grdArchivosCAA.DataBind();
             }
