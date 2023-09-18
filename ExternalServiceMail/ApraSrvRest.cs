@@ -47,6 +47,7 @@ namespace ExternalService
         {
             TokenResponse tokenResponse;
             var tokenResponseApplication = System.Web.HttpContext.Current.Application["TokenResponse"];
+            var timeoutTask = Task.Delay(10000);
             if (tokenResponseApplication != null)
             {
                 try
@@ -82,8 +83,19 @@ namespace ExternalService
             var client = new HttpClient();
             try
             {
-                var response = await client.PostAsync(url, data);
-                string result = response.Content.ReadAsStringAsync().Result;
+                var responseTask = client.PostAsync(url, data);
+
+                // Wait for either the HTTP request or the timeout
+                var completedTask = await Task.WhenAny(responseTask, timeoutTask);
+
+                if (completedTask == timeoutTask)
+                {
+                    throw new TimeoutException("The request timed out.");
+                }
+
+                var response = await responseTask;
+                //var response = await client.PostAsync(url, data);
+                string result = await response.Content.ReadAsStringAsync();
                 System.Web.HttpContext.Current.Application["TokenResponse"] = result;
                 var borrar = System.Web.HttpContext.Current.Application["TokenResponse"];
             }
@@ -97,7 +109,7 @@ namespace ExternalService
             return tokenResponse;
         }
         //Post
-        public async Task<GenerarCAAAutomaticoResponse> GenerarCAAAutomatico(int IdEncomienda, string codSeguridad)
+        public async Task<int> GenerarCAAAutomatico(int IdEncomienda, string codSeguridad)
         {
             try
             {
@@ -126,21 +138,21 @@ namespace ExternalService
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = response.Content;
-                        GenerarCAAAutomaticoResponse generarCAAAutomaticoResponse = new GenerarCAAAutomaticoResponse();
-                        generarCAAAutomaticoResponse = JsonConvert.DeserializeObject<GenerarCAAAutomaticoResponse>(content);
-                        return generarCAAAutomaticoResponse;
+                        //GenerarCAAAutomaticoResponse generarCAAAutomaticoResponse = new GenerarCAAAutomaticoResponse();
+                        //generarCAAAutomaticoResponse = JsonConvert.DeserializeObject<GenerarCAAAutomaticoResponse>(content);
+                        return int.Parse(content);
                     }
                     else
-                        return null;
+                        return 0;
                 }
                 catch (HttpRequestException ex)
                 {
-                    return null;
+                    return 0;
                 }
             }
             catch (Exception ex)
             {
-                return null;
+                return 0;
             }
 
         }
