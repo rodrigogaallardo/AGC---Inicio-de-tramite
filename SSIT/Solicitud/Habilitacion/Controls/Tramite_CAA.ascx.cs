@@ -247,7 +247,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             if (_caaAct != null)
             {
-                btnGenerarCAA.Enabled = false;
+                btnGenerarCAA.Visible = false;
                 if ((_caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.SujetoaCategorizacion ||
                      _caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.ConRelevanteEfecto) &&
                      _caaAct.id_estado          != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
