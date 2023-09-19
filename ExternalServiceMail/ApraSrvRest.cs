@@ -47,7 +47,7 @@ namespace ExternalService
         {
             TokenResponse tokenResponse;
             var tokenResponseApplication = System.Web.HttpContext.Current.Application["TokenResponse"];
-            var timeoutTask = Task.Delay(10000);
+            
             if (tokenResponseApplication != null)
             {
                 try
@@ -81,8 +81,10 @@ namespace ExternalService
 
             var url = UrlApraAgc + "api/Login";
             var client = new HttpClient();
+            client.Timeout = TimeSpan.FromSeconds(10);
             try
             {
+                var timeoutTask = Task.Delay(10000);
                 var responseTask = client.PostAsync(url, data);
 
                 // Wait for either the HTTP request or the timeout
@@ -345,7 +347,7 @@ namespace ExternalService
                 RestRequest request = new RestRequest(Method.POST);
                 request.RequestFormat = DataFormat.Json;
                 request.AddHeader("content-type", "application/json; charset=utf-8");
-                request.AddHeader("Authorization", "Bearer " + tokenResponse.token);
+                request.AddHeader("Authorization", "Bearer " + tokenResponse.token);//aca hay algo raro
 
                 var data = JsonConvert.SerializeObject(IdEncomiendaList);
 

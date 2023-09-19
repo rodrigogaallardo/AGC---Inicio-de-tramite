@@ -136,10 +136,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             set
             {
                 ViewState["_Enabled"] = value;
-                //if (btnGenerarCAA.Visible)
-                //{
-                //    btnGenerarCAA.Visible = value;
-                //}
+                if (btnGenerarCAA.Visible)
+                {
+                    btnGenerarCAA.Visible = value;
+                }
 
             }
         }
@@ -165,7 +165,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
         private SSITSolicitudesBL blSol = new SSITSolicitudesBL();
         private EncomiendaBL encBL = new EncomiendaBL();
-        public void Cargar_Datos(int id_solicitud)
+        public async Task Cargar_Datos(int id_solicitud)
         {
             pnlErrorBuscarCAA.Visible = false;
             lblErrorBuscarCAA.Text = "";
@@ -173,9 +173,9 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             EncomiendaBL blEnc = new EncomiendaBL();
             var lst_encomiendas = blEnc.GetByFKIdSolicitud(id_solicitud);
 
-            Cargar_Datos(lst_encomiendas, id_solicitud);
+            await Cargar_Datos(lst_encomiendas, id_solicitud);
         }
-        public void Cargar_Datos(IEnumerable<EncomiendaDTO> lst_encomiendas, int id_solicitud)
+        public async Task Cargar_Datos(IEnumerable<EncomiendaDTO> lst_encomiendas, int id_solicitud)
         {
             int nroSolReferencia = 0;
             int.TryParse(ConfigurationManager.AppSettings["NroSolicitudReferencia"], out nroSolReferencia);
@@ -229,19 +229,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 }
                 // Llena los CAAs de acuerdo a las encomiendas vinculadas a la solicitud.
                 // ---------------------------------------------------------------------
-                /* metodo soap para obtener CAA
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                wsResultado ws_resultado_CAA = new wsResultado();
-
-                ParametrosBL blParam = new ParametrosBL();
-                servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_encomiendas.Select(x => x.IdEncomienda).ToList().ToArray(), ref ws_resultado_CAA);
-                List_CAA = l.ToList();
-                */
                 #region Luis CAA rest
-                _lstCaa = GetCAAsByEncomiendas(lst_encomiendas.Select(x => x.IdEncomienda).ToArray()).GetAwaiter().GetResult();
+                _lstCaa = await GetCAAsByEncomiendas(lst_encomiendas.Select(x => x.IdEncomienda).ToArray());
 
                 #endregion
             }
@@ -257,7 +246,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             }
 
             if (_caaAct != null)
-            { 
+            {
+                btnGenerarCAA.Enabled = false;
                 if ((_caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.SujetoaCategorizacion ||
                      _caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.ConRelevanteEfecto) &&
                      _caaAct.id_estado          != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
@@ -272,69 +262,31 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 var lstArchivosCAA = new List<CAA_ArchivosDTO>();
                 EncomiendaDTO Encomienda = encBL.Single(id_encomienda);
                 EncomiendaDocumentosAdjuntosBL encDocBL = new EncomiendaDocumentosAdjuntosBL();
-                //armar linq para conseguir los caa in encomienda_archivos_adjuntos
+                
                 int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
                 var ListDocAdj = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).ToList();
+                //antes deberia recorrer la lista de encomiendas y despues este foreach
                 foreach(var docAdj in ListDocAdj)
                 {
                     CAA_ArchivosDTO item = new CAA_ArchivosDTO();
                     item.id_encomienda = _caaAct.formulario.id_encomienda_agc; //revisar si es el mismo
                     item.id_encomienda = docAdj.id_encomienda;
                     item.id_file = docAdj.id_file;
+                    item.CreateDate = docAdj.CreateDate;
                     item.url = string.Format("~/" + RouteConfig.DESCARGA_FILE + "{0}", Functions.ConvertToBase64String(item.id_file));
                     //_caaAct = _lstCaa.Where(caa => caa.formulario.id_encomienda_agc).OrderByDescending(caa => caa.id_solicitud).FirstOrDefault();
-                    // por ahora uso _caa_Act de antes porque no habria forma de buscarlo...
+                    // por ahora uso _caa_Act
+
                     item.id_caa = _caaAct.id_solicitud;
                     item.id_solicitud = Encomienda.IdSolicitud;
                     item.mostrarDoc = true;// antes hacia esto caa.Documentos.Count() > 0;
                     item.nombre = docAdj.nombre_archivo;
                     item.id_tipocertificado = _caaAct.id_tipocertificado;
+                    item.estado_caa = _caaAct.estado;
                     item.codigo_tipocertificado = _caaAct.codigo_tipocertificado;
                     item.nombre_tipocertificado = _caaAct.nombre_tipocertificado;
                     lstArchivosCAA.Add(item);
                 }
-                /*
-                // cargar archivos CAA
-                // -------------------
-                var lstArchivosCAA = new List<CAA_ArchivosDTO>();
-
-                foreach (var caa in _lstCaa)
-                {
-                    CAA_ArchivosDTO item = new CAA_ArchivosDTO();
-                    item.id_solicitud = caa.id_solicitud;
-                    item.id_caa = caa.id_solicitud;
-                    item.id_encomienda = caa.formulario.id_encomienda_agc;
-                    item.id_file = 
-                    // Remplazar por buscar el archivo desde encomienda_documentos_adjuntos
-                    if (caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado)
-                    {
-                        if (caa.Documentos.Count() == 0)
-                        {
-                            // regeneración del PDF del CAA por servicio SOAP de SIPSA
-                            ws_Interface_AGC servicio = new ws_Interface_AGC();
-                            wsResultado ws_resultado_CAA = new wsResultado();
-
-                            ParametrosBL blParam = new ParametrosBL();
-                            servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                            string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                            string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                            servicio.RegenerarPDFCertificadoCAA(username_servicio, password_servicio, caa.id_solicitud, true, ref ws_resultado_CAA);
-                        }
-                        item.id_file = caa.Documentos[0].id_file;
-                        item.url = string.Format("~/" + RouteConfig.DESCARGA_FILE + "{0}", Functions.ConvertToBase64String(item.id_file));
-                        item.mostrarDoc = caa.Documentos.Count() > 0;
-                    }
-                    
-
-                    item.CreateDate = caa.createDate;
-                    //item.nombre = caa.desccorta_tipotramite;// "CAA";// no esta en el response rest
-                    item.id_tipocertificado = caa.id_tipocertificado;
-                    item.codigo_tipocertificado = caa.codigo_tipocertificado;
-                    item.nombre_tipocertificado = caa.nombre_tipocertificado;
-                    item.estado_caa = caa.estado;
-                    lstArchivosCAA.Add(item);
-                
-                }*/
                 grdArchivosCAA.DataSource = lstArchivosCAA;
                 grdArchivosCAA.DataBind();
             }
@@ -502,7 +454,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
             subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado);  
-
+            //aca deberia volver a correr el load asi muestra el archivo
             return subioFile;
         }
 
@@ -512,9 +464,15 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             string codSeguridad = Encomienda.CodigoSeguridad;
                  
             int CAA_id = GenerarCAAAutomaticos(id_encomienda, codSeguridad).Result;
-            // si esto ya me lo devuelve como id entonces lo mando de una
-            GetCAAResponse caa = await GetCAA(CAA_id);
-            var fileInfo = GetCAA_fileInfo(caa); // esto no necesita retornar nada
+            if(CAA_id != 0)
+            {
+                GetCAAResponse caa = await GetCAA(CAA_id);
+                var fileInfo = GetCAA_fileInfo(caa); // esto no necesita retornar nada
+            }
+            else
+            {
+                //mostrar CAA viejo
+            }
 
         }
 
