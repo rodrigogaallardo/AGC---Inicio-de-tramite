@@ -273,7 +273,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             if (_caaAct != null)
             {
-                btnGenerarCAA.Enabled = false;
+                btnGenerarCAA.Visible = false;
                 if ((_caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.SujetoaCategorizacion ||
                      _caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.ConRelevanteEfecto) &&
                      _caaAct.id_estado          != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
@@ -292,6 +292,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
                 var ListDocAdj = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).ToList();
                 //antes deberia recorrer la lista de encomiendas y despues este foreach
+                //o quiza enta bien solamente tomar la ultima aprobada
                 foreach(var docAdj in ListDocAdj)
                 {
                     CAA_ArchivosDTO item = new CAA_ArchivosDTO();
