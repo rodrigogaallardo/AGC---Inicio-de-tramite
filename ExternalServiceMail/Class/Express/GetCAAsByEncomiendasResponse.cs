@@ -30,7 +30,7 @@ namespace ExternalService.Class.Express
         public int? anioActoAdministrativo { get; set; }
         public bool exentoBUI { get; set; }
         public string nroExpedienteSADE { get; set; }
-        public int id_tad { get; set; }
+        public int? id_tad { get; set; }
         public bool esCur { get; set; }
         public string nroGEDOCertificado { get; set; }
         public DateTime createDate { get; set; }

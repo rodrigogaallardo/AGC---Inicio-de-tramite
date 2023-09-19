@@ -4809,43 +4809,41 @@ namespace BusinesLayer.Implementation
         /// <summary>
         /// Inserta en el CAA en la base de files y guarda el id_file en DGHP_Solicitudes
         /// </summary>
-        /// <param name="id_solicitud"></param>
+        /// <param name="id_encomienda"></param>
         /// <param name="userid"></param>
         /// <param name="bytes"></param>
         /// <param name="filename"></param>
         /// <param name="extension"></param>
+        /// <param name="id_tipocertificado"></param>
         public bool InsertarCAA_DocAdjuntos(int id_encomienda, Guid userid, byte[] bytes, string filename, string extension, int id_tipocertificado)
         {
             bool subioFile = false;
             try
             {
-                uowF = new TransactionScopeUnitOfWorkFactory(System.Transactions.IsolationLevel.ReadUncommitted);
-                using (IUnitOfWork unitOfWork = this.uowF.GetUnitOfWork(System.Transactions.IsolationLevel.ReadUncommitted))
+                ExternalServiceFiles esf = new ExternalServiceFiles();
+                EncomiendaDocumentosAdjuntosBL encDocBL = new EncomiendaDocumentosAdjuntosBL();
+                EncomiendaDocumentosAdjuntosDTO encDocDTO;
+                string arch = filename + extension;
+                int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
+
+                var DocAdj = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).FirstOrDefault();
+
+                if (DocAdj == null)
                 {
-                    ExternalServiceFiles esf = new ExternalServiceFiles();
-                    var repoDoc = new EncomiendaDocumentosAdjuntosRepository(unitOfWork);
-                    string arch = filename + extension;
-                    int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
-
-                    var DocAdj = repoDoc.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).FirstOrDefault();
-
-                    if (DocAdj == null)
-                    {
-                        int id_file = esf.addFile(arch, bytes);
-                        DocAdj = new Encomienda_DocumentosAdjuntos();
-                        DocAdj.id_encomienda = id_encomienda;
-                        DocAdj.id_tdocreq = id_tipocertificado; //anda a saber si esto es lo que va aca, si es de 16 .. 19 esta ok
-                        DocAdj.tdocreq_detalle = "";
-                        DocAdj.generadoxSistema = true;
-                        DocAdj.CreateDate = DateTime.Now;
-                        DocAdj.CreateUser = userid;
-                        DocAdj.nombre_archivo = arch;
-                        DocAdj.id_file = id_file;
-                        DocAdj.id_tipodocsis = id_tipodocsis;
-                        repoDoc.Insert(DocAdj);
-                        if (id_file > 0)
-                            subioFile = true;
-                    }
+                    int id_file = esf.addFile(arch, bytes);
+                    encDocDTO = new EncomiendaDocumentosAdjuntosDTO();
+                    encDocDTO.id_encomienda = id_encomienda;
+                    encDocDTO.id_tdocreq = id_tipocertificado;
+                    //encDocDTO.tdocreq_detalle = ""; NO SE USA
+                    encDocDTO.generadoxSistema = true;
+                    encDocDTO.CreateDate = DateTime.Now;
+                    encDocDTO.CreateUser = userid;
+                    encDocDTO.nombre_archivo = arch;
+                    encDocDTO.id_file = id_file;
+                    encDocDTO.id_tipodocsis = id_tipodocsis;
+                    encDocBL.Insert(encDocDTO);
+                    if (id_file > 0)
+                        subioFile = true;
                 }
                 return subioFile;
             }
