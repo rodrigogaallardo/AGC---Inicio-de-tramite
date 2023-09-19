@@ -823,7 +823,7 @@ namespace SSIT
             }
         }
 
-        protected void btnPresentarTramite_Click(object sender, EventArgs e)
+        protected async void btnPresentarTramite_Click(object sender, EventArgs e)
         {
             try
             {
@@ -880,7 +880,7 @@ namespace SSIT
                 LogError.Write("Antes de RegenerarSolicitud");
                 RegenerarSolicitud(id_solicitud);
                 LogError.Write("Antes de ValidacionSolicitudes");
-                if (blSol.ValidacionSolicitudes(id_solicitud))
+                if (await blSol.ValidacionSolicitudes(id_solicitud))
                 {
                     LogError.Write("Antes de presentarSolicitud");
                     if (blSol.presentarSolicitud(id_solicitud, userid, oblea, emailUsuario))
