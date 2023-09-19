@@ -47,7 +47,7 @@ namespace ExternalService
         {
             TokenResponse tokenResponse;
             var tokenResponseApplication = System.Web.HttpContext.Current.Application["TokenResponse"];
-            var timeoutTask = Task.Delay(10000);
+            
             if (tokenResponseApplication != null)
             {
                 try

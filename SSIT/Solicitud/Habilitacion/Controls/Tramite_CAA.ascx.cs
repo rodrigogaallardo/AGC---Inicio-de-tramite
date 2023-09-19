@@ -247,7 +247,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             if (_caaAct != null)
             {
-                btnGenerarCAA.Visible = false;
+                btnGenerarCAA.Enabled = false;
                 if ((_caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.SujetoaCategorizacion ||
                      _caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.ConRelevanteEfecto) &&
                      _caaAct.id_estado          != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
@@ -287,8 +287,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     item.codigo_tipocertificado = _caaAct.codigo_tipocertificado;
                     item.nombre_tipocertificado = _caaAct.nombre_tipocertificado;
                     lstArchivosCAA.Add(item);
-                
-                }*/
+                }
                 grdArchivosCAA.DataSource = lstArchivosCAA;
                 grdArchivosCAA.DataBind();
             }
