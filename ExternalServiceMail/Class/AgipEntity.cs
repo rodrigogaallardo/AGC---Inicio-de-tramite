@@ -33,4 +33,25 @@ namespace ExternalService.Class
         public string status { get; set; }
         public string url { get; set; }
     }
+
+    public class TokenResponseAGIPRest
+    {
+        public int code { get; set; }
+        public bool success { get; set; }
+        public string token { get; set; }
+        public string message { get; set; }
+    }
+
+    public class CuitsRelacionadosPOSTRest
+    {
+        public int statusCode { get; set; }
+        public bool? success { get; set; }
+        public string message { get; set; }
+    }
+
+    public class CuitsRelacionadosDTO_REST
+    {
+        public long cuitAValidar { get; set; }
+        public long cuitRepresentado { get; set; }
+    }
 }
