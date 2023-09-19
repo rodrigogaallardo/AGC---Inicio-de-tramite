@@ -526,6 +526,31 @@ namespace SSIT.Common
             return desarrollo;
         }
 
+        public static CuitsRelacionadosPOSTRest isCuitsRelacionadosRest(string cuitAValidar, string cuitRepresentado)
+        {
+            ExternalServiceAGIP_REST servicio = new ExternalServiceAGIP_REST();
+            CuitsRelacionadosDTO_REST cuitsDto = new CuitsRelacionadosDTO_REST();
+            CuitsRelacionadosPOSTRest resul;
+            try
+            {
+                if (!String.IsNullOrEmpty(cuitRepresentado))
+                {
+                    long cuitValidar = Convert.ToInt64(cuitAValidar);
+                    long cuitRepre = Convert.ToInt64(cuitRepresentado);
+                    cuitsDto.cuitAValidar = cuitValidar;
+                    cuitsDto.cuitRepresentado = cuitRepre;
+                    resul = servicio.CuitsRelacionadosRest(cuitsDto);
+                }
+                else
+                    throw new Exception("Debe ingresar los datos del Titular");
+
+                return resul;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

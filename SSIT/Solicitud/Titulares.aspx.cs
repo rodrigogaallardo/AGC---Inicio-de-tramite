@@ -2066,14 +2066,15 @@ namespace SSIT
 
                 if (evaluar)
                 {
-                    var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
+                    //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
+                    var r = Functions.isCuitsRelacionadosRest(cuitFirmante, cuitTitular);
                     if (r.statusCode == 306)
                     {
-                        lblError.Text = r.status + "- Debe volver a iniciar sesión.";
+                        lblError.Text = r.message + " - Debe volver a iniciar sesión.";
                         this.EjecutarScript(updPanel, "showfrmError();");
                         resul = false;
                     }
-                    else if (!r.result.msg)
+                    else if (r.success ?? false)
                     {
                         string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
                         string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
@@ -2087,6 +2088,7 @@ namespace SSIT
             {
                 resul = false;
                 lblError.Text = "Error en el servicio de verificación de cuits: " + ex.Message;
+                LogError.Write(ex);
                 this.EjecutarScript(updPanel, "showfrmError();");
             }
             return resul;
