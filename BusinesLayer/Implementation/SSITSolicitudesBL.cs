@@ -6,6 +6,7 @@ using DataAcess;
 using DataAcess.EntityCustom;
 using DataTransferObject;
 using ExternalService;
+using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using IBusinessLayer;
 using StaticClass;
@@ -13,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using UnitOfWork;
 
 namespace BusinesLayer.Implementation
@@ -1182,38 +1184,49 @@ namespace BusinesLayer.Implementation
             encuesta.un_transporte = "";
             return encuesta;
         }
-        private Constantes.BUI_EstadoPago GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        /// <summary>
+        /// Obtiene el estado de pago del CAA en SIPSA
+        /// </summary>
+        /// <param name="tipo_tramite"></param>
+        /// <param name="id_solicitud"></param>
+        /// <returns></returns>
+        private async Task<Constantes.BUI_EstadoPago> GetEstadoPagoCAA(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        {
+            try
+            {
+                ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+                List<GetBUIsCAAResponse> lstBuis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+                apraSrvRest.Dispose();
+                if (lstBuis.Count > 0)
+                {
+                    if (lstBuis.Any(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado))
+                        return Constantes.BUI_EstadoPago.Pagado;
+                    else
+                        return (Constantes.BUI_EstadoPago)lstBuis.LastOrDefault().estadoId;
+                }
+                else
+                {
+                    throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex, "Error al intentar obtener el estado del pago del CAA en SIPSA.");
+                throw ex;
+            }
+
+            return Constantes.BUI_EstadoPago.SinPagar;
+        }
+
+        
+        private async Task<Constantes.BUI_EstadoPago> GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             Constantes.BUI_EstadoPago ret = Constantes.BUI_EstadoPago.SinPagar;
             var repoParam = new ParametrosRepository(this.uowF.GetUnitOfWork());
 
             if (tipo_tramite == Constantes.PagosTipoTramite.CAA)
             {
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                servicio.Url = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                var lstBUIsCAA = servicio.Get_BUIs_CAA(repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User"),
-                    repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password"), id_solicitud, ref ws_resultado_BUI);
-
-                servicio.Dispose();
-
-
-                if (ws_resultado_BUI.ErrorCode != 0)
-                {
-                    throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
-                }
-                else
-                {
-                    if (lstBUIsCAA.Count() > 0)
-                    {
-                        if (lstBUIsCAA.Count(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado) > 0)
-                            ret = Constantes.BUI_EstadoPago.Pagado;
-                        else
-                        {
-                            ret = (Constantes.BUI_EstadoPago)lstBUIsCAA.LastOrDefault().EstadoId;
-                        }
-                    }
-                }
+                ret = await GetEstadoPagoCAA(tipo_tramite, id_solicitud);
             }
             else
             {
@@ -1241,7 +1254,7 @@ namespace BusinesLayer.Implementation
 
         #endregion
         #region Validaciones
-        public bool ValidacionSolicitudes(int id_solicitud)
+        public async Task<bool> ValidacionSolicitudes(int id_solicitud)
         {
             repo = new SSITSolicitudesRepository(this.uowF.GetUnitOfWork());
             var SSITentity = repo.Single(id_solicitud);
@@ -1325,12 +1338,13 @@ namespace BusinesLayer.Implementation
                     }
                 }
 
-                DtoCAA solicitud_caa = new DtoCAA();
+                //DtoCAA solicitud_caa = new DtoCAA();
+                GetCAAsByEncomiendasResponse solicitud_caa = new GetCAAsByEncomiendasResponse();
                 bool EximirCAA = repo.GetEximir_CAA(SSITentity.id_solicitud, SSITentity.id_tipotramite);
 
                 if (EximirCAA == false && SSITentity.id_tipotramite != (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
                 {
-                    solicitud_caa = ValidarCAA(lstEncomiendasRelacionadas, listEnc, encomienda, tieneRubroEstadio);
+                    solicitud_caa = await ValidarCAA_v2(lstEncomiendasRelacionadas, listEnc, encomienda, tieneRubroEstadio);
                     if (solicitud_caa == null)
                     {
                         throw new Exception(Errors.SSIT_SOLICITUD_CAA_INEXISTENTE);
@@ -1351,7 +1365,7 @@ namespace BusinesLayer.Implementation
                         //0144521: JADHE 56637 - SSIT - RDU del 2018 pide BUI
                         DateTime fechaValida = new DateTime(2020, 1, 1);
                         if (SSITentity.CreateDate > fechaValida)
-                            ValidarPagoSSIT(id_solicitud);
+                            await ValidarPagoSSIT(id_solicitud);
                     }
 
                     if (SSITentity.id_tipotramite != (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
@@ -1409,18 +1423,18 @@ namespace BusinesLayer.Implementation
                                                           x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.CertificadoProTeatro);
                                 if (!tieneDocProTeatro)
                                 {
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
                                     if (EximirCAA == false)
-                                        ValidarPagoCAA(solicitud_caa);
+                                        await ValidarPagoCAA(solicitud_caa);
                                 }
                                 break;
                             case (int)Constantes.TieneRubroConExencionPago.Estadio:
                                 bool tieneChkEstadio = ssitDTO.ExencionPago;
                                 if (!tieneChkEstadio)
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
 
                                 if (solicitud_caa.id_solicitud > 0 && EximirCAA == false)
-                                    ValidarPagoCAA(solicitud_caa);
+                                    await ValidarPagoCAA(solicitud_caa);
                                 break;
                             case (int)Constantes.TieneRubroConExencionPago.CentroCultural:
                                 bool tieneDocCCultural = listDocSsit.Where(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.ConstanciaInicioTramiteIGJoINAES).Any();
@@ -1428,26 +1442,26 @@ namespace BusinesLayer.Implementation
                                 {
                                     ValidarPagoSSIT(id_solicitud);
                                     if (EximirCAA == false)
-                                        ValidarPagoCAA(solicitud_caa);
+                                        await ValidarPagoCAA(solicitud_caa);
                                 }
                                 break;
                             case (int)Constantes.TieneRubroConExencionPago.EsECI:
                                 //Valido que solo tenga mas de ese rubro para que no sea excepcion de pago
                                 if (encDTO.EncomiendaRubrosCNDTO.Count > 1 && encDTO.IdTipoTramite != (int)Constantes.TipoTramite.HabilitacionECIAdecuacion)
                                 {
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
                                     if (EximirCAA == false)
-                                        ValidarPagoCAA(solicitud_caa);
+                                        await ValidarPagoCAA(solicitud_caa);
                                 }
                                 else
                                 {
-                                    ValidarPagoCAA(solicitud_caa);
+                                    await ValidarPagoCAA(solicitud_caa);
                                 }
                                 break;
                             default:
-                                ValidarPagoSSIT(id_solicitud);
+                                await ValidarPagoSSIT(id_solicitud);
                                 if (EximirCAA == false)
-                                    ValidarPagoCAA(solicitud_caa);
+                                    await ValidarPagoCAA(solicitud_caa);
                                 break;
                         }
                     }
@@ -1497,7 +1511,76 @@ namespace BusinesLayer.Implementation
             var SSITentity = repo.Single(id_solicitud);
             return repo.GetEximir_CAA(SSITentity.id_solicitud, SSITentity.id_tipotramite);
         }
+        /// <summary>
+        /// Valida si tiene CAA aprobados asociados a las encomiendas
+        /// </summary>
+        /// <param name="lstEncomiendasRelacionadas"></param>
+        /// <param name="listEnc"></param>
+        /// <param name="encomienda"></param>
+        /// <param name="tieneRubroEstadio"></param>
+        /// <returns></returns>
+        private async Task<GetCAAsByEncomiendasResponse> ValidarCAA_v2(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            List<GetCAAsByEncomiendasResponse> lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lstEncomiendasRelacionadas.ToList());
 
+            var ultimoCAAAnulado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
+                                                .OrderByDescending(o => o.id_estado)
+                                                .FirstOrDefault();
+            if (tieneRubroEstadio)
+            {
+                if (ultimoCAAAnulado != null)
+                    return ultimoCAAAnulado;
+                else
+                    return null;
+            }
+
+            var ultimoCAAAprobado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado)
+                            .OrderByDescending(o => o.id_solicitud) //este id_solicitud se refiere al id_caa
+                            .FirstOrDefault();
+            if (ultimoCAAAprobado != null)
+            {
+                return ultimoCAAAprobado;
+            }
+
+            List<int> estados = new List<int>();
+            estados.Add((int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo);
+            estados.Add((int)Constantes.Encomienda_Estados.Vencida);
+
+            var lstEncomiendasAprobadas = listEnc.Where(x => estados.Contains(x.id_estado))
+                            .OrderByDescending(o => o.id_encomienda);
+
+            List<int> lstIdEncomiendaValidas = new List<int>();
+
+            foreach (var item in lstEncomiendasAprobadas)
+            {
+                if (item.tipo_anexo == Constantes.TipoAnexo_A)
+                {
+                    lstIdEncomiendaValidas.Add(item.id_encomienda);
+                    break;
+                }
+                else
+                    lstIdEncomiendaValidas.Add(item.id_encomienda);
+            }
+
+            if (!StaticClass.Funciones.isDesarrollo())
+            {
+                if (!lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado 
+                                      && lstIdEncomiendaValidas.Contains(caa.formulario.id_encomienda_agc)).Any())
+                {
+                    throw new Exception(Errors.SSIT_SOLICITUD_CAA_INEXISTENTE);
+                }
+            }
+            
+            var ret = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado 
+                                       && lstIdEncomiendaValidas.Contains(caa.formulario.id_encomienda_agc))
+                                .OrderByDescending(o => o.id_solicitud) //este id_solicitud se refiere al id_caa
+                                .FirstOrDefault();
+
+            return ret;
+
+        }
+        //metodo soap para validarCAA DEPRECADO
         private DtoCAA ValidarCAA(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
         {
             // se obtiene el ultimo CAA aprobado
@@ -1617,35 +1700,38 @@ namespace BusinesLayer.Implementation
                 throw new Exception(Errors.SSIT_SOLICITUD_OBSERVACIONES_SIN_PROCESAR);
         }
 
-        private void ValidarPagoCAA(DtoCAA caa)
+        private async Task ValidarPagoCAA(GetCAAsByEncomiendasResponse caa) //DtoCAA
         {
             if (StaticClass.Funciones.isDesarrollo())
             {
-                return;
+                //return;   //lo saco para testear habilitacion express
             }
-
+            DtoCAA old = null;
             //139533: JADHE YYYYY -SSIT - Pago excento CAA
-            if (caa.ExentoBUI)
+            if (caa.exentoBUI)
             {
                 return;
             }
 
             if (!(caa.id_tipotramite == (int)Constantes.TiposDeTramiteCAA.CAA_ESP))
             {
-                var estado_pago = GetEstadoPago(Constantes.PagosTipoTramite.CAA, caa.id_solicitud);
+                var estado_pago = await GetEstadoPago(Constantes.PagosTipoTramite.CAA, caa.id_solicitud);
 
                 if (estado_pago != Constantes.BUI_EstadoPago.Pagado)
                     throw new Exception(Errors.SSIT_SOLICITUD_PAGO_CAA);
             }
-            else if (caa.CAA_Especiales_Datos_Verificacion == null)
+            /* TODO: buscar alguna forma de saber si es un CAA especial
+            else if (caa.CAA_Especiales_Datos_Verificacion == null) //aca como verificamos si es un CAA especial
             {
                 throw new Exception(Errors.SSIT_SOLICITUD_PAGO_CAA_ESP);
             }
+            */
+            
         }
 
-        private void ValidarPagoSSIT(int IdSolicitud)
+        private async Task ValidarPagoSSIT(int IdSolicitud)
         {
-            if (GetEstadoPago(Constantes.PagosTipoTramite.HAB, IdSolicitud) != Constantes.BUI_EstadoPago.Pagado)
+            if (await GetEstadoPago(Constantes.PagosTipoTramite.HAB, IdSolicitud) != Constantes.BUI_EstadoPago.Pagado)
                 throw new Exception(Errors.SSIT_SOLICITUD_PAGO);
         }
 

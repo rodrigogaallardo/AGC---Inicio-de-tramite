@@ -278,7 +278,7 @@ namespace SSIT
                     DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_id_Encomiendas.ToArray(), ref ws_resultado_CAA);
 
 
-
+                    
                     #region ASOSA ASYNC
                     //GetBUIsCAA(200001);
                     //List<GetCAAsByEncomiendasResponse> l2 = await  GetCAAsByEncomiendas(lst_id_Encomiendas);
@@ -292,7 +292,7 @@ namespace SSIT
                     }));
                     ExecuteRegisteredAsyncTasks();
                     #endregion
-
+                    
                     var caaActualTest = lstCaa.Where
                         (y => y.id_estado
                             .Equals((int)Constantes.CAA_EstadoSolicitud.Aprobado))
@@ -348,7 +348,7 @@ namespace SSIT
         {
             #region ASOSA ASYNC
 
-            RegisterAsyncTask(new PageAsyncTask(() => GetBUIsCAA(200001)));
+            //RegisterAsyncTask(new PageAsyncTask(() => GetBUIsCAA(200001)));
             #endregion
             try
             {
@@ -872,7 +872,7 @@ namespace SSIT
             }
         }
 
-        protected void btnPresentarTramite_Click(object sender, EventArgs e)
+        protected async void btnPresentarTramite_Click(object sender, EventArgs e)
         {
             try
             {
@@ -929,7 +929,7 @@ namespace SSIT
                 LogError.Write("Antes de RegenerarSolicitud");
                 RegenerarSolicitud(id_solicitud);
                 LogError.Write("Antes de ValidacionSolicitudes");
-                if (blSol.ValidacionSolicitudes(id_solicitud))
+                if (await blSol.ValidacionSolicitudes(id_solicitud))
                 {
                     LogError.Write("Antes de presentarSolicitud");
                     if (blSol.presentarSolicitud(id_solicitud, userid, oblea, emailUsuario))
