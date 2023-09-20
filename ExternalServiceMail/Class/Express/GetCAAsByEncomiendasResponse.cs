@@ -63,7 +63,7 @@ namespace ExternalService.Class.Express
         public int id_caarubro { get; set; }
         public string cod_rubro { get; set; }
         public string desc_rubro { get; set; }
-        public int superficieHabilitar { get; set; }
+        public decimal superficieHabilitar { get; set; }
         public bool antenaEmisora { get; set; }
         public string cod_ImpactoAmbiental { get; set; }
         public string desc_ImpactoAmbiental { get; set; }

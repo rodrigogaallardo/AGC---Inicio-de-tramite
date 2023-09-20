@@ -444,6 +444,8 @@ namespace ExternalService
                 };
             }
         }
+        //hacer lo mismo que para el rest de VerificarCodigoSeguridad,
+        //devolver un objeto complejo con el valor del request + request.status + error code
         public async Task<string> AsociarAnexoTecnico(int IdSolicitud, string codSeguridad, int IdEncomienda)
         {
             try

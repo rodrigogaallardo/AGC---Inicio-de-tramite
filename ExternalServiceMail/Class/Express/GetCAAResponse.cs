@@ -29,7 +29,7 @@ namespace ExternalService.Class.Express
         public object entidadActoAdministrativo { get; set; }
         public object anioActoAdministrativo { get; set; }
         public bool exentoBUI { get; set; }
-        public object nroExpedienteSADE { get; set; }
+        public string nroExpedienteSADE { get; set; }
         public int? id_tad { get; set; }    //como en los ambientes de prueba esto es null hay que dejarlo asi
         public bool esCur { get; set; }
         public string nroGEDOCertificado { get; set; }

@@ -21,15 +21,15 @@ namespace ExternalService.Class.Express
         public string nombre_tipocertificado { get; set; }
         public string nroCertificado { get; set; }
         public DateTime fechaVencCertificado { get; set; }
-        public object nroActuacion { get; set; }
-        public object anioActuacion { get; set; }
-        public object tipoActoAdministrativo { get; set; }
-        public object nroActoAdministrativo { get; set; }
-        public object entidadActoAdministrativo { get; set; }
-        public object anioActoAdministrativo { get; set; }
+        public int? nroActuacion { get; set; }
+        public int? anioActuacion { get; set; }
+        public int? tipoActoAdministrativo { get; set; }
+        public int? nroActoAdministrativo { get; set; }
+        public int? entidadActoAdministrativo { get; set; }
+        public int? anioActoAdministrativo { get; set; }
         public bool exentoBUI { get; set; }
-        public object nroExpedienteSADE { get; set; }
-        public int id_tad { get; set; }
+        public string nroExpedienteSADE { get; set; }
+        public int? id_tad { get; set; }
         public bool esCur { get; set; }
         public string nroGEDOCertificado { get; set; }
         public DateTime createDate { get; set; }
@@ -46,11 +46,11 @@ namespace ExternalService.Class.Express
         public int id_encomienda_agc { get; set; }
         public string zonaDeclarada { get; set; }
         public string observaciones_rubros { get; set; }
-        public object observaciones_plantas { get; set; }
+        public string observaciones_plantas { get; set; }
         public bool iniciado_x_AGC { get; set; }
-        public object idZonaMixturaRubros { get; set; }
+        public int? idZonaMixturaRubros { get; set; }
         public Encomiendaprofesional encomiendaProfesional { get; set; }
-        public object[] rubrosCPU { get; set; }
+        public Rubroscpu[] rubrosCPU { get; set; }
         public Rubroscur[] rubrosCur { get; set; }
         public Normativadto normativaDTO { get; set; }
         public Planta[] plantas { get; set; }
@@ -62,11 +62,11 @@ namespace ExternalService.Class.Express
 
     public class Encomiendaprofesional
     {
-        public object motivoRechazo { get; set; }
+        public string motivoRechazo { get; set; }
         public Estadoivadto estadoIVADTO { get; set; }
         public Profesionaldto profesionalDTO { get; set; }
-        public object resultadoSCDTO { get; set; }
-        public object indicadoresValoracionAmbiental { get; set; }
+        public CAAResultadosSCDTO resultadoSCDTO { get; set; }
+        public IVADTO indicadoresValoracionAmbiental { get; set; }
     }
 
     public class Estadoivadto
@@ -103,9 +103,9 @@ namespace ExternalService.Class.Express
     public class Datoslocal
     {
         public int id_caadatoslocal { get; set; }
-        public float superficie_cubierta_dl { get; set; }
-        public float superficie_descubierta_dl { get; set; }
-        public float dimesion_frente_dl { get; set; }
+        public decimal superficie_cubierta_dl { get; set; }
+        public decimal superficie_descubierta_dl { get; set; }
+        public decimal dimesion_frente_dl { get; set; }
         public bool lugar_carga_descarga_dl { get; set; }
         public bool estacionamiento_dl { get; set; }
         public bool red_transito_pesado_dl { get; set; }
@@ -115,10 +115,10 @@ namespace ExternalService.Class.Express
         public string materiales_techos_dl { get; set; }
         public string materiales_revestimientos_dl { get; set; }
         public int cantidad_sanitarios_dl { get; set; }
-        public float frente_dl { get; set; }
-        public float fondo_dl { get; set; }
-        public float lateral_izquierdo_dl { get; set; }
-        public float lateral_derecho_dl { get; set; }
+        public decimal frente_dl { get; set; }
+        public decimal fondo_dl { get; set; }
+        public decimal lateral_izquierdo_dl { get; set; }
+        public decimal lateral_derecho_dl { get; set; }
         public bool sobrecarga_corresponde_dl { get; set; }
         public int cantidad_operarios_dl { get; set; }
     }
@@ -129,11 +129,11 @@ namespace ExternalService.Class.Express
         public int idRubro { get; set; }
         public string codigo { get; set; }
         public string nombre { get; set; }
-        public float superficieHabilitar { get; set; }
+        public decimal superficieHabilitar { get; set; }
         public string cod_ImpactoAmbiental { get; set; }
         public string desc_ImpactoAmbiental { get; set; }
         public string letraAnexo { get; set; }
-        public object altura { get; set; }
+        public decimal altura { get; set; }
     }
 
     public class Planta
@@ -252,6 +252,22 @@ namespace ExternalService.Class.Express
         public string usuario_modificacion { get; set; }
     }
 
+    public class CAAResultadosSCDTO
+    {
+        public decimal indice_form_A { get; set; }
+        public decimal indice_form_B { get; set; }
+        public int id_tipocertificado { get; set; }
+        public string codigo_tipocertificado { get; set; }
+        public string nombre_tipocertificado { get; set; }
+    }
+
+    public class IVADTO
+    {
+        public string cod_form { get; set; }
+        public string nombre_form { get; set; }
+        public decimal valor { get; set; }
+        public object criterio { get; set; }
+    }
 
 
 }
