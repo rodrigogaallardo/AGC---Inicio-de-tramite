@@ -299,8 +299,53 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
         }
 
+        protected async void btnBuscarCAA_Click(object sender, EventArgs e)
+        {
+            bool RecargarPagina = false;
+            pnlErrorBuscarCAA.Visible = false;
+            lblErrorBuscarCAA.Text = "";
+            lstMensajesCAA.ClearSelection();
+
+            int id_solicitud_caa = 0;
+            string codigo_seguridad_CAA = txtCodSeguridadCAA.Text.Trim().ToUpper();
+            int.TryParse(txtNroCAA.Text.Trim(), out id_solicitud_caa);
+
+            WsEscribanosActaNotarialBL blActaNotarial = new WsEscribanosActaNotarialBL();
+            EncomiendaBL blEnc = new EncomiendaBL();
+
+            var lst_encomiendas = blEnc.GetByFKIdSolicitud(id_solicitud);
+
+            var enc = lst_encomiendas
+                    .Where(x => x.IdEstado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo)
+                    .OrderByDescending(x => x.IdEncomienda)
+                    .FirstOrDefault();
+
+            ValidarCodigoSeguridadResponse resCodSeg = await ValidarCodigoSeguridad(id_solicitud_caa, codigo_seguridad_CAA);
+            //validar si es ambiente desarrollo y saltear todo?
+            if (!resCodSeg.EsValido)
+            {
+                lblErrorBuscarCAA.Text = resCodSeg.ErrorDesc;
+                pnlErrorBuscarCAA.Visible = true;
+            }
+            else
+            {
+                GetCAAResponse caa = await GetCAA(id_solicitud_caa);
+                //var lstMensajes = blSol.CompareWithCAA(this.id_solicitud, caa);
+
+
+            }
+
+            //fin
+            if (RecargarPagina)
+            {
+                string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
+                Response.Redirect(url);
+            }
+            btnBuscarCAA.Enabled = true;
+        }
+
         //pasar a rest
-        protected void btnBuscarCAA_Click(object sender, EventArgs e)
+        protected void btnBuscarCAA_Click_old(object sender, EventArgs e)
         {
             bool RecargarPagina = false;
             pnlErrorBuscarCAA.Visible = false;
@@ -388,12 +433,17 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             btnBuscarCAA.Enabled = true;
         }
 
-
         private async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             List<GetCAAsByEncomiendasResponse> lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
             return lstCaa;
+        }
+        private async Task<ValidarCodigoSeguridadResponse> ValidarCodigoSeguridad(int id_caa, string codigo_caa)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            ValidarCodigoSeguridadResponse resultado = await apraSrvRest.ValidarCodigoSeguridad(id_caa, codigo_caa);
+            return resultado;
         }
         private async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
         {
@@ -468,7 +518,14 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             if(CAA_id != 0)
             {
                 GetCAAResponse caa = await GetCAA(CAA_id);
-                var fileInfo = GetCAA_fileInfo(caa); // esto no necesita retornar nada
+                var fileInfo = GetCAA_fileInfo(caa);
+                if (fileInfo)
+                {
+                    string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
+                    Response.Redirect(url);
+                }
+                btnGenerarCAA.Enabled = false;
+                btnGenerarCAA.Visible = false;
             }
             else
             {

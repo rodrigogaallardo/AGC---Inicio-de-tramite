@@ -55,7 +55,7 @@ namespace ExternalService.Class.Express
         public Normativadto normativaDTO { get; set; }
         public Planta[] plantas { get; set; }
         public Titularespersonasfisica[] titularesPersonasFisicas { get; set; }
-        public object[] titularesPersonasJuridicas { get; set; }
+        public Titularespersonasjuridica[] titularesPersonasJuridicas { get; set; }
         public Ubicacione[] ubicaciones { get; set; }
         public Datoslocal datosLocal { get; set; }
     }
@@ -184,14 +184,14 @@ namespace ExternalService.Class.Express
         public string subtipoubicacion { get; set; }
         public string local_subtipoubicacion { get; set; }
         public string deptoLocal_ubicacion { get; set; }
-        public object zonaMixtura { get; set; }
-        public object observaciones { get; set; }
-        public object nroPartidaMatriz { get; set; }
-        public int seccion { get; set; }
+        public int? zonaMixtura { get; set; }
+        public string observaciones { get; set; }
+        public int? nroPartidaMatriz { get; set; }
+        public string seccion { get; set; }
         public string manzana { get; set; }
         public string parcela { get; set; }
         public Distrito[] distritos { get; set; }
-        public object[] mixturas { get; set; }
+        public Mixtura[] mixturas { get; set; }
         public Propiedadeshorizontale[] propiedadesHorizontales { get; set; }
         public Puerta[] puertas { get; set; }
         public object[] coordenadas { get; set; }
