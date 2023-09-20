@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ExternalService.Class.Express
 {
-    internal class ValidarCodigoSeguridadResponse
+    public class ValidarCodigoSeguridadResponse
     {
+        public bool EsValido { get; set; }
+        public string ErrorCode { get; set; }
+        public string ErrorDesc { get; set; }
     }
 
 

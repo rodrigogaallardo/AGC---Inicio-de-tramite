@@ -2026,7 +2026,9 @@ namespace BusinesLayer.Implementation
 
             return ret;
         }
-        public List<string> CompareWithCAA(int id_solicitud, DtoCAA solCAA)
+
+        //fuck
+        public List<string> CompareWithCAA(int id_solicitud, GetCAAResponse solCAA)
         {
 
             List<string> lstErrores = new List<string>();
@@ -2054,7 +2056,7 @@ namespace BusinesLayer.Implementation
             {
 
                 #region "Comparacion de ubicaciones"
-                var lstUbicacionesCAA = solCAA.Ubicaciones.ToList();
+                var lstUbicacionesCAA = solCAA.formulario.ubicaciones.ToList();
                 var lstUbicacionesHAB = sol.SSIT_Solicitudes_Ubicaciones.ToList();
 
                 if (lstUbicacionesCAA.Count != lstUbicacionesHAB.Count)
@@ -2072,15 +2074,15 @@ namespace BusinesLayer.Implementation
                         if (id_solicitud < nroSolicitudReferencia)
                         {
                             //evaluamos la zonificacion (Zona de Planeamiento).
-                            if (itemUbicCAA.id_zonaplaneamiento == null)
+                            if (itemUbicCAA.zonaMixtura == null) //itemUbicCAA.id_zonaplaneamiento old
                             {
                                 lstErrores.Add(string.Format("La solicitud no posee el dato zonificación de la ubicación. Número de ubicación: {0}.", NroUbicacion));
                             }
                             else
                             {
-                                if (itemUbicCAA.id_zonaplaneamiento != itemUbicHAB.id_zonaplaneamiento)
+                                if (itemUbicCAA.zonaMixtura != itemUbicHAB.id_zonaplaneamiento) //itemUbicCAA.id_zonaplaneamiento old
                                 {
-                                    var zonaPlaCAA = repoZonasPlaneamiento.Single(itemUbicCAA.id_zonaplaneamiento);
+                                    var zonaPlaCAA = repoZonasPlaneamiento.Single(itemUbicCAA.zonaMixtura);
                                     lstErrores.Add(string.Format("La zonificación de la ubicación {0} es diferente, en el CAA es {1} y en la solicitud de HAB es {2}.", NroUbicacion, zonaPlaCAA.CodZonaPla, itemUbicHAB.Zonas_Planeamiento.CodZonaPla));
                                 }
                             }
@@ -2096,15 +2098,15 @@ namespace BusinesLayer.Implementation
                             var cantidadMixturasHAB = (lstMixturasHAB.Select(t => t.IdZonaMixtura).Distinct().Count());
 
                             //Comparación de Distritos
-                            if (cantidadDistritosHAB != itemUbicCAA.Distritos.Count())
+                            if (cantidadDistritosHAB != itemUbicCAA.distritos.Count())
                             {
                                 lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
                             }
-                            else if ((cantidadDistritosHAB == itemUbicCAA.Distritos.Count()))
+                            else if ((cantidadDistritosHAB == itemUbicCAA.distritos.Count()))
                             {
                                 foreach (var itemDistrito in lstDistritosHAB)
                                 {
-                                    var itemDistritoCAA = itemUbicCAA.Distritos.FirstOrDefault(x => x.IdDistrito == itemDistrito.IdDistrito);
+                                    var itemDistritoCAA = itemUbicCAA.distritos.FirstOrDefault(x => x.idDistrito == itemDistrito.IdDistrito);
                                     if (itemDistritoCAA == null)
                                     {
                                         lstErrores.Add(string.Format("El distrito '{1} ' de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemDistrito.IdDistrito));
@@ -2113,15 +2115,15 @@ namespace BusinesLayer.Implementation
                             }
 
                             //Comparación de Mixturas
-                            if ((cantidadMixturasHAB != itemUbicCAA.Mixturas.Count()))
+                            if ((cantidadMixturasHAB != itemUbicCAA.mixturas.Count()))
                             {
                                 lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
                             }
-                            else if (cantidadMixturasHAB == itemUbicCAA.Mixturas.Count())
+                            else if (cantidadMixturasHAB == itemUbicCAA.mixturas.Count())
                             {
                                 foreach (var itemMixtura in lstMixturasHAB)
                                 {
-                                    var itemMixturaCAA = itemUbicCAA.Mixturas.FirstOrDefault(x => x.IdZonaMixtura == itemMixtura.IdZonaMixtura);
+                                    var itemMixturaCAA = itemUbicCAA.mixturas.FirstOrDefault(x => x.idZonaMixtura == itemMixtura.IdZonaMixtura);
                                     if (itemMixturaCAA == null)
                                     {
                                         lstErrores.Add(string.Format("La mixtura '{1} ' de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemMixtura.IdZonaMixtura));
@@ -2143,14 +2145,14 @@ namespace BusinesLayer.Implementation
                         }
 
                         //Comparación de las puertas
-                        if (itemUbicCAA.Puertas.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count())
+                        if (itemUbicCAA.puertas.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count())
                         {
                             lstErrores.Add(string.Format("La cantidad de puertas de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Puertas.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count()));
                         }
 
                         foreach (var itemPuerta in itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas)
                         {
-                            var itemPuertaCAA = itemUbicCAA.Puertas.FirstOrDefault(x => x.codigo_calle == itemPuerta.codigo_calle && x.NroPuerta == itemPuerta.NroPuerta);
+                            var itemPuertaCAA = itemUbicCAA.puertas.FirstOrDefault(x => x.codigo_calle == itemPuerta.codigo_calle && x.NroPuerta == itemPuerta.NroPuerta);
                             if (itemPuertaCAA == null)
                             {
                                 lstErrores.Add(string.Format("La puerta '{1} {2}' de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemPuerta.nombre_calle.Trim(), itemPuerta.NroPuerta));
@@ -2158,14 +2160,14 @@ namespace BusinesLayer.Implementation
                         }
 
                         //Comparación de las partidas horizontales
-                        if (itemUbicCAA.PropiedadesHorizontales.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count())
+                        if (itemUbicCAA.propiedadesHorizontales.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count())
                         {
                             lstErrores.Add(string.Format("La cantidad de partidas horizontales de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.PropiedadesHorizontales.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count()));
                         }
 
                         foreach (var itemPHorHAB in itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal)
                         {
-                            var itemPHorCAA = itemUbicCAA.PropiedadesHorizontales.FirstOrDefault(x => x.id_propiedadhorizontal == itemPHorHAB.id_propiedadhorizontal);
+                            var itemPHorCAA = itemUbicCAA.propiedadesHorizontales.FirstOrDefault(x => x.id_propiedadhorizontal == itemPHorHAB.id_propiedadhorizontal);
                             if (itemPHorCAA == null)
                             {
                                 lstErrores.Add(string.Format("La partida horizontal Nro. {1} de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemPHorHAB.Ubicaciones_PropiedadHorizontal.NroPartidaHorizontal));
@@ -2178,18 +2180,18 @@ namespace BusinesLayer.Implementation
 
                 #region "Comparacion de titulares"
                 #region "Titulares Personas Fisicas"
-                int cantidadTitPFCAA = (solCAA.TitularesPersonasFisicas != null ? solCAA.TitularesPersonasFisicas.Count() : 0);
+                int cantidadTitPFCAA = (solCAA.formulario.titularesPersonasFisicas != null ? solCAA.formulario.titularesPersonasFisicas.Count() : 0);
                 int cantidadTitPFHAB = sol.SSIT_Solicitudes_Titulares_PersonasFisicas.Count;
 
                 if (cantidadTitPFCAA != cantidadTitPFHAB)
                     lstErrores.Add("La cantidad de titulares (persona/s física/s de la solicitud de CAA es distinta a la de la solicitud actual.");
                 else if (cantidadTitPFCAA > 0)
                 {
-                    var lstTitPfCAA = solCAA.TitularesPersonasFisicas.ToList();
+                    var lstTitPfCAA = solCAA.formulario.titularesPersonasFisicas.ToList();
                     var lstTitPfHAB = sol.SSIT_Solicitudes_Titulares_PersonasFisicas.ToList();
                     foreach (var itemTitPfHAB in lstTitPfHAB)
                     {
-                        var itemTitPfCAA = lstTitPfCAA.FirstOrDefault(x => x.Cuit.Replace("-", "") == itemTitPfHAB.Cuit);
+                        var itemTitPfCAA = lstTitPfCAA.FirstOrDefault(x => x.cuit.Replace("-", "") == itemTitPfHAB.Cuit);
                         if (itemTitPfCAA == null)
                             lstErrores.Add(string.Format("No se encuentra el titular con CUIT {0} en el CAA.", itemTitPfHAB.Cuit));
 
@@ -2203,19 +2205,19 @@ namespace BusinesLayer.Implementation
 
                 #region "Titulares Personas Juridicas"
 
-                int cantidadTitPJCAA = (solCAA.TitularesPersonasJuridicas != null ? solCAA.TitularesPersonasJuridicas.Count() : 0);
+                int cantidadTitPJCAA = (solCAA.formulario.titularesPersonasJuridicas != null ? solCAA.formulario.titularesPersonasJuridicas.Count() : 0);
                 int cantidadTitPJHAB = sol.SSIT_Solicitudes_Titulares_PersonasJuridicas.Count;
 
                 if (cantidadTitPJCAA != cantidadTitPJHAB)
                     lstErrores.Add("La cantidad de titulares de la solicitud de CAA es distinta a la de la solicitud actual.");
                 else if (cantidadTitPJCAA > 0)
                 {
-                    var lstTitPjCAA = solCAA.TitularesPersonasJuridicas.ToList();
+                    var lstTitPjCAA = solCAA.formulario.titularesPersonasJuridicas.ToList();
                     var lstTitPjHAB = sol.SSIT_Solicitudes_Titulares_PersonasJuridicas.ToList();
 
                     foreach (var itemTitPjHAB in lstTitPjHAB)
                     {
-                        var itemTitPjCAA = lstTitPjCAA.FirstOrDefault(x => x.CUIT.Replace("-", "") == itemTitPjHAB.CUIT);
+                        var itemTitPjCAA = lstTitPjCAA.FirstOrDefault(x => x.cuit.Replace("-", "") == itemTitPjHAB.CUIT);
                         if (itemTitPjCAA == null)
                             lstErrores.Add(string.Format("No se encuentra el titular con CUIT {0} en el CAA.", itemTitPjHAB.CUIT));
                         else
@@ -2225,6 +2227,8 @@ namespace BusinesLayer.Implementation
 
                             //Comparacion de los titulares de Sociedades de Hecho
                             //--
+                            //el nuevo endpont no devuelve TitularesPersonasFisicasPersonasJuridicas
+                            /*
                             int cantidadTitPJPFCAA = (itemTitPjCAA.TitularesPersonasFisicasPersonasJuridicas != null ? itemTitPjCAA.TitularesPersonasFisicasPersonasJuridicas.Count() : 0);
                             int cantidadTitPJPFHAB = itemTitPjHAB.SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas.Count;
                             if (cantidadTitPJPFCAA != cantidadTitPJPFHAB)
@@ -2268,6 +2272,7 @@ namespace BusinesLayer.Implementation
                                     }
                                 }
                             }
+                            */
 
                         }
                     }

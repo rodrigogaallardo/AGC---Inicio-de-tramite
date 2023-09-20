@@ -380,8 +380,13 @@ namespace ExternalService
            
         }
 
-    
-        public async Task<string> ValidarCodigoSeguridad(int IdSolicitud, string codSeguridad)
+        /// <summary>
+        /// Recibe id_caa (IdSolicitud) y devuelve verdadero o falso, codigo de error y descripcion de este
+        /// </summary>
+        /// <param name="IdSolicitud"></param>
+        /// <param name="codSeguridad"></param>
+        /// <returns></returns>
+        public async Task<ValidarCodigoSeguridadResponse> ValidarCodigoSeguridad(int IdSolicitud, string codSeguridad)
         {
             try
             {
@@ -404,19 +409,39 @@ namespace ExternalService
                         string content = response.Content;
                         bool validarCodigoSeguridadResponse = new bool();
                         validarCodigoSeguridadResponse = JsonConvert.DeserializeObject<bool>(content);
-                         return JsonConvert.SerializeObject(content);
+                        return new ValidarCodigoSeguridadResponse
+                        {
+                            EsValido = validarCodigoSeguridadResponse,
+                            ErrorCode = null,
+                            ErrorDesc = null
+                        };
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return new ValidarCodigoSeguridadResponse
+                        {
+                            EsValido = false,
+                            ErrorCode = response.StatusCode.ToString(),
+                            ErrorDesc = $"La solicitud no fue exitosa. Código de estado: {response.StatusCode}"
+                        };
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return new ValidarCodigoSeguridadResponse
+                    {
+                        EsValido = false,
+                        ErrorCode = "HttpRequestException",
+                        ErrorDesc = $"Error al realizar la solicitud HTTP: {ex.Message}"
+                    };
                 }
             }
             catch (Exception ex)
             {
-                return $"Error generico al ejecutar  GenerarCAAAutomatico. Mensaje: {ex.Message}";
+                return new ValidarCodigoSeguridadResponse
+                {
+                    EsValido = false,
+                    ErrorCode = "Error Generico",
+                    ErrorDesc = $"Error genérico al ejecutar GenerarCAAAutomatico. Mensaje: {ex.Message}"
+                };
             }
         }
         public async Task<string> AsociarAnexoTecnico(int IdSolicitud, string codSeguridad, int IdEncomienda)
