@@ -356,101 +356,35 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             else
             {
                 GetCAAResponse caa = await GetCAA(id_solicitud_caa);
-                //var lstMensajes = blSol.CompareWithCAA(this.id_solicitud, caa);
-
-
-            }
-
-            //fin
-            if (RecargarPagina)
-            {
-                string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
-                Response.Redirect(url);
-            }
-            btnBuscarCAA.Enabled = true;
-        }
-
-        //pasar a rest
-        protected void btnBuscarCAA_Click_old(object sender, EventArgs e)
-        {
-            bool RecargarPagina = false;
-            pnlErrorBuscarCAA.Visible = false;
-            lblErrorBuscarCAA.Text = "";
-            lstMensajesCAA.ClearSelection();
-
-            int id_solicitud_caa = 0;
-            string codigo_seguridad_CAA = txtCodSeguridadCAA.Text.Trim().ToUpper();
-            int.TryParse(txtNroCAA.Text.Trim(), out id_solicitud_caa);
-
-            ws_Interface_AGC servicio = new ws_Interface_AGC();
-            wsResultado ws_resultado_CAA = new wsResultado();
-            ParametrosBL blParam = new ParametrosBL();
-            WsEscribanosActaNotarialBL blActaNotarial = new WsEscribanosActaNotarialBL();
-            EncomiendaBL blEnc = new EncomiendaBL();
-
-            servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-            string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-            string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-
-
-            var lst_encomiendas = blEnc.GetByFKIdSolicitud(id_solicitud);
-
-            var enc = lst_encomiendas.Where(x => x.IdEstado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo).OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
-
-
-            //Salto la validacion, si esta en desa
-            //if (!Functions.isDesarrollo())
-            //{
-                //Valida el codigo de seguridad de la solicitud de CAA
-                if (!servicio.ValidarCodigoSeguridad(username_servicio, password_servicio, id_solicitud_caa, codigo_seguridad_CAA, ref ws_resultado_CAA))
+                var lstMensajes = blSol.CompareWithCAA(this.id_solicitud, caa);
+                if (lstMensajes.Count == 0)
                 {
-                    lblErrorBuscarCAA.Text = ws_resultado_CAA.ErrorDescription;
-                    pnlErrorBuscarCAA.Visible = true;
-                }
-                else
-                {
-                    //Obtiene los datos de la solicitud de CAA.
-                    DtoCAA[] arrSolCAA = servicio.Get_CAAs(username_servicio, password_servicio, new int[] { id_solicitud_caa }, ref ws_resultado_CAA);
-                    if (arrSolCAA.Length > 0)
+                    if (servicio.AsociarAnexoTecnico(username_servicio, password_servicio, id_solicitud_caa, codigo_seguridad_CAA, enc.IdEncomienda, ref ws_resultado_CAA))
                     {
-                        var solCAA = arrSolCAA[0];
-                        var lstMensajes = blSol.CompareWithCAA(this.id_solicitud, solCAA);
-
-                        if (lstMensajes.Count == 0)
-                        {
-                            if (servicio.AsociarAnexoTecnico(username_servicio, password_servicio, id_solicitud_caa, codigo_seguridad_CAA, enc.IdEncomienda, ref ws_resultado_CAA))
-                            {
-                                blActaNotarial.CopiarDesdeAPRA(enc.IdEncomienda, solCAA.id_caa);
-                                RecargarPagina = true;
-                                //Cargar_Datos(id_solicitud);
-                                //txtNroCAA.Text = "";
-                                //txtCodSeguridadCAA.Text = "";
-                            }
-                            else
-                            {
-                                lblErrorBuscarCAA.Text = ws_resultado_CAA.ErrorDescription;
-                                pnlErrorBuscarCAA.Visible = true;
-                            }
-
-                        }
-                        else
-                        {
-                            lblErrorBuscarCAA.Text = "No es posible vincular la solicitud de CAA, se encontraron los siguientes inconvenientes:";
-                            lstMensajesCAA.DataSource = lstMensajes;
-                            lstMensajesCAA.DataBind();
-                            pnlErrorBuscarCAA.Visible = true;
-                        }
-
+                        blActaNotarial.CopiarDesdeAPRA(enc.IdEncomienda, solCAA.id_caa);
+                        RecargarPagina = true;
+                        //Cargar_Datos(id_solicitud);
+                        //txtNroCAA.Text = "";
+                        //txtCodSeguridadCAA.Text = "";
                     }
                     else
                     {
                         lblErrorBuscarCAA.Text = ws_resultado_CAA.ErrorDescription;
                         pnlErrorBuscarCAA.Visible = true;
                     }
+
+                }
+                else
+                {
+                    lblErrorBuscarCAA.Text = "No es posible vincular la solicitud de CAA, se encontraron los siguientes inconvenientes:";
+                    lstMensajesCAA.DataSource = lstMensajes;
+                    lstMensajesCAA.DataBind();
+                    pnlErrorBuscarCAA.Visible = true;
                 }
 
-                servicio.Dispose();
-            //}
+            }
+
+            //fin
             if (RecargarPagina)
             {
                 string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
@@ -464,6 +398,12 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             List<GetCAAsByEncomiendasResponse> lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
             return lstCaa;
+        }
+        private async Task<ValidarCodigoSeguridadResponse> ValidarAnexoTecnico(int id_caa, string codigo_caa)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            ValidarCodigoSeguridadResponse resultado = await apraSrvRest.validar(id_caa, codigo_caa);
+            return resultado;
         }
         private async Task<ValidarCodigoSeguridadResponse> ValidarCodigoSeguridad(int id_caa, string codigo_caa)
         {

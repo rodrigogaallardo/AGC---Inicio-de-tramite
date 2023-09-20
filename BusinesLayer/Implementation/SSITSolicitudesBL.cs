@@ -2073,20 +2073,21 @@ namespace BusinesLayer.Implementation
                     {
                         if (id_solicitud < nroSolicitudReferencia)
                         {
+                            /* Se comento ya que al pasar a rest ya no tenemos el dato id_zonaplaneamiento
                             //evaluamos la zonificacion (Zona de Planeamiento).
-                            if (itemUbicCAA.zonaMixtura == null) //itemUbicCAA.id_zonaplaneamiento old
+                            if (itemUbicCAA.id_zonaplaneamiento == null) 
                             {
                                 lstErrores.Add(string.Format("La solicitud no posee el dato zonificación de la ubicación. Número de ubicación: {0}.", NroUbicacion));
                             }
                             else
                             {
-                                if (itemUbicCAA.zonaMixtura != itemUbicHAB.id_zonaplaneamiento) //itemUbicCAA.id_zonaplaneamiento old
+                                if (itemUbicCAA.id_zonaplaneamiento != itemUbicHAB.id_zonaplaneamiento) 
                                 {
                                     var zonaPlaCAA = repoZonasPlaneamiento.Single(itemUbicCAA.zonaMixtura);
                                     lstErrores.Add(string.Format("La zonificación de la ubicación {0} es diferente, en el CAA es {1} y en la solicitud de HAB es {2}.", NroUbicacion, zonaPlaCAA.CodZonaPla, itemUbicHAB.Zonas_Planeamiento.CodZonaPla));
                                 }
                             }
-
+                            */
                         }
                         else
                         {
@@ -2227,7 +2228,8 @@ namespace BusinesLayer.Implementation
 
                             //Comparacion de los titulares de Sociedades de Hecho
                             //--
-                            //el nuevo endpont no devuelve TitularesPersonasFisicasPersonasJuridicas
+                            // el nuevo endpont no devuelve TitularesPersonasFisicasPersonasJuridicas
+                            // por lo tanto se quita esta validacion 
                             /*
                             int cantidadTitPJPFCAA = (itemTitPjCAA.TitularesPersonasFisicasPersonasJuridicas != null ? itemTitPjCAA.TitularesPersonasFisicasPersonasJuridicas.Count() : 0);
                             int cantidadTitPJPFHAB = itemTitPjHAB.SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas.Count;
@@ -2293,7 +2295,7 @@ namespace BusinesLayer.Implementation
                     {
                         // Compara las Superficies
                         decimal SuperficieSolicitud = 0;
-                        decimal SuperficieCAA = (solCAA.SuperficieCubierta + solCAA.SuperficieDescubierta);
+                        decimal SuperficieCAA = (solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl);
 
                         if (DatosLocal != null)
                         {
@@ -2309,7 +2311,9 @@ namespace BusinesLayer.Implementation
                     var lstRubrosHAB = repoSolicitudesRubros.GetRubrosCN(id_solicitud).ToList();
 
                     // Compara los Rubros.
-                    int cantidadRubrosCAA = (solCAA.Rubros != null ? solCAA.Rubros.Count() : 0);
+                    int cantidadRubrosCAA_cur = (solCAA.formulario.rubrosCur != null ? solCAA.formulario.rubrosCur.Count() : 0);
+                    
+                    int cantidadRubrosCAA = cantidadRubrosCAA_cur; 
                     int cantidadRubrosHAB = lstRubrosHAB.Count();
 
                     //if (cantidadRubrosCAA != cantidadRubrosHAB)
@@ -2318,11 +2322,11 @@ namespace BusinesLayer.Implementation
                     //}
                     //if (cantidadRubrosCAA > 0)
                     //{
-                    var lstRubrosCAA = solCAA.Rubros.ToList();
+                    var lstRubrosCAA = solCAA.formulario.rubrosCur.ToList();
 
                     foreach (var itemRubroHAB in lstRubrosHAB)
                     {
-                        var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.cod_rubro == itemRubroHAB.CodigoRubro);
+                        var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.codigo == itemRubroHAB.CodigoRubro);
                         if (itemRubroCAA == null)
                             lstErrores.Add(string.Format("No se encuentra el rubro {0} en el CAA.", itemRubroHAB.CodigoRubro));
                         else
@@ -2331,7 +2335,7 @@ namespace BusinesLayer.Implementation
                             decimal valorDecimalHAB = 0;
 
                             nombreCampo = "Superficie a habilitar";
-                            valorDecimalCAA = itemRubroCAA.SuperficieHabilitar;
+                            valorDecimalCAA = itemRubroCAA.superficieHabilitar;
                             valorDecimalHAB = itemRubroHAB.SuperficieHabilitar;
 
                             if (valorDecimalCAA < valorDecimalHAB)
@@ -2356,7 +2360,7 @@ namespace BusinesLayer.Implementation
                     {
                         // Compara las Superficies
                         decimal SuperficieEncomienda = 0;
-                        decimal SuperficieCAA = (solCAA.SuperficieCubierta + solCAA.SuperficieDescubierta);
+                        decimal SuperficieCAA = (solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl);
                         var datos_local = encomienda.Encomienda_DatosLocal.FirstOrDefault();
                         if (datos_local != null)
                         {
@@ -2372,8 +2376,8 @@ namespace BusinesLayer.Implementation
                             lstErrores.Add(string.Format("La Superficie total de la solicitud de CAA es distinta a la de la ultima encomienda aprobada. El valor en el CAA es {0} y en la encomienda es de {1}", SuperficieCAA, SuperficieEncomienda));
 
 
-                        // Compara los Rubros.
-                        int cantidadRubrosCAA = (solCAA.Rubros != null ? solCAA.Rubros.Count() : 0);
+                        // Compara los Rubros
+                        int cantidadRubrosCAA= (solCAA.formulario.rubrosCPU != null ? solCAA.formulario.rubrosCPU.Count() : 0);
                         int cantidadRubrosHAB = 0;
 
                         if (id_solicitud <= nroSolicitudReferencia)
@@ -2391,7 +2395,7 @@ namespace BusinesLayer.Implementation
                         {
                             if (id_solicitud <= nroSolicitudReferencia)
                             {
-                                var lstRubrosCAA = solCAA.Rubros.ToList();
+                                var lstRubrosCAA = solCAA.formulario.rubrosCPU.ToList();
                                 var lstRubrosHAB = encomienda.Encomienda_Rubros.ToList();
                                 foreach (var itemRubroHAB in lstRubrosHAB)
                                 {
@@ -2404,7 +2408,7 @@ namespace BusinesLayer.Implementation
                                         decimal valorDecimalHAB = 0;
 
                                         nombreCampo = "Superficie a habilitar";
-                                        valorDecimalCAA = itemRubroCAA.SuperficieHabilitar;
+                                        valorDecimalCAA = itemRubroCAA.superficieHabilitar;
                                         valorDecimalHAB = itemRubroHAB.SuperficieHabilitar;
 
                                         if (valorDecimalCAA != valorDecimalHAB)
@@ -2417,11 +2421,11 @@ namespace BusinesLayer.Implementation
                             else
                             {
 
-                                var lstRubrosCAA = solCAA.Rubros.ToList();
+                                var lstRubrosCAA = solCAA.formulario.rubrosCur.ToList();
                                 var lstRubrosHAB = encomienda.Encomienda_RubrosCN.ToList();
                                 foreach (var itemRubroHAB in lstRubrosHAB)
                                 {
-                                    var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.cod_rubro == itemRubroHAB.CodigoRubro);
+                                    var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.codigo == itemRubroHAB.CodigoRubro);
                                     if (itemRubroCAA == null)
                                         lstErrores.Add(string.Format("No se encuentra el rubro {0} en el CAA.", itemRubroHAB.CodigoRubro));
                                     else
@@ -2430,7 +2434,7 @@ namespace BusinesLayer.Implementation
                                         decimal valorDecimalHAB = 0;
 
                                         nombreCampo = "Superficie a habilitar";
-                                        valorDecimalCAA = itemRubroCAA.SuperficieHabilitar;
+                                        valorDecimalCAA = itemRubroCAA.superficieHabilitar;
                                         valorDecimalHAB = itemRubroHAB.SuperficieHabilitar;
 
                                         if (valorDecimalCAA != valorDecimalHAB)
