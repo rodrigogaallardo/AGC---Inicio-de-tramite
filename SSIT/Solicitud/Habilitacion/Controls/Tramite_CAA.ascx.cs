@@ -467,6 +467,9 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             else
             {
                 //mostrar CAA viejo
+                updBuscarCAA.Visible = true;
+                DivBtnSIPSA.Visible = true;
+                DivBtnSIPSAExpress.Visible = false;
             }
 
         }
