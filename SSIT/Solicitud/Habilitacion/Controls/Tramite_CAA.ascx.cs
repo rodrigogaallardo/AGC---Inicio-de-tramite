@@ -229,13 +229,12 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             estados.Add((int)Constantes.Encomienda_Estados.Vencida);
 
             this.id_solicitud = id_solicitud;
-            if(lst_encomiendas != null)
-                this.id_encomienda = lst_encomiendas.FirstOrDefault().IdEncomienda;
             //se cambia logica para q se compare el ultimo anexo tipo "A" y posteriores
             //mantis 149128: JADHE 57846 - SSIT - No permite generar una nueva BUI
 
             if (lst_encomiendas.Count() > 0)
             {
+                this.id_encomienda = lst_encomiendas.FirstOrDefault().IdEncomienda;
                 var UltimaA = lst_encomiendas.Where(x => estados.Contains(x.IdEstado) && x.tipoAnexo == Constantes.TipoAnexo_A).OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
                 if (UltimaA != null)
                 {
@@ -485,10 +484,11 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 var fileInfo = GetCAA_fileInfo(caa);
                 if (fileInfo)
                 {
+                    DivBtnSIPSAExpress.Visible = false;
                     string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
                     Response.Redirect(url);
                 }
-                //DivBtnSIPSAExpress.Visible = false;
+                
             }
             else
             {
