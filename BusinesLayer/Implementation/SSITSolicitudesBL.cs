@@ -2101,7 +2101,7 @@ namespace BusinesLayer.Implementation
                             //Comparación de Distritos
                             if (cantidadDistritosHAB != itemUbicCAA.distritos.Count())
                             {
-                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
+                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.distritos.Count(), lstDistritosHAB.Count()));
                             }
                             else if ((cantidadDistritosHAB == itemUbicCAA.distritos.Count()))
                             {
@@ -2118,7 +2118,7 @@ namespace BusinesLayer.Implementation
                             //Comparación de Mixturas
                             if ((cantidadMixturasHAB != itemUbicCAA.mixturas.Count()))
                             {
-                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
+                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.distritos.Count(), lstDistritosHAB.Count()));
                             }
                             else if (cantidadMixturasHAB == itemUbicCAA.mixturas.Count())
                             {
@@ -2148,12 +2148,12 @@ namespace BusinesLayer.Implementation
                         //Comparación de las puertas
                         if (itemUbicCAA.puertas.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count())
                         {
-                            lstErrores.Add(string.Format("La cantidad de puertas de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Puertas.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count()));
+                            lstErrores.Add(string.Format("La cantidad de puertas de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.puertas.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count()));
                         }
 
                         foreach (var itemPuerta in itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas)
                         {
-                            var itemPuertaCAA = itemUbicCAA.puertas.FirstOrDefault(x => x.codigo_calle == itemPuerta.codigo_calle && x.NroPuerta == itemPuerta.NroPuerta);
+                            var itemPuertaCAA = itemUbicCAA.puertas.FirstOrDefault(x => x.codigo_calle == itemPuerta.codigo_calle && x.nroPuerta == itemPuerta.NroPuerta);
                             if (itemPuertaCAA == null)
                             {
                                 lstErrores.Add(string.Format("La puerta '{1} {2}' de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemPuerta.nombre_calle.Trim(), itemPuerta.NroPuerta));
@@ -2163,7 +2163,7 @@ namespace BusinesLayer.Implementation
                         //Comparación de las partidas horizontales
                         if (itemUbicCAA.propiedadesHorizontales.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count())
                         {
-                            lstErrores.Add(string.Format("La cantidad de partidas horizontales de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.PropiedadesHorizontales.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count()));
+                            lstErrores.Add(string.Format("La cantidad de partidas horizontales de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.propiedadesHorizontales.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count()));
                         }
 
                         foreach (var itemPHorHAB in itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal)
@@ -2360,20 +2360,28 @@ namespace BusinesLayer.Implementation
                     {
                         // Compara las Superficies
                         decimal SuperficieEncomienda = 0;
-                        decimal SuperficieCAA = (solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl);
-                        var datos_local = encomienda.Encomienda_DatosLocal.FirstOrDefault();
-                        if (datos_local != null)
+                        if(solCAA.formulario.datosLocal != null)
                         {
-                            if (datos_local.ampliacion_superficie.HasValue && datos_local.ampliacion_superficie.Value)
-                                SuperficieEncomienda = (datos_local.superficie_cubierta_amp.HasValue ? datos_local.superficie_cubierta_amp.Value : 0) +
-                                                       (datos_local.superficie_descubierta_amp.HasValue ? datos_local.superficie_descubierta_amp.Value : 0);
-                            else
-                                SuperficieEncomienda = (datos_local.superficie_cubierta_dl.HasValue ? datos_local.superficie_cubierta_dl.Value : 0) +
-                                                       (datos_local.superficie_descubierta_dl.HasValue ? datos_local.superficie_descubierta_dl.Value : 0);
-                        }
+                            decimal SuperficieCAA = (solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl);
+                            var datos_local = encomienda.Encomienda_DatosLocal.FirstOrDefault();
+                            if (datos_local != null)
+                            {
+                                if (datos_local.ampliacion_superficie.HasValue && datos_local.ampliacion_superficie.Value)
+                                    SuperficieEncomienda = (datos_local.superficie_cubierta_amp.HasValue ? datos_local.superficie_cubierta_amp.Value : 0) +
+                                                           (datos_local.superficie_descubierta_amp.HasValue ? datos_local.superficie_descubierta_amp.Value : 0);
+                                else
+                                    SuperficieEncomienda = (datos_local.superficie_cubierta_dl.HasValue ? datos_local.superficie_cubierta_dl.Value : 0) +
+                                                           (datos_local.superficie_descubierta_dl.HasValue ? datos_local.superficie_descubierta_dl.Value : 0);
+                            }
 
-                        if (SuperficieEncomienda != SuperficieCAA)
-                            lstErrores.Add(string.Format("La Superficie total de la solicitud de CAA es distinta a la de la ultima encomienda aprobada. El valor en el CAA es {0} y en la encomienda es de {1}", SuperficieCAA, SuperficieEncomienda));
+                            if (SuperficieEncomienda != SuperficieCAA)
+                                lstErrores.Add(string.Format("La Superficie total de la solicitud de CAA es distinta a la de la ultima encomienda aprobada. El valor en el CAA es {0} y en la encomienda es de {1}", SuperficieCAA, SuperficieEncomienda));
+
+                        }
+                        else
+                        {
+                            lstErrores.Add("No es posible comparar los datos del local debido a que no se encontraron datos en el CAA indicado.");
+                        }
 
 
                         // Compara los Rubros

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ExternalService.Class.Express
 {
-    internal class AsociarAnexoTecnicoResponse
+    public class AsociarAnexoTecnicoResponse
     {
+        public bool Asociado { get; set; }
+        public string ErrorCode { get; set; }
+        public string ErrorDesc { get; set; }
     }
 }
