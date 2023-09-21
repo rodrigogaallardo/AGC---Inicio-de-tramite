@@ -412,7 +412,7 @@ namespace ExternalService
                         return new ValidarCodigoSeguridadResponse
                         {
                             EsValido = validarCodigoSeguridadResponse,
-                            ErrorCode = null,
+                            ErrorCode = response.StatusCode.ToString(),
                             ErrorDesc = null
                         };
                     }
@@ -444,9 +444,8 @@ namespace ExternalService
                 };
             }
         }
-        //hacer lo mismo que para el rest de VerificarCodigoSeguridad,
-        //devolver un objeto complejo con el valor del request + request.status + error code
-        public async Task<string> AsociarAnexoTecnico(int IdSolicitud, string codSeguridad, int IdEncomienda)
+
+        public async Task<AsociarAnexoTecnicoResponse> AsociarAnexoTecnico(int IdSolicitud, string codSeguridad, int IdEncomienda)
         {
             try
             {
@@ -469,19 +468,39 @@ namespace ExternalService
                         string content = response.Content;
                         bool asociarAnexoTecnicoResponse = new bool();
                         asociarAnexoTecnicoResponse = JsonConvert.DeserializeObject<bool>(content);
-                        return JsonConvert.SerializeObject(content);
+                        return new AsociarAnexoTecnicoResponse
+                        {
+                            Asociado = asociarAnexoTecnicoResponse,
+                            ErrorCode = response.StatusCode.ToString(),
+                            ErrorDesc = null
+                        };
                     }
                     else
-                        return ($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                        return new AsociarAnexoTecnicoResponse
+                        {
+                            Asociado = false,
+                            ErrorCode = response.StatusCode.ToString(),
+                            ErrorDesc = $"La solicitud no fue exitosa. Código de estado: {response.StatusCode}"
+                        };
                 }
                 catch (HttpRequestException ex)
                 {
-                    return ($"Error al realizar la solicitud HTTP: {ex.Message}");
+                    return new AsociarAnexoTecnicoResponse
+                    {
+                        Asociado = false,
+                        ErrorCode = "HttpRequestException",
+                        ErrorDesc = $"Error al realizar la solicitud HTTP: {ex.Message}"
+                    };
                 }
             }
             catch (Exception ex)
             {
-                return $"Error generico al ejecutar  GenerarCAAAutomatico. Mensaje: {ex.Message}";
+                return new AsociarAnexoTecnicoResponse
+                    {
+                        Asociado = false,
+                        ErrorCode = "Error Generico",
+                        ErrorDesc = $"Error generico al ejecutar  GenerarCAAAutomatico. Mensaje: {ex.Message}"
+                    };
             }
             
         }

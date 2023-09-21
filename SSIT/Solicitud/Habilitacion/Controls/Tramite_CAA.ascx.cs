@@ -223,13 +223,14 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
 
             grdArchivosCAA.Visible = true;
-            id_encomienda = 0;
+            
             List<int> estados = new List<int>();
             estados.Add((int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo);
             estados.Add((int)Constantes.Encomienda_Estados.Vencida);
 
             this.id_solicitud = id_solicitud;
-
+            if(lst_encomiendas != null)
+                this.id_encomienda = lst_encomiendas.FirstOrDefault().IdEncomienda;
             //se cambia logica para q se compare el ultimo anexo tipo "A" y posteriores
             //mantis 149128: JADHE 57846 - SSIT - No permite generar una nueva BUI
 
@@ -347,7 +348,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     .FirstOrDefault();
 
             ValidarCodigoSeguridadResponse resCodSeg = await ValidarCodigoSeguridad(id_solicitud_caa, codigo_seguridad_CAA);
-            //validar si es ambiente desarrollo y saltear todo?
+            //esto se salteaba antes en esta rama, verificar en master
             if (!resCodSeg.EsValido)
             {
                 lblErrorBuscarCAA.Text = resCodSeg.ErrorDesc;
@@ -359,17 +360,15 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 var lstMensajes = blSol.CompareWithCAA(this.id_solicitud, caa);
                 if (lstMensajes.Count == 0)
                 {
-                    if (servicio.AsociarAnexoTecnico(username_servicio, password_servicio, id_solicitud_caa, codigo_seguridad_CAA, enc.IdEncomienda, ref ws_resultado_CAA))
+                    AsociarAnexoTecnicoResponse anexoEstado = await AsociarAnexoTecnico(id_solicitud_caa, codigo_seguridad_CAA, id_encomienda);
+                    if (anexoEstado.Asociado)
                     {
-                        blActaNotarial.CopiarDesdeAPRA(enc.IdEncomienda, solCAA.id_caa);
+                        blActaNotarial.CopiarDesdeAPRA(enc.IdEncomienda, caa.id_solicitud);
                         RecargarPagina = true;
-                        //Cargar_Datos(id_solicitud);
-                        //txtNroCAA.Text = "";
-                        //txtCodSeguridadCAA.Text = "";
                     }
                     else
                     {
-                        lblErrorBuscarCAA.Text = ws_resultado_CAA.ErrorDescription;
+                        lblErrorBuscarCAA.Text = anexoEstado.ErrorDesc;
                         pnlErrorBuscarCAA.Visible = true;
                     }
 
@@ -384,7 +383,6 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             }
 
-            //fin
             if (RecargarPagina)
             {
                 string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
@@ -399,10 +397,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             List<GetCAAsByEncomiendasResponse> lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
             return lstCaa;
         }
-        private async Task<ValidarCodigoSeguridadResponse> ValidarAnexoTecnico(int id_caa, string codigo_caa)
+        private async Task<AsociarAnexoTecnicoResponse> AsociarAnexoTecnico(int id_caa, string codigo_caa, int id_encomienda)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            ValidarCodigoSeguridadResponse resultado = await apraSrvRest.validar(id_caa, codigo_caa);
+            AsociarAnexoTecnicoResponse resultado = await apraSrvRest.AsociarAnexoTecnico(id_caa, codigo_caa, id_encomienda);
             return resultado;
         }
         private async Task<ValidarCodigoSeguridadResponse> ValidarCodigoSeguridad(int id_caa, string codigo_caa)
@@ -490,8 +488,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
                     Response.Redirect(url);
                 }
-                btnGenerarCAA.Enabled = false;
-                btnGenerarCAA.Visible = false;
+                //DivBtnSIPSAExpress.Visible = false;
             }
             else
             {
