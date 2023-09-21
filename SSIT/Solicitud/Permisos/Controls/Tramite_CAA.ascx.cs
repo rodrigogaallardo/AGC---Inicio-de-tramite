@@ -145,7 +145,7 @@ namespace SSIT.Solicitud.Permisos.Controls
             return ret;
 
         }
-        //pasar a rest, pero no hay alternativa
+        //deprecado
         /*
         public DtoRACGenerado GenerarRAC(int id_solicitud_agc)
         {
