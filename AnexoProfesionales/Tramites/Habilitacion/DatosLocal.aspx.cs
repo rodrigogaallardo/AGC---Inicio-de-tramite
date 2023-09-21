@@ -520,7 +520,7 @@ namespace AnexoProfesionales
             //    else
             //        Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_ENCOMIENDA_RUBROS + "{0}", id_encomienda));
             //}
-
+            
         }
 
         protected void optsCertificadoSobrecarga_SI_CheckedChanged(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using Dal.UnitOfWork;
 using System.Data.Entity.Core.Objects;
 using StaticClass;
 using DataAcess.EntityCustom;
+using System.Data.Entity;
 
 namespace BaseRepository
 {
@@ -517,6 +518,40 @@ namespace BaseRepository
         {
             int valor = Convert.ToInt32(_unitOfWork.Db.Parametros.FirstOrDefault(p => p.cod_param == "NroSolicitudReferencia").valorchar_param);
             return idSolicitud > valor;
+        }
+
+        public string ObtenerObservacionLibradoUsoOblea(int idSolicitud)
+        {
+            string observacion = string.Empty;
+
+            var query = (from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
+                         join calificacion in _unitOfWork.Db.SGI_Tarea_Calificar on tth.id_tramitetarea equals calificacion.id_tramitetarea
+                         where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                         select new
+                         {
+                            calificacion.Observaciones_LibradoUso,
+                            calificacion.CreateDate
+                         }).Union(from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
+                                  join calificacion in _unitOfWork.Db.SGI_Tarea_Revision_Gerente on tth.id_tramitetarea equals calificacion.id_tramitetarea
+                                  where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                                  select new
+                                  {
+                                      calificacion.Observaciones_LibradoUso,
+                                      calificacion.CreateDate
+                                  }).Union(from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
+                                           join calificacion in _unitOfWork.Db.SGI_Tarea_Revision_SubGerente on tth.id_tramitetarea equals calificacion.id_tramitetarea
+                                           where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                                           select new
+                                           {
+                                               calificacion.Observaciones_LibradoUso,
+                                               calificacion.CreateDate
+                                           }).OrderByDescending(result => result.CreateDate).FirstOrDefault();
+
+            if (query != null)
+            {
+                observacion = query.Observaciones_LibradoUso;
+            }
+            return observacion;
         }
     }
 }

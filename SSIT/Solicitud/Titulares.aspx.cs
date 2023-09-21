@@ -11,6 +11,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SSIT.Common;
+using Microsoft.Ajax.Utilities;
 
 namespace SSIT
 {
@@ -2160,6 +2161,25 @@ namespace SSIT
             updAgregarPersonaFisica.Update();
         }
 
+        protected void validarCuitOtroFirmante_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var titularesBL = new TitularesBL();
+                var persona = titularesBL.GetPersonaTAD(txtCuitFirPF.Text);
+                var datos = GeneratePersonaTAD(persona);
+                AutocompleteFormDatosFirmante(datos);
+                ValidFromDF();
+            }
+            catch (Exception ex)
+            {
+                ClearFormDF();
+                lblError.Text = ex.Message.Replace("\r\n", "<br>");
+                this.EjecutarScript(updAgregarPersonaFisica, "showfrmError();");
+            }
+            updFirmantePF.Update();
+        }
+
         protected void validarCuitPjButton_Click(object sender, EventArgs e)
         {
             try
@@ -2177,6 +2197,25 @@ namespace SSIT
                 this.EjecutarScript(updAgregarPersonaJuridica, "showfrmError();");
             }
             updAgregarPersonaJuridica.Update();
+        }
+
+        protected void validarCuitOtroPJButton_Click (object sender, EventArgs e)
+        {
+            try
+            {
+                var titularesBL = new TitularesBL();
+                var persona = titularesBL.GetPersonaTAD(txtCuitFirPJ.Text);
+                var datos = GeneratePersonaTAD(persona);
+                AutoCompleteFormDatosFJ(datos);
+                ValidFromNuevaFirmantePJ();
+            }
+            catch (Exception ex)
+            {
+                ClearFormNuevoPJ();
+                lblError.Text = ex.Message.Replace("\r\n", "<br>");
+                this.EjecutarScript(updAgregarPersonaJuridica, "showfrmError();");
+            }
+            updFirmantePJ.Update();
         }
 
         private PersonaTAD GeneratePersonaTAD(PersonaTadDTO persona)
@@ -2218,6 +2257,21 @@ namespace SSIT
             txtCPPJ.Text = datos.CodigoPostal;
             txtTelefonoPJ.Text = datos.Telefono;
             txtEmailPJ.Text = datos.Email;
+        }
+
+        private void AutocompleteFormDatosFirmante(PersonaTAD datos)
+        {
+            txtApellidoFirPF.Text = datos.Apellidos;
+            txtNombresFirPF.Text = datos.Nombres;
+            txtNroDocumentoFirPF.Text = datos.Documento;
+        }
+
+        private void AutoCompleteFormDatosFJ(PersonaTAD datos)
+        {
+            txtApellidosFirPJ.Text = datos.Apellidos;
+            txtNombresFirPJ.Text = datos.Nombres;
+            txtNroDocumentoFirPJ.Text = datos.Documento;
+            txtEmailFirPJ.Text = datos.Email;
         }
 
         private void ClearFormPF()
@@ -2265,6 +2319,21 @@ namespace SSIT
             ddlTipoIngresosBrutosPJ.Enabled = false;
         }
 
+        protected void ClearFormDF()
+        {
+            txtApellidoFirPF.Text = string.Empty;
+            txtNombresFirPF.Text = string.Empty;
+            txtNroDocumentoFirPF.Text = string.Empty;
+        }
+
+        protected void ClearFormNuevoPJ()
+        {
+            txtApellidosFirPJ.Text = string.Empty;
+            txtNombresFirPJ.Text = string.Empty;
+            txtNroDocumentoFirPJ.Text = string.Empty;
+            txtEmailFirPJ.Text = string.Empty;
+        }
+
         private void ValidFromPF()
         {
             //txtApellidosPF.Enabled = string.IsNullOrWhiteSpace(txtApellidosPF.Text);
@@ -2292,6 +2361,20 @@ namespace SSIT
             txtEmailPJ.Enabled = string.IsNullOrWhiteSpace(txtEmailPJ.Text);
 
             ddlTipoIngresosBrutosPJ.Enabled = true;
+        }
+        private void ValidFromDF()
+        {
+            txtApellidoFirPF.Enabled = string.IsNullOrWhiteSpace(txtApellidoFirPF.Text);
+            txtNombresFirPF.Enabled = string.IsNullOrWhiteSpace(txtNombresFirPF.Text);
+            txtNroDocumentoFirPF.Enabled = string.IsNullOrWhiteSpace(txtNroDocumentoFirPF.Text);
+        }
+
+        private void ValidFromNuevaFirmantePJ()
+        {
+            txtApellidosFirPJ.Enabled = string.IsNullOrWhiteSpace(txtApellidosFirPJ.Text);
+            txtNombresFirPJ.Enabled = string.IsNullOrWhiteSpace(txtNombresFirPJ.Text);
+            txtNroDocumentoFirPJ.Enabled = string.IsNullOrWhiteSpace(txtNroDocumentoFirPJ.Text);
+            txtEmailFirPJ.Enabled = string.IsNullOrWhiteSpace(txtEmailFirPJ.Text);
         }
 
         private class PersonaTAD
