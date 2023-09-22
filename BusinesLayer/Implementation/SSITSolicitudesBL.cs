@@ -1072,7 +1072,7 @@ namespace BusinesLayer.Implementation
                     if (id_estado_ant != (int)Constantes.TipoEstadoSolicitudEnum.SUSPEN)
                         solicitudEntity.id_estado = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
                     repo.Update(solicitudEntity);
-                    unitOfWork.Commit();
+                    
                     if (estaLibrado)
                     {
                         var cmd = unitOfWork.Db.Database.Connection.CreateCommand();
@@ -1089,7 +1089,8 @@ namespace BusinesLayer.Implementation
                         }
                         finally
                         {
-                            unitOfWork.Db.Database.Connection.Close();
+                            unitOfWork.Commit();
+                            //unitOfWork.Db.Database.Connection.Close();
                             cmd.Dispose();
                         }
                     }
