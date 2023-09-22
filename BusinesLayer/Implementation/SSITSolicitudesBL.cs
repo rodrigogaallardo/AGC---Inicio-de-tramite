@@ -2495,7 +2495,7 @@ namespace BusinesLayer.Implementation
                                         decimal valorDecimalHAB = 0;
 
                                         nombreCampo = "Superficie a habilitar";
-                                        valorDecimalCAA = itemRubroCAA.superficieHabilitar;
+                                        valorDecimalCAA = (decimal)itemRubroCAA.superficieHabilitar;
                                         valorDecimalHAB = itemRubroHAB.SuperficieHabilitar;
 
                                         if (valorDecimalCAA != valorDecimalHAB)

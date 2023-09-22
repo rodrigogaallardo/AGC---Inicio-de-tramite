@@ -133,7 +133,7 @@ namespace ExternalService.Class.Express
         public string cod_ImpactoAmbiental { get; set; }
         public string desc_ImpactoAmbiental { get; set; }
         public string letraAnexo { get; set; }
-        public decimal altura { get; set; }
+        public decimal? altura { get; set; }
     }
 
     public class Planta
