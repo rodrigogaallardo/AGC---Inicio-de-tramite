@@ -4823,7 +4823,7 @@ namespace BusinesLayer.Implementation
                 ExternalServiceFiles esf = new ExternalServiceFiles();
                 EncomiendaDocumentosAdjuntosBL encDocBL = new EncomiendaDocumentosAdjuntosBL();
                 EncomiendaDocumentosAdjuntosDTO encDocDTO;
-                string arch = filename + extension;
+                string arch = filename;
                 int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
 
                 var DocAdj = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).FirstOrDefault();
