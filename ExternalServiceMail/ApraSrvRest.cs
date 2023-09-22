@@ -125,7 +125,8 @@ namespace ExternalService
                     codigoSeguridad = codSeguridad
                 };
 
-                var client = new RestClient(apiUrl);
+                var client = new HttpClient();
+                client.Timeout = TimeSpan.FromSeconds(10);
                 RestRequest request = new RestRequest(Method.POST);
                 request.RequestFormat = DataFormat.Json;
                 request.AddHeader("content-type", "application/json; charset=utf-8");
@@ -136,10 +137,18 @@ namespace ExternalService
                 request.AddParameter("application/json", data, ParameterType.RequestBody);
                 try
                 {
-                    var response = client.Execute(request);
+                    var timeoutTask = Task.Delay(10000);
+                    var responseTask = client.PostAsync(url, data);
+                    var completedTask = await Task.WhenAny(responseTask, timeoutTask);
+                    if (completedTask == timeoutTask)
+                    {
+                        throw new TimeoutException("The request timed out.");
+                    }
+                    var response = await responseTask;
+                    //string result = await response.Content.ReadAsStringAsync();
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        string content = response.Content;
+                        string content = response.Content.ReadAsStringAsync();
                         //GenerarCAAAutomaticoResponse generarCAAAutomaticoResponse = new GenerarCAAAutomaticoResponse();
                         //generarCAAAutomaticoResponse = JsonConvert.DeserializeObject<GenerarCAAAutomaticoResponse>(content);
                         return int.Parse(content);
