@@ -175,6 +175,15 @@ namespace SSIT.Solicitud.Habilitacion.Controls {
         protected global::System.Web.UI.WebControls.LinkButton linkBtnGenerarCAA;
 
         /// <summary>
+        /// Control generandoCAAgif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage generandoCAAgif;
+
+        /// <summary>
         /// Control grdArchivosCAA.
         /// </summary>
         /// <remarks>

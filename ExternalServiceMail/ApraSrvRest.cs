@@ -22,6 +22,7 @@ using ExternalService.Class;
 using ExternalService.ws_interface_AGC;
 using System.Web.Services.Description;
 using System.Runtime.InteropServices;
+using StaticClass;
 
 namespace ExternalService
 {
@@ -110,8 +111,8 @@ namespace ExternalService
 
             return tokenResponse;
         }
-        //Post
-        public async Task<int> GenerarCAAAutomatico(int IdEncomienda, string codSeguridad)
+        //Post 
+        public async Task<GenerarCAAAutoResponse> GenerarCAAAutomatico(int IdEncomienda, string codSeguridad)
         {
             try
             {
@@ -125,45 +126,71 @@ namespace ExternalService
                     codigoSeguridad = codSeguridad
                 };
 
-                var client = new HttpClient();
-                client.Timeout = TimeSpan.FromSeconds(10);
-                RestRequest request = new RestRequest(Method.POST);
-                request.RequestFormat = DataFormat.Json;
-                request.AddHeader("content-type", "application/json; charset=utf-8");
-                request.AddHeader("Authorization", "Bearer " + tokenResponse.token);
-
-                var data = JsonConvert.SerializeObject(obj);
-
-                request.AddParameter("application/json", data, ParameterType.RequestBody);
-                try
+                using (HttpClient client = new HttpClient())
                 {
-                    var timeoutTask = Task.Delay(10000);
-                    var responseTask = client.PostAsync(url, data);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenResponse.token);
+
+                    client.Timeout = TimeSpan.FromSeconds(30);  //30 segundos de espera, puede que sea poco para prod
+
+                    HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+                    var timeoutTask = Task.Delay(client.Timeout);
+                    var responseTask = client.PostAsync(apiUrl, httpContent);
+                    await responseTask.ConfigureAwait(false);
                     var completedTask = await Task.WhenAny(responseTask, timeoutTask);
-                    if (completedTask == timeoutTask)
+                    try
                     {
-                        throw new TimeoutException("The request timed out.");
+                        if (completedTask == timeoutTask)
+                        {
+                            LogError.Write(new TimeoutException("The request timed out."), "HTTP request exception in GenerarCAAAutomatico");
+                            throw new TimeoutException("The request timed out.");
+                        }
+                        //HttpResponseMessage response = await client.PostAsync(apiUrl, httpContent);
+                        HttpResponseMessage response = await responseTask;
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string content = await response.Content.ReadAsStringAsync();
+                            int id_solicitud_caa = int.Parse(content);
+                            return new GenerarCAAAutoResponse
+                            {
+                                id_solicitud_caa = id_solicitud_caa,
+                                ErrorCode = response.StatusCode.ToString(),
+                                ErrorDesc = null
+                            };
+                        }
+                        else
+                        {
+                            LogError.Write($"Non-successful HTTP response: {response.StatusCode} - {response.ReasonPhrase}");
+                            return new GenerarCAAAutoResponse
+                            {
+                                id_solicitud_caa = 0,
+                                ErrorCode = response.StatusCode.ToString(),
+                                ErrorDesc = response.ReasonPhrase.ToString()
+                            };
+                        }
                     }
-                    var response = await responseTask;
-                    //string result = await response.Content.ReadAsStringAsync();
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    catch (HttpRequestException ex)
                     {
-                        string content = response.Content.ReadAsStringAsync();
-                        //GenerarCAAAutomaticoResponse generarCAAAutomaticoResponse = new GenerarCAAAutomaticoResponse();
-                        //generarCAAAutomaticoResponse = JsonConvert.DeserializeObject<GenerarCAAAutomaticoResponse>(content);
-                        return int.Parse(content);
+                        LogError.Write(ex, "HTTP request exception in GenerarCAAAutomatico");
+                        return new GenerarCAAAutoResponse
+                        {
+                            id_solicitud_caa = 0,
+                            ErrorCode = "HttpRequestException",
+                            ErrorDesc = $"Error al realizar la solicitud HTTP: {ex.Message}"
+                        };
                     }
-                    else
-                        return 0;
-                }
-                catch (HttpRequestException ex)
-                {
-                    return 0;
                 }
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                return 0;
+                LogError.Write(ex, "Ocurrió un error en GenerarCAAAutomatico ");
+                return new GenerarCAAAutoResponse
+                {
+                    id_solicitud_caa = 0,
+                    ErrorCode = "HttpRequestException",
+                    ErrorDesc = $"Ocurrió un error al intentar generar el CAA automatico: {ex.Message}"
+                };
             }
 
         }

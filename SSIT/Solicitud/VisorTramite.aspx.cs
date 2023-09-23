@@ -264,7 +264,7 @@ namespace SSIT
                     int[] lst_id_Encomiendas = lstEncDTO.Select(s => s.IdEncomienda).ToArray();
                     ws_Interface_AGC servicio = new ws_Interface_AGC();
                     ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-
+                    //TODO: Falta pasar esto a REST
                     servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
                     string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
                     string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
