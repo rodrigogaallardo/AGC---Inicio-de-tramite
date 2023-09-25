@@ -82,7 +82,7 @@ namespace ExternalService
 
             var url = UrlApraAgc + "api/Login";
             var client = new HttpClient();
-            client.Timeout = TimeSpan.FromSeconds(10);
+            client.Timeout = TimeSpan.FromSeconds(300);
             try
             {
                 var timeoutTask = Task.Delay(10000);
@@ -131,7 +131,7 @@ namespace ExternalService
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenResponse.token);
 
-                    client.Timeout = TimeSpan.FromSeconds(30);  //30 segundos de espera, puede que sea poco para prod
+                    client.Timeout = TimeSpan.FromSeconds(300); 
 
                     HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
                     var timeoutTask = Task.Delay(client.Timeout);
