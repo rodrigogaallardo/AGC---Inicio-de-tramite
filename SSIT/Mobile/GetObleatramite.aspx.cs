@@ -346,7 +346,6 @@ namespace SSIT.Mobile
             }
 
             ObservLibradoUso.Visible = false;
-            ObservLibradoUso.Text = String.Empty;
             lblObservacionesLibrarUso.Visible = false;
             lblObservacionesLibrarUso.Text = String.Empty;
             string observacion = string.Empty;
