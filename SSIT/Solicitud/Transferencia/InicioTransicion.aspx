@@ -215,7 +215,7 @@
                                     Debe ingresar el Tipo de transmisión.
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -229,7 +229,7 @@
                         </asp:LinkButton>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <asp:LinkButton ID="btnConfirmar" runat="server" CssClass="btn btn-primary btn-lg" OnClick="btnConfirmar_Click" >
+                        <asp:LinkButton ID="btnConfirmar" runat="server" CssClass="btn btn-primary btn-lg" OnClick="btnConfirmar_Click">
                             <i class="imoon imoon-checkmark"></i>
                             <span class="text">Continuar</span>
                         </asp:LinkButton>
@@ -243,7 +243,7 @@
 
     <%--Confirmacion de nueva transmicion--%>
     <div id="frmConfirmarNuevaTransmision" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -255,16 +255,18 @@
                             <td style="text-align: center; vertical-align: text-top">
                                 <i class="imoon imoon imoon-info fs64 color-blue"></i>
                             </td>
-                            <td style="vertical-align: middle">
-                                <p class="mleft10">
-                                    Vas solicitar el inicio  un trámite de <strong>TRANSMISIÓN DE AUTORIZACION DE ACTIVIDAD ECONÓMICA</strong>, la misma podr&aacute; ser: 1) por Transferencia, 2) por Cambio de Denominaci&oacute;n o 3) por Oficio Judicial. Record&aacute; 
-                                    que seg&uacute;n el art. 34 del Anexo I de la Resoluci&oacute;n Nº 84-AGC/2019, al producirse un cambio de titularidad de la Habilitaci&oacute;n/Autorizaci&oacute;n previamente otorgada, pod&eacute;s optar por iniciar un nuevo tr&aacute;mite de Autorizaci&oacute;n
-                                     o solicitar la Transmisi&oacute;n del titular anterior.
-                                     
-                                </p>
-                                <%-- %><p style="text-decoration: underline">
-                                    POR FAVOR, RECORDA NO GENERAR MAS DE UNA SOLICITUD PARA UN MISMO LUGAR Y UN MISMO TITULAR, YA QUE LA ANTERIOR SERA ANULADA EN FORMA AUTOMATICA.
-                                </p><--%>
+                            <td>
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server" class="form-group">
+                                    <ContentTemplate>
+                                        <p class="mleft20">
+                                            Vas a solicitar el inicio de un trámite de <strong>TRANSMISIÓN DE AUTORIZACIÓN DE ACTIVIDAD ECONÓMICA</strong>. Recordá que según el art. 33 del Anexo I de la Resolución N° 150-AGC/2023, al producirse un cambio de titularidad de la Habilitación/Autorización previamente otorgada, podés optar por iniciar un nuevo trámite de Autorización o solicitar la Transmisión del titular anterior.
+                                        </p>
+                                        <div class="mleft20">
+                                            <textarea id="lblTransmision" runat="server" class="pad10" rows="14" style="width: 100%; resize: none;" readonly></textarea>
+                                        </div>
+
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </td>
                         </tr>
                     </table>
@@ -283,6 +285,7 @@
                                         </ProgressTemplate>
                                     </asp:UpdateProgress>
                                 </div>
+
                                 <div id="pnlBotonesConfirmarNuevaTransmision" class="form-group">
                                     <asp:LinkButton ID="btnNuevaTransmision" runat="server" CssClass="btn btn-primary" OnClick="btnNuevaTransmision_Click"
                                         OnClientClick="ocultarBotonesConfirmarNuevaTransmision();">
@@ -295,7 +298,6 @@
                                     </button>
                                 </div>
                             </div>
-
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -442,7 +444,7 @@
             if (
                 ($.trim($("#<%: txtExpediente_Anio.ClientID %>").val()).length + $.trim($("#<%: txtExpediente_Nro.ClientID %>").val()).length > 0) &&
                 ($.trim($("#<%: txtExpediente_Anio.ClientID %>").val()).length == 0 ||
-                 $.trim($("#<%: txtExpediente_Nro.ClientID %>").val()).length == 0)) {
+                    $.trim($("#<%: txtExpediente_Nro.ClientID %>").val()).length == 0)) {
                 $("#Req_Expediente").css("display", "inline-block");
                 ret = false;
             }
@@ -474,7 +476,7 @@
 
         }
 
-       
+
 
     </script>
 </asp:Content>
