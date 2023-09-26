@@ -1219,6 +1219,9 @@ namespace BusinesLayer.Implementation
                     repo = new TransferenciasSolicitudesRepository(unitOfWork);
                     repoSGITramitesTareas = new SGITramitesTareasTransferenciasRepository(unitOfWork);
 
+                    //estado librado
+                    bool estaLibrado = false;
+
                     var repoObser = new SGITareaCalificarObsDocsRepository(this.uowF.GetUnitOfWork());
                     if (repoObser.ExistenObservacionesdetalleSinProcesarTR(IdSolicitud))
                         throw new Exception(Errors.SSIT_SOLICITUD_OBSERVACIONES_SIN_PROCESAR);
@@ -1236,6 +1239,8 @@ namespace BusinesLayer.Implementation
                         {
                             id_estado_sig = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
                         }
+
+                        
                     }
 
                     EngineBL engine = new EngineBL();
@@ -1295,6 +1300,16 @@ namespace BusinesLayer.Implementation
                             }
                         }
                     }
+
+                    //Agregacion de prueba para librado al uso / No valido por habilitacion previa ni por plano de incendio ni si acoge a los beneficios porque
+                    // esas validaciones se hicieron previamente al iniciar la habilitacion
+                    if (entity.FechaLibrado == null)
+                    {
+                        entity.FechaLibrado = DateTime.Now;
+                        estaLibrado = true;
+                        //encuesta = getEncuesta(solicitudEntity, Direccion);
+                    }
+
                     entity.id_estado = id_estado_sig;
                     entity.LastUpdateUser = userId;
                     entity.LastUpdateDate = DateTime.Now;
@@ -1314,9 +1329,14 @@ namespace BusinesLayer.Implementation
                                 repoObserb.Update(obs);
                             }
                         }
-                    }
-
+                    }                   
                     repo.Update(entity);
+
+                    //LLamo al sp para cargar la tabla de historico de librados al uso para tranferencias.
+                    if (estaLibrado)
+                    {
+                        unitOfWork.Db.Transf_Solicitudes_Historial_LibradoUso_INSERT(entity.id_solicitud, entity.FechaLibrado, DateTime.Now, entity.CreateUser);
+                    }
 
                     unitOfWork.Commit();
 
