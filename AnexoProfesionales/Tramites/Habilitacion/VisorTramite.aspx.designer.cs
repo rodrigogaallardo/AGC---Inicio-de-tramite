@@ -222,6 +222,15 @@ namespace AnexoProfesionales
         protected global::System.Web.UI.WebControls.HiddenField hid_mostrar_conformacionLocal;
 
         /// <summary>
+        /// Control hid_mostrar_certificadoSobrecarga.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_mostrar_certificadoSobrecarga;
+
+        /// <summary>
         /// Control btnCargarDatostramite.
         /// </summary>
         /// <remarks>
@@ -337,6 +346,42 @@ namespace AnexoProfesionales
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AnexoProfesionales.Controls.ConformacionLocal visConformacionLocal;
+
+        /// <summary>
+        /// Control LabelS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelS;
+
+        /// <summary>
+        /// Control pnlMod.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMod;
+
+        /// <summary>
+        /// Control btnModificarCertificadoSobrecarga.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnModificarCertificadoSobrecarga;
+
+        /// <summary>
+        /// Control visCertificadoSobrecarga.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AnexoProfesionales.SobreCargaDatos visCertificadoSobrecarga;
 
         /// <summary>
         /// Control Label5.
