@@ -3996,11 +3996,20 @@ namespace BusinesLayer.Implementation
                     !encDTO.EsECI)
                 {
                     var soli = repoSsit.Single(enc.Encomienda_SSIT_Solicitudes.Select(x => x.id_solicitud).FirstOrDefault());
-                    if (planos.Count() == 0 &&
-                        (soli.id_tipotramite == (int)Constantes.TipoDeTramite.Habilitacion ||
-                         (soli.id_tipotramite != (int)Constantes.TipoDeTramite.Habilitacion &&
-                         soli.SSIT_Solicitudes_Origen != null && soli.SSIT_Solicitudes_Origen.id_solicitud_origen.HasValue)))
-                        listaErrores.Add(Errors.ENCOMIENDA_SIN_PLANOS_HABILITACION);
+                    if (soli.id_tipotramite == (int)Constantes.TipoDeTramite.Habilitacion || (soli.id_tipotramite != (int)Constantes.TipoDeTramite.Habilitacion && soli.SSIT_Solicitudes_Origen != null && soli.SSIT_Solicitudes_Origen.id_solicitud_origen.HasValue))
+                    {
+                        bool tienePlanoHabilitacion = false;
+                        foreach (var plano in planos)
+                            if (plano.id_tipo_plano == (int)Constantes.TiposDePlanos.Habilitacion)
+                            {
+                                tienePlanoHabilitacion = true;
+                                break;
+                            }
+                  
+                        if (!tienePlanoHabilitacion)
+                            listaErrores.Add(Errors.ENCOMIENDA_SIN_PLANOS_HABILITACION);
+
+                    }
                     else
                     {
                         // Si es Redistribución de Uso se busca el plano específico, sino se busca que tenga el de habilitación.
