@@ -2604,5 +2604,34 @@ namespace BusinesLayer.Implementation
             var enc = datoSolicitudEnc.OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
             return enc.AcogeBeneficios;
         }
+
+        public string ObtenerObservacionLibradoUsoOblea(int id_solicitud)
+        {
+            string observacionLibrado = string.Empty;
+            DateTime? fechaLibrado;
+
+            SSITSolicitudesDTO sol = Single(id_solicitud);
+
+            fechaLibrado = sol.FechaLibrado;
+
+            if (fechaLibrado != null)
+            {
+                try
+                {
+                    uowF = new TransactionScopeUnitOfWorkFactory();
+                    repo = new SSITSolicitudesRepository(this.uowF.GetUnitOfWork());
+                    observacionLibrado = repo.ObtenerObservacionLibradoUsoOblea(id_solicitud);
+                    if (string.IsNullOrEmpty(observacionLibrado))
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return observacionLibrado;
+        }
     }
 }

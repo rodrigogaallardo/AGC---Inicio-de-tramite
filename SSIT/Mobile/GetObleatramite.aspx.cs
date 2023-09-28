@@ -6,6 +6,7 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
@@ -342,6 +343,18 @@ namespace SSIT.Mobile
                         lblPlanoVisado.Text = "Plano de Uso de Actividad Económica: " + plano;
                 }
 
+            }
+
+            ObservLibradoUso.Visible = false;
+            lblObservacionesLibrarUso.Visible = false;
+            lblObservacionesLibrarUso.Text = String.Empty;
+            string observacion = string.Empty;
+            observacion = blSol.ObtenerObservacionLibradoUsoOblea(sol.IdSolicitud);
+            if (observacion != string.Empty && observacion != null)
+            {
+                ObservLibradoUso.Visible = true;
+                lblObservacionesLibrarUso.Visible = true;
+                lblObservacionesLibrarUso.Text = observacion;
             }
         }
         public class StringValue
