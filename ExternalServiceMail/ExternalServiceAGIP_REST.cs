@@ -98,10 +98,58 @@ namespace ExternalService
                 LogError.Write(new Exception("Client: " + Funciones.GetDataFromClient(client)));
                 LogError.Write(new Exception("Request: " + Funciones.GetDataFromRequest(request)));
                 LogError.Write(new Exception("Response: " + Funciones.GetDataFromResponse(response)));
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                if (response.StatusCode != System.Net.HttpStatusCode.OK 
+                    || response.StatusCode == (HttpStatusCode)110)
                     throw new Exception(string.Format("No se ha podido verificar la existencia de representación de servicios: {0} - {1}", response.StatusCode, response.Content));
 
                 CuitsRelacionadosPOSTRest ret = JsonConvert.DeserializeObject<CuitsRelacionadosPOSTRest>(response.Content);
+
+                if (ret.statusCode != 200 || ret.statusCode != 110)
+                    throw new Exception("Error al Validar CUITs con AGIP: " + ret.statusCode + ": " + ret.message);
+
+                return ret;
+            }
+            catch (Exception excep)
+            {
+                LogError.Write(excep);
+                throw excep;
+            }
+        }
+
+        public CuitsRepresentadosPOSTRest PostRepresentados(string cuit)
+        {
+            try
+            {
+                string hostParametro = ConfigurationManager.AppSettings["AGIP.Rest.ClaveCiudad.URL"];
+                string serviceParametro = ConfigurationManager.AppSettings["AGIP.Rest.ClaveCiudad.MetodoRepre"];
+                string userParametro = ConfigurationManager.AppSettings["AGIP.Rest.ClaveCiudad.User"];
+                string passParametro = ConfigurationManager.AppSettings["AGIP.Rest.ClaveCiudad.Pass"];
+
+                string _token = GetToken(userParametro, passParametro);
+
+                string _host;
+                if (hostParametro.IndexOf("http") < 0)
+                    _host = "http://" + hostParametro;
+                else
+                    _host = hostParametro;
+
+                var client = new RestClient(_host);
+                client.ClearHandlers();
+                client.AddHandler("application/json", new JsonDeserializer());
+                var request = new RestRequest(Method.POST);
+                request.AddParameter("method", serviceParametro);
+                request.AddParameter("cuitAValidar", cuit); 
+                request.AddHeader("Authorization", "Bearer " + _token.ToString());
+                IRestResponse response = client.Execute(request);
+                LogError.Write(new Exception("Client: " + Funciones.GetDataFromClient(client)));
+                LogError.Write(new Exception("Request: " + Funciones.GetDataFromRequest(request)));
+                LogError.Write(new Exception("Response: " + Funciones.GetDataFromResponse(response)));
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    throw new Exception(string.Format("No se ha podido verificar la existencia de representación de servicios: {0} - {1}", response.StatusCode, response.Content));
+                }
+
+                CuitsRepresentadosPOSTRest ret = JsonConvert.DeserializeObject<CuitsRepresentadosPOSTRest>(response.Content);
 
                 if (ret.statusCode != 200)
                     throw new Exception("Error al Validar CUITs con AGIP: " + ret.statusCode + ": " + ret.message);
@@ -113,6 +161,8 @@ namespace ExternalService
                 LogError.Write(excep);
                 throw excep;
             }
-}
+        }
+
+
     }
 }

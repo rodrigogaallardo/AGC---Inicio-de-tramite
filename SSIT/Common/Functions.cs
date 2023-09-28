@@ -540,6 +540,7 @@ namespace SSIT.Common
                     cuitsDto.cuitAValidar = cuitValidar;
                     cuitsDto.cuitRepresentado = cuitRepre;
                     resul = servicio.CuitsRelacionadosRest(cuitsDto);
+
                 }
                 else
                     throw new Exception("Debe ingresar los datos del Titular");
@@ -551,6 +552,34 @@ namespace SSIT.Common
                 throw ex;
             }
         }
+
+        public static bool isCuitsRepresentadoRest(string cuitAValidar, string cuitRepresentado)
+        {
+            ExternalServiceAGIP_REST servicio = new ExternalServiceAGIP_REST();
+            CuitsRepresentadosPOSTRest relacionados = new CuitsRepresentadosPOSTRest();
+            try
+            {
+                if (!long.TryParse(cuitRepresentado, out long cuitRepresentadoLong))
+                {
+                    return false;
+                }
+                var response = servicio.PostRepresentados(cuitAValidar);
+
+                if (response != null && response.representados != null)
+                {
+                    bool found = response.representados.Any(representado => representado.cuit == cuitRepresentadoLong);
+
+                    return found;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex);
+            }
+
+            return false;
+        }
+
 
     }
 }
