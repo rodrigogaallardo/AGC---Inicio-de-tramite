@@ -567,6 +567,7 @@ namespace SSIT.Common
 
                 if (response != null && response.representados != null)
                 {
+                    
                     bool found = response.representados.Any(representado => representado.cuit == cuitRepresentadoLong);
 
                     return found;
