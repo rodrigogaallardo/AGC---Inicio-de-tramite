@@ -553,7 +553,7 @@ namespace SSIT.Common
             }
         }
 
-        public static bool isCuitsRepresentadoRest(string cuitAValidar, string cuitRepresentado)
+        public static CuitsRepresentadosPOSTRest isCuitsRepresentadoRest(string cuitAValidar, string cuitRepresentado)
         {
             ExternalServiceAGIP_REST servicio = new ExternalServiceAGIP_REST();
             CuitsRepresentadosPOSTRest relacionados = new CuitsRepresentadosPOSTRest();
@@ -561,24 +561,32 @@ namespace SSIT.Common
             {
                 if (!long.TryParse(cuitRepresentado, out long cuitRepresentadoLong))
                 {
-                    return false;
+                    relacionados.success = false;
+                    relacionados.message = "El cuit tiene un formato invalido";
+                    return relacionados;
                 }
                 var response = servicio.PostRepresentados(cuitAValidar);
 
                 if (response != null && response.representados != null)
                 {
-                    
-                    bool found = response.representados.Any(representado => representado.cuit == cuitRepresentadoLong);
 
-                    return found;
+                    bool found = response.representados.Any(representado => representado.cuit == cuitRepresentadoLong);
+                    relacionados.success = found;
+                    relacionados.message = found ? "CuitRepresentado encontrado." : "CuitRepresentado no se encontro.";
+                    return relacionados;
                 }
             }
             catch (Exception ex)
             {
                 LogError.Write(ex);
+                relacionados.success = false;
+                relacionados.message = "Ocurrio un error al consultar cuitRepresentado en AGIP.";
+                return relacionados;
             }
 
-            return false;
+            relacionados.success = false;
+            relacionados.message = "Ocurrio un error al consultar cuitRepresentado en AGIP.";
+            return relacionados;
         }
 
 
