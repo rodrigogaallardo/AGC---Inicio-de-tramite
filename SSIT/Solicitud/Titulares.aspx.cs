@@ -2072,7 +2072,15 @@ namespace SSIT
                         return true;
                     if (r.statusCode == 110)
                     {
-                        return Functions.isCuitsRepresentadoRest(cuitFirmante, cuitTitular);
+                        var res = Functions.isCuitsRepresentadoRest(cuitFirmante, cuitTitular);
+
+                        if (!res.success ?? true)
+                        {
+                            lblError.Text = res.message;
+                            this.EjecutarScript(updPanel, "showfrmError();");
+                        }
+
+                        return false;
                     }
                     if (r.statusCode == 306)
                     {
