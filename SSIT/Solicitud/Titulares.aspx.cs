@@ -2068,6 +2068,10 @@ namespace SSIT
                 {
                     //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
                     var r = Functions.isCuitsRelacionadosRest(cuitFirmante, cuitTitular);
+                    if (r.statusCode == 110)
+                    {
+                        resul = Functions.isCuitsRepresentadoRest(cuitFirmante, cuitTitular);
+                    }
                     if (r.statusCode == 306)
                     {
                         lblError.Text = r.message + " - Debe volver a iniciar sesión.";

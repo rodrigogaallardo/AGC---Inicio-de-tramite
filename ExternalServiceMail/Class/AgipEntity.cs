@@ -54,4 +54,34 @@ namespace ExternalService.Class
         public long cuitAValidar { get; set; }
         public long cuitRepresentado { get; set; }
     }
+
+    public class CuitsRepresentadosPOSTRest
+    {
+        public int statusCode { get; set; }
+        public bool? success { get; set; }
+        public List<Representado> representados { get; set; }
+        public string message { get; set; }
+    }
+
+    public class Representado
+    {
+        public long cuit { get; set; }
+        public string nombre { get; set; }
+        public int? isib { get; set; }
+        public int? cat { get; set; }
+        public string calle { get; set; }
+        public int? puerta { get; set; }
+        public string piso { get; set; }
+        public string dpto { get; set; }
+        public string codpostal { get; set; }
+        public string localidad { get; set; }
+        public string provincia { get; set; }
+        public string telefono { get; set; }
+        public string email { get; set; }
+        public string tipo_representacion { get; set; }
+        public string tipoDocumento { get; set; }
+        public string nroDocumento { get; set; }
+
+
+    }
 }
