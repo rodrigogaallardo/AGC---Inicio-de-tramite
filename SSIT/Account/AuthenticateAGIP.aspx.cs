@@ -142,7 +142,7 @@ namespace SSIT.Account
 
     public class Personalogin
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public Persona persona { get; set; }
         public string calle { get; set; }
         public string altura { get; set; }
@@ -155,7 +155,7 @@ namespace SSIT.Account
 
     public class Persona
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string nombres { get; set; }
         public string apellidos { get; set; }
         public object razonSocial { get; set; }
@@ -167,12 +167,12 @@ namespace SSIT.Account
         public string codigoTelefonoPais { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-        public int usuarioCreacion { get; set; }
-        public long fechaAlta { get; set; }
+        public int? usuarioCreacion { get; set; }
+        public long? fechaAlta { get; set; }
         public object usuarioModificacion { get; set; }
-        public long fechaModificacion { get; set; }
+        public long? fechaModificacion { get; set; }
         public string tipoPersona { get; set; }
-        public int valiRenaper { get; set; }
+        public int? valiRenaper { get; set; }
         public Terminosycondiciones terminosYCondiciones { get; set; }
         public object sistemaConsumidor { get; set; }
         public object baId { get; set; }
@@ -181,17 +181,17 @@ namespace SSIT.Account
 
     public class Terminosycondiciones
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public Tipodocumento tipoDocumento { get; set; }
         public string estado { get; set; }
-        public long fechaAlta { get; set; }
+        public long? fechaAlta { get; set; }
         public string contenido { get; set; }
         public Nivelacceso nivelAcceso { get; set; }
     }
 
     public class Tipodocumento
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string acronimoGedo { get; set; }
         public string acronimoTAD { get; set; }
         public string nombre { get; set; }
@@ -200,35 +200,35 @@ namespace SSIT.Account
         public object tipoProduccion { get; set; }
         public string usuarioIniciador { get; set; }
         public string usuarioCreacion { get; set; }
-        public long fechaAlta { get; set; }
+        public long? fechaAlta { get; set; }
         public object usuarioModificacion { get; set; }
-        public long fechaModificacion { get; set; }
-        public bool esEmbebido { get; set; }
-        public bool firmaConToken { get; set; }
+        public long? fechaModificacion { get; set; }
+        public bool? esEmbebido { get; set; }
+        public bool? firmaConToken { get; set; }
         public object ip { get; set; }
-        public bool esFirmaConjunta { get; set; }
+        public bool? esFirmaConjunta { get; set; }
         public object documentoTipoFirma { get; set; }
         public object textoLibreLimite { get; set; }
-        public bool textoLibreEnriquecido { get; set; }
+        public bool? textoLibreEnriquecido { get; set; }
         public object embebidoOpcional { get; set; }
-        public bool esFirmaCloud { get; set; }
+        public bool? esFirmaCloud { get; set; }
     }
 
     public class Nivelacceso
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string nombre { get; set; }
-        public int nivelAcceso { get; set; }
+        public int? nivelAcceso { get; set; }
         public string proveedor { get; set; }
         public string authorizationEndPoint { get; set; }
         public string endSessionEndPoint { get; set; }
         public string loginComponent { get; set; }
-        public bool habilitarApoderamiento { get; set; }
+        public bool? habilitarApoderamiento { get; set; }
     }
 
     public class Apoderados
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public Persona persona { get; set; }
         public string calle { get; set; }
         public string altura { get; set; }

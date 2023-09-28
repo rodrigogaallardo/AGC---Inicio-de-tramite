@@ -526,6 +526,61 @@ namespace SSIT.Common
             return desarrollo;
         }
 
+        public static CuitsRelacionadosPOSTRest isCuitsRelacionadosRest(string cuitAValidar, string cuitRepresentado)
+        {
+            ExternalServiceAGIP_REST servicio = new ExternalServiceAGIP_REST();
+            CuitsRelacionadosDTO_REST cuitsDto = new CuitsRelacionadosDTO_REST();
+            CuitsRelacionadosPOSTRest resul;
+            try
+            {
+                if (!String.IsNullOrEmpty(cuitRepresentado))
+                {
+                    long cuitValidar = Convert.ToInt64(cuitAValidar);
+                    long cuitRepre = Convert.ToInt64(cuitRepresentado);
+                    cuitsDto.cuitAValidar = cuitValidar;
+                    cuitsDto.cuitRepresentado = cuitRepre;
+                    resul = servicio.CuitsRelacionadosRest(cuitsDto);
+
+                }
+                else
+                    throw new Exception("Debe ingresar los datos del Titular");
+
+                return resul;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static bool isCuitsRepresentadoRest(string cuitAValidar, string cuitRepresentado)
+        {
+            ExternalServiceAGIP_REST servicio = new ExternalServiceAGIP_REST();
+            CuitsRepresentadosPOSTRest relacionados = new CuitsRepresentadosPOSTRest();
+            try
+            {
+                if (!long.TryParse(cuitRepresentado, out long cuitRepresentadoLong))
+                {
+                    return false;
+                }
+                var response = servicio.PostRepresentados(cuitAValidar);
+
+                if (response != null && response.representados != null)
+                {
+                    
+                    bool found = response.representados.Any(representado => representado.cuit == cuitRepresentadoLong);
+
+                    return found;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex);
+            }
+
+            return false;
+        }
+
 
     }
 }

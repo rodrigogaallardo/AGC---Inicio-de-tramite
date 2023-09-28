@@ -207,7 +207,7 @@
                                         <asp:TextBox ID="txtSeccion" runat="server" Width="90px" MaxLength="3" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label1" runat="server" Text="Manzana:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtManzana" runat="server" Width="90px" MaxLength="6" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
 
                                         <asp:Label ID="Label2" runat="server" Text="Parcela:" class="col-sm-2 control-label" Font-Bold="true"></asp:Label>
                                         <asp:TextBox ID="txtParcela" runat="server" Width="90px" MaxLength="4" Style="text-transform: uppercase" CssClass="col-sm-2 form-control"></asp:TextBox>
@@ -589,12 +589,13 @@
                                                                     <div class="alert alert-small alert-warning">
                                                                         Si al intentar seleccionar las puertas, la calle no existe en el sistema. Haga click 
                                                                         <asp:LinkButton ID="btnNuevaPuerta" runat="server" Text="aquí" OnClick="btnNuevaPuerta_Click" Style="color: #377bb5;"
-                                                                            CommandArgument="<%# Item.IdUbicacion %>"></asp:LinkButton>
+                                                                            CommandArgument="<%# Item.IdUbicacion %>"></asp:LinkButton>                                                                        
                                                                     </div>
-
+                                                                    <div class="alert alert-small alert-warning">
+                                                                        De corresponder puerta alfanumerica, coloquelo en otros
+                                                                    </div>
                                                                     <p>La parcela que usted ingresó tiene las siguientes puertas registradas: </p>
                                                                     <br />
-
 
                                                                     <asp:UpdatePanel ID="updPuertas" runat="server" style="width: 720px">
                                                                         <ContentTemplate>
@@ -653,10 +654,10 @@
                                                                             <asp:TextBox ID="txtOtros" runat="server" MaxLength="50" Width="250px" CssClass="form-control"></asp:TextBox>
                                                                             <div style="font-size: 8pt; font-weight: bold; color: #9a9a9a; width: 350px;">
                                                                                 * Indicar los textos completos del sector deseado.
-                                                                                    <br />
+                                                                                <br/>
                                                                                 Ej: "Oficina 23 y 24", "Sección 18", etc.
-                                                                              
-                                                                             
+                                                                                <br/>
+                                                                                Si es una puerta alfanumerica, ingresar aqui el componente Alfabetico de la misma.
                                                                             </div>
                                                                         </div>
 
@@ -1158,14 +1159,14 @@
 
             if (vconfirm) {
                 $("#<%: btnIngresarUbicacion.ClientID %>").hide();
-                $("#<%: btnNuevaBusqueda.ClientID %>").hide();
-                $("#<%: btnCerrar5.ClientID %>").hide();
-                vconfirm = false;
-            }
-            else {
-                $("#<%: btnIngresarUbicacion.ClientID %>").show();
-                $("#<%: btnNuevaBusqueda.ClientID %>").show();
-                $("#<%: btnCerrar5.ClientID %>").show();
+                  $("#<%: btnNuevaBusqueda.ClientID %>").hide();
+                  $("#<%: btnCerrar5.ClientID %>").hide();
+                  vconfirm = false;
+              }
+              else {
+                  $("#<%: btnIngresarUbicacion.ClientID %>").show();
+                  $("#<%: btnNuevaBusqueda.ClientID %>").show();
+                  $("#<%: btnCerrar5.ClientID %>").show();
             }
 
             return ret;
