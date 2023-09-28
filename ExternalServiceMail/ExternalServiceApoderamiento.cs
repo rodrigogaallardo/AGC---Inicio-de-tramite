@@ -48,7 +48,7 @@ namespace ExternalService
         public ApoderamientoEntity ValidarApoderamientoonados(string cuitTitular, string cuitApoderado)
         {
             string hostParametro = ConfigurationManager.AppSettings["NombreParamHost"];
-            string serviceParametro = ConfigurationManager.AppSettings[""];
+            string serviceParametro = ConfigurationManager.AppSettings["NombreParamServiceApoderamiento"];
             string userParametro = ConfigurationManager.AppSettings["NombreParamUser"];
             string passParametro = ConfigurationManager.AppSettings["NombreParamPass"];
             string restParametro = "TAD";
