@@ -104,7 +104,7 @@ namespace ExternalService
 
                 CuitsRelacionadosPOSTRest ret = JsonConvert.DeserializeObject<CuitsRelacionadosPOSTRest>(response.Content);
 
-                if (ret.statusCode != 200 || ret.statusCode != 110)
+                if (ret.statusCode != 200 && ret.statusCode != 110)
                     throw new Exception("Error al Validar CUITs con AGIP: " + ret.statusCode + ": " + ret.message);
 
                 return ret;
