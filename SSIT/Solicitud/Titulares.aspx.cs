@@ -2066,7 +2066,8 @@ namespace SSIT
 
                 if (evaluar)
                 {
-                    var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
+                    //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
+                    var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular);
                     if (r.statusCode == 306)
                     {
                         lblError.Text = r.status + "- Debe volver a iniciar sesión.";
