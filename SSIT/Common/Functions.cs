@@ -507,6 +507,10 @@ namespace SSIT.Common
             }
 
         }
+        public static bool isCuitsRelacionadosJWT(string cuitAValidar, bool cuitAValidarSpecified, string cuitRepresentado)
+        {
+
+        }
         public static CuitsRelacionadosPOST isCuitsRelacionados(string cuitAValidar, bool cuitAValidarSpecified, string cuitRepresentado, bool cuitRepresentadoSpecified, Guid user)
         {
             UsuarioBL usuario = new UsuarioBL();
