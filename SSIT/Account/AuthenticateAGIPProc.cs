@@ -50,8 +50,10 @@ namespace SSIT.Account
 
                     if (validarToken(token, sign))
                     {
-
-
+                        HttpCookie cookie_tad_login = new HttpCookie("Masita");
+                        cookie_tad_login.Value = token;
+                        cookie_tad_login.Expires = DateTime.Now.AddHours(4);
+                        Response.Cookies.Add(cookie_tad_login);
                         Datos datosToken = GetDatosTokenMiBA(token,ref sign);
                         if (datosToken == null)
                             throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
