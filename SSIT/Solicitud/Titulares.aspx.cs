@@ -12,6 +12,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SSIT.Common;
 using Microsoft.Ajax.Utilities;
+using SSIT.Account;
 
 namespace SSIT
 {
@@ -2066,8 +2067,19 @@ namespace SSIT
 
                 if (evaluar)
                 {
-                    //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
-                    var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular);
+                    var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
+                    if (Request.Cookies["Masita"] != null)
+                    {
+                        string tokenJWT = Request.Cookies["Masita"].Value;
+                        var r2 = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
+                    }
+                    else
+                    {
+                        lblError.Text = r.status + "- Debe volver a iniciar sesión en TAD/MIBA.";
+                        this.EjecutarScript(updPanel, "showfrmError();");
+                        resul = false;
+                    }
+                    
                     if (r.statusCode == 306)
                     {
                         lblError.Text = r.status + "- Debe volver a iniciar sesión.";

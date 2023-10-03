@@ -2,6 +2,7 @@
 using DataTransferObject;
 using ExternalService;
 using ExternalService.Class;
+using SSIT.Account;
 using StaticClass;
 using System;
 using System.Collections.Generic;
@@ -453,9 +454,11 @@ namespace SSIT.Common
             }
 
         }
-        public static bool isCuitsRelacionadosJWT(string cuitAValidar, bool cuitAValidarSpecified, string cuitRepresentado)
+        public static CuitsRelacionadosPOST isCuitsRelacionadosJWT(string cuitAValidar, bool cuitAValidarSpecified, string cuitRepresentado, string tokenMIBA)
         {
 
+            Datos datosToken = GetDatosTokenMiBA(tokenMIBA, ref sign);
+            return null;
         }
         public static CuitsRelacionadosPOST isCuitsRelacionados(string cuitAValidar, bool cuitAValidarSpecified, string cuitRepresentado, bool cuitRepresentadoSpecified, Guid user)
         {
