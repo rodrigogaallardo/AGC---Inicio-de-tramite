@@ -2090,6 +2090,7 @@ namespace SSIT
                     }
                     else
                     {
+                        LogError.Write(new Exception("La cookie es NULL, no estaba logeado en TAD/miba"));
                         lblError.Text = "- Debe volver a iniciar sesión en TAD/MIBA.";
                         this.EjecutarScript(updPanel, "showfrmError();");
                         resul = false;
@@ -2100,6 +2101,7 @@ namespace SSIT
             }
             catch (Exception ex)
             {
+                LogError.Write(new Exception("Error en el servicio de verificación de cuits: " + ex.Message));
                 resul = false;
                 lblError.Text = "Error en el servicio de verificación de cuits: " + ex.Message;
                 this.EjecutarScript(updPanel, "showfrmError();");
