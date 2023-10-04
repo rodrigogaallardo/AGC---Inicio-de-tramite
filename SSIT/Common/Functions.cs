@@ -462,9 +462,10 @@ namespace SSIT.Common
             if (validar)
             {
                 Datos datosToken = authenticateAGIPProc.GetDatosTokenMiBA(tokenMIBA, ref sign);
-
+                
                 bool isCuitAValidarInAutenticado = datosToken.Autenticado != null &&
                     datosToken.Autenticado.Cuit == cuitAValidar;
+                LogError.Write(new Exception("isCuitAValidarInAutenticado = " + isCuitAValidarInAutenticado));
                 List<Representado> representados = datosToken.Representados;
 
                 bool isCuitRepresentadoInList = false;
@@ -478,7 +479,8 @@ namespace SSIT.Common
                         break;
                     }
                 }
-                if(isCuitAValidarInAutenticado && isCuitRepresentadoInList)
+                LogError.Write(new Exception("isCuitRepresentadoInList = " + isCuitRepresentadoInList));
+                if (isCuitAValidarInAutenticado && isCuitRepresentadoInList)
                 {
                     cuitsRelacionados.result.msg = true;
                     cuitsRelacionados.status = "Los cuits estan relacionados";
