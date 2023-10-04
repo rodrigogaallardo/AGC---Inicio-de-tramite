@@ -1,5 +1,6 @@
 ﻿using SSIT.App_Components;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -16,7 +17,7 @@ namespace SSIT.Account
         [XmlElement(ElementName = "autenticado")]
         public Autenticado Autenticado { get; set; }
         [XmlElement(ElementName = "representados")]
-        public Representados Representados { get; set; }
+        public List<Representado> Representados { get; set; }
     }
 
 

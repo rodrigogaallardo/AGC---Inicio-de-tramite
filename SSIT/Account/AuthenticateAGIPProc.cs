@@ -130,7 +130,7 @@ namespace SSIT.Account
             return ret;
 
         }
-        private Datos GetDatosTokenMiBA(string token, ref string sign  )
+        public Datos GetDatosTokenMiBA(string token, ref string sign  )
         {
           
             string[] tokenParts = token.Split('.');
@@ -168,7 +168,7 @@ namespace SSIT.Account
             autenticado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
             datosToken.Autenticado = autenticado;
 
-            Representados representados = new Representados();
+            List<Representado> representados = new List<Representado>();
             Representado representado = new Representado();
 
             if (datosMiBA.apoderados != null)
@@ -203,7 +203,8 @@ namespace SSIT.Account
                 representado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
                 representado.Elegido = true.ToString();
             }
-            representados.Representado = representado;
+            representados.Add(representado);
+            //representados.Representado = representado;
             datosToken.Representados = representados;
             #endregion
 
