@@ -2067,33 +2067,35 @@ namespace SSIT
 
                 if (evaluar)
                 {
-                    var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
+                    //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
                     if (Request.Cookies["Masita"] != null)
                     {
                         string tokenJWT = Request.Cookies["Masita"].Value;
-                        var r2 = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
+                        var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
+                        //revisar que error y status code ponerles
+                        if (r.statusCode == 306)
+                        {
+                            lblError.Text = r.status + "- Debe volver a iniciar sesión.";
+                            this.EjecutarScript(updPanel, "showfrmError();");
+                            resul = false;
+                        }
+                        else if (!r.result.msg)
+                        {
+                            string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
+                            string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
+                            resul = false;
+                            lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
+                            this.EjecutarScript(updPanel, "showfrmError();");
+                        }
                     }
                     else
                     {
-                        lblError.Text = r.status + "- Debe volver a iniciar sesión en TAD/MIBA.";
+                        lblError.Text = "- Debe volver a iniciar sesión en TAD/MIBA.";
                         this.EjecutarScript(updPanel, "showfrmError();");
                         resul = false;
                     }
                     
-                    if (r.statusCode == 306)
-                    {
-                        lblError.Text = r.status + "- Debe volver a iniciar sesión.";
-                        this.EjecutarScript(updPanel, "showfrmError();");
-                        resul = false;
-                    }
-                    else if (!r.result.msg)
-                    {
-                        string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
-                        string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
-                        resul = false;
-                        lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
-                        this.EjecutarScript(updPanel, "showfrmError();");
-                    }
+                    
                 }
             }
             catch (Exception ex)
