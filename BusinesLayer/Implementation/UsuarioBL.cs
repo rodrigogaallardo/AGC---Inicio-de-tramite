@@ -302,6 +302,42 @@ namespace BusinesLayer.Implementation
             }
         }
 
+        public void InserTokenTad(UsuarioDTO userDTO, string tokenJWT)
+        {
+            try
+            {
+                uowF = new TransactionScopeUnitOfWorkFactory(System.Transactions.IsolationLevel.ReadUncommitted);
+                using (IUnitOfWork unitOfWork = this.uowF.GetUnitOfWork(System.Transactions.IsolationLevel.ReadUncommitted))
+                {
+                    repo = new UsuarioRepository(unitOfWork);
+                    repo.InsertarTokenTAD(userDTO.UserId, tokenJWT);
+                    unitOfWork.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetTokenTad(UsuarioDTO userDTO)
+        {
+            try
+            {
+                uowF = new TransactionScopeUnitOfWorkFactory(System.Transactions.IsolationLevel.ReadUncommitted);
+                using (IUnitOfWork unitOfWork = this.uowF.GetUnitOfWork(System.Transactions.IsolationLevel.ReadUncommitted))
+                {
+                    repo = new UsuarioRepository(unitOfWork);
+                    string tokenJWT = repo.GetTokenTAD(userDTO.UserId);
+                    unitOfWork.Commit();
+                    return tokenJWT;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         #endregion
 
