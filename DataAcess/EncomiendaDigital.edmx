@@ -22686,7 +22686,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
           </AssociationSet>
           <FunctionImport Name="Get_Token_Tad" ReturnType="Collection(String)">
-            <Parameter Name="userId" Mode="In" Type="Guid" />
+          <Parameter Name="userId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Insert_Login_Tad_Token">
             <Parameter Name="userId" Mode="In" Type="Guid" />
