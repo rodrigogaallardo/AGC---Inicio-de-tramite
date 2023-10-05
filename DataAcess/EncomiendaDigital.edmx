@@ -22686,7 +22686,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
           </AssociationSet>
           <FunctionImport Name="Get_Token_Tad" ReturnType="Collection(String)">
-          <Parameter Name="userId" Mode="In" Type="Guid" />
+            <Parameter Name="userId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Insert_Login_Tad_Token">
             <Parameter Name="userId" Mode="In" Type="Guid" />
@@ -35894,7 +35894,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <PropertyRef Name="LibrarUso" />
             <PropertyRef Name="CreateDate" />
             <PropertyRef Name="CreateUser" />
-            <PropertyRef Name="CondicionExpress" />
           </Key>
           <Property Name="IdRubrosCN_historial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo_operacion" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
@@ -35923,7 +35922,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Property Name="LastUpdateUser" Type="Guid" />
           <Property Name="Asistentes350" Type="Boolean" />
           <Property Name="SinBanioPCD" Type="Boolean" />
-          <Property Name="CondicionExpress" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SSIT_Solicitudes_bk">
           <Key>
@@ -38801,7 +38799,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="SSIT_Solicitudes_RubrosCN" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="SSIT_Solicitudes_RubrosCN" />
           <NavigationProperty Name="Ubicaciones_Distritos_Excepciones_RubrosCN" Relationship="EncmiendaEntityes.FK_Ubicaciones_Distritos_Excepciones_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="Ubicaciones_Distritos_Excepciones_RubrosCN" />
           <NavigationProperty Name="CPadron_RubrosCN" Relationship="EncmiendaEntityes.FK_CPadron_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="CPadron_RubrosCN" />
-          <Property Name="CondicionExpress" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__RubrosCN__idCond__45FB7418">
           <End Type="EncmiendaEntityes.CondicionesIncendio" Role="CondicionesIncendio" Multiplicity="0..1" />
@@ -45665,7 +45662,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="RubrosCN_Historial">
             <EntityTypeMapping TypeName="EncmiendaEntityes.RubrosCN_Historial">
               <MappingFragment StoreEntitySet="RubrosCN_Historial">
-                <ScalarProperty Name="CondicionExpress" ColumnName="CondicionExpress" />
                 <ScalarProperty Name="SinBanioPCD" ColumnName="SinBanioPCD" />
                 <ScalarProperty Name="Asistentes350" ColumnName="Asistentes350" />
                 <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
@@ -46054,7 +46050,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="RubrosCN">
             <EntityTypeMapping TypeName="EncmiendaEntityes.RubrosCN">
               <MappingFragment StoreEntitySet="RubrosCN">
-                <ScalarProperty Name="CondicionExpress" ColumnName="CondicionExpress" />
                 <ScalarProperty Name="SinBanioPCD" ColumnName="SinBanioPCD" />
                 <ScalarProperty Name="SoloAPRA" ColumnName="SoloAPRA" />
                 <ScalarProperty Name="idCondicionIncendio" ColumnName="idCondicionIncendio" />
