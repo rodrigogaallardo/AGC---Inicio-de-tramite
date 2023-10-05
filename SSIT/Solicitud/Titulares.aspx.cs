@@ -2063,14 +2063,14 @@ namespace SSIT
             {
                 ParametrosBL parametrosBL = new ParametrosBL();
                 evaluar = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.Evaluar.Titulares"));
-
-
+                AuthenticateAGIPProc authenticateAGIPProc = new AuthenticateAGIPProc();
+                Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 if (evaluar)
                 {
                     //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
-                    if (Request.Cookies["Masita"] != null)
+                    string tokenJWT = authenticateAGIPProc.GetTokenTAD(userid);
+                    if (!tokenJWT.IsNullOrWhiteSpace() && !tokenJWT.Contains("expirado"))
                     {
-                        string tokenJWT = Request.Cookies["Masita"].Value;
                         var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
                         //revisar que error y status code ponerles
                         if (r.statusCode == 306)
@@ -2090,7 +2090,7 @@ namespace SSIT
                     }
                     else
                     {
-                        LogError.Write(new Exception("La cookie es NULL, no estaba logeado en TAD/miba"));
+                        LogError.Write(new Exception("No tiene token de TAD, no estaba logeado en TAD/miba"));
                         lblError.Text = "- Debe volver a iniciar sesión en TAD/MIBA.";
                         this.EjecutarScript(updPanel, "showfrmError();");
                         resul = false;
