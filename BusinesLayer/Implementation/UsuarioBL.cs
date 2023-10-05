@@ -303,7 +303,6 @@ namespace BusinesLayer.Implementation
         }
 
 
-
         #endregion
 
         public IEnumerable<UsuarioDTO> Get(string strUsername, string strApellido, string strNombres, int id_grupoconsejo, string ApplicationName)
