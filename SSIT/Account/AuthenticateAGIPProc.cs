@@ -50,13 +50,13 @@ namespace SSIT.Account
 
                     if (validarToken(token, sign))
                     {
-                        HttpCookie cookie_tad_login = new HttpCookie("Masita");
-                        cookie_tad_login.Value = token;
-                        cookie_tad_login.Expires = DateTime.Now.AddHours(4);
-                        Response.Cookies.Add(cookie_tad_login);
                         Datos datosToken = GetDatosTokenMiBA(token,ref sign);
                         if (datosToken == null)
-                            throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
+                        {
+                            Exception tokenNull = new Exception("No se ha podido recuperar los datos del token de AGIP.");
+                            LogError.Write(tokenNull);
+                            throw tokenNull;
+                        } 
 
                     
 
@@ -81,6 +81,7 @@ namespace SSIT.Account
                     }
                     else
                     {
+                        LogError.Write(new Exception("El token es inválido con respecto a la firma. Token" + token));
                         throw new Exception("El token es inválido con respecto a la firma.");
                     }
                 }
@@ -313,6 +314,10 @@ namespace SSIT.Account
                 usuarioBl.Insert(usuario, null);
             else
                 usuarioBl.Update(usuario);
+            //TODO: Insertar Token en db
+            #region guardar token JWT
+            usuarioBl.InserTokenTad(usuario, token);
+            #endregion guardar token JWT
         }
         private void GenerarTicketAutenticacion(string username)
         {
@@ -336,6 +341,20 @@ namespace SSIT.Account
             JWT jwt = new JWT(token);
             TokenValido = jwt.ValidateJwt();
             return TokenValido;
+        }
+
+        public string GetTokenTAD(Guid userid)
+        {
+            string tokenTAD = "";
+            UsuarioBL usuarioBl = new UsuarioBL();
+
+            var usuario = usuarioBl.Single(userid);
+            if (usuario == null)
+            {
+                return tokenTAD;
+            }
+            tokenTAD = usuarioBl.GetTokenTad(usuario);
+            return tokenTAD;
         }
 
         private string GetUserErrorMessage(MembershipCreateStatus status)
