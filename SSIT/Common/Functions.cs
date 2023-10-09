@@ -516,7 +516,7 @@ namespace SSIT.Common
             if (validar)
             {
                 Datos datosToken = authenticateAGIPProc.GetDatosTokenMiBA(tokenMIBA, ref sign);
-                
+                LogError.Write(new Exception("Representados = " + datosToken.Representados));
                 bool isCuitAValidarInAutenticado = datosToken.Autenticado != null &&
                     datosToken.Autenticado.Cuit == cuitAValidar;
                 LogError.Write(new Exception("isCuitAValidarInAutenticado = " + isCuitAValidarInAutenticado));
@@ -525,8 +525,8 @@ namespace SSIT.Common
                 bool isCuitRepresentadoInList = false;
                 foreach (var representado in representados)
                 {
-                    bool isCuitRepresentado = representado != null &&
-                    representado.Cuit == cuitRepresentado;
+                    bool isCuitRepresentado = (representado != null &&
+                        representado.Cuit == cuitRepresentado);
                     if (isCuitRepresentado)
                     {
                         isCuitRepresentadoInList = isCuitRepresentado;
