@@ -50,11 +50,13 @@ namespace SSIT.Account
 
                     if (validarToken(token, sign))
                     {
-
-
                         Datos datosToken = GetDatosTokenMiBA(token,ref sign);
                         if (datosToken == null)
-                            throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
+                        {
+                            Exception tokenNull = new Exception("No se ha podido recuperar los datos del token de AGIP.");
+                            LogError.Write(tokenNull);
+                            throw tokenNull;
+                        } 
 
                     
 
@@ -79,6 +81,7 @@ namespace SSIT.Account
                     }
                     else
                     {
+                        LogError.Write(new Exception("El token es inválido con respecto a la firma. Token" + token));
                         throw new Exception("El token es inválido con respecto a la firma.");
                     }
                 }
@@ -128,7 +131,7 @@ namespace SSIT.Account
             return ret;
 
         }
-        private Datos GetDatosTokenMiBA(string token, ref string sign  )
+        public Datos GetDatosTokenMiBA(string token, ref string sign  )
         {
           
             string[] tokenParts = token.Split('.');
@@ -166,7 +169,7 @@ namespace SSIT.Account
             autenticado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
             datosToken.Autenticado = autenticado;
 
-            Representados representados = new Representados();
+            List<Representado> representados = new List<Representado>();
             Representado representado = new Representado();
 
             if (datosMiBA.apoderados != null)
@@ -201,7 +204,8 @@ namespace SSIT.Account
                 representado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
                 representado.Elegido = true.ToString();
             }
-            representados.Representado = representado;
+            representados.Add(representado);
+            //representados.Representado = representado;
             datosToken.Representados = representados;
             #endregion
 
@@ -310,6 +314,10 @@ namespace SSIT.Account
                 usuarioBl.Insert(usuario, null);
             else
                 usuarioBl.Update(usuario);
+            //TODO: Insertar Token en db
+            #region guardar token JWT
+            usuarioBl.InserTokenTad(usuario, token);
+            #endregion guardar token JWT
         }
         private void GenerarTicketAutenticacion(string username)
         {
@@ -333,6 +341,20 @@ namespace SSIT.Account
             JWT jwt = new JWT(token);
             TokenValido = jwt.ValidateJwt();
             return TokenValido;
+        }
+
+        public string GetTokenTAD(Guid userid)
+        {
+            string tokenTAD = "";
+            UsuarioBL usuarioBl = new UsuarioBL();
+
+            var usuario = usuarioBl.Single(userid);
+            if (usuario == null)
+            {
+                return tokenTAD;
+            }
+            tokenTAD = usuarioBl.GetTokenTad(usuario);
+            return tokenTAD;
         }
 
         private string GetUserErrorMessage(MembershipCreateStatus status)
