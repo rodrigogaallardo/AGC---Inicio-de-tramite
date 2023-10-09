@@ -289,7 +289,7 @@
                                         <asp:Label runat="server" class="control-label col-sm-2">C.U.I.T. (*):</asp:Label>
                                         <div class="col-sm-2">
                                             <asp:TextBox ID="txtCuitPF" runat="server" MaxLength="11" Width="150px" CssClass="form-control"></asp:TextBox>
-                                            
+
                                             <div id="Req_CuitPF" class="field-validation-error" style="display: none;">
                                                 Debe ingresar el CUIT.
                                             </div>
@@ -314,7 +314,7 @@
                                                         <i class="imoon imoon-ok"></i>
                                                         <span class="text">Validar CUIT</span>
                                                     </asp:LinkButton>
-                                         
+
                                                     <asp:UpdateProgress ID="UpdateProgress12" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPF">
                                                         <ProgressTemplate>
                                                             <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
@@ -326,11 +326,11 @@
                                     </div>
                                 </div>
 
-                                  <div class="form-horizontal pright20">
+                                <div class="form-horizontal pright20">
                                     <div class="form-group">
                                         <div class="col-sm-11" style="text-align: center;">
-                                        <span style="color:red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos no están correctos en el perfil de TAD ingresar a <a href="https://gestioncolaborativa.buenosaires.gob.ar/prestaciones">https://gestioncolaborativa.buenosaires.gob.ar/prestaciones</a>"</span>
-                                      </div>
+                                            <span style="color: red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos están correctos en el perfil de TAD enviar mail a tramitesadistancia@buenosaires.gob.ar"</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-horizontal pright10">
@@ -690,7 +690,7 @@
 
                                         <asp:Label runat="server" class="control-label col-sm-2">C.U.I.T.(*):</asp:Label>
                                         <div class="col-sm-2">
-                                            
+
                                             <asp:TextBox ID="txtCuitPJ" runat="server" MaxLength="11" Width="150px" data-content="Debe ingresar los 11 dígitos sin guiones" CssClass="form-control"></asp:TextBox>
 
                                             <div id="Req_CuitPJ" class="field-validation-error" style="display: none;">
@@ -714,7 +714,7 @@
                                                         <i class="imoon imoon-ok"></i>
                                                         <span class="text">Validar CUIT</span>
                                                     </asp:LinkButton>
-                                         
+
                                                     <asp:UpdateProgress ID="UpdateProgress13" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPJ">
                                                         <ProgressTemplate>
                                                             <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
@@ -747,11 +747,11 @@
                                     </div>
                                 </div>
 
-                                  <div class="form-horizontal pright20">
+                                <div class="form-horizontal pright20">
                                     <div class="form-group">
                                         <div class="col-sm-11" style="text-align: center;">
-                                       <span style="color:red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos no están correctos en el perfil de TAD ingresar a <a href="https://gestioncolaborativa.buenosaires.gob.ar/prestaciones">https://gestioncolaborativa.buenosaires.gob.ar/prestaciones</a>"</span>
-                                      </div>
+                                            <span style="color: red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos están correctos en el perfil de TAD enviar mail a tramitesadistancia@buenosaires.gob.ar"</span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2193,7 +2193,7 @@
             $("#ValDV_CuitPF").hide();
             $("#ValCantidad_CuitPF").hide();
             $("#ValFormato_CuitPF").hide();
-            
+
             if ($.trim($("#<%: txtCuitPF.ClientID %>").val()).length == 0) {
                 $("#Req_CuitPF").css("display", "inline-block");
                 ret = false;
@@ -2314,214 +2314,214 @@
             var ret = true;
 
             var strmsgFormatoIIBB = "formato incorrecto. Ej: " + $("#<%: hid_IngresosBrutosPF_formato.ClientID %>").val();
-                var formatoIIBB = $("#<%: hid_IngresosBrutosPF_expresion.ClientID %>").val(); ///^([0-9]|-)*$/;
+            var formatoIIBB = $("#<%: hid_IngresosBrutosPF_expresion.ClientID %>").val(); ///^([0-9]|-)*$/;
 
 
-                if (formatoIIBB.length > 0) {
-                    formatoIIBB = eval("/^" + formatoIIBB + "$/");
-                }
+            if (formatoIIBB.length > 0) {
+                formatoIIBB = eval("/^" + formatoIIBB + "$/");
+            }
 
-                var formatoCUIT = /[2]\d{10}$/;
-                var formatoEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([.]\w+)*$/;
-                var formatoCP = /^(\d{4}|[a-zA-Z]\d{4}[a-zA-Z]{3})$/;
-                var formantoRazonSocial = /^([^0-9]*)$/;
+            var formatoCUIT = /[2]\d{10}$/;
+            var formatoEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([.]\w+)*$/;
+            var formatoCP = /^(\d{4}|[a-zA-Z]\d{4}[a-zA-Z]{3})$/;
+            var formantoRazonSocial = /^([^0-9]*)$/;
 
-                $("#Req_ApellidoPF").hide();
-                $("#Req_NombresPF").hide();
-                $("#Req_TipoNroDocPF").hide();
-                $("#Req_CuitPF").hide();
-                $("#ValDV_CuitPF").hide();
-                $("#ValCantidad_CuitPF").hide();
-                $("#ValFormato_CuitPF").hide();
-                $("#ValDNI_CuitPF").hide();
-                $("#Req_TipoIngresosBrutosPF").hide();
-                $("#Req_IngresosBrutosPF").hide();
-                $("#ValFormato_IngresosBrutosPF").hide();
-                $("#Req_CallePF").hide();
-                $("#Req_NroPuertaPF").hide();
-                $("#Req_ProvinciaPF").hide();
-                $("#Req_LocalidadPF").hide();
-                $("#Req_EmailPF").hide();
-                $("#ValFormato_EmailPF").hide();
-                $("#Req_ApellidoFirPF").hide();
-                $("#Req_NombresFirPF").hide();
-                $("#Req_TipoNroDocFirPF").hide();
-                $("#ValRepetido_txtNroDocumentoFirPF").hide();
-                $("#Req_TipoCaracterLegalFirPF").hide();
-                $("#<%: ValExiste_TitularPF.ClientID %>").hide();
-                $("#Req_CPPF").hide();
-                $("#Val_Formato_CPPF").hide();
+            $("#Req_ApellidoPF").hide();
+            $("#Req_NombresPF").hide();
+            $("#Req_TipoNroDocPF").hide();
+            $("#Req_CuitPF").hide();
+            $("#ValDV_CuitPF").hide();
+            $("#ValCantidad_CuitPF").hide();
+            $("#ValFormato_CuitPF").hide();
+            $("#ValDNI_CuitPF").hide();
+            $("#Req_TipoIngresosBrutosPF").hide();
+            $("#Req_IngresosBrutosPF").hide();
+            $("#ValFormato_IngresosBrutosPF").hide();
+            $("#Req_CallePF").hide();
+            $("#Req_NroPuertaPF").hide();
+            $("#Req_ProvinciaPF").hide();
+            $("#Req_LocalidadPF").hide();
+            $("#Req_EmailPF").hide();
+            $("#ValFormato_EmailPF").hide();
+            $("#Req_ApellidoFirPF").hide();
+            $("#Req_NombresFirPF").hide();
+            $("#Req_TipoNroDocFirPF").hide();
+            $("#ValRepetido_txtNroDocumentoFirPF").hide();
+            $("#Req_TipoCaracterLegalFirPF").hide();
+            $("#<%: ValExiste_TitularPF.ClientID %>").hide();
+            $("#Req_CPPF").hide();
+            $("#Val_Formato_CPPF").hide();
 
-                $("#ValFormato_txtApellidosPF").hide();
-                $("#ValFormato_txtNombresPF").hide();
-                $("#ValFormato_txtApellidoFirPF").hide();
-                $("#ValFormato_txtNombresFirPF").hide();
+            $("#ValFormato_txtApellidosPF").hide();
+            $("#ValFormato_txtNombresPF").hide();
+            $("#ValFormato_txtApellidoFirPF").hide();
+            $("#ValFormato_txtNombresFirPF").hide();
 
-                $("#Req_CuitFirPF").hide();
-                $("#ValCantidad_CuitFirPF").hide();
-                $("#ValFormato_CuitFirPF").hide();
-                $("#ValDV_CuitFirPF").hide();
-                $("#ValDNI_CuitFirPF").hide();
+            $("#Req_CuitFirPF").hide();
+            $("#ValCantidad_CuitFirPF").hide();
+            $("#ValFormato_CuitFirPF").hide();
+            $("#ValDV_CuitFirPF").hide();
+            $("#ValDNI_CuitFirPF").hide();
 
-                if ($.trim($("#<%: txtApellidosPF.ClientID %>").val()).length == 0) {
-                    $("#Req_ApellidoPF").css("display", "inline-block");
+            if ($.trim($("#<%: txtApellidosPF.ClientID %>").val()).length == 0) {
+                $("#Req_ApellidoPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosPF.ClientID %>").val()))) {
+                $("#ValFormato_txtApellidosPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtNombresPF.ClientID %>").val()).length == 0) {
+                $("#Req_NombresPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresPF.ClientID %>").val()))) {
+                $("#ValFormato_txtNombresPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: ddlTipoDocumentoPF.ClientID %>").val()).length == 0 ||
+                $.trim($("#<%: txtNroDocumentoPF.ClientID %>").val()).length == 0) {
+                $("#Req_TipoNroDocPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtCuitPF.ClientID %>").val()).length == 0) {
+                $("#Req_CuitPF").css("display", "inline-block");
+                ret = false;
+            }
+            else {
+                if ($.trim($("#<%: txtCuitPF.ClientID %>").val()).length < 11) {
+                    $("#ValCantidad_CuitPF").css("display", "inline-block");
                     ret = false;
                 }
-                else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosPF.ClientID %>").val()))) {
-                    $("#ValFormato_txtApellidosPF").css("display", "inline-block");
-                    ret = false;
-                }
 
-                if ($.trim($("#<%: txtNombresPF.ClientID %>").val()).length == 0) {
-                    $("#Req_NombresPF").css("display", "inline-block");
+                else if (!formatoCUIT.test($.trim($("#<%: txtCuitPF.ClientID %>").val()))) {
+                    $("#ValFormato_CuitPF").css("display", "inline-block");
                     ret = false;
                 }
-                else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresPF.ClientID %>").val()))) {
-                    $("#ValFormato_txtNombresPF").css("display", "inline-block");
+                else if (!ValidarCuitSinGuiones($("#<%: txtCuitPF.ClientID %>")[0])) {
+                    $("#ValDV_CuitPF").css("display", "inline-block");
                     ret = false;
                 }
-
-                if ($.trim($("#<%: ddlTipoDocumentoPF.ClientID %>").val()).length == 0 ||
-                    $.trim($("#<%: txtNroDocumentoPF.ClientID %>").val()).length == 0) {
-                    $("#Req_TipoNroDocPF").css("display", "inline-block");
-                    ret = false;
-                }
-
-                if ($.trim($("#<%: txtCuitPF.ClientID %>").val()).length == 0) {
-                    $("#Req_CuitPF").css("display", "inline-block");
-                    ret = false;
-                }
-                else {
-                    if ($.trim($("#<%: txtCuitPF.ClientID %>").val()).length < 11) {
-                        $("#ValCantidad_CuitPF").css("display", "inline-block");
+                else if ($.trim($("#<%: ddlTipoDocumentoPF.ClientID %>").val()) == id_tipodoc_dni) {
+                    if (!ValidarDniCuit()) {
+                        $("#ValDNI_CuitPF").css("display", "inline-block");
                         ret = false;
                     }
+                }
+            }
 
-                    else if (!formatoCUIT.test($.trim($("#<%: txtCuitPF.ClientID %>").val()))) {
-                        $("#ValFormato_CuitPF").css("display", "inline-block");
+            //Código postal
+            if ($.trim($("#<%: txtCPPF.ClientID %>").val()).length == 0) {
+                $("#Req_CPPF").css("display", "inline-block");
+                ret = false;
+            }
+            else {
+                if (!formatoCP.test($.trim($("#<%: txtCPPF.ClientID %>").val()))) {
+                    $("#Val_Formato_CPPF").css("display", "inline-block");
+                    ret = false;
+                }
+            }
+
+
+            if ($.trim($("#<%: ddlTipoIngresosBrutosPF.ClientID %>").val()).length == 0) {
+                $("#Req_TipoIngresosBrutosPF").css("display", "inline-block");
+                ret = false;
+            }
+            else {
+                if (!$("#<%: txtIngresosBrutosPF.ClientID %>").prop("disabled")) {
+
+                    if ($.trim($("#<%: txtIngresosBrutosPF.ClientID %>").val()).length == 0) {
+                        $("#Req_IngresosBrutosPF").css("display", "inline-block");
                         ret = false;
                     }
-                    else if (!ValidarCuitSinGuiones($("#<%: txtCuitPF.ClientID %>")[0])) {
-                        $("#ValDV_CuitPF").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else if ($.trim($("#<%: ddlTipoDocumentoPF.ClientID %>").val()) == id_tipodoc_dni) {
-                        if (!ValidarDniCuit()) {
-                            $("#ValDNI_CuitPF").css("display", "inline-block");
+                    else {
+                        if (!formatoIIBB.test($.trim($("#<%: txtIngresosBrutosPF.ClientID %>").val()))) {
+                            $("#ValFormato_IngresosBrutosPF").text(strmsgFormatoIIBB);
+                            $("#ValFormato_IngresosBrutosPF").css("display", "inline-block");
                             ret = false;
                         }
                     }
                 }
+            }
 
-                //Código postal
-                if ($.trim($("#<%: txtCPPF.ClientID %>").val()).length == 0) {
-                    $("#Req_CPPF").css("display", "inline-block");
+
+
+            if ($.trim($("#<%: txtCallePF.ClientID %>").val()).length == 0) {
+                $("#Req_CallePF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtNroPuertaPF.ClientID %>").val()).length == 0) {
+                $("#Req_NroPuertaPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: ddlProvinciaPF.ClientID %>").val()).length == 0) {
+                $("#Req_ProvinciaPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: ddlLocalidadPF.ClientID %>").val()).length == 0) {
+                $("#Req_LocalidadPF").css("display", "inline-block");
+                ret = false;
+            }
+
+
+            if ($.trim($("#<%: txtEmailPF.ClientID %>").val()).length > 0) {
+                if (!formatoEmail.test($.trim($("#<%: txtEmailPF.ClientID %>").val()))) {
+                    $("#ValFormato_EmailPF").css("display", "inline-block");
                     ret = false;
                 }
-                else {
-                    if (!formatoCP.test($.trim($("#<%: txtCPPF.ClientID %>").val()))) {
-                        $("#Val_Formato_CPPF").css("display", "inline-block");
-                        ret = false;
-                    }
-                }
+            }
+            else {
+                $("#Req_EmailPF").css("display", "inline-block");
+                ret = false;
+            }
 
+            // Validaciones para cuando el firmante no es la misma persona.
+            if ($("#<%: pnlOtraPersona.ClientID %>").css("display") != "none") {
 
-                if ($.trim($("#<%: ddlTipoIngresosBrutosPF.ClientID %>").val()).length == 0) {
-                    $("#Req_TipoIngresosBrutosPF").css("display", "inline-block");
+                if ($.trim($("#<%: txtApellidoFirPF.ClientID %>").val()).length == 0) {
+                    $("#Req_ApellidoFirPF").css("display", "inline-block");
                     ret = false;
                 }
-                else {
-                    if (!$("#<%: txtIngresosBrutosPF.ClientID %>").prop("disabled")) {
-
-                if ($.trim($("#<%: txtIngresosBrutosPF.ClientID %>").val()).length == 0) {
-                            $("#Req_IngresosBrutosPF").css("display", "inline-block");
-                            ret = false;
-                        }
-                        else {
-                            if (!formatoIIBB.test($.trim($("#<%: txtIngresosBrutosPF.ClientID %>").val()))) {
-                                $("#ValFormato_IngresosBrutosPF").text(strmsgFormatoIIBB);
-                                $("#ValFormato_IngresosBrutosPF").css("display", "inline-block");
-                                ret = false;
-                            }
-                        }
-                    }
-                }
-
-
-
-                if ($.trim($("#<%: txtCallePF.ClientID %>").val()).length == 0) {
-                    $("#Req_CallePF").css("display", "inline-block");
-                    ret = false;
-                }
-
-                if ($.trim($("#<%: txtNroPuertaPF.ClientID %>").val()).length == 0) {
-                    $("#Req_NroPuertaPF").css("display", "inline-block");
-                    ret = false;
-                }
-
-                if ($.trim($("#<%: ddlProvinciaPF.ClientID %>").val()).length == 0) {
-                    $("#Req_ProvinciaPF").css("display", "inline-block");
+                else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidoFirPF.ClientID %>").val()))) {
+                    $("#ValFormato_txtApellidoFirPF").css("display", "inline-block");
                     ret = false;
                 }
 
-                if ($.trim($("#<%: ddlLocalidadPF.ClientID %>").val()).length == 0) {
-                    $("#Req_LocalidadPF").css("display", "inline-block");
+                if ($.trim($("#<%: txtNombresFirPF.ClientID %>").val()).length == 0) {
+                    $("#Req_NombresFirPF").css("display", "inline-block");
+                    ret = false;
+                }
+                else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirPF.ClientID %>").val()))) {
+                    $("#ValFormato_txtNombresFirPF").css("display", "inline-block");
                     ret = false;
                 }
 
-
-                if ($.trim($("#<%: txtEmailPF.ClientID %>").val()).length > 0) {
-                    if (!formatoEmail.test($.trim($("#<%: txtEmailPF.ClientID %>").val()))) {
-                        $("#ValFormato_EmailPF").css("display", "inline-block");
-                        ret = false;
-                    }
-                }
-                else {
-                    $("#Req_EmailPF").css("display", "inline-block");
-                    ret = false;
-                }
-
-                // Validaciones para cuando el firmante no es la misma persona.
-                if ($("#<%: pnlOtraPersona.ClientID %>").css("display") != "none") {
-
-                    if ($.trim($("#<%: txtApellidoFirPF.ClientID %>").val()).length == 0) {
-                        $("#Req_ApellidoFirPF").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidoFirPF.ClientID %>").val()))) {
-                        $("#ValFormato_txtApellidoFirPF").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if ($.trim($("#<%: txtNombresFirPF.ClientID %>").val()).length == 0) {
-                        $("#Req_NombresFirPF").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirPF.ClientID %>").val()))) {
-                        $("#ValFormato_txtNombresFirPF").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if ($.trim($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val()).length == 0 ||
-                        $.trim($("#<%: txtNroDocumentoFirPF.ClientID %>").val()).length == 0) {
+                if ($.trim($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val()).length == 0 ||
+                    $.trim($("#<%: txtNroDocumentoFirPF.ClientID %>").val()).length == 0) {
                         $("#Req_TipoNroDocFirPF").css("display", "inline-block");
                         ret = false;
                     } else if (($.trim($("#<%: txtNroDocumentoFirPF.ClientID %>").val())) == ($.trim($("#<%: txtNroDocumentoPF.ClientID %>").val())) &&
                         ($.trim($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val())) == ($.trim($("#<%: ddlTipoDocumentoPF.ClientID %>").val()))) {
-                        $("#ValRepetido_txtNroDocumentoFirPF").css("display", "inline-block");
-                        ret = false;
-                    }
+                    $("#ValRepetido_txtNroDocumentoFirPF").css("display", "inline-block");
+                    ret = false;
+                }
 
-                    if ($.trim($("#<%: ddlTipoCaracterLegalFirPF.ClientID %>").val()).length == 0) {
-                        $("#Req_TipoCaracterLegalFirPF").css("display", "inline-block");
-                        ret = false;
-                    }
-                    if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length == 0) {
-                        $("#Req_CuitFirPF").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else {
-                        if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length < 11) {
+                if ($.trim($("#<%: ddlTipoCaracterLegalFirPF.ClientID %>").val()).length == 0) {
+                    $("#Req_TipoCaracterLegalFirPF").css("display", "inline-block");
+                    ret = false;
+                }
+                if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length == 0) {
+                    $("#Req_CuitFirPF").css("display", "inline-block");
+                    ret = false;
+                }
+                else {
+                    if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length < 11) {
                             $("#ValCantidad_CuitFirPF").css("display", "inline-block");
                             ret = false;
                         }
@@ -2589,81 +2589,81 @@
 
             $("#<%: ValExiste_TipoNroDocFirPJ.ClientID %>").hide();
 
-        $("#<%: ValExiste_TipoNroDocTitSH.ClientID %>").hide();
+            $("#<%: ValExiste_TipoNroDocTitSH.ClientID %>").hide();
 
-        $("#Req_TipoCaracterLegalFirPJ").hide();
-        $("#<%: Req_CargoFirPJ.ClientID %>").hide();
-
-
-
-        if ($.trim($("#<%: txtApellidosFirPJ.ClientID %>").val()).length == 0) {
-            $("#Req_ApellidosFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-        else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosFirPJ.ClientID %>").val()))) {
-            $("#ValFormato_txtApellidosFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-
-        if ($.trim($("#<%: txtNombresFirPJ.ClientID %>").val()).length == 0) {
-            $("#Req_NombresFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-        else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirPJ.ClientID %>").val()))) {
-            $("#ValFormato_txtNombresFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-
-        if ($.trim($("#<%: ddlTipoDocumentoFirPJ.ClientID %>").val()).length == 0 ||
-            $.trim($("#<%: txtNroDocumentoFirPJ.ClientID %>").val()).length == 0) {
-            $("#Req_TipoNroDocFirPJ").css("display", "inline-block");
-            ret = false;
-        }
+            $("#Req_TipoCaracterLegalFirPJ").hide();
+            $("#<%: Req_CargoFirPJ.ClientID %>").hide();
 
 
 
-        if ($.trim($("#<%: ddlTipoCaracterLegalFirPJ.ClientID %>").val()).length == 0) {
-            $("#Req_TipoCaracterLegalFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-
-        // Se valida el cargo solo cuando el panel está visible
-        if ($("#<%: rowCargoFirmantePJ.ClientID %>").css("display") != "none") {
-
-            if ($.trim($("#<%: txtCargoFirPJ.ClientID %>").val()).length == 0) {
-            $("#<%: Req_CargoFirPJ.ClientID %>").css("display", "inline-block");
+            if ($.trim($("#<%: txtApellidosFirPJ.ClientID %>").val()).length == 0) {
+                $("#Req_ApellidosFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosFirPJ.ClientID %>").val()))) {
+                $("#ValFormato_txtApellidosFirPJ").css("display", "inline-block");
                 ret = false;
             }
 
-        }
+            if ($.trim($("#<%: txtNombresFirPJ.ClientID %>").val()).length == 0) {
+                $("#Req_NombresFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirPJ.ClientID %>").val()))) {
+                $("#ValFormato_txtNombresFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: ddlTipoDocumentoFirPJ.ClientID %>").val()).length == 0 ||
+                $.trim($("#<%: txtNroDocumentoFirPJ.ClientID %>").val()).length == 0) {
+                $("#Req_TipoNroDocFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+
+
+            if ($.trim($("#<%: ddlTipoCaracterLegalFirPJ.ClientID %>").val()).length == 0) {
+                $("#Req_TipoCaracterLegalFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            // Se valida el cargo solo cuando el panel está visible
+            if ($("#<%: rowCargoFirmantePJ.ClientID %>").css("display") != "none") {
+
+                if ($.trim($("#<%: txtCargoFirPJ.ClientID %>").val()).length == 0) {
+                    $("#<%: Req_CargoFirPJ.ClientID %>").css("display", "inline-block");
+                    ret = false;
+                }
+
+            }
 
 
     //if ($.trim($("#<%: txtEmailFirPJ.ClientID %>").val()).length == 0) {
-        //$("#Req_EmailTitSH").css("display", "inline-block");
-        //ret = false;
-        //}
-        //else {
-        if (!formatoEmail.test($.trim($("#<%: txtEmailFirPJ.ClientID %>").val()))) {
-            $("#Val_Formato_EmailFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-        //}
+            //$("#Req_EmailTitSH").css("display", "inline-block");
+            //ret = false;
+            //}
+            //else {
+            if (!formatoEmail.test($.trim($("#<%: txtEmailFirPJ.ClientID %>").val()))) {
+                $("#Val_Formato_EmailFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            //}
 
-        if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length == 0) {
-            $("#Req_CuitFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-        else {
-            if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length < 11) {
-            $("#ValCantidad_CuitFirPJ").css("display", "inline-block");
-            ret = false;
-        }
+            if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length == 0) {
+                $("#Req_CuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else {
+                if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length < 11) {
+                    $("#ValCantidad_CuitFirPJ").css("display", "inline-block");
+                    ret = false;
+                }
 
-        else if (!formatoCUIT.test($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()))) {
-            $("#ValFormato_txtCuitFirPJ").css("display", "inline-block");
-            ret = false;
-        }
-        else if (!ValidarCuitSinGuiones($("#<%: txtCuitFirPJ.ClientID %>")[0])) {
+                else if (!formatoCUIT.test($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()))) {
+                    $("#ValFormato_txtCuitFirPJ").css("display", "inline-block");
+                    ret = false;
+                }
+                else if (!ValidarCuitSinGuiones($("#<%: txtCuitFirPJ.ClientID %>")[0])) {
                     $("#ValDV_CuitFirPJ").css("display", "inline-block");
                     ret = false;
                 }
@@ -2679,150 +2679,150 @@
             var ret = true;
 
             var strmsgFormatoIIBB = "formato incorrecto. Ej: " + $("#<%: hid_IngresosBrutosPJ_formato.ClientID %>").val();
-    var formatoIIBB = $("#<%: hid_IngresosBrutosPJ_expresion.ClientID %>").val(); ///^([0-9]|-)*$/;
+            var formatoIIBB = $("#<%: hid_IngresosBrutosPJ_expresion.ClientID %>").val(); ///^([0-9]|-)*$/;
 
-    if (formatoIIBB.length > 0) {
-        formatoIIBB = eval("/^" + formatoIIBB + "$/");
-    }
+            if (formatoIIBB.length > 0) {
+                formatoIIBB = eval("/^" + formatoIIBB + "$/");
+            }
 
-    var formatoCUIT = /[3]\d{10}$/;
-    var formatoEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([.]\w+)*$/;
-    var formatoCP = /^(\d{4}|[a-zA-Z]\d{4}[a-zA-Z]{3})$/;
+            var formatoCUIT = /[3]\d{10}$/;
+            var formatoEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([.]\w+)*$/;
+            var formatoCP = /^(\d{4}|[a-zA-Z]\d{4}[a-zA-Z]{3})$/;
 
-    $("#Req_TipoSociedadPJ").hide();
-    $("#Req_RazonSocialPJ").hide();
-    $("#Req_CuitPJ").hide();
-    $("#ValDV_CuitPJ").hide();
-    $("#ValCantidad_CuitPJ").hide();
-    $("#ValFormato_CuitPJ").hide();
-    $("#Req_TipoIngresosBrutosPJ").hide();
-    $("#Req_IngresosBrutosPJ").hide();
-    $("#ValFormato_IngresosBrutosPJ").hide();
-    $("#Req_CallePJ").hide();
-    $("#Req_NroPuertaPJ").hide();
-    $("#Req_ProvinciaPJ").hide();
-    $("#Req_LocalidadPJ").hide();
-    $("#Req_EmailPJ").hide();
-    $("#ValFormato_EmailPJ").hide();
-    $("#Req_FirmantesPJ").hide();
-    $("#Req_TitularesSH").hide();
-    $("#<%: ValExiste_TitularPJ.ClientID %>").hide();
-    $("#Req_CPPJ").hide();
-    $("#Val_Formato_CPPJ").hide();
-
-
+            $("#Req_TipoSociedadPJ").hide();
+            $("#Req_RazonSocialPJ").hide();
+            $("#Req_CuitPJ").hide();
+            $("#ValDV_CuitPJ").hide();
+            $("#ValCantidad_CuitPJ").hide();
+            $("#ValFormato_CuitPJ").hide();
+            $("#Req_TipoIngresosBrutosPJ").hide();
+            $("#Req_IngresosBrutosPJ").hide();
+            $("#ValFormato_IngresosBrutosPJ").hide();
+            $("#Req_CallePJ").hide();
+            $("#Req_NroPuertaPJ").hide();
+            $("#Req_ProvinciaPJ").hide();
+            $("#Req_LocalidadPJ").hide();
+            $("#Req_EmailPJ").hide();
+            $("#ValFormato_EmailPJ").hide();
+            $("#Req_FirmantesPJ").hide();
+            $("#Req_TitularesSH").hide();
+            $("#<%: ValExiste_TitularPJ.ClientID %>").hide();
+            $("#Req_CPPJ").hide();
+            $("#Val_Formato_CPPJ").hide();
 
 
-    var id_tiposociedad = $.trim($("#<%: ddlTipoSociedadPJ.ClientID %>").val());
-
-    if ($.trim($("#<%: ddlTipoSociedadPJ.ClientID %>").val()).length == 0) {
-        $("#Req_TipoSociedadPJ").css("display", "inline-block");
-
-        ret = false;
-    }
-
-    if (id_tiposociedad == "2" || id_tiposociedad == "32") // Sociedad de Hecho
-    {
-        if ($("#<%: grdTitularesSH.ClientID %> tr").length <= 2) {
-            $("#Req_TitularesSH").css("display", "inline-block");
-            ret = false;
-        }
-    }
-    else//Resto de las sociedades
-    {
-        if ($("#<%: grdFirmantesPJ.ClientID %> tr").length <= 1) {
-            $("#Req_FirmantesPJ").css("display", "inline-block");
-            ret = false;
-        }
-    }
 
 
-    if ($.trim($("#<%: txtRazonSocialPJ.ClientID %>").val()).length == 0) {
-        $("#Req_RazonSocialPJ").css("display", "inline-block");
-        ret = false;
-    }
+            var id_tiposociedad = $.trim($("#<%: ddlTipoSociedadPJ.ClientID %>").val());
 
+            if ($.trim($("#<%: ddlTipoSociedadPJ.ClientID %>").val()).length == 0) {
+                $("#Req_TipoSociedadPJ").css("display", "inline-block");
 
-    if ($.trim($("#<%: txtCuitPJ.ClientID %>").val()).length == 0) {
-        $("#Req_CuitPJ").css("display", "inline-block");
-        ret = false;
-    }
-    else {
-        if ($.trim($("#<%: txtCuitPJ.ClientID %>").val()).length < 11) {
-            $("#ValCantidad_CuitPJ").css("display", "inline-block");
-            ret = false;
-        }
-
-        else if (!formatoCUIT.test($.trim($("#<%: txtCuitPJ.ClientID %>").val()))) {
-            $("#ValFormato_CuitPJ").css("display", "inline-block");
-            ret = false;
-        }
-        else if (!ValidarCuitSinGuiones($("#<%: txtCuitPJ.ClientID %>")[0])) {
-            $("#ValDV_CuitPJ").css("display", "inline-block");
-            ret = false;
-        }
-
-    }
-
-
-    if ($.trim($("#<%: ddlTipoIngresosBrutosPJ.ClientID %>").val()).length == 0) {
-        $("#Req_TipoIngresosBrutosPJ").css("display", "inline-block");
-        ret = false;
-    }
-    else {
-        if (!$("#<%: txtIngresosBrutosPJ.ClientID %>").prop("disabled")) {
-
-            if ($.trim($("#<%: txtIngresosBrutosPJ.ClientID %>").val()).length == 0) {
-                $("#Req_IngresosBrutosPJ").css("display", "inline-block");
                 ret = false;
             }
-            else {
-                if (!formatoIIBB.test($.trim($("#<%: txtIngresosBrutosPJ.ClientID %>").val()))) {
-                    $("#ValFormato_IngresosBrutosPJ").text(strmsgFormatoIIBB);
-                    $("#ValFormato_IngresosBrutosPJ").css("display", "inline-block");
+
+            if (id_tiposociedad == "2" || id_tiposociedad == "32") // Sociedad de Hecho
+            {
+                if ($("#<%: grdTitularesSH.ClientID %> tr").length <= 2) {
+                    $("#Req_TitularesSH").css("display", "inline-block");
                     ret = false;
                 }
             }
-        }
-    }
+            else//Resto de las sociedades
+            {
+                if ($("#<%: grdFirmantesPJ.ClientID %> tr").length <= 1) {
+                    $("#Req_FirmantesPJ").css("display", "inline-block");
+                    ret = false;
+                }
+            }
 
 
-    if ($.trim($("#<%: txtCallePJ.ClientID %>").val()).length == 0) {
-        $("#Req_CallePJ").css("display", "inline-block");
-        ret = false;
-    }
-
-    if ($.trim($("#<%: txtNroPuertaPJ.ClientID %>").val()).length == 0) {
-        $("#Req_NroPuertaPJ").css("display", "inline-block");
-        ret = false;
-    }
+            if ($.trim($("#<%: txtRazonSocialPJ.ClientID %>").val()).length == 0) {
+                $("#Req_RazonSocialPJ").css("display", "inline-block");
+                ret = false;
+            }
 
 
-    //Código postal
-    if ($.trim($("#<%: txtCPPJ.ClientID %>").val()).length == 0) {
-        $("#Req_CPPJ").css("display", "inline-block");
-        ret = false;
-    }
-    else {
-        if (!formatoCP.test($.trim($("#<%: txtCPPJ.ClientID %>").val()))) {
-            $("#Val_Formato_CPPJ").css("display", "inline-block");
-            ret = false;
-        }
-    }
+            if ($.trim($("#<%: txtCuitPJ.ClientID %>").val()).length == 0) {
+                $("#Req_CuitPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else {
+                if ($.trim($("#<%: txtCuitPJ.ClientID %>").val()).length < 11) {
+                    $("#ValCantidad_CuitPJ").css("display", "inline-block");
+                    ret = false;
+                }
+
+                else if (!formatoCUIT.test($.trim($("#<%: txtCuitPJ.ClientID %>").val()))) {
+                    $("#ValFormato_CuitPJ").css("display", "inline-block");
+                    ret = false;
+                }
+                else if (!ValidarCuitSinGuiones($("#<%: txtCuitPJ.ClientID %>")[0])) {
+                    $("#ValDV_CuitPJ").css("display", "inline-block");
+                    ret = false;
+                }
+
+            }
 
 
-    if ($.trim($("#<%: ddlProvinciaPJ.ClientID %>").val()).length == 0) {
-        $("#Req_ProvinciaPJ").css("display", "inline-block");
-        ret = false;
-    }
+            if ($.trim($("#<%: ddlTipoIngresosBrutosPJ.ClientID %>").val()).length == 0) {
+                $("#Req_TipoIngresosBrutosPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else {
+                if (!$("#<%: txtIngresosBrutosPJ.ClientID %>").prop("disabled")) {
 
-    if ($.trim($("#<%: ddlLocalidadPJ.ClientID %>").val()).length == 0) {
-        $("#Req_LocalidadPJ").css("display", "inline-block");
-        ret = false;
-    }
+                    if ($.trim($("#<%: txtIngresosBrutosPJ.ClientID %>").val()).length == 0) {
+                        $("#Req_IngresosBrutosPJ").css("display", "inline-block");
+                        ret = false;
+                    }
+                    else {
+                        if (!formatoIIBB.test($.trim($("#<%: txtIngresosBrutosPJ.ClientID %>").val()))) {
+                            $("#ValFormato_IngresosBrutosPJ").text(strmsgFormatoIIBB);
+                            $("#ValFormato_IngresosBrutosPJ").css("display", "inline-block");
+                            ret = false;
+                        }
+                    }
+                }
+            }
 
-    if ($.trim($("#<%: txtEmailPJ.ClientID %>").val()).length > 0) {
-        if (!formatoEmail.test($.trim($("#<%: txtEmailPJ.ClientID %>").val()))) {
+
+            if ($.trim($("#<%: txtCallePJ.ClientID %>").val()).length == 0) {
+                $("#Req_CallePJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtNroPuertaPJ.ClientID %>").val()).length == 0) {
+                $("#Req_NroPuertaPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+
+            //Código postal
+            if ($.trim($("#<%: txtCPPJ.ClientID %>").val()).length == 0) {
+                $("#Req_CPPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else {
+                if (!formatoCP.test($.trim($("#<%: txtCPPJ.ClientID %>").val()))) {
+                    $("#Val_Formato_CPPJ").css("display", "inline-block");
+                    ret = false;
+                }
+            }
+
+
+            if ($.trim($("#<%: ddlProvinciaPJ.ClientID %>").val()).length == 0) {
+                $("#Req_ProvinciaPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: ddlLocalidadPJ.ClientID %>").val()).length == 0) {
+                $("#Req_LocalidadPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtEmailPJ.ClientID %>").val()).length > 0) {
+                if (!formatoEmail.test($.trim($("#<%: txtEmailPJ.ClientID %>").val()))) {
                     $("#ValFormato_EmailPJ").css("display", "inline-block");
                     ret = false;
                 }
@@ -2850,67 +2850,67 @@
 
             // Se realiza aqui y en el change para que ete correcto al editar y levanta por primera vez
             if ($("#<%: ddlTipoDocumentoPF.ClientID %>").val() != id_tipodoc_pasaporte) {
-        $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
-        $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("update");
-    }
-    else {
-        $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("destroy");
-    }
+                $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
+                $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("update");
+            }
+            else {
+                $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("destroy");
+            }
 
 
-    $("#<%: txtCuitPJ.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999999' });
-    $("#<%: txtCuitPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999999' });
-    $("#<%: txtNroPuertaPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '50000' });
-    $("#<%: txtTelefonoPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '9999999999999999999999' });
+            $("#<%: txtCuitPJ.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999999' });
+            $("#<%: txtCuitPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999999' });
+            $("#<%: txtNroPuertaPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '50000' });
+            $("#<%: txtTelefonoPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '9999999999999999999999' });
 
 
 
-    $("#<%: txtApellidosPF.ClientID %>").on("keyup", function (e) {
-        $("#Req_ApellidoPF").hide();
-    });
+            $("#<%: txtApellidosPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_ApellidoPF").hide();
+            });
 
-    $("#<%: txtNombresPF.ClientID %>").on("keyup", function (e) {
-        $("#Req_NombresPF").hide();
-    });
+            $("#<%: txtNombresPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_NombresPF").hide();
+            });
 
-    $("#<%: ddlTipoDocumentoPF.ClientID %>").on("change", function (e) {
-        $("#Req_TipoNroDocPF").hide();
+            $("#<%: ddlTipoDocumentoPF.ClientID %>").on("change", function (e) {
+                $("#Req_TipoNroDocPF").hide();
 
 
-        if ($("#<%: ddlTipoDocumentoPF.ClientID %>").val() != id_tipodoc_pasaporte) {
-            $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
-            $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("update");
-        }
-        else {
-            $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("destroy");
-        }
+                if ($("#<%: ddlTipoDocumentoPF.ClientID %>").val() != id_tipodoc_pasaporte) {
+                    $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
+                    $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("update");
+                }
+                else {
+                    $("#<%: txtNroDocumentoPF.ClientID %>").autoNumeric("destroy");
+                }
 
-    });
+            });
 
-    $("#<%: txtNroDocumentoPF.ClientID %>").on("keyup", function (e) {
-        $("#Req_TipoNroDocPF").hide();
-        $("#ValDNI_CuitPF").hide();
-    });
+            $("#<%: txtNroDocumentoPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_TipoNroDocPF").hide();
+                $("#ValDNI_CuitPF").hide();
+            });
 
-    $("#<%: txtCuitPF.ClientID %>").on("keyup", function (e) {
-        $("#Req_CuitPF").hide();
-        $("#ValCantidad_CuitPF").hide();
-        $("#ValFormato_CuitPF").hide();
-        $("#ValDV_CuitPF").hide();
-        $("#ValDNI_CuitPF").hide();
-        $("#<%: ValExiste_TitularPF.ClientID %>").hide();
+            $("#<%: txtCuitPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_CuitPF").hide();
+                $("#ValCantidad_CuitPF").hide();
+                $("#ValFormato_CuitPF").hide();
+                $("#ValDV_CuitPF").hide();
+                $("#ValDNI_CuitPF").hide();
+                $("#<%: ValExiste_TitularPF.ClientID %>").hide();
 
-    });
+            });
 
-    $("#<%: txtCallePF.ClientID %>").on("keyup", function (e) {
-        $("#Req_CallePF").hide();
-    });
+            $("#<%: txtCallePF.ClientID %>").on("keyup", function (e) {
+                $("#Req_CallePF").hide();
+            });
 
-    $("#<%: txtNroPuertaPF.ClientID %>").on("keyup", function (e) {
-        $("#Req_NroPuertaPF").hide();
-    });
+            $("#<%: txtNroPuertaPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_NroPuertaPF").hide();
+            });
 
-    $("#<%: txtEmailPF.ClientID %>").on("keyup", function (e) {
+            $("#<%: txtEmailPF.ClientID %>").on("keyup", function (e) {
                 $("#Req_EmailPF").hide();
                 $("#ValFormato_EmailPF").hide();
             });
@@ -2953,6 +2953,23 @@
 
 
             if ($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val() != id_tipodoc_pasaporte) {
+                $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
+                $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric("update");
+            }
+            else {
+                $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric("destroy");
+            }
+
+            $("#<%: txtApellidoFirPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_ApellidoFirPF").hide();
+            });
+            $("#<%: txtNombresFirPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_NombresFirPF").hide();
+            });
+            $("#<%: ddlTipoDocumentoFirPF.ClientID %>").on("change", function (e) {
+                $("#Req_TipoNroDocFirPF").hide();
+
+                if ($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val() != id_tipodoc_pasaporte) {
                     $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
                     $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric("update");
                 }
@@ -2960,34 +2977,17 @@
                     $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric("destroy");
                 }
 
-                $("#<%: txtApellidoFirPF.ClientID %>").on("keyup", function (e) {
-                    $("#Req_ApellidoFirPF").hide();
-                });
-                $("#<%: txtNombresFirPF.ClientID %>").on("keyup", function (e) {
-                    $("#Req_NombresFirPF").hide();
-                });
-                $("#<%: ddlTipoDocumentoFirPF.ClientID %>").on("change", function (e) {
-                    $("#Req_TipoNroDocFirPF").hide();
+            });
+            $("#<%: txtNroDocumentoFirPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_TipoNroDocFirPF").hide();
+            });
 
-                    if ($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val() != id_tipodoc_pasaporte) {
-                        $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
-                        $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric("update");
-                    }
-                    else {
-                        $("#<%: txtNroDocumentoFirPF.ClientID %>").autoNumeric("destroy");
-                    }
+            $("#<%: txtCPPF.ClientID %>").on("keyup", function (e) {
+                $("#Req_CPPF").hide();
+                $("#Val_Formato_CPPF").hide();
+            });
 
-                });
-                $("#<%: txtNroDocumentoFirPF.ClientID %>").on("keyup", function (e) {
-                    $("#Req_TipoNroDocFirPF").hide();
-                });
-
-                $("#<%: txtCPPF.ClientID %>").on("keyup", function (e) {
-                    $("#Req_CPPF").hide();
-                    $("#Val_Formato_CPPF").hide();
-                });
-
-                $("#<%: ddlTipoCaracterLegalFirPF.ClientID %>").on("change", function (e) {
+            $("#<%: ddlTipoCaracterLegalFirPF.ClientID %>").on("change", function (e) {
                 $("#Req_TipoCaracterLegalFirPF").hide();
             });
 
@@ -3001,28 +3001,28 @@
             $("#<%: txtNroPuertaPJ.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999' });
 
 
-                $("#<%: txtCuitPJ.ClientID %>").on("keyup", function (e) {
-                    $("#Req_CuitPJ").hide();
-                    $("#ValCantidad_CuitPJ").hide();
-                    $("#ValFormato_CuitPJ").hide();
-                    $("#ValDV_CuitPJ").hide();
-                    $("#<%: ValExiste_TitularPJ.ClientID %>").hide();
-                });
+            $("#<%: txtCuitPJ.ClientID %>").on("keyup", function (e) {
+                $("#Req_CuitPJ").hide();
+                $("#ValCantidad_CuitPJ").hide();
+                $("#ValFormato_CuitPJ").hide();
+                $("#ValDV_CuitPJ").hide();
+                $("#<%: ValExiste_TitularPJ.ClientID %>").hide();
+            });
 
-                $("#<%: txtCallePJ.ClientID %>").on("keyup", function (e) {
-                    $("#Req_CallePJ").hide();
-                });
+            $("#<%: txtCallePJ.ClientID %>").on("keyup", function (e) {
+                $("#Req_CallePJ").hide();
+            });
 
-                $("#<%: txtEmailPJ.ClientID %>").on("keyup", function (e) {
-                    $("#Req_EmailPJ").hide();
-                    $("#ValFormato_EmailPJ").hide();
-                });
+            $("#<%: txtEmailPJ.ClientID %>").on("keyup", function (e) {
+                $("#Req_EmailPJ").hide();
+                $("#ValFormato_EmailPJ").hide();
+            });
 
-                $("#<%: txtNroPuertaPJ.ClientID %>").on("keyup", function (e) {
-                    $("#Req_NroPuertaPJ").hide();
-                });
+            $("#<%: txtNroPuertaPJ.ClientID %>").on("keyup", function (e) {
+                $("#Req_NroPuertaPJ").hide();
+            });
 
-                $("#<%: txtCPPJ.ClientID %>").on("keyup", function (e) {
+            $("#<%: txtCPPJ.ClientID %>").on("keyup", function (e) {
                 $("#Req_CPPJ").hide();
                 $("#Val_Formato_CPPJ").hide();
             });
@@ -3071,37 +3071,37 @@
         function init_JS_updFirmantePJ() {
 
             if ($("#<%: ddlTipoDocumentoFirPJ.ClientID %>").val() != id_tipodoc_pasaporte) {
+                $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
+                $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric("update");
+            }
+            else {
+                $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric("destroy");
+            }
+
+            $("#<%: txtApellidosFirPJ.ClientID %>").on("keyup", function (e) {
+                $("#Req_ApellidosFirPJ").hide();
+            });
+            $("#<%: txtNombresFirPJ.ClientID %>").on("keyup", function (e) {
+                $("#Req_NombresFirPJ").hide();
+            });
+            $("#<%: ddlTipoDocumentoFirPJ.ClientID %>").on("change", function (e) {
+                $("#<%: ValExiste_TipoNroDocFirPJ.ClientID %>").hide();
+                $("#Req_TipoNroDocFirPJ").hide();
+
+                if ($("#<%: ddlTipoDocumentoFirPJ.ClientID %>").val() != id_tipodoc_pasaporte) {
                     $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
-                    $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric("update");
-                }
-                else {
-                    $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric("destroy");
-                }
-
-                $("#<%: txtApellidosFirPJ.ClientID %>").on("keyup", function (e) {
-                    $("#Req_ApellidosFirPJ").hide();
-                });
-                $("#<%: txtNombresFirPJ.ClientID %>").on("keyup", function (e) {
-                    $("#Req_NombresFirPJ").hide();
-                });
-                $("#<%: ddlTipoDocumentoFirPJ.ClientID %>").on("change", function (e) {
-                    $("#<%: ValExiste_TipoNroDocFirPJ.ClientID %>").hide();
-                    $("#Req_TipoNroDocFirPJ").hide();
-
-                    if ($("#<%: ddlTipoDocumentoFirPJ.ClientID %>").val() != id_tipodoc_pasaporte) {
-                        $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric({ aSep: '', mDec: '0', vMax: '99999999' });
                         $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric("update");
                     }
                     else {
                         $("#<%: txtNroDocumentoFirPJ.ClientID %>").autoNumeric("destroy");
-                    }
-                });
-                $("#<%: txtNroDocumentoFirPJ.ClientID %>").on("keyup", function (e) {
-                    $("#<%: ValExiste_TipoNroDocFirPJ.ClientID %>").hide();
-                    $("#Req_TipoNroDocFirPJ").hide();
-                });
+                }
+            });
+            $("#<%: txtNroDocumentoFirPJ.ClientID %>").on("keyup", function (e) {
+                $("#<%: ValExiste_TipoNroDocFirPJ.ClientID %>").hide();
+                $("#Req_TipoNroDocFirPJ").hide();
+            });
 
-                $("#<%: txtEmailFirPJ.ClientID %>").on("keyup", function (e) {
+            $("#<%: txtEmailFirPJ.ClientID %>").on("keyup", function (e) {
                 $("#Req_EmailFirPJ").hide();
                 $("#Val_Formato_EmailFirPJ").hide();
             });
@@ -3114,11 +3114,11 @@
         function init_JS_upd_ddlTipoSociedadPJ() {
 
             $("#<%: ddlTipoSociedadPJ.ClientID %>").select2({
-                    placeholder: "Seleccionar",
-                    allowClear: true,
-                });
+                placeholder: "Seleccionar",
+                allowClear: true,
+            });
 
-                $("#<%: ddlTipoSociedadPJ.ClientID %>").on("change", function (e) {
+            $("#<%: ddlTipoSociedadPJ.ClientID %>").on("change", function (e) {
                 $("#Req_TipoSociedadPJ").hide();
 
 
@@ -3202,84 +3202,84 @@
             $("#<%: ValExiste_TipoNroDocTitSH.ClientID %>").hide();
 
 
-                if ($.trim($("#<%: txtApellidosTitSH.ClientID %>").val()).length == 0) {
-                    $("#Req_ApellidosTitSH").css("display", "inline-block");
+            if ($.trim($("#<%: txtApellidosTitSH.ClientID %>").val()).length == 0) {
+                $("#Req_ApellidosTitSH").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosTitSH.ClientID %>").val()))) {
+                $("#ValFormato_txtApellidosTitSH").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtNombresTitSH.ClientID %>").val()).length == 0) {
+                $("#Req_NombresTitSH").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresTitSH.ClientID %>").val()))) {
+                $("#ValFormato_txtNombresTitSH").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: ddlTipoDocumentoTitSH.ClientID %>").val()).length == 0 ||
+                $.trim($("#<%: txtNroDocumentoTitSH.ClientID %>").val()).length == 0) {
+                $("#Req_TipoNroDocumentoTitSH").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtCuitTitSH.ClientID %>").val()).length == 0) {
+                $("#Req_CuitTitSH").css("display", "inline-block");
+                ret = false;
+            }
+
+            if ($.trim($("#<%: txtCuitTitSH.ClientID %>").val()).length > 0) {
+                if (!formatoCUIT.test($.trim($("#<%: txtCuitTitSH.ClientID %>").val()))) {
+                    $("#ValFormato_CuitTitSH").css("display", "inline-block");
                     ret = false;
                 }
-                else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosTitSH.ClientID %>").val()))) {
-                    $("#ValFormato_txtApellidosTitSH").css("display", "inline-block");
+                else if (!ValidarCuitSinGuiones($("#<%: txtCuitTitSH.ClientID %>")[0])) {
+                    $("#ValDV_CuitTitSH").css("display", "inline-block");
+                    ret = false;
+                }
+                else if (!ValidarDniCuit2($("#<%: ddlTipoDocumentoTitSH.ClientID %>").val(), $("#<%: txtNroDocumentoTitSH.ClientID %>").val(), $("#<%: txtCuitTitSH.ClientID %>").val())) {
+                    $("#ValDNI_CuitTitSH").css("display", "inline-block");
                     ret = false;
                 }
 
-                if ($.trim($("#<%: txtNombresTitSH.ClientID %>").val()).length == 0) {
-                    $("#Req_NombresTitSH").css("display", "inline-block");
-                    ret = false;
-                }
-                else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresTitSH.ClientID %>").val()))) {
-                    $("#ValFormato_txtNombresTitSH").css("display", "inline-block");
-                    ret = false;
-                }
+            }
 
-                if ($.trim($("#<%: ddlTipoDocumentoTitSH.ClientID %>").val()).length == 0 ||
-                    $.trim($("#<%: txtNroDocumentoTitSH.ClientID %>").val()).length == 0) {
-                    $("#Req_TipoNroDocumentoTitSH").css("display", "inline-block");
+            if ($("#<%: pnlFirSH.ClientID %>").is(":visible")) {
+
+                if ($.trim($("#<%: txtApellidosFirSH.ClientID %>").val()).length == 0) {
+                    $("#Req_ApellidosFirSH").css("display", "inline-block");
                     ret = false;
                 }
-
-                if ($.trim($("#<%: txtCuitTitSH.ClientID %>").val()).length == 0) {
-                    $("#Req_CuitTitSH").css("display", "inline-block");
+                else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosFirSH.ClientID %>").val()))) {
+                    $("#ValFormato_txtApellidosFirSH").css("display", "inline-block");
                     ret = false;
                 }
 
-                if ($.trim($("#<%: txtCuitTitSH.ClientID %>").val()).length > 0) {
-                    if (!formatoCUIT.test($.trim($("#<%: txtCuitTitSH.ClientID %>").val()))) {
-                        $("#ValFormato_CuitTitSH").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else if (!ValidarCuitSinGuiones($("#<%: txtCuitTitSH.ClientID %>")[0])) {
-                        $("#ValDV_CuitTitSH").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else if (!ValidarDniCuit2($("#<%: ddlTipoDocumentoTitSH.ClientID %>").val(), $("#<%: txtNroDocumentoTitSH.ClientID %>").val(), $("#<%: txtCuitTitSH.ClientID %>").val())) {
-                        $("#ValDNI_CuitTitSH").css("display", "inline-block");
-                        ret = false;
-                    }
-
+                if ($.trim($("#<%: txtNombresFirSH.ClientID %>").val()).length == 0) {
+                    $("#Req_NombresFirSH").css("display", "inline-block");
+                    ret = false;
+                }
+                else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirSH.ClientID %>").val()))) {
+                    $("#ValFormato_txtNombresFirSH").css("display", "inline-block");
+                    ret = false;
                 }
 
-                if ($("#<%: pnlFirSH.ClientID %>").is(":visible")) {
+                if ($.trim($("#<%: ddlTipoDocumentoFirSH.ClientID %>").val()).length == 0 ||
+                    $.trim($("#<%: txtNroDocumentoFirSH.ClientID %>").val()).length == 0) {
+                    $("#Req_TipoNroDocumentoFirSH").css("display", "inline-block");
+                    ret = false;
+                }
 
-                    if ($.trim($("#<%: txtApellidosFirSH.ClientID %>").val()).length == 0) {
-                        $("#Req_ApellidosFirSH").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosFirSH.ClientID %>").val()))) {
-                        $("#ValFormato_txtApellidosFirSH").css("display", "inline-block");
-                        ret = false;
-                    }
+                if ($.trim($("#<%: txtCuitFirSH.ClientID %>").val()).length == 0) {
+                    $("#Req_CuitFirSH").css("display", "inline-block");
+                    ret = false;
+                }
 
-                    if ($.trim($("#<%: txtNombresFirSH.ClientID %>").val()).length == 0) {
-                        $("#Req_NombresFirSH").css("display", "inline-block");
-                        ret = false;
-                    }
-                    else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirSH.ClientID %>").val()))) {
-                        $("#ValFormato_txtNombresFirSH").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if ($.trim($("#<%: ddlTipoDocumentoFirSH.ClientID %>").val()).length == 0 ||
-                        $.trim($("#<%: txtNroDocumentoFirSH.ClientID %>").val()).length == 0) {
-                        $("#Req_TipoNroDocumentoFirSH").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if ($.trim($("#<%: txtCuitFirSH.ClientID %>").val()).length == 0) {
-                        $("#Req_CuitFirSH").css("display", "inline-block");
-                        ret = false;
-                    }
-
-                    if ($.trim($("#<%: txtCuitFirSH.ClientID %>").val()).length > 0) {
-                        if (!formatoCUIT.test($.trim($("#<%: txtCuitFirSH.ClientID %>").val()))) {
+                if ($.trim($("#<%: txtCuitFirSH.ClientID %>").val()).length > 0) {
+                    if (!formatoCUIT.test($.trim($("#<%: txtCuitFirSH.ClientID %>").val()))) {
                             $("#ValFormato_CuitFirSH").css("display", "inline-block");
                             ret = false;
                         }
@@ -3288,29 +3288,29 @@
                             ret = false;
                         }
                         else if (!ValidarDniCuit2($("#<%: ddlTipoDocumentoFirSH.ClientID %>").val(), $("#<%: txtNroDocumentoFirSH.ClientID %>").val(), $("#<%: txtCuitFirSH.ClientID %>").val())) {
-                            $("#ValDNI_CuitFirSH").css("display", "inline-block");
-                            ret = false;
-                        }
-                    }
-
-                    if ($.trim($("#<%: txtEmailFirSH.ClientID %>").val()).length == 0) {
-                        $("#Req_EmailFirSH").css("display", "inline-block");
+                        $("#ValDNI_CuitFirSH").css("display", "inline-block");
                         ret = false;
                     }
-                    else {
-                        if (!formatoEmail.test($.trim($("#<%: txtEmailFirSH.ClientID %>").val()))) {
-                            $("#Val_Formato_EmailFirSH").css("display", "inline-block");
-                            ret = false;
-                        }
-                    }
+                }
 
-                    if ($.trim($("#<%: ddlTipoCaracterLegalFirSH.ClientID %>").val()).length == 0) {
-                        $("#Req_TipoCaracterLegalFirSH").css("display", "inline-block");
+                if ($.trim($("#<%: txtEmailFirSH.ClientID %>").val()).length == 0) {
+                    $("#Req_EmailFirSH").css("display", "inline-block");
+                    ret = false;
+                }
+                else {
+                    if (!formatoEmail.test($.trim($("#<%: txtEmailFirSH.ClientID %>").val()))) {
+                        $("#Val_Formato_EmailFirSH").css("display", "inline-block");
                         ret = false;
                     }
+                }
 
-                    if ($("#<%: txtCargoFirSH.ClientID %>").is(":visible")) {
-                        if ($.trim($("#<%: txtCargoFirSH.ClientID %>").val()).length == 0) {
+                if ($.trim($("#<%: ddlTipoCaracterLegalFirSH.ClientID %>").val()).length == 0) {
+                    $("#Req_TipoCaracterLegalFirSH").css("display", "inline-block");
+                    ret = false;
+                }
+
+                if ($("#<%: txtCargoFirSH.ClientID %>").is(":visible")) {
+                    if ($.trim($("#<%: txtCargoFirSH.ClientID %>").val()).length == 0) {
                         $("#Req_CargoFirSH").css("display", "inline-block");
                         ret = false;
                     }
