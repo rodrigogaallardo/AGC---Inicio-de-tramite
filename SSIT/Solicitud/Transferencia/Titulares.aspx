@@ -76,7 +76,7 @@
         <div id="box_titulares_ANT" class="box-panel">
             <div style="margin: 20px; margin-top: -5px">
                 <div style="color: #377bb5">
-                    <h4><i class="imoon imoon-users" style="margin-right: 10px"></i>Datos de los titulares anteriores</h4>
+                    <h4><i class="imoon imoon-users" style="margin-right: 10px"></i>Cendente (Titular/es anteriores)</h4>
                     <hr />
                 </div>
             </div>
@@ -106,13 +106,13 @@
                         <strong>Titulares</strong>
                     </div>
                     <div>
-                        <asp:GridView 
-                            ID="grdTitularesHabANT" 
-                            runat="server" 
-                            AutoGenerateColumns="false" 
+                        <asp:GridView
+                            ID="grdTitularesHabANT"
+                            runat="server"
+                            AutoGenerateColumns="false"
                             DataKeyNames="id_persona"
-                            AllowPaging="false" 
-                            Style="border: none;" 
+                            AllowPaging="false"
+                            Style="border: none;"
                             GridLines="None" Width="100%" CssClass="table table-bordered mtop5"
                             CellPadding="3"
                             OnRowDataBound="grdTitularesHabANT_RowDataBound">
@@ -203,7 +203,7 @@
 
             <div style="margin: 20px; margin-top: -5px">
                 <div style="color: #377bb5">
-                    <h4><i class="imoon imoon-users" style="margin-right: 10px"></i>Datos de los titulares</h4>
+                    <h4><i class="imoon imoon-users" style="margin-right: 10px"></i>Cesionario (Nuevo/s Titular/es)</h4>
                     <hr />
                 </div>
             </div>
@@ -407,7 +407,7 @@
                                             </div>
                                         </div>
                                         <asp:Label runat="server" class="control-label col-sm-2">C.U.I.T. (*):</asp:Label>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                             <asp:TextBox ID="txtCuitPF" runat="server" MaxLength="13" Width="150px" CssClass="form-control"></asp:TextBox>
                                             <div id="Req_CuitPF" class="field-validation-error" style="display: none;">
                                                 Debe ingresar el CUIT.
@@ -421,6 +421,30 @@
                                             <div id="ValDNI_CuitPF" class="field-validation-error" style="display: none;">
                                                 El CUIT ingresado es distinto al DNI.
                                             </div>
+                                        </div>
+                                        <asp:UpdatePanel ID="updValidarCuitPF" runat="server">
+                                            <ContentTemplate>
+                                                <div class="form-group">
+                                                    <asp:LinkButton ID="validarCuitPfButton" runat="server" CssClass="btn btn-primary" OnClick="validarCuitPfButton_Click" OnClientClick="return validarCuitPF(this);">
+                                                        <i class="imoon imoon-ok"></i>
+                                                        <span class="text">Validar CUIT</span>
+                                                    </asp:LinkButton>
+
+                                                    <asp:UpdateProgress ID="UpdateProgress12" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPF">
+                                                        <ProgressTemplate>
+                                                            <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+
+                                <div class="form-horizontal pright20">
+                                    <div class="form-group">
+                                        <div class="col-sm-11" style="text-align: center;">
+                                            <span style="color: red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos están correctos en el perfil de TAD enviar mail a tramitesadistancia@buenosaires.gob.ar"</span>
                                         </div>
                                     </div>
                                 </div>
@@ -635,6 +659,9 @@
                                                                 <div id="Req_TipoNroDocFirPF" class="field-validation-error" style="display: none;">
                                                                     Debe ingresar el Tipo y Nro. de doc.
                                                                 </div>
+                                                                <div id="ValRepetido_txtNroDocumentoFirPF" class="field-validation-error" style="display: none;">
+                                                                    El DNI del firmante no puede ser igual al del titular.
+                                                                </div>
                                                             </div>
                                                             <asp:Label runat="server" class="control-label col-sm-2">Car&aacute;cter Legal (*):</asp:Label>
                                                             <div class="col-sm-4">
@@ -649,7 +676,42 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        <div class="form-group">
+                                                            <asp:Label runat="server" class="control-label col-sm-2">C.U.I.T. (*):</asp:Label>
+                                                            <div class="col-sm-2">
+                                                                <asp:TextBox ID="txtCuitFirPF" runat="server" MaxLength="11" Width="150 px" CssClass="form-control"></asp:TextBox>
+                                                                <div id="Req_CuitFirPF" class="field-validation-error" style="display: none;">
+                                                                    Debe ingresar el CUIT.
+                                                                </div>
+                                                                <div id="ValCantidad_CuitFirPF" class="field-validation-error" style="display: none;">
+                                                                    El cuit debe contener 11 dígitos sin guiones.
+                                                                </div>
+                                                                <div id="ValFormato_CuitFirPF" class="field-validation-error" style="display: none;">
+                                                                    El CUIT ingresado no corresponde a una Persona Física. Ej: 20012345673
+                                                                </div>
+                                                                <div id="ValDV_CuitFirPF" class="field-validation-error" style="display: none;">
+                                                                    El CUIT ingresado es inv&aacute;lido.
+                                                                </div>
+                                                                <div id="ValDNI_CuitFirPF" class="field-validation-error" style="display: none;">
+                                                                    El CUIT ingresado es distinto al DNI.
+                                                                </div>
+                                                            </div>
+                                                            <asp:UpdatePanel ID="updValidarCuitPF2" runat="server">
+                                                                <ContentTemplate>
+                                                                    <div class="form-group">
+                                                                        <asp:LinkButton ID="validarCuitOtroFirmante" runat="server" CssClass="btn btn-primary" OnClick="validarCuitOtroFirmante_Click" OnClientClick="return validarCuitOtroFirmante(this);">
+                                                        <i class="imoon imoon-ok"></i>
+                                                        <span class="text">Validar CUIT</span>
+                                                                        </asp:LinkButton>
+                                                                        <asp:UpdateProgress ID="UpdateProgress14" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPF2">
+                                                                            <ProgressTemplate>
+                                                                                <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
+                                                                            </ProgressTemplate>
+                                                                        </asp:UpdateProgress>
+                                                                    </div>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </div>
                                                     </div>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
@@ -735,8 +797,8 @@
                                         </div>
 
                                         <asp:Label ID="Label3" runat="server" class="control-label col-sm-2">C.U.I.T.(*):</asp:Label>
-                                        <div class="col-sm-4">
-                                            <asp:TextBox ID="txtCuitPJ" runat="server" MaxLength="11" Width="200px" rel="popover" data-placement="top" data-trigger="focus" data-content="Debe ingresar los 11 dígitos sin guiones" AutoPostBack="true" CssClass="form-control" Style="display: inline"></asp:TextBox>
+                                        <div class="col-sm-2">
+                                            <asp:TextBox ID="txtCuitPJ" runat="server" MaxLength="11" Width="150px" rel="popover" data-placement="top" data-trigger="focus" data-content="Debe ingresar los 11 dígitos sin guiones" AutoPostBack="true" CssClass="form-control" Style="display: inline"></asp:TextBox>
 
                                             <div id="Req_CuitPJ" class="field-validation-error" style="display: none;">
                                                 Debe ingresar el CUIT.
@@ -748,6 +810,24 @@
                                                 El CUIT ingresado es inv&aacute;lido.
                                             </div>
                                         </div>
+
+                                        <asp:UpdatePanel ID="updValidarCuitPJ" runat="server">
+                                            <ContentTemplate>
+                                                <div class="form-group">
+                                                    <asp:LinkButton ID="validarCuitPjButton" runat="server" CssClass="btn btn-primary" OnClick="validarCuitPjButton_Click" OnClientClick="return validarCuitPJ(this);">
+                                                        <i class="imoon imoon-ok"></i>
+                                                        <span class="text">Validar CUIT</span>
+                                                    </asp:LinkButton>
+
+                                                    <asp:UpdateProgress ID="UpdateProgress13" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPJ">
+                                                        <ProgressTemplate>
+                                                            <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+
                                     </div>
                                 </div>
 
@@ -768,7 +848,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
+                                <div class="form-horizontal pright20">
+                                    <div class="form-group">
+                                        <div class="col-sm-11" style="text-align: center;">
+                                            <span style="color: red">"Verificar que los datos declarados estén completos, en el caso de tratarse de una razón social debe estar declarado el tipo de sociedad. Si los datos que se cargan no están completos o presentan errores, puede editarlos aquí mismo o ingresar al perfil de TAD y verificar, llegado el caso, editarlo allí y volver a VALIDAR CUIT. Si los datos están correctos en el perfil de TAD enviar mail a tramitesadistancia@buenosaires.gob.ar"</span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1239,7 +1326,46 @@
                                             </asp:Panel>
                                         </div>
                                     </div>
+                                    <div class="form-horizontal pright10">
+                                        <div class="form-group">
+                                            <asp:Label runat="server" class="control-label col-sm-3">Cuit (*):</asp:Label>
+                                            <div class="col-sm-6">
+                                                <asp:TextBox ID="txtCuitFirPJ" runat="server" MaxLength="20" Width="260px" CssClass="form-control"></asp:TextBox>
+                                                <div id="Req_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    Debe ingresar el CUIT.
+                                                </div>
+                                                <div id="ValFormato_txtCuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El CUIT ingresado no corresponde a una Persona Física. Ej: 20012345673
+                                                </div>
 
+                                                <div id="ValCantidad_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El cuit debe contener 11 dígitos sin guiones.
+                                                </div>
+
+                                                <div id="ValDV_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El CUIT ingresado es inv&aacute;lido.
+                                                </div>
+                                                <div id="ValDNI_CuitFirPJ" class="field-validation-error" style="display: none;">
+                                                    El CUIT ingresado es distinto al DNI.
+                                                </div>
+                                            </div>
+                                            <asp:UpdatePanel ID="updValidarCuitPFPJ" runat="server">
+                                                <ContentTemplate>
+                                                    <div class="form-group">
+                                                        <asp:LinkButton ID="updValidarCuitOtroPJButton" runat="server" CssClass="btn btn-primary" OnClick="validarCuitOtroPJButton_Click" OnClientClick="return validarOtroPJCuitPJ(this);">
+                                                            <i class="imoon imoon-ok"></i>
+                                                            <span class="text">Validar CUIT</span>
+                                                        </asp:LinkButton>
+                                                        <asp:UpdateProgress ID="UpdateProgress17" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="updValidarCuitPFPJ">
+                                                            <ProgressTemplate>
+                                                                <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />
+                                                            </ProgressTemplate>
+                                                        </asp:UpdateProgress>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <asp:Label runat="server" class="control-label col-sm-3">E-mail (*):</asp:Label>
                                         <div class="col-sm-9">
@@ -1944,7 +2070,7 @@
             $("#<%: hid_tipopersona_eliminar.ClientID %>").val(tipopersona_eliminar);
             $("#<%: hid_id_persona_eliminar.ClientID %>").val(id_persona_eliminar);
             $("#<%: hid_tipo_titular.ClientID %>").val(tipo_titular);
-            
+
             $("#frmConfirmarEliminar").modal("show");
             return false;
         }
@@ -1975,6 +2101,136 @@
         function ocultarBotonesConfirmacion() {
             $("#pnlBotonesConfirmacionEliminar").hide();
             return false;
+        }
+
+        function validarCuitPF(btn) {
+            var ret = true;
+
+            var formatoCUIT = /[2]\d{10}$/;
+            $("#Req_CuitPF").hide();
+            $("#ValDV_CuitPF").hide();
+            $("#ValCantidad_CuitPF").hide();
+            $("#ValFormato_CuitPF").hide();
+
+            if ($.trim($("#<%: txtCuitPF.ClientID %>").val()).length == 0) {
+                $("#Req_CuitPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if ($.trim($("#<%: txtCuitPF.ClientID %>").val()).length < 11) {
+                $("#ValCantidad_CuitPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formatoCUIT.test($.trim($("#<%: txtCuitPF.ClientID %>").val()))) {
+                $("#ValFormato_CuitPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!ValidarCuitSinGuiones($("#<%: txtCuitPF.ClientID %>")[0])) {
+                $("#ValDV_CuitPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                $(btn).hide();
+            }
+
+            return ret;
+        }
+
+        function validarCuitOtroFirmante(btn) {
+            var ret = true;
+
+            var formatoCUIT = /[2]\d{10}$/;
+            $("#Req_CuitFirPF").hide();
+            $("#ValCantidad_CuitFirPF").hide();
+            $("#ValFormato_CuitFirPF").hide();
+            $("#ValDV_CuitFirPF").hide();
+            if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length == 0) {
+                $("#Req_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length < 11) {
+                $("#ValCantidad_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formatoCUIT.test($.trim($("#<%: txtCuitFirPF.ClientID %>").val()))) {
+                $("#ValFormato_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!ValidarCuitSinGuiones($("#<%: txtCuitFirPF.ClientID %>")[0])) {
+                $("#ValDV_CuitFirPF").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                $(btn).hide();
+            }
+
+            return ret;
+        }
+
+        function validarCuitPJ(btn) {
+            var ret = true;
+
+            var formatoCUIT = /[3]\d{10}$/;
+            $("#Req_CuitPJ").hide();
+            $("#ValDV_CuitPJ").hide();
+            $("#ValCantidad_CuitPJ").hide();
+            $("#ValFormato_CuitPJ").hide();
+
+            if ($.trim($("#<%: txtCuitPJ.ClientID %>").val()).length == 0) {
+                $("#Req_CuitPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if ($.trim($("#<%: txtCuitPJ.ClientID %>").val()).length != 11) {
+                $("#ValCantidad_CuitPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formatoCUIT.test($.trim($("#<%: txtCuitPJ.ClientID %>").val()))) {
+                $("#ValFormato_CuitPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!ValidarCuitSinGuiones($("#<%: txtCuitPJ.ClientID %>")[0])) {
+                $("#ValDV_CuitPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                $(btn).hide();
+            }
+
+            return ret;
+        }
+
+        function validarOtroPJCuitPJ(btn) {
+            var ret = true;
+
+            var formatoCUIT = /[2]\d{10}$/;
+            $("#Req_CuitFirPJ").hide();
+            $("#ValDV_CuitFirPJ").hide();
+            $("#ValCantidad_CuitFirPJ").hide();
+            $("#ValFormato_txtCuitFirPJ").hide();
+            if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length == 0) {
+                $("#Req_CuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if ($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()).length != 11) {
+                $("#ValCantidad_CuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!formatoCUIT.test($.trim($("#<%: txtCuitFirPJ.ClientID %>").val()))) {
+                $("#ValFormato_txtCuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+            else if (!ValidarCuitSinGuiones($("#<%: txtCuitFirPJ.ClientID %>")[0])) {
+                $("#ValDV_CuitFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+
+            if (ret) {
+                $(btn).hide();
+            }
+
+            return ret;
         }
 
 
@@ -2132,19 +2388,60 @@
                     $("#Req_ApellidoFirPF").css("display", "inline-block");
                     ret = false;
                 }
+                else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidoFirPF.ClientID %>").val()))) {
+                    $("#ValFormato_txtApellidoFirPF").css("display", "inline-block");
+                    ret = false;
+                }
+
                 if ($.trim($("#<%: txtNombresFirPF.ClientID %>").val()).length == 0) {
                     $("#Req_NombresFirPF").css("display", "inline-block");
                     ret = false;
                 }
-                if ($.trim($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val()).length == 0 ||
-                   $.trim($("#<%: txtNroDocumentoFirPF.ClientID %>").val()).length == 0) {
-                    $("#Req_TipoNroDocFirPF").css("display", "inline-block");
+                else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirPF.ClientID %>").val()))) {
+                    $("#ValFormato_txtNombresFirPF").css("display", "inline-block");
                     ret = false;
                 }
+
+                if ($.trim($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val()).length == 0 ||
+                    $.trim($("#<%: txtNroDocumentoFirPF.ClientID %>").val()).length == 0) {
+                    $("#Req_TipoNroDocFirPF").css("display", "inline-block");
+                    ret = false;
+                } else if (($.trim($("#<%: txtNroDocumentoFirPF.ClientID %>").val())) == ($.trim($("#<%: txtNroDocumentoPF.ClientID %>").val())) &&
+                    ($.trim($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val())) == ($.trim($("#<%: ddlTipoDocumentoPF.ClientID %>").val()))) {
+                    $("#ValRepetido_txtNroDocumentoFirPF").css("display", "inline-block");
+                    ret = false;
+                }
+
                 if ($.trim($("#<%: ddlTipoCaracterLegalFirPF.ClientID %>").val()).length == 0) {
                     $("#Req_TipoCaracterLegalFirPF").css("display", "inline-block");
                     ret = false;
                 }
+                if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length == 0) {
+                    $("#Req_CuitFirPF").css("display", "inline-block");
+                    ret = false;
+                }
+                else {
+                    if ($.trim($("#<%: txtCuitFirPF.ClientID %>").val()).length < 11) {
+                        $("#ValCantidad_CuitFirPF").css("display", "inline-block");
+                        ret = false;
+                    }
+
+                    else if (!formatoCUIT.test($.trim($("#<%: txtCuitFirPF.ClientID %>").val()))) {
+                        $("#ValFormato_CuitFirPF").css("display", "inline-block");
+                        ret = false;
+                    }
+                    else if (!ValidarCuitSinGuiones($("#<%: txtCuitFirPF.ClientID %>")[0])) {
+                        $("#ValDV_CuitFirPF").css("display", "inline-block");
+                        ret = false;
+                    }
+                    else if ($.trim($("#<%: ddlTipoDocumentoFirPF.ClientID %>").val()) == id_tipodoc_dni) {
+                        if (!ValidarDniCuit()) {
+                            $("#ValDNI_CuitFirPF").css("display", "inline-block");
+                            ret = false;
+                        }
+                    }
+                }
+
             }
 
             if (ret) {
@@ -2160,12 +2457,22 @@
             var ret = true;
 
             var formatoEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([.]\w+)*$/;
+            var formantoRazonSocial = /^([^0-9]*)$/;
+            var formatoCUIT = /[2]\d{10}$/;
 
             $("#Req_ApellidosFirPJ").hide();
             $("#Req_NombresFirPJ").hide();
             $("#Req_TipoNroDocFirPJ").hide();
             $("#Req_EmailFirPJ").hide();
             $("#Req_Formato_EmailFirPJ").hide();
+            $("#ValFormato_txtApellidosFirPJ").hide();
+            $("#ValFormato_txtNombresFirPJ").hide();
+            $("#Req_CuitFirPJ").hide();
+            $("#ValFormato_txtCuitFirPJ").hide();
+
+            $("#ValCantidad_CuitFirPJ").hide();
+            $("#ValDV_CuitFirPJ").hide();
+            $("#ValDNI_CuitFirPJ").hide();
 
 
             $("#<%: ValExiste_TipoNroDocFirPJ.ClientID %>").hide();
@@ -2179,14 +2486,23 @@
                 $("#Req_ApellidosFirPJ").css("display", "inline-block");
                 ret = false;
             }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtApellidosFirPJ.ClientID %>").val()))) {
+                $("#ValFormato_txtApellidosFirPJ").css("display", "inline-block");
+                ret = false;
+            }
+
 
             if ($.trim($("#<%: txtNombresFirPJ.ClientID %>").val()).length == 0) {
                 $("#Req_NombresFirPJ").css("display", "inline-block");
                 ret = false;
             }
+            else if (!formantoRazonSocial.test($.trim($("#<%: txtNombresFirPJ.ClientID %>").val()))) {
+                $("#ValFormato_txtNombresFirPJ").css("display", "inline-block");
+                ret = false;
+            }
 
             if ($.trim($("#<%: ddlTipoDocumentoFirPJ.ClientID %>").val()).length == 0 ||
-               $.trim($("#<%: txtNroDocumentoFirPJ.ClientID %>").val()).length == 0) {
+                $.trim($("#<%: txtNroDocumentoFirPJ.ClientID %>").val()).length == 0) {
                 $("#Req_TipoNroDocFirPJ").css("display", "inline-block");
                 ret = false;
             }
@@ -2209,6 +2525,8 @@
 
             return ret;
         }
+
+
 
         function validarAgregarPJ() {
 
