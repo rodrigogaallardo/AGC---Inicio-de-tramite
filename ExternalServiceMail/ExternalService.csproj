@@ -60,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApraSrvRest.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Class\AgipEntity.cs" />
     <Compile Include="Class\ApoderamientoEntity.cs" />
     <Compile Include="Class\EmailEntity.cs" />
