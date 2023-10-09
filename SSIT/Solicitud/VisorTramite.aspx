@@ -90,7 +90,7 @@
                                             <span class="bg-info-lt">
                                                 <span class="glyphicon imoon-ok fs48"></span>
                                             </span>
-                                            <p >Confirmar</p>
+                                            <p>Confirmar</p>
                                     </asp:LinkButton>
 
                                 </asp:Panel>
@@ -101,7 +101,7 @@
                                             <span class="bg-info-lt">
                                                 <span class="glyphicon imoon-ok fs48"></span>
                                             </span>
-                                            <p >Presentar</p>
+                                            <p>Presentar</p>
                                     </asp:LinkButton>
 
 
