@@ -822,7 +822,6 @@ namespace SSIT
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "showfrmError", "showfrmError();", true);
             }
         }
-
         protected async void btnPresentarTramite_Click(object sender, EventArgs e)
         {
             try
