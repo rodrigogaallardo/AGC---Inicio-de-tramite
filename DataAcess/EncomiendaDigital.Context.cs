@@ -839,5 +839,26 @@ namespace DataAcess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Transf_Solicitudes_Historial_LibradoUso_INSERT", id_solicitudParameter, fechaLibradoParameter, createDateParameter, createUserParameter);
         }
     
+        public virtual ObjectResult<string> Get_Token_Tad(Nullable<System.Guid> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Get_Token_Tad", userIdParameter);
+        }
+    
+        public virtual int Insert_Login_Tad_Token(Nullable<System.Guid> userId, string tokenJWT)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(System.Guid));
+    
+            var tokenJWTParameter = tokenJWT != null ?
+                new ObjectParameter("tokenJWT", tokenJWT) :
+                new ObjectParameter("tokenJWT", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Login_Tad_Token", userIdParameter, tokenJWTParameter);
+        }
     }
 }

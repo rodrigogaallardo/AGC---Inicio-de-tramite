@@ -15354,6 +15354,9 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Parameter Name="id_resultado" Type="int" Mode="In" />
           <Parameter Name="id_tramitetarea" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_Token_Tad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="GetIdCircuitoHAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="id_solicitud" Type="int" Mode="In" />
         </Function>
@@ -15368,6 +15371,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
         <Function Name="GetMixDistritoZonaySubZonaByTR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idSolicitud" Type="int" Mode="In" />
           <Parameter Name="result" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="Insert_Login_Tad_Token" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="tokenJWT" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="RubrosDepositosCN_Evaluar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_tramite" Type="int" Mode="In" />
@@ -22691,6 +22698,13 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="Login_Tad_Token" EntitySet="Login_Tad_Token" />
             <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
           </AssociationSet>
+          <FunctionImport Name="Get_Token_Tad" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Login_Tad_Token">
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+            <Parameter Name="tokenJWT" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -46116,6 +46130,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Get_Token_Tad" FunctionName="EncmiendaEntityes.Store.Get_Token_Tad" />
+          <FunctionImportMapping FunctionImportName="Insert_Login_Tad_Token" FunctionName="EncmiendaEntityes.Store.Insert_Login_Tad_Token" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
