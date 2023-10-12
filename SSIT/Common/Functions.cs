@@ -516,10 +516,16 @@ namespace SSIT.Common
             if (validar)
             {
                 Datos datosToken = authenticateAGIPProc.GetDatosTokenMiBA(tokenMIBA, ref sign);
-                LogError.Write(new Exception("Representados = " + datosToken.Representados));
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Representados = ");
+                foreach (var representado in datosToken.Representados)
+                {
+                    sb.AppendLine(representado.ToString());
+                }
+                LogError.Write(new Exception(sb.ToString()));
                 bool isCuitAValidarInAutenticado = datosToken.Autenticado != null &&
                     datosToken.Autenticado.Cuit == cuitAValidar;
-                LogError.Write(new Exception("isCuitAValidarInAutenticado = " + isCuitAValidarInAutenticado));
+                LogError.Write(new Exception($"isCuitAValidarInAutenticado = { isCuitAValidarInAutenticado}"));
                 List<Representado> representados = datosToken.Representados;
 
                 bool isCuitRepresentadoInList = false;
@@ -536,22 +542,26 @@ namespace SSIT.Common
                 LogError.Write(new Exception("isCuitRepresentadoInList = " + isCuitRepresentadoInList));
                 if (isCuitAValidarInAutenticado && isCuitRepresentadoInList)
                 {
+                    cuitsRelacionados.result = new Result();
                     cuitsRelacionados.result.msg = true;
                     cuitsRelacionados.status = "Los cuits estan relacionados";
                     cuitsRelacionados.statusCode = 200;
+                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}"));
                 }
                 else
                 {
+                    cuitsRelacionados.result = new Result();
                     cuitsRelacionados.result.msg = false;
                     cuitsRelacionados.status = "Los cuits NO estan relacionados";
                     cuitsRelacionados.statusCode = 200;
+                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}"));
                 }
             }
             else
             {
                 cuitsRelacionados.result.msg = true;
                 cuitsRelacionados.status = "Se salteo la validacion";
-                cuitsRelacionados.statusCode = 200;
+                cuitsRelacionados.statusCode = 100;
             }
                 return cuitsRelacionados;
         }

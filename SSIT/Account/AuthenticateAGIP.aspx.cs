@@ -117,6 +117,11 @@ namespace SSIT.Account
         public string Documento { get; set; }
         [XmlAttribute(AttributeName = "elegido")]
         public string Elegido { get; set; }
+
+        public override string ToString()
+        {
+            return $"Cuit: {Cuit}, TipoRepresentacion: {TipoRepresentacion}, TipoDocumento: {TipoDocumento}, Documento: {Documento}";
+        }
     }
 
     [XmlRoot(ElementName = "representados")]

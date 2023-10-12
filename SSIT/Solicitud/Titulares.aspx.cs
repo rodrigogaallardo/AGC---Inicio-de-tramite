@@ -2069,6 +2069,7 @@ namespace SSIT
                 {
                     //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
                     string tokenJWT = authenticateAGIPProc.GetTokenTAD(userid);
+                    LogError.Write(new Exception($"token TAD, {tokenJWT} + userid + {userid}"));
                     if (!tokenJWT.IsNullOrWhiteSpace() && !tokenJWT.Contains("expirado"))
                     {
                         var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
