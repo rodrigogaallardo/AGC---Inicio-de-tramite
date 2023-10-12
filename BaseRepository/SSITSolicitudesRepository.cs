@@ -526,27 +526,53 @@ namespace BaseRepository
 
             var query = (from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
                          join calificacion in _unitOfWork.Db.SGI_Tarea_Calificar on tth.id_tramitetarea equals calificacion.id_tramitetarea
-                         where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                         join solicitud in _unitOfWork.Db.SSIT_Solicitudes on tth.id_solicitud equals solicitud.id_solicitud
+                         join tt in _unitOfWork.Db.SGI_Tramites_Tareas on tth.id_tramitetarea equals tt.id_tramitetarea
+                         join tskr in _unitOfWork.Db.ENG_Tareas on tt.id_tarea equals tskr.id_tarea
+                         join cir in _unitOfWork.Db.ENG_Circuitos on tskr.id_circuito equals cir.id_circuito
+                         where  tth.id_solicitud == idSolicitud 
+                                && calificacion.Observaciones_LibradoUso != null 
+                                &&(cir.id_circuito == (int)Constantes.ENG_Circuitos.ESCU_HP
+                                || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2
+                                || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2_AMP)
                          select new
                          {
                             calificacion.Observaciones_LibradoUso,
                             calificacion.CreateDate
                          }).Union(from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
                                   join calificacion in _unitOfWork.Db.SGI_Tarea_Revision_Gerente on tth.id_tramitetarea equals calificacion.id_tramitetarea
-                                  where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                                  join solicitud in _unitOfWork.Db.SSIT_Solicitudes on tth.id_solicitud equals solicitud.id_solicitud
+                                  join tt in _unitOfWork.Db.SGI_Tramites_Tareas on tth.id_tramitetarea equals tt.id_tramitetarea
+                                  join tskr in _unitOfWork.Db.ENG_Tareas on tt.id_tarea equals tskr.id_tarea
+                                  join cir in _unitOfWork.Db.ENG_Circuitos on tskr.id_circuito equals cir.id_circuito
+                                  where tth.id_solicitud == idSolicitud 
+                                  && calificacion.Observaciones_LibradoUso != null
+                                  && calificacion.Observaciones_LibradoUso != null
+                                    && (cir.id_circuito == (int)Constantes.ENG_Circuitos.ESCU_HP
+                                    || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2
+                                    || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2_AMP)
                                   select new
                                   {
                                       calificacion.Observaciones_LibradoUso,
                                       calificacion.CreateDate
                                   }).Union(from tth in _unitOfWork.Db.SGI_Tramites_Tareas_HAB
                                            join calificacion in _unitOfWork.Db.SGI_Tarea_Revision_SubGerente on tth.id_tramitetarea equals calificacion.id_tramitetarea
-                                           where tth.id_solicitud == idSolicitud && calificacion.Observaciones_LibradoUso != null
+                                           join solicitud in _unitOfWork.Db.SSIT_Solicitudes on tth.id_solicitud equals solicitud.id_solicitud
+                                           join tt in _unitOfWork.Db.SGI_Tramites_Tareas on tth.id_tramitetarea equals tt.id_tramitetarea
+                                           join tskr in _unitOfWork.Db.ENG_Tareas on tt.id_tarea equals tskr.id_tarea
+                                           join cir in _unitOfWork.Db.ENG_Circuitos on tskr.id_circuito equals cir.id_circuito
+                                           where tth.id_solicitud == idSolicitud 
+                                           && calificacion.Observaciones_LibradoUso != null
+                                           && calificacion.Observaciones_LibradoUso != null
+                                            && (cir.id_circuito == (int)Constantes.ENG_Circuitos.ESCU_HP
+                                            || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2
+                                            || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2_AMP)
                                            select new
                                            {
                                                calificacion.Observaciones_LibradoUso,
                                                calificacion.CreateDate
                                            }).OrderByDescending(result => result.CreateDate).FirstOrDefault();
-
+            
             if (query != null)
             {
                 observacion = query.Observaciones_LibradoUso;
