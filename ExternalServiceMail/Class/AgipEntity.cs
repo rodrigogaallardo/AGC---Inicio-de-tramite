@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,6 +58,7 @@ namespace ExternalService.Class
 
     public class CuitsRepresentadosPOSTRest
     {
+        [JsonProperty("code")]
         public int statusCode { get; set; }
         public bool? success { get; set; }
         public List<Representado> representados { get; set; }

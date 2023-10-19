@@ -132,13 +132,22 @@ namespace ExternalService
                     _host = "http://" + hostParametro;
                 else
                     _host = hostParametro;
+                long cuitL = 0;
+                try
+                {
+                    cuitL = long.Parse(cuit);
+                }
+                catch (FormatException fe)
+                {
+                    LogError.Write(fe, $"No se puede convertir el cuit a un long '{cuit}'");
+                }
 
                 var client = new RestClient(_host);
                 client.ClearHandlers();
                 client.AddHandler("application/json", new JsonDeserializer());
                 var request = new RestRequest(Method.POST);
                 request.AddParameter("method", serviceParametro);
-                request.AddParameter("cuitAValidar", cuit); 
+                request.AddParameter("cuit", cuitL); 
                 request.AddHeader("Authorization", "Bearer " + _token.ToString());
                 IRestResponse response = client.Execute(request);
                 LogError.Write(new Exception("Client: " + Funciones.GetDataFromClient(client)));
@@ -146,10 +155,21 @@ namespace ExternalService
                 LogError.Write(new Exception("Response: " + Funciones.GetDataFromResponse(response)));
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    throw new Exception(string.Format("No se ha podido verificar la existencia de representación de servicios: {0} - {1}", response.StatusCode, response.Content));
+                    Exception ex = new Exception(string.Format("No se ha podido verificar la existencia de representación de servicios: {0} - {1}", response.StatusCode, response.Content));
+                    LogError.Write(ex);
+                    throw ex;
                 }
 
-                CuitsRepresentadosPOSTRest ret = JsonConvert.DeserializeObject<CuitsRepresentadosPOSTRest>(response.Content);
+                CuitsRepresentadosPOSTRest ret = new CuitsRepresentadosPOSTRest();
+                try
+                {
+                    ret = JsonConvert.DeserializeObject<CuitsRepresentadosPOSTRest>(response.Content);
+                }
+                catch (Exception ex)
+                {
+                    LogError.Write(ex);
+                    throw ex;
+                }
 
                 if (ret.statusCode != 200)
                     throw new Exception("Error al Validar CUITs con AGIP: " + ret.statusCode + ": " + ret.message);
