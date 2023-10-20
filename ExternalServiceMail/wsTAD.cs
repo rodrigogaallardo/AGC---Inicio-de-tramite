@@ -128,6 +128,8 @@ namespace ExternalService
 
         public static PersonaTadEntity GetPersonaTAD(string url, string cuit)
         {
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             RestClient clientrest = new RestClient
             {
                 BaseUrl = new Uri(url)
