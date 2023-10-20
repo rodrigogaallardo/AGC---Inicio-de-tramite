@@ -192,12 +192,38 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             //el Btn Ingresar A SIPSA y Buscar solo se muestran cuando la sol esta en estado datos Confirmados y Observado
             if (MostrarPanelesCAA.Contains(sol.IdEstado))
             {
-                updBuscarCAA.Visible = true;
-                DivBtnSIPSA.Visible = true;
+                bool CondicionExpress = false;
+                foreach (var _encomiendas in lst_encomiendas)
+                {
+                    foreach (var rubrosCN in _encomiendas.EncomiendaRubrosCNDTO)
+                    {
+                        if (rubrosCN.RubrosDTO.CondicionExpress == true)
+                        {
+                            CondicionExpress = true;
+                        }
+                        else
+                        {
+                            CondicionExpress = false;
+                            goto Found;
+                        }
+                    }
+                }
+
+            Found:
+                if (CondicionExpress == true)
+                {
+                    DivBtnSIPSAExpress.Visible = true;
+                }
+                else
+                {
+                    updBuscarCAA.Visible = true;
+                    DivBtnSIPSA.Visible = true;
+                }
             }
-            
+
+
             grdArchivosCAA.Visible = true;
-            
+
             List<int> estados = new List<int>();
             estados.Add((int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo);
             estados.Add((int)Constantes.Encomienda_Estados.Vencida);
@@ -225,7 +251,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         {
                             pnlBuscarCAA.Visible = true;
                         }
-                    } 
+                    }
                 }
                 // Llena los CAAs de acuerdo a las encomiendas vinculadas a la solicitud.
                 // ---------------------------------------------------------------------
@@ -251,7 +277,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 DivBtnSIPSAExpress.Visible = false;
                 if ((_caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.SujetoaCategorizacion ||
                      _caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.ConRelevanteEfecto) &&
-                     _caaAct.id_estado          != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
+                     _caaAct.id_estado != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
                 {
                     //pnlInfoSIPSA.Visible = id_solicitud > Constantes.SOLICITUDES_NUEVAS_MAYORES_A;
                     //pnlInfo.Visible = false;
@@ -263,12 +289,12 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 var lstArchivosCAA = new List<CAA_ArchivosDTO>();
                 EncomiendaDTO Encomienda = encBL.Single(id_encomienda);
                 EncomiendaDocumentosAdjuntosBL encDocBL = new EncomiendaDocumentosAdjuntosBL();
-                
+
                 int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
                 var ListDocAdj = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).ToList();
                 //antes deberia recorrer la lista de encomiendas y despues este foreach
                 //o quiza enta bien solamente tomar la ultima aprobada
-                if(_caaAct != null)
+                if (_caaAct != null)
                 {
                     foreach (var docAdj in ListDocAdj)
                     {
@@ -292,7 +318,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         lstArchivosCAA.Add(item);
                     }
                 }
-                
+
                 grdArchivosCAA.DataSource = lstArchivosCAA;
                 grdArchivosCAA.DataBind();
             }
@@ -426,7 +452,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             switch (response.id_tipocertificado)
             {
                 case 1:
-                    id_tipocertificado = (int)TipoCertificadoCAA.sre;   
+                    id_tipocertificado = (int)TipoCertificadoCAA.sre;
                     break;
                 case 2:
                     id_tipocertificado = (int)TipoCertificadoCAA.sreCC;
@@ -446,7 +472,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
-            subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado);  
+            subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado);
             //aca deberia volver a correr el load asi muestra el archivo
             return subioFile;
         }
@@ -473,7 +499,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
                     Response.Redirect(url);
                 }
-                
+
             }
             else
             {
