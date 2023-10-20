@@ -876,6 +876,7 @@
     </Compile>
     <Compile Include="Tramites\Habilitacion\Rubros.aspx.cs">
       <DependentUpon>Rubros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Tramites\Habilitacion\Rubros.aspx.designer.cs">
       <DependentUpon>Rubros.aspx</DependentUpon>

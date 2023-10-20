@@ -132,22 +132,14 @@ namespace ExternalService
                     _host = "http://" + hostParametro;
                 else
                     _host = hostParametro;
-                long cuitL = 0;
-                try
-                {
-                    cuitL = long.Parse(cuit);
-                }
-                catch (FormatException fe)
-                {
-                    LogError.Write(fe, $"No se puede convertir el cuit a un long '{cuit}'");
-                }
+
 
                 var client = new RestClient(_host);
                 client.ClearHandlers();
                 client.AddHandler("application/json", new JsonDeserializer());
                 var request = new RestRequest(Method.POST);
                 request.AddParameter("method", serviceParametro);
-                request.AddParameter("cuit", cuitL); 
+                request.AddParameter("cuit", cuit); 
                 request.AddHeader("Authorization", "Bearer " + _token.ToString());
                 IRestResponse response = client.Execute(request);
                 LogError.Write(new Exception("Client: " + Funciones.GetDataFromClient(client)));
