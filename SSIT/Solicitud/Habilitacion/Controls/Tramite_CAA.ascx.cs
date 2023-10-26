@@ -481,14 +481,27 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         {
             EncomiendaDTO Encomienda = encBL.Single(id_encomienda);
             string codSeguridad = Encomienda.CodigoSeguridad;
+            int CAA_id = 0;
             pnlErrorBuscarCAA.Visible = false;
             lblErrorBuscarCAA.Text = "";
             lstMensajesCAA.ClearSelection();
             List<string> lstErr = new List<string>();
-            GenerarCAAAutoResponse rCaa = await GenerarCAAAutomaticos(id_encomienda, codSeguridad);
-            int CAA_id = 0;
-            if (rCaa != null)
-                CAA_id = rCaa.id_solicitud_caa;
+            //Antes de generar un CAA reviso si la encomienda ya tiene un CAA
+            int[] encomiendas = { id_encomienda};
+            List<GetCAAsByEncomiendasResponse> lstRCAAenc = await GetCAAsByEncomiendas(encomiendas);
+            if (lstRCAAenc != null && lstRCAAenc.Count > 0)
+            {
+                CAA_id = lstRCAAenc.FirstOrDefault().id_solicitud;
+            }
+            else
+            {
+                //Si la encomienda no tiene un CAA, entonces lo creo
+                GenerarCAAAutoResponse rCaa = await GenerarCAAAutomaticos(id_encomienda, codSeguridad);
+
+                if (rCaa != null)
+                    CAA_id = rCaa.id_solicitud_caa;
+            }
+            
             if (CAA_id > 0)
             {
                 GetCAAResponse caa = await GetCAA(CAA_id);
@@ -508,8 +521,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 DivBtnSIPSA.Visible = true;
                 DivBtnSIPSAExpress.Visible = false;
 
-                lstErr.Add(rCaa.ErrorDesc);
-                lstMensajesCAA.DataSource = lstErr;
+                //lstErr.Add(rCaa.ErrorDesc);
+                //lstMensajesCAA.DataSource = lstErr;
                 lstMensajesCAA.DataBind();
             }
             generandoCAAgif.Style["display"] = "none";
