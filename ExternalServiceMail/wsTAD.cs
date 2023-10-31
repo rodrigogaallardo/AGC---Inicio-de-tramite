@@ -85,6 +85,9 @@ namespace ExternalService
         public static void actualizarTramite(string _urlESB, int idTramite, int idSolicitud, string numeroExpediente, string tipoTramite, string ubicacion)
         {
             string uriString = _urlESB + "/tramites/" + idTramite;
+            //ignorar validacion de https en ambiente de prueba
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             RestClient clientrest = new RestClient();
             clientrest.BaseUrl = new Uri(uriString);

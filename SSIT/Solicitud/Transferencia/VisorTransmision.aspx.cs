@@ -805,7 +805,7 @@ namespace SSIT
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
-                        usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
+                        usuDTO.CUIT, (int)TipoParticipante.Titular, true, Constantes.Sistema,
                         usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
 
                 //alta titulares complementarios
