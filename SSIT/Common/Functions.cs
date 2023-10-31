@@ -6,6 +6,7 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Web.Security;
 using static StaticClass.Constantes;
@@ -225,6 +226,9 @@ namespace SSIT.Common
         {
             MembershipUser usuario = Membership.GetUser();
             ParametrosBL parametrosBL = new ParametrosBL();
+            //ignorar validacion de https en ambiente de prueba
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             string _urlESB = parametrosBL.GetParametroChar("Url.Service.ESB");
             string trata = parametrosBL.GetParametroChar("Trata.Habilitacion");
             if (!sol.EsECI)
@@ -308,20 +312,23 @@ namespace SSIT.Common
             var cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit);
             if (cambios.Any())
             {
+                bool tieneSolicitante = false;
                 // baja
                 foreach (var item in lstParticipantesGP)
                 {
                     //desvincular todos los  participantes, menos el solicitante
-                    if(item.idPerfil != (int)TipoParticipante.Solicitante)
+                    if (item.idPerfil != (int)TipoParticipante.Solicitante)
                     {
                         wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
                     }
+                    else
+                        tieneSolicitante = true;
                 }
-
                 // alta solicitante/apoderado
-                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
-                solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
-                solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
+                if(!tieneSolicitante)
+                    wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
+                    usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
+                    usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
@@ -405,15 +412,33 @@ namespace SSIT.Common
                                     .Where(x => x.cuit != titular.cuit)
                                     .Select(x => x.cuit)
                                     .ToList();
+            //esto para arreglar el backlog de error22
+            if (solicitante == null)
+            {
+                Exception ex22 = new Exception(
+                    $"Debe tener solicitante para poder tramitar, titular {titular}," +
+                    $"Solicitud : {sol.IdSolicitud}, " +
+                    $"idTad : {sol.idTAD}, " +
+                    $"usuarioSSIT : {usuDTO.UserName}"
+                    );
+                LogError.Write(ex22);
+                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, "",
+                usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
+                usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+            }
 
             var cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit);
             if (cambios.Any())
             {
+                bool tieneSolicitante = false;
                 // baja
                 foreach (var item in lstParticipantesGP)
                 {
-                    //desvincular todos los  participantes                    
-                    wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                    //desvincular todos los  participantes, menos el solicitante
+                    if (item.idPerfil != (int)TipoParticipante.Solicitante)
+                        wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                    else
+                        tieneSolicitante = true;
                 }
 
                 // alta solicitante/apoderado
