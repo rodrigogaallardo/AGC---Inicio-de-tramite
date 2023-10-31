@@ -40,7 +40,9 @@ namespace ExternalService
         {
             int idTad = 0;
             string uriString = _urlESB + "/tiposTramite/" + codTrata + "/tramites";
-
+            //ignorar validacion de https en ambiente de prueba
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             RestClient clientrest = new RestClient();
             clientrest.BaseUrl = new Uri(uriString);
             RestRequest request = new RestRequest();
