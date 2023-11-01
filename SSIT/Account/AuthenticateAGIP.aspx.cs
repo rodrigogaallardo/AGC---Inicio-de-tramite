@@ -1,4 +1,5 @@
-﻿using SSIT.App_Components;
+﻿using ExternalService.Class;
+using SSIT.App_Components;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -203,7 +204,7 @@ namespace SSIT.Account
         public string tipoPersona { get; set; }
         public int? valiRenaper { get; set; }
         public Terminosycondiciones terminosYCondiciones { get; set; }
-        public string sistemaConsumidor { get; set; }
+        public SistemaConsumidor sistemaConsumidor { get; set; }
         public string baId { get; set; }
         public bool? habilitadaVista360 { get; set; }
     }
