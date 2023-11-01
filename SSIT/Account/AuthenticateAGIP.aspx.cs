@@ -160,7 +160,7 @@ namespace SSIT.Account
         public bool permisoHabilitacionesAGC { get; set; }
         public bool habilitadoNefGenerales { get; set; }
         public bool habilitadoNefConfidenciales { get; set; }
-        public bool habilitadaVista360 { get; set; }
+        public bool? habilitadaVista360 { get; set; }
         public Persona apoderado { get; set; }
         public Persona poderdante { get; set; }
         public Persona solicitante { get; set; }
@@ -205,7 +205,7 @@ namespace SSIT.Account
         public Terminosycondiciones terminosYCondiciones { get; set; }
         public string sistemaConsumidor { get; set; }
         public string baId { get; set; }
-        public bool habilitadaVista360 { get; set; }
+        public bool? habilitadaVista360 { get; set; }
     }
 
     public class Terminosycondiciones
