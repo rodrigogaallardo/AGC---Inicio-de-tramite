@@ -152,10 +152,10 @@ namespace SSIT.Account
         public bool permisoMisDatos { get; set; }
         public bool permisoApoderamiento { get; set; }
         public bool permisoAllTipoTramite { get; set; }
-        public long fechaAlta { get; set; }
-        public long fechaBaja { get; set; }
-        public long fechaVencimiento { get; set; }
-        public long fechaRechazo { get; set; }
+        public long? fechaAlta { get; set; }
+        public long? fechaBaja { get; set; }
+        public long? fechaVencimiento { get; set; }
+        public long? fechaRechazo { get; set; }
         public bool permisoNotifExterna { get; set; }
         public bool permisoHabilitacionesAGC { get; set; }
         public bool habilitadoNefGenerales { get; set; }
@@ -174,11 +174,11 @@ namespace SSIT.Account
         public Persona persona { get; set; }
         public string calle { get; set; }
         public string altura { get; set; }
-        public object piso { get; set; }
-        public object depto { get; set; }
+        public string piso { get; set; }
+        public string depto { get; set; }
         public string codigoPostal { get; set; }
-        public object telefono { get; set; }
-        public object observaciones { get; set; }
+        public string telefono { get; set; }
+        public string observaciones { get; set; }
 
     }
 
@@ -230,11 +230,11 @@ namespace SSIT.Account
         public string usuarioIniciador { get; set; }
         public string usuarioCreacion { get; set; }
         public long? fechaAlta { get; set; }
-        public object usuarioModificacion { get; set; }
+        public string usuarioModificacion { get; set; }
         public long? fechaModificacion { get; set; }
         public bool? esEmbebido { get; set; }
         public bool? firmaConToken { get; set; }
-        public object ip { get; set; }
+        public string ip { get; set; }
         public bool? esFirmaConjunta { get; set; }
         public object documentoTipoFirma { get; set; }
         public object textoLibreLimite { get; set; }
