@@ -1,4 +1,5 @@
-﻿using SSIT.App_Components;
+﻿using ExternalService.Class;
+using SSIT.App_Components;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -152,10 +153,10 @@ namespace SSIT.Account
         public bool permisoMisDatos { get; set; }
         public bool permisoApoderamiento { get; set; }
         public bool permisoAllTipoTramite { get; set; }
-        public long fechaAlta { get; set; }
-        public long fechaBaja { get; set; }
-        public long fechaVencimiento { get; set; }
-        public long fechaRechazo { get; set; }
+        public long? fechaAlta { get; set; }
+        public long? fechaBaja { get; set; }
+        public long? fechaVencimiento { get; set; }
+        public long? fechaRechazo { get; set; }
         public bool permisoNotifExterna { get; set; }
         public bool permisoHabilitacionesAGC { get; set; }
         public bool habilitadoNefGenerales { get; set; }
@@ -203,7 +204,7 @@ namespace SSIT.Account
         public string tipoPersona { get; set; }
         public int? valiRenaper { get; set; }
         public Terminosycondiciones terminosYCondiciones { get; set; }
-        public string sistemaConsumidor { get; set; }
+        public SistemaConsumidor sistemaConsumidor { get; set; }
         public string baId { get; set; }
         public bool? habilitadaVista360 { get; set; }
     }
