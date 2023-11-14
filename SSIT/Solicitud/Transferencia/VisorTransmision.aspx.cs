@@ -805,8 +805,8 @@ namespace SSIT
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
-                        usuDTO.CUIT, (int)TipoParticipante.Titular, true, Constantes.Sistema,
-                        usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+                        titular.cuit, titular.idPerfil, titular.idPerfil == idPerfilSol, Constantes.Sistema,
+                        titular.Nombres, titular.Apellido, titular.RazonSocial);
 
                 //alta titulares complementarios
                 foreach (var item in lstParticipantesSSIT)
@@ -814,7 +814,8 @@ namespace SSIT
                     if (listTitularesComplementariosCuit.Contains(item.cuit) && item.idPerfil != idPerfilSol)
                     {
                         wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
-                                item.cuit, (int)TipoParticipante.TitularComplementario, item.idPerfil == idPerfilSol, Constantes.Sistema, item.Nombres, item.Apellido, item.RazonSocial);
+                                item.cuit, (int)TipoParticipante.TitularComplementario, item.idPerfil == idPerfilSol,
+                                Constantes.Sistema, item.Nombres, item.Apellido, item.RazonSocial);
                     }
                 }
             }
