@@ -27,5 +27,6 @@ namespace AuthenticationAGIP.Entity
     
         public virtual DbSet<aspnet_Users> aspnet_Users { get; set; }
         public virtual DbSet<Parametros> Parametros { get; set; }
+        public virtual DbSet<Cargos> Cargos { get; set; }
     }
 }

@@ -182,6 +182,9 @@
     <Compile Include="Calles_Excepcion.cs">
       <DependentUpon>EncomiendaDigital.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cargos.cs">
+      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
+    </Compile>
     <Compile Include="Categorias.cs">
       <DependentUpon>EncomiendaDigital.tt</DependentUpon>
     </Compile>

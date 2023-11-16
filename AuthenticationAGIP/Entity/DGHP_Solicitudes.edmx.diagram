@@ -5,7 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f838a4f6e14044d7b369f9e02d00a985" Name="Diagram1">
-        </Diagram>
+        <EntityTypeShape EntityType="DGHP_SolicitudesModel.Cargos" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

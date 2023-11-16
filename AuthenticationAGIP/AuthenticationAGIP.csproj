@@ -294,6 +294,9 @@
     <Compile Include="Entity\aspnet_Users.cs">
       <DependentUpon>DGHP_Solicitudes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Cargos.cs">
+      <DependentUpon>DGHP_Solicitudes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\DGHP_Solicitudes.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
