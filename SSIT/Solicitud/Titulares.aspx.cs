@@ -128,6 +128,7 @@ namespace SSIT
                 CargarTiposDeIngresosBrutos();
                 CargarTiposDeCaracterLegal();
                 CargarProvincias();
+                CargarCargos();
                 CargarDatosTitulares(id_solicitud);
 
                 updAgregarPersonaFisica.Update();
@@ -227,6 +228,19 @@ namespace SSIT
 
         }
 
+        private void CargarCargos()
+        {
+            CargosBL cargosBL = new CargosBL();
+            var lstCargos = cargosBL.GetCargos();
+
+            ddlCargos_FirPJ.DataValueField = "id_cargo";
+            ddlCargos_FirPJ.DataTextField = "nombre";
+            ddlCargos_FirPJ.DataSource = lstCargos;
+            ddlCargos_FirPJ.DataBind();
+            ddlCargos_FirPJ.Items.Insert(0, string.Empty);
+
+            
+        }
         private void CargarTiposDeDocumentoPersonal()
         {
             TipoDocumentoPersonalBL tipoDocumentoPersonalBL = new TipoDocumentoPersonalBL();
@@ -1030,13 +1044,13 @@ namespace SSIT
             txtTorrePJ.Text = "";
             txtCPPJ.Text = "";
             txtTelefonoPJ.Text = "";
-            txtCargoFirPJ.Text = "";
             txtEmailPJ.Text = "";
             ValExiste_TitularPJ.Style["display"] = "none";
 
             ddlTipoSociedadPJ.ClearSelection();
             ddlProvinciaPJ.ClearSelection();
             ddlTipoIngresosBrutosPJ.ClearSelection();
+            ddlCargos_FirPJ.ClearSelection();
             CargarLocalidades(ddlProvinciaPJ, ddlLocalidadPJ);
 
             DataTable dt = dtFirmantesCargados();
@@ -1118,7 +1132,7 @@ namespace SSIT
             }
             else
             {
-                txtCargoFirPJ.Text = "";
+                ddlCargos_FirPJ.ClearSelection();
                 hid_CargosFir_seleccionado.Value = "";
                 rowCargoFirmantePJ.Style["display"] = "none";
             }
@@ -1149,7 +1163,7 @@ namespace SSIT
             txtNroDocumentoFirPJ.Text = "";
             txtEmailFirPJ.Text = "";
             ddlTipoCaracterLegalFirPJ.ClearSelection();
-            txtCargoFirPJ.Text = "";
+            ddlCargos_FirPJ.ClearSelection();
             rowCargoFirmantePJ.Style["display"] = "none";
             Req_CargoFirPJ.Style["display"] = "none";
             ValExiste_TipoNroDocFirPJ.Style["display"] = "none";
@@ -1183,7 +1197,7 @@ namespace SSIT
                 {
                     dt.Rows.Add(txtApellidosFirPJ.Text.Trim(), txtNombresFirPJ.Text.Trim(), ddlTipoDocumentoFirPJ.SelectedItem.Text.Trim(), txtNroDocumentoFirPJ.Text.Trim(), txtCuitFirPJ.Text.Trim(),
                                 ddlTipoCaracterLegalFirPJ.SelectedItem.Text, int.Parse(ddlTipoDocumentoFirPJ.SelectedValue), txtEmailFirPJ.Text.Trim(), int.Parse(ddlTipoCaracterLegalFirPJ.SelectedValue),
-                                txtCargoFirPJ.Text.Trim(), dt.Rows.Count);
+                               int.Parse(ddlCargos_FirPJ.SelectedValue), dt.Rows.Count);
 
                     if (Validation)
                         Validation = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
@@ -1221,7 +1235,7 @@ namespace SSIT
                     dt.Rows[rowindex]["IdTipoDocPersonal"] = int.Parse(ddlTipoDocumentoFirPJ.SelectedValue);
                     dt.Rows[rowindex]["email"] = txtEmailFirPJ.Text.Trim();
                     dt.Rows[rowindex]["id_tipocaracter"] = int.Parse(ddlTipoCaracterLegalFirPJ.SelectedValue);
-                    dt.Rows[rowindex]["cargo_firmante_pj"] = txtCargoFirPJ.Text.Trim();
+                    dt.Rows[rowindex]["cargo_firmante_pj"] = ddlCargos_FirPJ.SelectedValue.Trim();
 
 
                     if (Validation)
@@ -1259,9 +1273,9 @@ namespace SSIT
             ddlTipoDocumentoFirPJ.SelectedValue = dr["IdTipoDocPersonal"].ToString();
             ddlTipoCaracterLegalFirPJ.SelectedValue = dr["id_tipocaracter"].ToString();
 
-            txtCargoFirPJ.Text = dr["cargo_firmante_pj"].ToString();
+            ddlCargos_FirPJ.SelectedValue = dr["cargo_firmante_pj"].ToString();
 
-            if (!(String.IsNullOrWhiteSpace(txtCargoFirPJ.Text)))
+            if (!(String.IsNullOrWhiteSpace(ddlCargos_FirPJ.SelectedValue)))
             {
                 rowCargoFirmantePJ.Style["display"] = "block";
             }
@@ -2032,7 +2046,7 @@ namespace SSIT
             txtTorrePJ.Enabled = enabled;
             txtCPPJ.Enabled = enabled;
             txtTelefonoPJ.Enabled = enabled;
-            txtCargoFirPJ.Enabled = enabled;
+            ddlCargos_FirPJ.Enabled = enabled;
             txtEmailPJ.Enabled = enabled;
             ddlTipoSociedadPJ.Enabled = enabled;
             ddlTipoIngresosBrutosPJ.Enabled = enabled;

@@ -110,6 +110,7 @@
     <Compile Include="Ley962TiposDeDocumentosRequeridosRepository.cs" />
     <Compile Include="MailsRepository.cs" />
     <Compile Include="ProfesionalHistorialRepository.cs" />
+    <Compile Include="CargosRepository.cs" />
     <Compile Include="RelRubrosSolicitudesNuevasRepository.cs" />
     <Compile Include="RubrosCNATAnteriorRepository.cs" />
     <Compile Include="RubrosCNRepository.cs" />

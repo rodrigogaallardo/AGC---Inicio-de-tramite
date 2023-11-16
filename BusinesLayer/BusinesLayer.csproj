@@ -98,6 +98,7 @@
     <Compile Include="Implementation\PagosBoletasBL.cs" />
     <Compile Include="Implementation\PDFBL.cs" />
     <Compile Include="Implementation\PermisosBL.cs" />
+    <Compile Include="Implementation\CargosBL.cs" />
     <Compile Include="Implementation\RelRubrosCNSolicitudesNuevasBL.cs" />
     <Compile Include="Implementation\EncomiendaRubrosCNATAnteriorBL.cs" />
     <Compile Include="Implementation\RubrosCNBL.cs" />

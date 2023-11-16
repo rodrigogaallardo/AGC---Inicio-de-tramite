@@ -68,6 +68,7 @@
     <Compile Include="IGrupoConsejosBL.cs" />
     <Compile Include="ILey962TiposDeDocumentosRequeridosBL.cs" />
     <Compile Include="IMailsBL.cs" />
+    <Compile Include="ICargosBL.cs" />
     <Compile Include="IRelRubrosCNSolicitudesNuevasBL.cs" />
     <Compile Include="IEncomiendaRubrosCNATAnteriorBL.cs" />
     <Compile Include="IRubrosCNBL.cs" />

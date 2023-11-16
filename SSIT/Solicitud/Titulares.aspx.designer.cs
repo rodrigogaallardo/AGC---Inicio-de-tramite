@@ -1347,13 +1347,13 @@ namespace SSIT
         protected global::System.Web.UI.WebControls.HiddenField hid_CargosFir_seleccionado;
 
         /// <summary>
-        /// Control txtCargoFirPJ.
+        /// Control ddlCargos_FirPJ.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCargoFirPJ;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCargos_FirPJ;
 
         /// <summary>
         /// Control Req_CargoFirPJ.

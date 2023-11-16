@@ -102,6 +102,7 @@
     <Compile Include="ProfesionalDTO.cs" />
     <Compile Include="ProfesionalesPerfilesInhibicionesDTO.cs" />
     <Compile Include="Profesional_historialDTO.cs" />
+    <Compile Include="CargosDTO.cs" />
     <Compile Include="RelRubrosSolicitudesNuevasDTO.cs" />
     <Compile Include="ResultadoDTO.cs" />
     <Compile Include="RolesDTO.cs" />
