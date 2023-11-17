@@ -265,7 +265,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             if (_lstCaa != null && _lstCaa.Count > 0 && _lstCaa.FirstOrDefault().formulario.id_encomienda_agc != 0)
             {
-
+                pnlBuscarCAA.Visible = false;
                 //this.CAA_Actual = List_CAA.Where(x => x.id_estado != (int)Constantes.CAA_EstadoSolicitud.Anulado).OrderByDescending(x => x.id_caa).FirstOrDefault();
                 _caaAct = _lstCaa.Where(caa => caa.id_estado != (int)Constantes.CAA_EstadoSolicitud.Anulado).OrderByDescending(caa => caa.id_solicitud).FirstOrDefault();
 
@@ -316,6 +316,15 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         item.codigo_tipocertificado = _caaAct.codigo_tipocertificado;
                         item.nombre_tipocertificado = _caaAct.nombre_tipocertificado;
                         lstArchivosCAA.Add(item);
+                    }
+                    //para el backlog, si no tiene archivo en nuestra base lo agrego
+                    GetCAAResponse caa = await GetCAA(_caaAct.id_solicitud);
+                    var fileInfo = GetCAA_fileInfo(caa);
+                    if (fileInfo)
+                    {
+                        DivBtnSIPSAExpress.Visible = false;
+                        string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
+                        Response.Redirect(url);
                     }
                 }
                 
