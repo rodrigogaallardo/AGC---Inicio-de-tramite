@@ -263,29 +263,33 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             // Establece el CAA relacionado con la encomienda 
             // ----------------------------------------------
 
-            if (_lstCaa != null && _lstCaa.Count > 0 && _lstCaa.FirstOrDefault().formulario.id_encomienda_agc != 0)
+            foreach (var encomien in lst_encomiendas)
             {
-                pnlBuscarCAA.Visible = false;
-                //this.CAA_Actual = List_CAA.Where(x => x.id_estado != (int)Constantes.CAA_EstadoSolicitud.Anulado).OrderByDescending(x => x.id_caa).FirstOrDefault();
-                _caaAct = _lstCaa.Where(caa => caa.id_estado != (int)Constantes.CAA_EstadoSolicitud.Anulado).OrderByDescending(caa => caa.id_solicitud).FirstOrDefault();
 
-            }
-
-            if (_caaAct != null)
-            {
-                btnGenerarCAA.Visible = false;
-                DivBtnSIPSAExpress.Visible = false;
-                if ((_caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.SujetoaCategorizacion ||
-                     _caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.ConRelevanteEfecto) &&
-                     _caaAct.id_estado != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
+                if (_lstCaa != null && _lstCaa.Count > 0 && _lstCaa.FirstOrDefault().formulario.id_encomienda_agc != 0)
                 {
-                    //pnlInfoSIPSA.Visible = id_solicitud > Constantes.SOLICITUDES_NUEVAS_MAYORES_A;
-                    //pnlInfo.Visible = false;
-                    grdArchivosCAA.Visible = false;
+                    //this.CAA_Actual = List_CAA.Where(x => x.id_estado != (int)Constantes.CAA_EstadoSolicitud.Anulado).OrderByDescending(x => x.id_caa).FirstOrDefault();
+                    _caaAct = _lstCaa.Where(caa => caa.id_estado != (int)Constantes.CAA_EstadoSolicitud.Anulado).OrderByDescending(caa => caa.id_solicitud).FirstOrDefault();
+
                 }
-            }
-            if (lst_encomiendas.Count() > 0)
-            {
+                else
+                {
+                    btnGenerarCAA.Visible = true;
+                }
+
+                if (_caaAct != null)
+                {
+                    
+                    if ((_caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.SujetoaCategorizacion ||
+                         _caaAct.id_tipocertificado == (int)Constantes.CAA_TipoCertificado.ConRelevanteEfecto) &&
+                         _caaAct.id_estado != (int)Constantes.CAA_EstadoSolicitud.Aprobado)
+                    {
+                        //pnlInfoSIPSA.Visible = id_solicitud > Constantes.SOLICITUDES_NUEVAS_MAYORES_A;
+                        //pnlInfo.Visible = false;
+                        grdArchivosCAA.Visible = false;
+                    }
+                }
+
                 var lstArchivosCAA = new List<CAA_ArchivosDTO>();
                 EncomiendaDTO Encomienda = encBL.Single(id_encomienda);
                 EncomiendaDocumentosAdjuntosBL encDocBL = new EncomiendaDocumentosAdjuntosBL();
@@ -318,20 +322,35 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         lstArchivosCAA.Add(item);
                     }
                     //para el backlog, si no tiene archivo en nuestra base lo agrego
-                    GetCAAResponse caa = await GetCAA(_caaAct.id_solicitud);
-                    var fileInfo = GetCAA_fileInfo(caa);
-                    if (fileInfo)
+                    if(lstArchivosCAA.Count() == 0)
                     {
-                        DivBtnSIPSAExpress.Visible = false;
-                        string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
-                        Response.Redirect(url);
+                        GetCAAResponse caa = await GetCAA(_caaAct.id_solicitud);
+                        var fileInfo = GetCAA_fileInfo(caa);
+                        if (fileInfo)
+                        {
+                            DivBtnSIPSAExpress.Visible = false;
+                            string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
+                            Response.Redirect(url);
+                        }
                     }
+                    
                 }
+
 
                 grdArchivosCAA.DataSource = lstArchivosCAA;
                 grdArchivosCAA.DataBind();
             }
+            if (lst_encomiendas.Count() < _lstCaa.Count())
+            {
+                pnlBuscarCAA.Visible = true;
+                btnGenerarCAA.Visible = true;
+            }
             else
+            {
+                btnGenerarCAA.Visible = true;
+                DivBtnSIPSAExpress.Visible = true;
+            }
+            if (_lstCaa.Count() <= 0)
             {
                 grdArchivosCAA.DataSource = null;
                 grdArchivosCAA.DataBind();
