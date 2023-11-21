@@ -547,7 +547,6 @@ namespace BaseRepository
                                   join cir in _unitOfWork.Db.ENG_Circuitos on tskr.id_circuito equals cir.id_circuito
                                   where tth.id_solicitud == idSolicitud 
                                   && calificacion.Observaciones_LibradoUso != null
-                                  && calificacion.Observaciones_LibradoUso != null
                                     && (cir.id_circuito == (int)Constantes.ENG_Circuitos.ESCU_HP
                                     || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2
                                     || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2_AMP)
@@ -562,7 +561,6 @@ namespace BaseRepository
                                            join tskr in _unitOfWork.Db.ENG_Tareas on tt.id_tarea equals tskr.id_tarea
                                            join cir in _unitOfWork.Db.ENG_Circuitos on tskr.id_circuito equals cir.id_circuito
                                            where tth.id_solicitud == idSolicitud 
-                                           && calificacion.Observaciones_LibradoUso != null
                                            && calificacion.Observaciones_LibradoUso != null
                                             && (cir.id_circuito == (int)Constantes.ENG_Circuitos.ESCU_HP
                                             || cir.id_circuito == (int)Constantes.ENG_Circuitos.ESPAR2
