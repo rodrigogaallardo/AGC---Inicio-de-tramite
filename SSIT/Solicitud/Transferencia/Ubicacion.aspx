@@ -84,14 +84,24 @@
         </asp:UpdatePanel>
         <br />
 
-        <asp:UpdatePanel ID="updPlantas" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
+         <asp:UpdatePanel ID="updPlantas" runat="server" UpdateMode="Conditional">
+     <ContentTemplate>
+        <%--Plantas a habilitar--%>
+        <asp:Panel ID="pnlPlantasHabilitar" runat="server" CssClass="back-panel-gris" Style="margin-top: 20px; padding-left: 10px">
+            <strong>Plantas a habilitar:</strong>
+            <asp:Label ID="lblPlantasHabilitar" runat="server"></asp:Label>
+        </asp:Panel>
+              </ContentTemplate>
+ </asp:UpdatePanel>
+
+       <%-- <asp:UpdatePanel ID="updPlantas" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>--%>
 
                     <%-- Contenido del panel de plantas a habilitar --%>
-                      <div class="box-panel">
+                     <%-- <div class="box-panel">--%>
 
 
-                            <asp:Panel ID="pnlPlantasHabilitar" runat="server" CssClass="mtop5" >
+<%--                            <asp:Panel ID="pnlPlantasHabilitar" runat="server" CssClass="mtop5" >
                                         
                                       
                                 <div style="color:#377bb5">                                 
@@ -168,11 +178,11 @@
                                 Debe ingresar la informaci&oacute;n referida a las plantas.
                             </asp:Panel>
                            
-                        </div>
+                        </div>--%>
                  
                 
-            </ContentTemplate>
-        </asp:UpdatePanel>
+          <%--  </ContentTemplate>
+        </asp:UpdatePanel>--%>
 
 
         <%--Botones de Guardado--%>
@@ -369,7 +379,7 @@
             return true;
         }
 
-        function validarGuardar() {
+       <%-- function validarGuardar() {
 
             var ret = true;
             var plantasSeleccionadas = false;
@@ -406,7 +416,7 @@
                 ocultarBotonesGuardado();
 
             return ret;
-        }
+        }--%>
         
     </script>
 </asp:Content>
