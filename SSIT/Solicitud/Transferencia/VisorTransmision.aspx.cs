@@ -784,8 +784,10 @@ namespace SSIT
                 usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
                 usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
             }
-            var cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit);
-            if (cambios.Any())
+            bool cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit).Any()
+                || listParticipantesGPCuit.Except(listParticipantesSSITCuit).Any();
+
+            if (cambios)
             {
                 bool tieneSolicitante = false;
                 // baja
