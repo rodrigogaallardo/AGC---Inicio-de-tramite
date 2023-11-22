@@ -251,7 +251,7 @@
                                     <div class="widget-title">
                                         <span class="icon"><i class="imoon imoon-user" style="color: #344882;"></i></span>
                                         <h5>
-                                            <asp:Label ID="Label4" runat="server" Text="Titulares Actuales"></asp:Label></h5>
+                                            <asp:Label ID="Label4" runat="server" Text="Cedentes"></asp:Label></h5>
                                         <span class="btn-right"><i class="imoon imoon-chevron-down" style="color: #344882;"></i></span>
                                     </div>
                                 </a>
@@ -278,7 +278,7 @@
                                     <div class="widget-title">
                                         <span class="icon"><i class="imoon imoon-user" style="color: #344882;"></i></span>
                                         <h5>
-                                            <asp:Label ID="Label3" runat="server" Text="Titulares Nuevos"></asp:Label></h5>
+                                            <asp:Label ID="Label3" runat="server" Text="Cesionarios"></asp:Label></h5>
                                         <span class="btn-right"><i class="imoon imoon-chevron-down" style="color: #344882;"></i></span>
                                     </div>
                                 </a>
@@ -869,13 +869,13 @@
                 }
             });
 
-                return false;
-            }
+            return false;
+        }
 
-            function colorear(indice) {
-                switch (indice) {
-                    case 0:
-                        $("#<%: spnDatosSolicitud.ClientID %> ").css("background", "#fdd306");
+        function colorear(indice) {
+            switch (indice) {
+                case 0:
+                    $("#<%: spnDatosSolicitud.ClientID %> ").css("background", "#fdd306");
                         $("#<%: spnAnexoTecnico.ClientID %> ").css("background", "#EEEEEE");
                         $("#<%: spntabBui.ClientID %> ").css("background", "#EEEEEE");
                         $("#<%: spntabDocumentos.ClientID %> ").css("background", "#EEEEEE");
@@ -928,9 +928,9 @@
                         $("#<%: spntabDocumentos.ClientID %> ").css("background", "#EEEEEE");
                         $("#<%: spntabPresentacion.ClientID %> ").css("background", "#EEEEEE");
                         $("#<%: spantabAvisos.ClientID %> ").css("background", "#fdd306");
-                        break;
-                }
-                return false;
+                    break;
             }
+            return false;
+        }
     </script>
 </asp:Content>

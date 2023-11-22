@@ -273,7 +273,7 @@
       <Name>DataTransferObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExternalServiceMail\ExternalService.csproj">
-      <Project>{33f5fd19-535e-4bbe-8544-a6dc90aeb1f1}</Project>
+      <Project>{33F5FD19-535E-4BBE-8544-A6DC90AEB1F1}</Project>
       <Name>ExternalService</Name>
     </ProjectReference>
     <ProjectReference Include="..\IBaseRepository\IBaseRepository.csproj">

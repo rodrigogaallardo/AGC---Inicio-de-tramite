@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAcces", "DataAcces", "{CC4E1D9D-C7D3-4B7A-9FD9-A79AB5C683CA}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,6 +20,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DTO", "DTO", "{31DCD898-103A-4040-94B0-382E331A7031}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinesLayer", "BusinesLayer\BusinesLayer.csproj", "{8FF7AFC2-3068-428A-B046-5213A9EED822}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33F5FD19-535E-4BBE-8544-A6DC90AEB1F1} = {33F5FD19-535E-4BBE-8544-A6DC90AEB1F1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObject", "DataTrasnferObject\DataTransferObject.csproj", "{D19C2B35-AB4A-4EB2-BE0F-E151F023FEDB}"
 EndProject
@@ -32,16 +35,28 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAcess", "DataAcess\DataAcess.csproj", "{9E8652C6-7EB7-486A-9E40-4999393D401E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayerUnitTest", "BusinessLayerUnitTest\BusinessLayerUnitTest.csproj", "{02226466-7F10-4382-BD12-F0310AAC37C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33F5FD19-535E-4BBE-8544-A6DC90AEB1F1} = {33F5FD19-535E-4BBE-8544-A6DC90AEB1F1}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{856D9383-AA3C-4A3B-810B-D8CBAF037F8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBusinessLayer", "IBusinessLayer\IBusinessLayer.csproj", "{3E8E0DDA-E025-4CA4-9169-F139D6D90B97}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33F5FD19-535E-4BBE-8544-A6DC90AEB1F1} = {33F5FD19-535E-4BBE-8544-A6DC90AEB1F1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnexoProfesionales", "AnexoProfesionales\AnexoProfesionales.csproj", "{78B51D35-B309-4A6B-8BD2-20E14E3FB141}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33F5FD19-535E-4BBE-8544-A6DC90AEB1F1} = {33F5FD19-535E-4BBE-8544-A6DC90AEB1F1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsejosProfesionales", "ConsejosProfesionales\ConsejosProfesionales.csproj", "{0315806F-AD62-42BD-B287-9DFF0CD23F3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSIT", "SSIT\SSIT.csproj", "{B799B3E8-92E8-454A-B8E1-1FF61D9A272F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33F5FD19-535E-4BBE-8544-A6DC90AEB1F1} = {33F5FD19-535E-4BBE-8544-A6DC90AEB1F1}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8C18A8C0-9300-4319-A77A-234BDDF9A465}"
 	ProjectSection(SolutionItems) = preProject
@@ -59,6 +74,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reporting", "Reporting", "{B0FBE34A-33EA-4B49-96DE-4F8953E069B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporting", "Reporting\Reporting.csproj", "{CCC09F9C-2254-4D74-9867-33A91C487544}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33F5FD19-535E-4BBE-8544-A6DC90AEB1F1} = {33F5FD19-535E-4BBE-8544-A6DC90AEB1F1}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine_Service", "Engine_Service", "{408FF473-87E5-442D-A29C-FCF4F72DA431}"
 EndProject

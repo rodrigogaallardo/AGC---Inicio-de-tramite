@@ -273,6 +273,7 @@ namespace SSIT.Solicitud.Transferencia
 
         private void CargarTablaPlantasHabilitar(int IdSolicitud)
         {
+            pnlPlantasHabilitar.Enabled = false;
             TransferenciasPlantasBL transfPlantasBL = new TransferenciasPlantasBL();
             var lstResult = transfPlantasBL.Get(IdSolicitud).ToList();
 

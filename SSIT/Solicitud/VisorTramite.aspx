@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Visualizar Trámite" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VisorTramite.aspx.cs" Inherits="SSIT.VisorTramite" %>
+﻿<%@ Page Async="true" Title="Visualizar Trámite" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VisorTramite.aspx.cs" Inherits="SSIT.VisorTramite" %>
 
 <%@ Register Src="~/Solicitud/Habilitacion/Controls/DatosSolicitud.ascx" TagPrefix="uc" TagName="DatosSolicitud" %>
 <%@ Register Src="~/Solicitud/Habilitacion/Controls/AnexoTecnico.ascx" TagPrefix="uc" TagName="AnexoTecnico" %>
@@ -90,7 +90,7 @@
                                             <span class="bg-info-lt">
                                                 <span class="glyphicon imoon-ok fs48"></span>
                                             </span>
-                                            <p >Confirmar</p>
+                                            <p>Confirmar</p>
                                     </asp:LinkButton>
 
                                 </asp:Panel>
@@ -101,7 +101,7 @@
                                             <span class="bg-info-lt">
                                                 <span class="glyphicon imoon-ok fs48"></span>
                                             </span>
-                                            <p >Presentar</p>
+                                            <p>Presentar</p>
                                     </asp:LinkButton>
 
 

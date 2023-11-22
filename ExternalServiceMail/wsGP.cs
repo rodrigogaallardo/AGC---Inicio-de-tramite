@@ -24,6 +24,9 @@ namespace ExternalService
 
             string uriString = _urlESB + "/tiposTramite/" + p_trata + "/perfiles";
             var client = new RestClient(uriString);
+            //ignorar validacion de https en ambiente de prueba
+            if(Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             client.ClearHandlers();
             client.AddHandler("application/json", new JsonDeserializer());
 

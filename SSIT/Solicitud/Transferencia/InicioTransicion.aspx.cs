@@ -141,6 +141,7 @@ namespace SSIT.Solicitud.Transferencia
         protected void btnConfirmar_Click(object sender, EventArgs e)
         {
             lblError.Text = "";
+            ParametrosBL parametrosBL = new ParametrosBL();
 
             try
             {
@@ -153,11 +154,28 @@ namespace SSIT.Solicitud.Transferencia
                 {
                     if (ValidarTramiteSeleccionado())
                     {
+                        string tipoTransmision = ddlTipoTransmision.SelectedValue;
+                        if (tipoTransmision.Equals("1"))
+                        {
+                            string textoTransmision = parametrosBL.GetParametroChar("SSIT_Transmision_transferencia");
+                            lblTransmision.InnerText = textoTransmision;
+                        }
+                        else if (tipoTransmision.Equals("2"))
+                        {
+                            string textoTransmision = parametrosBL.GetParametroChar("SSIT_Transmision_cambioDenominacion");
+                            lblTransmision.InnerText = textoTransmision;
+                        }
+                        else
+                        {
+                            string textoTransmision = parametrosBL.GetParametroChar("SSIT_Transmision_ordenJudicial");
+                            lblTransmision.InnerText = textoTransmision;
+                        }
+
                         this.EjecutarScript(updTramitesEncontrados, "showfrmConfirmarNuevaTransmision();");
                     }
                     else
                     {
-                        lblError.Text = "Dele seleccionar un trámite para poder confirmar.";
+                        lblError.Text = "Debe seleccionar un trámite para poder confirmar.";
                         this.EjecutarScript(updTramitesEncontrados, "showfrmError();");
                     }
                 }

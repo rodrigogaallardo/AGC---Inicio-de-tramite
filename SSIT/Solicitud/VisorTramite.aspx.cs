@@ -264,7 +264,7 @@ namespace SSIT
                     int[] lst_id_Encomiendas = lstEncDTO.Select(s => s.IdEncomienda).ToArray();
                     ws_Interface_AGC servicio = new ws_Interface_AGC();
                     ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-
+                    //TODO: Falta pasar esto a REST
                     servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
                     string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
                     string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
@@ -822,8 +822,7 @@ namespace SSIT
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "showfrmError", "showfrmError();", true);
             }
         }
-
-        protected void btnPresentarTramite_Click(object sender, EventArgs e)
+        protected async void btnPresentarTramite_Click(object sender, EventArgs e)
         {
             try
             {
@@ -880,7 +879,7 @@ namespace SSIT
                 LogError.Write("Antes de RegenerarSolicitud");
                 RegenerarSolicitud(id_solicitud);
                 LogError.Write("Antes de ValidacionSolicitudes");
-                if (blSol.ValidacionSolicitudes(id_solicitud))
+                if (await blSol.ValidacionSolicitudes(id_solicitud))
                 {
                     LogError.Write("Antes de presentarSolicitud");
                     if (blSol.presentarSolicitud(id_solicitud, userid, oblea, emailUsuario))
