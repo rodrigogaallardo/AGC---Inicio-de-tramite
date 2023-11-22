@@ -529,8 +529,10 @@ namespace SSIT
                 usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
             }
 
-            var cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit);
-            if (cambios.Any())
+            bool cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit).Any()
+                || listParticipantesGPCuit.Except(listParticipantesSSITCuit).Any();
+
+            if (cambios)
             {
                 bool tieneSolicitante = false;
                 //desvincular todos los participantes, menos el solicitante                 
