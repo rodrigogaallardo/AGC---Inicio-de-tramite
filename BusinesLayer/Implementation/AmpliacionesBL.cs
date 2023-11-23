@@ -850,11 +850,16 @@ namespace BusinesLayer.Implementation
                 foreach (var item in resultsTransf)
                 {
                     var item_transf = elements_transf.FirstOrDefault(x => x.id_solicitud == item.IdSolicitud);
+                    var item_transfEncomiendaId = elements_transf
+                     .SelectMany(x => x.Encomienda_Transf_Solicitudes
+                         .Select(y => y.id_encomienda))
+                     .FirstOrDefault();
+
                     var lstUbicaciones = item_transf.CPadron_Solicitudes.CPadron_Ubicaciones;
                     var item_datos_local = item_transf.CPadron_Solicitudes.CPadron_DatosLocal.FirstOrDefault();
 
                     item.SuperficieTotal = item_datos_local.superficie_cubierta_dl + item_datos_local.superficie_descubierta_dl;
-
+                    item.IdEncomienda = item_transfEncomiendaId;
                     List<SSITSolicitudesUbicacionesDTO> lstUbicacionesDTO = new List<SSITSolicitudesUbicacionesDTO>();
                     foreach (var itemUbic in lstUbicaciones)
                     {

@@ -94,97 +94,7 @@
               </ContentTemplate>
  </asp:UpdatePanel>
 
-       <%-- <asp:UpdatePanel ID="updPlantas" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>--%>
-
-                    <%-- Contenido del panel de plantas a habilitar --%>
-                     <%-- <div class="box-panel">--%>
-
-
-<%--                            <asp:Panel ID="pnlPlantasHabilitar" runat="server" CssClass="mtop5" >
-                                        
-                                      
-                                <div style="color:#377bb5">                                 
-                                        <h4><i class="imoon imoon-stackexchange" style="margin-right:10px"></i>Seleccione las Plantas</h4> 
-                                        <hr />                      
-                                </div>
-                                
-                                           
-                                <div class="row pleft20 mtop10">
-                        
-                                    <div class="form-group col-md-8">
-                                        
-                                            <asp:GridView 
-                                                ID="grdPlantasHabilitar" 
-                                                runat="server" 
-                                                AutoGenerateColumns="false" 
-                                                GridLines="None" 
-                                                CellPadding="3" 
-                                                ShowHeader="false"        
-                                                DataKeyNames="IdTransferenciaTipoSector"                                         
-                                                OnRowDataBound="grdPlantasHabilitar_OnRowDataBound"
-                                                >
-                                                <Columns>
-                                                            
-                                                    <asp:TemplateField ItemStyle-Width="100px">
-                                                        <ItemTemplate>
-                                                            <div class="checkbox mtop1">
-                                                                <label>
-                                                                    <asp:CheckBox ID="chkSeleccionado" runat="server" Checked='<% #Eval("Seleccionado") %>'
-                                                                        OnCheckedChanged="chkSeleccionado_CheckedChanged" AutoPostBack="true" /> <%# Eval("Descripcion") %>
-                                                                    <asp:HiddenField ID="hid_id_tiposector" runat="server" Value='<% #Eval("IdTipoSector") %>' />
-                                                                    <asp:HiddenField ID="hid_descripcion" runat="server" Value='<% #Eval("Descripcion") %>' />
-                                                                </label>
-                                                            </div>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField >
-                                                        <ItemTemplate>
-                                                                <div class="form-inline">
-                                                                    <div class="form-group">
-                                                                        <asp:TextBox ID="txtDetalle" runat="server" CssClass="form-control mtop5 mbottom5" MaxLength='<% #Eval("TamanoCampoAdicional") %>'
-                                                                            Visible='<% #Eval("Ocultar") %>' Width="100px" Text='<% #Eval("detalleDES") %>'></asp:TextBox>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <asp:Panel ID="ReqtxtDetalle" runat="server" CssClass="field-validation-error" Style="display: none">
-                                                                            Debe ingresar la aclaración del item.
-                                                                        </asp:Panel>
-                                                                    </div>
-                                                                </div>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
-                                        
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        
-                                        <div>Opciones con información adicional:</div>
-                                        <div style="padding-top:10px"><b>Piso:</b> En esta opción deberá indicar la aclaración del piso. Ej: Piso 2, Piso 3</div>
-                                        <div style="padding-top: 10px"><b>Otro:</b> En esta opción deberá indicar la descripcón deaseada, alguna no incluída en la lista ofrecida.</div>
-                                        <div style="padding-top:10px">
-                                            <b>Nota:</b> En los campos "Otro" <b>NO</b> deberá ingresar información de otra cosa que no sea una planta a habilitar. <b>NO</b> indicar unidades funcionales, departamentos, locales o cualquier referencia a la ubicación.
-                                        </div>
-                                        
-                                    </div>
-                        
-                                </div>
-
-                               
-                            </asp:Panel>
-
-                            
-                            <asp:Panel ID="Req_Plantas" runat="server" CssClass="field-validation-error" Style="display: none">
-                                Debe ingresar la informaci&oacute;n referida a las plantas.
-                            </asp:Panel>
-                           
-                        </div>--%>
-                 
-                
-          <%--  </ContentTemplate>
-        </asp:UpdatePanel>--%>
-
-
+      
         <%--Botones de Guardado--%>
         <asp:UpdatePanel ID="updBotonesGuardar" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -378,45 +288,6 @@
 
             return true;
         }
-
-       <%-- function validarGuardar() {
-
-            var ret = true;
-            var plantasSeleccionadas = false;
-
-            $("#<%: Req_Plantas.ClientID %>").hide();
-            $("#<%: grdPlantasHabilitar.ClientID %> [id*='_ReqtxtDetalle']").hide();
-            
-            plantasSeleccionadas = ($("#<%: grdPlantasHabilitar.ClientID %> :checkbox[checked]").length > 0);
-
-            $("#<%: grdPlantasHabilitar.ClientID %> [id*='_txtDetalle']").each(function (index, element) {
-
-                if ($(element).val().length == 0) {
-                    var txtDetalle_id = $(element).prop("id");
-                    var chkSeleccionado_id = txtDetalle_id.replace("_txtDetalle", "_chkSeleccionado");
-                    var ReqtxtDetalle_id = txtDetalle_id.replace("_txtDetalle", "_ReqtxtDetalle");
-
-                    if ($("#" + chkSeleccionado_id).prop("checked")) {
-                        
-                        
-                        $("#" + ReqtxtDetalle_id).show();
-                        ret = false;
-
-                    }
-                }
-
-            })
-
-            if (!plantasSeleccionadas) {
-                $("#<%: Req_Plantas.ClientID %>").css("display", "inline-block");
-                ret = false;
-            }
-
-            if (ret)
-                ocultarBotonesGuardado();
-
-            return ret;
-        }--%>
-        
+     
     </script>
 </asp:Content>
