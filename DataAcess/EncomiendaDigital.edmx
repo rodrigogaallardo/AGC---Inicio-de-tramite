@@ -26286,10 +26286,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Transf_Titulares_PersonasJuridicas_PersonasFisicas" Relationship="EncmiendaEntityes.FK_Transf_Titulares_PersonasJuridicas_PersonasFisicas_Transf_Firmantes_PersonasJuridicas" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Transf_Titulares_PersonasJuridicas_PersonasFisicas" />
           <NavigationProperty Name="TipoDocumentoPersonal" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_TipoDocumentoPersonal" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="TipoDocumentoPersonal" />
           <NavigationProperty Name="Transf_Solicitudes" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_Transf_Solicitudes" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Transf_Solicitudes" />
-          <Property Name="Cargo" Type="Int32" />
-          <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.Transf_Firmantes_PersonasJuridicas_Cargo" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Cargos" />
           <Property Name="id_cargo" Type="Int32" />
-          <NavigationProperty Name="Cargos1" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_Cargo" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Cargos" />
+          <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.Transf_Firmantes_PersonasJuridicas_Cargo" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Cargos" />        
         </EntityType>
         <EntityType Name="Transf_Titulares_PersonasFisicas">
           <Key>
@@ -30208,10 +30206,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="TiposDeCaracterLegal" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_TiposDeCaracterLegal" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="TiposDeCaracterLegal" />
           <NavigationProperty Name="SSIT_Solicitudes" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_SSIT_Solicitudes" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="SSIT_Solicitudes" />
           <NavigationProperty Name="SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas_SSIT_Solicitudes_Firmantes_PersonasJuridicas" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas" />
-          <Property Name="Cargo" Type="Int32" />
-          <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="Cargos" />
           <Property Name="id_cargo" Type="Int32" />
-          <NavigationProperty Name="Cargos1" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo1" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="Cargos" />
+          <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="Cargos" />
         </EntityType>
         <Association Name="FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_SSIT_Solicitudes_Titulares_PersonasJuridicas">
           <End Type="EncmiendaEntityes.SSIT_Solicitudes_Titulares_PersonasJuridicas" Role="SSIT_Solicitudes_Titulares_PersonasJuridicas" Multiplicity="1" />

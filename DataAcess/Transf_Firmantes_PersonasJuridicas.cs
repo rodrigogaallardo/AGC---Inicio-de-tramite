@@ -38,6 +38,5 @@ namespace DataAcess
         public virtual TipoDocumentoPersonal TipoDocumentoPersonal { get; set; }
         public virtual Transf_Solicitudes Transf_Solicitudes { get; set; }
         public virtual Cargos Cargos { get; set; }
-       
     }
 }
