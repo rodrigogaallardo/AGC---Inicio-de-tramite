@@ -137,7 +137,8 @@ namespace ExternalService
             {
                 BaseUrl = new Uri(url)
             };
-
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             clientrest.Encoding = Encoding.GetEncoding("ISO-8859-1");
 
             RestRequest request = new RestRequest
