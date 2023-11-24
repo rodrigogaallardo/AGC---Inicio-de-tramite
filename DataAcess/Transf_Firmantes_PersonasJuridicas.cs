@@ -30,6 +30,7 @@ namespace DataAcess
         public int id_tipocaracter { get; set; }
         public string cargo_firmante_pj { get; set; }
         public Nullable<int> Cargo { get; set; }
+        public Nullable<int> id_cargo { get; set; }
     
         public virtual TiposDeCaracterLegal TiposDeCaracterLegal { get; set; }
         public virtual Transf_Titulares_PersonasJuridicas Transf_Titulares_PersonasJuridicas { get; set; }
@@ -37,5 +38,6 @@ namespace DataAcess
         public virtual TipoDocumentoPersonal TipoDocumentoPersonal { get; set; }
         public virtual Transf_Solicitudes Transf_Solicitudes { get; set; }
         public virtual Cargos Cargos { get; set; }
+       
     }
 }

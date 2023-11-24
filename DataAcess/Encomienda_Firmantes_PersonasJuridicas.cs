@@ -29,11 +29,13 @@ namespace DataAcess
         public int id_tipocaracter { get; set; }
         public string cargo_firmante_pj { get; set; }
         public string Email { get; set; }
+        public Nullable<int> id_cargo { get; set; }
     
         public virtual TiposDeCaracterLegal TiposDeCaracterLegal { get; set; }
         public virtual ICollection<Encomienda_Titulares_PersonasJuridicas_PersonasFisicas> Encomienda_Titulares_PersonasJuridicas_PersonasFisicas { get; set; }
         public virtual Encomienda_Titulares_PersonasJuridicas Encomienda_Titulares_PersonasJuridicas { get; set; }
         public virtual TipoDocumentoPersonal TipoDocumentoPersonal { get; set; }
         public virtual Encomienda Encomienda { get; set; }
+        public virtual Cargos Cargos { get; set; }
     }
 }

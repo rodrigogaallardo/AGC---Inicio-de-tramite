@@ -1220,6 +1220,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.Encomienda_Docu
           <Property Name="id_tipocaracter" Type="int" Nullable="false" />
           <Property Name="cargo_firmante_pj" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="id_cargo" Type="int" />
         </EntityType>
         <EntityType Name="Encomienda_HistorialEstados">
           <Key>
@@ -4313,7 +4314,6 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitude
           <Property Name="id_tipocaracter" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
           <Property Name="Cuit" Type="nvarchar" MaxLength="30" />
-          <Property Name="Cargo" Type="int" />
         </EntityType>
         <EntityType Name="SSIT_Solicitudes_Firmantes_PersonasJuridicas">
           <Key>
@@ -4330,7 +4330,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitude
           <Property Name="cargo_firmante_pj" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
           <Property Name="Cuit" Type="nvarchar" MaxLength="30" />
-          <Property Name="Cargo" Type="int" />
+          <Property Name="id_cargo" Type="int" />
         </EntityType>
         <EntityType Name="SSIT_Solicitudes_HistorialEstados">
           <Key>
@@ -4963,7 +4963,6 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitude
           <Property Name="Nro_Documento" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="id_tipocaracter" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
-          <Property Name="Cargo" Type="int" />
         </EntityType>
         <EntityType Name="Transf_Firmantes_PersonasJuridicas">
           <Key>
@@ -4979,7 +4978,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitude
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
           <Property Name="id_tipocaracter" Type="int" Nullable="false" />
           <Property Name="cargo_firmante_pj" Type="nvarchar" MaxLength="50" />
-          <Property Name="Cargo" Type="int" />
+          <Property Name="id_cargo" Type="int" />
         </EntityType>
         <EntityType Name="Transf_Firmantes_Solicitud_PersonasFisicas">
           <Key>
@@ -5011,6 +5010,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitude
           <Property Name="cargo_firmante_pj" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
           <Property Name="Cuit" Type="nvarchar" MaxLength="30" />
+          <Property Name="id_cargo" Type="int" />
         </EntityType>
         <EntityType Name="Transf_Normativas">
           <Key>
@@ -8130,6 +8130,18 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.vis_Certificado
             </Principal>
             <Dependent Role="Encomienda_Firmantes_PersonasFisicas">
               <PropertyRef Name="id_tipocaracter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomienda_Firmantes_PersonasJuridicas_Cargo">
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+          <End Role="Encomienda_Firmantes_PersonasJuridicas" Type="Self.Encomienda_Firmantes_PersonasJuridicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="Encomienda_Firmantes_PersonasJuridicas">
+              <PropertyRef Name="id_cargo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12571,18 +12583,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SSIT_Solicitudes_Firmantes_PersonasFisicas_Cargo">
-          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
-          <End Role="SSIT_Solicitudes_Firmantes_PersonasFisicas" Type="Self.SSIT_Solicitudes_Firmantes_PersonasFisicas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargos">
-              <PropertyRef Name="id_cargo" />
-            </Principal>
-            <Dependent Role="SSIT_Solicitudes_Firmantes_PersonasFisicas">
-              <PropertyRef Name="Cargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SSIT_Solicitudes_Firmantes_PersonasFisicas_SSIT_Solicitudes">
           <End Role="SSIT_Solicitudes" Type="Self.SSIT_Solicitudes" Multiplicity="1" />
           <End Role="SSIT_Solicitudes_Firmantes_PersonasFisicas" Type="Self.SSIT_Solicitudes_Firmantes_PersonasFisicas" Multiplicity="*" />
@@ -12639,7 +12639,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
               <PropertyRef Name="id_cargo" />
             </Principal>
             <Dependent Role="SSIT_Solicitudes_Firmantes_PersonasJuridicas">
-              <PropertyRef Name="Cargo" />
+              <PropertyRef Name="id_cargo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -13507,6 +13507,18 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transf_Firmantes_PersonasJuridicas_Cargo">
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+          <End Role="Transf_Firmantes_PersonasJuridicas" Type="Self.Transf_Firmantes_PersonasJuridicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="Transf_Firmantes_PersonasJuridicas">
+              <PropertyRef Name="id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transf_Firmantes_PersonasJuridicas_TipoDocumentoPersonal">
           <End Role="TipoDocumentoPersonal" Type="Self.TipoDocumentoPersonal" Multiplicity="1" />
           <End Role="Transf_Firmantes_PersonasJuridicas" Type="Self.Transf_Firmantes_PersonasJuridicas" Multiplicity="*" />
@@ -13600,6 +13612,18 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             </Principal>
             <Dependent Role="Transf_Firmantes_Solicitud_PersonasFisicas">
               <PropertyRef Name="id_personafisica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo">
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+          <End Role="Transf_Firmantes_Solicitud_PersonasJuridicas" Type="Self.Transf_Firmantes_Solicitud_PersonasJuridicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="Transf_Firmantes_Solicitud_PersonasJuridicas">
+              <PropertyRef Name="id_cargo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -15319,30 +15343,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Transf_Firmantes_PersonasFisicas_Cargo">
-          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
-          <End Role="Transf_Firmantes_PersonasFisicas" Type="Self.Transf_Firmantes_PersonasFisicas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargos">
-              <PropertyRef Name="id_cargo" />
-            </Principal>
-            <Dependent Role="Transf_Firmantes_PersonasFisicas">
-              <PropertyRef Name="Cargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Transf_Firmantes_PersonasJuridicas_Cargo">
-          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
-          <End Role="Transf_Firmantes_PersonasJuridicas" Type="Self.Transf_Firmantes_PersonasJuridicas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargos">
-              <PropertyRef Name="id_cargo" />
-            </Principal>
-            <Dependent Role="Transf_Firmantes_PersonasJuridicas">
-              <PropertyRef Name="Cargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="Encomienda_Actualizar_TipoSubtipo_Expediente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_encomienda" Type="int" Mode="In" />
         </Function>
@@ -16914,6 +16914,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="TiposDeCaracterLegal" EntitySet="TiposDeCaracterLegal" />
             <End Role="Encomienda_Firmantes_PersonasFisicas" EntitySet="Encomienda_Firmantes_PersonasFisicas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Encomienda_Firmantes_PersonasJuridicas_Cargo" Association="Self.FK_Encomienda_Firmantes_PersonasJuridicas_Cargo">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Encomienda_Firmantes_PersonasJuridicas" EntitySet="Encomienda_Firmantes_PersonasJuridicas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Encomienda_Firmantes_PersonasJuridicas_Encomienda" Association="Self.FK_Encomienda_Firmantes_PersonasJuridicas_Encomienda">
             <End Role="Encomienda" EntitySet="Encomienda" />
             <End Role="Encomienda_Firmantes_PersonasJuridicas" EntitySet="Encomienda_Firmantes_PersonasJuridicas" />
@@ -18390,10 +18394,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="SSIT_Solicitudes" EntitySet="SSIT_Solicitudes" />
             <End Role="SSIT_Solicitudes_Encomienda" EntitySet="SSIT_Solicitudes_Encomienda" />
           </AssociationSet>
-          <AssociationSet Name="FK_SSIT_Solicitudes_Firmantes_PersonasFisicas_Cargo" Association="Self.FK_SSIT_Solicitudes_Firmantes_PersonasFisicas_Cargo">
-            <End Role="Cargos" EntitySet="Cargos" />
-            <End Role="SSIT_Solicitudes_Firmantes_PersonasFisicas" EntitySet="SSIT_Solicitudes_Firmantes_PersonasFisicas" />
-          </AssociationSet>
           <AssociationSet Name="FK_SSIT_Solicitudes_Firmantes_PersonasFisicas_SSIT_Solicitudes" Association="Self.FK_SSIT_Solicitudes_Firmantes_PersonasFisicas_SSIT_Solicitudes">
             <End Role="SSIT_Solicitudes" EntitySet="SSIT_Solicitudes" />
             <End Role="SSIT_Solicitudes_Firmantes_PersonasFisicas" EntitySet="SSIT_Solicitudes_Firmantes_PersonasFisicas" />
@@ -18702,6 +18702,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="Transf_Titulares_PersonasFisicas" EntitySet="Transf_Titulares_PersonasFisicas" />
             <End Role="Transf_Firmantes_PersonasFisicas" EntitySet="Transf_Firmantes_PersonasFisicas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transf_Firmantes_PersonasJuridicas_Cargo" Association="Self.FK_Transf_Firmantes_PersonasJuridicas_Cargo">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Transf_Firmantes_PersonasJuridicas" EntitySet="Transf_Firmantes_PersonasJuridicas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Transf_Firmantes_PersonasJuridicas_TipoDocumentoPersonal" Association="Self.FK_Transf_Firmantes_PersonasJuridicas_TipoDocumentoPersonal">
             <End Role="TipoDocumentoPersonal" EntitySet="TipoDocumentoPersonal" />
             <End Role="Transf_Firmantes_PersonasJuridicas" EntitySet="Transf_Firmantes_PersonasJuridicas" />
@@ -18733,6 +18737,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <AssociationSet Name="FK_Transf_Firmantes_Solicitud_PersonasFisicas_Transf_Titulares_Solicitud_PersonasFisicas" Association="Self.FK_Transf_Firmantes_Solicitud_PersonasFisicas_Transf_Titulares_Solicitud_PersonasFisicas">
             <End Role="Transf_Titulares_Solicitud_PersonasFisicas" EntitySet="Transf_Titulares_Solicitud_PersonasFisicas" />
             <End Role="Transf_Firmantes_Solicitud_PersonasFisicas" EntitySet="Transf_Firmantes_Solicitud_PersonasFisicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo" Association="Self.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Transf_Firmantes_Solicitud_PersonasJuridicas" EntitySet="Transf_Firmantes_Solicitud_PersonasJuridicas" />
           </AssociationSet>
           <AssociationSet Name="FK_Transf_Firmantes_Solicitud_PersonasJuridicas_TipoDocumentoPersonal" Association="Self.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_TipoDocumentoPersonal">
             <End Role="TipoDocumentoPersonal" EntitySet="TipoDocumentoPersonal" />
@@ -19305,14 +19313,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <AssociationSet Name="FK_wsPagos_PagoElectronico_wsPagos1" Association="Self.FK_wsPagos_PagoElectronico_wsPagos1">
             <End Role="wsPagos" EntitySet="wsPagos" />
             <End Role="wsPagos_PagoElectronico" EntitySet="wsPagos_PagoElectronico" />
-          </AssociationSet>
-          <AssociationSet Name="Transf_Firmantes_PersonasFisicas_Cargo" Association="Self.Transf_Firmantes_PersonasFisicas_Cargo">
-            <End Role="Cargos" EntitySet="Cargos" />
-            <End Role="Transf_Firmantes_PersonasFisicas" EntitySet="Transf_Firmantes_PersonasFisicas" />
-          </AssociationSet>
-          <AssociationSet Name="Transf_Firmantes_PersonasJuridicas_Cargo" Association="Self.Transf_Firmantes_PersonasJuridicas_Cargo">
-            <End Role="Cargos" EntitySet="Cargos" />
-            <End Role="Transf_Firmantes_PersonasJuridicas" EntitySet="Transf_Firmantes_PersonasJuridicas" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -22739,6 +22739,22 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="Cargos" EntitySet="Cargos" />
             <End Role="Transf_Firmantes_PersonasJuridicas" EntitySet="Transf_Firmantes_PersonasJuridicas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Encomienda_Firmantes_PersonasJuridicas_Cargo" Association="EncmiendaEntityes.FK_Encomienda_Firmantes_PersonasJuridicas_Cargo">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Encomienda_Firmantes_PersonasJuridicas" EntitySet="Encomienda_Firmantes_PersonasJuridicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo1" Association="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo1">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="SSIT_Solicitudes_Firmantes_PersonasJuridicas" EntitySet="SSIT_Solicitudes_Firmantes_PersonasJuridicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transf_Firmantes_PersonasJuridicas_Cargo" Association="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_Cargo">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Transf_Firmantes_PersonasJuridicas" EntitySet="Transf_Firmantes_PersonasJuridicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo" Association="EncmiendaEntityes.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Transf_Firmantes_Solicitud_PersonasJuridicas" EntitySet="Transf_Firmantes_Solicitud_PersonasJuridicas" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -25973,6 +25989,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Encomienda_Titulares_PersonasJuridicas" Relationship="EncmiendaEntityes.FK_Encomienda_Firmantes_PersonasJuridicas_Encomienda_Titulares_PersonasJuridicas" FromRole="Encomienda_Firmantes_PersonasJuridicas" ToRole="Encomienda_Titulares_PersonasJuridicas" />
           <NavigationProperty Name="TipoDocumentoPersonal" Relationship="EncmiendaEntityes.FK_Encomienda_Firmantes_PersonasJuridicas_TipoDocumentoPersonal" FromRole="Encomienda_Firmantes_PersonasJuridicas" ToRole="TipoDocumentoPersonal" />
           <NavigationProperty Name="Encomienda" Relationship="EncmiendaEntityes.FK_Encomienda_Firmantes_PersonasJuridicas_Encomienda" FromRole="Encomienda_Firmantes_PersonasJuridicas" ToRole="Encomienda" />
+          <Property Name="id_cargo" Type="Int32" />
+          <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.FK_Encomienda_Firmantes_PersonasJuridicas_Cargo" FromRole="Encomienda_Firmantes_PersonasJuridicas" ToRole="Cargos" />
         </EntityType>
         <EntityType Name="Encomienda_Planos">
           <Key>
@@ -26270,6 +26288,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Transf_Solicitudes" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_Transf_Solicitudes" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Transf_Solicitudes" />
           <Property Name="Cargo" Type="Int32" />
           <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.Transf_Firmantes_PersonasJuridicas_Cargo" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Cargos" />
+          <Property Name="id_cargo" Type="Int32" />
+          <NavigationProperty Name="Cargos1" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_Cargo" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Cargos" />
         </EntityType>
         <EntityType Name="Transf_Titulares_PersonasFisicas">
           <Key>
@@ -30190,6 +30210,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas_SSIT_Solicitudes_Firmantes_PersonasJuridicas" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas" />
           <Property Name="Cargo" Type="Int32" />
           <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="Cargos" />
+          <Property Name="id_cargo" Type="Int32" />
+          <NavigationProperty Name="Cargos1" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo1" FromRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" ToRole="Cargos" />
         </EntityType>
         <Association Name="FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_SSIT_Solicitudes_Titulares_PersonasJuridicas">
           <End Type="EncmiendaEntityes.SSIT_Solicitudes_Titulares_PersonasJuridicas" Role="SSIT_Solicitudes_Titulares_PersonasJuridicas" Multiplicity="1" />
@@ -31402,6 +31424,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Transf_Titulares_Solicitud_PersonasJuridicas" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Transf_Titulares_Solicitud_PersonasJuridicas" FromRole="Transf_Firmantes_Solicitud_PersonasJuridicas" ToRole="Transf_Titulares_Solicitud_PersonasJuridicas" />
           <NavigationProperty Name="Transf_Solicitudes" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Transf_Solicitudes" FromRole="Transf_Firmantes_Solicitud_PersonasJuridicas" ToRole="Transf_Solicitudes" />
           <NavigationProperty Name="Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Transf_Firmantes_Solicitud_PersonasJuridicas" FromRole="Transf_Firmantes_Solicitud_PersonasJuridicas" ToRole="Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas" />
+          <Property Name="id_cargo" Type="Int32" />
+          <NavigationProperty Name="Cargos" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo" FromRole="Transf_Firmantes_Solicitud_PersonasJuridicas" ToRole="Cargos" />
         </EntityType>
         <Association Name="FK_Transf_Firmantes_Solicitud_PersonasFisicas_TipoDocumentoPersonal">
           <End Type="EncmiendaEntityes.TipoDocumentoPersonal" Role="TipoDocumentoPersonal" Multiplicity="1" />
@@ -39154,6 +39178,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="SSIT_Solicitudes_Firmantes_PersonasJuridicas" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo" FromRole="Cargos" ToRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" />
           <NavigationProperty Name="Transf_Firmantes_PersonasFisicas" Relationship="EncmiendaEntityes.Transf_Firmantes_PersonasFisicas_Cargo" FromRole="Cargos" ToRole="Transf_Firmantes_PersonasFisicas" />
           <NavigationProperty Name="Transf_Firmantes_PersonasJuridicas" Relationship="EncmiendaEntityes.Transf_Firmantes_PersonasJuridicas_Cargo" FromRole="Cargos" ToRole="Transf_Firmantes_PersonasJuridicas" />
+          <NavigationProperty Name="Encomienda_Firmantes_PersonasJuridicas" Relationship="EncmiendaEntityes.FK_Encomienda_Firmantes_PersonasJuridicas_Cargo" FromRole="Cargos" ToRole="Encomienda_Firmantes_PersonasJuridicas" />
+          <NavigationProperty Name="SSIT_Solicitudes_Firmantes_PersonasJuridicas1" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo1" FromRole="Cargos" ToRole="SSIT_Solicitudes_Firmantes_PersonasJuridicas" />
+          <NavigationProperty Name="Transf_Firmantes_PersonasJuridicas1" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_Cargo" FromRole="Cargos" ToRole="Transf_Firmantes_PersonasJuridicas" />
+          <NavigationProperty Name="Transf_Firmantes_Solicitud_PersonasJuridicas" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo" FromRole="Cargos" ToRole="Transf_Firmantes_Solicitud_PersonasJuridicas" />
         </EntityType>
         <Association Name="FK_SSIT_Solicitudes_Firmantes_PersonasFisicas_Cargo">
           <End Type="EncmiendaEntityes.Cargos" Role="Cargos" Multiplicity="0..1" />
@@ -39200,6 +39228,54 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             </Principal>
             <Dependent Role="Transf_Firmantes_PersonasJuridicas">
               <PropertyRef Name="Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomienda_Firmantes_PersonasJuridicas_Cargo">
+          <End Type="EncmiendaEntityes.Cargos" Role="Cargos" Multiplicity="0..1" />
+          <End Type="EncmiendaEntityes.Encomienda_Firmantes_PersonasJuridicas" Role="Encomienda_Firmantes_PersonasJuridicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="Encomienda_Firmantes_PersonasJuridicas">
+              <PropertyRef Name="id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SSIT_Solicitudes_Firmantes_PersonasJuridicas_Cargo1">
+          <End Type="EncmiendaEntityes.Cargos" Role="Cargos" Multiplicity="0..1" />
+          <End Type="EncmiendaEntityes.SSIT_Solicitudes_Firmantes_PersonasJuridicas" Role="SSIT_Solicitudes_Firmantes_PersonasJuridicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="SSIT_Solicitudes_Firmantes_PersonasJuridicas">
+              <PropertyRef Name="id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transf_Firmantes_PersonasJuridicas_Cargo">
+          <End Type="EncmiendaEntityes.Cargos" Role="Cargos" Multiplicity="0..1" />
+          <End Type="EncmiendaEntityes.Transf_Firmantes_PersonasJuridicas" Role="Transf_Firmantes_PersonasJuridicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="Transf_Firmantes_PersonasJuridicas">
+              <PropertyRef Name="id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transf_Firmantes_Solicitud_PersonasJuridicas_Cargo">
+          <End Type="EncmiendaEntityes.Cargos" Role="Cargos" Multiplicity="0..1" />
+          <End Type="EncmiendaEntityes.Transf_Firmantes_Solicitud_PersonasJuridicas" Role="Transf_Firmantes_Solicitud_PersonasJuridicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="Transf_Firmantes_Solicitud_PersonasJuridicas">
+              <PropertyRef Name="id_cargo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -40884,6 +40960,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Encomienda_Firmantes_PersonasJuridicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Encomienda_Firmantes_PersonasJuridicas">
               <MappingFragment StoreEntitySet="Encomienda_Firmantes_PersonasJuridicas">
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="cargo_firmante_pj" ColumnName="cargo_firmante_pj" />
                 <ScalarProperty Name="id_tipocaracter" ColumnName="id_tipocaracter" />
@@ -41121,7 +41198,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Transf_Firmantes_PersonasFisicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Transf_Firmantes_PersonasFisicas">
               <MappingFragment StoreEntitySet="Transf_Firmantes_PersonasFisicas">
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="id_tipocaracter" ColumnName="id_tipocaracter" />
                 <ScalarProperty Name="Nro_Documento" ColumnName="Nro_Documento" />
@@ -41137,7 +41213,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Transf_Firmantes_PersonasJuridicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Transf_Firmantes_PersonasJuridicas">
               <MappingFragment StoreEntitySet="Transf_Firmantes_PersonasJuridicas">
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
                 <ScalarProperty Name="cargo_firmante_pj" ColumnName="cargo_firmante_pj" />
                 <ScalarProperty Name="id_tipocaracter" ColumnName="id_tipocaracter" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -42548,7 +42624,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="SSIT_Solicitudes_Firmantes_PersonasJuridicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.SSIT_Solicitudes_Firmantes_PersonasJuridicas">
               <MappingFragment StoreEntitySet="SSIT_Solicitudes_Firmantes_PersonasJuridicas">
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
                 <ScalarProperty Name="Cuit" ColumnName="Cuit" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="cargo_firmante_pj" ColumnName="cargo_firmante_pj" />
@@ -42566,7 +42642,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="SSIT_Solicitudes_Firmantes_PersonasFisicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.SSIT_Solicitudes_Firmantes_PersonasFisicas">
               <MappingFragment StoreEntitySet="SSIT_Solicitudes_Firmantes_PersonasFisicas">
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
                 <ScalarProperty Name="Cuit" ColumnName="Cuit" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="id_tipocaracter" ColumnName="id_tipocaracter" />
@@ -43011,6 +43086,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Transf_Firmantes_Solicitud_PersonasJuridicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Transf_Firmantes_Solicitud_PersonasJuridicas">
               <MappingFragment StoreEntitySet="Transf_Firmantes_Solicitud_PersonasJuridicas">
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
                 <ScalarProperty Name="Cuit" ColumnName="Cuit" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="cargo_firmante_pj" ColumnName="cargo_firmante_pj" />

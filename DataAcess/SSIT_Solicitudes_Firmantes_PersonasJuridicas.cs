@@ -31,6 +31,7 @@ namespace DataAcess
         public string Email { get; set; }
         public string Cuit { get; set; }
         public Nullable<int> Cargo { get; set; }
+        public Nullable<int> id_cargo { get; set; }
     
         public virtual SSIT_Solicitudes_Titulares_PersonasJuridicas SSIT_Solicitudes_Titulares_PersonasJuridicas { get; set; }
         public virtual TipoDocumentoPersonal TipoDocumentoPersonal { get; set; }
@@ -38,5 +39,6 @@ namespace DataAcess
         public virtual SSIT_Solicitudes SSIT_Solicitudes { get; set; }
         public virtual ICollection<SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas> SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas { get; set; }
         public virtual Cargos Cargos { get; set; }
+        public virtual Cargos Cargos1 { get; set; }
     }
 }

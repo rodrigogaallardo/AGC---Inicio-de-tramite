@@ -30,11 +30,13 @@ namespace DataAcess
         public string cargo_firmante_pj { get; set; }
         public string Email { get; set; }
         public string Cuit { get; set; }
+        public Nullable<int> id_cargo { get; set; }
     
         public virtual TipoDocumentoPersonal TipoDocumentoPersonal { get; set; }
         public virtual TiposDeCaracterLegal TiposDeCaracterLegal { get; set; }
         public virtual Transf_Titulares_Solicitud_PersonasJuridicas Transf_Titulares_Solicitud_PersonasJuridicas { get; set; }
         public virtual Transf_Solicitudes Transf_Solicitudes { get; set; }
         public virtual ICollection<Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas> Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas { get; set; }
+        public virtual Cargos Cargos { get; set; }
     }
 }

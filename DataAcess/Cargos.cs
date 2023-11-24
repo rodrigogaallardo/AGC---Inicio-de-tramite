@@ -20,6 +20,10 @@ namespace DataAcess
             this.SSIT_Solicitudes_Firmantes_PersonasJuridicas = new HashSet<SSIT_Solicitudes_Firmantes_PersonasJuridicas>();
             this.Transf_Firmantes_PersonasFisicas = new HashSet<Transf_Firmantes_PersonasFisicas>();
             this.Transf_Firmantes_PersonasJuridicas = new HashSet<Transf_Firmantes_PersonasJuridicas>();
+            this.Encomienda_Firmantes_PersonasJuridicas = new HashSet<Encomienda_Firmantes_PersonasJuridicas>();
+            this.SSIT_Solicitudes_Firmantes_PersonasJuridicas1 = new HashSet<SSIT_Solicitudes_Firmantes_PersonasJuridicas>();
+            this.Transf_Firmantes_PersonasJuridicas1 = new HashSet<Transf_Firmantes_PersonasJuridicas>();
+            this.Transf_Firmantes_Solicitud_PersonasJuridicas = new HashSet<Transf_Firmantes_Solicitud_PersonasJuridicas>();
         }
     
         public int id_cargo { get; set; }
@@ -29,5 +33,9 @@ namespace DataAcess
         public virtual ICollection<SSIT_Solicitudes_Firmantes_PersonasJuridicas> SSIT_Solicitudes_Firmantes_PersonasJuridicas { get; set; }
         public virtual ICollection<Transf_Firmantes_PersonasFisicas> Transf_Firmantes_PersonasFisicas { get; set; }
         public virtual ICollection<Transf_Firmantes_PersonasJuridicas> Transf_Firmantes_PersonasJuridicas { get; set; }
+        public virtual ICollection<Encomienda_Firmantes_PersonasJuridicas> Encomienda_Firmantes_PersonasJuridicas { get; set; }
+        public virtual ICollection<SSIT_Solicitudes_Firmantes_PersonasJuridicas> SSIT_Solicitudes_Firmantes_PersonasJuridicas1 { get; set; }
+        public virtual ICollection<Transf_Firmantes_PersonasJuridicas> Transf_Firmantes_PersonasJuridicas1 { get; set; }
+        public virtual ICollection<Transf_Firmantes_Solicitud_PersonasJuridicas> Transf_Firmantes_Solicitud_PersonasJuridicas { get; set; }
     }
 }
