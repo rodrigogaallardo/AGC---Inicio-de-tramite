@@ -97,6 +97,7 @@ namespace SSIT.Solicitud.Transferencia
                 CargarTiposDeIngresosBrutos();
                 CargarTiposDeCaracterLegal();
                 CargarProvincias();
+                CargarCargos();
                 CargarDatosTitulares(IdSolicitud);
                 CargarDatosTitularesANT(IdSolicitud);
 
@@ -220,6 +221,18 @@ namespace SSIT.Solicitud.Transferencia
             ddlProvinciaPF.Items.Insert(0, string.Empty);
 
 
+        }
+
+        private void CargarCargos()
+        {
+            CargosBL cargosBl = new CargosBL();
+            var lstCargos = cargosBl.GetAll();
+
+            ddlCargos_FirPJ.DataValueField = "id_cargo";
+            ddlCargos_FirPJ.DataTextField = "nombre";
+            ddlCargos_FirPJ.DataSource = lstCargos;
+            ddlCargos_FirPJ.DataBind();
+            ddlCargos_FirPJ.Items.Insert(0, string.Empty);
         }
 
         private void CargarTiposDeDocumentoPersonal()
@@ -1341,13 +1354,13 @@ namespace SSIT.Solicitud.Transferencia
             txtDeptoPJ.Text = "";
             txtCPPJ.Text = "";
             txtTelefonoPJ.Text = "";
-            txtCargoFirPJ.Text = "";
             txtEmailPJ.Text = "";
             ValExiste_TitularPJ.Style["display"] = "none";
 
             ddlTipoSociedadPJ.ClearSelection();
             ddlProvinciaPJ.ClearSelection();
             ddlTipoIngresosBrutosPJ.ClearSelection();
+            ddlCargos_FirPJ.ClearSelection();
             CargarLocalidades(ddlProvinciaPJ, ddlLocalidadPJ);
 
             DataTable dt = dtFirmantesCargados();
@@ -1428,7 +1441,7 @@ namespace SSIT.Solicitud.Transferencia
             }
             else
             {
-                txtCargoFirPJ.Text = "";
+                ddlCargos_FirPJ.ClearSelection();
                 hid_CargosFir_seleccionado.Value = "";
                 rowCargoFirmantePJ.Style["display"] = "none";
             }
@@ -1451,7 +1464,7 @@ namespace SSIT.Solicitud.Transferencia
             txtNroDocumentoFirPJ.Text = "";
             txtEmailFirPJ.Text = "";
             ddlTipoCaracterLegalFirPJ.ClearSelection();
-            txtCargoFirPJ.Text = "";
+            ddlCargos_FirPJ.ClearSelection();
             rowCargoFirmantePJ.Style["display"] = "none";
             Req_CargoFirPJ.Style["display"] = "none";
             ValExiste_TipoNroDocFirPJ.Style["display"] = "none";
@@ -1485,7 +1498,7 @@ namespace SSIT.Solicitud.Transferencia
                     {
                         dt.Rows.Add(txtApellidosFirPJ.Text.Trim(), txtNombresFirPJ.Text.Trim(), ddlTipoDocumentoFirPJ.SelectedItem.Text.Trim(), txtNroDocumentoFirPJ.Text.Trim(),
                             ddlTipoCaracterLegalFirPJ.SelectedItem.Text, int.Parse(ddlTipoDocumentoFirPJ.SelectedValue), txtEmailFirPJ.Text.Trim(), int.Parse(ddlTipoCaracterLegalFirPJ.SelectedValue),
-                            txtCargoFirPJ.Text.Trim(), dt.Rows.Count);
+                            int.Parse(ddlCargos_FirPJ.SelectedValue), dt.Rows.Count);
 
                     }
 
@@ -1519,8 +1532,7 @@ namespace SSIT.Solicitud.Transferencia
                         dt.Rows[rowindex]["IdTipoDocPersonal"] = int.Parse(ddlTipoDocumentoFirPJ.SelectedValue);
                         dt.Rows[rowindex]["email"] = txtEmailFirPJ.Text.Trim();
                         dt.Rows[rowindex]["id_tipocaracter"] = int.Parse(ddlTipoCaracterLegalFirPJ.SelectedValue);
-                        dt.Rows[rowindex]["cargo_firmante_pj"] = txtCargoFirPJ.Text.Trim();
-                    }
+                        dt.Rows[rowindex]["cargo_firmante_pj"] = int.Parse(ddlCargos_FirPJ.SelectedValue) ;
 
 
                 }
@@ -1531,6 +1543,7 @@ namespace SSIT.Solicitud.Transferencia
 
                 if (Validation)
                     this.EjecutarScript(updgrdFirmantesPJ, "hidefrmAgregarFirmantePJ();");
+            }
             }
             catch (Exception ex)
             {
@@ -1561,9 +1574,9 @@ namespace SSIT.Solicitud.Transferencia
                 ddlTipoDocumentoFirPJ.SelectedValue = dr["IdTipoDocPersonal"].ToString();
                 ddlTipoCaracterLegalFirPJ.SelectedValue = dr["id_tipocaracter"].ToString();
 
-                txtCargoFirPJ.Text = dr["cargo_firmante_pj"].ToString();
+                ddlCargos_FirPJ.SelectedValue = dr["cargo_firmante_pj"].ToString();
 
-                if (!(String.IsNullOrWhiteSpace(txtCargoFirPJ.Text)))
+                if (!(String.IsNullOrWhiteSpace(ddlCargos_FirPJ.SelectedValue)))
                 {
                     rowCargoFirmantePJ.Style["display"] = "block";
                 }

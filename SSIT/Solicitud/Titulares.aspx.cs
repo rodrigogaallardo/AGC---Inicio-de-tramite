@@ -230,8 +230,8 @@ namespace SSIT
 
         private void CargarCargos()
         {
-            CargosBL cargosBL = new CargosBL();
-            var lstCargos = cargosBL.GetCargos();
+            CargosBL cargosBl = new CargosBL();
+            var lstCargos = cargosBl.GetAll();
 
             ddlCargos_FirPJ.DataValueField = "id_cargo";
             ddlCargos_FirPJ.DataTextField = "nombre";
@@ -239,8 +239,9 @@ namespace SSIT
             ddlCargos_FirPJ.DataBind();
             ddlCargos_FirPJ.Items.Insert(0, string.Empty);
 
-            
+
         }
+
         private void CargarTiposDeDocumentoPersonal()
         {
             TipoDocumentoPersonalBL tipoDocumentoPersonalBL = new TipoDocumentoPersonalBL();

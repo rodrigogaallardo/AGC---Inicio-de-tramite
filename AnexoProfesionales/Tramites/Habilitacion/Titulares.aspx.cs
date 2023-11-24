@@ -123,6 +123,7 @@ namespace AnexoProfesionales
                 CargarTiposDeIngresosBrutos();
                 CargarTiposDeCaracterLegal();
                 CargarProvincias();
+                CargarCargos();
                 CargarDatosTitulares(id_encomienda);
 
                 updAgregarPersonaFisica.Update();
@@ -205,6 +206,18 @@ namespace AnexoProfesionales
             ddlProvinciaPF.Items.Insert(0, string.Empty);
 
 
+        }
+
+        private void CargarCargos()
+        {
+            CargosBL cargosBl = new CargosBL();
+            var lstCargos = cargosBl.GetAll();
+
+            ddlCargos_FirPJ.DataValueField = "id_cargo";
+            ddlCargos_FirPJ.DataTextField = "nombre";
+            ddlCargos_FirPJ.DataSource = lstCargos;
+            ddlCargos_FirPJ.DataBind();
+            ddlCargos_FirPJ.Items.Insert(0, string.Empty);
         }
 
         private void CargarTiposDeDocumentoPersonal()
@@ -979,13 +992,13 @@ namespace AnexoProfesionales
             txtTorrePJ.Text = "";
             txtCPPJ.Text = "";
             txtTelefonoPJ.Text = "";
-            txtCargoFirPJ.Text = "";
             txtEmailPJ.Text = "";
             ValExiste_TitularPJ.Style["display"] = "none";
 
             ddlTipoSociedadPJ.ClearSelection();
             ddlProvinciaPJ.ClearSelection();
             ddlTipoIngresosBrutosPJ.ClearSelection();
+            ddlCargos_FirPJ.ClearSelection();
             CargarLocalidades(ddlProvinciaPJ, ddlLocalidadPJ);
 
             DataTable dt = dtFirmantesCargados();
@@ -1066,7 +1079,7 @@ namespace AnexoProfesionales
             }
             else
             {
-                txtCargoFirPJ.Text = "";
+                ddlCargos_FirPJ.ClearSelection();
                 hid_CargosFir_seleccionado.Value = "";
                 rowCargoFirmantePJ.Style["display"] = "none";
             }
@@ -1089,7 +1102,7 @@ namespace AnexoProfesionales
             txtNroDocumentoFirPJ.Text = "";
             txtEmailFirPJ.Text = "";
             ddlTipoCaracterLegalFirPJ.ClearSelection();
-            txtCargoFirPJ.Text = "";
+            ddlCargos_FirPJ.ClearSelection();
             rowCargoFirmantePJ.Style["display"] = "none";
             Req_CargoFirPJ.Style["display"] = "none";
             ValExiste_TipoNroDocFirPJ.Style["display"] = "none";
@@ -1121,7 +1134,7 @@ namespace AnexoProfesionales
                 {
                     dt.Rows.Add(txtApellidosFirPJ.Text.Trim(), txtNombresFirPJ.Text.Trim(), ddlTipoDocumentoFirPJ.SelectedItem.Text.Trim(), txtNroDocumentoFirPJ.Text.Trim(),
                         ddlTipoCaracterLegalFirPJ.SelectedItem.Text, int.Parse(ddlTipoDocumentoFirPJ.SelectedValue), txtEmailFirPJ.Text.Trim(), int.Parse(ddlTipoCaracterLegalFirPJ.SelectedValue),
-                        txtCargoFirPJ.Text.Trim(), dt.Rows.Count);
+                        int.Parse(ddlCargos_FirPJ.SelectedValue), dt.Rows.Count);
 
                 }
 
@@ -1155,7 +1168,7 @@ namespace AnexoProfesionales
                     dt.Rows[rowindex]["id_tipodoc_personal"] = int.Parse(ddlTipoDocumentoFirPJ.SelectedValue);
                     dt.Rows[rowindex]["email"] = txtEmailFirPJ.Text.Trim();
                     dt.Rows[rowindex]["id_tipocaracter"] = int.Parse(ddlTipoCaracterLegalFirPJ.SelectedValue);
-                    dt.Rows[rowindex]["cargo_firmante_pj"] = txtCargoFirPJ.Text.Trim();
+                    dt.Rows[rowindex]["cargo_firmante_pj"] = int.Parse(ddlCargos_FirPJ.SelectedValue) ;
                 }
 
 
@@ -1188,9 +1201,9 @@ namespace AnexoProfesionales
             ddlTipoDocumentoFirPJ.SelectedValue = dr["id_tipodoc_personal"].ToString();
             ddlTipoCaracterLegalFirPJ.SelectedValue = dr["id_tipocaracter"].ToString();
 
-            txtCargoFirPJ.Text = dr["cargo_firmante_pj"].ToString();
+           ddlCargos_FirPJ.SelectedValue = dr["cargo_firmante_pj"].ToString();
 
-            if (txtCargoFirPJ.Text.Length > 0)
+            if (ddlCargos_FirPJ.SelectedValue.Length > 0)
             {
                 rowCargoFirmantePJ.Style["display"] = "block";
             }

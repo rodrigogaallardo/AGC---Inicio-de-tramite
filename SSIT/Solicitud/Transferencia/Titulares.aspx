@@ -1288,8 +1288,9 @@
                                                 <asp:Label runat="server" class="control-label col-sm-3">Cargo (*):</asp:Label>
                                                 <div class="col-sm-9 mleft5">
                                                     <asp:HiddenField ID="hid_CargosFir_seleccionado" runat="server" />
-                                                    <asp:TextBox ID="txtCargoFirPJ" runat="server" MaxLength="50" Width="350px"></asp:TextBox>
-                                                    <i class="imoon imoon-question mleft5" title="Selecciona el cargo. Si el mismo no se encuentra, escribilo y luego presiona <TAB> o <ENTER>" data-toggle="tooltip"></i>
+                                                    <asp:DropDownList ID="ddlCargos_FirPJ" runat="server" Width="300px" CssClass="form-control"
+                                                        AutoPostBack="true" OnSelectedIndexChanged="ddlCargo_SelecedIndexChanged">
+                                                    </asp:DropDownList>
                                                     <asp:Panel ID="Req_CargoFirPJ" runat="server" CssClass="field-validation-error" Style="display: none;">
                                                         Debe ingresar el cargo que ocupa.
                                                     </asp:Panel>
@@ -1751,21 +1752,21 @@
             toolTips();
 
             var strData = $("#<%: hid_CargosFirPJ.ClientID %>").val().split(",");
-            $("#<%: txtCargoFirPJ.ClientID %>").select2({
+            $("#<%: ddlCargos_FirPJ.ClientID %>").select2({
                 maximumSelectionSize: 1,
                 tags: strData,
                 tokenSeparators: [","]
             });
 
-            $("#<%: txtCargoFirPJ.ClientID %>").on("change", function () {
-                $("#<%: hid_CargosFirSH_seleccionado.ClientID %>").val($("#<%: txtCargoFirPJ.ClientID %>").select2("val"));
+            $("#<%: ddlCargos_FirPJ.ClientID %>").on("change", function () {
+                $("#<%: hid_CargosFirSH_seleccionado.ClientID %>").val($("#<%: ddlCargos_FirPJ.ClientID %>").select2("val"));
             });
 
             $("#<%: ddlTipoCaracterLegalFirPJ.ClientID %>").on("change", function (e) {
                 $("#Req_TipoCaracterLegalFirPJ").hide();
             });
 
-            $("#<%: txtCargoFirPJ.ClientID %>").on("change", function (event) {
+            $("#<%: ddlCargos_FirPJ.ClientID %>").on("change", function (event) {
                 $("#<%: Req_CargoFirPJ.ClientID %>").hide();
             });
         }
@@ -2199,7 +2200,7 @@
             // Se valida el cargo solo cuando el panel está visible
             if ($("#<%: rowCargoFirmantePJ.ClientID %>").css("display") != "none") {
 
-                if ($.trim($("#<%: txtCargoFirPJ.ClientID %>").val()).length == 0) {
+                if ($.trim($("#<%: ddlCargos_FirPJ.ClientID %>").val()).length == 0) {
                     $("#<%: Req_CargoFirPJ.ClientID %>").css("display", "inline-block");
                     ret = false;
                 }

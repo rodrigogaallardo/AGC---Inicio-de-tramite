@@ -1935,7 +1935,7 @@
         }
         function incializarCargoFirPJ() {
 
-            $("[id*='s2id_MainContent_txtCargoFirPJ']").popover({ placement: "top", rel: "popover", content: "Selecciona el cargo. Si el mismo no se encuentra, escribilo y luego presiona <TAB> o <ENTER>", trigger: "focus" });
+            $("[id*='s2id_MainContent_txtCargoFirPJ']").popover({ placement: "top", rel: "popover", content: "Selecciona el cargo. Si el mismo no se encuentra, comunicarse con la AGC", trigger: "focus" });
         }
 
 
