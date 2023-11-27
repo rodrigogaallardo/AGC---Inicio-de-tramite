@@ -2408,6 +2408,17 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.Ley962_TiposDeD
           <Property Name="Clave" Type="float" />
           <Property Name="Excluir" Type="bit" />
         </EntityType>
+        <EntityType Name="Login_Tad_Token">
+          <Key>
+            <PropertyRef Name="login_tad_token_id" />
+          </Key>
+          <Property Name="login_tad_token_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="uniqueidentifier" />
+          <Property Name="tokenJWT" Type="nvarchar(max)" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="ExpireDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="MasBuscados">
           <Key>
             <PropertyRef Name="id_masbuscados" />
@@ -3011,6 +3022,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.Ley962_TiposDeD
           <Property Name="idCondicionIncendio" Type="int" />
           <Property Name="SoloAPRA" Type="bit" Nullable="false" />
           <Property Name="SinBanioPCD" Type="bit" />
+          <Property Name="CondicionExpress" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RubrosCN_Config_Incendio">
           <Key>
@@ -3037,6 +3049,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.RubrosCN_Histor
             <PropertyRef Name="LibrarUso" />
             <PropertyRef Name="CreateDate" />
             <PropertyRef Name="CreateUser" />
+            <PropertyRef Name="CondicionExpress" />
           </Key>
           <Property Name="IdRubrosCN_historial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo_operacion" Type="nvarchar" MaxLength="2" Nullable="false" />
@@ -3065,6 +3078,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.RubrosCN_Histor
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
           <Property Name="Asistentes350" Type="bit" />
           <Property Name="SinBanioPCD" Type="bit" />
+          <Property Name="CondicionExpress" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RubrosCN_InformacionRelevante">
           <Key>
@@ -9978,6 +9992,18 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.vis_Certificado
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_login_tad_token_login_tad_token">
+          <End Role="Login_Tad_Token" Type="Self.Login_Tad_Token" Multiplicity="1" />
+          <End Role="Login_Tad_Token1" Type="Self.Login_Tad_Token" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login_Tad_Token">
+              <PropertyRef Name="login_tad_token_id" />
+            </Principal>
+            <Dependent Role="Login_Tad_Token1">
+              <PropertyRef Name="login_tad_token_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <!--Errores durante la generación:
 advertencia 6035: La relación 'FK_MasBuscados_Categorias' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_MasBuscados_Categorias" />-->
@@ -15327,6 +15353,9 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Parameter Name="id_resultado" Type="int" Mode="In" />
           <Parameter Name="id_tramitetarea" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_Token_Tad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="GetIdCircuitoHAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="id_solicitud" Type="int" Mode="In" />
         </Function>
@@ -15341,6 +15370,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
         <Function Name="GetMixDistritoZonaySubZonaByTR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idSolicitud" Type="int" Mode="In" />
           <Parameter Name="result" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="Insert_Login_Tad_Token" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="tokenJWT" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="RubrosDepositosCN_Evaluar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_tramite" Type="int" Mode="In" />
@@ -15548,6 +15581,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySet Name="Ley257_Solicitudes_HistorialEstados" EntityType="Self.Ley257_Solicitudes_HistorialEstados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ley257_Solicitudes_Pagos" EntityType="Self.Ley257_Solicitudes_Pagos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login_Tad_Token" EntityType="Self.Login_Tad_Token" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasBuscados" EntityType="Self.MasBuscados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Niveles_Agrupamiento" EntityType="Self.Niveles_Agrupamiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
@@ -16004,7 +16038,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
     [RubrosCN_Historial].[LastUpdateDate] AS [LastUpdateDate], 
     [RubrosCN_Historial].[LastUpdateUser] AS [LastUpdateUser], 
     [RubrosCN_Historial].[Asistentes350] AS [Asistentes350], 
-    [RubrosCN_Historial].[SinBanioPCD] AS [SinBanioPCD] 
+    [RubrosCN_Historial].[SinBanioPCD] AS [SinBanioPCD], 
+    [RubrosCN_Historial].[CondicionExpress] AS [CondicionExpress]
     FROM [dbo].[RubrosCN_Historial] AS [RubrosCN_Historial]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SSIT_Solicitudes_bk" EntityType="Self.SSIT_Solicitudes_bk" store:Type="Tables" store:Schema="dbo">
@@ -17468,6 +17503,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <AssociationSet Name="FK_Localidad_Provincia" Association="Self.FK_Localidad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_login_tad_token_login_tad_token" Association="Self.FK_login_tad_token_login_tad_token">
+            <End Role="Login_Tad_Token" EntitySet="Login_Tad_Token" />
+            <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
           </AssociationSet>
           <AssociationSet Name="FK_Parametros_Bandeja_Rubro_Rubros" Association="Self.FK_Parametros_Bandeja_Rubro_Rubros">
             <End Role="Rubros" EntitySet="Rubros" />
@@ -22641,6 +22680,18 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="TipoActividad" EntitySet="TipoActividad" />
             <End Role="CPadron_RubrosCN" EntitySet="CPadron_RubrosCN" />
           </AssociationSet>
+          <EntitySet Name="Login_Tad_Token" EntityType="EncmiendaEntityes.Login_Tad_Token" />
+          <AssociationSet Name="FK_login_tad_token_login_tad_token" Association="EncmiendaEntityes.FK_login_tad_token_login_tad_token">
+            <End Role="Login_Tad_Token" EntitySet="Login_Tad_Token" />
+            <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
+          </AssociationSet>
+          <FunctionImport Name="Get_Token_Tad" ReturnType="Collection(String)">
+          <Parameter Name="userId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Login_Tad_Token">
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+            <Parameter Name="tokenJWT" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -35843,6 +35894,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <PropertyRef Name="LibrarUso" />
             <PropertyRef Name="CreateDate" />
             <PropertyRef Name="CreateUser" />
+            <PropertyRef Name="CondicionExpress" />
           </Key>
           <Property Name="IdRubrosCN_historial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo_operacion" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
@@ -35871,6 +35923,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Property Name="LastUpdateUser" Type="Guid" />
           <Property Name="Asistentes350" Type="Boolean" />
           <Property Name="SinBanioPCD" Type="Boolean" />
+          <Property Name="CondicionExpress" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SSIT_Solicitudes_bk">
           <Key>
@@ -38748,6 +38801,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="SSIT_Solicitudes_RubrosCN" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="SSIT_Solicitudes_RubrosCN" />
           <NavigationProperty Name="Ubicaciones_Distritos_Excepciones_RubrosCN" Relationship="EncmiendaEntityes.FK_Ubicaciones_Distritos_Excepciones_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="Ubicaciones_Distritos_Excepciones_RubrosCN" />
           <NavigationProperty Name="CPadron_RubrosCN" Relationship="EncmiendaEntityes.FK_CPadron_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="CPadron_RubrosCN" />
+          <Property Name="CondicionExpress" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__RubrosCN__idCond__45FB7418">
           <End Type="EncmiendaEntityes.CondicionesIncendio" Role="CondicionesIncendio" Multiplicity="0..1" />
@@ -39031,6 +39085,31 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             </Principal>
             <Dependent Role="CPadron_RubrosCN">
               <PropertyRef Name="id_tipoactividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Login_Tad_Token">
+          <Key>
+            <PropertyRef Name="login_tad_token_id" />
+          </Key>
+          <Property Name="login_tad_token_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Guid" />
+          <Property Name="tokenJWT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Login_Tad_Token1" Relationship="EncmiendaEntityes.FK_login_tad_token_login_tad_token" FromRole="Login_Tad_Token" ToRole="Login_Tad_Token1" />
+          <NavigationProperty Name="Login_Tad_Token2" Relationship="EncmiendaEntityes.FK_login_tad_token_login_tad_token" FromRole="Login_Tad_Token1" ToRole="Login_Tad_Token" />
+        </EntityType>
+        <Association Name="FK_login_tad_token_login_tad_token">
+          <End Type="EncmiendaEntityes.Login_Tad_Token" Role="Login_Tad_Token" Multiplicity="1" />
+          <End Type="EncmiendaEntityes.Login_Tad_Token" Role="Login_Tad_Token1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login_Tad_Token">
+              <PropertyRef Name="login_tad_token_id" />
+            </Principal>
+            <Dependent Role="Login_Tad_Token1">
+              <PropertyRef Name="login_tad_token_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -45586,6 +45665,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="RubrosCN_Historial">
             <EntityTypeMapping TypeName="EncmiendaEntityes.RubrosCN_Historial">
               <MappingFragment StoreEntitySet="RubrosCN_Historial">
+                <ScalarProperty Name="CondicionExpress" ColumnName="CondicionExpress" />
                 <ScalarProperty Name="SinBanioPCD" ColumnName="SinBanioPCD" />
                 <ScalarProperty Name="Asistentes350" ColumnName="Asistentes350" />
                 <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
@@ -45974,6 +46054,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="RubrosCN">
             <EntityTypeMapping TypeName="EncmiendaEntityes.RubrosCN">
               <MappingFragment StoreEntitySet="RubrosCN">
+                <ScalarProperty Name="CondicionExpress" ColumnName="CondicionExpress" />
                 <ScalarProperty Name="SinBanioPCD" ColumnName="SinBanioPCD" />
                 <ScalarProperty Name="SoloAPRA" ColumnName="SoloAPRA" />
                 <ScalarProperty Name="idCondicionIncendio" ColumnName="idCondicionIncendio" />
@@ -46021,6 +46102,20 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Login_Tad_Token">
+            <EntityTypeMapping TypeName="EncmiendaEntityes.Login_Tad_Token">
+              <MappingFragment StoreEntitySet="Login_Tad_Token">
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="tokenJWT" ColumnName="tokenJWT" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="login_tad_token_id" ColumnName="login_tad_token_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Get_Token_Tad" FunctionName="EncmiendaEntityes.Store.Get_Token_Tad" />
+          <FunctionImportMapping FunctionImportName="Insert_Login_Tad_Token" FunctionName="EncmiendaEntityes.Store.Insert_Login_Tad_Token" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

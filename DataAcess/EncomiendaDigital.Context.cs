@@ -490,6 +490,7 @@ namespace DataAcess
         public DbSet<CondicionesIncendio> CondicionesIncendio { get; set; }
         public DbSet<RubrosCN> RubrosCN { get; set; }
         public DbSet<CPadron_RubrosCN> CPadron_RubrosCN { get; set; }
+        public DbSet<Login_Tad_Token> Login_Tad_Token { get; set; }
     
         public virtual int ENG_Bandeja_Asignar(Nullable<int> id_tramitetarea, Nullable<System.Guid> userid_a_asignar, Nullable<System.Guid> userid_asignador)
         {
@@ -815,6 +816,28 @@ namespace DataAcess
                 new ObjectParameter("Sistema", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RubrosDepositosCN_Evaluar_Result>("RubrosDepositosCN_Evaluar", id_tramiteParameter, idDepositoParameter, superficieCubiertaParameter, zonaMixturaParameter, sistemaParameter);
+        }
+    
+        public virtual ObjectResult<string> Get_Token_Tad(Nullable<System.Guid> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Get_Token_Tad", userIdParameter);
+        }
+    
+        public virtual int Insert_Login_Tad_Token(Nullable<System.Guid> userId, string tokenJWT)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(System.Guid));
+    
+            var tokenJWTParameter = tokenJWT != null ?
+                new ObjectParameter("tokenJWT", tokenJWT) :
+                new ObjectParameter("tokenJWT", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Login_Tad_Token", userIdParameter, tokenJWTParameter);
         }
     }
 }

@@ -2,6 +2,7 @@
 using DataTransferObject;
 using ExternalService;
 using ExternalService.Class;
+using SSIT.Account;
 using StaticClass;
 using System;
 using System.Collections.Generic;
@@ -452,6 +453,63 @@ namespace SSIT.Common
                 }
             }
 
+        }
+        public static CuitsRelacionadosPOST isCuitsRelacionadosJWT(string cuitAValidar, bool validar, string cuitRepresentado, string tokenMIBA)
+        {
+            string sign = "";
+            AuthenticateAGIPProc authenticateAGIPProc = new AuthenticateAGIPProc();
+            CuitsRelacionadosPOST cuitsRelacionados = new CuitsRelacionadosPOST();
+            if (validar)
+            {
+                Datos datosToken = authenticateAGIPProc.GetDatosTokenMiBA(tokenMIBA, ref sign);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Representados = ");
+                foreach (var representado in datosToken.Representados)
+                {
+                    sb.AppendLine(representado.ToString());
+                }
+                LogError.Write(new Exception(sb.ToString()));
+                bool isCuitAValidarInAutenticado = datosToken.Autenticado != null &&
+                    datosToken.Autenticado.Cuit == cuitAValidar;
+                LogError.Write(new Exception($"isCuitAValidarInAutenticado = { isCuitAValidarInAutenticado}"));
+                List<Representado> representados = datosToken.Representados;
+
+                bool isCuitRepresentadoInList = false;
+                foreach (var representado in representados)
+                {
+                    bool isCuitRepresentado = (representado != null &&
+                        representado.Cuit == cuitRepresentado);
+                    if (isCuitRepresentado)
+                    {
+                        isCuitRepresentadoInList = isCuitRepresentado;
+                        break;
+                    }
+                }
+                LogError.Write(new Exception("isCuitRepresentadoInList = " + isCuitRepresentadoInList));
+                if (isCuitAValidarInAutenticado && isCuitRepresentadoInList)
+                {
+                    cuitsRelacionados.result = new Result();
+                    cuitsRelacionados.result.msg = true;
+                    cuitsRelacionados.status = "Los cuits estan relacionados";
+                    cuitsRelacionados.statusCode = 200;
+                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}"));
+                }
+                else
+                {
+                    cuitsRelacionados.result = new Result();
+                    cuitsRelacionados.result.msg = false;
+                    cuitsRelacionados.status = "Los cuits NO estan relacionados";
+                    cuitsRelacionados.statusCode = 200;
+                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}"));
+                }
+            }
+            else
+            {
+                cuitsRelacionados.result.msg = true;
+                cuitsRelacionados.status = "Se salteo la validacion";
+                cuitsRelacionados.statusCode = 100;
+            }
+                return cuitsRelacionados;
         }
         public static CuitsRelacionadosPOST isCuitsRelacionados(string cuitAValidar, bool cuitAValidarSpecified, string cuitRepresentado, bool cuitRepresentadoSpecified, Guid user)
         {
