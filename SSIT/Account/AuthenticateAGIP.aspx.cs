@@ -1,7 +1,5 @@
-﻿using ExternalService.Class;
-using SSIT.App_Components;
+﻿using SSIT.App_Components;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -18,7 +16,7 @@ namespace SSIT.Account
         [XmlElement(ElementName = "autenticado")]
         public Autenticado Autenticado { get; set; }
         [XmlElement(ElementName = "representados")]
-        public List<Representado> Representados { get; set; }
+        public Representados Representados { get; set; }
     }
 
 
@@ -118,11 +116,6 @@ namespace SSIT.Account
         public string Documento { get; set; }
         [XmlAttribute(AttributeName = "elegido")]
         public string Elegido { get; set; }
-
-        public override string ToString()
-        {
-            return $"Cuit: {Cuit}, TipoRepresentacion: {TipoRepresentacion}, TipoDocumento: {TipoDocumento}, Documento: {Documento}";
-        }
     }
 
     [XmlRoot(ElementName = "representados")]
@@ -141,33 +134,11 @@ namespace SSIT.Account
     public class DatosMiBA
     {
         public Personalogin personaLogin { get; set; }
-        public int? idTad { get; set; }
+        public object idTad { get; set; }
         public Apoderados apoderados { get; set; }
-        public int? tipoTramite { get; set; }
-        public Poderdantes[] poderdantes { get; set; }
+        public object tipoTramite { get; set; }
+        public object[] poderdantes { get; set; }
     }
-
-    public class Poderdantes
-    {
-        public int? id { get; set; }
-        public bool permisoMisDatos { get; set; }
-        public bool permisoApoderamiento { get; set; }
-        public bool permisoAllTipoTramite { get; set; }
-        public long? fechaAlta { get; set; }
-        public long? fechaBaja { get; set; }
-        public long? fechaVencimiento { get; set; }
-        public long? fechaRechazo { get; set; }
-        public bool permisoNotifExterna { get; set; }
-        public bool permisoHabilitacionesAGC { get; set; }
-        public bool habilitadoNefGenerales { get; set; }
-        public bool habilitadoNefConfidenciales { get; set; }
-        public bool? habilitadaVista360 { get; set; }
-        public Persona apoderado { get; set; }
-        public Persona poderdante { get; set; }
-        public Persona solicitante { get; set; }
-
-    }
-
 
     public class Personalogin
     {
@@ -180,7 +151,6 @@ namespace SSIT.Account
         public string codigoPostal { get; set; }
         public object telefono { get; set; }
         public object observaciones { get; set; }
-
     }
 
     public class Persona
@@ -188,7 +158,7 @@ namespace SSIT.Account
         public int? id { get; set; }
         public string nombres { get; set; }
         public string apellidos { get; set; }
-        public string razonSocial { get; set; }
+        public object razonSocial { get; set; }
         public string cuit { get; set; }
         public string tipoDocumento { get; set; }
         public string numeroDocumento { get; set; }
@@ -199,14 +169,14 @@ namespace SSIT.Account
         public string email { get; set; }
         public int? usuarioCreacion { get; set; }
         public long? fechaAlta { get; set; }
-        public int? usuarioModificacion { get; set; }
+        public object usuarioModificacion { get; set; }
         public long? fechaModificacion { get; set; }
         public string tipoPersona { get; set; }
         public int? valiRenaper { get; set; }
         public Terminosycondiciones terminosYCondiciones { get; set; }
-        public SistemaConsumidor sistemaConsumidor { get; set; }
-        public string baId { get; set; }
-        public bool? habilitadaVista360 { get; set; }
+        public object sistemaConsumidor { get; set; }
+        public object baId { get; set; }
+        public object habilitadaVista360 { get; set; }
     }
 
     public class Terminosycondiciones
