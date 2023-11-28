@@ -50,13 +50,11 @@ namespace SSIT.Account
 
                     if (validarToken(token, sign))
                     {
+
+
                         Datos datosToken = GetDatosTokenMiBA(token,ref sign);
                         if (datosToken == null)
-                        {
-                            Exception tokenNull = new Exception("No se ha podido recuperar los datos del token de AGIP.");
-                            LogError.Write(tokenNull);
-                            throw tokenNull;
-                        } 
+                            throw new Exception("No se ha podido recuperar los datos del token de AGIP.");
 
                     
 
@@ -81,7 +79,6 @@ namespace SSIT.Account
                     }
                     else
                     {
-                        LogError.Write(new Exception("El token es inválido con respecto a la firma. Token" + token));
                         throw new Exception("El token es inválido con respecto a la firma.");
                     }
                 }
@@ -131,7 +128,7 @@ namespace SSIT.Account
             return ret;
 
         }
-        public Datos GetDatosTokenMiBA(string token, ref string sign  )
+        private Datos GetDatosTokenMiBA(string token, ref string sign  )
         {
           
             string[] tokenParts = token.Split('.');
@@ -169,30 +166,24 @@ namespace SSIT.Account
             autenticado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
             datosToken.Autenticado = autenticado;
 
-            List<Representado> representados = new List<Representado>();
+            Representados representados = new Representados();
             Representado representado = new Representado();
 
-            if (datosMiBA.poderdantes != null && datosMiBA.poderdantes.Length > 0)
+            if (datosMiBA.apoderados != null)
             {
-                foreach (var poderdante in datosMiBA.poderdantes)
-                {
-                    representado = new Representado();
-                    representado.Cuit = (poderdante.poderdante == null) ? "" : poderdante.poderdante.cuit;
-                    representado.Nombre = (poderdante.poderdante == null) ? "" : poderdante.poderdante.nombres + " " + poderdante.poderdante.apellidos;
-                    representado.Isib = "";
-                    representado.Codcalle = "";
-                    representado.Calle = "";
-                    representado.Puerta = "";
-                    representado.Codpostal = "";
-                    representado.Telefono = (poderdante.poderdante == null) ? "" : poderdante.poderdante.telefono;
-                    representado.Email = (poderdante.poderdante == null) ? "" : poderdante.poderdante.email;
-                    representado.TipoRepresentacion = "";
-                    representado.TipoDocumento = (poderdante.poderdante == null) ? "" : poderdante.poderdante.tipoDocumento;
-                    representado.Documento = (poderdante.poderdante == null) ? "" : poderdante.poderdante.numeroDocumento;
-                    representado.Elegido = true.ToString();
-                    representados.Add(representado);
-                }
-                
+                representado.Cuit = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.cuit;
+                representado.Nombre = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.nombres + " " + datosMiBA.apoderados.persona.apellidos;
+                representado.Isib = "";
+                representado.Codcalle = "";
+                representado.Calle = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.calle;
+                representado.Puerta = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.altura;
+                representado.Codpostal = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.codigoPostal;
+                representado.Telefono = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.telefono;
+                representado.Email = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.email;
+                representado.TipoRepresentacion = "";//ASOSA
+                representado.TipoDocumento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.tipoDocumento;
+                representado.Documento = (datosMiBA.apoderados.persona == null) ? "" : datosMiBA.apoderados.persona.numeroDocumento;
+                representado.Elegido = true.ToString();
             }
             else
             {
@@ -210,7 +201,7 @@ namespace SSIT.Account
                 representado.Documento = datosMiBA.personaLogin.persona.numeroDocumento;
                 representado.Elegido = true.ToString();
             }
-
+            representados.Representado = representado;
             datosToken.Representados = representados;
             #endregion
 
@@ -319,10 +310,6 @@ namespace SSIT.Account
                 usuarioBl.Insert(usuario, null);
             else
                 usuarioBl.Update(usuario);
-            //TODO: Insertar Token en db
-            #region guardar token JWT
-            usuarioBl.InserTokenTad(usuario, token);
-            #endregion guardar token JWT
         }
         private void GenerarTicketAutenticacion(string username)
         {
@@ -346,20 +333,6 @@ namespace SSIT.Account
             JWT jwt = new JWT(token);
             TokenValido = jwt.ValidateJwt();
             return TokenValido;
-        }
-
-        public string GetTokenTAD(Guid userid)
-        {
-            string tokenTAD = "";
-            UsuarioBL usuarioBl = new UsuarioBL();
-
-            var usuario = usuarioBl.Single(userid);
-            if (usuario == null)
-            {
-                return tokenTAD;
-            }
-            tokenTAD = usuarioBl.GetTokenTad(usuario);
-            return tokenTAD;
         }
 
         private string GetUserErrorMessage(MembershipCreateStatus status)

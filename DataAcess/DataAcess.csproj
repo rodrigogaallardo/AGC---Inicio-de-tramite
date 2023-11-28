@@ -710,9 +710,6 @@
     <Compile Include="Localidad.cs">
       <DependentUpon>EncomiendaDigital.tt</DependentUpon>
     </Compile>
-    <Compile Include="Login_Tad_Token.cs">
-      <DependentUpon>EncomiendaDigital.tt</DependentUpon>
-    </Compile>
     <Compile Include="MasBuscados.cs">
       <DependentUpon>EncomiendaDigital.tt</DependentUpon>
     </Compile>

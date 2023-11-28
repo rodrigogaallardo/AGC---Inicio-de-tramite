@@ -4,8 +4,6 @@ using ExternalService;
 using SSIT.Common;
 using StaticClass;
 using System;
-using System.Web;
-using System.Web.Http.Metadata;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -19,6 +17,7 @@ namespace SSIT
         protected void Page_Load(object sender, EventArgs e)
         {
             var DivcontendorGral = (HtmlControl)Master.FindControl("contendorGral");
+
             DivcontendorGral.Attributes.Add("class", "container-fluid");
             MembershipUser usu = Membership.GetUser();
 
