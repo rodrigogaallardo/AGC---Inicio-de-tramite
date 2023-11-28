@@ -186,13 +186,13 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
             var solBl = new SSITSolicitudesBL();
             var sol = solBl.Single(id_solicitud);
-
+            bool CondicionExpress = false;
             updTramiteCAA.Visible = true;
 
             //el Btn Ingresar A SIPSA y Buscar solo se muestran cuando la sol esta en estado datos Confirmados y Observado
             if (MostrarPanelesCAA.Contains(sol.IdEstado))
             {
-                bool CondicionExpress = false;
+                
                 foreach (var _encomiendas in lst_encomiendas)
                 {
                     foreach (var rubrosCN in _encomiendas.EncomiendaRubrosCNDTO)
@@ -347,8 +347,11 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             }
             else
             {
-                btnGenerarCAA.Visible = true;
-                DivBtnSIPSAExpress.Visible = true;
+                if (CondicionExpress)
+                {
+                    btnGenerarCAA.Visible = true;
+                    DivBtnSIPSAExpress.Visible = true;
+                }
             }
             if (_lstCaa.Count() <= 0)
             {
