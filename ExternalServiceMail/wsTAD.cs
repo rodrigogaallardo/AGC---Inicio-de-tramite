@@ -40,7 +40,9 @@ namespace ExternalService
         {
             int idTad = 0;
             string uriString = _urlESB + "/tiposTramite/" + codTrata + "/tramites";
-
+            //ignorar validacion de https en ambiente de prueba
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             RestClient clientrest = new RestClient();
             clientrest.BaseUrl = new Uri(uriString);
             RestRequest request = new RestRequest();
@@ -83,6 +85,9 @@ namespace ExternalService
         public static void actualizarTramite(string _urlESB, int idTramite, int idSolicitud, string numeroExpediente, string tipoTramite, string ubicacion)
         {
             string uriString = _urlESB + "/tramites/" + idTramite;
+            //ignorar validacion de https en ambiente de prueba
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             RestClient clientrest = new RestClient();
             clientrest.BaseUrl = new Uri(uriString);
@@ -132,7 +137,8 @@ namespace ExternalService
             {
                 BaseUrl = new Uri(url)
             };
-
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             clientrest.Encoding = Encoding.GetEncoding("ISO-8859-1");
 
             RestRequest request = new RestRequest
