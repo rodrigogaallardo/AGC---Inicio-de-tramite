@@ -1288,8 +1288,8 @@
                                                 <asp:Label runat="server" class="control-label col-sm-3">Cargo (*):</asp:Label>
                                                 <div class="col-sm-9 mleft5">
                                                     <asp:HiddenField ID="hid_CargosFir_seleccionado" runat="server" />
-                                                    <asp:DropDownList ID="ddlCargos_FirPJ" runat="server" Width="300px" CssClass="form-control"
-                                                        AutoPostBack="true" OnSelectedIndexChanged="ddlCargo_SelecedIndexChanged">
+                                                    <asp:DropDownList ID="ddlCargos_FirPJ" runat="server" Width="300px" CssClass="form-control" >
+                                                      
                                                     </asp:DropDownList>
                                                     <asp:Panel ID="Req_CargoFirPJ" runat="server" CssClass="field-validation-error" Style="display: none;">
                                                         Debe ingresar el cargo que ocupa.

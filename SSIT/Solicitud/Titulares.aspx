@@ -1298,7 +1298,6 @@
                                                 Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endRequestHandler);
                                                 function endRequestHandler() {
                                                     inicializar_popover();
-                                                    incializarCargoFirPJ();
                                                 }
 
                                             </script>
@@ -1333,11 +1332,11 @@
                                                     <asp:Label runat="server" class="control-label col-sm-3">Cargo (*):</asp:Label>
                                                     <div class="col-sm-8">
                                                         <asp:HiddenField ID="hid_CargosFir_seleccionado" runat="server" />
-                                                        <asp:DropDownList ID="ddlCargos_FirPJ" runat="server" Width="300px" CssClass="form-control"
-                                                            AutoPostBack="true" OnSelectedIndexChanged="ddlCargo_SelecedIndexChanged">
+                                                        <asp:DropDownList ID="ddlCargos_FirPJ" runat="server" Width="300px" CssClass="form-control">
+                                                            
                                                         </asp:DropDownList>
                                                         <asp:Panel ID="Req_CargoFirPJ" runat="server" CssClass="field-validation-error" Style="display: none;">
-                                                            Debe ingresar el cargo que ocupa.
+                                                            Debe seleccionar el cargo que ocupa.
                                                         </asp:Panel>
                                                     </div>
                                                 </div>
@@ -1932,10 +1931,6 @@
                 $("#<%: Req_CargoFirPJ.ClientID %>").hide();
             });
 
-        }
-        function incializarCargoFirPJ() {
-
-            $("[id*='s2id_MainContent_txtCargoFirPJ']").popover({ placement: "top", rel: "popover", content: "Selecciona el cargo. Si el mismo no se encuentra, comunicarse con la AGC", trigger: "focus" });
         }
 
 

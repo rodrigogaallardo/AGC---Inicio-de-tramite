@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="117c3f36c48e4311818e6e0f3a1fb15a" Name="Diagram1" ZoomLevel="67">
+      <Diagram DiagramId="117c3f36c48e4311818e6e0f3a1fb15a" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="EncmiendaEntityes.CPadron_RubrosCN" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="EncmiendaEntityes.Cargos" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
