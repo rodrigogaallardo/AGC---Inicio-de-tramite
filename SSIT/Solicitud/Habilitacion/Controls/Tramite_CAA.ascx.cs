@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using ExternalService.Class.Express;
 using System.Threading.Tasks;
 using System.Web.Security;
+using System.Net;
 
 namespace SSIT.Solicitud.Habilitacion.Controls
 {
@@ -256,8 +257,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 // Llena los CAAs de acuerdo a las encomiendas vinculadas a la solicitud.
                 // ---------------------------------------------------------------------
                 #region Luis CAA rest
-                _lstCaa = await GetCAAsByEncomiendas(lst_encomiendas.Select(x => x.IdEncomienda).ToArray());
-
+                var encWrap = await GetCAAsByEncomiendas(lst_encomiendas.Select(x => x.IdEncomienda).ToArray());
+                _lstCaa = encWrap.ListCaa;
                 #endregion
             }
             // Establece el CAA relacionado con la encomienda 
@@ -358,7 +359,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 grdArchivosCAA.DataSource = null;
                 grdArchivosCAA.DataBind();
             }
-
+            // only for test DivBtnSIPSAExpress.Visible = true;
         }
 
         protected async void btnBuscarCAA_Click(object sender, EventArgs e)
@@ -426,10 +427,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             btnBuscarCAA.Enabled = true;
         }
 
-        private async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            List<GetCAAsByEncomiendasResponse> lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
             return lstCaa;
         }
         private async Task<AsociarAnexoTecnicoResponse> AsociarAnexoTecnico(int id_caa, string codigo_caa, int id_encomienda)
@@ -444,10 +445,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             ValidarCodigoSeguridadResponse resultado = await apraSrvRest.ValidarCodigoSeguridad(id_caa, codigo_caa);
             return resultado;
         }
-        private async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
+        private async Task<GetBUIsCAAResponseWrap> GetBUIsCAA(int id_solicitud)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            List<GetBUIsCAAResponse> lstBuis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+            GetBUIsCAAResponseWrap lstBuis = await apraSrvRest.GetBUIsCAA(id_solicitud);
             return lstBuis;
         }
         private async Task<GenerarCAAAutoResponse> GenerarCAAAutomaticos(int IdEncomienda, string codSeguridad)
@@ -513,13 +514,14 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             EncomiendaDTO Encomienda = encBL.Single(id_encomienda);
             string codSeguridad = Encomienda.CodigoSeguridad;
             int CAA_id = 0;
-            pnlErrorBuscarCAA.Visible = false;
+            pnlErrorBuscarCAA.Visible = true;
             lblErrorBuscarCAA.Text = "";
             lstMensajesCAA.ClearSelection();
             List<string> lstErr = new List<string>();
             //Antes de generar un CAA reviso si la encomienda ya tiene un CAA
             int[] encomiendas = { id_encomienda};
-            List<GetCAAsByEncomiendasResponse> lstRCAAenc = await GetCAAsByEncomiendas(encomiendas);
+            GetCAAsByEncomiendasWrapResponse caaWrap = await GetCAAsByEncomiendas(encomiendas);
+            List<GetCAAsByEncomiendasResponse> lstRCAAenc = caaWrap.ListCaa;
             if (lstRCAAenc != null && lstRCAAenc.Count > 0)
             {
                 CAA_id = lstRCAAenc.FirstOrDefault().id_solicitud;
@@ -530,7 +532,16 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 GenerarCAAAutoResponse rCaa = await GenerarCAAAutomaticos(id_encomienda, codSeguridad);
 
                 if (rCaa != null)
-                    CAA_id = rCaa.id_solicitud_caa;
+                {
+                    if(rCaa.ErrorCode == HttpStatusCode.OK.ToString())
+                        CAA_id = rCaa.id_solicitud_caa;
+                    else
+                    {
+                        lstErr.Add(rCaa.ErrorDesc);
+                        lstMensajesCAA.DataSource = lstErr;
+                    }
+                }
+                    
             }
             
             if (CAA_id > 0)

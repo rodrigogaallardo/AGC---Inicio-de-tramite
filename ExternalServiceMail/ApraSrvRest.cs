@@ -161,12 +161,14 @@ namespace ExternalService
                         }
                         else
                         {
-                            LogError.Write($"Non-successful HTTP response: {response.StatusCode} - {response.ReasonPhrase}");
+                            string content = await response.Content.ReadAsStringAsync();
+                            LogError.Write($"Non-successful HTTP response: Request :{obj} ; Response {response.StatusCode} - {response.ReasonPhrase} - {content}");
+                            string Errormessage = JsonConvert.DeserializeObject<dynamic>(content).message;
                             return new GenerarCAAAutoResponse
                             {
                                 id_solicitud_caa = 0,
                                 ErrorCode = response.StatusCode.ToString(),
-                                ErrorDesc = response.ReasonPhrase.ToString()
+                                ErrorDesc = Errormessage
                             };
                         }
                     }
@@ -237,7 +239,7 @@ namespace ExternalService
             }
         }
 
-        public async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
+        public async Task<GetBUIsCAAResponseWrap> GetBUIsCAA(int id_solicitud)
         {
             try
             {
@@ -260,20 +262,44 @@ namespace ExternalService
                         string content = response.Content;
                         List<GetBUIsCAAResponse> getBUIsCAAResponseList = new List<GetBUIsCAAResponse>();
                         getBUIsCAAResponseList = JsonConvert.DeserializeObject<List<GetBUIsCAAResponse>>(content);
-                        return getBUIsCAAResponseList;
+                        if (getBUIsCAAResponseList.Count == 0)
+                        {
+                            getBUIsCAAResponseList = null;
+                        }
+                        return new GetBUIsCAAResponseWrap
+                        {
+                            ListBuis = getBUIsCAAResponseList,
+                            ErrorCode = response.StatusCode.ToString(),
+                            ErrorDesc = response.ErrorMessage != null ? response.ErrorMessage.ToString() : null
+                        };
                     }
                     else
-                        return null;
+                        return new GetBUIsCAAResponseWrap
+                        {
+                            ListBuis = null,
+                            ErrorCode = response.StatusCode.ToString(),
+                            ErrorDesc = response.Content
+                        };
                 }
                 catch (HttpRequestException ex)
                 {
-                    return null;
+                    return new GetBUIsCAAResponseWrap
+                    {
+                        ListBuis = null,
+                        ErrorCode = "HttpRequestException",
+                        ErrorDesc = $"Ocurrió un error al intentar obtener el pago en BUI: {ex.Message}"
+                    };
                 }
 
             }
             catch (Exception ex)
             {
-                return null;
+                return new GetBUIsCAAResponseWrap
+                {
+                    ListBuis = null,
+                    ErrorCode = "HttpRequestException",
+                    ErrorDesc = $"Ocurrió un error al intentar obtener el pago en BUI: {ex.Message}"
+                };
             }
 
 
@@ -369,7 +395,7 @@ namespace ExternalService
 
         }
 
-        public async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(List<int> IdEncomiendaList)
+        public async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> IdEncomiendaList)
         {
             try
             {
@@ -397,21 +423,49 @@ namespace ExternalService
                         List<GetCAAsByEncomiendasResponse> getCAAsByEncomiendasResponseList = new List<GetCAAsByEncomiendasResponse>();
                         DtoCAA[] l = JsonConvert.DeserializeObject<DtoCAA[]>(content);
 
-
                         getCAAsByEncomiendasResponseList = JsonConvert.DeserializeObject<List<GetCAAsByEncomiendasResponse>>(content);
-                        return getCAAsByEncomiendasResponseList;
+                        if(getCAAsByEncomiendasResponseList.Count == 0)
+                        {
+                            getCAAsByEncomiendasResponseList = null;
+                        }
+                        return new GetCAAsByEncomiendasWrapResponse
+                        {
+                            ListCaa = getCAAsByEncomiendasResponseList,
+                            ErrorCode = response.StatusCode.ToString(),
+                            ErrorDesc = response.ErrorMessage != null ? response.ErrorMessage.ToString() : null
+                        };
                     }
                     else
-                        return null;
+                    {
+                        string content = response.Content;
+                        LogError.Write($"Non-successful HTTP response: {response.Request} - {response.StatusCode} - {content}");
+                        string Errormessage = JsonConvert.DeserializeObject<dynamic>(content).message;
+                        return new GetCAAsByEncomiendasWrapResponse
+                        {
+                            ListCaa = null,
+                            ErrorCode = response.StatusCode.ToString(),
+                            ErrorDesc = response.ErrorMessage != null ? response.ErrorMessage.ToString() : null
+                        };
+                    }
                 }
                 catch (HttpRequestException ex)
                 {
-                    return null;
+                    return new GetCAAsByEncomiendasWrapResponse
+                    {
+                        ListCaa = null,
+                        ErrorCode = "HttpRequestException",
+                        ErrorDesc = $"Ocurrió un error al intentar obtener el pago en BUI: {ex.Message}"
+                    };
                 }
             }
             catch (Exception ex)
             {
-                return null;
+                return new GetCAAsByEncomiendasWrapResponse
+                {
+                    ListCaa = null,
+                    ErrorCode = "HttpRequestException",
+                    ErrorDesc = $"Ocurrió un error al intentar obtener el pago en BUI: {ex.Message}"
+                };
             }
            
         }

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ExternalService.Class.Express
 {
-
+    public class GetCAAsByEncomiendasWrapResponse
+    {
+        public List<GetCAAsByEncomiendasResponse> ListCaa { get; set; }
+        public string ErrorCode { get; set; }
+        public string ErrorDesc { get; set; }
+    }
 
     public class GetCAAsByEncomiendasResponse
     {
