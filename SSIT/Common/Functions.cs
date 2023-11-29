@@ -289,6 +289,8 @@ namespace SSIT.Common
 
             var solicitante = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilSol);
 
+            var solicitanteGP = lstParticipantesGP.FirstOrDefault( x => x.idPerfil == idPerfilSol);
+
             var titular = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilTit);
 
             var listTitularesComplementariosCuit = lstParticipantesSSIT
@@ -296,7 +298,7 @@ namespace SSIT.Common
                                     .Select(x => x.cuit)
                                     .ToList();
             //esto para arreglar el backlog de error22
-            if (solicitante == null)
+            if (solicitanteGP == null)
             {
                 Exception ex22 = new Exception(
                     $"Debe tener solicitante para poder tramitar, titular {titular}," +
@@ -408,6 +410,8 @@ namespace SSIT.Common
 
             var solicitante = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilSol);
 
+            var solicitanteGP = lstParticipantesGP.FirstOrDefault(x => x.idPerfil == idPerfilSol);
+
             var titular = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilTit);
 
             var listTitularesComplementariosCuit = lstParticipantesSSIT
@@ -415,7 +419,7 @@ namespace SSIT.Common
                                     .Select(x => x.cuit)
                                     .ToList();
             //esto para arreglar el backlog de error22
-            if (solicitante == null)
+            if (solicitanteGP == null)
             {
                 Exception ex22 = new Exception(
                     $"Debe tener solicitante para poder tramitar, titular {titular}," +
