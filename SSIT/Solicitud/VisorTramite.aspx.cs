@@ -14,6 +14,8 @@ using System.Web.UI;
 using static StaticClass.Constantes;
 using Org.BouncyCastle.Utilities;
 using DataAcess;
+using ExternalService.Class.Express;
+using System.Threading.Tasks;
 
 namespace SSIT
 {
@@ -338,6 +340,7 @@ namespace SSIT
             GetBUIsCAAResponseWrap l2 = await apraSrvRest.GetBUIsCAA(id_solicitud);
             return l2;
         }
+        #endregion ASOSA ASYNC
         private void CargarDatos(SSITSolicitudesDTO sol)
         {
             EncomiendaBL blEnc = new EncomiendaBL();
