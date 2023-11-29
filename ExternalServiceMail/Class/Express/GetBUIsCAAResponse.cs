@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace ExternalService.Class.Express
 {
+    public class GetBUIsCAAResponseWrap
+    {
+        public List<GetBUIsCAAResponse> ListBuis { get; set; }
+        public string ErrorCode { get; set; }
+        public string ErrorDesc { get; set; }
+    }
+
     public class GetBUIsCAAResponse
     {
         public int idBoletaUnica { get; set; }

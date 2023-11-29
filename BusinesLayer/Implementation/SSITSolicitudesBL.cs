@@ -1258,7 +1258,8 @@ namespace BusinesLayer.Implementation
             try
             {
                 ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-                List<GetBUIsCAAResponse> lstBuis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+                GetBUIsCAAResponseWrap Buis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+                List<GetBUIsCAAResponse> lstBuis = Buis.ListBuis;
                 apraSrvRest.Dispose();
                 if (lstBuis.Count > 0)
                 {
@@ -1585,8 +1586,8 @@ namespace BusinesLayer.Implementation
         private async Task<GetCAAsByEncomiendasResponse> ValidarCAA_v2(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            List<GetCAAsByEncomiendasResponse> lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lstEncomiendasRelacionadas.ToList());
-
+            GetCAAsByEncomiendasWrapResponse lstCaaW = await apraSrvRest.GetCAAsByEncomiendas(lstEncomiendasRelacionadas.ToList());
+            List<GetCAAsByEncomiendasResponse> lstCaa = lstCaaW.ListCaa;
             var ultimoCAAAnulado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
                                                 .OrderByDescending(o => o.id_estado)
                                                 .FirstOrDefault();

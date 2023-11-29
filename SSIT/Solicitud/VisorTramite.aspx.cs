@@ -275,30 +275,43 @@ namespace SSIT
                     servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
                     string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
                     string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                    DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_id_Encomiendas.ToArray(), ref ws_resultado_CAA);
+                    //DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_id_Encomiendas.ToArray(), ref ws_resultado_CAA);
 
 
-                    
+
 
                     #region krasorx async
-                    List<GetCAAsByEncomiendasResponse> lstCaa = null;
+                    GetCAAsByEncomiendasWrapResponse lstCaa = null;
                     RegisterAsyncTask(new PageAsyncTask(async () =>
                     {
                         lstCaa = await GetCAAsByEncomiendas(lst_id_Encomiendas);
                     }));
                     ExecuteRegisteredAsyncTasks();
+                   
                     #endregion
-                    
-                    var caaActualTest = lstCaa.Where
+
+                    var caaActualRest = lstCaa.ListCaa.Where
                         (y => y.id_estado
                             .Equals((int)Constantes.CAA_EstadoSolicitud.Aprobado))
                             .OrderByDescending(o => o.id_tad)
                             .FirstOrDefault();
-                    //TODO: PASAR A REST
-                    var caaActual = l.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(o => o.id_caa).FirstOrDefault();
 
-                    if (caaActual != null)
-                        estadoPagoCAA = servicio.Get_BUIs_CAA(username_servicio, password_servicio, caaActual.id_caa, ref ws_resultado_CAA).Where(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado).Any();
+                    if(caaActualRest != null)
+                    {
+                        GetBUIsCAAResponseWrap pago = null;
+                        RegisterAsyncTask(new PageAsyncTask(async () =>
+                        {
+                            pago = await GetBUIsCAA(caaActualRest.id_solicitud);
+                        }));
+                        ExecuteRegisteredAsyncTasks();
+                        estadoPagoCAA = pago.ListBuis.Where(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado).Any();
+                    }
+                        
+                    //var caaActual = l.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(o => o.id_caa).FirstOrDefault();
+                    //TODO: PASAR A REST
+                    //if (caaActual != null)
+                    //    estadoPagoCAA = servicio.Get_BUIs_CAA(username_servicio, password_servicio, caaActual.id_caa, ref ws_resultado_CAA).Where(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado).Any();
+
                 }
 
                 if (estadoPagoAGC && estadoPagoCAA)
@@ -320,16 +333,16 @@ namespace SSIT
         }
 
         #region ASOSA ASYNC
-        private async Task<List<GetCAAsByEncomiendasResponse>> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            List<GetCAAsByEncomiendasResponse> l2 = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            GetCAAsByEncomiendasWrapResponse l2 = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
             return l2;
         }
-        private async Task<List<GetBUIsCAAResponse>> GetBUIsCAA(int id_solicitud)
+        private async Task<GetBUIsCAAResponseWrap> GetBUIsCAA(int id_solicitud)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            List<GetBUIsCAAResponse> l2 = await apraSrvRest.GetBUIsCAA(id_solicitud);
+            GetBUIsCAAResponseWrap l2 = await apraSrvRest.GetBUIsCAA(id_solicitud);
             return l2;
         }
         #endregion
