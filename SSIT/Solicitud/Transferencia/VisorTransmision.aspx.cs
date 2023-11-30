@@ -764,6 +764,8 @@ namespace SSIT
 
             var solicitante = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilSol);
 
+            var solicitanteGP = lstParticipantesGP.FirstOrDefault(x => x.idPerfil == idPerfilSol);
+
             var titular = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilTit);
 
             var listTitularesComplementariosCuit = lstParticipantesSSIT
@@ -771,7 +773,7 @@ namespace SSIT
                                     .Select(x => x.cuit)
                                     .ToList();
             //esto para arreglar el backlog de error22
-            if (solicitante == null)
+            if (solicitanteGP == null)
             {
                 Exception ex22 = new Exception(
                     $"Debe tener solicitante para poder tramitar, titular {titular}," +
@@ -783,6 +785,8 @@ namespace SSIT
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
                 usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
                 usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+                lstParticipantesGP = wsGP.GetParticipantesxTramite(_urlESB, sol.idTAD.Value).ToList();
+                listParticipantesGPCuit = lstParticipantesGP.Select(x => x.cuit).Distinct().OrderByDescending(x => x);
             }
             bool cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit).Any()
                 || listParticipantesGPCuit.Except(listParticipantesSSITCuit).Any();
