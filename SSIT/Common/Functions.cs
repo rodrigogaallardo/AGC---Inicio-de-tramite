@@ -454,9 +454,10 @@ namespace SSIT.Common
                 }
 
                 // alta solicitante/apoderado
-                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, "",
-                solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
-                solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
+                if (!tieneSolicitante)
+                    wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, "",
+                        solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
+                        solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, "",
