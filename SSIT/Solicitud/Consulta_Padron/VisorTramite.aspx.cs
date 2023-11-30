@@ -382,6 +382,7 @@ namespace SSIT.Solicitud.Consulta_Padron
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
                 usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
                 usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+                lstParticipantesGP = wsGP.GetParticipantesxTramite(_urlESB, sol.idTAD.Value).ToList();
             }
 
             // Da de baja los que no están SIPSA
