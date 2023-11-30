@@ -529,6 +529,8 @@ namespace SSIT
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
                 usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
                 usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+                lstParticipantesGP = wsGP.GetParticipantesxTramite(_urlESB, sol.idTAD.Value).ToList();
+                listParticipantesGPCuit = lstParticipantesGP.Select(x => x.cuit).Distinct().OrderByDescending(x => x);
             }
 
             bool cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit).Any()
