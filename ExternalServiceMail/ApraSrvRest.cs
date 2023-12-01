@@ -409,7 +409,8 @@ namespace ExternalService
                 RestRequest request = new RestRequest(Method.POST);
                 request.RequestFormat = DataFormat.Json;
                 request.AddHeader("content-type", "application/json; charset=utf-8");
-                request.AddHeader("Authorization", "Bearer " + tokenResponse.token);//aca hay algo raro
+                if(tokenResponse != null)
+                    request.AddHeader("Authorization", "Bearer " + tokenResponse.token);//aca hay algo raro
 
                 var data = JsonConvert.SerializeObject(IdEncomiendaList);
 
