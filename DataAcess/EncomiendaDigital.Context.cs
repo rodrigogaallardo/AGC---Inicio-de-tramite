@@ -817,27 +817,23 @@ namespace DataAcess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RubrosDepositosCN_Evaluar_Result>("RubrosDepositosCN_Evaluar", id_tramiteParameter, idDepositoParameter, superficieCubiertaParameter, zonaMixturaParameter, sistemaParameter);
         }
-    
-        public virtual ObjectResult<string> Get_Token_Tad(Nullable<System.Guid> userId)
+        public virtual int Insert_Login_Tad_Token(Guid userId, string tokenJWT)
         {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("userId", userId) :
-                new ObjectParameter("userId", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Get_Token_Tad", userIdParameter);
-        }
-    
-        public virtual int Insert_Login_Tad_Token(Nullable<System.Guid> userId, string tokenJWT)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("userId", userId) :
-                new ObjectParameter("userId", typeof(System.Guid));
-    
+            var userIdParameter = new ObjectParameter("userId", userId);
             var tokenJWTParameter = tokenJWT != null ?
                 new ObjectParameter("tokenJWT", tokenJWT) :
                 new ObjectParameter("tokenJWT", typeof(string));
-    
+
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Login_Tad_Token", userIdParameter, tokenJWTParameter);
         }
+        public virtual string Get_Token_Tad(Guid userId)
+        {
+            var userIdParameter = new ObjectParameter("userId", userId);
+
+            var result = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Get_Token_Tad", userIdParameter).FirstOrDefault();
+
+            return result;
+        }
+
     }
 }

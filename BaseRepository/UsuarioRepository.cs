@@ -47,7 +47,7 @@ namespace BaseRepository
         {
             try
             {
-                string result = _unitOfWork.Db.Get_Token_Tad(userid).FirstOrDefault();
+                string result = _unitOfWork.Db.Get_Token_Tad(userid);
                 return result;
             }
             catch (Exception ex)
@@ -55,6 +55,8 @@ namespace BaseRepository
                 throw ex;
             }
         }
+
+
     }
 }
 
