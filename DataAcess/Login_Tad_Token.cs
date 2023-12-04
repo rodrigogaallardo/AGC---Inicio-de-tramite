@@ -12,17 +12,16 @@ namespace DataAcess
     using System;
     using System.Collections.Generic;
     
-    public partial class SolicitudRubro
+    public partial class Login_Tad_Token
     {
-        public int NroSolicitud { get; set; }
-        public string Codigo { get; set; }
-        public string Descripcion { get; set; }
-        public bool EsAnterior { get; set; }
-        public int id_tipoactividad { get; set; }
-        public int id_tipodocreq { get; set; }
-        public decimal Superficie { get; set; }
-        public Nullable<int> id_ImpactoAmbiental { get; set; }
+        public int login_tad_token_id { get; set; }
+        public Nullable<System.Guid> userId { get; set; }
+        public string tokenJWT { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<System.DateTime> ExpireDate { get; set; }
     
-        public virtual Solicitud Solicitud { get; set; }
+        public virtual Login_Tad_Token Login_Tad_Token1 { get; set; }
+        public virtual Login_Tad_Token Login_Tad_Token2 { get; set; }
     }
 }
