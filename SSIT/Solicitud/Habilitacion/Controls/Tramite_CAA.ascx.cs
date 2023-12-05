@@ -344,15 +344,16 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             if (lst_encomiendas.Count() < _lstCaa.Count())
             {
                 pnlBuscarCAA.Visible = true;
-                btnGenerarCAA.Visible = true;
-            }
-            else
-            {
                 if (CondicionExpress)
                 {
                     btnGenerarCAA.Visible = true;
                     DivBtnSIPSAExpress.Visible = true;
                 }
+            }
+            else
+            {
+                btnGenerarCAA.Visible = false;
+                DivBtnSIPSAExpress.Visible = false;
             }
             if (_lstCaa.Count() <= 0)
             {
