@@ -719,6 +719,38 @@ namespace AnexoProfesionales
             }
         }
 
+        public void ValidarEncomiendaConformacionLocal(EncomiendaConformacionLocalDTO encConfLocalDTO)
+        {
+
+            var validarPropiedades = new List<string>
+            {
+                nameof(encConfLocalDTO.id_destino),
+                nameof(encConfLocalDTO.largo_conflocal),
+                nameof(encConfLocalDTO.ancho_conflocal),
+                nameof(encConfLocalDTO.alto_conflocal),
+                nameof(encConfLocalDTO.TipoSuperficieDTO),
+                nameof(encConfLocalDTO.superficie_conflocal),
+                nameof(encConfLocalDTO.EncomiendaPlantasDTO),
+                nameof(encConfLocalDTO.Paredes_conflocal),
+                nameof(encConfLocalDTO.Techos_conflocal),
+                nameof(encConfLocalDTO.Pisos_conflocal),
+                nameof(encConfLocalDTO.TipoVentilacionDTO),
+                nameof(encConfLocalDTO.id_iluminacion),
+                nameof(encConfLocalDTO.Frisos_conflocal),
+            };
+
+            foreach (var propiedad in validarPropiedades)
+            {
+                var propiedadValor= encConfLocalDTO.GetType().GetProperty(propiedad);
+                var value = propiedadValor.GetValue(encConfLocalDTO, null);
+                if (value == null)
+                {
+                    
+                    throw new Exception("Debe completar los datos de conformación del local.");
+                }
+            }
+        }
+
         protected void btnConfirmarTramite_Click(object sender, EventArgs e)
         {
             try
@@ -750,6 +782,13 @@ namespace AnexoProfesionales
 
                 #region ValidacionPlantasHabilitar
                 ValidarPlantasSeleccionadas(enc);
+                #endregion
+
+                #region ValidarDatosConformacionLocal
+                foreach (var conformacionLocalDTO in encConfLocalDTO)
+                {
+                    ValidarEncomiendaConformacionLocal(conformacionLocalDTO);
+                }
                 #endregion
 
                 #region ValidacionSegunRubros
@@ -784,7 +823,7 @@ namespace AnexoProfesionales
                 #endregion
 
                 if (enc.IdSubTipoExpediente == (int)SubtipoDeExpediente.SinPlanos)
-                {
+                {                
                     if (!encConfLocalDTO.Any())
                     {
                         throw new Exception("Debe cargar los datos de conformación del local.");
