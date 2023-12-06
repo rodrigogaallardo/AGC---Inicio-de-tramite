@@ -3022,7 +3022,6 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.Ley962_TiposDeD
           <Property Name="idCondicionIncendio" Type="int" />
           <Property Name="SoloAPRA" Type="bit" Nullable="false" />
           <Property Name="SinBanioPCD" Type="bit" />
-          <Property Name="CondicionExpress" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RubrosCN_Config_Incendio">
           <Key>
@@ -3049,7 +3048,6 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.RubrosCN_Histor
             <PropertyRef Name="LibrarUso" />
             <PropertyRef Name="CreateDate" />
             <PropertyRef Name="CreateUser" />
-            <PropertyRef Name="CondicionExpress" />
           </Key>
           <Property Name="IdRubrosCN_historial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo_operacion" Type="nvarchar" MaxLength="2" Nullable="false" />
@@ -3078,7 +3076,6 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.RubrosCN_Histor
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
           <Property Name="Asistentes350" Type="bit" />
           <Property Name="SinBanioPCD" Type="bit" />
-          <Property Name="CondicionExpress" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RubrosCN_InformacionRelevante">
           <Key>
@@ -16038,8 +16035,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
     [RubrosCN_Historial].[LastUpdateDate] AS [LastUpdateDate], 
     [RubrosCN_Historial].[LastUpdateUser] AS [LastUpdateUser], 
     [RubrosCN_Historial].[Asistentes350] AS [Asistentes350], 
-    [RubrosCN_Historial].[SinBanioPCD] AS [SinBanioPCD], 
-    [RubrosCN_Historial].[CondicionExpress] AS [CondicionExpress]
+    [RubrosCN_Historial].[SinBanioPCD] AS [SinBanioPCD]
     FROM [dbo].[RubrosCN_Historial] AS [RubrosCN_Historial]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SSIT_Solicitudes_bk" EntityType="Self.SSIT_Solicitudes_bk" store:Type="Tables" store:Schema="dbo">
