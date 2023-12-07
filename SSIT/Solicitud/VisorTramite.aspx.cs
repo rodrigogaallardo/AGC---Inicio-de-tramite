@@ -103,14 +103,14 @@ namespace SSIT
             #endregion
         }
 
-        private   void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
+        private async Task ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
         {
             int id_solicitud = sol.IdSolicitud;
             if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG)
             {
                 ParametrosBL blParam = new ParametrosBL();
 
-                bool estadoPagoAGC = visPagosSolicitud.getVis_Pagos_AGC().GetEstadoPago(Constantes.PagosTipoTramite.HAB, id_solicitud) == Constantes.BUI_EstadoPago.Pagado;
+                bool estadoPagoAGC = await visPagosSolicitud.getVis_Pagos_AGC().GetEstadoPago(Constantes.PagosTipoTramite.HAB, id_solicitud) == Constantes.BUI_EstadoPago.Pagado;
 
                 if (!estadoPagoAGC)
                 {
@@ -381,7 +381,11 @@ namespace SSIT
                 System.Diagnostics.Debug.Write("encomiendas: " + (DateTime.Now - dt).Milliseconds.ToString() + Environment.NewLine);
 
                 dt = DateTime.Now;
-                ActualizarEstadoPenPagEnTramite(ref sol, lstEnc);
+                
+                Task.Run(async () =>
+                {
+                    await ActualizarEstadoPenPagEnTramite(ref sol, lstEnc);
+                }).Wait();
                 System.Diagnostics.Debug.Write("ActualizarEstadoPenPagEnTramite" + (DateTime.Now - dt).Milliseconds.ToString() + Environment.NewLine);
 
                 CargarDatos(sol, lstEnc);
@@ -434,21 +438,21 @@ namespace SSIT
 
         }
 
-        private void RecargarPago(object sender, EventArgs e)
+        private async Task RecargarPago(object sender, EventArgs e)
         {
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             SSITSolicitudesBL blSol = new SSITSolicitudesBL();
             var sol = blSol.Single(id_solicitud);
             bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM;
-            CargarPagos(editable, sol, encomiendaBL.GetByFKIdSolicitud(sol.IdSolicitud));
+            await CargarPagos(editable, sol, encomiendaBL.GetByFKIdSolicitud(sol.IdSolicitud));
 
         }
-        private void CargarPagos(bool editable, SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncomiendas)
+        private async Task CargarPagos(bool editable, SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncomiendas)
         {
             try
             {
                 visPagosSolicitud.Enabled = editable;
-                visPagosSolicitud.Cargar_Datos(sol, visTramite_CAA.CAA_Actual, lstEncomiendas);
+                await visPagosSolicitud.Cargar_Datos(sol, visTramite_CAA.CAA_Actual, lstEncomiendas);
             }
             catch (Exception ex)
             {
@@ -1099,12 +1103,18 @@ namespace SSIT
 
         protected void visDocumentos_EventRecargarPagos(object sender, SSIT.Solicitud.Habilitacion.Controls.Documentos.ucRecargarPagosEventsArgs e)
         {
-            visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            Task.Run(async () =>
+            {
+                await visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            }).Wait();
         }
 
         protected void visTramite_CAA_EventRecargarPagos(object sender, SSIT.Solicitud.Habilitacion.Controls.Tramite_CAA.ucRecargarPagosEventsArgs e)
         {
-            visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            Task.Run(async () =>
+            {
+                await visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            }).Wait();
 
         }
 

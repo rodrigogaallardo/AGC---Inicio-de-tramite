@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SSIT.Solicitud.Habilitacion.Controls
 {
@@ -117,10 +118,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
         /// <returns></returns>
-        public Constantes.BUI_EstadoPago GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async Task <Constantes.BUI_EstadoPago> GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-            var ret = pagosBoletaBL.GetEstadoPago(tipo_tramite, id_solicitud);
+            var ret = await pagosBoletaBL.GetEstadoPago(tipo_tramite, id_solicitud);
             hid_estado_pago.Value = ret.ToString();
             return ret;
         }
@@ -140,10 +141,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
         /// <returns></returns>
-        public int GetPagosCount(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async Task<int> GetPagosCount(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-            return pagosBoletaBL.GetPagosCount(tipo_tramite, id_solicitud);
+            return await pagosBoletaBL.GetPagosCount(tipo_tramite, id_solicitud);
         }
         /// <summary>
         /// 
@@ -151,15 +152,15 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         /// <param name="tipo_tramite"></param>
         /// <param name="IdSolicitud"></param>
         /// <returns></returns>
-        public bool HabilitarGeneracionPago(Constantes.PagosTipoTramite tipo_tramite, int IdSolicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
+        public async Task<bool> HabilitarGeneracionPago(Constantes.PagosTipoTramite tipo_tramite, int IdSolicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
         {
             PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-            return pagosBoletaBL.HabilitarGeneracionPago(tipo_tramite, IdSolicitud, lstEncomiendas);
+            return await pagosBoletaBL.HabilitarGeneracionPago(tipo_tramite, IdSolicitud, lstEncomiendas);
         }
 
-        public bool HabilitarGeneracionPagoApra(int id_solicitud)
+        public async Task<bool> HabilitarGeneracionPagoApra(int id_solicitud)
         {
-            if (GetPagosCount(Constantes.PagosTipoTramite.CAA, id_solicitud) == 0)
+            if (await GetPagosCount(Constantes.PagosTipoTramite.CAA, id_solicitud) == 0)
                 return true;
             string estado_pago = GetEstadoPago();
             if (string.IsNullOrEmpty(estado_pago) ||
@@ -203,7 +204,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         /// </summary>
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
-        public void CargarPagos(Constantes.PagosTipoTramite tipo_tramite, SSITSolicitudesDTO solicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
+        public async Task CargarPagos(Constantes.PagosTipoTramite tipo_tramite, SSITSolicitudesDTO solicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
         {
             EncomiendaDTO encDTO = null;
             if (lstEncomiendas == null)
@@ -222,14 +223,14 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             }
 
             PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-            var lstPagos = pagosBoletaBL.CargarPagos(tipo_tramite, solicitud.IdSolicitud, lstEncomiendas);
+            var lstPagos = await pagosBoletaBL.CargarPagos(tipo_tramite, solicitud.IdSolicitud, lstEncomiendas);
 
             grdPagosGeneradosBUI.DataSource = lstPagos;
             grdPagosGeneradosBUI.DataBind();
 
             if (tipo_tramite == Constantes.PagosTipoTramite.CAA)
             {
-                pnlGenerarBoletaUnica.Visible = HabilitarGeneracionManual && HabilitarGeneracionPago(tipo_tramite, solicitud.IdSolicitud, 
+                pnlGenerarBoletaUnica.Visible = HabilitarGeneracionManual && await HabilitarGeneracionPago(tipo_tramite, solicitud.IdSolicitud, 
                                                                                                         lstEncomiendas);
             }
             else
@@ -438,10 +439,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         /// </summary>
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
-        public void GenerarBoletaUnica(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async void GenerarBoletaUnica(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             PagosBoletasBL pagosBl = new PagosBoletasBL();
-            pagosBl.GenerarBoletaUnica(tipo_tramite, id_solicitud);
+            await pagosBl.GenerarBoletaUnica(tipo_tramite, id_solicitud);
 
         }
         /// <summary>
@@ -458,17 +459,29 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     this.tipo_tramite == (int)Constantes.PagosTipoTramite.AMP)
                 {
                     GenerarBoletaUnica((Constantes.PagosTipoTramite)tipo_tramite, this.id_solicitud);
-                    CargarPagos((Constantes.PagosTipoTramite)tipo_tramite, solicitudesBL.Single(id_solicitud), null);
+                    
+                    Task.Run(async () =>
+                    {
+                        await CargarPagos((Constantes.PagosTipoTramite)tipo_tramite, solicitudesBL.Single(id_solicitud), null);
+                    }).Wait();
                 }
                 if (this.tipo_tramite == (int)Constantes.PagosTipoTramite.CAA)
                 {
                     GenerarBoletaUnica(Constantes.PagosTipoTramite.CAA, this.id_solicitud);
-                    CargarPagos(Constantes.PagosTipoTramite.CAA, solicitudesBL.Single(id_solicitud), null);
+                    
+                    Task.Run(async () =>
+                    {
+                        await CargarPagos(Constantes.PagosTipoTramite.CAA, solicitudesBL.Single(id_solicitud), null);
+                    }).Wait();
                 }
                 if (this.tipo_tramite == (int)Constantes.PagosTipoTramite.TR)
                 {
                     GenerarBoletaUnica(Constantes.PagosTipoTramite.TR, this.id_solicitud);
-                    CargarPagos(Constantes.PagosTipoTramite.TR, solicitudesBL.Single(id_solicitud), null);
+                    
+                    Task.Run(async () =>
+                    {
+                        await CargarPagos(Constantes.PagosTipoTramite.TR, solicitudesBL.Single(id_solicitud), null);
+                    }).Wait();
                 }
 
             }

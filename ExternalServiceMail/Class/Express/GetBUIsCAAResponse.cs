@@ -20,7 +20,7 @@ namespace ExternalService.Class.Express
         public string codBarras { get; set; }
         public int nroBoletaUnica { get; set; }
         public int dependencia { get; set; }
-        public string montoTotal { get; set; }
+        public decimal montoTotal { get; set; }
         public int estadoId { get; set; }
         public string estadoNombre { get; set; }
         public DateTime createDate { get; set; }
@@ -30,7 +30,7 @@ namespace ExternalService.Class.Express
         public string trazaPago { get; set; }
         public string codigoVerificador { get; set; }
         public string nroBUI { get; set; }
-        public string buI_ID { get; set; }
+        public Guid? buI_ID { get; set; }
         public string updateUser { get; set; }
         public string medioDePagoRectificado { get; set; }
         public string numeroComprobante { get; set; }

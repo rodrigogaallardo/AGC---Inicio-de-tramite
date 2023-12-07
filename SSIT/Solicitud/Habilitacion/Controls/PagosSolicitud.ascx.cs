@@ -6,6 +6,7 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -52,7 +53,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             }
         }
 
-        public void Cargar_Datos(SSITSolicitudesDTO sol, DtoCAA CAA_Actual, IEnumerable<EncomiendaDTO> lstEncomiendas)
+        public async Task Cargar_Datos(SSITSolicitudesDTO sol, DtoCAA CAA_Actual, IEnumerable<EncomiendaDTO> lstEncomiendas)
         {
             //Condiciones para Habilitacion de boton de pago //
 
@@ -125,10 +126,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             }
             
             vis_Pagos_AGC.id_solicitud = sol.IdSolicitud;
-            vis_Pagos_AGC.CargarPagos((Constantes.PagosTipoTramite)vis_Pagos_AGC.tipo_tramite, sol, lstEncomiendas);
+            await vis_Pagos_AGC.CargarPagos((Constantes.PagosTipoTramite)vis_Pagos_AGC.tipo_tramite, sol, lstEncomiendas);
             
             vis_Pagos_APRA.id_solicitud = sol.IdSolicitud;
-            vis_Pagos_APRA.CargarPagos(Constantes.PagosTipoTramite.CAA, sol, lstEncomiendas);
+            await vis_Pagos_APRA.CargarPagos(Constantes.PagosTipoTramite.CAA, sol, lstEncomiendas);
         }
 
         public Pagos getVis_Pagos_AGC()
@@ -158,21 +159,21 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         {
             pnlAGC.Visible = false;
         }
-        public void RecargarPagos(Constantes.PagosTipoTramite TipoTramite, int IdSolicitud)
+        public async Task RecargarPagos(Constantes.PagosTipoTramite TipoTramite, int IdSolicitud)
         {
             SSITSolicitudesBL solicitudesBL = new SSITSolicitudesBL();
             if (TipoTramite == Constantes.PagosTipoTramite.CAA)
             {
 
-                vis_Pagos_APRA.CargarPagos(TipoTramite, solicitudesBL.Single(IdSolicitud), null);
+                await vis_Pagos_APRA.CargarPagos(TipoTramite, solicitudesBL.Single(IdSolicitud), null);
             }
             if (TipoTramite == Constantes.PagosTipoTramite.HAB || TipoTramite == Constantes.PagosTipoTramite.AMP)
             {
-                vis_Pagos_AGC.CargarPagos(TipoTramite, solicitudesBL.Single(IdSolicitud), null);
+                await vis_Pagos_AGC.CargarPagos(TipoTramite, solicitudesBL.Single(IdSolicitud), null);
             }
         }
 
-        public void ProcesarBoletaUnicaAGC(SSITSolicitudesDTO sol)
+        public async Task ProcesarBoletaUnicaAGC(SSITSolicitudesDTO sol)
         {
             Guid userId = Functions.GetUserid();
             EncomiendaBL encomiendaBL = new EncomiendaBL();
@@ -183,11 +184,11 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             Constantes.PagosTipoTramite tipo_tramite = (Constantes.PagosTipoTramite)enc.IdTipoTramite;
 
             //Cuando la solicitud está pendiente de Pago y no se genenró nunca una boleta, entonces se debe generar la BUI de AGC
-            if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && getVis_Pagos_AGC().HabilitarGeneracionPago(tipo_tramite, sol.IdSolicitud, lstEncomiendas)
-                    && getVis_Pagos_AGC().GetPagosCount(tipo_tramite, sol.IdSolicitud) == 0)
+            if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && await getVis_Pagos_AGC().HabilitarGeneracionPago(tipo_tramite, sol.IdSolicitud, lstEncomiendas)
+                    && await getVis_Pagos_AGC().GetPagosCount(tipo_tramite, sol.IdSolicitud) == 0)
             {
                 getVis_Pagos_AGC().GenerarBoletaUnica(tipo_tramite, sol.IdSolicitud);
-                getVis_Pagos_AGC().CargarPagos(tipo_tramite, sol, null);
+                await getVis_Pagos_AGC().CargarPagos(tipo_tramite, sol, null);
             }
 
         }

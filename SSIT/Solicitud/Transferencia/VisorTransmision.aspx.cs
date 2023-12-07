@@ -9,6 +9,7 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -93,7 +94,10 @@ namespace SSIT
             Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
             CargarCombos();
             TransferenciaBL.ActualizarEstadoCompleto(transferencia, userId);
-            CargarDatosTramite(transferencia);
+            Task.Run(async () =>
+            {
+                await CargarDatosTramite(transferencia);
+            }).Wait();
 
         }
 
@@ -167,7 +171,7 @@ namespace SSIT
             lblAlertasSolicitud.Text = System.Web.HttpUtility.HtmlEncode(alerta);
             pnlAlertasSolicitud.Visible = (alerta.Length > 0);
         }
-        private void CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
+        private async Task CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
         {
 
             ConsultaPadronSolicitudesBL consulta = new ConsultaPadronSolicitudesBL();
@@ -345,7 +349,7 @@ namespace SSIT
                         LogError.Write(ex);
                         MostrarMensajeAlertas(ex.Message);
                     }
-                    Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
+                    await Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
 
                     updBoxPagos.Visible = true;
                 }
@@ -466,19 +470,25 @@ namespace SSIT
                     if ((transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia) || (transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_nominacion))
                     {
                         PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-                        var lstPagos = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
-                        if (lstPagos == null)
+                        var lstPagosTask = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
+                        //var lstPagos = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
+                        if (lstPagosTask == null)
                             throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
 
-                        //0148737: JADHE 57779 - SSIT - Error al presentar
-                        DateTime fecha = new DateTime(2020, 01, 01);
-                        if (transferencia.CreateDate > fecha)
+                        Task.Run(async () =>
                         {
-                            if (!lstPagos.Any(p => p.id_estado_pago == (int)Constantes.BUI_EstadoPago.Pagado))
+                            var lstPagos = await lstPagosTask;
+
+                            //0148737: JADHE 57779 - SSIT - Error al presentar
+                            DateTime fecha = new DateTime(2020, 01, 01);
+                            if (transferencia.CreateDate > fecha)
                             {
-                                throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                                if (!lstPagos.Any(p => p.id_estado_pago == (int)Constantes.BUI_EstadoPago.Pagado))
+                                {
+                                    throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                                }
                             }
-                        }
+                        }).Wait();  //no puedo hacer que una funcion ejecutada por un boton sea async asique hago esto
 
                         //0145298: JADHE 57098 - SGI - TRM 2019 piden BUI
                         TransferenciasSolicitudesBL blTransferencia = new TransferenciasSolicitudesBL();
