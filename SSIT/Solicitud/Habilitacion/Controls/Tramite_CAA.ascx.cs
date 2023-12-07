@@ -341,21 +341,37 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 grdArchivosCAA.DataSource = lstArchivosCAA;
                 grdArchivosCAA.DataBind();
             }
-            if (lst_encomiendas.Count() < _lstCaa.Count())
+            if (_lstCaa != null)
             {
-                pnlBuscarCAA.Visible = true;
+                if(lst_encomiendas.Count() < _lstCaa.Count())
+                {
+                    pnlBuscarCAA.Visible = true;
+                    if (CondicionExpress)
+                    {
+                        btnGenerarCAA.Visible = true;
+                        DivBtnSIPSAExpress.Visible = true;
+                    }
+                }
+                else
+                {
+                    btnGenerarCAA.Visible = false;
+                    DivBtnSIPSAExpress.Visible = false;
+                }
+            }
+            else
+            {
                 if (CondicionExpress)
                 {
                     btnGenerarCAA.Visible = true;
                     DivBtnSIPSAExpress.Visible = true;
                 }
+                else
+                {
+                    pnlBuscarCAA.Visible = true;
+                }
             }
-            else
-            {
-                btnGenerarCAA.Visible = false;
-                DivBtnSIPSAExpress.Visible = false;
-            }
-            if (_lstCaa.Count() <= 0)
+            
+            if (_lstCaa != null && _lstCaa.Count() <= 0)
             {
                 grdArchivosCAA.DataSource = null;
                 grdArchivosCAA.DataBind();

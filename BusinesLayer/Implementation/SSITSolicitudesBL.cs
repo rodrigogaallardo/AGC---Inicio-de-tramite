@@ -1504,7 +1504,7 @@ namespace BusinesLayer.Implementation
                                 bool tieneDocCCultural = listDocSsit.Where(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.ConstanciaInicioTramiteIGJoINAES).Any();
                                 if (!tieneDocCCultural)
                                 {
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
                                     if (EximirCAA == false)
                                         await ValidarPagoCAA(solicitud_caa);
                                 }
