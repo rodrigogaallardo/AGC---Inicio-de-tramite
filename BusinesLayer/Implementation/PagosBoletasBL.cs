@@ -653,6 +653,8 @@ namespace BusinesLayer.Implementation
                         //string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
                         var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
                         List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                        if (l == null)
+                            return null;
                         foreach (var caa in l.ToList())
                         {
                             GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(caa.id_solicitud);
