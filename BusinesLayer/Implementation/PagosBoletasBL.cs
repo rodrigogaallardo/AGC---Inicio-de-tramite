@@ -652,21 +652,26 @@ namespace BusinesLayer.Implementation
                         foreach (var caa in l.ToList())
                         {
                             var listPago = servicio.Get_BUIs_CAA(username_servicio, password_servicio, caa.id_solicitud, ref ws_resultado_CAA);
-                            foreach (var p in listPago)
+                            if (listPago != null)
                             {
-                                var pago = new clsItemGrillaPagos();
-                                var pago_estado = pagos.GetEstadoPago(p.IdPago);
-                                pago.id_sol_pago = p.IdPago;
-                                pago.id_solicitud = caa.id_caa;
-                                pago.id_pago = p.IdPago;
-                                pago.id_medio_pago = 0;
-                                pago.monto_pago = p.MontoTotal;
-                                pago.CreateDate = caa.CreateDate;//TODO aca iria la fecha creacion de la boleta que no la esta devolviendo
-                                pago.desc_medio_pago = "Boleta única";
-                                pago.desc_estado_pago = pago_estado.desc_estado_pago;
-                                pago.id_estado_pago = pago_estado.id_estado_pago;
-                                lst.Add(pago);
+                                foreach (var p in listPago)
+                                {
+                                    var pago = new clsItemGrillaPagos();
+                                    var pago_estado = pagos.GetEstadoPago(p.IdPago);
+                                    pago.id_sol_pago = p.IdPago;
+                                    pago.id_solicitud = caa.id_caa;
+                                    pago.id_pago = p.IdPago;
+                                    pago.id_medio_pago = 0;
+                                    pago.monto_pago = p.MontoTotal;
+                                    pago.CreateDate = caa.CreateDate;//TODO aca iria la fecha creacion de la boleta que no la esta devolviendo
+                                    pago.desc_medio_pago = "Boleta única";
+                                    pago.desc_estado_pago = pago_estado.desc_estado_pago;
+                                    pago.id_estado_pago = pago_estado.id_estado_pago;
+                                    lst.Add(pago);
+                                }
                             }
+                            else
+                                return null;
                         }
                     }
                 }
