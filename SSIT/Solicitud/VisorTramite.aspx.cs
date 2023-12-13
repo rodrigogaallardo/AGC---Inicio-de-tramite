@@ -103,7 +103,7 @@ namespace SSIT
             #endregion
         }
 
-        private async Task ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
+        private async Task<SSITSolicitudesDTO> ActualizarEstadoPenPagEnTramite(SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
         {
             int id_solicitud = sol.IdSolicitud;
             if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG)
@@ -269,15 +269,7 @@ namespace SSIT
                 if (lstEncDTO.Count() > 0)
                 {
                     int[] lst_id_Encomiendas = lstEncDTO.Select(s => s.IdEncomienda).ToArray();
-                    ws_Interface_AGC servicio = new ws_Interface_AGC();
-                    ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-                    //TODO: Falta pasar esto a REST
-                    servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                    string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                    string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                    //DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_id_Encomiendas.ToArray(), ref ws_resultado_CAA);
-
-
+                    
 
 
                     #region krasorx async
@@ -307,11 +299,6 @@ namespace SSIT
                         estadoPagoCAA = pago.ListBuis.Where(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado).Any();
                     }
                         
-                    //var caaActual = l.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(o => o.id_caa).FirstOrDefault();
-                    //TODO: PASAR A REST
-                    //if (caaActual != null)
-                    //    estadoPagoCAA = servicio.Get_BUIs_CAA(username_servicio, password_servicio, caaActual.id_caa, ref ws_resultado_CAA).Where(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado).Any();
-
                 }
 
                 if (estadoPagoAGC && estadoPagoCAA)
@@ -330,6 +317,7 @@ namespace SSIT
                 else
                     this.MostrarMensajeAlertas("Debera tener una boleta de AGC abonada y la boleta del ultimo Certificado de Aptitud Ambiental (CAA) abonada.");
             }
+            return sol;
         }
 
         #region ASOSA ASYNC
@@ -384,7 +372,7 @@ namespace SSIT
                 
                 Task.Run(async () =>
                 {
-                    await ActualizarEstadoPenPagEnTramite(ref sol, lstEnc);
+                    sol = await ActualizarEstadoPenPagEnTramite(sol, lstEnc);
                 }).Wait();
                 System.Diagnostics.Debug.Write("ActualizarEstadoPenPagEnTramite" + (DateTime.Now - dt).Milliseconds.ToString() + Environment.NewLine);
 

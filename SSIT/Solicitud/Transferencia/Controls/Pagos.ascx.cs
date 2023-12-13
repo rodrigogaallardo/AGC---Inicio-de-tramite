@@ -96,10 +96,10 @@ namespace SSIT.Solicitud.Transferencia.Controls
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
         /// <returns></returns>
-        public Constantes.BUI_EstadoPago GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async Task<Constantes.BUI_EstadoPago> GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-            var ret = pagosBoletaBL.GetEstadoPago(tipo_tramite, id_solicitud);
+            var ret = await pagosBoletaBL.GetEstadoPago(tipo_tramite, id_solicitud);
             hid_estado_pago.Value = ret.ToString();
             return ret;
         }

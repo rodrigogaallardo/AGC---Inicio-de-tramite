@@ -1,6 +1,7 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
 using ExternalService;
+using Microsoft.Ajax.Utilities;
 using SSIT.App_Components;
 using SSIT.Common;
 using SSIT.Solicitud.Controls;
@@ -495,9 +496,15 @@ namespace SSIT
                         TransferenciasSolicitudesDTO tranf = blTransferencia.Single(transferencia.IdSolicitud);
                         if (tranf.TipoTransmision.id_tipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia)
                         {
-                            var ret = pagosBoletaBL.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud);
-                            if (ret != Constantes.BUI_EstadoPago.Pagado)
-                                throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                            var retTask = pagosBoletaBL.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud);
+                            Task.Run(async () =>
+                            {
+                                var ret = await retTask;
+                                if (ret != Constantes.BUI_EstadoPago.Pagado)
+                                    throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                            }
+                            ).Wait();
+                           
                         }
                     }
                 }
