@@ -784,12 +784,6 @@ namespace AnexoProfesionales
                 ValidarPlantasSeleccionadas(enc);
                 #endregion
 
-                #region ValidarDatosConformacionLocal
-                foreach (var conformacionLocalDTO in encConfLocalDTO)
-                {
-                    ValidarEncomiendaConformacionLocal(conformacionLocalDTO);
-                }
-                #endregion
 
                 #region ValidacionSegunRubros
                 if (enc.EncomiendaRubrosCNDTO.Count > 0)
@@ -829,8 +823,17 @@ namespace AnexoProfesionales
                         throw new Exception("Debe cargar los datos de conformación del local.");
                     }
 
+
+                    if (encConfLocalDTO.Any())
+                    {
+                        foreach (var conformacionLocalDTO in encConfLocalDTO)
+                        {
+                            ValidarEncomiendaConformacionLocal(conformacionLocalDTO);
+                        }
+                    }
+
                     if (SuperficieTotal > 60 && encDatosLocal.cumple_ley_962 == true && encDatosLocal.sanitarios_ubicacion_dl == 1 
-                        && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
+                    && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
                     {
                         throw new Exception("Debe cargar en los datos de conformación del local, el destino Baño PcD.");
                     }
