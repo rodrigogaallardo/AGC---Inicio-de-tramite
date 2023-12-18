@@ -1,5 +1,6 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
+using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using SSIT.Common;
 using StaticClass;
@@ -9,6 +10,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static StaticClass.Constantes;
@@ -149,18 +151,17 @@ namespace SSIT.Mobile
 
             if (encomienda != null)
             {
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                wsResultado ws_resultado_CAA = new wsResultado();
-
-                ParametrosBL blParam = new ParametrosBL();
-                servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
                 List<int> lst_encomiendas = new List<int>();
                 lst_encomiendas.Add(encomienda.IdEncomienda);
-                DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_encomiendas.ToArray(), ref ws_resultado_CAA);
 
-                lblNroCAA.Text = l.Length > 0 ? l[0].id_caa.ToString() : "";
+                List<GetCAAsByEncomiendasResponse> l = null;
+                Task.Run(async () =>
+                {
+                    var encWrap = await GetCAAsByEncomiendas(lst_encomiendas);
+                    l = encWrap.ListCaa;
+                }).Wait();
+
+                lblNroCAA.Text = l.Count > 0 ? l[0].formulario.id_caa.ToString() : "";
                 lblEstado.Text = sol.TipoEstadoSolicitudDTO.Descripcion;
                 bool automatica = false;
                 EngineBL blEng = new EngineBL();
@@ -458,5 +459,12 @@ namespace SSIT.Mobile
                 }
             }
         }
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
+        }
+
     }
 }

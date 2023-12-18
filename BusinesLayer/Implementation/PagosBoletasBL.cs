@@ -754,19 +754,21 @@ namespace BusinesLayer.Implementation
                     try
                     {
                         // se obtiene el ultimo CAA aprobado
-                        ws_Interface_AGC servicio = new ws_Interface_AGC();
-                        ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-                        var lstEncomiendasRelacionadas = lstEncomiendas.Select(p => p.IdEncomienda);
-                        servicio.Url = this.Url_Interface_AGC;
-                        DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(this.User_Interface_AGC, this.Password_Interface_AGC, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
-                        var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_caa).FirstOrDefault();
+                        //ws_Interface_AGC servicio = new ws_Interface_AGC();
+                        //ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+                        List<int> lstEncomiendasRelacionadas = lstEncomiendas.Select(p => p.IdEncomienda).ToList();
+                        //servicio.Url = this.Url_Interface_AGC;
+                        var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                        List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                        var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
 
                         int id_caa = (solCAA != null ? solCAA.id_solicitud : 0);
 
                         // Se consulta el estado del último CAA aprobado
-                        ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                        var lstBUIsCAA = servicio.Get_BUIs_CAA(this.User_Interface_AGC, this.Password_Interface_AGC, id_caa, ref ws_resultado_BUI).ToList();
-                        servicio.Dispose();
+                        //ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
+                        GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_caa);
+                        var lstBUIsCAA = wrapPago.ListBuis;
+                        //servicio.Dispose();
 
                         if (ws_resultado_BUI.ErrorCode != 0)
                         {
@@ -792,7 +794,7 @@ namespace BusinesLayer.Implementation
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
         /// <returns></returns>
-        public int GetPagosCount(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async Task<int> GetPagosCount(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             int ret = 0;
             if (tipo_tramite == Constantes.PagosTipoTramite.TR)
@@ -804,13 +806,17 @@ namespace BusinesLayer.Implementation
             {
                 try
                 {
-                    ws_Interface_AGC servicio = new ws_Interface_AGC();
-                    ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                    servicio.Url = this.Url_Interface_AGC;
-                    var lstBUIsCAA = servicio.Get_BUIs_CAA(this.User_Interface_AGC, this.Password_Interface_AGC, id_solicitud, ref ws_resultado_BUI).ToList();
-                    servicio.Dispose();
+                    EncomiendaBL blEnc = new EncomiendaBL();
+                    List<int> lstEncomiendasRelacionadas = blEnc.GetByFKIdSolicitud(id_solicitud).Select(x => x.IdEncomienda).ToList();
+                    var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                    List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                    var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
 
-                    if (ws_resultado_BUI.ErrorCode != 0)
+                    int id_solicitud_caa = (solCAA != null ? solCAA.id_solicitud : 0);
+                    GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_solicitud_caa);
+                    var lstBUIsCAA = wrapPago.ListBuis;
+
+                    if (wrapPago.ErrorCode != "200")
                     {
                         throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
                     }
@@ -839,13 +845,17 @@ namespace BusinesLayer.Implementation
 
             if (tipo_tramite == Constantes.PagosTipoTramite.CAA)
             {
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                servicio.Url = this.Url_Interface_AGC;
-                var lstBUIsCAA = servicio.Get_BUIs_CAA(this.User_Interface_AGC, this.Password_Interface_AGC, id_solicitud, ref ws_resultado_BUI);
-                servicio.Dispose();
+                EncomiendaBL blEnc = new EncomiendaBL();
+                List<int> lstEncomiendasRelacionadas = blEnc.GetByFKIdSolicitud(id_solicitud).Select(x => x.IdEncomienda).ToList();
+                var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
 
-                if (ws_resultado_BUI.ErrorCode != 0)
+                int id_solicitud_caa = (solCAA != null ? solCAA.id_solicitud : 0);
+                GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_solicitud_caa);
+                var lstBUIsCAA = wrapPago.ListBuis;
+
+                if (wrapPago.ErrorCode != "200")
                 {
                     throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
                 }
@@ -853,10 +863,10 @@ namespace BusinesLayer.Implementation
                 {
                     if (lstBUIsCAA.Count() > 0)
                     {
-                        if (lstBUIsCAA.Count(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado) > 0)
+                        if (lstBUIsCAA.Count(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado) > 0)
                             ret = Constantes.BUI_EstadoPago.Pagado;
                         else
-                            ret = (Constantes.BUI_EstadoPago)lstBUIsCAA.LastOrDefault().EstadoId;
+                            ret = (Constantes.BUI_EstadoPago)lstBUIsCAA.LastOrDefault().estadoId;
                     }
                 }
             }
@@ -933,6 +943,19 @@ namespace BusinesLayer.Implementation
 
             return strEstadoPago;
 
+        }
+
+        private async Task<GetBUIsCAAResponseWrap> GetBUIsCAA(int id_solicitud)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetBUIsCAAResponseWrap lstBuis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+            return lstBuis;
+        }
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
         }
     }
 }

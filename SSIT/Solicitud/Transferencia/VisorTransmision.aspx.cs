@@ -337,7 +337,7 @@ namespace SSIT
                         validarDocumentos(transferencia);
 
                         TransferenciaBL.validarEncomienda(IdSolicitud);
-                        if (!arrEstadosPago.Contains(Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
+                        if (!arrEstadosPago.Contains(await Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
                             Pagos.HabilitarGeneracionManual = true;
                     }
                     catch (Exception ex)
