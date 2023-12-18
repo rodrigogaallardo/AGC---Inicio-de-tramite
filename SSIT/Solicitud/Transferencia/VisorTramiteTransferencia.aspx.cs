@@ -246,7 +246,7 @@ namespace SSIT
 
             Constantes.BUI_EstadoPago[] arrEstadosPago = new Constantes.BUI_EstadoPago[] { Constantes.BUI_EstadoPago.Pagado, Constantes.BUI_EstadoPago.SinPagar };
 
-            if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && !arrEstadosPago.Contains(Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
+            if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && !arrEstadosPago.Contains(await Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
                 Pagos.HabilitarGeneracionManual = true;
 
             await Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);

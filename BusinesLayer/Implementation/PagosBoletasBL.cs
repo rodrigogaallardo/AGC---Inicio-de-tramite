@@ -761,10 +761,10 @@ namespace BusinesLayer.Implementation
                     try
                     {
                         // se obtiene el ultimo CAA aprobado
-                        ws_Interface_AGC servicio = new ws_Interface_AGC();
-                        ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+                        //ws_Interface_AGC servicio = new ws_Interface_AGC();
+                        //ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
                         List<int> lstEncomiendasRelacionadas = lstEncomiendas.Select(p => p.IdEncomienda).ToList();
-                        servicio.Url = this.Url_Interface_AGC;
+                        //servicio.Url = this.Url_Interface_AGC;
                         var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
                         List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
                         var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
@@ -775,7 +775,7 @@ namespace BusinesLayer.Implementation
                         //ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
                         GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_caa);
                         var lstBUIsCAA = wrapPago.ListBuis;
-                        servicio.Dispose();
+                        //servicio.Dispose();
 
                         if (wrapPago.ErrorCode != "200")
                         {

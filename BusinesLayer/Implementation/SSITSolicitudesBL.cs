@@ -1645,17 +1645,23 @@ namespace BusinesLayer.Implementation
 
         }
         //metodo soap para validarCAA DEPRECADO
-        private DtoCAA ValidarCAA(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
+        private GetCAAsByEncomiendasResponse ValidarCAA(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
         {
-            // se obtiene el ultimo CAA aprobado
-            ws_Interface_AGC servicio = new ws_Interface_AGC();
-            ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-
+            //// se obtiene el ultimo CAA aprobado
+            //ws_Interface_AGC servicio = new ws_Interface_AGC();
+            //ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+            //
             var repoParam = new ParametrosRepository(this.uowF.GetUnitOfWork());
-            servicio.Url = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-            string username_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-            string password_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-            DtoCAA[] lstDocCAA = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
+            //servicio.Url = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
+            //string username_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
+            //string password_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
+            //DtoCAA[] lstDocCAA = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
+            List<GetCAAsByEncomiendasResponse> lstDocCAA = null;
+            Task.Run(async () =>
+            {
+                var listCaaW = await GetCAAsByEncomiendas(listEnc.Select(enc => enc.id_encomienda).ToList());
+                lstDocCAA = listCaaW.ListCaa;
+            }).Wait();
 
             var ultimoCAANoAnulado = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
                                                 .OrderByDescending(o => o.id_estado)
@@ -1670,7 +1676,7 @@ namespace BusinesLayer.Implementation
 
             #region 132130: JADHE YYYYY - SSIT - Modificar validacion de CAA
             var ultimoCAAAprobado = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado)
-                            .OrderByDescending(o => o.id_caa)
+                            .OrderByDescending(o => o.formulario.id_caa)
                             .FirstOrDefault();
 
             if (ultimoCAAAprobado != null)
@@ -1700,18 +1706,18 @@ namespace BusinesLayer.Implementation
 
             if (!StaticClass.Funciones.isDesarrollo())
             {
-                if (!lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.id_encomienda)).Any())
+                if (!lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.formulario.id_encomienda_agc)).Any())
                 {
                     throw new Exception(Errors.SSIT_SOLICITUD_CAA_INEXISTENTE);
                 }
             }
             else
             {
-                lstDocCAA = new DtoCAA[1];
+                lstDocCAA = new GetCAAsByEncomiendasResponse[1].ToList();
                 return lstDocCAA[0];
             }
-            var ret = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.id_encomienda))
-                                .OrderByDescending(o => o.id_caa)
+            var ret = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.formulario.id_encomienda_agc))
+                                .OrderByDescending(o => o.formulario.id_caa)
                                 .FirstOrDefault();
 
             return ret;
@@ -2816,6 +2822,13 @@ namespace BusinesLayer.Implementation
                 }
             }
             return observacionLibrado;
+        }
+
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
         }
     }
 }
