@@ -348,9 +348,12 @@ namespace SSIT.Mobile
 
             ObservLibradoUso.Visible = false;
             lblObservacionesLibrarUso.Visible = false;
+            lblObservacionesLibrarUso.Text = String.Empty;
             string observacion = string.Empty;
             observacion = blSol.ObtenerObservacionLibradoUsoOblea(sol.IdSolicitud);
-            if (observacion != null)
+            if (observacion != string.Empty && observacion != null
+                && sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO 
+                && sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.RECH)//tambien debe chequear si ya fue aprobada o rechazada
             {
                 ObservLibradoUso.Visible = true;
                 lblObservacionesLibrarUso.Visible = true;

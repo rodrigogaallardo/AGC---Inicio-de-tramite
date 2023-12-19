@@ -18,6 +18,10 @@ namespace ExternalService
 
         public static List<PerfilDTO> perfilesPorTrata(string _urlESB, string p_trata)
         {
+            //ignorar validacion de https en ambiente de prueba
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             string uriString = _urlESB + "/tiposTramite/" + p_trata + "/perfiles";
             var client = new RestClient(uriString);
             client.ClearHandlers();
@@ -52,6 +56,9 @@ namespace ExternalService
         public static List<clsParticipantes> GetParticipantesxTramite(string _urlESB, int id_tad)
         {
             List<clsParticipantes> result = new List<clsParticipantes>();
+            //ignorar validacion de https en ambiente de prueba
+            if (Funciones.isDesarrollo())
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             string uriString = _urlESB + "/tramites/" + id_tad.ToString() + "/participaciones";
             var clientrest = new RestClient(uriString);
