@@ -1198,7 +1198,7 @@ namespace BusinesLayer.Implementation
                 GetBUIsCAAResponseWrap Buis = await apraSrvRest.GetBUIsCAA(id_solicitud);
                 List<GetBUIsCAAResponse> lstBuis = Buis.ListBuis;
                 apraSrvRest.Dispose();
-                if (lstBuis != null && lstBuis.Count > 0)
+                if (lstBuis.Count > 0)
                 {
                     if (lstBuis.Any(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado))
                         return Constantes.BUI_EstadoPago.Pagado;
