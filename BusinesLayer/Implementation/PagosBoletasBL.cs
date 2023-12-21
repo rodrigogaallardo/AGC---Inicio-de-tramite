@@ -658,22 +658,27 @@ namespace BusinesLayer.Implementation
                         foreach (var caa in l.ToList())
                         {
                             GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(caa.id_solicitud);
-                            var listPago = wrapPago.ListBuis;
-                            foreach (var p in listPago)
-                            {
-                                var pago = new clsItemGrillaPagos();
-                                var pago_estado = pagos.GetEstadoPago(p.idPago);
-                                pago.id_sol_pago = p.idPago;
-                                pago.id_solicitud = caa.id_solicitud;
-                                pago.id_pago = p.idPago;
-                                pago.id_medio_pago = 0;
-                                pago.monto_pago = p.montoTotal;
-                                pago.CreateDate = caa.createDate;
-                                pago.desc_medio_pago = "Boleta única";
-                                pago.desc_estado_pago = pago_estado.desc_estado_pago;
-                                pago.id_estado_pago = pago_estado.id_estado_pago;
-                                lst.Add(pago);
-                            }
+                            if(wrapPago != null)
+                                if(wrapPago.ListBuis != null && wrapPago.ListBuis.Count > 0)
+                                {
+                                    var listPago = wrapPago.ListBuis;
+                                    foreach (var p in listPago)
+                                    {
+                                        var pago = new clsItemGrillaPagos();
+                                        var pago_estado = pagos.GetEstadoPago(p.idPago);
+                                        pago.id_sol_pago = p.idPago;
+                                        pago.id_solicitud = caa.id_solicitud;
+                                        pago.id_pago = p.idPago;
+                                        pago.id_medio_pago = 0;
+                                        pago.monto_pago = p.montoTotal;
+                                        pago.CreateDate = caa.createDate;
+                                        pago.desc_medio_pago = "Boleta única";
+                                        pago.desc_estado_pago = pago_estado.desc_estado_pago;
+                                        pago.id_estado_pago = pago_estado.id_estado_pago;
+                                        lst.Add(pago);
+                                    }
+                                }
+                            
                         }
                     }
                 }
@@ -783,7 +788,8 @@ namespace BusinesLayer.Implementation
                         }
                         else
                         {
-                            ret = (lstBUIsCAA.Count(x => estados_consultados.Contains(x.estadoId)) == 0);
+                            if(wrapPago != null && wrapPago.ListBuis != null && wrapPago.ListBuis.Count > 0)
+                                ret = (lstBUIsCAA.Count(x => estados_consultados.Contains(x.estadoId)) == 0);
                         }
                     }
                     catch (Exception exc)
@@ -829,7 +835,8 @@ namespace BusinesLayer.Implementation
                     }
                     else
                     {
-                        ret = lstBUIsCAA.Count();
+                        if (wrapPago != null && wrapPago.ListBuis != null && wrapPago.ListBuis.Count > 0)
+                            ret = lstBUIsCAA.Count();
                     }
                 }
                 catch (Exception exc)
@@ -868,7 +875,7 @@ namespace BusinesLayer.Implementation
                 }
                 else
                 {
-                    if (lstBUIsCAA.Count() > 0)
+                    if (lstBUIsCAA != null && lstBUIsCAA.Count() > 0)
                     {
                         if (lstBUIsCAA.Count(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado) > 0)
                             ret = Constantes.BUI_EstadoPago.Pagado;
