@@ -1524,25 +1524,35 @@ namespace BusinesLayer.Implementation
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             GetCAAsByEncomiendasWrapResponse lstCaaW = await apraSrvRest.GetCAAsByEncomiendas(lstEncomiendasRelacionadas.ToList());
-            List<GetCAAsByEncomiendasResponse> lstCaa = lstCaaW.ListCaa;
-            var ultimoCAAAnulado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
-                                                .OrderByDescending(o => o.id_estado)
-                                                .FirstOrDefault();
-            if (tieneRubroEstadio)
+            List<GetCAAsByEncomiendasResponse> lstCaa = null;
+            if (lstCaaW != null && lstCaaW.ErrorCode == "200")
             {
-                if (ultimoCAAAnulado != null)
-                    return ultimoCAAAnulado;
-                else
-                    return null;
-            }
+                lstCaa = lstCaaW.ListCaa;
+                var ultimoCAAAnulado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
+                                                    .OrderByDescending(o => o.id_estado)
+                                                    .FirstOrDefault();
+                if (tieneRubroEstadio)
+                {
+                    if (ultimoCAAAnulado != null)
+                        return ultimoCAAAnulado;
+                    else
+                        return null;
+                }
 
-            var ultimoCAAAprobado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado)
-                            .OrderByDescending(o => o.id_solicitud) //este id_solicitud se refiere al id_caa
-                            .FirstOrDefault();
-            if (ultimoCAAAprobado != null)
-            {
-                return ultimoCAAAprobado;
+                var ultimoCAAAprobado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado)
+                                .OrderByDescending(o => o.id_solicitud) //este id_solicitud se refiere al id_caa
+                                .FirstOrDefault();
+                if (ultimoCAAAprobado != null)
+                {
+                    return ultimoCAAAprobado;
+                }
             }
+            else
+            {
+                return null;
+            }
+                
+            
 
             List<int> estados = new List<int>();
             estados.Add((int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo);
