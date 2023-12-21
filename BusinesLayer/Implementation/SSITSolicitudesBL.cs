@@ -1525,7 +1525,7 @@ namespace BusinesLayer.Implementation
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             GetCAAsByEncomiendasWrapResponse lstCaaW = await apraSrvRest.GetCAAsByEncomiendas(lstEncomiendasRelacionadas.ToList());
             List<GetCAAsByEncomiendasResponse> lstCaa = null;
-            if (lstCaaW != null && lstCaaW.ErrorCode == "200")
+            if (lstCaaW != null && lstCaaW.ErrorCode == "OK")
             {
                 lstCaa = lstCaaW.ListCaa;
                 var ultimoCAAAnulado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
