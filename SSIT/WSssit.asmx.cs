@@ -94,7 +94,7 @@ namespace SSIT
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [WebMethod]
-        public async Task<bool> InsertarCAA_DocAdjuntos(string user, string pass, int id_solicitud)
+        public bool InsertarCAA_DocAdjuntos(string user, string pass, int id_solicitud)
         {
             //uso las credenciales de APRA para este endpoint
             //ya se que no es lo ideal pero son las 1am
@@ -113,9 +113,12 @@ namespace SSIT
             var lstEnc = blEnc.GetByFKIdSolicitud(id_solicitud);
             List<int> encomiendas = lstEnc.Select(e => e.IdEncomienda).ToList();
 
-            //Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
-
-            GetCAAsByEncomiendasWrapResponse caaWrap = await GetCAAsByEncomiendas(encomiendas);
+            GetCAAsByEncomiendasWrapResponse caaWrap = null;
+            Task.Run(async () =>
+            {
+                caaWrap = await GetCAAsByEncomiendas(encomiendas);
+            }).Wait();
+             
             List<GetCAAsByEncomiendasResponse> lstRCAAenc = caaWrap.ListCaa;
             if (lstRCAAenc != null && lstRCAAenc.Count > 0)
             {
@@ -124,7 +127,11 @@ namespace SSIT
                     CAA_id = caa_act.id_solicitud;
                     if (CAA_id > 0)
                     {
-                        GetCAAResponse caa = await GetCAA(CAA_id);
+                        GetCAAResponse caa = null;
+                        Task.Run(async () =>
+                        {
+                            caa = await GetCAA(CAA_id);
+                        }).Wait();
                         var fileInfo = GetCAA_fileInfo(caa, caa_act.formulario.id_encomienda_agc);
                     }
                     
@@ -190,7 +197,7 @@ namespace SSIT
             }
 
             EncomiendaBL encomiendaBL = new EncomiendaBL();
-            Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userid = (Guid)Membership.GetUser("ws-sgi").ProviderUserKey;
             subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado);
             return subioFile;
         }
