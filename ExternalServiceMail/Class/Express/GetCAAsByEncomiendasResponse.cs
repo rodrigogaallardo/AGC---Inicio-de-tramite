@@ -26,7 +26,7 @@ namespace ExternalService.Class.Express
         public string codigo_tipocertificado { get; set; }
         public string nombre_tipocertificado { get; set; }
         public string nroCertificado { get; set; }
-        public DateTime fechaVencCertificado { get; set; }
+        public DateTime? fechaVencCertificado { get; set; }
         public int? nroActuacion { get; set; }
         public int? anioActuacion { get; set; }
         public int? tipoActoAdministrativo { get; set; }
