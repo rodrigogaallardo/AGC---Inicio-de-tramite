@@ -539,14 +539,14 @@ namespace SSIT.Common
                         break;
                     }
                 }
-                LogError.Write(new Exception("isCuitRepresentadoInList = " + isCuitRepresentadoInList));
+                LogError.Write(new Exception("isCuitRepresentadoInList = " + isCuitRepresentadoInList + "| Cuit a validar = " + cuitAValidar + "| " + cuitRepresentado));
                 if (isCuitAValidarInAutenticado && isCuitRepresentadoInList)
                 {
                     cuitsRelacionados.result = new Result();
                     cuitsRelacionados.result.msg = true;
                     cuitsRelacionados.status = "Los cuits estan relacionados";
                     cuitsRelacionados.statusCode = 200;
-                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}"));
+                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}" + isCuitRepresentadoInList + "| Cuit a validar = " + cuitAValidar + "| " + cuitRepresentado));
                 }
                 else
                 {
@@ -554,7 +554,7 @@ namespace SSIT.Common
                     cuitsRelacionados.result.msg = false;
                     cuitsRelacionados.status = "Los cuits NO estan relacionados";
                     cuitsRelacionados.statusCode = 200;
-                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}"));
+                    LogError.Write(new Exception($"cuitsRelacionados = {cuitsRelacionados.status}" + isCuitRepresentadoInList + "| Cuit a validar = " + cuitAValidar + "| " + cuitRepresentado));
                 }
             }
             else
