@@ -176,7 +176,7 @@ namespace ExternalService
                         {
                             string content = await response.Content.ReadAsStringAsync();
                             LogError.Write($"Non-successful HTTP response: Request :{obj} ; Response {response.StatusCode} - {response.ReasonPhrase} - {content}");
-                            string Errormessage = JsonConvert.DeserializeObject<dynamic>(content).message;
+                            string Errormessage = JsonConvert.DeserializeObject<dynamic>(content)?.message;
                             return new GenerarCAAAutoResponse
                             {
                                 id_solicitud_caa = 0,
