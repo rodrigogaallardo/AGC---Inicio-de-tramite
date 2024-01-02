@@ -41,5 +41,6 @@ namespace DataAcess
         public Nullable<System.Guid> LastUpdateUser { get; set; }
         public Nullable<bool> Asistentes350 { get; set; }
         public Nullable<bool> SinBanioPCD { get; set; }
+        public bool CondicionExpress { get; set; }
     }
 }

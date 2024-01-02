@@ -8,6 +8,7 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -86,7 +87,10 @@ namespace SSIT
             Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
             CargarCombos();
             TransferenciaBL.ActualizarEstadoCompleto(transferencia, userId);
-            CargarDatosTramite(transferencia);
+            Task.Run(async () =>
+            {
+                await CargarDatosTramite(transferencia);
+            }).Wait();
 
         }
         private void ComprobarSolicitud(TransferenciasSolicitudesDTO transferencia)
@@ -107,7 +111,7 @@ namespace SSIT
         /// <summary>
         /// 
         /// </summary>
-        private void CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
+        private async Task CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
         {
 
             ConsultaPadronSolicitudesBL consulta = new ConsultaPadronSolicitudesBL();
@@ -242,10 +246,10 @@ namespace SSIT
 
             Constantes.BUI_EstadoPago[] arrEstadosPago = new Constantes.BUI_EstadoPago[] { Constantes.BUI_EstadoPago.Pagado, Constantes.BUI_EstadoPago.SinPagar };
 
-            if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && !arrEstadosPago.Contains(Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
+            if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && !arrEstadosPago.Contains(await Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
                 Pagos.HabilitarGeneracionManual = true;
 
-            Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
+            await Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
             #endregion
 
 

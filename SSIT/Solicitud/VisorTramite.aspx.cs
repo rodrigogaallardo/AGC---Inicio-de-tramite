@@ -14,6 +14,8 @@ using System.Web.UI;
 using static StaticClass.Constantes;
 using Org.BouncyCastle.Utilities;
 using DataAcess;
+using ExternalService.Class.Express;
+using System.Threading.Tasks;
 
 namespace SSIT
 {
@@ -63,6 +65,8 @@ namespace SSIT
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+
             ScriptManager sm = ScriptManager.GetCurrent(this);
             if (sm.IsInAsyncPostBack)
             {
@@ -93,17 +97,20 @@ namespace SSIT
                 if (id_solicitud <= nroSolReferencia)
                     divbtnImprimirSolicitud.Visible = false;
             }
-
+            #region ASOSA ASYNC
+            //GetBUIsCAA(200001);
+            //List<GetCAAsByEncomiendasResponse> l2 = await GetBUIsCAA(200001);
+            #endregion
         }
 
-        private void ActualizarEstadoPenPagEnTramite(ref SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
+        private async Task<SSITSolicitudesDTO> ActualizarEstadoPenPagEnTramite(SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncDTO)
         {
             int id_solicitud = sol.IdSolicitud;
             if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG)
             {
                 ParametrosBL blParam = new ParametrosBL();
 
-                bool estadoPagoAGC = visPagosSolicitud.getVis_Pagos_AGC().GetEstadoPago(Constantes.PagosTipoTramite.HAB, id_solicitud) == Constantes.BUI_EstadoPago.Pagado;
+                bool estadoPagoAGC = await visPagosSolicitud.getVis_Pagos_AGC().GetEstadoPago(Constantes.PagosTipoTramite.HAB, id_solicitud) == Constantes.BUI_EstadoPago.Pagado;
 
                 if (!estadoPagoAGC)
                 {
@@ -262,18 +269,36 @@ namespace SSIT
                 if (lstEncDTO.Count() > 0)
                 {
                     int[] lst_id_Encomiendas = lstEncDTO.Select(s => s.IdEncomienda).ToArray();
-                    ws_Interface_AGC servicio = new ws_Interface_AGC();
-                    ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+                    
 
-                    servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                    string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                    string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                    DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_id_Encomiendas.ToArray(), ref ws_resultado_CAA);
 
-                    var caaActual = l.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(o => o.id_caa).FirstOrDefault();
+                    #region krasorx async
+                    GetCAAsByEncomiendasWrapResponse lstCaa = null;
+                    RegisterAsyncTask(new PageAsyncTask(async () =>
+                    {
+                        lstCaa = await GetCAAsByEncomiendas(lst_id_Encomiendas);
+                    }));
+                    ExecuteRegisteredAsyncTasks();
+                   
+                    #endregion
 
-                    if (caaActual != null)
-                        estadoPagoCAA = servicio.Get_BUIs_CAA(username_servicio, password_servicio, caaActual.id_caa, ref ws_resultado_CAA).Where(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado).Any();
+                    var caaActualRest = lstCaa.ListCaa.Where
+                        (y => y.id_estado
+                            .Equals((int)Constantes.CAA_EstadoSolicitud.Aprobado))
+                            .OrderByDescending(o => o.id_tad)
+                            .FirstOrDefault();
+
+                    if(caaActualRest != null)
+                    {
+                        GetBUIsCAAResponseWrap pago = null;
+                        RegisterAsyncTask(new PageAsyncTask(async () =>
+                        {
+                            pago = await GetBUIsCAA(caaActualRest.id_solicitud);
+                        }));
+                        ExecuteRegisteredAsyncTasks();
+                        estadoPagoCAA = pago.ListBuis.Where(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado).Any();
+                    }
+                        
                 }
 
                 if (estadoPagoAGC && estadoPagoCAA)
@@ -292,15 +317,36 @@ namespace SSIT
                 else
                     this.MostrarMensajeAlertas("Debera tener una boleta de AGC abonada y la boleta del ultimo Certificado de Aptitud Ambiental (CAA) abonada.");
             }
+            return sol;
         }
+
+        #region ASOSA ASYNC
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse l2 = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return l2;
+        }
+        private async Task<GetBUIsCAAResponseWrap> GetBUIsCAA(int id_solicitud)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetBUIsCAAResponseWrap l2 = await apraSrvRest.GetBUIsCAA(id_solicitud);
+            return l2;
+        }
+        #endregion
         private void CargarDatos(SSITSolicitudesDTO sol)
         {
+       
             EncomiendaBL blEnc = new EncomiendaBL();
             var lstEnc = blEnc.GetByFKIdSolicitud(id_solicitud);
             CargarDatos(sol, lstEnc);
         }
         protected void btnCargarDatostramite_Click(object sender, EventArgs e)
         {
+            #region ASOSA ASYNC
+
+            //RegisterAsyncTask(new PageAsyncTask(() => GetBUIsCAA(200001)));
+            #endregion
             try
             {
                 this.id_solicitud = id_solicitud;
@@ -323,7 +369,11 @@ namespace SSIT
                 System.Diagnostics.Debug.Write("encomiendas: " + (DateTime.Now - dt).Milliseconds.ToString() + Environment.NewLine);
 
                 dt = DateTime.Now;
-                ActualizarEstadoPenPagEnTramite(ref sol, lstEnc);
+                
+                Task.Run(async () =>
+                {
+                    sol = await ActualizarEstadoPenPagEnTramite(sol, lstEnc);
+                }).Wait();
                 System.Diagnostics.Debug.Write("ActualizarEstadoPenPagEnTramite" + (DateTime.Now - dt).Milliseconds.ToString() + Environment.NewLine);
 
                 CargarDatos(sol, lstEnc);
@@ -376,21 +426,21 @@ namespace SSIT
 
         }
 
-        private void RecargarPago(object sender, EventArgs e)
+        private async Task RecargarPago(object sender, EventArgs e)
         {
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             SSITSolicitudesBL blSol = new SSITSolicitudesBL();
             var sol = blSol.Single(id_solicitud);
             bool editable = id_estado == (int)Constantes.TipoEstadoSolicitudEnum.COMP || id_estado == (int)Constantes.TipoEstadoSolicitudEnum.INCOM;
-            CargarPagos(editable, sol, encomiendaBL.GetByFKIdSolicitud(sol.IdSolicitud));
+            await CargarPagos(editable, sol, encomiendaBL.GetByFKIdSolicitud(sol.IdSolicitud));
 
         }
-        private void CargarPagos(bool editable, SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncomiendas)
+        private async Task CargarPagos(bool editable, SSITSolicitudesDTO sol, IEnumerable<EncomiendaDTO> lstEncomiendas)
         {
             try
             {
                 visPagosSolicitud.Enabled = editable;
-                visPagosSolicitud.Cargar_Datos(sol, visTramite_CAA.CAA_Actual, lstEncomiendas);
+                await visPagosSolicitud.Cargar_Datos(sol, visTramite_CAA.CAA_Actual, lstEncomiendas);
             }
             catch (Exception ex)
             {
@@ -823,7 +873,7 @@ namespace SSIT
             }
         }
 
-        protected void btnPresentarTramite_Click(object sender, EventArgs e)
+        protected async void btnPresentarTramite_Click(object sender, EventArgs e)
         {
             try
             {
@@ -880,7 +930,7 @@ namespace SSIT
                 LogError.Write("Antes de RegenerarSolicitud");
                 RegenerarSolicitud(id_solicitud);
                 LogError.Write("Antes de ValidacionSolicitudes");
-                if (blSol.ValidacionSolicitudes(id_solicitud))
+                if (await blSol.ValidacionSolicitudes(id_solicitud))
                 {
                     LogError.Write("Antes de presentarSolicitud");
                     if (blSol.presentarSolicitud(id_solicitud, userid, oblea, emailUsuario))
@@ -1041,12 +1091,18 @@ namespace SSIT
 
         protected void visDocumentos_EventRecargarPagos(object sender, SSIT.Solicitud.Habilitacion.Controls.Documentos.ucRecargarPagosEventsArgs e)
         {
-            visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            Task.Run(async () =>
+            {
+                await visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            }).Wait();
         }
 
         protected void visTramite_CAA_EventRecargarPagos(object sender, SSIT.Solicitud.Habilitacion.Controls.Tramite_CAA.ucRecargarPagosEventsArgs e)
         {
-            visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            Task.Run(async () =>
+            {
+                await visPagosSolicitud.RecargarPagos(e.tipo_tramite, e.id_solicitud);
+            }).Wait();
 
         }
 

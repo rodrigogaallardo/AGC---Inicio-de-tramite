@@ -60,9 +60,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApraSrvRest.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Class\AgipEntity.cs" />
     <Compile Include="Class\ApoderamientoEntity.cs" />
     <Compile Include="Class\EmailEntity.cs" />
+    <Compile Include="Class\Express\AsociarAnexoTecnicoResponse.cs" />
+    <Compile Include="Class\Express\GenerarCAAAutomaticoResponse.cs" />
+    <Compile Include="Class\Express\GenerarCAAAutoResponse.cs" />
+    <Compile Include="Class\Express\GetBUIsCAAResponse.cs" />
+    <Compile Include="Class\Express\GetBUIsPagosResponse.cs" />
+    <Compile Include="Class\Express\GetCAAResponse.cs" />
+    <Compile Include="Class\Express\GetCAAsByEncomiendasResponse.cs" />
+    <Compile Include="Class\Express\GetIdPagosCAAByEncomiendasResponse.cs" />
+    <Compile Include="Class\Express\LoginResponse.cs" />
+    <Compile Include="Class\Express\ValidarCodigoSeguridadResponse.cs" />
     <Compile Include="Class\PagosEntity.cs" />
     <Compile Include="Class\ParametrosService.cs" />
     <Compile Include="Class\PersonaTadEntity.cs" />
@@ -140,6 +153,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
