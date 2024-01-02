@@ -145,8 +145,7 @@ namespace SSIT.Solicitud.Permisos.Controls
             return ret;
 
         }
-        //deprecado
-        /*
+        //No hay un REST equivalente
         public DtoRACGenerado GenerarRAC(int id_solicitud_agc)
         {
 
@@ -184,10 +183,17 @@ namespace SSIT.Solicitud.Permisos.Controls
                 else
                 {
                     //Obtiene los datos de la solicitud de CAA.
-                    DtoCAA[] arrSolCAA = servicio.Get_CAAs(username_servicio, password_servicio, new int[] { id_solicitud_caa }, ref ws_resultado_CAA);
-                    if (arrSolCAA.Length > 0)
+                    //DtoCAA[] arrSolCAA = servicio.Get_CAAs(username_servicio, password_servicio, new int[] { id_solicitud_caa }, ref ws_resultado_CAA);
+                    List<GetCAAsByEncomiendasResponse> lstDocCAA = null;
+                    Task.Run(async () =>
                     {
-                        var solCAA = arrSolCAA[0];
+                        var listCaaW = await GetCAAsByEncomiendas(listEnc.Select(enc => enc.id_encomienda).ToList());
+                        lstDocCAA = listCaaW.ListCaa;
+                    }).Wait();
+
+                    if (lstDocCAA != null && lstDocCAA.Count() > 0)
+                    {
+                        var solCAA = lstDocCAA[0];
                         var lstMensajes = blSol.CompareWithCAA(id_solicitud_agc, solCAA);
 
                         if (lstMensajes.Count == 0)
@@ -252,7 +258,6 @@ namespace SSIT.Solicitud.Permisos.Controls
 
             return result;
         }
-        */
 
         private async Task<ValidarCodigoSeguridadResponse> ValidarCodigoSeguridad(int id_caa, string codigo_caa)
         {
@@ -265,6 +270,12 @@ namespace SSIT.Solicitud.Permisos.Controls
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
             GetCAAResponse jsonCaa = await apraSrvRest.GetCaa(id_caa);
             return jsonCaa;
+        }
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
         }
 
     }

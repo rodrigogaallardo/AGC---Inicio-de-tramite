@@ -239,15 +239,13 @@ namespace SSIT.Solicitud.Permisos
             pnlAlertasSolicitud.Visible = (alerta.Length > 0);
         }
 
-        //pasar a rest
-        /*
-        protected async void btnConfirmarTramite_Click(object sender, EventArgs e)
+        protected void btnConfirmarTramite_Click(object sender, EventArgs e)
         {
             Guid userid = Functions.GetUserid();
             try
             {
                 SSITSolicitudesDTO solic = blSol.Single(this.id_solicitud);
-                var dtoRAC = await visTramite_CAA.GenerarRAC(this.id_solicitud);
+                var dtoRAC = visTramite_CAA.GenerarRAC(this.id_solicitud);
                 //var dtoRAC = new DtoRACGenerado();
                 //if (solic.IdTipoTramite == (int)Constantes.TipoDeTramite.Permisos && solic.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
                 //{
@@ -299,7 +297,7 @@ namespace SSIT.Solicitud.Permisos
             this.EjecutarScript(udpConfirmarSolcitud1, "mostrarShortcuts();");
 
         }
-        */
+        
 
         protected void btnAnularTramite_Click(object sender, EventArgs e)
         {
