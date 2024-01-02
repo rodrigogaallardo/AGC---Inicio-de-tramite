@@ -103,24 +103,24 @@ namespace ExternalService.Class.Express
     public class Datoslocal
     {
         public int id_caadatoslocal { get; set; }
-        public decimal superficie_cubierta_dl { get; set; }
-        public decimal superficie_descubierta_dl { get; set; }
-        public decimal dimesion_frente_dl { get; set; }
-        public bool lugar_carga_descarga_dl { get; set; }
-        public bool estacionamiento_dl { get; set; }
-        public bool red_transito_pesado_dl { get; set; }
-        public bool sobre_avenida_dl { get; set; }
+        public decimal? superficie_cubierta_dl { get; set; }
+        public decimal? superficie_descubierta_dl { get; set; }
+        public decimal? dimesion_frente_dl { get; set; }
+        public bool? lugar_carga_descarga_dl { get; set; }
+        public bool? estacionamiento_dl { get; set; }
+        public bool? red_transito_pesado_dl { get; set; }
+        public bool? sobre_avenida_dl { get; set; }
         public string materiales_pisos_dl { get; set; }
         public string materiales_paredes_dl { get; set; }
         public string materiales_techos_dl { get; set; }
         public string materiales_revestimientos_dl { get; set; }
-        public int cantidad_sanitarios_dl { get; set; }
-        public decimal frente_dl { get; set; }
-        public decimal fondo_dl { get; set; }
-        public decimal lateral_izquierdo_dl { get; set; }
-        public decimal lateral_derecho_dl { get; set; }
+        public int? cantidad_sanitarios_dl { get; set; }
+        public decimal? frente_dl { get; set; }
+        public decimal? fondo_dl { get; set; }
+        public decimal? lateral_izquierdo_dl { get; set; }
+        public decimal? lateral_derecho_dl { get; set; }
         public bool sobrecarga_corresponde_dl { get; set; }
-        public int cantidad_operarios_dl { get; set; }
+        public int? cantidad_operarios_dl { get; set; }
     }
 
     public class Rubroscur

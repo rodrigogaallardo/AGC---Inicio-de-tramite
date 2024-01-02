@@ -2312,7 +2312,7 @@ namespace BusinesLayer.Implementation
                     {
                         // Compara las Superficies
                         decimal SuperficieSolicitud = 0;
-                        decimal SuperficieCAA = (solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl);
+                        decimal SuperficieCAA = ((decimal)(solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl));
 
                         if (DatosLocal != null)
                         {
@@ -2379,7 +2379,7 @@ namespace BusinesLayer.Implementation
                         decimal SuperficieEncomienda = 0;
                         if(solCAA.formulario.datosLocal != null)
                         {
-                            decimal SuperficieCAA = (solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl);
+                            decimal SuperficieCAA = ((decimal)(solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl));
                             var datos_local = encomienda.Encomienda_DatosLocal.FirstOrDefault();
                             if (datos_local != null)
                             {
