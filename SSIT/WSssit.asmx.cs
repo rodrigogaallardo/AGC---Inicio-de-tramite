@@ -30,14 +30,6 @@ namespace SSIT
     // [System.Web.Script.Services.ScriptService]
     public class WSssit : System.Web.Services.WebService
     {
-        private enum TipoCertificadoCAA
-        {
-            sre = 16,
-            sreCC = 17,
-            sc = 18,
-            cre = 19,
-            DDJJ = 120
-        }
         [WebMethod]
         public bool generarDocInicioTramite(string user, string pass, int id_solicitud)
         {
@@ -81,18 +73,6 @@ namespace SSIT
             return service.enviar(enc);
         }
 
-        /// <summary>
-        /// Revisa las encomiendas relacionadas a la solicitud 
-        /// y si tiene CAA en SIPSA entonces los obtiene y los
-        /// guarda en nuestra base de datos fix 21/12/23 00:05am
-        /// no me pagan lo suficiente para esto pero milei ya 
-        /// anuncio la ley omnibus VLLC! @Krasorx
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="pass"></param>
-        /// <param name="id_solicitud"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         [WebMethod]
         public bool InsertarCAA_DocAdjuntos(string user, string pass, int id_solicitud)
         {
@@ -167,38 +147,37 @@ namespace SSIT
         private bool GetCAA_fileInfo(GetCAAResponse response, int id_encomienda)
         {
             bool subioFile = false;
-            ExternalService.ExternalServiceFiles files_service = new ExternalService.ExternalServiceFiles();
             string fileName = response.certificado.fileName;
-            string contentType = response.certificado.contentType;
             string extension = response.certificado.extension;
+            DateTime fechaCreacionCAA = response.fechaIngreso;
             byte[] rawBytes = Convert.FromBase64String(response.certificado.rawBytes);
-            int size = response.certificado.size;
             int id_tipocertificado = 1;
 
             switch (response.id_tipocertificado)
             {
                 case 1:
-                    id_tipocertificado = (int)TipoCertificadoCAA.sre;
+                    id_tipocertificado = 18;
                     break;
                 case 2:
-                    id_tipocertificado = (int)TipoCertificadoCAA.sreCC;
+                    id_tipocertificado = 19;
                     break;
                 case 3:
-                    id_tipocertificado = (int)TipoCertificadoCAA.sc;
+                    id_tipocertificado = 17;
                     break;
                 case 4:
-                    id_tipocertificado = (int)TipoCertificadoCAA.sre;
+                    id_tipocertificado = 16;
                     break;
                 case 5:
-                    id_tipocertificado = (int)TipoCertificadoCAA.DDJJ;
+                    id_tipocertificado = 53;
                     break;
                 default:
+                    id_tipocertificado = 53;
                     break;
             }
 
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             Guid userid = (Guid)Membership.GetUser("ws-sgi").ProviderUserKey;
-            subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado);
+            subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado, fechaCreacionCAA);
             return subioFile;
         }
 

@@ -24,11 +24,11 @@ namespace SSIT.Solicitud.HabilitacionECI
         AmpliacionesBL blSol = new AmpliacionesBL();
         private enum TipoCertificadoCAA
         {
-            sre = 16,
-            sreCC = 17,
-            sc = 18,
-            cre = 19,
-            DDJJ = 120 
+            sre = 18,
+            sreCC = 19,
+            sc = 17,
+            cre = 16,
+            DDJJ = 53
         }
         protected void Page_Load(object sender, EventArgs e)
         {
