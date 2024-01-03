@@ -11,7 +11,7 @@ namespace ExternalService.Class.Express
     {
         public int id_solicitud { get; set; }
         public string codigoSeguridad { get; set; }
-        public DateTime fechaIngreso { get; set; }
+        public DateTime? fechaIngreso { get; set; }
         public int id_tipotramite { get; set; }
         public string tipotramite { get; set; }
         public int id_estado { get; set; }
@@ -20,7 +20,7 @@ namespace ExternalService.Class.Express
         public string codigo_tipocertificado { get; set; }
         public string nombre_tipocertificado { get; set; }
         public string nroCertificado { get; set; }
-        public DateTime fechaVencCertificado { get; set; }
+        public DateTime? fechaVencCertificado { get; set; }
         public int? nroActuacion { get; set; }
         public int? anioActuacion { get; set; }
         public int? tipoActoAdministrativo { get; set; }
@@ -32,7 +32,7 @@ namespace ExternalService.Class.Express
         public int? id_tad { get; set; }
         public bool esCur { get; set; }
         public string nroGEDOCertificado { get; set; }
-        public DateTime createDate { get; set; }
+        public DateTime? createDate { get; set; }
         public string createUser { get; set; }
         public Pago[] pagos { get; set; }
         public Historialestado[] historialEstados { get; set; }
@@ -96,7 +96,7 @@ namespace ExternalService.Class.Express
         public string codEntidadNormativa { get; set; }
         public string descEntidadNormativa { get; set; }
         public string nro_normativa { get; set; }
-        public DateTime fecha_normativa { get; set; }
+        public DateTime? fecha_normativa { get; set; }
         public bool verificada_SADE { get; set; }
     }
 
@@ -239,7 +239,7 @@ namespace ExternalService.Class.Express
         public int id_pago { get; set; }
         public string monto_pago { get; set; }
         public int nro_boletaUnica { get; set; }
-        public DateTime createDate { get; set; }
+        public DateTime? createDate { get; set; }
     }
 
     public class Historialestado
@@ -248,7 +248,7 @@ namespace ExternalService.Class.Express
         public int id_solicitud { get; set; }
         public string cod_estado_ant { get; set; }
         public string cod_estado_nuevo { get; set; }
-        public DateTime fecha_modificacion { get; set; }
+        public DateTime? fecha_modificacion { get; set; }
         public string usuario_modificacion { get; set; }
     }
 

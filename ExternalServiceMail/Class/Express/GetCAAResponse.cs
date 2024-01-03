@@ -33,7 +33,7 @@ namespace ExternalService.Class.Express
         public int? id_tad { get; set; }    //como en los ambientes de prueba esto es null hay que dejarlo asi
         public bool esCur { get; set; }
         public string nroGEDOCertificado { get; set; }
-        public DateTime createDate { get; set; }
+        public DateTime? createDate { get; set; }
         public string createUser { get; set; }
         public Pago[] pagos { get; set; }
         public Historialestado[] historialEstados { get; set; }

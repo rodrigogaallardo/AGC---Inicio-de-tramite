@@ -4824,7 +4824,8 @@ namespace BusinesLayer.Implementation
         /// <param name="filename"></param>
         /// <param name="extension"></param>
         /// <param name="id_tipocertificado"></param>
-        public bool InsertarCAA_DocAdjuntos(int id_encomienda, Guid userid, byte[] bytes, string filename, string extension, int id_tipocertificado)
+        public bool InsertarCAA_DocAdjuntos(int id_encomienda, Guid userid, byte[] bytes, string filename, 
+            string extension, int id_tipocertificado, DateTime fechaCreacionCAA)
         {
             bool subioFile = false;
             try
@@ -4845,7 +4846,7 @@ namespace BusinesLayer.Implementation
                     encDocDTO.id_tdocreq = id_tipocertificado;
                     //encDocDTO.tdocreq_detalle = ""; NO SE USA
                     encDocDTO.generadoxSistema = true;
-                    encDocDTO.CreateDate = DateTime.Now;
+                    encDocDTO.CreateDate = fechaCreacionCAA;
                     encDocDTO.CreateUser = userid;
                     encDocDTO.nombre_archivo = arch;
                     encDocDTO.id_file = id_file;

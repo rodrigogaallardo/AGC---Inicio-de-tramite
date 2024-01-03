@@ -44,11 +44,11 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
         private enum TipoCertificadoCAA
         {
-            sre = 16,
-            sreCC = 17,
-            sc = 18,
-            cre = 19,
-            DDJJ = 120   //TODO: Insertar nueva fila en la base de datos
+            sre = 18,
+            sreCC = 19,
+            sc = 17,
+            cre = 16,
+            DDJJ = 53 
         }
 
         public delegate void EventHandlerRecargarPagos(object sender, ucRecargarPagosEventsArgs e);
@@ -490,12 +490,10 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         private bool GetCAA_fileInfo(GetCAAResponse response)
         {
             bool subioFile = false;
-            ExternalService.ExternalServiceFiles files_service = new ExternalService.ExternalServiceFiles();
             string fileName = response.certificado.fileName;
-            string contentType = response.certificado.contentType;
+            DateTime fechaCreacionCAA = response.fechaIngreso;
             string extension = response.certificado.extension;
             byte[] rawBytes = Convert.FromBase64String(response.certificado.rawBytes);
-            int size = response.certificado.size;
             int id_tipocertificado = 1;
 
             switch (response.id_tipocertificado)
@@ -510,18 +508,19 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     id_tipocertificado = (int)TipoCertificadoCAA.sc;
                     break;
                 case 4:
-                    id_tipocertificado = (int)TipoCertificadoCAA.sre;
+                    id_tipocertificado = (int)TipoCertificadoCAA.cre;
                     break;
                 case 5:
                     id_tipocertificado = (int)TipoCertificadoCAA.DDJJ;
                     break;
                 default:
+                    id_tipocertificado = (int)TipoCertificadoCAA.DDJJ;
                     break;
             }
 
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
-            subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado);  
+            subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado, fechaCreacionCAA);  
             //aca deberia volver a correr el load asi muestra el archivo
             return subioFile;
         }
