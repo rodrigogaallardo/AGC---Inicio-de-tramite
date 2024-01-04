@@ -160,8 +160,12 @@ namespace SSIT.Mobile
                     var encWrap = await GetCAAsByEncomiendas(lst_encomiendas);
                     l = encWrap.ListCaa;
                 }).Wait();
-
-                lblNroCAA.Text = l.Count > 0 ? l[0].formulario.id_caa.ToString() : "";
+                string nroCAA_txt = string.Empty;
+                if(l != null)
+                {
+                    nroCAA_txt = l.Count > 0 ? l[0].formulario.id_caa.ToString() : "";
+                }
+                lblNroCAA.Text = nroCAA_txt;
                 lblEstado.Text = sol.TipoEstadoSolicitudDTO.Descripcion;
                 bool automatica = false;
                 EngineBL blEng = new EngineBL();
