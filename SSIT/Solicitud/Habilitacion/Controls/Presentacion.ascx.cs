@@ -61,14 +61,21 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                             l = listCaaW.ListCaa;
                         }).Wait();
                         lstItems.Add(new ListItem());
-                    foreach (var item in l)
-                    {
-                        string doc = "";
-                        if (item.certificado != null)
-                            doc = item.certificado.idFile.ToString();
+                        if(l != null)
+                        {
+                            foreach (var item in l)
+                            {
+                                string doc = "";
+                                if (item.certificado != null)
+                                    doc = item.certificado.idFile.ToString();
 
-                        lstItems.Add(new ListItem(item.nombre_tipocertificado + item.formulario.id_caa.ToString(), doc));
-                    }
+                                lstItems.Add(new ListItem(item.nombre_tipocertificado + item.formulario.id_caa.ToString(), doc));
+                            }
+                            Exception caaExp = new Exception(
+                                $"Al presentar tramite no se encontraron CAA para las encomiendas {lst},"
+                                );
+                            LogError.Write(caaExp);
+                        }
 
                     lstItems.Add(new ListItem());
                     foreach (var item in lst)
