@@ -2417,13 +2417,19 @@ namespace BusinesLayer.Implementation
 
 
                         // Compara los Rubros
-                        int cantidadRubrosCAA= (solCAA.formulario.rubrosCPU != null ? solCAA.formulario.rubrosCPU.Count() : 0);
+                        int cantidadRubrosCAA = 0; 
                         int cantidadRubrosHAB = 0;
 
                         if (id_solicitud <= nroSolicitudReferencia)
+                        {
+                            cantidadRubrosCAA = solCAA.formulario.rubrosCPU != null ? solCAA.formulario.rubrosCPU.Count() : 0;
                             cantidadRubrosHAB = encomienda.Encomienda_Rubros.Count();
+                        }
                         else
+                        {
+                            cantidadRubrosCAA = solCAA.formulario.rubrosCur != null ? solCAA.formulario.rubrosCur.Count() : 0;
                             cantidadRubrosHAB = encomienda.Encomienda_RubrosCN.Count();
+                        }
 
 
 

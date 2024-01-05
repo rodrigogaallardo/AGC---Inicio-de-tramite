@@ -54,7 +54,7 @@ namespace ExternalService
                 try
                 {
                     tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(tokenResponseApplication.ToString());
-                    if (tokenResponse.expires.AddMinutes(-10) > DateTime.Now)
+                    if (tokenResponse.expires.ToLocalTime().AddMinutes(-10) > DateTime.Now)
                     {
                         return tokenResponse;
                     }
@@ -103,10 +103,6 @@ namespace ExternalService
                 {
                     System.Web.HttpContext.Current.Application["TokenResponse"] = result;
                     var borrar = System.Web.HttpContext.Current.Application["TokenResponse"];
-                }
-                else
-                {
-
                 }
                     
             }
@@ -238,7 +234,16 @@ namespace ExternalService
                         return getCAAResponse;//JsonConvert.SerializeObject(content);
                     }
                     else
-                        return null;//($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                    {
+                        string content = response.Content;
+                        GetCAAResponse getCAAResponse = new GetCAAResponse();
+                        if (content.Contains("no existe"))
+                            return null;
+                        getCAAResponse = JsonConvert.DeserializeObject<GetCAAResponse>(content);
+
+                        return getCAAResponse;
+                    }
+                        //return null;//($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
                 }
                 catch (HttpRequestException ex)
                 {
@@ -423,7 +428,7 @@ namespace ExternalService
                 request.RequestFormat = DataFormat.Json;
                 request.AddHeader("content-type", "application/json; charset=utf-8");
                 if(tokenResponse != null)
-                    request.AddHeader("Authorization", "Bearer " + tokenResponse.token);//aca hay algo raro
+                    request.AddHeader("Authorization", "Bearer " + tokenResponse.token);
 
                 var data = JsonConvert.SerializeObject(IdEncomiendaList);
 
