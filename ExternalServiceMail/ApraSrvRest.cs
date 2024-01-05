@@ -104,10 +104,6 @@ namespace ExternalService
                     System.Web.HttpContext.Current.Application["TokenResponse"] = result;
                     var borrar = System.Web.HttpContext.Current.Application["TokenResponse"];
                 }
-                else
-                {
-
-                }
                     
             }
             catch (Exception ex)

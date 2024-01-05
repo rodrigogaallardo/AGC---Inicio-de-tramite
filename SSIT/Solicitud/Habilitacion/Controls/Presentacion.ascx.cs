@@ -68,11 +68,21 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                                 string doc = "";
                                 if (item.certificado != null)
                                     doc = item.certificado.idFile.ToString();
-
+                                else
+                                {
+                                    Exception caaExp2 = new Exception(
+                                        $"La solicitud de CAA no tiene Certificado. id_solicitud_caa : {item.id_solicitud}," +
+                                        $"id_encomienda : {item.formulario.id_encomienda_agc}," +
+                                        $"id_estado_solicitud_caa : {item.id_estado}," +
+                                        $"certificado : {item.certificado},"
+                                        );
+                                     LogError.Write(caaExp2);
+                                     throw new Exception("La solicitud no cuenta con un caa otorgado pero si con una solicitud de caa en trámite.");
+                                }
                                 lstItems.Add(new ListItem(item.nombre_tipocertificado + item.formulario.id_caa.ToString(), doc));
                             }
                             Exception caaExp = new Exception(
-                                $"Al presentar tramite no se encontraron CAA para las encomiendas {lst},"
+                                $"Al presentar tramite no se encontraron CAA para las encomiendas."
                                 );
                             LogError.Write(caaExp);
                         }
