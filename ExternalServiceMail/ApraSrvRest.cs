@@ -234,7 +234,16 @@ namespace ExternalService
                         return getCAAResponse;//JsonConvert.SerializeObject(content);
                     }
                     else
-                        return null;//($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
+                    {
+                        string content = response.Content;
+                        GetCAAResponse getCAAResponse = new GetCAAResponse();
+                        if (content.Contains("no existe"))
+                            return null;
+                        getCAAResponse = JsonConvert.DeserializeObject<GetCAAResponse>(content);
+
+                        return getCAAResponse;
+                    }
+                        //return null;//($"La solicitud no fue exitosa. Código de estado: {response.StatusCode}");
                 }
                 catch (HttpRequestException ex)
                 {
