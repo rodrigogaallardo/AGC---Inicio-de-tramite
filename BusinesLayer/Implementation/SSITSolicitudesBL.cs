@@ -9,6 +9,7 @@ using ExternalService;
 using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using IBusinessLayer;
+using iTextSharp.text;
 using StaticClass;
 using System;
 using System.Collections.Generic;
@@ -1349,6 +1350,20 @@ namespace BusinesLayer.Implementation
                     if (solicitud_caa == null)
                     {
                         throw new Exception(Errors.SSIT_SOLICITUD_CAA_INEXISTENTE);
+                    }
+                    else
+                    {
+                        if (solicitud_caa.certificado == null)
+                        {
+                            Exception caaExp = new Exception(
+                                $"La solicitud de CAA no tiene Certificado. id_solicitud_caa : {solicitud_caa.id_solicitud}," +
+                                $"id_encomienda : {solicitud_caa.formulario.id_encomienda_agc}," +
+                                $"id_estado_solicitud_caa : {solicitud_caa.id_estado}," +
+                                $"certificado : {solicitud_caa.certificado},"
+                                );
+                            LogError.Write(caaExp);
+                            throw new Exception("La solicitud no cuenta con un caa otorgado pero si con una solicitud de caa en trámite.");
+                        }
                     }
                 }
 
