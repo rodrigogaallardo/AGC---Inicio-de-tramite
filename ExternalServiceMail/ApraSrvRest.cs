@@ -54,7 +54,7 @@ namespace ExternalService
                 try
                 {
                     tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(tokenResponseApplication.ToString());
-                    if (tokenResponse.expires.AddMinutes(-10) > DateTime.Now)
+                    if (tokenResponse.expires.ToLocalTime().AddMinutes(-10) > DateTime.Now)
                     {
                         return tokenResponse;
                     }
@@ -419,7 +419,7 @@ namespace ExternalService
                 request.RequestFormat = DataFormat.Json;
                 request.AddHeader("content-type", "application/json; charset=utf-8");
                 if(tokenResponse != null)
-                    request.AddHeader("Authorization", "Bearer " + tokenResponse.token);//aca hay algo raro
+                    request.AddHeader("Authorization", "Bearer " + tokenResponse.token);
 
                 var data = JsonConvert.SerializeObject(IdEncomiendaList);
 
