@@ -333,7 +333,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         lstArchivosCAA.Add(item);
                     }
                     //para el backlog, si no tiene archivo en nuestra base lo agrego
-                    var caaBacklog = lstArchivosCAA.Where(x => !listEncomiendasCAA.Contains(x.id_encomienda)).ToList();
+                    var caaBacklog = listEncomiendasCAA.Where(y => !lstArchivosCAA.Select(x => x.id_encomienda).Contains(y)).ToList();
                     if (caaBacklog != null && caaBacklog.Count() > 0)
                     {
                         bool subioAlgo = await InsertarCAA_DocAdjuntos(id_solicitud);
