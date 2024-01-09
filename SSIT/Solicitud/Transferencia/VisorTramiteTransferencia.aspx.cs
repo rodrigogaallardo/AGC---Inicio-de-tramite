@@ -529,7 +529,7 @@ namespace SSIT
                     $"idTad : {sol.idTAD}, " +
                     $"usuarioSSIT : {usuDTO.UserName}"
                     );
-                LogError.Write(ex22);
+                //LogError.Write(ex22);
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
                 usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
                 usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
