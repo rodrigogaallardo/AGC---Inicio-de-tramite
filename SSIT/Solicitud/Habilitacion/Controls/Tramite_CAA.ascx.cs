@@ -314,26 +314,27 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                      //var x = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).ToList();
                     foreach (var docAdj in ListDocAdj)
                     {
+                        var caaActual = _lstCaa.Where(x => x.formulario.id_encomienda_agc == docAdj.id_encomienda).FirstOrDefault();
                         CAA_ArchivosDTO item = new CAA_ArchivosDTO();
                         item.id_encomienda = docAdj.id_encomienda;
                         item.id_file = docAdj.id_file;
                         item.CreateDate = docAdj.CreateDate;
                         item.url = string.Format("~/" + RouteConfig.DESCARGA_FILE + "{0}", Functions.ConvertToBase64String(item.id_file));
-                        item.id_caa = _caaAct.id_solicitud;
+                        item.id_caa = caaActual.id_solicitud;
                         item.id_solicitud = Encomienda.IdSolicitud;
                         item.mostrarDoc = true;// antes hacia esto caa.Documentos.Count() > 0;
                         item.nombre = docAdj.nombre_archivo;
-                        item.id_tipocertificado = _caaAct.id_tipocertificado;
-                        item.estado_caa = _caaAct.estado;
-                        item.codigo_tipocertificado = _caaAct.codigo_tipocertificado;
-                        item.nombre_tipocertificado = _caaAct.nombre_tipocertificado;
+                        item.id_tipocertificado = caaActual.id_tipocertificado;
+                        item.estado_caa = caaActual.estado;
+                        item.codigo_tipocertificado = caaActual.codigo_tipocertificado;
+                        item.nombre_tipocertificado = caaActual.nombre_tipocertificado;
                         lstArchivosCAA.Add(item);
                     }
                     //para el backlog, si no tiene archivo en nuestra base lo agrego
                     var caaBacklog = listEncomiendasCAA.Where(y => !lstArchivosCAA.Select(x => x.id_encomienda).Contains(y)).ToList();
                     if (caaBacklog != null && caaBacklog.Count() > 0)
                     {
-                        bool subioAlgo = await InsertarCAA_DocAdjuntos(listEncomiendasCAA);
+                        bool subioAlgo = await InsertarCAA_DocAdjuntos(caaBacklog);
                         //si como minimo subio algun archivo, recargo la pagina para poder verlos
                         if (subioAlgo)
                         {
@@ -343,7 +344,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         }
                         else
                         {
-                            var caasSinCert = _lstCaa.Where(x => !caaBacklog
+                            var caasSinCert = _lstCaa.Where(x => caaBacklog
                                                     .Contains(x.formulario.id_encomienda_agc)).ToList();
                             foreach (var caaSinCert in caasSinCert)
                             {
@@ -595,7 +596,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
 
                 EncomiendaBL encomiendaBL = new EncomiendaBL();
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
-                subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(id_encomienda, userid, rawBytes, fileName, extension, id_tipocertificado, fechaCreacionCAA);
+                subioFile = encomiendaBL.InsertarCAA_DocAdjuntos(response.formulario.id_encomienda_agc, userid, rawBytes, fileName, extension, id_tipocertificado, fechaCreacionCAA);
                 //aca deberia volver a correr el load asi muestra el archivo
                 return subioFile;
             }
