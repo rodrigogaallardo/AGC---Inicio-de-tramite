@@ -17,6 +17,7 @@ using System.Net;
 using iTextSharp.text;
 using ExternalService;
 using Microsoft.IdentityModel.Tokens;
+using System.IO;
 
 namespace SSIT.Solicitud.Habilitacion.Controls
 {
@@ -260,7 +261,7 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 // Llena los CAAs de acuerdo a las encomiendas vinculadas a la solicitud.
                 // ---------------------------------------------------------------------
                 #region Luis CAA rest
-                var encWrap = await GetCAAsByEncomiendas(lst_encomiendas.Select(x => x.IdEncomienda).ToArray());
+                var encWrap = await GetCAAsByEncomiendas(lst_encomiendas.Select(x => x.IdEncomienda).ToList());
                 _lstCaa = encWrap.ListCaa;
                 #endregion
             }
@@ -307,21 +308,17 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     List<EncomiendaDocumentosAdjuntosDTO> ListDocAdj = new List<EncomiendaDocumentosAdjuntosDTO>();
                     foreach (var enc in listEncomiendasCAA)
                     {
-                        var listaencCAADocs =  encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).ToList();
+                        var listaencCAADocs =  encDocBL.GetByFKIdEncomiendaTipoSis(enc, id_tipodocsis).ToList();
                         ListDocAdj.AddRange(listaencCAADocs);
                     }
                      //var x = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).ToList();
                     foreach (var docAdj in ListDocAdj)
                     {
                         CAA_ArchivosDTO item = new CAA_ArchivosDTO();
-                        item.id_encomienda = _caaAct.formulario.id_encomienda_agc;
                         item.id_encomienda = docAdj.id_encomienda;
                         item.id_file = docAdj.id_file;
                         item.CreateDate = docAdj.CreateDate;
                         item.url = string.Format("~/" + RouteConfig.DESCARGA_FILE + "{0}", Functions.ConvertToBase64String(item.id_file));
-                        //_caaAct = _lstCaa.Where(caa => caa.formulario.id_encomienda_agc).OrderByDescending(caa => caa.id_solicitud).FirstOrDefault();
-                        // por ahora uso _caa_Act
-
                         item.id_caa = _caaAct.id_solicitud;
                         item.id_solicitud = Encomienda.IdSolicitud;
                         item.mostrarDoc = true;// antes hacia esto caa.Documentos.Count() > 0;
@@ -336,15 +333,32 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     var caaBacklog = listEncomiendasCAA.Where(y => !lstArchivosCAA.Select(x => x.id_encomienda).Contains(y)).ToList();
                     if (caaBacklog != null && caaBacklog.Count() > 0)
                     {
-                        bool subioAlgo = await InsertarCAA_DocAdjuntos(id_solicitud);
-
-                        //GetCAAResponse caa = await GetCAA(_caaAct.id_solicitud);
-                        //var fileInfo = GetCAA_fileInfo(caa);
+                        bool subioAlgo = await InsertarCAA_DocAdjuntos(listEncomiendasCAA);
+                        //si como minimo subio algun archivo, recargo la pagina para poder verlos
                         if (subioAlgo)
                         {
                             DivBtnSIPSAExpress.Visible = false;
                             string url = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
                             Response.Redirect(url);
+                        }
+                        else
+                        {
+                            var caasSinCert = _lstCaa.Where(x => !caaBacklog
+                                                    .Contains(x.formulario.id_encomienda_agc)).ToList();
+                            foreach (var caaSinCert in caasSinCert)
+                            {
+                                CAA_ArchivosDTO item = new CAA_ArchivosDTO();
+                                item.id_encomienda = caaSinCert.formulario.id_encomienda_agc;
+                                item.CreateDate = caaSinCert.createDate;
+                                item.id_caa = caaSinCert.id_solicitud;
+                                item.id_solicitud = Encomienda.IdSolicitud;
+                                item.mostrarDoc = false;
+                                item.id_tipocertificado = caaSinCert.id_tipocertificado;
+                                item.estado_caa = caaSinCert.estado;
+                                item.codigo_tipocertificado = caaSinCert.codigo_tipocertificado;
+                                item.nombre_tipocertificado = caaSinCert.nombre_tipocertificado;
+                                lstArchivosCAA.Add(item);
+                            }
                         }
                     }
                     
@@ -457,15 +471,13 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             btnBuscarCAA.Enabled = true;
         }
 
-        public async Task<bool> InsertarCAA_DocAdjuntos(int id_solicitud)
+        public async Task<bool> InsertarCAA_DocAdjuntos(List<int> encomiendas)
         {
 
             int CAA_id = 0;
+            bool subioFile = false;
+            int cantidadSubido = 0;
             ExternalServiceFiles files_service = new ExternalServiceFiles();
-
-            EncomiendaBL blEnc = new EncomiendaBL();
-            var lstEnc = blEnc.GetByFKIdSolicitud(id_solicitud);
-            int[] encomiendas = lstEnc.Select(e => e.IdEncomienda).ToArray();
 
             GetCAAsByEncomiendasWrapResponse caaWrap = null;
             caaWrap = await GetCAAsByEncomiendas(encomiendas);
@@ -481,22 +493,22 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         GetCAAResponse caa = null;
                         caa = await GetCAA(CAA_id);
                         
-                        var fileInfo = GetCAA_fileInfo(caa);
+                        subioFile = GetCAA_fileInfo(caa);
+                        if (subioFile)
+                            cantidadSubido++;
                     }
 
                 }
             }
-            else
-                return false;   // no tiene CAA que agregar
-
-
-            return true;    //Agrego los CAA con exito (perhaps)
+            if (cantidadSubido > 0)
+                subioFile = true;
+            return subioFile;    //Agrego los CAA con exito (perhaps)
         }
 
-        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas);
             return lstCaa;
         }
         private async Task<AsociarAnexoTecnicoResponse> AsociarAnexoTecnico(int id_caa, string codigo_caa, int id_encomienda)
@@ -549,6 +561,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                         $"id_estado_solicitud_caa : {response.id_estado},"
                         );
                     LogError.Write(caaExp);
+                    lblErrorBuscarCAA.Text = $"La solicitud de CAA {response.id_solicitud} aún no tiene Certificado. No fue generado por APRA";
+                    pnlErrorBuscarCAA.Visible = true;
                     return false;
                 }
                 string fileName = response.certificado.fileName;
@@ -604,7 +618,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             lstMensajesCAA.ClearSelection();
             List<string> lstErr = new List<string>();
             //Antes de generar un CAA reviso si la encomienda ya tiene un CAA
-            int[] encomiendas = { id_encomienda};
+            List<int> encomiendas = new List<int>();
+            encomiendas.Add(id_encomienda);
             GetCAAsByEncomiendasWrapResponse caaWrap = await GetCAAsByEncomiendas(encomiendas);
             List<GetCAAsByEncomiendasResponse> lstRCAAenc = caaWrap.ListCaa;
             if (lstRCAAenc != null && lstRCAAenc.Count > 0)

@@ -230,7 +230,8 @@ namespace ExternalService
                         string content = response.Content;
                         GetCAAResponse getCAAResponse = new GetCAAResponse();
                         getCAAResponse = JsonConvert.DeserializeObject<GetCAAResponse>(content);
-
+                        if (getCAAResponse.id_solicitud == 244984)
+                            getCAAResponse.certificado = null;
                         return getCAAResponse;//JsonConvert.SerializeObject(content);
                     }
                     else
@@ -446,6 +447,15 @@ namespace ExternalService
                         if(getCAAsByEncomiendasResponseList.Count == 0)
                         {
                             getCAAsByEncomiendasResponseList = null;
+                        }
+                        else
+                        {   
+                            //para testing
+                            foreach(var caa in getCAAsByEncomiendasResponseList)
+                            {
+                                if (caa.id_solicitud == 244984)
+                                    caa.certificado = null;
+                            }
                         }
                         return new GetCAAsByEncomiendasWrapResponse
                         {
