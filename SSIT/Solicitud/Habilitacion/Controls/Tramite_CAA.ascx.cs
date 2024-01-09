@@ -479,10 +479,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                     if (CAA_id > 0)
                     {
                         GetCAAResponse caa = null;
-                        Task.Run(async () =>
-                        {
-                            caa = await GetCAA(CAA_id);
-                        }).Wait();
+                        caa = await GetCAA(CAA_id);
+                        
                         var fileInfo = GetCAA_fileInfo(caa);
                     }
 
@@ -590,7 +588,8 @@ namespace SSIT.Solicitud.Habilitacion.Controls
             catch (Exception ex)
             {
                 LogError.Write(ex);
-                throw (ex);
+                return subioFile;
+                //throw (ex); esto podia generar el loop de logs
             }
             
         }

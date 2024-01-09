@@ -4861,7 +4861,6 @@ namespace BusinesLayer.Implementation
             {
                 LogError.Write(ex, ex.Message);
                 throw ex;
-                return subioFile;
             }
         }
 
