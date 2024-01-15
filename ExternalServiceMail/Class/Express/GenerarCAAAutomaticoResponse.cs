@@ -208,7 +208,7 @@ namespace ExternalService.Class.Express
     {
         public int id_caaprophorizontal { get; set; }
         public int id_propiedadhorizontal { get; set; }
-        public int nroPartidaHorizontal { get; set; }
+        public int? nroPartidaHorizontal { get; set; }
         public string unidadFuncional { get; set; }
     }
 
