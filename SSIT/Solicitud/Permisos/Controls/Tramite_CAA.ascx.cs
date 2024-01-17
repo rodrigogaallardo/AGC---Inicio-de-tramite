@@ -1,4 +1,5 @@
 ﻿using BusinesLayer.Implementation;
+using DataAcess;
 using DataTransferObject;
 using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
@@ -153,7 +154,7 @@ namespace SSIT.Solicitud.Permisos.Controls
             DtoRACGenerado result = null;
             CAAErrorEventArgs args = new CAAErrorEventArgs();
             args.Code = 5000;
-
+            List<string> lstMensajes = new List<string>();
             System.Web.Security.MembershipUser usu = System.Web.Security.Membership.GetUser();
             string codigo_seguridad_CAA = txtCodSeguridadCAA.Text.Trim().ToUpper();
             int id_solicitud_caa = 0;
@@ -174,7 +175,19 @@ namespace SSIT.Solicitud.Permisos.Controls
 
 
                 //Valida el codigo de seguridad de la solicitud de CAA
-                if (!servicio.ValidarCodigoSeguridad(username_servicio, password_servicio, id_solicitud_caa, codigo_seguridad_CAA, ref ws_resultado_CAA))
+                //if (!servicio.ValidarCodigoSeguridad(username_servicio, password_servicio, id_solicitud_caa, codigo_seguridad_CAA, ref ws_resultado_CAA))
+                ValidarCodigoSeguridadResponse resCodSeg = new ValidarCodigoSeguridadResponse();
+                Task.Run(async () =>
+                {
+                    resCodSeg = await ValidarCodigoSeguridad(id_solicitud_caa, codigo_seguridad_CAA);
+                }).Wait();
+                if (resCodSeg == null)  //esto indicaria un error de comunicación con APRA, no creamos el permiso de musica y canto si esto sucede
+                {
+                    Exception exception = new Exception("Hubo un error al intentar validar el codigo de seguridad del caa");
+                    LogError.Write(exception + $" id_solicitud_agc:{id_solicitud_agc}  id_solicitud_caa:{id_solicitud_caa} codigo_seguridad_CAA:{codigo_seguridad_CAA}");
+                    throw exception;
+                }
+                if (!resCodSeg.EsValido)
                 {
                     args.Description = ws_resultado_CAA.ErrorDescription;
                     if (Error != null)
@@ -184,17 +197,32 @@ namespace SSIT.Solicitud.Permisos.Controls
                 {
                     //Obtiene los datos de la solicitud de CAA.
                     //DtoCAA[] arrSolCAA = servicio.Get_CAAs(username_servicio, password_servicio, new int[] { id_solicitud_caa }, ref ws_resultado_CAA);
+                    var lst_encomiendas = blEnc.GetByFKIdSolicitud(id_solicitud_agc);
                     List<GetCAAsByEncomiendasResponse> lstDocCAA = null;
                     Task.Run(async () =>
                     {
-                        var listCaaW = await GetCAAsByEncomiendas(listEnc.Select(enc => enc.id_encomienda).ToList());
+                        var listCaaW = await GetCAAsByEncomiendas(lst_encomiendas.Select(enc => enc.IdEncomienda).ToList());
                         lstDocCAA = listCaaW.ListCaa;
                     }).Wait();
 
                     if (lstDocCAA != null && lstDocCAA.Count() > 0)
                     {
-                        var solCAA = lstDocCAA[0];
-                        var lstMensajes = blSol.CompareWithCAA(id_solicitud_agc, solCAA);
+                        GetCAAsByEncomiendasResponse solCAA = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
+                        GetCAAResponse caa = new GetCAAResponse();
+                        if(solCAA != null)
+                        {
+                            Task.Run(async () =>
+                            {
+                                caa = await GetCAA(solCAA.id_solicitud);
+                            }).Wait();
+                            if (caa != null)
+                                lstMensajes = blSol.CompareWithCAA(id_solicitud_agc, caa);
+                        }
+                        else
+                        {
+                            lstMensajes.Add("No se encontro ninguna encomienda Aprobada con CAA Aprobado.");
+                        }
+                        
 
                         if (lstMensajes.Count == 0)
                         {
@@ -271,10 +299,10 @@ namespace SSIT.Solicitud.Permisos.Controls
             GetCAAResponse jsonCaa = await apraSrvRest.GetCaa(id_caa);
             return jsonCaa;
         }
-        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(int[] lst_id_Encomiendas)
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
         {
             ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
-            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas);
             return lstCaa;
         }
 
