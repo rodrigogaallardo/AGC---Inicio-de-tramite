@@ -60,6 +60,7 @@ namespace DataAcess
         public string ZonaDeclarada { get; set; }
         public Nullable<int> idTipoTransmision { get; set; }
         public Nullable<int> idSolicitudRef { get; set; }
+        public Nullable<System.DateTime> FechaLibrado { get; set; }
     
         public virtual CPadron_Solicitudes CPadron_Solicitudes { get; set; }
         public virtual ICollection<SGI_Tramites_Tareas_TRANSF> SGI_Tramites_Tareas_TRANSF { get; set; }

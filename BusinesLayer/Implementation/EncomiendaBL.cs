@@ -1676,7 +1676,7 @@ namespace BusinesLayer.Implementation
             string BusApenom,
             string BusCuit,
             List<int> BusListEstados,
-            int BusNroTramite,
+            string BusNroTramite,
             int BusTipoTramite,
             int startRowIndex,
             int maximumRows,
@@ -1730,7 +1730,7 @@ namespace BusinesLayer.Implementation
         /// <param name="nroTramite"></param>
         /// <param name="pIdEncomiendaConsejo"></param>
         /// <returns></returns>
-        public IList<EncomiendaExternaDTO> TraerEncomiendasExConsejos(int id_grupoconsejo, string matricula, string Apenom, string cuit, string estados, int tipoTramite, int nroTramite, int pIdEncomiendaConsejo, int startRowIndex, int maximumRows, out int totalRowCount)
+        public IList<EncomiendaExternaDTO> TraerEncomiendasExConsejos(int id_grupoconsejo, string matricula, string Apenom, string cuit, string estados, int tipoTramite, string nroTramite, int pIdEncomiendaConsejo, int startRowIndex, int maximumRows, out int totalRowCount)
         {
             try
             {
@@ -4168,7 +4168,7 @@ namespace BusinesLayer.Implementation
         /// <param name="NroTramite"></param>
         /// <param name="IdTipoTramite"></param>
         /// <returns></returns>
-        public EncomiendaExternaDTO GetEncomiendaExterna(int NroTramite, int IdTipoTramite)
+        public EncomiendaExternaDTO GetEncomiendaExterna(string NroTramite, int IdTipoTramite)
         {
             try
             {

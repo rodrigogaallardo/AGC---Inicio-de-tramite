@@ -411,7 +411,7 @@ namespace BaseRepository
         /// <param name="nroTramite"></param>
         /// <param name="pIdEncomiendaConsejo"></param>
         /// <returns></returns>
-        public IEnumerable<EncomiendaExt> TraerEncomiendasExConsejos(int id_grupoconsejo, string matricula, string Apenom, string cuit, string estados, int tipoTramite, int nroTramite, int pIdEncomiendaConsejo)
+        public IEnumerable<EncomiendaExt> TraerEncomiendasExConsejos(int id_grupoconsejo, string matricula, string Apenom, string cuit, string estados, int tipoTramite, string nroTramite, int pIdEncomiendaConsejo)
         {
             var encomiendas = (from enc in _unitOfWork.Db.EncomiendaExt
                                join con in _unitOfWork.Db.ConsejoProfesional on enc.id_consejo equals con.Id
@@ -428,7 +428,7 @@ namespace BaseRepository
                 encomiendas = encomiendas.Where(p => p.Profesional.Apellido.Contains(Apenom));
             if (!string.IsNullOrEmpty(cuit))
                 encomiendas = encomiendas.Where(p => p.Profesional.Cuit.Contains(cuit));
-            if (nroTramite > 0)
+            if (!string.IsNullOrEmpty(nroTramite))
                 encomiendas = encomiendas.Where(p => p.nroTramite == nroTramite);
             if (pIdEncomiendaConsejo > 0)
                 encomiendas = encomiendas.Where(p => p.nroEncomiendaconsejo == pIdEncomiendaConsejo);
@@ -452,7 +452,7 @@ namespace BaseRepository
         /// <param name="nroTramite"></param>
         /// <param name="id_tipocertificado"></param>
         /// <returns></returns>
-        public IEnumerable<EncomiendaExt> TraerEncomiendasDirectorObra(int BusIdGrupoConsejo, string BusMatricula, string BusApenom, string BusCuit, List<int> BusListEstados, int BusNroTramite, int BusTipoTramite)
+        public IEnumerable<EncomiendaExt> TraerEncomiendasDirectorObra(int BusIdGrupoConsejo, string BusMatricula, string BusApenom, string BusCuit, List<int> BusListEstados, string BusNroTramite, int BusTipoTramite)
         {
 
             var encomiendas = (from enc in _unitOfWork.Db.EncomiendaExt
@@ -480,7 +480,7 @@ namespace BaseRepository
             if (!string.IsNullOrEmpty(BusCuit))
                 encomiendas = encomiendas.Where(p => p.Profesional.Cuit.Contains(BusCuit));
 
-            if (BusNroTramite > 0)
+            if (!string.IsNullOrEmpty(BusNroTramite))
                 encomiendas = encomiendas.Where(p => p.nroTramite == BusNroTramite);
 
             if (BusListEstados.Count > 0)

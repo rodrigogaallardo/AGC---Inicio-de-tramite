@@ -24,7 +24,7 @@ namespace DataAcess
         }
     
         public int id_encomienda { get; set; }
-        public int nroTramite { get; set; }
+        public string nroTramite { get; set; }
         public int nroEncomiendaconsejo { get; set; }
         public System.DateTime FechaEncomienda { get; set; }
         public int id_consejo { get; set; }

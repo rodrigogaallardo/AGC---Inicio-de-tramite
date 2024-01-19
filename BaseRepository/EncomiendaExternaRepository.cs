@@ -23,7 +23,7 @@ namespace BaseRepository
         /// </summary>
         /// <param name="NroTramite"></param>
         /// <returns></returns>
-        public EncomiendaExt Get(int NroTramite, int IdTipoTramite)
+        public EncomiendaExt Get(string NroTramite, int IdTipoTramite)
         {
             return (from enc in _unitOfWork.Db.EncomiendaExt
                     where enc.nroTramite == NroTramite

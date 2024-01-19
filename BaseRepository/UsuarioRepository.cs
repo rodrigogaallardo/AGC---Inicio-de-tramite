@@ -47,7 +47,7 @@ namespace BaseRepository
         {
             try
             {
-                string result = _unitOfWork.Db.Get_Token_Tad(userid);
+                string result = _unitOfWork.Db.Get_Token_Tad(userid).ToString();
                 return result;
             }
             catch (Exception ex)

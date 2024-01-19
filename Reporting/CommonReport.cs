@@ -215,7 +215,7 @@ namespace Reporting
             return documento;
         }
 
-        public static Stream GenerarCertificadoExtConsejo(int tipo_tramite, int nro_tramite)
+        public static Stream GenerarCertificadoExtConsejo(int tipo_tramite, string nro_tramite)
         {
             Stream documento = null;
 
