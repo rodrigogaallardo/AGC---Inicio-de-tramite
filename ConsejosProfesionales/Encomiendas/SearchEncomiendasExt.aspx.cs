@@ -99,10 +99,11 @@ namespace ConsejosProfesionales.Encomiendas
             string nroMatricula = txtNroMatricula.Text.Trim();
             string Apenom = txtApeNom.Text.Trim();
 
-            int nroTramite = 0;
+            string nroTramite = string.Empty;
             int nroEncomienda = 0;
 
-            int.TryParse(txtNroTramite.Text.Trim(), out nroTramite);
+            //int.TryParse(txtNroTramite.Text.Trim(), out nroTramite);
+            nroTramite = Convert.ToString(txtNroTramite.Text.Trim());
             int.TryParse(txtNroEncomienda.Text.Trim(), out nroEncomienda);
             EncomiendaBL encomiendaBL = new EncomiendaBL();
 

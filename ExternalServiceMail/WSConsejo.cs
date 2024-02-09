@@ -44,7 +44,7 @@ namespace ExternalService.WSConsejo
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetPdfCertificadoEncomiendaExt", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
-        public byte[] GetPdfCertificadoEncomiendaExt(string usuario, string clave, int tipo_tramite, int nro_tramite)
+        public byte[] GetPdfCertificadoEncomiendaExt(string usuario, string clave, int tipo_tramite, string nro_tramite)
         {
             object[] results = this.Invoke("GetPdfCertificadoEncomiendaExt", new object[] {
                     usuario,
@@ -55,7 +55,7 @@ namespace ExternalService.WSConsejo
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginGetPdfCertificadoEncomiendaExt(string usuario, string clave, int tipo_tramite, int nro_tramite, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginGetPdfCertificadoEncomiendaExt(string usuario, string clave, int tipo_tramite, string nro_tramite, System.AsyncCallback callback, object asyncState)
         {
             return this.BeginInvoke("GetPdfCertificadoEncomiendaExt", new object[] {
                     usuario,
@@ -72,13 +72,13 @@ namespace ExternalService.WSConsejo
         }
 
         /// <remarks/>
-        public void GetPdfCertificadoEncomiendaExtAsync(string usuario, string clave, int tipo_tramite, int nro_tramite)
+        public void GetPdfCertificadoEncomiendaExtAsync(string usuario, string clave, int tipo_tramite, string nro_tramite)
         {
             this.GetPdfCertificadoEncomiendaExtAsync(usuario, clave, tipo_tramite, nro_tramite, null);
         }
 
         /// <remarks/>
-        public void GetPdfCertificadoEncomiendaExtAsync(string usuario, string clave, int tipo_tramite, int nro_tramite, object userState)
+        public void GetPdfCertificadoEncomiendaExtAsync(string usuario, string clave, int tipo_tramite, string nro_tramite, object userState)
         {
             if ((this.GetPdfCertificadoEncomiendaExtOperationCompleted == null))
             {

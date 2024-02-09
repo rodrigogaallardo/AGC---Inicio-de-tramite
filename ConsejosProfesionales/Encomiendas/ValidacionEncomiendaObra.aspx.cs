@@ -74,8 +74,9 @@ namespace ConsejosProfesionales.Encomiendas
             string BusMatricula = txtNroMatricula.Text.Trim();
             string BusApenom = txtApeNom.Text.Trim();
 
-            int BusNroTramite = 0;
-            int.TryParse(txtNroEncomienda.Text.Trim(), out BusNroTramite);
+            string BusNroTramite = string.Empty;
+            BusNroTramite = Convert.ToString(txtNroEncomienda.Text.Trim());
+            //int.TryParse(txtNroEncomienda.Text.Trim(), out BusNroTramite);
 
             EncomiendaBL encomiendaBL = new EncomiendaBL();
 

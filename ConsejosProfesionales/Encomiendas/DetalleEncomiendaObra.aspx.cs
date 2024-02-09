@@ -163,7 +163,7 @@ namespace ConsejosProfesionales.Encomiendas
         /// <param name="tipoTramite"></param>
         /// <param name="nroTramite"></param>
         /// <returns></returns>
-        public IEnumerable<CertificadosDTO> TraerCertificado(int tipoTramite, int nroTramite)
+        public IEnumerable<CertificadosDTO> TraerCertificado(int tipoTramite, string nroTramite)
         {
             CertificadosBL certificadosBL = new CertificadosBL();
             return certificadosBL.GetByFKNroTipo(nroTramite, tipoTramite);

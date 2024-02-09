@@ -51,7 +51,7 @@ namespace ConsejosProfesionales.Encomiendas
                 var dsSol = encomiendaBL.GetEncomiendaExterna(NroTramite);
                 if (dsSol != null)
                 {
-                    int nro_tramite = dsSol.nroTramite;
+                    string nro_tramite = dsSol.nroTramite;
                     btnImprimirComprobante.NavigateUrl = string.Format("~/Reportes/ImprimirComprobante.aspx?tipo={0}&nro_tramite={1}&userid={2}", TipoCertificado.ToString(), nro_tramite, userid.ToString().ToLower());
                 }
 
@@ -101,7 +101,7 @@ namespace ConsejosProfesionales.Encomiendas
             EncomiendaBL encomiendaBL = new EncomiendaBL();
             var ds = encomiendaBL.GetEncomiendaExterna(id_encomienda);
             int id_estado;
-            int nroTramite = 0;
+            string nroTramite = string.Empty;
             int tipo_tramite = 0;
             bool Bloqueada = false;
 
@@ -163,7 +163,7 @@ namespace ConsejosProfesionales.Encomiendas
             }
         }
 
-        public IList<CertificadosDTO>  TraerCertificado(int tipoTramite, int nroTramite)
+        public IList<CertificadosDTO>  TraerCertificado(int tipoTramite, string nroTramite)
         {
             CertificadosBL certificadosBL = new CertificadosBL();
 

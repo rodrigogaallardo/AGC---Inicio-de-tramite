@@ -16,14 +16,14 @@ namespace SSIT.Reportes
         {
             if (!IsPostBack)
             {
-                string param_id = "";
-                int id_actanotarial = 0;
+                string param_id = string.Empty;
+                string id_actanotarial = string.Empty;
 
                 try
                 {
                     param_id = Page.RouteData.Values["id_actanotarial"].ToString();
                     byte[] bidfile = Convert.FromBase64String(HttpUtility.UrlDecode(param_id));
-                    id_actanotarial = int.Parse(System.Text.Encoding.ASCII.GetString(bidfile));
+                    id_actanotarial = Convert.ToString(System.Text.Encoding.ASCII.GetString(bidfile));
 
                 }
                 catch (Exception)
@@ -34,7 +34,7 @@ namespace SSIT.Reportes
                 DescargarFile(id_actanotarial);
             }
         }
-        private void DescargarFile(int id_actanotarial)
+        private void DescargarFile(string id_actanotarial)
         {
             CertificadosBL blCert = new CertificadosBL();
             var cert = blCert.GetByFKNroTipo(id_actanotarial, (int)Constantes.TipoTramiteCertificados.Certificado_Acta_Notarial_Encomienda).FirstOrDefault();

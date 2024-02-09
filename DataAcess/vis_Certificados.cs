@@ -16,7 +16,7 @@ namespace DataAcess
     {
         public int id_certificado { get; set; }
         public int TipoTramite { get; set; }
-        public int NroTramite { get; set; }
+        public string NroTramite { get; set; }
         public byte[] Certificado { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string CreateUser { get; set; }

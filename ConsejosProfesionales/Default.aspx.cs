@@ -82,7 +82,7 @@ namespace ConsejosProfesionales
 
                 int totalRowCount = 0;
 
-                int cant = encomiendaBL.TraerEncomiendasDirectorObra(dsGrupoConsejo.FirstOrDefault().Id, "", "", "", BusListEstados, 0, 11,  0, 9999,  "", out totalRowCount).Count();
+                int cant = encomiendaBL.TraerEncomiendasDirectorObra(dsGrupoConsejo.FirstOrDefault().Id, "", "", "", BusListEstados, "", 11,  0, 9999,  "", out totalRowCount).Count();
                 lblCountDirObraPend.Text = cant == 0 ? "" : "( " + cant + " )";
             }
             

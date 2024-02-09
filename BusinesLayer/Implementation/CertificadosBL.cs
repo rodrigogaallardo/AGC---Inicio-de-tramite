@@ -48,7 +48,7 @@ namespace BusinesLayer.Implementation
 		/// </summary>
 		/// <param name="IdEncomienda"></param>
 		/// <returns></returns>	
-		public IEnumerable<CertificadosDTO> GetByFKNroTipo(int NroTramite, int TipoTramite)
+		public IEnumerable<CertificadosDTO> GetByFKNroTipo(string NroTramite, int TipoTramite)
         {
 			uowF = new TransactionScopeUnitOfWorkFactory();
             repo = new CertificadosRepository(this.uowF.GetUnitOfWork());
@@ -57,7 +57,7 @@ namespace BusinesLayer.Implementation
             return elementsDto;				
 		}
 
-        public IEnumerable<CertificadosDTO> GetByFKListNroTipo(List<int> list, int TipoTramite)
+        public IEnumerable<CertificadosDTO> GetByFKListNroTipo(List<String> list, int TipoTramite)
         {
             uowF = new TransactionScopeUnitOfWorkFactory();
             repo = new CertificadosRepository(this.uowF.GetUnitOfWork());

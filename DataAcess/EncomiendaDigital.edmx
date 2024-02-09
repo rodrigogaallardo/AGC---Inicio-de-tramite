@@ -5071,7 +5071,6 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitude
           <Property Name="ZonaDeclarada" Type="varchar" MaxLength="50" />
           <Property Name="idTipoTransmision" Type="int" />
           <Property Name="idSolicitudRef" Type="int" />
-          <Property Name="FechaLibrado" Type="datetime" />
         </EntityType>
         <EntityType Name="Transf_Solicitudes_AvisoCaducidad">
           <Key>
@@ -6759,7 +6758,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes_preprod.dbo.vis_Certificado
           </Key>
           <Property Name="id_certificado" Type="int" Nullable="false" />
           <Property Name="TipoTramite" Type="int" Nullable="false" />
-          <Property Name="NroTramite" Type="int" Nullable="false" />
+          <Property Name="NroTramite" Type="nvarchar" Nullable="false" />
           <Property Name="Certificado" Type="varbinary(max)" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreateUser" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -24512,7 +24511,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           </Key>
           <Property Name="id_certificado" Type="Int32" Nullable="false" />
           <Property Name="TipoTramite" Type="Int32" Nullable="false" />
-          <Property Name="NroTramite" Type="Int32" Nullable="false" />
+          <Property Name="NroTramite" Type="String" Nullable="false" />
           <Property Name="Certificado" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -31615,7 +31614,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Transf_Solicitudes_AvisoCaducidad" Relationship="EncmiendaEntityes.FK_Transf_Solicitudes_AvisoCaducidad_Transf_Solicitudes" FromRole="Transf_Solicitudes" ToRole="Transf_Solicitudes_AvisoCaducidad" />
           <NavigationProperty Name="Transf_Solicitudes_Baja" Relationship="EncmiendaEntityes.FK_Transf_Solicitudes_Baja_Transf_Solicitudes" FromRole="Transf_Solicitudes" ToRole="Transf_Solicitudes_Baja" />
           <NavigationProperty Name="Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas" Relationship="EncmiendaEntityes.FK_Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas_Transf_Solicitudes" FromRole="Transf_Solicitudes" ToRole="Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas" />
-          <Property Name="FechaLibrado" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Transf_Solicitudes_CPadron_Solicitudes">
           <End Type="EncmiendaEntityes.CPadron_Solicitudes" Role="CPadron_Solicitudes" Multiplicity="1" />
@@ -42988,7 +42986,6 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Transf_Solicitudes">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Transf_Solicitudes">
               <MappingFragment StoreEntitySet="Transf_Solicitudes">
-                <ScalarProperty Name="FechaLibrado" ColumnName="FechaLibrado" />
                 <ScalarProperty Name="idSolicitudRef" ColumnName="idSolicitudRef" />
                 <ScalarProperty Name="idTipoTransmision" ColumnName="idTipoTransmision" />
                 <ScalarProperty Name="ZonaDeclarada" ColumnName="ZonaDeclarada" />

@@ -29,7 +29,7 @@ namespace DataTransferObject
     public class EncomiendaExternaDTO : EncomiendaDTO
     {
         public bool Bloqueada { get; set; }
-        public int nroTramite { get; set; }
+        public string nroTramite { get; set; }
         public string MotivoRechazo { get; set; }
         public string NroDGROC { get; set; }
         public int? id_file { get; set; }

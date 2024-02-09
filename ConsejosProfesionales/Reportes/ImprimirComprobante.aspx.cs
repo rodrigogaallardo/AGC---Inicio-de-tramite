@@ -29,7 +29,7 @@ namespace ConsejosProfesionales.Reportes
                     if (tipo == 1)
                         ImprimirCertificadoEncomienda(nro_tramite, userid);
                     else
-                        ImprimirCertificadoEncomiendaExterna(tipo, nro_tramite, userid);
+                        ImprimirCertificadoEncomiendaExterna(tipo, "", userid); //TODO pasarle el nroTramite correcto
 
                 }
                 catch (Exception ex)
@@ -39,7 +39,7 @@ namespace ConsejosProfesionales.Reportes
                 Response.End();
             }
         }
-        private void ImprimirCertificadoEncomiendaExterna(int tipo_tramite, int nroTramite, Guid userid)
+        private void ImprimirCertificadoEncomiendaExterna(int tipo_tramite, string nroTramite, Guid userid)
         {
 
             var documento = CommonReport.GenerarCertificadoExtConsejo(tipo_tramite, nroTramite);

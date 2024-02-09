@@ -18,13 +18,13 @@ namespace BaseRepository
 			_unitOfWork = unit;
         }
 
-        public IEnumerable<vis_Certificados> GetByFKNroTipo(int NroTramite, int TipoTramite)
+        public IEnumerable<vis_Certificados> GetByFKNroTipo(string NroTramite, int TipoTramite)
         {
             IEnumerable<vis_Certificados> domains = _unitOfWork.Db.vis_Certificados.Where(x => x.NroTramite == NroTramite && x.TipoTramite == TipoTramite);
             return domains;
         }
 
-        public IEnumerable<vis_Certificados> GetByFKListNroTipo(List<int> list, int TipoTramite)
+        public IEnumerable<vis_Certificados> GetByFKListNroTipo(List<String> list, int TipoTramite)
         {
             IEnumerable<vis_Certificados> domains = _unitOfWork.Db.vis_Certificados.Where(x => list.Contains(x.NroTramite) && x.TipoTramite == TipoTramite);
             return domains;
