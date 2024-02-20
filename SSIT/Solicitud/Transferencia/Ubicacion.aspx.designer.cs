@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSIT.Solicitud.Transferencia {
-    
-    
-    public partial class Ubicacion {
-        
+namespace SSIT.Solicitud.Transferencia
+{
+
+
+    public partial class Ubicacion
+    {
+
         /// <summary>
         /// updUbicaciones control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updUbicaciones;
-        
+
         /// <summary>
         /// hid_return_url control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_return_url;
-        
+
         /// <summary>
         /// updAgregarUbicacion control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updAgregarUbicacion;
-        
+
         /// <summary>
         /// btnCargarDatos control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCargarDatos;
-        
+
         /// <summary>
         /// hid_id_solicitud control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_id_solicitud;
-        
+
         /// <summary>
         /// visUbicaciones control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::SSIT.Solicitud.Transferencia.Controls.Ubicacion visUbicaciones;
-        
+
         /// <summary>
         /// updPlantas control.
         /// </summary>
@@ -74,34 +76,25 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPlantas;
-        
+
         /// <summary>
-        /// pnlPlantasHabilitar control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPlantasHabilitar;
-        
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+
         /// <summary>
-        /// grdPlantasHabilitar control.
+        /// lblPlantasHabilitar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPlantasHabilitar;
-        
-        /// <summary>
-        /// Req_Plantas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Req_Plantas;
-        
+        protected global::System.Web.UI.WebControls.Label lblPlantasHabilitar;
+
         /// <summary>
         /// updBotonesGuardar control.
         /// </summary>
@@ -110,7 +103,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updBotonesGuardar;
-        
+
         /// <summary>
         /// btnContinuar control.
         /// </summary>
@@ -119,7 +112,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnContinuar;
-        
+
         /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
@@ -128,7 +121,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// updmpeInfo control.
         /// </summary>
@@ -137,7 +130,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updmpeInfo;
-        
+
         /// <summary>
         /// lblError control.
         /// </summary>
@@ -146,7 +139,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// updConfirmarEliminar control.
         /// </summary>
@@ -155,7 +148,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updConfirmarEliminar;
-        
+
         /// <summary>
         /// UpdateProgress2 control.
         /// </summary>
@@ -164,7 +157,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress2;
-        
+
         /// <summary>
         /// btnEliminar_Si control.
         /// </summary>
@@ -173,7 +166,7 @@ namespace SSIT.Solicitud.Transferencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEliminar_Si;
-        
+
         /// <summary>
         /// BuscarUbicacion control.
         /// </summary>

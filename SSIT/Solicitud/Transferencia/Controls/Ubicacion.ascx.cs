@@ -246,6 +246,45 @@ namespace SSIT.Solicitud.Transferencia.Controls
         /// <param name="IdSolicitud"></param>
         private void CargarPlantasHabilitar(TransferenciasSolicitudesDTO transferencia)
         {
+            bool tieneEncomienda = transferencia.EncomiendaTransfSolicitudesDTO.Select(e => e.id_encomienda).Any();
+
+            if (tieneEncomienda)
+            {
+                //var listaPlantasDesdeEncomienda;
+                int idEncomienda = transferencia.EncomiendaTransfSolicitudesDTO.First().id_encomienda;
+                EncomiendaPlantasBL encomiendaPlantasBL = new EncomiendaPlantasBL();
+                var plantasDesdeEncomienda = encomiendaPlantasBL.Get(idEncomienda).Where(x => x.Seleccionado);
+
+                if (plantasDesdeEncomienda != null)
+                {
+                    foreach (var item in plantasDesdeEncomienda)
+                    {
+                        int TamanoCampoAdicional = item.TamanoCampoAdicional;
+                        bool MuestraCampoAdicional = false;
+                        string separador = "";
+
+                        MuestraCampoAdicional = item.MuestraCampoAdicional;
+
+                        if (lblPlantasHabilitar.Text.Length == 0)
+                            separador = "";
+                        else
+                            separador = ", ";
+
+                        if (MuestraCampoAdicional)
+                        {
+                            if (TamanoCampoAdicional >= 8)
+                                lblPlantasHabilitar.Text += separador + item.Descripcion.Trim() + " " + item.Detalle.Trim();
+                            else
+                                lblPlantasHabilitar.Text += separador + item.Descripcion.Trim();
+                        }
+                        else
+                            lblPlantasHabilitar.Text += separador + item.Descripcion.Trim();
+
+
+                    }
+                    return;
+                }
+            }
 
             var lstaPlantas = transferencia.Plantas;
 
