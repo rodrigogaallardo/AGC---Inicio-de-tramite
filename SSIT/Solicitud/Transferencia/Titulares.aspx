@@ -76,7 +76,7 @@
         <div id="box_titulares_ANT" class="box-panel">
             <div style="margin: 20px; margin-top: -5px">
                 <div style="color: #377bb5">
-                    <h4><i class="imoon imoon-users" style="margin-right: 10px"></i>Cendente (Titular/es anteriores)</h4>
+                    <h4><i class="imoon imoon-users" style="margin-right: 10px"></i>Cedente (Titular/es anteriores)</h4>
                     <hr />
                 </div>
             </div>
