@@ -377,6 +377,7 @@ namespace SSIT
         {
             try
             {
+                Cargar();
                 int id_docadjunto;
                 int.TryParse(hid_id_docadjunto.Value, out id_docadjunto);
                 TransferenciasDocumentosAdjuntosBL bldoc = new TransferenciasDocumentosAdjuntosBL();
