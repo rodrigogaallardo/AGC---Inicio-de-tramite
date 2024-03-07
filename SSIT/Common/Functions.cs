@@ -638,6 +638,30 @@ namespace SSIT.Common
             return desarrollo;
         }
 
+        public static CuitsRelacionadosPOSTRest isCuitsRelacionadosRest(string cuitFirmante, string cuitTitular)
+        {
+            ExternalServiceAGIP_REST servicio = new ExternalServiceAGIP_REST();
+            CuitsRelacionadosDTO_REST cuitsDto = new CuitsRelacionadosDTO_REST();
+            CuitsRelacionadosPOSTRest resul;
+            try
+            {
+                if (!String.IsNullOrEmpty(cuitTitular))
+                {
+                    long cuitRepre = Convert.ToInt64(cuitTitular);
+                    long cuitValidar = Convert.ToInt64(cuitFirmante);
+                    cuitsDto.cuitRepresentado = cuitRepre;
+                    cuitsDto.cuitAValidar = cuitValidar;
+                    resul = servicio.CuitsRelacionadosRest(cuitsDto);
+                }
+                else
+                    throw new Exception("Debe ingresar los datos del Titular");
 
+                return resul;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

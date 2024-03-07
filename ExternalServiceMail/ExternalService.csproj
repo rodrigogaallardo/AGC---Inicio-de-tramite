@@ -81,6 +81,7 @@
     <Compile Include="Class\PersonaTadEntity.cs" />
     <Compile Include="Class\ReportingEntity.cs" />
     <Compile Include="Class\TokenJwtTad.cs" />
+    <Compile Include="ExternalServiceAGIP_REST.cs" />
     <Compile Include="ExternalServiceAGIP.cs" />
     <Compile Include="ExternalServiceApoderamiento.cs" />
     <Compile Include="ExternalServiceEncuesta.cs" />

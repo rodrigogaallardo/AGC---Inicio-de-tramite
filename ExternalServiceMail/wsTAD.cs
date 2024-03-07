@@ -159,17 +159,24 @@ namespace ExternalService
             {
                 var response = JsonConvert.DeserializeObject<Response>(restResponse.Content);
 
-                if (response.Resultado != null && response.Resultado.Equals("200"))
+                if (response != null)
                 {
-                    return response.PersonaTAD;
-                }
-                else if (response.Codigo != null)
-                {
-                    throw new ArgumentException(response.Error);
+                    if (response.Resultado != null && response.Resultado.Equals("200"))
+                    {
+                        return response.PersonaTAD;
+                    }
+                    else if (response.Codigo != null)
+                    {
+                        throw new ArgumentException(response.Error);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Error inesperado en el servicio.");
+                    }
                 }
                 else
                 {
-                    throw new ArgumentException("Error inesperado en el servicio.");
+                    throw new ArgumentException("Error en comunicacion con el servicio.");
                 }
             }
             catch (ArgumentException ex)
