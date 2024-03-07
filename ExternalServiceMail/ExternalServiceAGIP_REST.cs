@@ -100,13 +100,7 @@ namespace ExternalService
                 LogError.Write(new Exception("Response: " + Funciones.GetDataFromResponse(response)));
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                     throw new Exception(string.Format("No se ha podido verificar la existencia de representación de servicios: {0} - {1}", response.StatusCode, response.Content));
-
-                CuitsRelacionadosPOSTRest ret = JsonConvert.DeserializeObject<CuitsRelacionadosPOSTRest>(response.Content);
-
-                if (ret.statusCode != 200)
-                    throw new Exception("Error al Validar CUITs con AGIP: " + ret.statusCode + ": " + ret.message);
-
-                return ret;
+                return JsonConvert.DeserializeObject<CuitsRelacionadosPOSTRest>(response.Content);
             }
             catch (Exception excep)
             {

@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using SSIT.Common;
 using Microsoft.Ajax.Utilities;
 using SSIT.Account;
+using Org.BouncyCastle.Ocsp;
 
 namespace SSIT
 {
@@ -679,13 +680,15 @@ namespace SSIT
                         var sol = solBL.Single(id_solicitud);
                         if (!MismoFirmante)
                         {
-
                             valido = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
-                                        || ValidarCuit(solTitPFDTO.Cuit.Trim(), solTitPFDTO.DtoFirmantes.Cuit.Trim(), updBotonesAgregarPF));
+                                     || ValidarCuit(solTitPFDTO.Cuit.Trim(), solTitPFDTO.DtoFirmantes.Cuit.Trim(), updBotonesAgregarPF));
                         }
 
-                        valido = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
-                                 || ValidarApoderamiento(solTitPFDTO.Cuit, updBotonesAgregarPF));
+                        if (valido)
+                        {
+                            valido = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
+                                     || ValidarApoderamiento(solTitPFDTO.Cuit, updBotonesAgregarPF));
+                        }
 
                         if (valido)
                         {
@@ -1188,7 +1191,7 @@ namespace SSIT
 
                     if (Validation)
                         Validation = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
-                                       || ValidarCuit(txtCuitPJ.Text.Trim(), txtCuitFirPJ.Text.Trim(), updgrdFirmantesPJ));
+                                     || ValidarCuit(txtCuitPJ.Text.Trim(), txtCuitFirPJ.Text.Trim(), updgrdFirmantesPJ));
                 }
 
             }
@@ -2058,7 +2061,7 @@ namespace SSIT
         private bool ValidarCuit(string cuitTitular, string cuitFirmante, UpdatePanel updPanel)
         {
             bool resul = true;
-            bool evaluar = true;
+            bool evaluar;
             try
             {
                 ParametrosBL parametrosBL = new ParametrosBL();
@@ -2116,21 +2119,16 @@ namespace SSIT
 
                     //VERSION NUEVA: USANDO SERVICIO REST DE "ISREPRESENTANTELEGAL" DE AGIP
                     var r = Functions.isCuitsRelacionadosRest(cuitFirmante, cuitTitular);
-                    if (r.statusCode == 306)
+                    if (r.statusCode == 110)
                     {
-                        lblError.Text = r.message + " - Debe volver a iniciar sesión.";
-                        this.EjecutarScript(updPanel, "showfrmError();");
                         resul = false;
-                    }
-                    else if (r.success ?? false)
-                    {
                         string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
                         string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
-                        resul = false;
                         lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
                         this.EjecutarScript(updPanel, "showfrmError();");
                     }
                 }
+                return resul;
             }
             catch (Exception ex)
             {
@@ -2138,8 +2136,8 @@ namespace SSIT
                 lblError.Text = "Error en el servicio de verificación de cuits: " + ex.Message;
                 LogError.Write(new Exception(lblError.Text));
                 this.EjecutarScript(updPanel, "showfrmError();");
+                return resul;
             }
-            return resul;
         }
 
         private bool ValidarApoderamiento(string cuitTitular, UpdatePanel updPanel)
