@@ -463,7 +463,7 @@ namespace SSIT
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 MembershipUser usuario = Membership.GetUser(userid);
 
-                Cargar();
+                CargarCombos();
 
                 //valido documentos
                 validarDocumentos(transferencia);
