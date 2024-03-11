@@ -377,6 +377,7 @@ namespace SSIT
         {
             try
             {
+                Cargar();
                 int id_docadjunto;
                 int.TryParse(hid_id_docadjunto.Value, out id_docadjunto);
                 TransferenciasDocumentosAdjuntosBL bldoc = new TransferenciasDocumentosAdjuntosBL();
@@ -404,8 +405,10 @@ namespace SSIT
 
         protected void btnConfirmarTramite_Click(object sender, EventArgs e)
         {
+            
             try
             {
+                Cargar();
                 var sol = TransferenciaBL.Single(IdSolicitud);
                 if (sol.idTAD != null)
                 {
@@ -423,7 +426,6 @@ namespace SSIT
                 lblError.Text = ex.Message;
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "showfrmError", "showfrmError();", true);
             }
-            Cargar();
         }
 
         private void enviarCambio(TransferenciasSolicitudesDTO sol)
