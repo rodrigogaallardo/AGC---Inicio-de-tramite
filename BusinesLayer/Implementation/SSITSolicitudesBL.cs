@@ -1111,7 +1111,10 @@ namespace BusinesLayer.Implementation
                             {
                                 if (transtarea != null)
                                 {
-                                    blEng.AsignarTarea(idTramiteTarea, transtarea.UsuarioAsignadoTramiteTarea.Value, unitOfWork);
+                                    if (blEng.UsuarioTienePermisoTarea(idProximaTarea, transtarea.UsuarioAsignadoTramiteTarea.Value))
+                                    {
+                                        blEng.AsignarTarea(idTramiteTarea, transtarea.UsuarioAsignadoTramiteTarea.Value, unitOfWork);
+                                    }
                                 }
                             }
                         }

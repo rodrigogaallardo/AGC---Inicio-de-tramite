@@ -51,6 +51,7 @@ namespace SSIT.Solicitud.Controls
 
         public void CargarCombo(List<TiposDeDocumentosRequeridosDTO> lstTiposDocumentos)
         {
+            ddlTiposDeDocumentosRequeridos.Items.Clear();
             ddlTiposDeDocumentosRequeridos.DataSource = lstTiposDocumentos;
             ddlTiposDeDocumentosRequeridos.DataTextField = "Descripcion_compuesta";
             ddlTiposDeDocumentosRequeridos.DataValueField = "id_tdocreq";
