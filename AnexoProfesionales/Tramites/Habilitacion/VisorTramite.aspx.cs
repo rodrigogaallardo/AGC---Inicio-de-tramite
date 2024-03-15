@@ -113,39 +113,27 @@ namespace AnexoProfesionales
 
                 if (enc.IdEstado != 0)
                 { 
-                decimal SuperficieTotal = 0;
-                if (encDatosLocal.ampliacion_superficie.HasValue && encDatosLocal.ampliacion_superficie.Value)
-                    SuperficieTotal = encDatosLocal.superficie_cubierta_amp.Value + encDatosLocal.superficie_descubierta_amp.Value;
-                else
-                    SuperficieTotal = encDatosLocal.superficie_cubierta_dl.Value + encDatosLocal.superficie_descubierta_dl.Value;
+                    decimal SuperficieTotal = 0;
+                    if (encDatosLocal.ampliacion_superficie.HasValue && encDatosLocal.ampliacion_superficie.Value)
+                        SuperficieTotal = encDatosLocal.superficie_cubierta_amp.Value + encDatosLocal.superficie_descubierta_amp.Value;
+                    else
+                        SuperficieTotal = encDatosLocal.superficie_cubierta_dl.Value + encDatosLocal.superficie_descubierta_dl.Value;
 
-                if (enc.IdSubTipoExpediente == (int)SubtipoDeExpediente.SinPlanos)
-                {
-                    if (!encConfLocalDTO.Any())
+                    if (enc.IdSubTipoExpediente == (int)SubtipoDeExpediente.SinPlanos)
                     {
-                        conformacionLocalOk = false;
-                    }
-
-                    if (SuperficieTotal > 60 && encDatosLocal.cumple_ley_962 == true && encDatosLocal.sanitarios_ubicacion_dl == 1
-                        && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
-                    {
-                        bañoPcDOk = false;
-                    }
-                    else if (SuperficieTotal <= 60 && encDatosLocal.cumple_ley_962 == true && encDatosLocal.sanitarios_ubicacion_dl == 1
-                        && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
-                    {
-                        //Verificar que Todos los rubros esten exceptuados
-                        foreach (var item in encRubrosCN)
+                        if (!encConfLocalDTO.Any())
                         {
-                            RubrosCNBL rubrosCNBL = new RubrosCNBL();
-                            var rubroCN = rubrosCNBL.Get(item.CodigoRubro).FirstOrDefault();
-                            if (!rubroCN.SinBanioPCD)
-                            {
-                                bañoPcDOk = false;
-                            }
+                            conformacionLocalOk = false;
+                        }
+
+                        if (((SuperficieTotal <= 60 && encRubrosCN.Where(x => x.RubrosDTO.SinBanioPCD == false).Any()) || SuperficieTotal > 60) 
+                            && encDatosLocal.cumple_ley_962 == true 
+                            && encDatosLocal.sanitarios_ubicacion_dl == 1
+                            && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
+                        {
+                            bañoPcDOk = false;
                         }
                     }
-                }
                 }
 
                 bool titularesOk = enc.EncomiendaTitularesPersonasFisicasDTO.Any() || enc.EncomiendaTitularesPersonasJuridicasDTO.Any();
@@ -832,24 +820,12 @@ namespace AnexoProfesionales
                         }
                     }
 
-                    if (SuperficieTotal > 60 && encDatosLocal.cumple_ley_962 == true && encDatosLocal.sanitarios_ubicacion_dl == 1 
-                    && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
-                    {
-                        throw new Exception("Debe cargar en los datos de conformación del local, el destino Baño PcD.");
-                    }
-                    else if (SuperficieTotal <= 60 && encDatosLocal.cumple_ley_962 == true && encDatosLocal.sanitarios_ubicacion_dl == 1
+                    if (((SuperficieTotal <= 60 && encRubrosCN.Where(x => x.RubrosDTO.SinBanioPCD == false).Any()) || SuperficieTotal > 60)
+                        && encDatosLocal.cumple_ley_962 == true
+                        && encDatosLocal.sanitarios_ubicacion_dl == 1
                         && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
                     {
-                        //Verificar que Todos los rubros esten exceptuados
-                        foreach (var item in encRubrosCN)
-                        {
-                            RubrosCNBL rubrosCNBL = new RubrosCNBL();
-                            var rubroCN = rubrosCNBL.Get(item.CodigoRubro).FirstOrDefault();
-                            if (!rubroCN.SinBanioPCD)
-                            {
-                                throw new Exception("Todos los tipos de rubros declarados deben estar exceptuados para el destino Baño PCD.");
-                            }
-                        }
+                        throw new Exception("Debe cargar en los datos de conformación del local, el destino Baño PcD.");
                     }
                 }
 
