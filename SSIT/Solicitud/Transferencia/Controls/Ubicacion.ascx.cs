@@ -51,7 +51,6 @@ namespace SSIT.Solicitud.Transferencia.Controls
                 // Se debe setear la propiedad editable antes de ejecutar la carga de datos
                 ViewState["Ubicaciones.ascx._Editable"] = value;
                 _Editable = value;
-                pnlPlantasHabilitar.Visible = !value;       // solo es visible al no ser editable
             }
         }
 
@@ -77,8 +76,7 @@ namespace SSIT.Solicitud.Transferencia.Controls
             gridubicacion_db.DataSource = transferencia.Ubicaciones;
             gridubicacion_db.DataBind();
 
-            if (!_Editable)
-                CargarPlantasHabilitar(transferencia);
+            CargarPlantasHabilitar(transferencia);
 
         }
         /// <summary>

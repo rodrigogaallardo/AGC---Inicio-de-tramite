@@ -220,8 +220,6 @@ namespace SSIT.Solicitud.Transferencia
             visUbicaciones.Editable = true;
             var transf = trBL.Single(id_solicitud);
             visUbicaciones.CargarDatos(transf);
-            //CargarTablaPlantasHabilitar(id_solicitud);
-            CargarTablaPlantasHabilitarTransf(transf);
         }
 
         protected void visUbicaciones_EliminarClick(object sender, ucEliminarEventsArgs args)
@@ -268,80 +266,6 @@ namespace SSIT.Solicitud.Transferencia
                 this.EjecutarScript(updConfirmarEliminar, "hidefrmConfirmarEliminar();showfrmError();");
             }
         }
-
-
-        #region "Plantas a habilitar"
-
-        private void CargarTablaPlantasHabilitarTransf(TransferenciasSolicitudesDTO transferencia)
-        {
-            bool tieneEncomienda = transferencia.EncomiendaTransfSolicitudesDTO.Select(e => e.id_encomienda).Any();
-
-            if (tieneEncomienda)
-            {
-                //var listaPlantasDesdeEncomienda;
-                int idEncomienda = transferencia.EncomiendaTransfSolicitudesDTO.First().id_encomienda;
-                EncomiendaPlantasBL encomiendaPlantasBL = new EncomiendaPlantasBL();
-                var plantasDesdeEncomienda = encomiendaPlantasBL.Get(idEncomienda).Where(x => x.Seleccionado);
-
-                if (plantasDesdeEncomienda != null)
-                {
-                    foreach (var item in plantasDesdeEncomienda)
-                    {
-                        int TamanoCampoAdicional = item.TamanoCampoAdicional;
-                        bool MuestraCampoAdicional = false;
-                        string separador = "";
-
-                        MuestraCampoAdicional = item.MuestraCampoAdicional;
-
-                        if (lblPlantasHabilitar.Text.Length == 0)
-                            separador = "";
-                        else
-                            separador = ", ";
-
-                        if (MuestraCampoAdicional)
-                        {
-                            if (TamanoCampoAdicional >= 8)
-                                lblPlantasHabilitar.Text += separador + item.Descripcion.Trim() + " " + item.Detalle.Trim();
-                            else
-                                lblPlantasHabilitar.Text += separador + item.Descripcion.Trim();
-                        }
-                        else
-                            lblPlantasHabilitar.Text += separador + item.Descripcion.Trim();
-                    }
-                    updPlantas.Update();
-                    return;
-                }
-            }
-
-            var lstaPlantas = transferencia.Plantas;
-
-            if (lstaPlantas != null)
-            {
-                foreach (var item in lstaPlantas)
-                {
-                    string separador = "";
-
-                    if (lblPlantasHabilitar.Text.Length == 0)
-                        separador = "";
-                    else
-                        separador = ", ";
-
-                    if (string.IsNullOrWhiteSpace(item.DetalleTransferenciaTipoSector))
-                    {
-                        lblPlantasHabilitar.Text += separador + item.TipoSector.Descripcion.Trim();
-                    }
-                    else
-                    {
-                        lblPlantasHabilitar.Text += separador + item.DetalleTransferenciaTipoSector.Trim();
-                    }
-                }
-                updPlantas.Update();
-            }
-
-
-        }
-
-        #endregion
 
         protected void btnContinuar_Click(object sender, EventArgs e)
         {

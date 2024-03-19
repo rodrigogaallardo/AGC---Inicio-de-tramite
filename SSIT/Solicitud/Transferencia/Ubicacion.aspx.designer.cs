@@ -69,33 +69,6 @@ namespace SSIT.Solicitud.Transferencia
         protected global::SSIT.Solicitud.Transferencia.Controls.Ubicacion visUbicaciones;
 
         /// <summary>
-        /// updPlantas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPlantas;
-
-        /// <summary>
-        /// Panel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
-
-        /// <summary>
-        /// lblPlantasHabilitar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPlantasHabilitar;
-
-        /// <summary>
         /// updBotonesGuardar control.
         /// </summary>
         /// <remarks>

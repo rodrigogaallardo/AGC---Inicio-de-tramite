@@ -72,17 +72,7 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <br/>
-        <asp:UpdatePanel ID="updPlantas" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <%--Plantas a habilitar--%>
-                <asp:Panel ID="Panel1" runat="server" CssClass="back-panel-gris" Style="margin-top: 20px; padding-left: 10px">
-                    <strong>Plantas a habilitar:</strong>
-                    <asp:Label ID="lblPlantasHabilitar" runat="server"></asp:Label>
-                </asp:Panel>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-
+        
         <%--Botones de Guardado--%>
         <asp:UpdatePanel ID="updBotonesGuardar" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -201,6 +191,7 @@
             $("#page_content").hide();
             $("#Loading").show();
             $("#<%: btnCargarDatos.ClientID %>").click();
+            finalizarCarga();
         });
 
         function finalizarCarga() {
