@@ -245,7 +245,7 @@ namespace SSIT.Solicitud.Transferencia.Controls
         private void CargarPlantasHabilitar(TransferenciasSolicitudesDTO transferencia)
         {
             bool tieneEncomienda = transferencia.EncomiendaTransfSolicitudesDTO.Select(e => e.id_encomienda).Any();
-
+            lblPlantasHabilitar.Text = string.Empty;
             if (tieneEncomienda)
             {
                 //var listaPlantasDesdeEncomienda;
