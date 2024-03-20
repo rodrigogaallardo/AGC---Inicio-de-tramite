@@ -189,24 +189,19 @@ namespace AnexoProfesionales.Controls
                 pnlSMP.Visible = RequiereSMP;
 
 
-                if (id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ParcelaComun) || !id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ObjetoTerritorial)
-                  || id_tipoubicacion.Equals((int)Constantes.TiposDeUbicacion.ObjetoTerritorial))
-                {
+               
                     pnlTipoUbicacion.Visible = true;
                     lblTipoUbicacion.Text = item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion != null ?
-                        item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion.Trim() : "";
+                    item.SubTipoUbicacionesDTO.TiposDeUbicacionDTO.DescripcionTipoUbicacion.Trim() : "";
                     lblSubTipoUbicacion.Text = item.SubTipoUbicacionesDTO.descripcion_subtipoubicacion.Trim();
                     lblTextOtros.Text = item.LocalSubtipoUbicacion != null ? item.LocalSubtipoUbicacion : "";
-                    lbl_seccion.Text = item.Ubicacion.Seccion.Value.ToString();
+                    lbl_seccion.Text = item.Ubicacion.Seccion != null ? item.Ubicacion.Seccion.ToString() :"";
                     lbl_manzana.Text = item.Ubicacion.Manzana.Trim();
                     lbl_parcela.Text = item.Ubicacion.Parcela.Trim();
 
                     pnlDeptoLocal.Visible = false;
                     pnlSMP.Visible = true;
 
-                }
-                else
-                    pnlDeptoLocal.Visible = true;// Solo aparece cuando es parcela común, para el resto lo tomna del campo local que pone al buscar
 
 
                 lbl_zonificacion.Text += encBL.GetZonificacion(item.IdEncomienda.Value);
