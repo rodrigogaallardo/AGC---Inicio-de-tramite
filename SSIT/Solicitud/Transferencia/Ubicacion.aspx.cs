@@ -30,7 +30,7 @@ namespace SSIT.Solicitud.Transferencia
                 //ComprobarSolicitud();
                 hid_return_url.Value = Request.Url.AbsoluteUri;
             }
-            this.BuscarUbicacion.AgregarUbicacionClick += BuscarUbicacion_AgregarUbicacionClick1;
+            this.BuscarUbicacion.AgregarUbicacionClick += BuscarUbicacion_AgregarUbicacionClick;
             this.BuscarUbicacion.CerrarClick += BuscarUbicacion_CerrarClick;
         }
 
@@ -118,14 +118,19 @@ namespace SSIT.Solicitud.Transferencia
                 TransferenciasSolicitudesBL trBL = new TransferenciasSolicitudesBL();
                 visUbicaciones.CargarDatos(trBL.Single(IdSolicitud));
                 updUbicaciones.Update();
-                this.EjecutarScript(upd, "hidefrmAgregarUbicacion();");
+                this.EjecutarScript(updUbicaciones, "hidefrmAgregarUbicacion();");
+                ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "hidefrmAgregarUbicacion", "hidefrmAgregarUbicacion();", true);
             }
             catch (Exception ex)
             {
                 LogError.Write(ex, ex.Message);
                 e.Cancel = true;
                 lblError.Text = (ex.Message);
-                this.EjecutarScript(upd, "hidefrmAgregarUbicacion();showfrmError();");
+                updUbicaciones.Update();
+                this.EjecutarScript(updUbicaciones, "hidefrmAgregarUbicacion();");
+                ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "hidefrmAgregarUbicacion", "hidefrmAgregarUbicacion();", true);
+                this.EjecutarScript(updUbicaciones, "showfrmError();");
+                ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "showfrmError", "showfrmError();", true);
             }
         }
 
@@ -179,20 +184,24 @@ namespace SSIT.Solicitud.Transferencia
                 visUbicaciones.CargarDatos(trBL.Single(IdSolicitud));
                 updUbicaciones.Update();
                 this.EjecutarScript(upd, "hidefrmAgregarUbicacion();");
+                ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "hidefrmAgregarUbicacion", "hidefrmAgregarUbicacion();", true);
             }
             catch (Exception ex)
             {
                 LogError.Write(ex, ex.Message);
                 e.Cancel = true;
                 lblError.Text = (ex.Message);
-                this.EjecutarScript(upd, "hidefrmAgregarUbicacion();showfrmError();");
+                this.EjecutarScript(updUbicaciones, "hidefrmAgregarUbicacion();");
+                ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "hidefrmAgregarUbicacion", "hidefrmAgregarUbicacion();", true);
+                this.EjecutarScript(updUbicaciones, "showfrmError();");
+                ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "showfrmError", "showfrmError();", true);
             }
         }
 
         protected void BuscarUbicacion_CerrarClick(object sender, EventArgs e)
         {
             CargarDatos(IdSolicitud);
-            this.EjecutarScript(updUbicaciones, "hidefrmAgregarUbicacion();");
+            this.EjecutarScript(updUbicaciones, "finalizarCarga();");
             updUbicaciones.Update();
             ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "hidefrmAgregarUbicacion", "hidefrmAgregarUbicacion();", true);
         }
@@ -203,7 +212,11 @@ namespace SSIT.Solicitud.Transferencia
             {
                 CargarDatos(IdSolicitud);
                 this.EjecutarScript(updUbicaciones, "finalizarCarga();");
-
+                if (hid_return_url.Value.Contains("Editar"))
+                {
+                    btnVolver.Style["display"] = "inline";
+                    updBotonesGuardar.Update();
+                }
             }
             catch (Exception ex)
             {
@@ -225,7 +238,7 @@ namespace SSIT.Solicitud.Transferencia
         protected void visUbicaciones_EliminarClick(object sender, ucEliminarEventsArgs args)
         {
             btnEliminar_Si.CommandArgument = args.IdUbicacion.ToString();
-            this.EjecutarScript(updUbicaciones, "showfrmConfirmarEliminar();");
+            ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "updUbicaciones", "showfrmConfirmarEliminar();", true);
         }
 
         protected void visUbicaciones_EditarClick(object sender, ucEditarEventsArgs args)
@@ -255,7 +268,7 @@ namespace SSIT.Solicitud.Transferencia
                 // vuelve a cargar los datos.
                 TransferenciasSolicitudesBL trBL = new TransferenciasSolicitudesBL();
                 visUbicaciones.CargarDatos(trBL.Single(IdSolicitud));
-                this.EjecutarScript(updUbicaciones, "hidefrmConfirmarEliminar();");
+                ScriptManager.RegisterStartupScript(updUbicaciones, updUbicaciones.GetType(), "updUbicaciones2", "hidefrmConfirmarEliminar();", true);
                 updUbicaciones.Update();
 
             }
@@ -274,6 +287,23 @@ namespace SSIT.Solicitud.Transferencia
                 if (!visUbicaciones.TieneUbicaciones)
                     throw new Exception("Debe ingresar la ubicación.");
 
+                if (hid_return_url.Value.Contains("Editar"))
+                    Response.Redirect(string.Format("~/" + RouteConfig.VISOR_TRANSMISIONES + "{0}", IdSolicitud));
+                else
+                    Response.Redirect(string.Format("~/" + RouteConfig.AGREGAR_DATOSLOCAL_TRANSMISION + "{0}", IdSolicitud));
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex, ex.Message);
+                lblError.Text = ex.Message;
+                this.EjecutarScript(updBotonesGuardar, "showfrmError();");
+            }
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 if (hid_return_url.Value.Contains("Editar"))
                     Response.Redirect(string.Format("~/" + RouteConfig.VISOR_TRANSMISIONES + "{0}", IdSolicitud));
                 else

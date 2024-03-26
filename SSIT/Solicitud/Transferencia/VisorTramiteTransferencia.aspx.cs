@@ -411,7 +411,7 @@ namespace SSIT
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 TransferenciaBL.Confirmar(IdSolicitud, userid);
 
-
+                Response.Redirect(string.Format("~/" + RouteConfig.VISOR_TRANSFERENCIAS + "{0}", IdSolicitud));
             }
             catch (Exception ex)
             {

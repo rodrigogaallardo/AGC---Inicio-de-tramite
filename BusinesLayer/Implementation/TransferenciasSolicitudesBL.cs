@@ -1232,51 +1232,19 @@ namespace BusinesLayer.Implementation
                     if (entity.id_estado == (int)Constantes.TipoEstadoSolicitudEnum.DATOSCONF ||
                         entity.id_estado == (int)Constantes.TipoEstadoSolicitudEnum.OBSERVADO)
                     {
-                        var tramites = repoSGITramitesTareas.GetByFKIdSolicitud(IdSolicitud);
-
-
-                        if (tramites.Count() > 0)
-                        {
-                            id_estado_sig = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
-                        }
-
-                        
+                        id_estado_sig = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
                     }
 
                     EngineBL engine = new EngineBL();
 
                     var tarea = engine.GetUltimaTareaTransferencia(IdSolicitud);
-                    int id_estado_confirmado = (int)Constantes.TipoEstadoSolicitudEnum.ETRA;
                     int id_estado_anulado = (int)Constantes.TipoEstadoSolicitudEnum.ANU;
                     int id_resultado_actual = 0;
 
                     IEnumerable<EngineResultadoTareaDTO> tareaResult = null;
 
-                    if (id_estado_sig == id_estado_anulado)
-                        id_resultado_actual = (int)Constantes.TareasResultados.SolicitudAnulada;// --Solicitud Anulada
-
-                    else if (id_estado_sig == id_estado_confirmado)
-                        id_resultado_actual = (int)Constantes.TareasResultados.SolicitudConfirmada;// --Solicitud Confirmada
-                    else
-                    {
-                        tareaResult = engine.GetResultadoTarea(tarea.IdTarea);
-                        if (tareaResult.Any())
-                            id_resultado_actual = tareaResult.FirstOrDefault().id_resultado;
-                    }
-
-                    #region mantis 126058: JADHE 47052 - SGI - Ingreso tramite incompleto                    
-                    /* var listaAdjuntos = entity.Transf_DocumentosAdjuntos.ToList();
-
-                     var adjuntosEdictos = listaAdjuntos.Where(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.Edicto)
-                                             .Select(x => x).Count();
-
-                     var AdjuntosAN = listaAdjuntos.Where(t => t.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.Acta_Notarial)
-                                             .Select(x => x).Count();
-
-                     if (!(adjuntosEdictos >= 1 && AdjuntosAN >= 1))
-                         throw new Exception(Errors.SSIT_TRANSFERENCIAS_SIN_ADJUNTOS);*/
-                    #endregion
-
+                    id_resultado_actual = (int)Constantes.TareasResultados.SolicitudConfirmada;// --Solicitud Confirmada
+                    
                     if (tarea != null)
                     {
                         engine.FinalizarTarea(tarea.IdTramiteTarea, id_resultado_actual, 0, userId);

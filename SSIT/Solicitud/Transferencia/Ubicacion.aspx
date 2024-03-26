@@ -42,23 +42,24 @@
             <ContentTemplate>
                 <asp:HiddenField ID="hid_return_url" runat="server" />
                 <div class="row mleft20 mright20">
-                <div class="col-sm-9">
-                    <ul class="pleft40">
-                        <li>Domicilio.</li>
-                        <li>N&uacute;mero de Partida (matriz o horizontal).</li>
-                        <li>Datos Catastrales (Secci&oacute;n, manzana y Parcela).</li>
-                        <li>Ubicaciones especiales.</li>
-                    </ul>
-                </div>
-                <div class="text-right">
-                    <asp:UpdatePanel ID="updAgregarUbicacion" runat="server">
-                        <ContentTemplate>
-                            <span class="btn btn-primary " onclick="showfrmAgregarUbicacion();">
-                                <i class="imoon imoon-plus"></i>
-                                <span class="text">Agregar Ubicaci&oacute;n</span>
-                            </span>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+                    <div class="col-sm-9">
+                        <ul class="pleft40">
+                            <li>Domicilio.</li>
+                            <li>N&uacute;mero de Partida (matriz o horizontal).</li>
+                            <li>Datos Catastrales (Secci&oacute;n, manzana y Parcela).</li>
+                            <li>Ubicaciones especiales.</li>
+                        </ul>
+                    </div>
+                    <div class="text-right">
+                        <asp:UpdatePanel ID="updAgregarUbicacion" runat="server">
+                            <ContentTemplate>
+                                <span class="btn btn-primary " onclick="showfrmAgregarUbicacion();">
+                                    <i class="imoon imoon-plus"></i>
+                                    <span class="text">Agregar Ubicaci&oacute;n</span>
+                                </span>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
                 </div>
                 <asp:Button ID="btnCargarDatos" runat="server" OnClick="btnCargarDatos_Click"  Style="display: none" />
                 <asp:HiddenField ID="hid_id_solicitud" runat="server" />
@@ -73,22 +74,31 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         
+        <asp:Label ID="reqUbicacion" runat="server" Text="Debe ingresar al menos una ubicacion para continuar" CssClass="alert alert-danger" Style="display:none" ></asp:Label>
         <%--Botones de Guardado--%>
         <asp:UpdatePanel ID="updBotonesGuardar" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div class="form-inline text-right mtop20">
-                    <div id="pnlBotonesGuardar" class="form-group">
-                        <asp:LinkButton ID="btnContinuar" runat="server" CssClass="btn btn-lg btn-primary" OnClientClick="return validarGuardar();" OnClick="btnContinuar_Click">
-                            <i class="imoon imoon-disk"></i>
-                            <span class="text">Guardar y Continuar</span>
-                        </asp:LinkButton>
-                    </div>
-                    <div class="form-group">
-                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="200" AssociatedUpdatePanelID="updBotonesGuardar">
-                            <ProgressTemplate>
-                                <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />Guardando...
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>
+                <div class="form-group form-inline">
+                    <div id="pnlBotonesGuardar">
+                        <div id="Div1" class="col-sm-6 mtop10">
+                            <asp:LinkButton ID="btnVolver" runat="server" CssClass="btn btn-default btn-lg" Onclick="btnVolver_Click" style="display:none" >
+                                <i class="imoon imoon-arrow-left"></i>
+                                <span class="text">Volver</span>
+                            </asp:LinkButton>
+                        </div>
+                        <div class="text-right mtop10">
+                            <asp:LinkButton ID="btnContinuar" runat="server" CssClass="btn btn-lg btn-primary" OnClientClick="return validarGuardar();" OnClick="btnContinuar_Click">
+                                <i class="imoon imoon-disk"></i>
+                                <span class="text">Guardar y Continuar</span>
+                            </asp:LinkButton>
+                        </div>
+                        <div class="form-group">
+                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="200" AssociatedUpdatePanelID="updBotonesGuardar">
+                                <ProgressTemplate>
+                                    <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />Guardando...
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </div>
                     </div>
                 </div>
             </ContentTemplate>
@@ -233,12 +243,17 @@
         function hidefrmAgregarUbicacion() {
             
             $("#frmAgregarUbicacion").modal("hide");
-            //return false;
+            return false;
         }
 
         function ocultarBotonesGuardado() {
 
             $("#pnlBotonesGuardar").hide();
+            return true;
+        }
+
+        function validarGuardar() {
+            ocultarBotonesGuardado();
             return true;
         }
     </script>

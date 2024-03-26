@@ -69,6 +69,15 @@ namespace SSIT.Solicitud.Transferencia
         protected global::SSIT.Solicitud.Transferencia.Controls.Ubicacion visUbicaciones;
 
         /// <summary>
+        /// reqUbicacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label reqUbicacion;
+
+        /// <summary>
         /// updBotonesGuardar control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace SSIT.Solicitud.Transferencia
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updBotonesGuardar;
+
+        /// <summary>
+        /// btnVolver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnVolver;
 
         /// <summary>
         /// btnContinuar control.

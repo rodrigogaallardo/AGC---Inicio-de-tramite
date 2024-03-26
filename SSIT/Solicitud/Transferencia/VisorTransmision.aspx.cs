@@ -557,6 +557,8 @@ namespace SSIT
 
                 Cargar();
                 ScriptManager.RegisterStartupScript(udpConfirmarSolcitud, udpConfirmarSolcitud.GetType(), "init_Js_updCargarDatos", "init_Js_updCargarDatos();", true);
+
+                Response.Redirect(string.Format("~/" + RouteConfig.VISOR_TRANSMISIONES + "{0}", IdSolicitud));
             }
             catch (Exception ex)
             {
