@@ -5254,6 +5254,55 @@ namespace BusinesLayer.Implementation
             var profesional = elementsDto.LastOrDefault()?.ProfesionalDTO;
             return profesional;
         }
+        /// <summary>
+        /// Inserta en el CAA en la base de files y guarda el id_file en DGHP_Solicitudes
+        /// </summary>
+        /// <param name="id_encomienda"></param>
+        /// <param name="userid"></param>
+        /// <param name="bytes"></param>
+        /// <param name="filename"></param>
+        /// <param name="extension"></param>
+        /// <param name="id_tipocertificado"></param>
+        public bool InsertarCAA_DocAdjuntos(int id_encomienda, Guid userid, byte[] bytes, string filename, 
+            string extension, int id_tipocertificado, DateTime fechaCreacionCAA)
+        {
+            bool subioFile = false;
+            try
+            {
+                ExternalServiceFiles esf = new ExternalServiceFiles();
+                EncomiendaDocumentosAdjuntosBL encDocBL = new EncomiendaDocumentosAdjuntosBL();
+                EncomiendaDocumentosAdjuntosDTO encDocDTO;
+                string arch = filename;
+                int id_tipodocsis = (int)Constantes.TiposDeDocumentosSistema.CERTIFICADO_CAA;
+
+                var DocAdj = encDocBL.GetByFKIdEncomiendaTipoSis(id_encomienda, id_tipodocsis).FirstOrDefault();
+
+                if (DocAdj == null)
+                {
+                    int id_file = esf.addFile(arch, bytes);
+                    encDocDTO = new EncomiendaDocumentosAdjuntosDTO();
+                    encDocDTO.id_encomienda = id_encomienda;
+                    encDocDTO.id_tdocreq = id_tipocertificado;
+                    //encDocDTO.tdocreq_detalle = ""; NO SE USA
+                    encDocDTO.generadoxSistema = true;
+                    encDocDTO.CreateDate = fechaCreacionCAA;
+                    encDocDTO.CreateUser = userid;
+                    encDocDTO.nombre_archivo = arch;
+                    encDocDTO.id_file = id_file;
+                    encDocDTO.id_tipodocsis = id_tipodocsis;
+                    encDocBL.Insert(encDocDTO);
+                    if (id_file > 0)
+                        subioFile = true;
+                }
+                return subioFile;
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex, ex.Message);
+                throw ex;
+            }
+        }
+
     }
 }
 

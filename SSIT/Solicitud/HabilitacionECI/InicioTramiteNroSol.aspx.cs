@@ -7,6 +7,8 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using ExternalService.Class.Express;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -29,6 +31,14 @@ namespace SSIT.Solicitud.HabilitacionECI
             {
                 hid_id_solicitud.Value = value.ToString();
             }
+        }
+        private enum TipoCertificadoCAA
+        {
+            sre = 18,
+            sreCC = 19,
+            sc = 17,
+            cre = 16,
+            DDJJ = 53
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -202,18 +212,43 @@ namespace SSIT.Solicitud.HabilitacionECI
                             }
                         }
                         //Copio el CAA
-                        List<DtoCAA> CAS = CopiarCAADesdeSolicitudAnterior((int)oSSITSolicitudesOrigenDTO.id_solicitud_origen);
+                        List<GetCAAsByEncomiendasResponse> CAS = null;
+                        Task.Run(async () =>
+                        {
+                            CAS = await CopiarCAADesdeSolicitudAnterior((int)oSSITSolicitudesOrigenDTO.id_solicitud_origen);
+                        }).Wait();
+                        int id_tipodocsis = 1;
                         foreach (var itemDoc in CAS)
                         {
+                            switch (itemDoc.id_tipocertificado)
+                            {
+                                case 1:
+                                    id_tipodocsis = (int)TipoCertificadoCAA.sre;
+                                    break;
+                                case 2:
+                                    id_tipodocsis = (int)TipoCertificadoCAA.sreCC;
+                                    break;
+                                case 3:
+                                    id_tipodocsis = (int)TipoCertificadoCAA.sc;
+                                    break;
+                                case 4:
+                                    id_tipodocsis = (int)TipoCertificadoCAA.sre;
+                                    break;
+                                case 5:
+                                    id_tipodocsis = (int)TipoCertificadoCAA.DDJJ;
+                                    break;
+                                default:
+                                    break;
+                            }
                             solDocDTO = new SSITDocumentosAdjuntosDTO();
                             solDocDTO.id_solicitud = id_solicitudNew;
-                            solDocDTO.id_tipodocsis = itemDoc.Documentos[0].id_tipodocsis;
+                            solDocDTO.id_tipodocsis = id_tipodocsis;
                             solDocDTO.id_tdocreq = 0;
                             solDocDTO.generadoxSistema = true;
-                            solDocDTO.CreateDate = itemDoc.CreateDate;
+                            solDocDTO.CreateDate = itemDoc.createDate;
                             solDocDTO.CreateUser = userid;
-                            solDocDTO.nombre_archivo = "CAA" + itemDoc.id_encomienda.ToString() + "." + itemDoc.Documentos[0].formato_archivo;
-                            solDocDTO.id_file = itemDoc.Documentos[0].id_file;
+                            solDocDTO.nombre_archivo = "CAA" + itemDoc.formulario.id_encomienda_agc.ToString() + "." + "pdf";
+                            solDocDTO.id_file = itemDoc.certificado.idFile;
                             solDocDTO.tdocreq_detalle = "";
                             solDocBL.Insert(solDocDTO, true);
                         }
@@ -261,7 +296,7 @@ namespace SSIT.Solicitud.HabilitacionECI
         /// </summary>
         /// <param name="id_Solicitud_Origen">The identifier solicitud origen.</param>
         /// <returns></returns>
-        private List<DtoCAA> CopiarCAADesdeSolicitudAnterior(int id_Solicitud_Origen)
+        private async Task<List<GetCAAsByEncomiendasResponse>> CopiarCAADesdeSolicitudAnterior(int id_Solicitud_Origen)
         {
             //Busco las encomiendas
             EncomiendaBL blEnc = new EncomiendaBL();
@@ -270,18 +305,26 @@ namespace SSIT.Solicitud.HabilitacionECI
 
             // Llena los CAAs de acuerdo a las encomiendas vinculadas a la solicitud.
             // ---------------------------------------------------------------------
-            ws_Interface_AGC servicio = new ws_Interface_AGC();
-            ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-
-            ParametrosBL blParam = new ParametrosBL();
-            servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-            string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-            string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-            DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEnc.Select(x => x.IdEncomienda).ToList().ToArray(), ref ws_resultado_CAA);
-
-            List<DtoCAA> List_CAA = l.ToList();
-            return List_CAA;
+            //ws_Interface_AGC servicio = new ws_Interface_AGC();
+            //ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+            //
+            //ParametrosBL blParam = new ParametrosBL();
+            //servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
+            //string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
+            //string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
+            //DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEnc.Select(x => x.IdEncomienda).ToList().ToArray(), ref ws_resultado_CAA);
+            var encWrap = await GetCAAsByEncomiendas(lstEnc.Select(enc => enc.IdEncomienda).ToList());
+            List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+            return l;
         }
+
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
+        }
+
 
     }
 

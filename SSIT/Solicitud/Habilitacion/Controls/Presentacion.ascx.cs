@@ -1,6 +1,7 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
 using ExternalService;
+using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using iTextSharp.text.pdf;
 using SSIT.App_Components;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -47,28 +49,43 @@ namespace SSIT.Solicitud.Habilitacion.Controls
                 {
                     var lst = this.Encomiendas.SelectMany(p => p.EncomiendaDocumentosAdjuntosDTO.Where(a => a.id_tipodocsis == (int)Constantes.TiposDeDocumentosSistema.ENCOMIENDA_DIGITAL));
 
-                    ws_Interface_AGC servicio = new ws_Interface_AGC();
-                    ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-
-                    ParametrosBL blParam = new ParametrosBL();
-                    servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                    string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                    string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
                     List<ListItem> lstItems = new List<ListItem>();
 
                     try
                     {
-                    DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, this.Encomiendas.Select(p => p.IdEncomienda).ToArray(), ref ws_resultado_CAA);
 
-                    lstItems.Add(new ListItem());
-                    foreach (var item in l.ToList())
-                    {
-                        string doc = "";
-                        if (item.Documentos.Any())
-                            doc = item.Documentos[0].id_file.ToString();
-
-                        lstItems.Add(new ListItem(item.desccorta_tipotramite + item.id_caa.ToString(), doc));
-                    }
+                        List<GetCAAsByEncomiendasResponse> l = null;
+                        Task.Run(async () =>
+                        {
+                            var listCaaW = await GetCAAsByEncomiendas(this.Encomiendas.Select(p => p.IdEncomienda).ToList());
+                            l = listCaaW.ListCaa;
+                        }).Wait();
+                        lstItems.Add(new ListItem());
+                        if(l != null)
+                        {
+                            foreach (var item in l)
+                            {
+                                string doc = "";
+                                if (item.certificado != null)
+                                    doc = item.certificado.idFile.ToString();
+                                else
+                                {
+                                    Exception caaExp2 = new Exception(
+                                        $"La solicitud de CAA no tiene Certificado. id_solicitud_caa : {item.id_solicitud}," +
+                                        $"id_encomienda : {item.formulario.id_encomienda_agc}," +
+                                        $"id_estado_solicitud_caa : {item.id_estado}," +
+                                        $"certificado : {item.certificado},"
+                                        );
+                                     LogError.Write(caaExp2);
+                                     throw new Exception("La solicitud no cuenta con un caa otorgado pero si con una solicitud de caa en trámite.");
+                                }
+                                lstItems.Add(new ListItem(item.nombre_tipocertificado + item.formulario.id_caa.ToString(), doc));
+                            }
+                            Exception caaExp = new Exception(
+                                $"Al presentar tramite no se encontraron CAA para las encomiendas."
+                                );
+                            LogError.Write(caaExp);
+                        }
 
                     lstItems.Add(new ListItem());
                     foreach (var item in lst)
@@ -576,5 +593,11 @@ namespace SSIT.Solicitud.Habilitacion.Controls
         }
         #endregion
         #endregion
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
+        }
     }
 }

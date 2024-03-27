@@ -554,5 +554,13 @@ namespace BusinesLayer.Implementation
             var dispo = repoEngTareas.GetIdCircuitoByIdEncomienda(id_encomienda);
             return dispo;
         }
+
+        public bool UsuarioTienePermisoTarea(int idTarea, Guid usuario)
+        {
+            uowF = new TransactionScopeUnitOfWorkFactory();
+            repoEngTareas = new EngTareasRepository(this.uowF.GetUnitOfWork());
+            bool tienePermiso = repoEngTareas.UsuarioTienePermisoTarea(idTarea, usuario);
+            return tienePermiso;
+        }
     }
 }

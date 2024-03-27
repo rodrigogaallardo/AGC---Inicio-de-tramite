@@ -12,6 +12,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SSIT.Common;
 using Microsoft.Ajax.Utilities;
+using SSIT.Account;
 
 namespace SSIT
 {
@@ -2062,29 +2063,46 @@ namespace SSIT
             {
                 ParametrosBL parametrosBL = new ParametrosBL();
                 evaluar = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.Evaluar.Titulares"));
-
-
+                AuthenticateAGIPProc authenticateAGIPProc = new AuthenticateAGIPProc();
+                Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 if (evaluar)
                 {
-                    var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
-                    if (r.statusCode == 306)
+                    //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
+                    string tokenJWT = authenticateAGIPProc.GetTokenTAD(userid);
+                    LogError.Write(new Exception($"token TAD, {tokenJWT} + userid + {userid}"));
+                    if (!tokenJWT.IsNullOrWhiteSpace() && !tokenJWT.Contains("expirado"))
                     {
-                        lblError.Text = r.status + "- Debe volver a iniciar sesión.";
+                        var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
+                        //revisar que error y status code ponerles
+                        if (r.statusCode == 306)
+                        {
+                            lblError.Text = r.status + "- Debe volver a iniciar sesión.";
+                            this.EjecutarScript(updPanel, "showfrmError();");
+                            resul = false;
+                        }
+                        else if (!r.result.msg)
+                        {
+                            string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
+                            string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
+                            resul = false;
+                            lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
+                            this.EjecutarScript(updPanel, "showfrmError();");
+                        }
+                    }
+                    else
+                    {
+                        LogError.Write(new Exception("No tiene token de TAD, no estaba logeado en TAD/miba"));
+                        lblError.Text = "- Debe volver a iniciar sesión en TAD/MIBA.";
                         this.EjecutarScript(updPanel, "showfrmError();");
                         resul = false;
                     }
-                    else if (!r.result.msg)
-                    {
-                        string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
-                        string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
-                        resul = false;
-                        lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
-                        this.EjecutarScript(updPanel, "showfrmError();");
-                    }
+                    
+                    
                 }
             }
             catch (Exception ex)
             {
+                LogError.Write(new Exception("Error en el servicio de verificación de cuits: " + ex.Message));
                 resul = false;
                 lblError.Text = "Error en el servicio de verificación de cuits: " + ex.Message;
                 this.EjecutarScript(updPanel, "showfrmError();");

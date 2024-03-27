@@ -1,6 +1,7 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
 using ExternalService;
+using Microsoft.Ajax.Utilities;
 using SSIT.App_Components;
 using SSIT.Common;
 using SSIT.Solicitud.Controls;
@@ -9,6 +10,7 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -93,7 +95,10 @@ namespace SSIT
             Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
             CargarCombos();
             TransferenciaBL.ActualizarEstadoCompleto(transferencia, userId);
-            CargarDatosTramite(transferencia);
+            Task.Run(async () =>
+            {
+                await CargarDatosTramite(transferencia);
+            }).Wait();
 
         }
 
@@ -167,7 +172,7 @@ namespace SSIT
             lblAlertasSolicitud.Text = System.Web.HttpUtility.HtmlEncode(alerta);
             pnlAlertasSolicitud.Visible = (alerta.Length > 0);
         }
-        private void CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
+        private async Task CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
         {
 
             ConsultaPadronSolicitudesBL consulta = new ConsultaPadronSolicitudesBL();
@@ -337,7 +342,7 @@ namespace SSIT
                         validarDocumentos(transferencia);
 
                         TransferenciaBL.validarEncomienda(IdSolicitud);
-                        if (!arrEstadosPago.Contains(Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
+                        if (!arrEstadosPago.Contains(await Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
                             Pagos.HabilitarGeneracionManual = true;
                     }
                     catch (Exception ex)
@@ -345,7 +350,7 @@ namespace SSIT
                         LogError.Write(ex);
                         MostrarMensajeAlertas(ex.Message);
                     }
-                    Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
+                    await Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
 
                     updBoxPagos.Visible = true;
                 }
@@ -450,6 +455,7 @@ namespace SSIT
         {
             try
             {
+                
                 var transferencia = TransferenciaBL.Single(IdSolicitud);
                 int id_estado_ant = transferencia.IdEstado;
                 byte[] oblea = null;
@@ -457,6 +463,8 @@ namespace SSIT
 
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 MembershipUser usuario = Membership.GetUser(userid);
+
+                CargarCombos();
 
                 //valido documentos
                 validarDocumentos(transferencia);
@@ -467,28 +475,40 @@ namespace SSIT
                     if ((transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia) || (transferencia.idTipoTransmision == (int)Constantes.TipoTransmision.Transmision_nominacion))
                     {
                         PagosBoletasBL pagosBoletaBL = new PagosBoletasBL();
-                        var lstPagos = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
-                        if (lstPagos == null)
+                        var lstPagosTask = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
+                        //var lstPagos = pagosBoletaBL.CargarPagos(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud, null);
+                        if (lstPagosTask == null)
                             throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
 
-                        //0148737: JADHE 57779 - SSIT - Error al presentar
-                        DateTime fecha = new DateTime(2020, 01, 01);
-                        if (transferencia.CreateDate > fecha)
+                        Task.Run(async () =>
                         {
-                            if (!lstPagos.Any(p => p.id_estado_pago == (int)Constantes.BUI_EstadoPago.Pagado))
+                            var lstPagos = await lstPagosTask;
+
+                            //0148737: JADHE 57779 - SSIT - Error al presentar
+                            DateTime fecha = new DateTime(2020, 01, 01);
+                            if (transferencia.CreateDate > fecha)
                             {
-                                throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                                if (!lstPagos.Any(p => p.id_estado_pago == (int)Constantes.BUI_EstadoPago.Pagado))
+                                {
+                                    throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                                }
                             }
-                        }
+                        }).Wait();  //no puedo hacer que una funcion ejecutada por un boton sea async asique hago esto
 
                         //0145298: JADHE 57098 - SGI - TRM 2019 piden BUI
                         TransferenciasSolicitudesBL blTransferencia = new TransferenciasSolicitudesBL();
                         TransferenciasSolicitudesDTO tranf = blTransferencia.Single(transferencia.IdSolicitud);
                         if (tranf.TipoTransmision.id_tipoTransmision == (int)Constantes.TipoTransmision.Transmision_Transferencia)
                         {
-                            var ret = pagosBoletaBL.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud);
-                            if (ret != Constantes.BUI_EstadoPago.Pagado)
-                                throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                            var retTask = pagosBoletaBL.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud);
+                            Task.Run(async () =>
+                            {
+                                var ret = await retTask;
+                                if (ret != Constantes.BUI_EstadoPago.Pagado)
+                                    throw new Exception(StaticClass.Errors.SSIT_TRANSFERENCIAS_PAGO);
+                            }
+                            ).Wait();
+                           
                         }
                     }
                 }
@@ -555,7 +575,7 @@ namespace SSIT
                 }
                 #endregion
 
-                Cargar();
+                
                 ScriptManager.RegisterStartupScript(udpConfirmarSolcitud, udpConfirmarSolcitud.GetType(), "init_Js_updCargarDatos", "init_Js_updCargarDatos();", true);
 
                 Response.Redirect(string.Format("~/" + RouteConfig.VISOR_TRANSMISIONES + "{0}", IdSolicitud));
@@ -766,30 +786,56 @@ namespace SSIT
 
             var solicitante = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilSol);
 
+            var solicitanteGP = lstParticipantesGP.FirstOrDefault(x => x.idPerfil == idPerfilSol);
+
             var titular = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilTit);
 
             var listTitularesComplementariosCuit = lstParticipantesSSIT
                                     .Where(x => x.cuit != titular.cuit)
                                     .Select(x => x.cuit)
                                     .ToList();
-
-            var cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit);
-            if (cambios.Any())
+            //esto para arreglar el backlog de error22
+            if (solicitanteGP == null)
             {
+                Exception ex22 = new Exception(
+                    $"Debe tener solicitante para poder tramitar, titular {titular}," +
+                    $"Solicitud : {sol.IdSolicitud}, " +
+                    $"idTad : {sol.idTAD}, " +
+                    $"usuarioSSIT : {usuDTO.UserName}"
+                    );
+                //LogError.Write(ex22);
+                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
+                usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
+                usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+                lstParticipantesGP = wsGP.GetParticipantesxTramite(_urlESB, sol.idTAD.Value).ToList();
+                listParticipantesGPCuit = lstParticipantesGP.Select(x => x.cuit).Distinct().OrderByDescending(x => x);
+            }
+            bool cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit).Any()
+                || listParticipantesGPCuit.Except(listParticipantesSSITCuit).Any();
+
+            if (cambios)
+            {
+                bool tieneSolicitante = false;
+                // baja
                 foreach (var item in lstParticipantesGP)
                 {
-                    //desvincular todos los  participantes 
-                    wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                    //desvincular todos los  participantes, menos el solicitante
+                    if (item.idPerfil != (int)TipoParticipante.Solicitante)
+                        wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                    else
+                        tieneSolicitante = true;
                 }
 
                 // alta solicitante/apoderado
-                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
-                solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
-                solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
+                if (!tieneSolicitante)
+                    wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
+                    solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
+                    solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
-                        titular.cuit, titular.idPerfil, titular.idPerfil == idPerfilSol, Constantes.Sistema, titular.Nombres, titular.Apellido, titular.RazonSocial);
+                        titular.cuit, titular.idPerfil, titular.idPerfil == idPerfilSol, Constantes.Sistema,
+                        titular.Nombres, titular.Apellido, titular.RazonSocial);
 
                 //alta titulares complementarios
                 foreach (var item in lstParticipantesSSIT)
@@ -797,7 +843,8 @@ namespace SSIT
                     if (listTitularesComplementariosCuit.Contains(item.cuit) && item.idPerfil != idPerfilSol)
                     {
                         wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
-                                item.cuit, (int)TipoParticipante.TitularComplementario, item.idPerfil == idPerfilSol, Constantes.Sistema, item.Nombres, item.Apellido, item.RazonSocial);
+                                item.cuit, (int)TipoParticipante.TitularComplementario, item.idPerfil == idPerfilSol,
+                                Constantes.Sistema, item.Nombres, item.Apellido, item.RazonSocial);
                     }
                 }
             }

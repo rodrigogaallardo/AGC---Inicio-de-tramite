@@ -8,6 +8,7 @@ using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -86,7 +87,10 @@ namespace SSIT
             Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
             CargarCombos();
             TransferenciaBL.ActualizarEstadoCompleto(transferencia, userId);
-            CargarDatosTramite(transferencia);
+            Task.Run(async () =>
+            {
+                await CargarDatosTramite(transferencia);
+            }).Wait();
 
         }
         private void ComprobarSolicitud(TransferenciasSolicitudesDTO transferencia)
@@ -107,7 +111,7 @@ namespace SSIT
         /// <summary>
         /// 
         /// </summary>
-        private void CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
+        private async Task CargarDatosTramite(TransferenciasSolicitudesDTO transferencia)
         {
 
             ConsultaPadronSolicitudesBL consulta = new ConsultaPadronSolicitudesBL();
@@ -242,10 +246,10 @@ namespace SSIT
 
             Constantes.BUI_EstadoPago[] arrEstadosPago = new Constantes.BUI_EstadoPago[] { Constantes.BUI_EstadoPago.Pagado, Constantes.BUI_EstadoPago.SinPagar };
 
-            if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && !arrEstadosPago.Contains(Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
+            if (transferencia.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.PENPAG && !arrEstadosPago.Contains(await Pagos.GetEstadoPago(Constantes.PagosTipoTramite.TR, transferencia.IdSolicitud)))
                 Pagos.HabilitarGeneracionManual = true;
 
-            Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
+            await Pagos.CargarPagos(Constantes.PagosTipoTramite.TR, IdSolicitud);
             #endregion
 
 
@@ -373,6 +377,7 @@ namespace SSIT
         {
             try
             {
+                Cargar();
                 int id_docadjunto;
                 int.TryParse(hid_id_docadjunto.Value, out id_docadjunto);
                 TransferenciasDocumentosAdjuntosBL bldoc = new TransferenciasDocumentosAdjuntosBL();
@@ -400,8 +405,10 @@ namespace SSIT
 
         protected void btnConfirmarTramite_Click(object sender, EventArgs e)
         {
+            
             try
             {
+                Cargar();
                 var sol = TransferenciaBL.Single(IdSolicitud);
                 if (sol.idTAD != null)
                 {
@@ -419,7 +426,6 @@ namespace SSIT
                 lblError.Text = ex.Message;
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "showfrmError", "showfrmError();", true);
             }
-            Cargar();
         }
 
         private void enviarCambio(TransferenciasSolicitudesDTO sol)
@@ -508,27 +514,51 @@ namespace SSIT
 
             var solicitante = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilSol);
 
+            var solicitanteGP = lstParticipantesGP.FirstOrDefault(x => x.idPerfil == idPerfilSol);
+
             var titular = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilTit);
 
             var listTitularesComplementariosCuit = lstParticipantesSSIT
                                     .Where(x => x.cuit != titular.cuit)
                                     .Select(x => x.cuit)
                                     .ToList();
-
-            var cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit);
-            if (cambios.Any())
+            //esto para arreglar el backlog de error22
+            if (solicitanteGP == null)
             {
-                //desvincular todos los participantes                    
+                Exception ex22 = new Exception(
+                    $"Debe tener solicitante para poder tramitar, titular {titular}," +
+                    $"Solicitud : {sol.IdSolicitud}, " +
+                    $"idTad : {sol.idTAD}, " +
+                    $"usuarioSSIT : {usuDTO.UserName}"
+                    );
+                //LogError.Write(ex22);
+                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
+                usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
+                usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+                lstParticipantesGP = wsGP.GetParticipantesxTramite(_urlESB, sol.idTAD.Value).ToList();
+                listParticipantesGPCuit = lstParticipantesGP.Select(x => x.cuit).Distinct().OrderByDescending(x => x);
+            }
+
+            bool cambios = listParticipantesSSITCuit.Except(listParticipantesGPCuit).Any()
+                || listParticipantesGPCuit.Except(listParticipantesSSITCuit).Any();
+
+            if (cambios)
+            {
+                bool tieneSolicitante = false;
+                //desvincular todos los participantes, menos el solicitante                 
                 foreach (var item in lstParticipantesGP)
                 {
-                    wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                    if (item.idPerfil != (int)TipoParticipante.Solicitante)
+                        wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                    else
+                        tieneSolicitante = true;
                 }
 
                 // alta solicitante/apoderado
-
-                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
-                solicitante.cuit, solicitante.idPerfil, solicitante.idPerfil == idPerfilSol, Constantes.Sistema,
-                solicitante.Nombres, solicitante.Apellido, solicitante.RazonSocial);
+                if (!tieneSolicitante)
+                    wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,
+                        usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
+                        usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
 
                 // alta titular 
                 wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NumeroExpedienteSade,

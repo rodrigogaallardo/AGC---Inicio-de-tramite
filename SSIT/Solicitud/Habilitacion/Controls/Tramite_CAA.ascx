@@ -3,6 +3,7 @@
 <link href="<%: ResolveUrl("~/Content/css/shortcuts.css") %>" rel="stylesheet" />
 
 <%@ Import Namespace="SSIT.Common" %>
+<asp:HiddenField ID="hid_id_encomienda_in_caa" runat="server" />
 
 <div id="box_titulares" class="accordion-group widget-box" style="background-color: #ffffff">
     <div class="accordion-heading">
@@ -28,7 +29,7 @@
                             <span class="text">Ingresar a SIPSA</span>
                         </asp:LinkButton>
                     </div>
-                    <asp:UpdatePanel ID="updBuscarCAA" runat="server" visible="false">
+                    <asp:UpdatePanel ID="updBuscarCAA" runat="server" Visible="false">
                         <ContentTemplate>
                             <asp:Panel ID="pnlBuscarCAA" runat="server">
                                 <div class="ptop10">
@@ -78,6 +79,17 @@
                             </asp:Panel>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                      <div class="text-left mtop10" visible="false" runat="server" id="DivBtnSIPSAExpress">
+                        <strong>Para tramitar su Certificado de Aptitud Ambiental inicie su solicitud por aquí:</strong>
+                        <asp:LinkButton ID="linkBtnGenerarCAA" runat="server" CssClass="btn btn-primary" OnClick="linkBtnGenerarCAA_Click" 
+                            OnClientClick="showLoadingGifAndDisableButton('loadingDiv'); deshabilitar(this.id);">
+                            <i class="imoon imoon-file4"></i>
+                            <span class="text">Generar CAA</span>
+                        </asp:LinkButton>
+                          <div id="loadingDiv" style="display: none;">
+                              <img src="~/Content/img/app/Loading24x24.gif" alt="Loading..." CssClass="mtop5" ID="generandoCAAgif" runat="server"/>
+                          </div>
+                    </div>
                     <div style="padding: 0px 10px 10px 10px; width: auto">
                         <div class="mtop10">
                             <strong>Listado de Certificados de Aptitud Ambiental</strong>
@@ -118,5 +130,16 @@
         document.getElementById(boton).style.visibility = 'hidden';
     }
 </script>
+
+<script type="text/javascript">
+    function showLoadingGifAndDisableButton(loadingDivId) {
+        var loadingDiv = document.getElementById(loadingDivId);
+        loadingDiv.style.display = 'block';  
+        var linkBtnGenerarCAA = document.getElementById('<%= linkBtnGenerarCAA.ClientID %>');
+        linkBtnGenerarCAA.disabled = true;  
+    }
+</script>
+
+
 
 

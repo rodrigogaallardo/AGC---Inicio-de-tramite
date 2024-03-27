@@ -120,8 +120,8 @@
           <Property Name="Navegadores_avh" Type="nvarchar" MaxLength="200" />
           <Property Name="ipclient_avh" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.BackupCalles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.BackupCalles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BackupCalles">
           <Key>
             <PropertyRef Name="id_calle" />
@@ -149,8 +149,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.BackupCalles' no tiene 
           <Property Name="LastUpdateDate" Type="datetime" />
           <Property Name="FechaBackup" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.BackupEscribanos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.BackupEscribanos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BackupEscribanos">
           <Key>
             <PropertyRef Name="Matricula" />
@@ -477,8 +477,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.BackupEscribanos' no ti
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
           <Property Name="LastUpdateDate" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CPadron_Planos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.CPadron_Planos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CPadron_Planos">
           <Key>
             <PropertyRef Name="id_cpadron_plano" />
@@ -866,8 +866,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CPadron_Planos' no tien
           <Property Name="Descripcion" Type="varchar" MaxLength="200" />
           <Property Name="Requerido" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.dtproperties' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.dtproperties' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="dtproperties">
           <Key>
             <PropertyRef Name="id" />
@@ -1013,8 +1013,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.dtproperties' no tiene 
           <Property Name="ProductosInflamables" Type="bit" />
           <Property Name="AcogeBeneficios" Type="bit" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Encomienda_bk' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Encomienda_bk' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Encomienda_bk">
           <Key>
             <PropertyRef Name="id_encomienda" />
@@ -1150,8 +1150,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Encomienda_bk' no tiene
           <Property Name="nombre_archivo" Type="nvarchar" MaxLength="50" />
           <Property Name="fechaPresentado" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Encomienda_DocumentosAdjuntos_borrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Encomienda_DocumentosAdjuntos_borrados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Encomienda_DocumentosAdjuntos_borrados">
           <Key>
             <PropertyRef Name="id_docadjunto" />
@@ -1939,8 +1939,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Encomienda_DocumentosAd
           <Property Name="id_estado" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Log' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Envio_Mail_Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Envio_Mail_Log">
           <Key>
             <PropertyRef Name="id" />
@@ -1950,8 +1950,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Log' no tien
           <Property Name="fecha_proceso" Type="datetime" />
           <Property Name="error" Type="nvarchar" MaxLength="1000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Log_Errores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Envio_Mail_Log_Errores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Envio_Mail_Log_Errores">
           <Key>
             <PropertyRef Name="ID_SQL" />
@@ -1985,8 +1985,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Log_Errores'
           <Property Name="cfg_smpt_puerto" Type="int" />
           <Property Name="cfg_html" Type="nvarchar" MaxLength="2000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Send_Estado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Envio_Mail_Send_Estado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Envio_Mail_Send_Estado">
           <Key>
             <PropertyRef Name="Estado_Proceso" />
@@ -1995,8 +1995,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Send_Estado'
           <Property Name="Estado_Proceso" Type="bit" Nullable="false" />
           <Property Name="Ultima_Ejecucion" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Send_Filtrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Envio_Mail_Send_Filtrados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Envio_Mail_Send_Filtrados">
           <Key>
             <PropertyRef Name="id_email" />
@@ -2049,8 +2049,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Envio_Mail_Send_Filtrad
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Estadisticas_Hoja2' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Estadisticas_Hoja2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Estadisticas_Hoja2">
           <Key>
             <PropertyRef Name="id" />
@@ -2383,8 +2383,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Estadisticas_Hoja2' no 
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreateUser" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Ley962_TiposDeDocumentosRequeridos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Ley962_TiposDeDocumentosRequeridos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Ley962_TiposDeDocumentosRequeridos">
           <Key>
             <PropertyRef Name="id" />
@@ -2407,6 +2407,17 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Ley962_TiposDeDocumento
           <Property Name="Perimetro" Type="float" />
           <Property Name="Clave" Type="float" />
           <Property Name="Excluir" Type="bit" />
+        </EntityType>
+        <EntityType Name="Login_Tad_Token">
+          <Key>
+            <PropertyRef Name="login_tad_token_id" />
+          </Key>
+          <Property Name="login_tad_token_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="uniqueidentifier" />
+          <Property Name="tokenJWT" Type="nvarchar(max)" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="ExpireDate" Type="datetime" />
         </EntityType>
         <EntityType Name="MasBuscados">
           <Key>
@@ -3010,7 +3021,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Ley962_TiposDeDocumento
           <Property Name="TieneRubroDeposito" Type="bit" />
           <Property Name="idCondicionIncendio" Type="int" />
           <Property Name="SoloAPRA" Type="bit" Nullable="false" />
-		  <Property Name="SinBanioPCD" Type="bit" />
+          <Property Name="SinBanioPCD" Type="bit" />
+          <Property Name="CondicionExpress" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RubrosCN_Config_Incendio">
           <Key>
@@ -3024,8 +3036,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Ley962_TiposDeDocumento
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreateUser" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.RubrosCN_Historial' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.RubrosCN_Historial' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RubrosCN_Historial">
           <Key>
             <PropertyRef Name="IdRubrosCN_historial" />
@@ -3037,6 +3049,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.RubrosCN_Historial' no 
             <PropertyRef Name="LibrarUso" />
             <PropertyRef Name="CreateDate" />
             <PropertyRef Name="CreateUser" />
+            <PropertyRef Name="CondicionExpress" />
           </Key>
           <Property Name="IdRubrosCN_historial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo_operacion" Type="nvarchar" MaxLength="2" Nullable="false" />
@@ -3065,6 +3078,7 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.RubrosCN_Historial' no 
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
           <Property Name="Asistentes350" Type="bit" />
           <Property Name="SinBanioPCD" Type="bit" />
+          <Property Name="CondicionExpress" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RubrosCN_InformacionRelevante">
           <Key>
@@ -4232,8 +4246,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.RubrosCN_Historial' no 
           <Property Name="LastUpdateDate" Type="datetime" />
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.SSIT_Solicitudes_bk' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitudes_bk' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SSIT_Solicitudes_bk">
           <Key>
             <PropertyRef Name="id_solicitud" />
@@ -4273,8 +4287,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.SSIT_Solicitudes_bk' no
           <Property Name="LastUpdateDate" Type="datetime" />
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.SSIT_Solicitudes_Encomienda' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitudes_Encomienda' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SSIT_Solicitudes_Encomienda">
           <Key>
             <PropertyRef Name="id_sol_enc" />
@@ -5838,8 +5852,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.SSIT_Solicitudes_Encomi
           <Property Name="id_session" Type="nvarchar" MaxLength="100" />
           <Property Name="TipoDeVoto_voto" Type="tinyint" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsDatosCallejeroUSIG' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.wsDatosCallejeroUSIG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wsDatosCallejeroUSIG">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -6160,8 +6174,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsDatosCallejeroUSIG' n
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsPagos_Parametros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.wsPagos_Parametros' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wsPagos_Parametros">
           <Key>
             <PropertyRef Name="id_param" />
@@ -6171,8 +6185,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsPagos_Parametros' no 
           <Property Name="nom_param" Type="nvarchar" MaxLength="500" />
           <Property Name="valor_param" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsPagos_Procesados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.wsPagos_Procesados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wsPagos_Procesados">
           <Key>
             <PropertyRef Name="id_pago_BU" />
@@ -6187,8 +6201,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsPagos_Procesados' no 
           <Property Name="Job" Type="varchar" MaxLength="52" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsPagos_Procesados_PagadosSinFecha' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.wsPagos_Procesados_PagadosSinFecha' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wsPagos_Procesados_PagadosSinFecha">
           <Key>
             <PropertyRef Name="id_pago_BU" />
@@ -6223,8 +6237,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.wsPagos_Procesados_Paga
           <Property Name="CreateUser" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_DocumentosAdjuntos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_DocumentosAdjuntos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_DocumentosAdjuntos">
           <Key>
             <PropertyRef Name="id_docadjunto" />
@@ -6252,8 +6266,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_DocumentosAdjuntos'
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateUser" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Empresas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Empresas">
           <Key>
             <PropertyRef Name="id_empresa" />
@@ -6268,8 +6282,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas' no tiene 
           <Property Name="LastUpdateDate" Type="datetime" />
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas_PersonasFisicas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Empresas_PersonasFisicas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Empresas_PersonasFisicas">
           <Key>
             <PropertyRef Name="id_personafisica" />
@@ -6302,8 +6316,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas_PersonasFi
           <Property Name="Celular" Type="nvarchar" MaxLength="20" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas_PersonasJuridicas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Empresas_PersonasJuridicas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Empresas_PersonasJuridicas">
           <Key>
             <PropertyRef Name="id_personajuridica" />
@@ -6328,8 +6342,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas_PersonasJu
           <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas_PersonasJuridicas_Firmantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Empresas_PersonasJuridicas_Firmantes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Empresas_PersonasJuridicas_Firmantes">
           <Key>
             <PropertyRef Name="id_firmante_pj" />
@@ -6354,8 +6368,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Empresas_PersonasJu
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
           <Property Name="firmante_misma_persona" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Encomiendas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Encomiendas">
           <Key>
             <PropertyRef Name="id_encomienda" />
@@ -6376,8 +6390,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas' no tie
           <Property Name="LastUpdateDate" Type="datetime" />
           <Property Name="LastUpdateUser" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas_Estados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Encomiendas_Estados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Encomiendas_Estados">
           <Key>
             <PropertyRef Name="id_estado" />
@@ -6390,8 +6404,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas_Estados
           <Property Name="nom_estado" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="nom_estado_consejo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas_HistorialEstados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Encomiendas_HistorialEstados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Encomiendas_HistorialEstados">
           <Key>
             <PropertyRef Name="id_enchistest" />
@@ -6408,8 +6422,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas_Histori
           <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
           <Property Name="usuario_modificacion" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas_Titulares' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Encomiendas_Titulares' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Encomiendas_Titulares">
           <Key>
             <PropertyRef Name="id_rel_encomienda_empresa" />
@@ -6422,8 +6436,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Encomiendas_Titular
           <Property Name="id_empresa" Type="int" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Rel_encreg_encrni' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Rel_encreg_encrni' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Rel_encreg_encrni">
           <Key>
             <PropertyRef Name="id_rel_encreg_encrni" />
@@ -6438,8 +6452,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Rel_encreg_encrni' 
           <Property Name="id_encomienda_rni" Type="int" Nullable="false" />
           <Property Name="id_antubicacion_rni" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Ubicaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Ubicaciones">
           <Key>
             <PropertyRef Name="id_antubicacion" />
@@ -6452,8 +6466,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones' no tie
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreateUser" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_Coordenadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Ubicaciones_Coordenadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Ubicaciones_Coordenadas">
           <Key>
             <PropertyRef Name="id_antubic_coordenada" />
@@ -6474,8 +6488,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_Coorden
           <Property Name="longitud_minutos" Type="int" Nullable="false" />
           <Property Name="longitud_segundos" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_PropiedadHorizontal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Ubicaciones_PropiedadHorizontal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Ubicaciones_PropiedadHorizontal">
           <Key>
             <PropertyRef Name="id_antprophorizontal" />
@@ -6486,8 +6500,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_Propied
           <Property Name="id_antubicacion" Type="int" Nullable="false" />
           <Property Name="id_propiedadhorizontal" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_Puertas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Ubicaciones_Puertas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Ubicaciones_Puertas">
           <Key>
             <PropertyRef Name="id_antpuerta" />
@@ -6502,8 +6516,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_Puertas
           <Property Name="Nombre_calle" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="NroPuerta" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_Ubicacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Ubicaciones_Ubicacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Ubicaciones_Ubicacion">
           <Key>
             <PropertyRef Name="id_antubicacionubic" />
@@ -6520,8 +6534,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_Ubicaci
           <Property Name="deptolocal_antubicacion" Type="nvarchar" MaxLength="50" />
           <Property Name="id_zonaplaneamiento" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_ViaPublica' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.ANT_Ubicaciones_ViaPublica' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ANT_Ubicaciones_ViaPublica">
           <Key>
             <PropertyRef Name="id_antubicviapublica" />
@@ -6532,8 +6546,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.ANT_Ubicaciones_ViaPubl
           <Property Name="id_antubicacion" Type="int" Nullable="false" />
           <Property Name="observaciones" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.APRA_TiposdeCertificados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.APRA_TiposdeCertificados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="APRA_TiposdeCertificados">
           <Key>
             <PropertyRef Name="id_tipocertificado" />
@@ -6553,8 +6567,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.APRA_TiposdeCertificado
           <Property Name="AcronimoSADE" Type="nvarchar" MaxLength="20" />
           <Property Name="NombreArchivoCertificado" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.APRA_TiposDeDocumentosSistema' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.APRA_TiposDeDocumentosSistema' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="APRA_TiposDeDocumentosSistema">
           <Key>
             <PropertyRef Name="id_tipdocsis" />
@@ -6567,8 +6581,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.APRA_TiposDeDocumentosS
           <Property Name="nombre_tipodocsis" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.APRA_TiposDeTramite' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.APRA_TiposDeTramite' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="APRA_TiposDeTramite">
           <Key>
             <PropertyRef Name="id_tipotramite" />
@@ -6581,8 +6595,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.APRA_TiposDeTramite' no
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="id_grupotramite" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_DocumentosAdjuntos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.CAA_DocumentosAdjuntos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CAA_DocumentosAdjuntos">
           <Key>
             <PropertyRef Name="id_docadjunto" />
@@ -6610,8 +6624,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_DocumentosAdjuntos'
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateUser" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_Estados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.CAA_Estados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CAA_Estados">
           <Key>
             <PropertyRef Name="id_estado" />
@@ -6628,8 +6642,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_Estados' no tiene d
           <Property Name="orden" Type="int" Nullable="false" />
           <Property Name="visible_Aprob_prof" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_Solicitudes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.CAA_Solicitudes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CAA_Solicitudes">
           <Key>
             <PropertyRef Name="id_solicitud" />
@@ -6668,8 +6682,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_Solicitudes' no tie
           <Property Name="id_caa" Type="int" Nullable="false" />
           <Property Name="id_encomienda_agc" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_TiposDeCertificados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.CAA_TiposDeCertificados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CAA_TiposDeCertificados">
           <Key>
             <PropertyRef Name="id_tipocertificado" />
@@ -6689,8 +6703,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.CAA_TiposDeCertificados
           <Property Name="AcronimoSADE" Type="nvarchar" MaxLength="20" />
           <Property Name="NombreArchivoCertificado" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Files' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.Files' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Files">
           <Key>
             <PropertyRef Name="rowid" />
@@ -6710,8 +6724,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.Files' no tiene definid
           <Property Name="FileName" Type="varchar" MaxLength="1000" />
           <Property Name="Md5" Type="binary" MaxLength="32" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.RubrosImpactoAmbientalCN' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.RubrosImpactoAmbientalCN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RubrosImpactoAmbientalCN">
           <Key>
             <PropertyRef Name="IdRubroIA" />
@@ -6733,8 +6747,8 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.RubrosImpactoAmbientalC
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreateUser" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.vis_Certificados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.vis_Certificados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vis_Certificados">
           <Key>
             <PropertyRef Name="id_certificado" />
@@ -9979,6 +9993,18 @@ advertencia 6002: La tabla o vista 'DGHP_Solicitudes.dbo.vis_Certificados' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_login_tad_token_login_tad_token">
+          <End Role="Login_Tad_Token" Type="Self.Login_Tad_Token" Multiplicity="1" />
+          <End Role="Login_Tad_Token1" Type="Self.Login_Tad_Token" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login_Tad_Token">
+              <PropertyRef Name="login_tad_token_id" />
+            </Principal>
+            <Dependent Role="Login_Tad_Token1">
+              <PropertyRef Name="login_tad_token_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <!--Errores durante la generación:
 advertencia 6035: La relación 'FK_MasBuscados_Categorias' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_MasBuscados_Categorias" />-->
@@ -10510,8 +10536,8 @@ advertencia 6035: La relación 'FK_MasBuscados_Categorias' tiene columnas que no
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zonas_Planeamiento' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zonas_Planeamiento' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zonas_Planeamiento" />-->
         <Association Name="FK_Rubros_CircuitoAtomatico_Zonas_Historial_Cambios_Rubros_Historial_Cambios">
           <End Role="Rubros_Historial_Cambios" Type="Self.Rubros_Historial_Cambios" Multiplicity="1" />
@@ -15328,6 +15354,9 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Parameter Name="id_resultado" Type="int" Mode="In" />
           <Parameter Name="id_tramitetarea" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_Token_Tad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="GetIdCircuitoHAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="id_solicitud" Type="int" Mode="In" />
         </Function>
@@ -15342,6 +15371,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
         <Function Name="GetMixDistritoZonaySubZonaByTR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idSolicitud" Type="int" Mode="In" />
           <Parameter Name="result" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="Insert_Login_Tad_Token" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="tokenJWT" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="RubrosDepositosCN_Evaluar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_tramite" Type="int" Mode="In" />
@@ -15555,6 +15588,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySet Name="Ley257_Solicitudes_HistorialEstados" EntityType="Self.Ley257_Solicitudes_HistorialEstados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ley257_Solicitudes_Pagos" EntityType="Self.Ley257_Solicitudes_Pagos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login_Tad_Token" EntityType="Self.Login_Tad_Token" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasBuscados" EntityType="Self.MasBuscados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Niveles_Agrupamiento" EntityType="Self.Niveles_Agrupamiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
@@ -16011,7 +16045,8 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
     [RubrosCN_Historial].[LastUpdateDate] AS [LastUpdateDate], 
     [RubrosCN_Historial].[LastUpdateUser] AS [LastUpdateUser], 
     [RubrosCN_Historial].[Asistentes350] AS [Asistentes350], 
-    [RubrosCN_Historial].[SinBanioPCD] AS [SinBanioPCD] 
+    [RubrosCN_Historial].[SinBanioPCD] AS [SinBanioPCD], 
+    [RubrosCN_Historial].[CondicionExpress] AS [CondicionExpress]
     FROM [dbo].[RubrosCN_Historial] AS [RubrosCN_Historial]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SSIT_Solicitudes_bk" EntityType="Self.SSIT_Solicitudes_bk" store:Type="Tables" store:Schema="dbo">
@@ -17475,6 +17510,10 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <AssociationSet Name="FK_Localidad_Provincia" Association="Self.FK_Localidad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_login_tad_token_login_tad_token" Association="Self.FK_login_tad_token_login_tad_token">
+            <End Role="Login_Tad_Token" EntitySet="Login_Tad_Token" />
+            <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
           </AssociationSet>
           <AssociationSet Name="FK_Parametros_Bandeja_Rubro_Rubros" Association="Self.FK_Parametros_Bandeja_Rubro_Rubros">
             <End Role="Rubros" EntitySet="Rubros" />
@@ -22648,6 +22687,18 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="TipoActividad" EntitySet="TipoActividad" />
             <End Role="CPadron_RubrosCN" EntitySet="CPadron_RubrosCN" />
           </AssociationSet>
+          <EntitySet Name="Login_Tad_Token" EntityType="EncmiendaEntityes.Login_Tad_Token" />
+          <AssociationSet Name="FK_login_tad_token_login_tad_token" Association="EncmiendaEntityes.FK_login_tad_token_login_tad_token">
+            <End Role="Login_Tad_Token" EntitySet="Login_Tad_Token" />
+            <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
+          </AssociationSet>
+          <FunctionImport Name="Get_Token_Tad" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Login_Tad_Token">
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+            <Parameter Name="tokenJWT" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="Transf_Solicitudes_Historial_LibradoUso_INSERT">
             <Parameter Name="id_solicitud" Mode="In" Type="Int32" />
             <Parameter Name="fechaLibrado" Mode="In" Type="DateTime" />
@@ -35857,6 +35908,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <PropertyRef Name="LibrarUso" />
             <PropertyRef Name="CreateDate" />
             <PropertyRef Name="CreateUser" />
+            <PropertyRef Name="CondicionExpress" />
           </Key>
           <Property Name="IdRubrosCN_historial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo_operacion" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
@@ -35885,6 +35937,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Property Name="LastUpdateUser" Type="Guid" />
           <Property Name="Asistentes350" Type="Boolean" />
           <Property Name="SinBanioPCD" Type="Boolean" />
+          <Property Name="CondicionExpress" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SSIT_Solicitudes_bk">
           <Key>
@@ -38762,6 +38815,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="SSIT_Solicitudes_RubrosCN" Relationship="EncmiendaEntityes.FK_SSIT_Solicitudes_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="SSIT_Solicitudes_RubrosCN" />
           <NavigationProperty Name="Ubicaciones_Distritos_Excepciones_RubrosCN" Relationship="EncmiendaEntityes.FK_Ubicaciones_Distritos_Excepciones_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="Ubicaciones_Distritos_Excepciones_RubrosCN" />
           <NavigationProperty Name="CPadron_RubrosCN" Relationship="EncmiendaEntityes.FK_CPadron_RubrosCN_RubrosCN" FromRole="RubrosCN" ToRole="CPadron_RubrosCN" />
+          <Property Name="CondicionExpress" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__RubrosCN__idCond__45FB7418">
           <End Type="EncmiendaEntityes.CondicionesIncendio" Role="CondicionesIncendio" Multiplicity="0..1" />
@@ -39045,6 +39099,31 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             </Principal>
             <Dependent Role="CPadron_RubrosCN">
               <PropertyRef Name="id_tipoactividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Login_Tad_Token">
+          <Key>
+            <PropertyRef Name="login_tad_token_id" />
+          </Key>
+          <Property Name="login_tad_token_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Guid" />
+          <Property Name="tokenJWT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Login_Tad_Token1" Relationship="EncmiendaEntityes.FK_login_tad_token_login_tad_token" FromRole="Login_Tad_Token" ToRole="Login_Tad_Token1" />
+          <NavigationProperty Name="Login_Tad_Token2" Relationship="EncmiendaEntityes.FK_login_tad_token_login_tad_token" FromRole="Login_Tad_Token1" ToRole="Login_Tad_Token" />
+        </EntityType>
+        <Association Name="FK_login_tad_token_login_tad_token">
+          <End Type="EncmiendaEntityes.Login_Tad_Token" Role="Login_Tad_Token" Multiplicity="1" />
+          <End Type="EncmiendaEntityes.Login_Tad_Token" Role="Login_Tad_Token1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login_Tad_Token">
+              <PropertyRef Name="login_tad_token_id" />
+            </Principal>
+            <Dependent Role="Login_Tad_Token1">
+              <PropertyRef Name="login_tad_token_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -45601,6 +45680,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="RubrosCN_Historial">
             <EntityTypeMapping TypeName="EncmiendaEntityes.RubrosCN_Historial">
               <MappingFragment StoreEntitySet="RubrosCN_Historial">
+                <ScalarProperty Name="CondicionExpress" ColumnName="CondicionExpress" />
                 <ScalarProperty Name="SinBanioPCD" ColumnName="SinBanioPCD" />
                 <ScalarProperty Name="Asistentes350" ColumnName="Asistentes350" />
                 <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
@@ -45989,6 +46069,7 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="RubrosCN">
             <EntityTypeMapping TypeName="EncmiendaEntityes.RubrosCN">
               <MappingFragment StoreEntitySet="RubrosCN">
+				<ScalarProperty Name="CondicionExpress" ColumnName="CondicionExpress" />
                 <ScalarProperty Name="SinBanioPCD" ColumnName="SinBanioPCD" />
                 <ScalarProperty Name="SoloAPRA" ColumnName="SoloAPRA" />
                 <ScalarProperty Name="idCondicionIncendio" ColumnName="idCondicionIncendio" />
@@ -46036,6 +46117,20 @@ advertencia 6035: La relación 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Login_Tad_Token">
+            <EntityTypeMapping TypeName="EncmiendaEntityes.Login_Tad_Token">
+              <MappingFragment StoreEntitySet="Login_Tad_Token">
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="tokenJWT" ColumnName="tokenJWT" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="login_tad_token_id" ColumnName="login_tad_token_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Get_Token_Tad" FunctionName="EncmiendaEntityes.Store.Get_Token_Tad" />
+          <FunctionImportMapping FunctionImportName="Insert_Login_Tad_Token" FunctionName="EncmiendaEntityes.Store.Insert_Login_Tad_Token" />
           <FunctionImportMapping FunctionImportName="Transf_Solicitudes_Historial_LibradoUso_INSERT" FunctionName="EncmiendaEntityes.Store.Transf_Solicitudes_Historial_LibradoUso_INSERT" />
           </EntityContainerMapping>
       </Mapping>

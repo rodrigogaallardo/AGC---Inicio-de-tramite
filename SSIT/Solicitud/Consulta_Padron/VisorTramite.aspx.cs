@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static StaticClass.Constantes;
 
 namespace SSIT.Solicitud.Consulta_Padron
 {
@@ -366,11 +367,30 @@ namespace SSIT.Solicitud.Consulta_Padron
 
             var solicitante = lstParticipantesSSIT.FirstOrDefault(x => x.idPerfil == idPerfilSol);
 
+            var solicitanteGP = lstParticipantesGP.FirstOrDefault(x => x.idPerfil == idPerfilSol);
+
+            //esto para arreglar el backlog de error22
+            if (solicitanteGP == null)
+            {
+                Exception ex22 = new Exception(
+                    $"Debe tener solicitante para poder tramitar, titular {lstTitulares.FirstOrDefault()}," +
+                    $"Solicitud : {sol.IdConsultaPadron}, " +
+                    $"idTad : {sol.idTAD}, " +
+                    $"usuarioSSIT : {usuDTO.UserName}"
+                    );
+                LogError.Write(ex22);
+                wsGP.nuevoTramiteParticipante(_urlESB, trata, sol.idTAD.Value, sol.NroExpedienteSade,
+                usuDTO.CUIT, (int)TipoParticipante.Solicitante, true, Constantes.Sistema,
+                usuDTO.Nombre, usuDTO.Apellido, usuDTO.RazonSocial);
+                lstParticipantesGP = wsGP.GetParticipantesxTramite(_urlESB, sol.idTAD.Value).ToList();
+            }
+
             // Da de baja los que no están SIPSA
             foreach (var item in lstParticipantesGP)
             {
-                if (!lstParticipantesSSIT.Exists(x => x.cuit == item.cuit && x.idPerfil == item.idPerfil))
-                    wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
+                if(item.idPerfil != idPerfilSol)
+                    if (!lstParticipantesSSIT.Exists(x => x.cuit == item.cuit && x.idPerfil == item.idPerfil))
+                        wsGP.DesvincularParticipante(_urlESB, sol.idTAD.Value, solicitante.cuit, solicitante.idPerfil, Constantes.Sistema, item.cuit, item.idPerfil);
             }
         }
         protected void btnAnularTramite_Click(object sender, EventArgs e)

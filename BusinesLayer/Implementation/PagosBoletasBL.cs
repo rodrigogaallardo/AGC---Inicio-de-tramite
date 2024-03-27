@@ -1,6 +1,8 @@
 ﻿using BaseRepository;
+using DataAcess;
 using DataTransferObject;
 using ExternalService;
+using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using StaticClass;
 using System;
@@ -42,11 +44,11 @@ namespace BusinesLayer.Implementation
             }
         }
         /// <summary>
-        /// 
+        /// Todavia no hay metodo rest equivalente
         /// </summary>
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
-        public void GenerarBoletaUnica(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async Task GenerarBoletaUnica(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             ExternalService.BUBoletaUnica boletaGenerada = null;
 
@@ -78,10 +80,11 @@ namespace BusinesLayer.Implementation
                 servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
                 string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
                 string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
+                var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
 
                 // se obtiene el ultimo CAA aprobado
-                var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_caa).FirstOrDefault();
+                var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
 
                 int id_solicitud_caa = (solCAA != null ? solCAA.id_solicitud : 0);
 
@@ -92,8 +95,8 @@ namespace BusinesLayer.Implementation
                 }
                 else
                 {
-                    var lstBUIsCAA = servicio.Get_BUIs_CAA(this.User_Interface_AGC, this.Password_Interface_AGC, id_solicitud_caa, ref ws_resultado_BUI);
-
+                    GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_solicitud_caa);
+                    var lstBUIsCAA = wrapPago.ListBuis;
                     if (ws_resultado_BUI.ErrorCode != 0)
                     {
                         throw new Exception("CAA - " + ws_resultado_BUI.ErrorDescription);
@@ -101,37 +104,37 @@ namespace BusinesLayer.Implementation
                     else
                     {
                         boletaGenerada = (from bui in lstBUIsCAA
-                                          where bui.IdPago == id_pago
+                                          where bui.idPago == id_pago
                                           select new ExternalService.BUBoletaUnica
                                           {
-                                              BUI_ID = bui.BUI_ID,
-                                              CodBarras = bui.CodBarras,
-                                              CodigoVerificador = bui.CodigoVerificador,
+                                              BUI_ID = bui.buI_ID,
+                                              CodBarras = bui.codBarras,
+                                              CodigoVerificador = bui.codigoVerificador,
                                               Contribuyente = new ExternalService.BUDatosContribuyente
                                               {
-                                                  ApellidoyNombre = bui.Contribuyente.ApellidoyNombre,
-                                                  CodPost = bui.Contribuyente.CodPost,
-                                                  Departamento = bui.Contribuyente.Departamento,
-                                                  Direccion = bui.Contribuyente.Direccion,
-                                                  Documento = bui.Contribuyente.Documento,
-                                                  Email = bui.Contribuyente.Email,
-                                                  Localidad = bui.Contribuyente.Localidad,
-                                                  Piso = bui.Contribuyente.Piso,
-                                                  TipoDoc = (ExternalService.BUTipodocumento)bui.Contribuyente.TipoDoc,
-                                                  TipoPersona = (ExternalService.BUTipoPersona)bui.Contribuyente.TipoPersona
+                                                  ApellidoyNombre = bui.contribuyente.apellidoyNombre,
+                                                  CodPost = bui.contribuyente.codPost,
+                                                  Departamento = bui.contribuyente.departamento,
+                                                  Direccion = bui.contribuyente.direccion,
+                                                  Documento = bui.contribuyente.documento,
+                                                  Email = bui.contribuyente.email,
+                                                  Localidad = bui.contribuyente.localidad,
+                                                  Piso = bui.contribuyente.piso,
+                                                  TipoDoc = (ExternalService.BUTipodocumento)bui.contribuyente.tipoDoc,
+                                                  TipoPersona = (ExternalService.BUTipoPersona)bui.contribuyente.tipoPersona
 
                                               },
-                                              Dependencia = bui.Dependencia,
-                                              EstadoId = bui.EstadoId,
-                                              EstadoNombre = bui.EstadoNombre,
-                                              FechaAnulada = bui.FechaAnulada,
-                                              FechaCancelada = bui.FechaCancelada,
-                                              FechaPago = bui.FechaPago,
-                                              IdPago = bui.IdPago,
-                                              MontoTotal = bui.MontoTotal,
-                                              NroBoletaUnica = bui.NroBoletaUnica,
-                                              NroBUI = bui.NroBUI,
-                                              TrazaPago = bui.TrazaPago
+                                              Dependencia = bui.dependencia,
+                                              EstadoId = bui.estadoId,
+                                              EstadoNombre = bui.estadoNombre,
+                                              FechaAnulada = bui.fechaAnulada,
+                                              FechaCancelada = bui.fechaCancelada,
+                                              FechaPago = bui.fechaPago,
+                                              IdPago = bui.idPago,
+                                              MontoTotal = bui.montoTotal,
+                                              NroBoletaUnica = bui.nroBoletaUnica,
+                                              NroBUI = bui.nroBUI,
+                                              TrazaPago = bui.trazaPago
 
                                           }).FirstOrDefault();
                     }
@@ -616,7 +619,7 @@ namespace BusinesLayer.Implementation
         /// </summary>
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
-        public IEnumerable<clsItemGrillaPagos> CargarPagos(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
+        public async Task<IEnumerable<clsItemGrillaPagos>> CargarPagos(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
         {
             List<clsItemGrillaPagos> lstPagos = new List<clsItemGrillaPagos>();
 
@@ -637,36 +640,45 @@ namespace BusinesLayer.Implementation
                     lstEncomiendasRelacionadas = lstEncomiendas.Select(x => x.IdEncomienda).ToList();
                 }
 
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+                //ws_Interface_AGC servicio = new ws_Interface_AGC();
+                //ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
 
                 try
                 {
                     if (lstEncomiendasRelacionadas.Any())
                     {
-                        ParametrosBL blParam = new ParametrosBL();
-                        servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                        string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                        string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                        DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
+                        //ParametrosBL blParam = new ParametrosBL();
+                        //servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
+                        //string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
+                        //string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
+                        var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                        List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                        if (l == null)
+                            return null;
                         foreach (var caa in l.ToList())
                         {
-                            var listPago = servicio.Get_BUIs_CAA(username_servicio, password_servicio, caa.id_solicitud, ref ws_resultado_CAA);
-                            foreach (var p in listPago)
-                            {
-                                var pago = new clsItemGrillaPagos();
-                                var pago_estado = pagos.GetEstadoPago(p.IdPago);
-                                pago.id_sol_pago = p.IdPago;
-                                pago.id_solicitud = caa.id_caa;
-                                pago.id_pago = p.IdPago;
-                                pago.id_medio_pago = 0;
-                                pago.monto_pago = p.MontoTotal;
-                                pago.CreateDate = caa.CreateDate;//TODO aca iria la fecha creacion de la boleta que no la esta devolviendo
-                                pago.desc_medio_pago = "Boleta única";
-                                pago.desc_estado_pago = pago_estado.desc_estado_pago;
-                                pago.id_estado_pago = pago_estado.id_estado_pago;
-                                lst.Add(pago);
-                            }
+                            GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(caa.id_solicitud);
+                            if(wrapPago != null)
+                                if(wrapPago.ListBuis != null && wrapPago.ListBuis.Count > 0)
+                                {
+                                    var listPago = wrapPago.ListBuis;
+                                    foreach (var p in listPago)
+                                    {
+                                        var pago = new clsItemGrillaPagos();
+                                        var pago_estado = pagos.GetEstadoPago(p.idPago);
+                                        pago.id_sol_pago = p.idPago;
+                                        pago.id_solicitud = caa.id_solicitud;
+                                        pago.id_pago = p.idPago;
+                                        pago.id_medio_pago = 0;
+                                        pago.monto_pago = p.montoTotal;
+                                        pago.CreateDate = caa.createDate;
+                                        pago.desc_medio_pago = "Boleta única";
+                                        pago.desc_estado_pago = pago_estado.desc_estado_pago;
+                                        pago.id_estado_pago = pago_estado.id_estado_pago;
+                                        lst.Add(pago);
+                                    }
+                                }
+                            
                         }
                     }
                 }
@@ -695,7 +707,7 @@ namespace BusinesLayer.Implementation
             }
             return lstPagos;
         }
-        public bool HabilitarGeneracionPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
+        public async Task<bool> HabilitarGeneracionPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud, IEnumerable<EncomiendaDTO> lstEncomiendas)
         {
             bool ret = false;
 
@@ -754,27 +766,30 @@ namespace BusinesLayer.Implementation
                     try
                     {
                         // se obtiene el ultimo CAA aprobado
-                        ws_Interface_AGC servicio = new ws_Interface_AGC();
-                        ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
-                        var lstEncomiendasRelacionadas = lstEncomiendas.Select(p => p.IdEncomienda);
-                        servicio.Url = this.Url_Interface_AGC;
-                        DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(this.User_Interface_AGC, this.Password_Interface_AGC, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
-                        var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_caa).FirstOrDefault();
+                        //ws_Interface_AGC servicio = new ws_Interface_AGC();
+                        //ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+                        List<int> lstEncomiendasRelacionadas = lstEncomiendas.Select(p => p.IdEncomienda).ToList();
+                        //servicio.Url = this.Url_Interface_AGC;
+                        var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                        List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                        var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
 
                         int id_caa = (solCAA != null ? solCAA.id_solicitud : 0);
 
                         // Se consulta el estado del último CAA aprobado
-                        ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                        var lstBUIsCAA = servicio.Get_BUIs_CAA(this.User_Interface_AGC, this.Password_Interface_AGC, id_caa, ref ws_resultado_BUI).ToList();
-                        servicio.Dispose();
+                        //ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
+                        GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_caa);
+                        var lstBUIsCAA = wrapPago.ListBuis;
+                        //servicio.Dispose();
 
-                        if (ws_resultado_BUI.ErrorCode != 0)
+                        if (wrapPago.ErrorCode != "200")
                         {
                             throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
                         }
                         else
                         {
-                            ret = (lstBUIsCAA.Count(x => estados_consultados.Contains(x.EstadoId)) == 0);
+                            if(wrapPago != null && wrapPago.ListBuis != null && wrapPago.ListBuis.Count > 0)
+                                ret = (lstBUIsCAA.Count(x => estados_consultados.Contains(x.estadoId)) == 0);
                         }
                     }
                     catch (Exception exc)
@@ -792,7 +807,7 @@ namespace BusinesLayer.Implementation
         /// <param name="tipo_tramite"></param>
         /// <param name="id_solicitud"></param>
         /// <returns></returns>
-        public int GetPagosCount(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async Task<int> GetPagosCount(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             int ret = 0;
             if (tipo_tramite == Constantes.PagosTipoTramite.TR)
@@ -804,19 +819,24 @@ namespace BusinesLayer.Implementation
             {
                 try
                 {
-                    ws_Interface_AGC servicio = new ws_Interface_AGC();
-                    ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                    servicio.Url = this.Url_Interface_AGC;
-                    var lstBUIsCAA = servicio.Get_BUIs_CAA(this.User_Interface_AGC, this.Password_Interface_AGC, id_solicitud, ref ws_resultado_BUI).ToList();
-                    servicio.Dispose();
+                    EncomiendaBL blEnc = new EncomiendaBL();
+                    List<int> lstEncomiendasRelacionadas = blEnc.GetByFKIdSolicitud(id_solicitud).Select(x => x.IdEncomienda).ToList();
+                    var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                    List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                    var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
 
-                    if (ws_resultado_BUI.ErrorCode != 0)
+                    int id_solicitud_caa = (solCAA != null ? solCAA.id_solicitud : 0);
+                    GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_solicitud_caa);
+                    var lstBUIsCAA = wrapPago.ListBuis;
+
+                    if (wrapPago.ErrorCode != "200")
                     {
                         throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
                     }
                     else
                     {
-                        ret = lstBUIsCAA.Count();
+                        if (wrapPago != null && wrapPago.ListBuis != null && wrapPago.ListBuis.Count > 0)
+                            ret = lstBUIsCAA.Count();
                     }
                 }
                 catch (Exception exc)
@@ -833,30 +853,34 @@ namespace BusinesLayer.Implementation
 
             return ret;
         }
-        public Constantes.BUI_EstadoPago GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        public async Task<Constantes.BUI_EstadoPago> GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             Constantes.BUI_EstadoPago ret = Constantes.BUI_EstadoPago.SinPagar;
 
             if (tipo_tramite == Constantes.PagosTipoTramite.CAA)
             {
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                servicio.Url = this.Url_Interface_AGC;
-                var lstBUIsCAA = servicio.Get_BUIs_CAA(this.User_Interface_AGC, this.Password_Interface_AGC, id_solicitud, ref ws_resultado_BUI);
-                servicio.Dispose();
+                EncomiendaBL blEnc = new EncomiendaBL();
+                List<int> lstEncomiendasRelacionadas = blEnc.GetByFKIdSolicitud(id_solicitud).Select(x => x.IdEncomienda).ToList();
+                var encWrap = await GetCAAsByEncomiendas(lstEncomiendasRelacionadas);
+                List<GetCAAsByEncomiendasResponse> l = encWrap.ListCaa;
+                var solCAA = l.ToList().Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado).OrderByDescending(x => x.id_solicitud).FirstOrDefault();
 
-                if (ws_resultado_BUI.ErrorCode != 0)
+                int id_solicitud_caa = (solCAA != null ? solCAA.id_solicitud : 0);
+                GetBUIsCAAResponseWrap wrapPago = await GetBUIsCAA(id_solicitud_caa);
+                var lstBUIsCAA = wrapPago.ListBuis;
+
+                if (wrapPago.ErrorCode != "200")
                 {
                     throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
                 }
                 else
                 {
-                    if (lstBUIsCAA.Count() > 0)
+                    if (lstBUIsCAA != null && lstBUIsCAA.Count() > 0)
                     {
-                        if (lstBUIsCAA.Count(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado) > 0)
+                        if (lstBUIsCAA.Count(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado) > 0)
                             ret = Constantes.BUI_EstadoPago.Pagado;
                         else
-                            ret = (Constantes.BUI_EstadoPago)lstBUIsCAA.LastOrDefault().EstadoId;
+                            ret = (Constantes.BUI_EstadoPago)lstBUIsCAA.LastOrDefault().estadoId;
                     }
                 }
             }
@@ -933,6 +957,19 @@ namespace BusinesLayer.Implementation
 
             return strEstadoPago;
 
+        }
+
+        private async Task<GetBUIsCAAResponseWrap> GetBUIsCAA(int id_solicitud)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetBUIsCAAResponseWrap lstBuis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+            return lstBuis;
+        }
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
         }
     }
 }

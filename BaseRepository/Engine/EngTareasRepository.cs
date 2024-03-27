@@ -10,6 +10,7 @@ using System.Data.Entity.Core.Objects;
 using StaticClass;
 using System.Configuration;
 using DataAcess.EntityCustom;
+using System.Runtime.InteropServices;
 
 namespace BaseRepository.Engine
 {
@@ -463,6 +464,26 @@ namespace BaseRepository.Engine
             var parameter = new ObjectParameter("circuito", typeof(int));
             _unitOfWork.Db.SPGetIdCircuitoHAB(id_solicitud, parameter);
             return (int)parameter.Value;
+        }
+
+        public bool UsuarioTienePermisoTarea(int idTarea, Guid usuario)
+        {
+            bool tienePermiso = false;
+            var perfiles = (from pt in _unitOfWork.Db.ENG_Rel_Perfiles_Tareas
+                            join p in _unitOfWork.Db.SGI_Perfiles on pt.id_perfil equals p.id_perfil
+                            where pt.id_tarea == idTarea
+                            select p);
+            int existe = 0;
+            foreach (var per in perfiles)
+            {
+                if (existe == 0)
+                    existe = per.aspnet_Users2.Where(usu => usu.UserId == usuario).ToList().Count();
+                else
+                    break;
+            }
+            if (existe > 0)
+                tienePermiso = true;
+            return tienePermiso;
         }
     }
 }

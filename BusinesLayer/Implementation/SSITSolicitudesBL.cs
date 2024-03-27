@@ -6,13 +6,16 @@ using DataAcess;
 using DataAcess.EntityCustom;
 using DataTransferObject;
 using ExternalService;
+using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using IBusinessLayer;
+using iTextSharp.text;
 using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using UnitOfWork;
 
 namespace BusinesLayer.Implementation
@@ -1108,7 +1111,10 @@ namespace BusinesLayer.Implementation
                             {
                                 if (transtarea != null)
                                 {
-                                    blEng.AsignarTarea(idTramiteTarea, transtarea.UsuarioAsignadoTramiteTarea.Value, unitOfWork);
+                                    if (blEng.UsuarioTienePermisoTarea(idProximaTarea, transtarea.UsuarioAsignadoTramiteTarea.Value))
+                                    {
+                                        blEng.AsignarTarea(idTramiteTarea, transtarea.UsuarioAsignadoTramiteTarea.Value, unitOfWork);
+                                    }
                                 }
                             }
                         }
@@ -1182,38 +1188,50 @@ namespace BusinesLayer.Implementation
             encuesta.un_transporte = "";
             return encuesta;
         }
-        private Constantes.BUI_EstadoPago GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        /// <summary>
+        /// Obtiene el estado de pago del CAA en SIPSA
+        /// </summary>
+        /// <param name="tipo_tramite"></param>
+        /// <param name="id_solicitud"></param>
+        /// <returns></returns>
+        private async Task<Constantes.BUI_EstadoPago> GetEstadoPagoCAA(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
+        {
+            try
+            {
+                ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+                GetBUIsCAAResponseWrap Buis = await apraSrvRest.GetBUIsCAA(id_solicitud);
+                List<GetBUIsCAAResponse> lstBuis = Buis.ListBuis;
+                apraSrvRest.Dispose();
+                if (lstBuis != null && lstBuis.Count > 0)
+                {
+                    if (lstBuis.Any(x => x.estadoId == (int)Constantes.BUI_EstadoPago.Pagado))
+                        return Constantes.BUI_EstadoPago.Pagado;
+                    else
+                        return (Constantes.BUI_EstadoPago)lstBuis.LastOrDefault().estadoId;
+                }
+                else
+                {
+                    throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError.Write(ex, "Error al intentar obtener el estado del pago del CAA en SIPSA.");
+                throw ex;
+            }
+
+            return Constantes.BUI_EstadoPago.SinPagar;
+        }
+
+        
+        private async Task<Constantes.BUI_EstadoPago> GetEstadoPago(Constantes.PagosTipoTramite tipo_tramite, int id_solicitud)
         {
             Constantes.BUI_EstadoPago ret = Constantes.BUI_EstadoPago.SinPagar;
             var repoParam = new ParametrosRepository(this.uowF.GetUnitOfWork());
 
             if (tipo_tramite == Constantes.PagosTipoTramite.CAA)
             {
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                ExternalService.ws_interface_AGC.wsResultado ws_resultado_BUI = new ExternalService.ws_interface_AGC.wsResultado();
-                servicio.Url = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                var lstBUIsCAA = servicio.Get_BUIs_CAA(repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User"),
-                    repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password"), id_solicitud, ref ws_resultado_BUI);
-
-                servicio.Dispose();
-
-
-                if (ws_resultado_BUI.ErrorCode != 0)
-                {
-                    throw new Exception("No se ha podido recuperar las BUI/s relacionadas al CAA.");
-                }
-                else
-                {
-                    if (lstBUIsCAA.Count() > 0)
-                    {
-                        if (lstBUIsCAA.Count(x => x.EstadoId == (int)Constantes.BUI_EstadoPago.Pagado) > 0)
-                            ret = Constantes.BUI_EstadoPago.Pagado;
-                        else
-                        {
-                            ret = (Constantes.BUI_EstadoPago)lstBUIsCAA.LastOrDefault().EstadoId;
-                        }
-                    }
-                }
+                ret = await GetEstadoPagoCAA(tipo_tramite, id_solicitud);
             }
             else
             {
@@ -1241,7 +1259,7 @@ namespace BusinesLayer.Implementation
 
         #endregion
         #region Validaciones
-        public bool ValidacionSolicitudes(int id_solicitud)
+        public async Task<bool> ValidacionSolicitudes(int id_solicitud)
         {
             repo = new SSITSolicitudesRepository(this.uowF.GetUnitOfWork());
             var SSITentity = repo.Single(id_solicitud);
@@ -1325,15 +1343,30 @@ namespace BusinesLayer.Implementation
                     }
                 }
 
-                DtoCAA solicitud_caa = new DtoCAA();
+                //DtoCAA solicitud_caa = new DtoCAA();
+                GetCAAsByEncomiendasResponse solicitud_caa = new GetCAAsByEncomiendasResponse();
                 bool EximirCAA = repo.GetEximir_CAA(SSITentity.id_solicitud, SSITentity.id_tipotramite);
 
                 if (EximirCAA == false && SSITentity.id_tipotramite != (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
                 {
-                    solicitud_caa = ValidarCAA(lstEncomiendasRelacionadas, listEnc, encomienda, tieneRubroEstadio);
+                    solicitud_caa = await ValidarCAA_v2(lstEncomiendasRelacionadas, listEnc, encomienda, tieneRubroEstadio);
                     if (solicitud_caa == null)
                     {
                         throw new Exception(Errors.SSIT_SOLICITUD_CAA_INEXISTENTE);
+                    }
+                    else
+                    {
+                        if (solicitud_caa.certificado == null)
+                        {
+                            Exception caaExp = new Exception(
+                                $"La solicitud de CAA no tiene Certificado. id_solicitud_caa : {solicitud_caa.id_solicitud}," +
+                                $"id_encomienda : {solicitud_caa.formulario.id_encomienda_agc}," +
+                                $"id_estado_solicitud_caa : {solicitud_caa.id_estado}," +
+                                $"certificado : {solicitud_caa.certificado},"
+                                );
+                            LogError.Write(caaExp);
+                            throw new Exception("La solicitud no cuenta con un caa otorgado pero si con una solicitud de caa en trámite.");
+                        }
                     }
                 }
 
@@ -1351,7 +1384,7 @@ namespace BusinesLayer.Implementation
                         //0144521: JADHE 56637 - SSIT - RDU del 2018 pide BUI
                         DateTime fechaValida = new DateTime(2020, 1, 1);
                         if (SSITentity.CreateDate > fechaValida)
-                            ValidarPagoSSIT(id_solicitud);
+                            await ValidarPagoSSIT(id_solicitud);
                     }
 
                     if (SSITentity.id_tipotramite != (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
@@ -1409,45 +1442,45 @@ namespace BusinesLayer.Implementation
                                                           x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.CertificadoProTeatro);
                                 if (!tieneDocProTeatro)
                                 {
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
                                     if (EximirCAA == false)
-                                        ValidarPagoCAA(solicitud_caa);
+                                        await ValidarPagoCAA(solicitud_caa);
                                 }
                                 break;
                             case (int)Constantes.TieneRubroConExencionPago.Estadio:
                                 bool tieneChkEstadio = ssitDTO.ExencionPago;
                                 if (!tieneChkEstadio)
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
 
                                 if (solicitud_caa.id_solicitud > 0 && EximirCAA == false)
-                                    ValidarPagoCAA(solicitud_caa);
+                                    await ValidarPagoCAA(solicitud_caa);
                                 break;
                             case (int)Constantes.TieneRubroConExencionPago.CentroCultural:
                                 bool tieneDocCCultural = listDocSsit.Where(x => x.id_tdocreq == (int)Constantes.TipoDocumentoRequerido.ConstanciaInicioTramiteIGJoINAES).Any();
                                 if (!tieneDocCCultural)
                                 {
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
                                     if (EximirCAA == false)
-                                        ValidarPagoCAA(solicitud_caa);
+                                        await ValidarPagoCAA(solicitud_caa);
                                 }
                                 break;
                             case (int)Constantes.TieneRubroConExencionPago.EsECI:
                                 //Valido que solo tenga mas de ese rubro para que no sea excepcion de pago
                                 if (encDTO.EncomiendaRubrosCNDTO.Count > 1 && encDTO.IdTipoTramite != (int)Constantes.TipoTramite.HabilitacionECIAdecuacion)
                                 {
-                                    ValidarPagoSSIT(id_solicitud);
+                                    await ValidarPagoSSIT(id_solicitud);
                                     if (EximirCAA == false)
-                                        ValidarPagoCAA(solicitud_caa);
+                                        await ValidarPagoCAA(solicitud_caa);
                                 }
                                 else
                                 {
-                                    ValidarPagoCAA(solicitud_caa);
+                                    await ValidarPagoCAA(solicitud_caa);
                                 }
                                 break;
                             default:
-                                ValidarPagoSSIT(id_solicitud);
+                                await ValidarPagoSSIT(id_solicitud);
                                 if (EximirCAA == false)
-                                    ValidarPagoCAA(solicitud_caa);
+                                    await ValidarPagoCAA(solicitud_caa);
                                 break;
                         }
                     }
@@ -1497,18 +1530,103 @@ namespace BusinesLayer.Implementation
             var SSITentity = repo.Single(id_solicitud);
             return repo.GetEximir_CAA(SSITentity.id_solicitud, SSITentity.id_tipotramite);
         }
-
-        private DtoCAA ValidarCAA(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
+        /// <summary>
+        /// Valida si tiene CAA aprobados asociados a las encomiendas
+        /// </summary>
+        /// <param name="lstEncomiendasRelacionadas"></param>
+        /// <param name="listEnc"></param>
+        /// <param name="encomienda"></param>
+        /// <param name="tieneRubroEstadio"></param>
+        /// <returns></returns>
+        private async Task<GetCAAsByEncomiendasResponse> ValidarCAA_v2(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
         {
-            // se obtiene el ultimo CAA aprobado
-            ws_Interface_AGC servicio = new ws_Interface_AGC();
-            ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaaW = await apraSrvRest.GetCAAsByEncomiendas(lstEncomiendasRelacionadas.ToList());
+            List<GetCAAsByEncomiendasResponse> lstCaa = null;
+            if (lstCaaW != null && lstCaaW.ErrorCode == "OK")
+            {
+                lstCaa = lstCaaW.ListCaa;
+                var ultimoCAAAnulado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
+                                                    .OrderByDescending(o => o.id_estado)
+                                                    .FirstOrDefault();
+                if (tieneRubroEstadio)
+                {
+                    if (ultimoCAAAnulado != null)
+                        return ultimoCAAAnulado;
+                    else
+                        return null;
+                }
 
+                var ultimoCAAAprobado = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado)
+                                .OrderByDescending(o => o.id_solicitud) //este id_solicitud se refiere al id_caa
+                                .FirstOrDefault();
+                if (ultimoCAAAprobado != null)
+                {
+                    return ultimoCAAAprobado;
+                }
+            }
+            else
+            {
+                return null;
+            }
+                
+            
+
+            List<int> estados = new List<int>();
+            estados.Add((int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo);
+            estados.Add((int)Constantes.Encomienda_Estados.Vencida);
+
+            var lstEncomiendasAprobadas = listEnc.Where(x => estados.Contains(x.id_estado))
+                            .OrderByDescending(o => o.id_encomienda);
+
+            List<int> lstIdEncomiendaValidas = new List<int>();
+
+            foreach (var item in lstEncomiendasAprobadas)
+            {
+                if (item.tipo_anexo == Constantes.TipoAnexo_A)
+                {
+                    lstIdEncomiendaValidas.Add(item.id_encomienda);
+                    break;
+                }
+                else
+                    lstIdEncomiendaValidas.Add(item.id_encomienda);
+            }
+
+            if (!StaticClass.Funciones.isDesarrollo())
+            {
+                if (!lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado 
+                                      && lstIdEncomiendaValidas.Contains(caa.formulario.id_encomienda_agc)).Any())
+                {
+                    throw new Exception(Errors.SSIT_SOLICITUD_CAA_INEXISTENTE);
+                }
+            }
+            
+            var ret = lstCaa.Where(caa => caa.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado 
+                                       && lstIdEncomiendaValidas.Contains(caa.formulario.id_encomienda_agc))
+                                .OrderByDescending(o => o.id_solicitud) //este id_solicitud se refiere al id_caa
+                                .FirstOrDefault();
+
+            return ret;
+
+        }
+        //metodo soap para validarCAA DEPRECADO
+        private GetCAAsByEncomiendasResponse ValidarCAA(List<int> lstEncomiendasRelacionadas, List<Encomienda> listEnc, Encomienda encomienda, bool tieneRubroEstadio)
+        {
+            //// se obtiene el ultimo CAA aprobado
+            //ws_Interface_AGC servicio = new ws_Interface_AGC();
+            //ExternalService.ws_interface_AGC.wsResultado ws_resultado_CAA = new ExternalService.ws_interface_AGC.wsResultado();
+            //
             var repoParam = new ParametrosRepository(this.uowF.GetUnitOfWork());
-            servicio.Url = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-            string username_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-            string password_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-            DtoCAA[] lstDocCAA = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
+            //servicio.Url = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
+            //string username_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
+            //string password_servicio = repoParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
+            //DtoCAA[] lstDocCAA = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lstEncomiendasRelacionadas.ToArray(), ref ws_resultado_CAA);
+            List<GetCAAsByEncomiendasResponse> lstDocCAA = null;
+            Task.Run(async () =>
+            {
+                var listCaaW = await GetCAAsByEncomiendas(listEnc.Select(enc => enc.id_encomienda).ToList());
+                lstDocCAA = listCaaW.ListCaa;
+            }).Wait();
 
             var ultimoCAANoAnulado = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Anulado)
                                                 .OrderByDescending(o => o.id_estado)
@@ -1523,7 +1641,7 @@ namespace BusinesLayer.Implementation
 
             #region 132130: JADHE YYYYY - SSIT - Modificar validacion de CAA
             var ultimoCAAAprobado = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado)
-                            .OrderByDescending(o => o.id_caa)
+                            .OrderByDescending(o => o.formulario.id_caa)
                             .FirstOrDefault();
 
             if (ultimoCAAAprobado != null)
@@ -1553,18 +1671,18 @@ namespace BusinesLayer.Implementation
 
             if (!StaticClass.Funciones.isDesarrollo())
             {
-                if (!lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.id_encomienda)).Any())
+                if (!lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.formulario.id_encomienda_agc)).Any())
                 {
                     throw new Exception(Errors.SSIT_SOLICITUD_CAA_INEXISTENTE);
                 }
             }
             else
             {
-                lstDocCAA = new DtoCAA[1];
+                lstDocCAA = new GetCAAsByEncomiendasResponse[1].ToList();
                 return lstDocCAA[0];
             }
-            var ret = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.id_encomienda))
-                                .OrderByDescending(o => o.id_caa)
+            var ret = lstDocCAA.Where(x => x.id_estado == (int)Constantes.CAA_EstadoSolicitud.Aprobado && lstIdEncomiendaValidas.Contains(x.formulario.id_encomienda_agc))
+                                .OrderByDescending(o => o.formulario.id_caa)
                                 .FirstOrDefault();
 
             return ret;
@@ -1617,35 +1735,38 @@ namespace BusinesLayer.Implementation
                 throw new Exception(Errors.SSIT_SOLICITUD_OBSERVACIONES_SIN_PROCESAR);
         }
 
-        private void ValidarPagoCAA(DtoCAA caa)
+        private async Task ValidarPagoCAA(GetCAAsByEncomiendasResponse caa) //DtoCAA
         {
             if (StaticClass.Funciones.isDesarrollo())
             {
-                return;
+                //return;   //lo saco para testear habilitacion express
             }
-
+            DtoCAA old = null;
             //139533: JADHE YYYYY -SSIT - Pago excento CAA
-            if (caa.ExentoBUI)
+            if (caa.exentoBUI)
             {
                 return;
             }
 
             if (!(caa.id_tipotramite == (int)Constantes.TiposDeTramiteCAA.CAA_ESP))
             {
-                var estado_pago = GetEstadoPago(Constantes.PagosTipoTramite.CAA, caa.id_solicitud);
+                var estado_pago = await GetEstadoPago(Constantes.PagosTipoTramite.CAA, caa.id_solicitud);
 
                 if (estado_pago != Constantes.BUI_EstadoPago.Pagado)
                     throw new Exception(Errors.SSIT_SOLICITUD_PAGO_CAA);
             }
-            else if (caa.CAA_Especiales_Datos_Verificacion == null)
+            /* TODO: buscar alguna forma de saber si es un CAA especial
+            else if (caa.CAA_Especiales_Datos_Verificacion == null) //aca como verificamos si es un CAA especial
             {
                 throw new Exception(Errors.SSIT_SOLICITUD_PAGO_CAA_ESP);
             }
+            */
+            
         }
 
-        private void ValidarPagoSSIT(int IdSolicitud)
+        private async Task ValidarPagoSSIT(int IdSolicitud)
         {
-            if (GetEstadoPago(Constantes.PagosTipoTramite.HAB, IdSolicitud) != Constantes.BUI_EstadoPago.Pagado)
+            if (await GetEstadoPago(Constantes.PagosTipoTramite.HAB, IdSolicitud) != Constantes.BUI_EstadoPago.Pagado)
                 throw new Exception(Errors.SSIT_SOLICITUD_PAGO);
         }
 
@@ -1940,7 +2061,9 @@ namespace BusinesLayer.Implementation
 
             return ret;
         }
-        public List<string> CompareWithCAA(int id_solicitud, DtoCAA solCAA)
+
+        //fuck
+        public List<string> CompareWithCAA(int id_solicitud, GetCAAResponse solCAA)
         {
 
             List<string> lstErrores = new List<string>();
@@ -1968,7 +2091,7 @@ namespace BusinesLayer.Implementation
             {
 
                 #region "Comparacion de ubicaciones"
-                var lstUbicacionesCAA = solCAA.Ubicaciones.ToList();
+                var lstUbicacionesCAA = solCAA.formulario.ubicaciones.ToList();
                 var lstUbicacionesHAB = sol.SSIT_Solicitudes_Ubicaciones.ToList();
 
                 if (lstUbicacionesCAA.Count != lstUbicacionesHAB.Count)
@@ -1985,20 +2108,21 @@ namespace BusinesLayer.Implementation
                     {
                         if (id_solicitud < nroSolicitudReferencia)
                         {
+                            /* Se comento ya que al pasar a rest ya no tenemos el dato id_zonaplaneamiento
                             //evaluamos la zonificacion (Zona de Planeamiento).
-                            if (itemUbicCAA.id_zonaplaneamiento == null)
+                            if (itemUbicCAA.id_zonaplaneamiento == null) 
                             {
                                 lstErrores.Add(string.Format("La solicitud no posee el dato zonificación de la ubicación. Número de ubicación: {0}.", NroUbicacion));
                             }
                             else
                             {
-                                if (itemUbicCAA.id_zonaplaneamiento != itemUbicHAB.id_zonaplaneamiento)
+                                if (itemUbicCAA.id_zonaplaneamiento != itemUbicHAB.id_zonaplaneamiento) 
                                 {
-                                    var zonaPlaCAA = repoZonasPlaneamiento.Single(itemUbicCAA.id_zonaplaneamiento);
+                                    var zonaPlaCAA = repoZonasPlaneamiento.Single(itemUbicCAA.zonaMixtura);
                                     lstErrores.Add(string.Format("La zonificación de la ubicación {0} es diferente, en el CAA es {1} y en la solicitud de HAB es {2}.", NroUbicacion, zonaPlaCAA.CodZonaPla, itemUbicHAB.Zonas_Planeamiento.CodZonaPla));
                                 }
                             }
-
+                            */
                         }
                         else
                         {
@@ -2010,15 +2134,15 @@ namespace BusinesLayer.Implementation
                             var cantidadMixturasHAB = (lstMixturasHAB.Select(t => t.IdZonaMixtura).Distinct().Count());
 
                             //Comparación de Distritos
-                            if (cantidadDistritosHAB != itemUbicCAA.Distritos.Count())
+                            if (cantidadDistritosHAB != itemUbicCAA.distritos.Count())
                             {
-                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
+                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.distritos.Count(), lstDistritosHAB.Count()));
                             }
-                            else if ((cantidadDistritosHAB == itemUbicCAA.Distritos.Count()))
+                            else if ((cantidadDistritosHAB == itemUbicCAA.distritos.Count()))
                             {
                                 foreach (var itemDistrito in lstDistritosHAB)
                                 {
-                                    var itemDistritoCAA = itemUbicCAA.Distritos.FirstOrDefault(x => x.IdDistrito == itemDistrito.IdDistrito);
+                                    var itemDistritoCAA = itemUbicCAA.distritos.FirstOrDefault(x => x.idDistrito == itemDistrito.IdDistrito);
                                     if (itemDistritoCAA == null)
                                     {
                                         lstErrores.Add(string.Format("El distrito '{1} ' de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemDistrito.IdDistrito));
@@ -2027,15 +2151,15 @@ namespace BusinesLayer.Implementation
                             }
 
                             //Comparación de Mixturas
-                            if ((cantidadMixturasHAB != itemUbicCAA.Mixturas.Count()))
+                            if ((cantidadMixturasHAB != itemUbicCAA.mixturas.Count()))
                             {
-                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Distritos.Count(), lstDistritosHAB.Count()));
+                                lstErrores.Add(string.Format("La cantidad de Distritos de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.distritos.Count(), lstDistritosHAB.Count()));
                             }
-                            else if (cantidadMixturasHAB == itemUbicCAA.Mixturas.Count())
+                            else if (cantidadMixturasHAB == itemUbicCAA.mixturas.Count())
                             {
                                 foreach (var itemMixtura in lstMixturasHAB)
                                 {
-                                    var itemMixturaCAA = itemUbicCAA.Mixturas.FirstOrDefault(x => x.IdZonaMixtura == itemMixtura.IdZonaMixtura);
+                                    var itemMixturaCAA = itemUbicCAA.mixturas.FirstOrDefault(x => x.idZonaMixtura == itemMixtura.IdZonaMixtura);
                                     if (itemMixturaCAA == null)
                                     {
                                         lstErrores.Add(string.Format("La mixtura '{1} ' de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemMixtura.IdZonaMixtura));
@@ -2057,14 +2181,14 @@ namespace BusinesLayer.Implementation
                         }
 
                         //Comparación de las puertas
-                        if (itemUbicCAA.Puertas.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count())
+                        if (itemUbicCAA.puertas.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count())
                         {
-                            lstErrores.Add(string.Format("La cantidad de puertas de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.Puertas.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count()));
+                            lstErrores.Add(string.Format("La cantidad de puertas de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.puertas.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas.Count()));
                         }
 
                         foreach (var itemPuerta in itemUbicHAB.SSIT_Solicitudes_Ubicaciones_Puertas)
                         {
-                            var itemPuertaCAA = itemUbicCAA.Puertas.FirstOrDefault(x => x.codigo_calle == itemPuerta.codigo_calle && x.NroPuerta == itemPuerta.NroPuerta);
+                            var itemPuertaCAA = itemUbicCAA.puertas.FirstOrDefault(x => x.codigo_calle == itemPuerta.codigo_calle && x.nroPuerta == itemPuerta.NroPuerta);
                             if (itemPuertaCAA == null)
                             {
                                 lstErrores.Add(string.Format("La puerta '{1} {2}' de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemPuerta.nombre_calle.Trim(), itemPuerta.NroPuerta));
@@ -2072,14 +2196,14 @@ namespace BusinesLayer.Implementation
                         }
 
                         //Comparación de las partidas horizontales
-                        if (itemUbicCAA.PropiedadesHorizontales.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count())
+                        if (itemUbicCAA.propiedadesHorizontales.Count() != itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count())
                         {
-                            lstErrores.Add(string.Format("La cantidad de partidas horizontales de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.PropiedadesHorizontales.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count()));
+                            lstErrores.Add(string.Format("La cantidad de partidas horizontales de la ubicación {0} es diferente, en el CAA es/son '{1}' y en la solicitud de HAB es/son '{2}'.", NroUbicacion, itemUbicCAA.propiedadesHorizontales.Count(), itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal.Count()));
                         }
 
                         foreach (var itemPHorHAB in itemUbicHAB.SSIT_Solicitudes_Ubicaciones_PropiedadHorizontal)
                         {
-                            var itemPHorCAA = itemUbicCAA.PropiedadesHorizontales.FirstOrDefault(x => x.id_propiedadhorizontal == itemPHorHAB.id_propiedadhorizontal);
+                            var itemPHorCAA = itemUbicCAA.propiedadesHorizontales.FirstOrDefault(x => x.id_propiedadhorizontal == itemPHorHAB.id_propiedadhorizontal);
                             if (itemPHorCAA == null)
                             {
                                 lstErrores.Add(string.Format("La partida horizontal Nro. {1} de la ubicación {0} no se encuentra en la solicitud de CAA.", NroUbicacion, itemPHorHAB.Ubicaciones_PropiedadHorizontal.NroPartidaHorizontal));
@@ -2092,18 +2216,18 @@ namespace BusinesLayer.Implementation
 
                 #region "Comparacion de titulares"
                 #region "Titulares Personas Fisicas"
-                int cantidadTitPFCAA = (solCAA.TitularesPersonasFisicas != null ? solCAA.TitularesPersonasFisicas.Count() : 0);
+                int cantidadTitPFCAA = (solCAA.formulario.titularesPersonasFisicas != null ? solCAA.formulario.titularesPersonasFisicas.Count() : 0);
                 int cantidadTitPFHAB = sol.SSIT_Solicitudes_Titulares_PersonasFisicas.Count;
 
                 if (cantidadTitPFCAA != cantidadTitPFHAB)
                     lstErrores.Add("La cantidad de titulares (persona/s física/s de la solicitud de CAA es distinta a la de la solicitud actual.");
                 else if (cantidadTitPFCAA > 0)
                 {
-                    var lstTitPfCAA = solCAA.TitularesPersonasFisicas.ToList();
+                    var lstTitPfCAA = solCAA.formulario.titularesPersonasFisicas.ToList();
                     var lstTitPfHAB = sol.SSIT_Solicitudes_Titulares_PersonasFisicas.ToList();
                     foreach (var itemTitPfHAB in lstTitPfHAB)
                     {
-                        var itemTitPfCAA = lstTitPfCAA.FirstOrDefault(x => x.Cuit.Replace("-", "") == itemTitPfHAB.Cuit);
+                        var itemTitPfCAA = lstTitPfCAA.FirstOrDefault(x => x.cuit.Replace("-", "") == itemTitPfHAB.Cuit);
                         if (itemTitPfCAA == null)
                             lstErrores.Add(string.Format("No se encuentra el titular con CUIT {0} en el CAA.", itemTitPfHAB.Cuit));
 
@@ -2117,19 +2241,19 @@ namespace BusinesLayer.Implementation
 
                 #region "Titulares Personas Juridicas"
 
-                int cantidadTitPJCAA = (solCAA.TitularesPersonasJuridicas != null ? solCAA.TitularesPersonasJuridicas.Count() : 0);
+                int cantidadTitPJCAA = (solCAA.formulario.titularesPersonasJuridicas != null ? solCAA.formulario.titularesPersonasJuridicas.Count() : 0);
                 int cantidadTitPJHAB = sol.SSIT_Solicitudes_Titulares_PersonasJuridicas.Count;
 
                 if (cantidadTitPJCAA != cantidadTitPJHAB)
                     lstErrores.Add("La cantidad de titulares de la solicitud de CAA es distinta a la de la solicitud actual.");
                 else if (cantidadTitPJCAA > 0)
                 {
-                    var lstTitPjCAA = solCAA.TitularesPersonasJuridicas.ToList();
+                    var lstTitPjCAA = solCAA.formulario.titularesPersonasJuridicas.ToList();
                     var lstTitPjHAB = sol.SSIT_Solicitudes_Titulares_PersonasJuridicas.ToList();
 
                     foreach (var itemTitPjHAB in lstTitPjHAB)
                     {
-                        var itemTitPjCAA = lstTitPjCAA.FirstOrDefault(x => x.CUIT.Replace("-", "") == itemTitPjHAB.CUIT);
+                        var itemTitPjCAA = lstTitPjCAA.FirstOrDefault(x => x.cuit.Replace("-", "") == itemTitPjHAB.CUIT);
                         if (itemTitPjCAA == null)
                             lstErrores.Add(string.Format("No se encuentra el titular con CUIT {0} en el CAA.", itemTitPjHAB.CUIT));
                         else
@@ -2139,6 +2263,9 @@ namespace BusinesLayer.Implementation
 
                             //Comparacion de los titulares de Sociedades de Hecho
                             //--
+                            // el nuevo endpont no devuelve TitularesPersonasFisicasPersonasJuridicas
+                            // por lo tanto se quita esta validacion 
+                            /*
                             int cantidadTitPJPFCAA = (itemTitPjCAA.TitularesPersonasFisicasPersonasJuridicas != null ? itemTitPjCAA.TitularesPersonasFisicasPersonasJuridicas.Count() : 0);
                             int cantidadTitPJPFHAB = itemTitPjHAB.SSIT_Solicitudes_Titulares_PersonasJuridicas_PersonasFisicas.Count;
                             if (cantidadTitPJPFCAA != cantidadTitPJPFHAB)
@@ -2182,6 +2309,7 @@ namespace BusinesLayer.Implementation
                                     }
                                 }
                             }
+                            */
 
                         }
                     }
@@ -2202,7 +2330,7 @@ namespace BusinesLayer.Implementation
                     {
                         // Compara las Superficies
                         decimal SuperficieSolicitud = 0;
-                        decimal SuperficieCAA = (solCAA.SuperficieCubierta + solCAA.SuperficieDescubierta);
+                        decimal SuperficieCAA = ((decimal)(solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl));
 
                         if (DatosLocal != null)
                         {
@@ -2218,7 +2346,9 @@ namespace BusinesLayer.Implementation
                     var lstRubrosHAB = repoSolicitudesRubros.GetRubrosCN(id_solicitud).ToList();
 
                     // Compara los Rubros.
-                    int cantidadRubrosCAA = (solCAA.Rubros != null ? solCAA.Rubros.Count() : 0);
+                    int cantidadRubrosCAA_cur = (solCAA.formulario.rubrosCur != null ? solCAA.formulario.rubrosCur.Count() : 0);
+                    
+                    int cantidadRubrosCAA = cantidadRubrosCAA_cur; 
                     int cantidadRubrosHAB = lstRubrosHAB.Count();
 
                     //if (cantidadRubrosCAA != cantidadRubrosHAB)
@@ -2227,11 +2357,11 @@ namespace BusinesLayer.Implementation
                     //}
                     //if (cantidadRubrosCAA > 0)
                     //{
-                    var lstRubrosCAA = solCAA.Rubros.ToList();
+                    var lstRubrosCAA = solCAA.formulario.rubrosCur.ToList();
 
                     foreach (var itemRubroHAB in lstRubrosHAB)
                     {
-                        var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.cod_rubro == itemRubroHAB.CodigoRubro);
+                        var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.codigo == itemRubroHAB.CodigoRubro);
                         if (itemRubroCAA == null)
                             lstErrores.Add(string.Format("No se encuentra el rubro {0} en el CAA.", itemRubroHAB.CodigoRubro));
                         else
@@ -2240,7 +2370,7 @@ namespace BusinesLayer.Implementation
                             decimal valorDecimalHAB = 0;
 
                             nombreCampo = "Superficie a habilitar";
-                            valorDecimalCAA = itemRubroCAA.SuperficieHabilitar;
+                            valorDecimalCAA = itemRubroCAA.superficieHabilitar;
                             valorDecimalHAB = itemRubroHAB.SuperficieHabilitar;
 
                             if (valorDecimalCAA < valorDecimalHAB)
@@ -2265,30 +2395,44 @@ namespace BusinesLayer.Implementation
                     {
                         // Compara las Superficies
                         decimal SuperficieEncomienda = 0;
-                        decimal SuperficieCAA = (solCAA.SuperficieCubierta + solCAA.SuperficieDescubierta);
-                        var datos_local = encomienda.Encomienda_DatosLocal.FirstOrDefault();
-                        if (datos_local != null)
+                        if(solCAA.formulario.datosLocal != null)
                         {
-                            if (datos_local.ampliacion_superficie.HasValue && datos_local.ampliacion_superficie.Value)
-                                SuperficieEncomienda = (datos_local.superficie_cubierta_amp.HasValue ? datos_local.superficie_cubierta_amp.Value : 0) +
-                                                       (datos_local.superficie_descubierta_amp.HasValue ? datos_local.superficie_descubierta_amp.Value : 0);
-                            else
-                                SuperficieEncomienda = (datos_local.superficie_cubierta_dl.HasValue ? datos_local.superficie_cubierta_dl.Value : 0) +
-                                                       (datos_local.superficie_descubierta_dl.HasValue ? datos_local.superficie_descubierta_dl.Value : 0);
+                            decimal SuperficieCAA = ((decimal)(solCAA.formulario.datosLocal.superficie_cubierta_dl + solCAA.formulario.datosLocal.superficie_descubierta_dl));
+                            var datos_local = encomienda.Encomienda_DatosLocal.FirstOrDefault();
+                            if (datos_local != null)
+                            {
+                                if (datos_local.ampliacion_superficie.HasValue && datos_local.ampliacion_superficie.Value)
+                                    SuperficieEncomienda = (datos_local.superficie_cubierta_amp.HasValue ? datos_local.superficie_cubierta_amp.Value : 0) +
+                                                           (datos_local.superficie_descubierta_amp.HasValue ? datos_local.superficie_descubierta_amp.Value : 0);
+                                else
+                                    SuperficieEncomienda = (datos_local.superficie_cubierta_dl.HasValue ? datos_local.superficie_cubierta_dl.Value : 0) +
+                                                           (datos_local.superficie_descubierta_dl.HasValue ? datos_local.superficie_descubierta_dl.Value : 0);
+                            }
+
+                            if (SuperficieEncomienda != SuperficieCAA)
+                                lstErrores.Add(string.Format("La Superficie total de la solicitud de CAA es distinta a la de la ultima encomienda aprobada. El valor en el CAA es {0} y en la encomienda es de {1}", SuperficieCAA, SuperficieEncomienda));
+
+                        }
+                        else
+                        {
+                            lstErrores.Add("No es posible comparar los datos del local debido a que no se encontraron datos en el CAA indicado.");
                         }
 
-                        if (SuperficieEncomienda != SuperficieCAA)
-                            lstErrores.Add(string.Format("La Superficie total de la solicitud de CAA es distinta a la de la ultima encomienda aprobada. El valor en el CAA es {0} y en la encomienda es de {1}", SuperficieCAA, SuperficieEncomienda));
 
-
-                        // Compara los Rubros.
-                        int cantidadRubrosCAA = (solCAA.Rubros != null ? solCAA.Rubros.Count() : 0);
+                        // Compara los Rubros
+                        int cantidadRubrosCAA = 0; 
                         int cantidadRubrosHAB = 0;
 
                         if (id_solicitud <= nroSolicitudReferencia)
+                        {
+                            cantidadRubrosCAA = solCAA.formulario.rubrosCPU != null ? solCAA.formulario.rubrosCPU.Count() : 0;
                             cantidadRubrosHAB = encomienda.Encomienda_Rubros.Count();
+                        }
                         else
+                        {
+                            cantidadRubrosCAA = solCAA.formulario.rubrosCur != null ? solCAA.formulario.rubrosCur.Count() : 0;
                             cantidadRubrosHAB = encomienda.Encomienda_RubrosCN.Count();
+                        }
 
 
 
@@ -2300,7 +2444,7 @@ namespace BusinesLayer.Implementation
                         {
                             if (id_solicitud <= nroSolicitudReferencia)
                             {
-                                var lstRubrosCAA = solCAA.Rubros.ToList();
+                                var lstRubrosCAA = solCAA.formulario.rubrosCPU.ToList();
                                 var lstRubrosHAB = encomienda.Encomienda_Rubros.ToList();
                                 foreach (var itemRubroHAB in lstRubrosHAB)
                                 {
@@ -2313,7 +2457,7 @@ namespace BusinesLayer.Implementation
                                         decimal valorDecimalHAB = 0;
 
                                         nombreCampo = "Superficie a habilitar";
-                                        valorDecimalCAA = itemRubroCAA.SuperficieHabilitar;
+                                        valorDecimalCAA = (decimal)itemRubroCAA.superficieHabilitar;
                                         valorDecimalHAB = itemRubroHAB.SuperficieHabilitar;
 
                                         if (valorDecimalCAA != valorDecimalHAB)
@@ -2326,11 +2470,11 @@ namespace BusinesLayer.Implementation
                             else
                             {
 
-                                var lstRubrosCAA = solCAA.Rubros.ToList();
+                                var lstRubrosCAA = solCAA.formulario.rubrosCur.ToList();
                                 var lstRubrosHAB = encomienda.Encomienda_RubrosCN.ToList();
                                 foreach (var itemRubroHAB in lstRubrosHAB)
                                 {
-                                    var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.cod_rubro == itemRubroHAB.CodigoRubro);
+                                    var itemRubroCAA = lstRubrosCAA.FirstOrDefault(x => x.codigo == itemRubroHAB.CodigoRubro);
                                     if (itemRubroCAA == null)
                                         lstErrores.Add(string.Format("No se encuentra el rubro {0} en el CAA.", itemRubroHAB.CodigoRubro));
                                     else
@@ -2339,7 +2483,7 @@ namespace BusinesLayer.Implementation
                                         decimal valorDecimalHAB = 0;
 
                                         nombreCampo = "Superficie a habilitar";
-                                        valorDecimalCAA = itemRubroCAA.SuperficieHabilitar;
+                                        valorDecimalCAA = itemRubroCAA.superficieHabilitar;
                                         valorDecimalHAB = itemRubroHAB.SuperficieHabilitar;
 
                                         if (valorDecimalCAA != valorDecimalHAB)
@@ -2632,6 +2776,13 @@ namespace BusinesLayer.Implementation
                 }
             }
             return observacionLibrado;
+        }
+
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
         }
     }
 }

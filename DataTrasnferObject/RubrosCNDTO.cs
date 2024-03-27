@@ -31,6 +31,8 @@ namespace DataTransferObject
         public bool TieneRubroDeposito { get; set; }
         public int idCondicionIncendio { get; set; }
         public bool SinBanioPCD { get; set; }
+        public bool CondicionExpress { get; set; }
+        
         public virtual ICollection<RubrosCNSubRubrosDTO> RubrosCN_SubrubrosDTO { get; set; }
         public virtual CondicionesIncendioDTO CondicionesIncendio { get; set; }
 

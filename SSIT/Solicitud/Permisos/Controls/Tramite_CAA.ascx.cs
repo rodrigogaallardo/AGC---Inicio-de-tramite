@@ -1,5 +1,6 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
+using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using SSIT.Common;
 using StaticClass;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -143,7 +145,8 @@ namespace SSIT.Solicitud.Permisos.Controls
             return ret;
 
         }
-
+        //deprecado
+        /*
         public DtoRACGenerado GenerarRAC(int id_solicitud_agc)
         {
 
@@ -169,7 +172,7 @@ namespace SSIT.Solicitud.Permisos.Controls
                 servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
                 string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
                 string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
-                
+
 
                 //Valida el codigo de seguridad de la solicitud de CAA
                 if (!servicio.ValidarCodigoSeguridad(username_servicio, password_servicio, id_solicitud_caa, codigo_seguridad_CAA, ref ws_resultado_CAA))
@@ -189,9 +192,9 @@ namespace SSIT.Solicitud.Permisos.Controls
 
                         if (lstMensajes.Count == 0)
                         {
-                            resultService = servicio.Generar_RAC_MusicaCanto(username_servicio, password_servicio, id_solicitud_caa, 
+                            resultService = servicio.Generar_RAC_MusicaCanto(username_servicio, password_servicio, id_solicitud_caa,
                                                     codigo_seguridad_CAA, id_solicitud_agc, usu.UserName, ref ws_resultado_RAC);
-                            
+
                             if (resultService == null)
                             {
                                 args.Description = ws_resultado_RAC.ErrorDescription;
@@ -212,7 +215,7 @@ namespace SSIT.Solicitud.Permisos.Controls
                                 result.id_rac = resultService.id_rac;
                                 result.id_form_rac = resultService.id_form_rac;
                             }
-                            
+
                         }
                         else
                         {
@@ -249,5 +252,20 @@ namespace SSIT.Solicitud.Permisos.Controls
 
             return result;
         }
+        */
+
+        private async Task<ValidarCodigoSeguridadResponse> ValidarCodigoSeguridad(int id_caa, string codigo_caa)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            ValidarCodigoSeguridadResponse resultado = await apraSrvRest.ValidarCodigoSeguridad(id_caa, codigo_caa);
+            return resultado;
+        }
+        private async Task<GetCAAResponse> GetCAA(int id_caa)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAResponse jsonCaa = await apraSrvRest.GetCaa(id_caa);
+            return jsonCaa;
+        }
+
     }
 }

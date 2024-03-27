@@ -1,5 +1,6 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
+using ExternalService.Class.Express;
 using ExternalService.ws_interface_AGC;
 using SSIT.Common;
 using StaticClass;
@@ -9,6 +10,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static StaticClass.Constantes;
@@ -149,18 +151,21 @@ namespace SSIT.Mobile
 
             if (encomienda != null)
             {
-                ws_Interface_AGC servicio = new ws_Interface_AGC();
-                wsResultado ws_resultado_CAA = new wsResultado();
-
-                ParametrosBL blParam = new ParametrosBL();
-                servicio.Url = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC");
-                string username_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.User");
-                string password_servicio = blParam.GetParametroChar("SIPSA.Url.Webservice.ws_Interface_AGC.Password");
                 List<int> lst_encomiendas = new List<int>();
                 lst_encomiendas.Add(encomienda.IdEncomienda);
-                DtoCAA[] l = servicio.Get_CAAs_by_Encomiendas(username_servicio, password_servicio, lst_encomiendas.ToArray(), ref ws_resultado_CAA);
 
-                lblNroCAA.Text = l.Length > 0 ? l[0].id_caa.ToString() : "";
+                List<GetCAAsByEncomiendasResponse> l = null;
+                Task.Run(async () =>
+                {
+                    var encWrap = await GetCAAsByEncomiendas(lst_encomiendas);
+                    l = encWrap.ListCaa;
+                }).Wait();
+                string nroCAA_txt = string.Empty;
+                if(l != null)
+                {
+                    nroCAA_txt = l.Count > 0 ? l[0].formulario.id_caa.ToString() : "";
+                }
+                lblNroCAA.Text = nroCAA_txt;
                 lblEstado.Text = sol.TipoEstadoSolicitudDTO.Descripcion;
                 bool automatica = false;
                 EngineBL blEng = new EngineBL();
@@ -350,7 +355,9 @@ namespace SSIT.Mobile
             lblObservacionesLibrarUso.Text = String.Empty;
             string observacion = string.Empty;
             observacion = blSol.ObtenerObservacionLibradoUsoOblea(sol.IdSolicitud);
-            if (observacion != string.Empty && observacion != null)
+            if (observacion != string.Empty && observacion != null
+                && sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO 
+                && sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.RECH)//tambien debe chequear si ya fue aprobada o rechazada
             {
                 ObservLibradoUso.Visible = true;
                 lblObservacionesLibrarUso.Visible = true;
@@ -456,5 +463,12 @@ namespace SSIT.Mobile
                 }
             }
         }
+        private async Task<GetCAAsByEncomiendasWrapResponse> GetCAAsByEncomiendas(List<int> lst_id_Encomiendas)
+        {
+            ExternalService.ApraSrvRest apraSrvRest = new ExternalService.ApraSrvRest();
+            GetCAAsByEncomiendasWrapResponse lstCaa = await apraSrvRest.GetCAAsByEncomiendas(lst_id_Encomiendas.ToList());
+            return lstCaa;
+        }
+
     }
 }
