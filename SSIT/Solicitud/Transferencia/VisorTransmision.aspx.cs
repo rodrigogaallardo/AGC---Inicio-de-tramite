@@ -450,6 +450,7 @@ namespace SSIT
             updpnlDocumentosAdjuntos.Update();
         }
 
+        
         protected void btnPresentarTramite_Click(object sender, EventArgs e)
         {
             try
@@ -576,6 +577,8 @@ namespace SSIT
 
                 
                 ScriptManager.RegisterStartupScript(udpConfirmarSolcitud, udpConfirmarSolcitud.GetType(), "init_Js_updCargarDatos", "init_Js_updCargarDatos();", true);
+
+                Response.Redirect(string.Format("~/" + RouteConfig.VISOR_TRANSMISIONES + "{0}", IdSolicitud));
             }
             catch (Exception ex)
             {

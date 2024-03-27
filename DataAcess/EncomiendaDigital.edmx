@@ -5071,6 +5071,7 @@ warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitudes_Enco
           <Property Name="ZonaDeclarada" Type="varchar" MaxLength="50" />
           <Property Name="idTipoTransmision" Type="int" />
           <Property Name="idSolicitudRef" Type="int" />
+          <Property Name="FechaLibrado" Type="datetime" />
         </EntityType>
         <EntityType Name="Transf_Solicitudes_AvisoCaducidad">
           <Key>
@@ -15415,6 +15416,12 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <Parameter Name="userid_nuevo" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="userid_anterior" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="Transf_Solicitudes_Historial_LibradoUso_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_solicitud" Type="int" Mode="In" />
+          <Parameter Name="fechaLibrado" Type="datetime" Mode="In" />
+          <Parameter Name="createDate" Type="datetime" Mode="In" />
+          <Parameter Name="createUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="wsEscribanos_CopiarDeAPRA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_encomienda" Type="int" Mode="In" />
           <Parameter Name="id_caa" Type="int" Mode="In" />
@@ -22691,6 +22698,12 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <FunctionImport Name="Insert_Login_Tad_Token">
             <Parameter Name="userId" Mode="In" Type="Guid" />
             <Parameter Name="tokenJWT" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Transf_Solicitudes_Historial_LibradoUso_INSERT">
+            <Parameter Name="id_solicitud" Mode="In" Type="Int32" />
+            <Parameter Name="fechaLibrado" Mode="In" Type="DateTime" />
+            <Parameter Name="createDate" Mode="In" Type="DateTime" />
+            <Parameter Name="createUser" Mode="In" Type="Guid" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="aspnet_Applications">
@@ -31614,6 +31627,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Transf_Solicitudes_AvisoCaducidad" Relationship="EncmiendaEntityes.FK_Transf_Solicitudes_AvisoCaducidad_Transf_Solicitudes" FromRole="Transf_Solicitudes" ToRole="Transf_Solicitudes_AvisoCaducidad" />
           <NavigationProperty Name="Transf_Solicitudes_Baja" Relationship="EncmiendaEntityes.FK_Transf_Solicitudes_Baja_Transf_Solicitudes" FromRole="Transf_Solicitudes" ToRole="Transf_Solicitudes_Baja" />
           <NavigationProperty Name="Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas" Relationship="EncmiendaEntityes.FK_Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas_Transf_Solicitudes" FromRole="Transf_Solicitudes" ToRole="Transf_Titulares_Solicitud_PersonasJuridicas_PersonasFisicas" />
+          <Property Name="FechaLibrado" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Transf_Solicitudes_CPadron_Solicitudes">
           <End Type="EncmiendaEntityes.CPadron_Solicitudes" Role="CPadron_Solicitudes" Multiplicity="1" />
@@ -42986,6 +43000,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Transf_Solicitudes">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Transf_Solicitudes">
               <MappingFragment StoreEntitySet="Transf_Solicitudes">
+                <ScalarProperty Name="FechaLibrado" ColumnName="FechaLibrado" />
                 <ScalarProperty Name="idSolicitudRef" ColumnName="idSolicitudRef" />
                 <ScalarProperty Name="idTipoTransmision" ColumnName="idTipoTransmision" />
                 <ScalarProperty Name="ZonaDeclarada" ColumnName="ZonaDeclarada" />
@@ -46116,6 +46131,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Get_Token_Tad" FunctionName="EncmiendaEntityes.Store.Get_Token_Tad" />
           <FunctionImportMapping FunctionImportName="Insert_Login_Tad_Token" FunctionName="EncmiendaEntityes.Store.Insert_Login_Tad_Token" />
+          <FunctionImportMapping FunctionImportName="Transf_Solicitudes_Historial_LibradoUso_INSERT" FunctionName="EncmiendaEntityes.Store.Transf_Solicitudes_Historial_LibradoUso_INSERT" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

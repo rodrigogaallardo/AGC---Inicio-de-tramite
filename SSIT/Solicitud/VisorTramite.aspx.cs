@@ -333,7 +333,6 @@ namespace SSIT
         #endregion
         private void CargarDatos(SSITSolicitudesDTO sol)
         {
-       
             EncomiendaBL blEnc = new EncomiendaBL();
             var lstEnc = blEnc.GetByFKIdSolicitud(id_solicitud);
             CargarDatos(sol, lstEnc);
