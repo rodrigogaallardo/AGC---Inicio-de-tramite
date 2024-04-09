@@ -378,7 +378,34 @@ namespace BusinesLayer.Implementation
             string url = parametros.GetParametroChar("Servicios.GCBA");
             string metodo = parametros.GetParametroChar("Servicios.GCBA.Participantes");
 
-            var persona = wsTAD.GetPersonaTAD($"{url}{metodo}", cuit);
+            PersonaTadEntity persona;
+            try
+            {
+                persona = wsTAD.GetPersonaTAD($"{url}{metodo}", cuit);
+            }
+            catch (Exception ex)
+            {
+                if (Funciones.isDesarrollo())
+                {
+                    persona = new PersonaTadEntity();
+                    persona.Apellido1 = "Nombre Prueba";
+                    persona.Nombre1 = "Apellido Prueba";
+                    persona.RazonSocial = "Razon Social Prueba";
+                    persona.DocumentoIdentidad = cuit.Substring(2, 8);
+                    persona.Cuit = cuit;
+                    persona.Telefono = "123456789";
+                    persona.Email = "prueba@prueba.com";
+                    DomicilioConstituido domicilio = new DomicilioConstituido();
+                    domicilio.CodPostal = "1000";
+                    domicilio.Direccion = "Prueba Calle";
+                    domicilio.Altura = "9999";
+                    persona.DomicilioConstituido = domicilio;
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
 
             var personaDTO = mapperBase.Map<PersonaTadDTO>(persona);
             if (personaDTO != null && personaDTO.RazonSocial != null)

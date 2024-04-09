@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using SSIT.Common;
 using Microsoft.Ajax.Utilities;
 using SSIT.Account;
+using Org.BouncyCastle.Ocsp;
 
 namespace SSIT
 {
@@ -679,13 +680,15 @@ namespace SSIT
                         var sol = solBL.Single(id_solicitud);
                         if (!MismoFirmante)
                         {
-
                             valido = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
-                                        || ValidarCuit(solTitPFDTO.Cuit.Trim(), solTitPFDTO.DtoFirmantes.Cuit.Trim(), updBotonesAgregarPF));
+                                     || ValidarCuit(solTitPFDTO.Cuit.Trim(), solTitPFDTO.DtoFirmantes.Cuit.Trim(), updBotonesAgregarPF));
                         }
 
-                        valido = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
-                                 || ValidarApoderamiento(solTitPFDTO.Cuit, updBotonesAgregarPF));
+                        if (valido)
+                        {
+                            valido = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
+                                     || ValidarApoderamiento(solTitPFDTO.Cuit, updBotonesAgregarPF));
+                        }
 
                         if (valido)
                         {
@@ -1188,7 +1191,7 @@ namespace SSIT
 
                     if (Validation)
                         Validation = ((sol.IdTipoTramite == (int)Constantes.TipoTramite.PERMISO && sol.IdTipoExpediente == (int)Constantes.TipoDeExpediente.MusicaCanto)
-                                       || ValidarCuit(txtCuitPJ.Text.Trim(), txtCuitFirPJ.Text.Trim(), updgrdFirmantesPJ));
+                                     || ValidarCuit(txtCuitPJ.Text.Trim(), txtCuitFirPJ.Text.Trim(), updgrdFirmantesPJ));
                 }
 
             }
@@ -2058,56 +2061,83 @@ namespace SSIT
         private bool ValidarCuit(string cuitTitular, string cuitFirmante, UpdatePanel updPanel)
         {
             bool resul = true;
-            bool evaluar = true;
+            bool evaluar;
             try
             {
                 ParametrosBL parametrosBL = new ParametrosBL();
-                evaluar = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.Evaluar.Titulares"));
-                AuthenticateAGIPProc authenticateAGIPProc = new AuthenticateAGIPProc();
-                Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
+                evaluar = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.Evaluar.Titulares.AGIP"));
                 if (evaluar)
                 {
+                    //VERSION VIEJA: USANDO SOAP DE AGIP
                     //var r = Functions.isCuitsRelacionados(cuitFirmante, true, cuitTitular, true, (Guid)Membership.GetUser().ProviderUserKey);
-                    string tokenJWT = authenticateAGIPProc.GetTokenTAD(userid);
-                    LogError.Write(new Exception($"token TAD, {tokenJWT} + userid + {userid}"));
-                    if (!tokenJWT.IsNullOrWhiteSpace() && !tokenJWT.Contains("expirado"))
+                    //if (r.statusCode == 306)
+                    //{
+                    //    lblError.Text = r.status + "- Debe volver a iniciar sesión.";
+                    //    this.EjecutarScript(updPanel, "showfrmError();");
+                    //    resul = false;
+                    //}
+                    //else if (!r.result.msg)
+                    //{
+                    //    string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
+                    //    string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
+                    //    resul = false;
+                    //    lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
+                    //    this.EjecutarScript(updPanel, "showfrmError();");
+                    //}
+
+                    //VERSION NUEVA: USANDO TOKEN JWT (PODERDANTES)
+                    //AuthenticateAGIPProc authenticateAGIPProc = new AuthenticateAGIPProc();
+                    //Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
+                    //string tokenJWT = authenticateAGIPProc.GetTokenTAD(userid);
+                    //LogError.Write(new Exception($"token TAD, {tokenJWT} + userid + {userid}"));
+                    //if (!tokenJWT.IsNullOrWhiteSpace() && !tokenJWT.Contains("expirado"))
+                    //{
+                    //    var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
+                    //    //revisar que error y status code ponerles
+                    //    if (r.statusCode == 306)
+                    //    {
+                    //        lblError.Text = r.status + "- Debe volver a iniciar sesión.";
+                    //        this.EjecutarScript(updPanel, "showfrmError();");
+                    //        resul = false;
+                    //    }
+                    //    else if (!r.result.msg)
+                    //    {
+                    //        string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
+                    //        string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
+                    //        resul = false;
+                    //        lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
+                    //        this.EjecutarScript(updPanel, "showfrmError();");
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    LogError.Write(new Exception("No tiene token de TAD, no estaba logeado en TAD/miba"));
+                    //    lblError.Text = "- Debe volver a iniciar sesión en TAD/MIBA.";
+                    //    this.EjecutarScript(updPanel, "showfrmError();");
+                    //    resul = false;
+                    //}
+
+                    //VERSION NUEVA: USANDO SERVICIO REST DE "ISREPRESENTANTELEGAL" DE AGIP
+                    var r = Functions.isCuitsRelacionadosRest(cuitFirmante, cuitTitular);
+                    if (r.statusCode == 110)
                     {
-                        var r = Functions.isCuitsRelacionadosJWT(cuitFirmante, evaluar, cuitTitular, tokenJWT);
-                        //revisar que error y status code ponerles
-                        if (r.statusCode == 306)
-                        {
-                            lblError.Text = r.status + "- Debe volver a iniciar sesión.";
-                            this.EjecutarScript(updPanel, "showfrmError();");
-                            resul = false;
-                        }
-                        else if (!r.result.msg)
-                        {
-                            string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
-                            string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
-                            resul = false;
-                            lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
-                            this.EjecutarScript(updPanel, "showfrmError();");
-                        }
-                    }
-                    else
-                    {
-                        LogError.Write(new Exception("No tiene token de TAD, no estaba logeado en TAD/miba"));
-                        lblError.Text = "- Debe volver a iniciar sesión en TAD/MIBA.";
-                        this.EjecutarScript(updPanel, "showfrmError();");
                         resul = false;
+                        string value = parametrosBL.GetParametroChar("AGIP.ERROR1.URL");
+                        string url = " Para esto deberá gestionar el apoderamiento en AGIP contando con Clave Ciudad Nivel 2 según corresponda. Para mas informacion ver: <a href='" + value + "'>TAD</a>";
+                        lblError.Text = string.Format("Los Cuits no se encuentran relacionados en el servicio de AGIP - {0}", url);
+                        this.EjecutarScript(updPanel, "showfrmError();");
                     }
-                    
-                    
                 }
+                return resul;
             }
             catch (Exception ex)
             {
-                LogError.Write(new Exception("Error en el servicio de verificación de cuits: " + ex.Message));
                 resul = false;
                 lblError.Text = "Error en el servicio de verificación de cuits: " + ex.Message;
+                LogError.Write(new Exception(lblError.Text));
                 this.EjecutarScript(updPanel, "showfrmError();");
+                return resul;
             }
-            return resul;
         }
 
         private bool ValidarApoderamiento(string cuitTitular, UpdatePanel updPanel)
@@ -2120,7 +2150,7 @@ namespace SSIT
                 UsuarioBL userBL = new UsuarioBL();
                 Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
                 var apoderado = userBL.Single(userId);
-                evaluar = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.Evaluar.Titulares"));
+                evaluar = Convert.ToBoolean(parametrosBL.GetParametroChar("SSIT.Evaluar.Titulares.TAD"));
 
                 if (evaluar)
                 {
