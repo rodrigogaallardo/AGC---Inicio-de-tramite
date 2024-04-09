@@ -450,10 +450,12 @@ namespace SSIT
             updpnlDocumentosAdjuntos.Update();
         }
 
+        
         protected void btnPresentarTramite_Click(object sender, EventArgs e)
         {
             try
             {
+                
                 var transferencia = TransferenciaBL.Single(IdSolicitud);
                 int id_estado_ant = transferencia.IdEstado;
                 byte[] oblea = null;
@@ -461,6 +463,8 @@ namespace SSIT
 
                 Guid userid = (Guid)Membership.GetUser().ProviderUserKey;
                 MembershipUser usuario = Membership.GetUser(userid);
+
+                CargarCombos();
 
                 //valido documentos
                 validarDocumentos(transferencia);
@@ -571,8 +575,10 @@ namespace SSIT
                 }
                 #endregion
 
-                Cargar();
+                
                 ScriptManager.RegisterStartupScript(udpConfirmarSolcitud, udpConfirmarSolcitud.GetType(), "init_Js_updCargarDatos", "init_Js_updCargarDatos();", true);
+
+                Response.Redirect(string.Format("~/" + RouteConfig.VISOR_TRANSMISIONES + "{0}", IdSolicitud));
             }
             catch (Exception ex)
             {

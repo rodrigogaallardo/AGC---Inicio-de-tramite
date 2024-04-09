@@ -6,7 +6,7 @@
 
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-     <%: Scripts.Render("~/bundles/autoNumeric") %>
+    <%: Scripts.Render("~/bundles/autoNumeric") %>
 
     <%--ajax cargando ...--%>
     <div id="Loading" style="text-align: center; padding-bottom: 20px; margin-top: 120px">
@@ -24,24 +24,20 @@
     </div>
 
     <div id="page_content" Style="display:none">
-
         <h2>Ubicaci&oacute;n</h2>
-        <hr />
-
+        <hr/>
         <div class="row">
-
             <div class="col-sm-1 mtop10" style="width:25px">
                 <i class="imoon imoon-info fs24" style="color:#377bb5"></i>
             </div>
             <div class="col-sm-11">
-                
                 <p class="pad10" >
-                    En este paso deberá ingresar la ubicación donde se encuentra el establecimiento a habilitar.<br /> 
+                    En este paso deberá ingresar la ubicación donde se encuentra el establecimiento a habilitar.<br/> 
                     La ubicación se puede ingresar a través del:
                 </p>
-
             </div>
         </div>
+
         <asp:UpdatePanel ID="updUbicaciones" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <asp:HiddenField ID="hid_return_url" runat="server" />
@@ -55,154 +51,58 @@
                         </ul>
                     </div>
                     <div class="text-right">
-                       <asp:UpdatePanel ID="updAgregarUbicacion" runat="server">
+                        <asp:UpdatePanel ID="updAgregarUbicacion" runat="server">
                             <ContentTemplate>
-                        <span class="btn btn-primary " onclick="showfrmAgregarUbicacion();">
-                             <i class="imoon imoon-plus"></i>
-                            <span class="text">Agregar Ubicaci&oacute;n</span>
-                        </span>
-
+                                <span class="btn btn-primary " onclick="showfrmAgregarUbicacion();">
+                                    <i class="imoon imoon-plus"></i>
+                                    <span class="text">Agregar Ubicaci&oacute;n</span>
+                                </span>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
-                    </ContentTemplate>
-                 </asp:UpdatePanel>
                 </div>
-        
                 <asp:Button ID="btnCargarDatos" runat="server" OnClick="btnCargarDatos_Click"  Style="display: none" />
                 <asp:HiddenField ID="hid_id_solicitud" runat="server" />
-
                 <div id="box_ubicacion"  class="box-panel">
-                     <div style="margin:20px; margin-top:-5px"> 
-                            <div style="margin-top:5px; color:#377bb5">                                 
-                                        <h4><i class="imoon imoon-map-marker" style="margin-right:10px"></i>Datos de la Ubicaci&oacute;n</h4> 
-                                                      
-                                    </div>
-                              </div>
-                     <uc1:Ubicacion runat="server" ID="visUbicaciones" OnEliminarClick="visUbicaciones_EliminarClick" OnEditarClick="visUbicaciones_EditarClick"/>
-                </div>
-
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <br />
-
-        <asp:UpdatePanel ID="updPlantas" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-
-                    <%-- Contenido del panel de plantas a habilitar --%>
-                      <div class="box-panel">
-
-
-                            <asp:Panel ID="pnlPlantasHabilitar" runat="server" CssClass="mtop5" >
-                                        
-                                      
-                                <div style="color:#377bb5">                                 
-                                        <h4><i class="imoon imoon-stackexchange" style="margin-right:10px"></i>Seleccione las Plantas</h4> 
-                                        <hr />                      
-                                </div>
-                                
-                                           
-                                <div class="row pleft20 mtop10">
-                        
-                                    <div class="form-group col-md-8">
-                                        
-                                            <asp:GridView 
-                                                ID="grdPlantasHabilitar" 
-                                                runat="server" 
-                                                AutoGenerateColumns="false" 
-                                                GridLines="None" 
-                                                CellPadding="3" 
-                                                ShowHeader="false"        
-                                                DataKeyNames="IdTransferenciaTipoSector"                                         
-                                                OnRowDataBound="grdPlantasHabilitar_OnRowDataBound"
-                                                >
-                                                <Columns>
-                                                            
-                                                    <asp:TemplateField ItemStyle-Width="100px">
-                                                        <ItemTemplate>
-                                                            <div class="checkbox mtop1">
-                                                                <label>
-                                                                    <asp:CheckBox ID="chkSeleccionado" runat="server" Checked='<% #Eval("Seleccionado") %>'
-                                                                        OnCheckedChanged="chkSeleccionado_CheckedChanged" AutoPostBack="true" /> <%# Eval("Descripcion") %>
-                                                                    <asp:HiddenField ID="hid_id_tiposector" runat="server" Value='<% #Eval("IdTipoSector") %>' />
-                                                                    <asp:HiddenField ID="hid_descripcion" runat="server" Value='<% #Eval("Descripcion") %>' />
-                                                                </label>
-                                                            </div>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField >
-                                                        <ItemTemplate>
-                                                                <div class="form-inline">
-                                                                    <div class="form-group">
-                                                                        <asp:TextBox ID="txtDetalle" runat="server" CssClass="form-control mtop5 mbottom5" MaxLength='<% #Eval("TamanoCampoAdicional") %>'
-                                                                            Visible='<% #Eval("Ocultar") %>' Width="100px" Text='<% #Eval("detalleDES") %>'></asp:TextBox>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <asp:Panel ID="ReqtxtDetalle" runat="server" CssClass="field-validation-error" Style="display: none">
-                                                                            Debe ingresar la aclaración del item.
-                                                                        </asp:Panel>
-                                                                    </div>
-                                                                </div>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
-                                        
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        
-                                        <div>Opciones con información adicional:</div>
-                                        <div style="padding-top:10px"><b>Piso:</b> En esta opción deberá indicar la aclaración del piso. Ej: Piso 2, Piso 3</div>
-                                        <div style="padding-top: 10px"><b>Otro:</b> En esta opción deberá indicar la descripcón deaseada, alguna no incluída en la lista ofrecida.</div>
-                                        <div style="padding-top:10px">
-                                            <b>Nota:</b> En los campos "Otro" <b>NO</b> deberá ingresar información de otra cosa que no sea una planta a habilitar. <b>NO</b> indicar unidades funcionales, departamentos, locales o cualquier referencia a la ubicación.
-                                        </div>
-                                        
-                                    </div>
-                        
-                                </div>
-
-                               
-                            </asp:Panel>
-
-                            
-                            <asp:Panel ID="Req_Plantas" runat="server" CssClass="field-validation-error" Style="display: none">
-                                Debe ingresar la informaci&oacute;n referida a las plantas.
-                            </asp:Panel>
-                           
+                    <div style="margin:20px; margin-top:-5px"> 
+                        <div style="margin-top:5px; color:#377bb5">                                 
+                            <h4><i class="imoon imoon-map-marker" style="margin-right:10px"></i>Datos de la Ubicaci&oacute;n</h4> 
                         </div>
-                 
-                
+                    </div>
+                    <uc1:Ubicacion runat="server" ID="visUbicaciones" OnEliminarClick="visUbicaciones_EliminarClick" OnEditarClick="visUbicaciones_EditarClick"/>
+                </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-
-
+        
+        <asp:Label ID="reqUbicacion" runat="server" Text="Debe ingresar al menos una ubicacion para continuar" CssClass="alert alert-danger" Style="display:none" ></asp:Label>
         <%--Botones de Guardado--%>
         <asp:UpdatePanel ID="updBotonesGuardar" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-
-                <div class="form-inline text-right mtop20">
-                    <div id="pnlBotonesGuardar" class="form-group">
-
-                        <asp:LinkButton ID="btnContinuar" runat="server" CssClass="btn btn-lg btn-primary" OnClientClick="return validarGuardar();"
-                            OnClick="btnContinuar_Click">
+                <div class="form-group form-inline">
+                    <div id="pnlBotonesGuardar">
+                        <div id="Div1" class="col-sm-6 mtop10">
+                            <asp:LinkButton ID="btnVolver" runat="server" CssClass="btn btn-default btn-lg" Onclick="btnVolver_Click" style="display:none" >
+                                <i class="imoon imoon-arrow-left"></i>
+                                <span class="text">Volver</span>
+                            </asp:LinkButton>
+                        </div>
+                        <div class="text-right mtop10">
+                            <asp:LinkButton ID="btnContinuar" runat="server" CssClass="btn btn-lg btn-primary" OnClientClick="return validarGuardar();" OnClick="btnContinuar_Click">
                                 <i class="imoon imoon-disk"></i>
                                 <span class="text">Guardar y Continuar</span>
-                        </asp:LinkButton>
-
-                    </div>
-                    <div class="form-group">
-                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="200" AssociatedUpdatePanelID="updBotonesGuardar">
-                            <ProgressTemplate>
-                                <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />Guardando...
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>
+                            </asp:LinkButton>
+                        </div>
+                        <div class="form-group">
+                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="200" AssociatedUpdatePanelID="updBotonesGuardar">
+                                <ProgressTemplate>
+                                    <img src='<%: ResolveUrl("~/Content/img/app/Loading24x24.gif") %>' style="margin-left: 10px" alt="loading" />Guardando...
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </div>
                     </div>
                 </div>
-
             </ContentTemplate>
         </asp:UpdatePanel>
-
-        
-
     </div>
 
      <%--Modal mensajes de error--%>
@@ -228,7 +128,6 @@
                             </td>
                         </tr>
                     </table>
-
                 </div>
                 <div class="modal-footer mleft20 mright20">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -257,13 +156,10 @@
                             </td>
                         </tr>
                     </table>
-
                 </div>
                 <div class="modal-footer mleft20 mright20">
-
                     <asp:UpdatePanel ID="updConfirmarEliminar" runat="server">
                         <ContentTemplate>
-
                             <div class="form-inline">
                                 <div class="form-group">
                                     <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="updConfirmarEliminar">
@@ -277,16 +173,13 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                 </div>
                             </div>
-
                         </ContentTemplate>
                     </asp:UpdatePanel>
-
                 </div>
             </div>
         </div>
     </div>
     <!-- /.modal -->
-
 
     <%-- Modal Agregar Ubicación --%>
     <div id="frmAgregarUbicacion" class="modal fade" role="dialog">
@@ -304,109 +197,64 @@
     <!-- /.modal -->
 
     <script type="text/javascript">
-
         $(document).ready(function () {
             $("#page_content").hide();
             $("#Loading").show();
             $("#<%: btnCargarDatos.ClientID %>").click();
-                    
-
+            finalizarCarga();
         });
-        function finalizarCarga() {
 
+        function finalizarCarga() {
             $("#Loading").hide();
             $("#page_content").show();
-
             return false;
-
         }
 
         function showfrmError() {
             $("#pnlBotonesGuardar").show();
             $("#frmError").modal("show");
             return false;
-
         }
-        function showfrmConfirmarEliminar() {
 
+        function showfrmConfirmarEliminar() {
             $("#pnlBotonesConfirmacion").show();
             $("#frmConfirmarEliminar").modal("show");
             return false;
         }
 
         function hidefrmConfirmarEliminar() {
-            
             $("#frmConfirmarEliminar").modal("hide");
             return false;
         }
 
         function ocultarBotonesConfirmacion() {
-
             $("#pnlBotonesConfirmacion").hide();
             return false;
         }
 
         function showfrmAgregarUbicacion() {
-
             $("#frmAgregarUbicacion").modal({
                 "show": true,
                 "backdrop": "static",
-                "keyboard": false
-                });
+                "keyboard": false});
             return false;
         }
 
         function hidefrmAgregarUbicacion() {
             
             $("#frmAgregarUbicacion").modal("hide");
-            //return false;
+            return false;
         }
 
         function ocultarBotonesGuardado() {
 
             $("#pnlBotonesGuardar").hide();
-
             return true;
         }
 
         function validarGuardar() {
-
-            var ret = true;
-            var plantasSeleccionadas = false;
-
-            $("#<%: Req_Plantas.ClientID %>").hide();
-            $("#<%: grdPlantasHabilitar.ClientID %> [id*='_ReqtxtDetalle']").hide();
-            
-            plantasSeleccionadas = ($("#<%: grdPlantasHabilitar.ClientID %> :checkbox[checked]").length > 0);
-
-            $("#<%: grdPlantasHabilitar.ClientID %> [id*='_txtDetalle']").each(function (index, element) {
-
-                if ($(element).val().length == 0) {
-                    var txtDetalle_id = $(element).prop("id");
-                    var chkSeleccionado_id = txtDetalle_id.replace("_txtDetalle", "_chkSeleccionado");
-                    var ReqtxtDetalle_id = txtDetalle_id.replace("_txtDetalle", "_ReqtxtDetalle");
-
-                    if ($("#" + chkSeleccionado_id).prop("checked")) {
-                        
-                        
-                        $("#" + ReqtxtDetalle_id).show();
-                        ret = false;
-
-                    }
-                }
-
-            })
-
-            if (!plantasSeleccionadas) {
-                $("#<%: Req_Plantas.ClientID %>").css("display", "inline-block");
-                ret = false;
-            }
-
-            if (ret)
-                ocultarBotonesGuardado();
-
-            return ret;
+            ocultarBotonesGuardado();
+            return true;
         }
-        
     </script>
 </asp:Content>

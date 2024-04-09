@@ -51,18 +51,12 @@ namespace SSIT.Solicitud.Controls
 
         public void CargarCombo(List<TiposDeDocumentosRequeridosDTO> lstTiposDocumentos)
         {
+            ddlTiposDeDocumentosRequeridos.Items.Clear();
             ddlTiposDeDocumentosRequeridos.DataSource = lstTiposDocumentos;
             ddlTiposDeDocumentosRequeridos.DataTextField = "Descripcion_compuesta";
             ddlTiposDeDocumentosRequeridos.DataValueField = "id_tdocreq";
             ddlTiposDeDocumentosRequeridos.DataBind();
             ddlTiposDeDocumentosRequeridos.Items.Insert(0, "");
-
-            if (ddlTiposDeDocumentosRequeridos.Items.Count == 2)    // Se cuenta el vacío y un elemento. Si esto ocurre se selecciona el elemento
-            {
-                ddlTiposDeDocumentosRequeridos.SelectedIndex = 1;
-                ddlTiposDeDocumentosRequeridos_SelectedIndexChanged(ddlTiposDeDocumentosRequeridos, new EventArgs());
-            }
-
         }
 
         protected virtual void OnSubirDocumentoClick(EventArgs e)

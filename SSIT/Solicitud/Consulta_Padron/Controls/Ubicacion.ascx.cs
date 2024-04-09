@@ -235,7 +235,7 @@ namespace SSIT.Solicitud.Consulta_Padron.Controls
         /// <param name="IdSolicitud"></param>
         private void CargarPlantasHabilitar(ConsultaPadronSolicitudesDTO cpSolicitudes)
         {
-
+            lblPlantasHabilitar.Text = string.Empty;
             var lstaPlantas = cpSolicitudes.Plantas;
 
             if (lstaPlantas != null)

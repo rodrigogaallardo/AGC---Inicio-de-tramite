@@ -1,16 +1,15 @@
 ﻿using BusinesLayer.Implementation;
+using DataTransferObject;
+using SSIT.App_Components;
+using StaticClass;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using StaticClass;
-using DataTransferObject;
-using SSIT.App_Components;
-using System.Web.Security;
 
 namespace SSIT.Solicitud.Transferencia
 {
@@ -125,10 +124,10 @@ namespace SSIT.Solicitud.Transferencia
             FirmantesBL firmantesBL = new FirmantesBL();
 
             var lstTitulares = titularesBL.GetTitularesTransferencias(IdSolicitud).ToList();
-         
+
             var lstFirmantes = firmantesBL.GetFirmantesTransferencias(IdSolicitud).ToList();
 
-         
+
             grdTitularesHab.DataSource = lstTitulares;
             grdTitularesHab.DataBind();
 
@@ -150,7 +149,7 @@ namespace SSIT.Solicitud.Transferencia
 
             var lstTitulares = titularesBL.GetTitularesTransferenciasANT(IdSolicitud).ToList();
 
-            var lstFirmantes = firmantesBL.GetFirmantesTransferenciasANT(IdSolicitud).ToList();            
+            var lstFirmantes = firmantesBL.GetFirmantesTransferenciasANT(IdSolicitud).ToList();
 
             grdTitularesHabANT.DataSource = lstTitulares;
             grdTitularesHabANT.DataBind();
@@ -167,7 +166,7 @@ namespace SSIT.Solicitud.Transferencia
 
             updGrillaTitularesANT.Update();
             updGrillaFirmantesANT.Update();
-            
+
         }
 
         protected void grdTitularesHabANT_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -176,7 +175,7 @@ namespace SSIT.Solicitud.Transferencia
             var sol = transferenciasSolicitudesBL.Single(IdSolicitud);
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if(sol.idSolicitudRef != null)
+                if (sol.idSolicitudRef != null)
                 {
                     LinkButton lkbeditar = (LinkButton)e.Row.Cells[4].FindControl("btnEditarTitularAnt");
                     lkbeditar.Visible = false;
@@ -805,8 +804,8 @@ namespace SSIT.Solicitud.Transferencia
                         TransferenciasTitularesSolicitudPersonasJuridicasPersonasFisicasBL encTitPerJurPerFisBL = new TransferenciasTitularesSolicitudPersonasJuridicasPersonasFisicasBL();
 
                         List<TransferenciasFirmantesSolicitudPersonasJuridicasDTO> encFirPerJurDTO = encFirPerJurBL.GetByFKIdSolicitudIdPersonaJuridica(IdSolicitud, id_persona).ToList();
-                        List <TransferenciasTitularesSolicitudPersonasJuridicasDTO> encTitPerJurDTO = encTitPerJurBL.GetByIdSolicitudIdPersonaJuridica(IdSolicitud, id_persona).ToList();
-                        List <TransferenciasTitularesSolicitudPersonasJuridicasPersonasFisicasDTO> encTitPerJurPerFisDTO = encTitPerJurPerFisBL.GetByIdSolicitudIdPersonaJuridica(IdSolicitud, id_persona).ToList();
+                        List<TransferenciasTitularesSolicitudPersonasJuridicasDTO> encTitPerJurDTO = encTitPerJurBL.GetByIdSolicitudIdPersonaJuridica(IdSolicitud, id_persona).ToList();
+                        List<TransferenciasTitularesSolicitudPersonasJuridicasPersonasFisicasDTO> encTitPerJurPerFisDTO = encTitPerJurPerFisBL.GetByIdSolicitudIdPersonaJuridica(IdSolicitud, id_persona).ToList();
 
                         if (encTitPerJurPerFisDTO.Count > 0)
                         {
@@ -950,7 +949,7 @@ namespace SSIT.Solicitud.Transferencia
 
                     TitularesBL titularesBL = new TitularesBL();
                     var lstTitularesSH = titularesBL.GetTitularesSHTransferencias(id_personajuridica).ToList();
-                    
+
                     grdTitularesSH.DataSource = lstTitularesSH;
                     grdTitularesSH.DataBind();
 
@@ -964,7 +963,7 @@ namespace SSIT.Solicitud.Transferencia
 
 
                         //var lstFirmantesSH = firmantesBL.GetFirmantesPJPF(id_firmante_pj).ToList();
-                        var lstFirmantesSH = firmantesBL.GetTransfFirmantesPJPFSolicitudByIDSol(IdSolicitud).Where(x=>x.IdPersonaJuridica == id_firmante_pj).ToList();
+                        var lstFirmantesSH = firmantesBL.GetTransfFirmantesPJPFSolicitudByIDSol(IdSolicitud).Where(x => x.IdPersonaJuridica == id_firmante_pj).ToList();
                         if (lstFirmantesSH.Count() == 0)
                             throw new Exception("No existen firmantes con el ID: " + Convert.ToString(id_firmante_pj));
 
@@ -1048,7 +1047,7 @@ namespace SSIT.Solicitud.Transferencia
                 ddlTipoSociedadPJ.SelectedValue = pj.IdTipoSociedad.ToString() != "0" ? pj.IdTipoSociedad.ToString() : "";
                 txtRazonSocialPJ.Text = pj.RazonSocial;
                 txtCuitPJ.Text = pj.CUIT;
-                ddlTipoIngresosBrutosPJ.SelectedValue = pj.IdTipoiibb.ToString() != "0" ? pj.IdTipoiibb.ToString() : ""; 
+                ddlTipoIngresosBrutosPJ.SelectedValue = pj.IdTipoiibb.ToString() != "0" ? pj.IdTipoiibb.ToString() : "";
                 txtIngresosBrutosPJ.Text = pj.Numeroiibb;
                 txtCallePJ.Text = pj.Calle;
                 txtNroPuertaPJ.Text = pj.NroPuerta.ToString();
@@ -1063,7 +1062,7 @@ namespace SSIT.Solicitud.Transferencia
                 var localidad = localidadBL.Single(pj.IdLocalidad);
                 if (localidad != null)
                 {
-                    ddlProvinciaPJ.SelectedValue = localidad.IdProvincia.ToString() != "0" ? localidad.IdProvincia.ToString() : ""; 
+                    ddlProvinciaPJ.SelectedValue = localidad.IdProvincia.ToString() != "0" ? localidad.IdProvincia.ToString() : "";
                     CargarLocalidades(ddlProvinciaPJ, ddlLocalidadPJ);
                     ddlLocalidadPJ.SelectedValue = pj.IdLocalidad.ToString();
                 }
@@ -1091,7 +1090,7 @@ namespace SSIT.Solicitud.Transferencia
 
 
                         //var lstFirmantesSH = firmantesBL.GetFirmantesPJPF(id_firmante_pj).ToList();
-                        var lstFirmantesSH = firmantesBL.GetFirmantesTransferenciasPJANT(id_firmante_pj).Where(x=>x.NroDoc == titularsh.NroDoc).ToList();
+                        var lstFirmantesSH = firmantesBL.GetFirmantesTransferenciasPJANT(id_firmante_pj).Where(x => x.NroDoc == titularsh.NroDoc).ToList();
                         if (lstFirmantesSH.Count() == 0)
                             throw new Exception("No existen firmantes con el ID: " + Convert.ToString(id_firmante_pj));
 
@@ -1328,7 +1327,7 @@ namespace SSIT.Solicitud.Transferencia
             LimpiarControlesABMPJ();
             updAgregarPersonaJuridica.Update();
             this.EjecutarScript(updShowAgregarPersonasANT, "showfrmAgregarPersonaJuridica();");
-            
+
         }
         private void LimpiarControlesABMPJ()
         {
@@ -1833,7 +1832,7 @@ namespace SSIT.Solicitud.Transferencia
                             encTitPJBL.Insert(encTitPerJurDTO);
                         }
                     }
-                    catch 
+                    catch
                     {
                         throw;
                     }
@@ -2235,6 +2234,272 @@ namespace SSIT.Solicitud.Transferencia
                 this.EjecutarScript(updgrillaTitularesSH, "showfrmError();");
             }
 
+        }
+
+        //Funcionalidades para validad CUIT en transferencias
+
+        //Validar persona fisica
+        protected void validarCuitPfButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var titularesBL = new TitularesBL();
+                var persona = titularesBL.GetPersonaTAD(txtCuitPF.Text);
+                var datos = GeneratePersonaTAD(persona);
+                AutocompleteFormPF(datos);
+                ValidFromPF();
+            }
+            catch (Exception ex)
+            {
+                ClearFormPF();
+                lblError.Text = ex.Message.Replace("\r\n", "<br>");
+                this.EjecutarScript(updAgregarPersonaFisica, "showfrmError();");
+            }
+            updAgregarPersonaFisica.Update();
+        }
+
+        //Validar persona juridica
+        protected void validarCuitPjButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var titularesBL = new TitularesBL();
+                var persona = titularesBL.GetPersonaTAD(txtCuitPJ.Text);
+                var datos = GeneratePersonaTAD(persona);
+                AutocompleteFormPJ(datos);
+                ValidFromPJ();
+            }
+            catch (Exception ex)
+            {
+                ClearFormPJ();
+                lblError.Text = ex.Message.Replace("\r\n", "<br>");
+                this.EjecutarScript(updAgregarPersonaJuridica, "showfrmError();");
+            }
+            updAgregarPersonaJuridica.Update();
+        }
+
+        //Validar cuit otro firmante pf
+        protected void validarCuitOtroFirmante_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var titularesBL = new TitularesBL();
+                var persona = titularesBL.GetPersonaTAD(txtCuitFirPF.Text);
+                var datos = GeneratePersonaTAD(persona);
+                AutocompleteFormDatosFirmante(datos);
+                ValidFromDF();
+            }
+            catch (Exception ex)
+            {
+                ClearFormDF();
+                lblError.Text = ex.Message.Replace("\r\n", "<br>");
+                this.EjecutarScript(updAgregarPersonaFisica, "showfrmError();");
+            }
+            updFirmantePF.Update();
+        }
+
+        //Validar cuit otro firmante pj
+        protected void validarCuitOtroPJButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var titularesBL = new TitularesBL();
+                var persona = titularesBL.GetPersonaTAD(txtCuitFirPJ.Text);
+                var datos = GeneratePersonaTAD(persona);
+                AutoCompleteFormDatosFJ(datos);
+                ValidFromNuevaFirmantePJ();
+            }
+            catch (Exception ex)
+            {
+                ClearFormNuevoPJ();
+                lblError.Text = ex.Message.Replace("\r\n", "<br>");
+                this.EjecutarScript(updAgregarPersonaJuridica, "showfrmError();");
+            }
+            updFirmantePJ.Update();
+        }
+
+
+
+        private void ValidFromNuevaFirmantePJ()
+        {
+            txtApellidosFirPJ.Enabled = string.IsNullOrWhiteSpace(txtApellidosFirPJ.Text);
+            txtNombresFirPJ.Enabled = string.IsNullOrWhiteSpace(txtNombresFirPJ.Text);
+            txtNroDocumentoFirPJ.Enabled = string.IsNullOrWhiteSpace(txtNroDocumentoFirPJ.Text);
+            txtEmailFirPJ.Enabled = string.IsNullOrWhiteSpace(txtEmailFirPJ.Text);
+        }
+
+        private void ValidFromPF()
+        {
+            //txtApellidosPF.Enabled = string.IsNullOrWhiteSpace(txtApellidosPF.Text);
+            //txtNombresPF.Enabled = string.IsNullOrWhiteSpace(txtNombresPF.Text);
+            txtNroDocumentoPF.Enabled = string.IsNullOrWhiteSpace(txtNroDocumentoPF.Text);
+            txtIngresosBrutosPF.Enabled = string.IsNullOrWhiteSpace(txtIngresosBrutosPF.Text) && ddlTipoIngresosBrutosPF.SelectedIndex > 0;
+            txtCallePF.Enabled = string.IsNullOrWhiteSpace(txtCallePF.Text);
+            txtNroPuertaPF.Enabled = string.IsNullOrWhiteSpace(txtNroPuertaPF.Text);
+            txtCPPF.Enabled = string.IsNullOrWhiteSpace(txtCPPF.Text);
+            txtTelefonoPF.Enabled = string.IsNullOrWhiteSpace(txtTelefonoPF.Text);
+            txtEmailPF.Enabled = string.IsNullOrWhiteSpace(txtEmailPF.Text);
+
+            ddlTipoDocumentoPF.Enabled = true;
+            ddlTipoIngresosBrutosPF.Enabled = true;
+        }
+
+        private void ValidFromDF()
+        {
+            txtApellidoFirPF.Enabled = string.IsNullOrWhiteSpace(txtApellidoFirPF.Text);
+            txtNombresFirPF.Enabled = string.IsNullOrWhiteSpace(txtNombresFirPF.Text);
+            txtNroDocumentoFirPF.Enabled = string.IsNullOrWhiteSpace(txtNroDocumentoFirPF.Text);
+        }
+
+        private void ValidFromPJ()
+        {
+            //txtRazonSocialPJ.Enabled = string.IsNullOrWhiteSpace(txtRazonSocialPJ.Text);
+            txtIngresosBrutosPJ.Enabled = string.IsNullOrWhiteSpace(txtIngresosBrutosPF.Text) && ddlTipoIngresosBrutosPJ.SelectedIndex > 0;
+            txtCallePJ.Enabled = string.IsNullOrWhiteSpace(txtCallePJ.Text);
+            txtNroPuertaPJ.Enabled = string.IsNullOrWhiteSpace(txtNroPuertaPJ.Text);
+            txtCPPJ.Enabled = string.IsNullOrWhiteSpace(txtCPPJ.Text);
+            txtTelefonoPJ.Enabled = string.IsNullOrWhiteSpace(txtTelefonoPJ.Text);
+            txtEmailPJ.Enabled = string.IsNullOrWhiteSpace(txtEmailPJ.Text);
+
+            ddlTipoIngresosBrutosPJ.Enabled = true;
+        }
+
+
+
+        private PersonaTAD GeneratePersonaTAD(PersonaTadDTO persona)
+        {
+            return new PersonaTAD
+            {
+                RazonSocial = persona.RazonSocial,
+                Apellidos = $"{persona.Apellido1 ?? string.Empty} {persona.Apellido2 ?? string.Empty}".Trim(),
+                Nombres = $"{persona.Nombre1 ?? string.Empty} {persona.Nombre2 ?? string.Empty} {persona.Nombre3 ?? string.Empty}".Trim(),
+                Documento = persona.DocumentoIdentidad,
+                CodigoPostal = persona.DomicilioConstituido?.CodPostal,
+                Calle = persona.DomicilioConstituido?.Direccion,
+                NroPuerta = persona.DomicilioConstituido?.Altura,
+                Cuit = persona.Cuit,
+                Telefono = persona.Telefono,
+                Email = persona.Email,
+            };
+        }
+
+        private void AutocompleteFormPF(PersonaTAD datos)
+        {
+            txtApellidosPF.Text = datos.Apellidos;
+            txtNombresPF.Text = datos.Nombres;
+            txtNroDocumentoPF.Text = datos.Documento;
+            txtIngresosBrutosPF.Text = datos.IngresosBrutos;
+            txtCallePF.Text = datos.Calle;
+            txtNroPuertaPF.Text = datos.NroPuerta;
+            txtCPPF.Text = datos.CodigoPostal;
+            txtTelefonoPF.Text = datos.Telefono;
+            txtEmailPF.Text = datos.Email;
+        }
+
+        private void AutocompleteFormPJ(PersonaTAD datos)
+        {
+            txtRazonSocialPJ.Text = datos.RazonSocial;
+            txtIngresosBrutosPJ.Text = datos.IngresosBrutos;
+            txtCallePJ.Text = datos.Calle;
+            txtNroPuertaPJ.Text = datos.NroPuerta;
+            txtCPPJ.Text = datos.CodigoPostal;
+            txtTelefonoPJ.Text = datos.Telefono;
+            txtEmailPJ.Text = datos.Email;
+        }
+
+        private void AutoCompleteFormDatosFJ(PersonaTAD datos)
+        {
+            txtApellidosFirPJ.Text = datos.Apellidos;
+            txtNombresFirPJ.Text = datos.Nombres;
+            txtNroDocumentoFirPJ.Text = datos.Documento;
+            txtEmailFirPJ.Text = datos.Email;
+        }
+
+        private void AutocompleteFormDatosFirmante(PersonaTAD datos)
+        {
+            txtApellidoFirPF.Text = datos.Apellidos;
+            txtNombresFirPF.Text = datos.Nombres;
+            txtNroDocumentoFirPF.Text = datos.Documento;
+
+        }
+
+        private void ClearFormPF()
+        {
+            txtApellidosPF.Text = string.Empty;
+            txtNombresPF.Text = string.Empty;
+            txtNroDocumentoPF.Text = string.Empty;
+            txtIngresosBrutosPF.Text = string.Empty;
+            txtCallePF.Text = string.Empty;
+            txtNroPuertaPF.Text = string.Empty;
+            txtCPPF.Text = string.Empty;
+            txtTelefonoPF.Text = string.Empty;
+            txtEmailPF.Text = string.Empty;
+
+            txtApellidosPF.Enabled = false;
+            txtNombresPF.Enabled = false;
+            txtNroDocumentoPF.Enabled = false;
+            txtIngresosBrutosPF.Enabled = false;
+            txtCallePF.Enabled = false;
+            txtNroPuertaPF.Enabled = false;
+            txtCPPF.Enabled = false;
+            txtTelefonoPF.Enabled = false;
+            txtEmailPF.Enabled = false;
+            ddlTipoDocumentoPF.Enabled = false;
+            ddlTipoIngresosBrutosPF.Enabled = false;
+        }
+
+        protected void ClearFormDF()
+        {
+            txtApellidoFirPF.Text = string.Empty;
+            txtNombresFirPF.Text = string.Empty;
+            txtNroDocumentoFirPF.Text = string.Empty;
+        }
+
+        private void ClearFormPJ()
+        {
+            txtRazonSocialPJ.Text = string.Empty;
+            txtIngresosBrutosPJ.Text = string.Empty;
+            txtCallePJ.Text = string.Empty;
+            txtNroPuertaPJ.Text = string.Empty;
+            txtCPPJ.Text = string.Empty;
+            txtTelefonoPJ.Text = string.Empty;
+            txtEmailPJ.Text = string.Empty;
+
+            txtRazonSocialPJ.Enabled = false;
+            txtIngresosBrutosPJ.Enabled = false;
+            txtCallePJ.Enabled = false;
+            txtNroPuertaPJ.Enabled = false;
+            txtCPPJ.Enabled = false;
+            txtTelefonoPJ.Enabled = false;
+            txtEmailPJ.Enabled = false;
+            ddlTipoIngresosBrutosPJ.Enabled = false;
+        }
+
+        protected void ClearFormNuevoPJ()
+        {
+            txtApellidosFirPJ.Text = string.Empty;
+            txtNombresFirPJ.Text = string.Empty;
+            txtNroDocumentoFirPJ.Text = string.Empty;
+            txtEmailFirPJ.Text = string.Empty;
+        }
+
+
+
+        private class PersonaTAD
+        {
+            public string Apellidos { get; set; }
+            public string Nombres { get; set; }
+            public string TipoDocumento { get; set; }
+            public string Documento { get; set; }
+            public string RazonSocial { get; set; }
+            public string Cuit { get; set; }
+            public string TipoIngresosBrutos { get; set; }
+            public string IngresosBrutos { get; set; }
+            public string Calle { get; set; }
+            public string NroPuerta { get; set; }
+            public string CodigoPostal { get; set; }
+            public string Telefono { get; set; }
+            public string Email { get; set; }
         }
     }
 }

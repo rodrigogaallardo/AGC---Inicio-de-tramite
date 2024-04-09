@@ -267,24 +267,12 @@ namespace AnexoProfesionales
                     lblError.Text = "Debe cargar los datos de conformación del local.";
                 }
 
-                if (SuperficieTotal > 60 && encDatosLocal.cumple_ley_962 == true && encDatosLocal.sanitarios_ubicacion_dl == 1
+                if (((SuperficieTotal <= 60 && encRubrosCN.Where(x => x.RubrosDTO.SinBanioPCD == false).Any()) || SuperficieTotal > 60)
+                    && encDatosLocal.cumple_ley_962 == true
+                    && encDatosLocal.sanitarios_ubicacion_dl == 1
                     && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
                 {
-                        lblError.Text = "Debe cargar en los datos de conformación del local, el destino Baño PcD.";
-                }
-                else if (SuperficieTotal <= 60 && encDatosLocal.cumple_ley_962 == true && encDatosLocal.sanitarios_ubicacion_dl == 1
-                    && !encConfLocalDTO.Where(x => x.id_destino == (int)TipoDestino.BañoPcD).Any())
-                {
-                    //Verificar que Todos los rubros esten exceptuados
-                    foreach (var item in encRubrosCN)
-                    {
-                        RubrosCNBL rubrosCNBL = new RubrosCNBL();
-                        var rubroCN = rubrosCNBL.Get(item.CodigoRubro).FirstOrDefault();
-                        if (!rubroCN.SinBanioPCD)
-                        {
-                            lblError.Text = "Todos los tipos de rubros declarados deben estar exceptuados para el destino Baño PCD.";
-                        }
-                    }
+                    lblError.Text = "Debe cargar en los datos de conformación del local, el destino Baño PcD.";
                 }
 
                 if (lblError.Text != "")

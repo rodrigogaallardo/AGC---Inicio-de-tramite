@@ -51,7 +51,6 @@ namespace SSIT.Solicitud.Transferencia.Controls
                 // Se debe setear la propiedad editable antes de ejecutar la carga de datos
                 ViewState["Ubicaciones.ascx._Editable"] = value;
                 _Editable = value;
-                pnlPlantasHabilitar.Visible = !value;       // solo es visible al no ser editable
             }
         }
 
@@ -77,8 +76,7 @@ namespace SSIT.Solicitud.Transferencia.Controls
             gridubicacion_db.DataSource = transferencia.Ubicaciones;
             gridubicacion_db.DataBind();
 
-            if (!_Editable)
-                CargarPlantasHabilitar(transferencia);
+            CargarPlantasHabilitar(transferencia);
 
         }
         /// <summary>
@@ -246,6 +244,45 @@ namespace SSIT.Solicitud.Transferencia.Controls
         /// <param name="IdSolicitud"></param>
         private void CargarPlantasHabilitar(TransferenciasSolicitudesDTO transferencia)
         {
+            bool tieneEncomienda = transferencia.EncomiendaTransfSolicitudesDTO.Select(e => e.id_encomienda).Any();
+            lblPlantasHabilitar.Text = string.Empty;
+            if (tieneEncomienda)
+            {
+                //var listaPlantasDesdeEncomienda;
+                int idEncomienda = transferencia.EncomiendaTransfSolicitudesDTO.First().id_encomienda;
+                EncomiendaPlantasBL encomiendaPlantasBL = new EncomiendaPlantasBL();
+                var plantasDesdeEncomienda = encomiendaPlantasBL.Get(idEncomienda).Where(x => x.Seleccionado);
+
+                if (plantasDesdeEncomienda != null)
+                {
+                    foreach (var item in plantasDesdeEncomienda)
+                    {
+                        int TamanoCampoAdicional = item.TamanoCampoAdicional;
+                        bool MuestraCampoAdicional = false;
+                        string separador = "";
+
+                        MuestraCampoAdicional = item.MuestraCampoAdicional;
+
+                        if (lblPlantasHabilitar.Text.Length == 0)
+                            separador = "";
+                        else
+                            separador = ", ";
+
+                        if (MuestraCampoAdicional)
+                        {
+                            if (TamanoCampoAdicional >= 8)
+                                lblPlantasHabilitar.Text += separador + item.Descripcion.Trim() + " " + item.Detalle.Trim();
+                            else
+                                lblPlantasHabilitar.Text += separador + item.Descripcion.Trim();
+                        }
+                        else
+                            lblPlantasHabilitar.Text += separador + item.Descripcion.Trim();
+
+
+                    }
+                    return;
+                }
+            }
 
             var lstaPlantas = transferencia.Plantas;
 

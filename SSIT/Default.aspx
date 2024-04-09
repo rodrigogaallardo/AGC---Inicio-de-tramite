@@ -131,23 +131,23 @@
                                 </asp:HyperLink>
                             </div>--%>
                             <div class="row">
-<%--                                <a class="col-md-12 col-sm-12 shortcut" href="https://dghpsh.agcontrol.gob.ar/AsistenteOnline/Home/Index">
+                                <%--                                <a class="col-md-12 col-sm-12 shortcut" href="https://dghpsh.agcontrol.gob.ar/AsistenteOnline/Home/Index">
                                     <span class="bg-violet-lt">
                                         <span class="glyphicon glyphicon-phone"></span>
                                     </span>
                                     <h3>Asistente Online de<br />Habilitaciones</h3>
                                 </a>--%>
 
-                                    <asp:LinkButton ID="lnkAsistenteOnline" CssClass="shortcut" runat="server">
+                                <asp:LinkButton ID="lnkAsistenteOnline" CssClass="shortcut" runat="server">
                                                  <span class="bg-violet-lt">
                                                     <span class="glyphicon glyphicon-phone"></span>
                                                 </span>
                                                 <h3>Asistente Online de<br />Habilitaciones</h3>
-                                    </asp:LinkButton>
+                                </asp:LinkButton>
 
                             </div>
-                            
-                            
+
+
                             <div class="row">
                                 <a class="col-md-4 col-sm-12 shortcut" href="http://www.buenosaires.gob.ar/agc/guia-de-tramites-de-la-agc">
                                     <span class="bg-blue-lt">
@@ -185,7 +185,7 @@
                         <p style="padding-top: 10px; line-height: 20px; text-align: center">
                             Desde aquí, vas a poder efectuar el Inicio Online de los Trámites vinculados a tu Autorización de Actividad Económica.<br />
                         </p>
-                         <p style="padding-top: 10px; line-height: 20px; text-align: center">
+                        <p style="padding-top: 10px; line-height: 20px; text-align: center">
                             Podr&aacute; consultar su Libro Digital a trav&eacute;s de <a href="https://librodigital.agcontrol.gob.ar/">librodigital.agcontrol.gob.ar</a> para aquellas solicitudes que hayan sido libradas al uso a partir del 09/12/2020. Para poder ingresar al sistema deber&aacute; adherir el servicio de “Libro Digital de Inspecciones” en AGIP. Para mayor informaci&oacute;n sobre la funcionalidad de AGIP ingrese a <a href="https://www.agip.gob.ar/tutoriales">www.agip.gob.ar/tutoriales</a><br />
                         </p>
                         <div class="ptop10 pright20">
@@ -207,7 +207,7 @@
                                     <h4 style="text-transform:uppercase">Nueva Autorización de Actividad Económica</h4>
                             </asp:LinkButton>
 
-                          <asp:LinkButton ID="lnkCrearECI" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/HabilitacionECI/SelecInicioTramite.aspx">
+                            <asp:LinkButton ID="lnkCrearECI" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/HabilitacionECI/SelecInicioTramite.aspx">
                                     <span class="bg-blue-lt">
                                             <span class="glyphicon imoon-file fs48"></span>
                                         </span>
@@ -227,7 +227,7 @@
                                     <h4 style="text-transform:uppercase">Nueva Ampliaci&oacute;n de Rubro y/o Superficie</h4>
                             </asp:LinkButton>
 
-                          <asp:LinkButton ID="lnkCrearRedistribucionUso" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/RedistribucionUso/InicioTramite.aspx">
+                            <asp:LinkButton ID="lnkCrearRedistribucionUso" CssClass="col-md-3 col-sm-6 shortcut" runat="server" PostBackUrl="~/Solicitud/RedistribucionUso/InicioTramite.aspx">
                                     <span class="bg-info-lt">
                                             <span class="glyphicon imoon-file fs48"></span>
                                         </span>
@@ -267,7 +267,7 @@
                                             </span>
                                             <h4  style="text-transform:uppercase">Instructivo Espacio Cultural Independiente(ECI)</h4>
                             </asp:LinkButton>
-                           <asp:LinkButton ID="linkDescargaInstTrans" CssClass="col-md-3 col-sm-6 shortcut" runat="server" OnClick="linkDescargaInstTrans_Click">
+                            <asp:LinkButton ID="linkDescargaInstTrans" CssClass="col-md-3 col-sm-6 shortcut" runat="server" OnClick="linkDescargaInstTrans_Click">
                                             <span class="bg-violet-lt">
                                                     <span class="glyphicon imoon-download fs48"></span>
                                                 </span>
@@ -502,7 +502,7 @@
                             <td style="vertical-align: middle">
                                 <p class="mleft10">
                                     Vas solicitar el inicio  un trámite de <strong>TRANSMISIÓN DE AUTORIZACION DE ACTIVIDAD ECONÓMICA</strong>, la misma podr&aacute; ser: 1) por Transferencia, 2) por Cambio de Denominaci&oacute;n o 3) por Oficio Judicial. Record&aacute; 
-                                    que seg&uacute;n el art. 34 del Anexo I de la Resoluci&oacute;n Nº 84-AGC/2019, al producirse un cambio de titularidad de la Habilitaci&oacute;n/Autorizaci&oacute;n previamente otorgada, pod&eacute;s optar por iniciar un nuevo tr&aacute;mite de Autorizaci&oacute;n
+                                    que seg&uacute;n el art. 33 del Anexo I de la Resolución N° 150-AGC/2023, al producirse un cambio de titularidad de la Habilitaci&oacute;n/Autorizaci&oacute;n previamente otorgada, pod&eacute;s optar por iniciar un nuevo tr&aacute;mite de Autorizaci&oacute;n
                                      o solicitar la Transmisi&oacute;n del titular anterior.
                                 </p>
                             </td>

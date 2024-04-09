@@ -16,6 +16,7 @@ using Org.BouncyCastle.Utilities;
 using DataAcess;
 using ExternalService.Class.Express;
 using System.Threading.Tasks;
+using SSIT.Solicitud.Habilitacion.Controls;
 
 namespace SSIT
 {
@@ -62,11 +63,8 @@ namespace SSIT
         }
 
         private string mensajeAlertaPagos = "";
-
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-
             ScriptManager sm = ScriptManager.GetCurrent(this);
             if (sm.IsInAsyncPostBack)
             {
@@ -80,7 +78,6 @@ namespace SSIT
 
             string tieneOblea = visDocumentos.tieneOblea(id_solicitud);
             divbtnOblea.Visible = false;
-
             //si boleta cero esta activa, oculto panel de pagos
             SSITSolicitudesBL _blSol = new SSITSolicitudesBL();
             var _sol = _blSol.Single(id_solicitud);
@@ -336,7 +333,6 @@ namespace SSIT
         #endregion
         private void CargarDatos(SSITSolicitudesDTO sol)
         {
-       
             EncomiendaBL blEnc = new EncomiendaBL();
             var lstEnc = blEnc.GetByFKIdSolicitud(id_solicitud);
             CargarDatos(sol, lstEnc);
@@ -875,18 +871,25 @@ namespace SSIT
 
         protected async void btnPresentarTramite_Click(object sender, EventArgs e)
         {
+            
+            
             try
             {
+                
                 pnlTramiteIncompleto.Visible = false;
                 lblTextoTramiteIncompleto.Text = "";
                 SSITSolicitudesBL blSol = new SSITSolicitudesBL();
                 EncomiendaRubrosBL encRubrosBL = new EncomiendaRubrosBL();
                 EncomiendaBL encBL = new EncomiendaBL();
                 var sol = blSol.Single(id_solicitud);
+                EncomiendaBL blEnc = new EncomiendaBL();
+                var lstEnc = blEnc.GetByFKIdSolicitud(id_solicitud);
+
+                CargarDatos(sol, lstEnc);
 
                 //********** DARIO BOLETA 0 - 06/04/2023 **********
                 //si boleta cero esta activa, marco la solicitud como excenta de pago
-                    if (BoletaCeroActiva())
+                if (BoletaCeroActiva())
                         sol.ExencionPago = true;
                 //*************************************************
 
@@ -1000,7 +1003,7 @@ namespace SSIT
                 lblError.Text = Funciones.GetErrorMessage(ex);
                 updEstadoSolicitud.Update();
                 ScriptManager.RegisterStartupScript(updEstadoSolicitud, updEstadoSolicitud.GetType(), "showfrmError", "showfrmError();", true);
-                LogError.Write(ex, ex.Message);
+                LogError.Write(ex, ex.Message);               
 
             }
         }

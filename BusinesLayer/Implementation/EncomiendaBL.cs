@@ -2306,16 +2306,22 @@ namespace BusinesLayer.Implementation
                         }
                     }
 
-
+                    //Acá estaba el bug, siempre id_encomienda_solicitud_anterior al ser tranf DIGITALIZADA era mayor a cero.
                     if (id_encomienda_solicitud_anterior > 0)
                     {
-                        // pone el cumple en los rubros cuando se copia de una encomienda anterior
-                        elementDto.CumpleArticulo521 = true;
-                        repo.Update(elementDto);
-                        copiarDatos(id_solicitud, id_encomienda, id_encomienda_solicitud_anterior, sol.id_tipotramite, userid, id_s_origen);
+                        if (sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
+                            copiarDatosTransf(id_solicitud, id_encomienda, id_encomienda_solicitud_anterior, sol.id_tipotramite, userid, id_s_origen);
+                        else
+                        {
+                            // pone el cumple en los rubros cuando se copia de una encomienda anterior
+                            elementDto.CumpleArticulo521 = true;
+                            repo.Update(elementDto);
+                            copiarDatos(id_solicitud, id_encomienda, id_encomienda_solicitud_anterior, sol.id_tipotramite, userid, id_s_origen);
+                        }
                     }
                     else
                     {
+                        //lo dejo por las dudas que sea para transf manuales
                         if (sol.id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA)
                             copiarDatosTransf(id_solicitud, id_encomienda, userid);
                         else
@@ -2591,7 +2597,440 @@ namespace BusinesLayer.Implementation
 
                 throw ex;
             }
+        }
 
+        //Agrego este metodo con mas parametros para hacer el traspaso completo de datos desde ssit transf.
+        private void copiarDatosTransf(int id_solicitud, int id_encomienda, int id_encomienda_ant, int id_tipotramite, Guid userid, int id_s_origen)
+        {
+            try
+            {
+                uowF = new TransactionScopeUnitOfWorkFactory(System.Transactions.IsolationLevel.ReadUncommitted);
+                using (IUnitOfWork unitOfWork = this.uowF.GetUnitOfWork(System.Transactions.IsolationLevel.ReadUncommitted))
+                {
+                    copyTitularesTransfFromEncomienda(id_solicitud, id_encomienda, userid);
+
+                    #region ubicacion
+                    UbicacionesBL blUbic = new UbicacionesBL();
+                    TransferenciaUbicacionesBL blUbi = new TransferenciaUbicacionesBL();
+                    TransferenciasUbicacionesPropiedadHorizontalBL blHor = new TransferenciasUbicacionesPropiedadHorizontalBL();
+                    TransferenciasUbicacionesPuertasBL blPuer = new TransferenciasUbicacionesPuertasBL();
+                    TransferenciaUbicacionesDistritosBL blDistrito = new TransferenciaUbicacionesDistritosBL();
+                    TransferenciaUbicacionesMixturasBL blMixtura = new TransferenciaUbicacionesMixturasBL();
+
+                    EncomiendaUbicacionesBL bleu = new EncomiendaUbicacionesBL();
+                    var lubi = blUbi.GetByFKIdSolicitud(id_solicitud);
+
+                    foreach (var ubi in lubi)
+                    {
+                        var ubic = blUbic.Single((int)ubi.IdUbicacion);
+                        EncomiendaUbicacionesDTO u = new EncomiendaUbicacionesDTO();
+                        u.DeptoLocalEncomiendaUbicacion = ubi.DeptoLocalTransferenciaUbicacion;
+                        u.Depto = ubi.Depto;
+                        u.Local = ubi.Local;
+                        u.Torre = ubi.Torre;
+                        u.IdEncomienda = id_encomienda;
+                        u.IdSubtipoUbicacion = ubi.IdSubTipoUbicacion;
+                        u.IdUbicacion = ubi.IdUbicacion;
+                        u.IdZonaPlaneamiento = ubi.IdZonaPlaneamiento;
+                        u.LocalSubtipoUbicacion = ubi.LocalSubTipoUbicacion;
+                        u.InmuebleCatalogado = ubic.EsUbicacionProtegida;
+                        var lhor = blHor.GetByFKIdSolicitudUbicacion(ubi.IdTransferenciaUbicacion);
+                        u.PropiedadesHorizontales = new List<UbicacionesPropiedadhorizontalDTO>();
+                        foreach (var hor in lhor)
+                        {
+                            UbicacionesPropiedadhorizontalDTO h = new UbicacionesPropiedadhorizontalDTO();
+                            h.IdPropiedadHorizontal = hor.IdPropiedadHorizontal.Value;
+                            u.PropiedadesHorizontales.Add(h);
+                        }
+                        var lpuer = blPuer.GetByFKIdTransferenciaUbicacion(ubi.IdTransferenciaUbicacion);
+                        u.Puertas = new List<UbicacionesPuertasDTO>();
+                        foreach (var puer in lpuer)
+                        {
+                            UbicacionesPuertasDTO p = new UbicacionesPuertasDTO();
+                            p.CodigoCalle = puer.CodigoCalle;
+                            p.NroPuertaUbic = puer.NumeroPuerta;
+                            u.Puertas.Add(p);
+                        }
+                        var ldistrito = blDistrito.GetByFKIdSolicitudUbicacion(ubi.IdTransferenciaUbicacion);
+                        u.EncomiendaUbicacionesDistritosDTO = new List<Encomienda_Ubicaciones_DistritosDTO>();
+                        foreach (var distri in ldistrito)
+                        {
+                            Encomienda_Ubicaciones_DistritosDTO d = new Encomienda_Ubicaciones_DistritosDTO();
+                            d.IdDistrito = distri.IdDistrito;
+                            u.EncomiendaUbicacionesDistritosDTO.Add(d);
+                        }
+                        var lmixtura = blMixtura.GetByFKIdSolicitudUbicacion(ubi.IdTransferenciaUbicacion);
+                        u.EncomiendaUbicacionesMixturasDTO = new List<Encomienda_Ubicaciones_MixturasDTO>();
+                        foreach (var mixtu in lmixtura)
+                        {
+                            Encomienda_Ubicaciones_MixturasDTO m = new Encomienda_Ubicaciones_MixturasDTO();
+                            m.IdZonaMixtura = mixtu.IdZonaMixtura;
+                            u.EncomiendaUbicacionesMixturasDTO.Add(m);
+                        }
+
+                        u.CreateDate = DateTime.Now;
+                        u.CreateUser = userid;
+                        bleu.Insert(u);
+                    }
+                    //unitOfWork.Commit();
+                    #endregion
+
+                    #region Plantas
+                    EncomiendaPlantasBL blPlantas = new EncomiendaPlantasBL();
+                    var listPlantas = blPlantas.GetByFKIdEncomienda(id_encomienda_ant);
+                    var listPlantasNew = new List<EncomiendaPlantasDTO>();
+                    foreach (var planta in listPlantas)
+                    {
+                        EncomiendaPlantasDTO p = new EncomiendaPlantasDTO();
+                        p.id_encomienda = id_encomienda;
+                        p.IdTipoSector = planta.IdTipoSector;
+                        p.Descripcion = planta.Descripcion;
+                        p.id_encomiendatiposector = blPlantas.Insert(p);
+                        listPlantasNew.Add(p);
+                    }
+                    #endregion
+
+                    #region Datos Del Local
+                    EncomiendaDatosLocalBL blDatos = new EncomiendaDatosLocalBL();
+                    var dato = blDatos.GetByFKIdEncomienda(id_encomienda_ant);
+                    if (dato != null)
+                    {
+                        EncomiendaDatosLocalDTO d = new EncomiendaDatosLocalDTO();
+                        d.cantidad_operarios_dl = dato.cantidad_operarios_dl;
+                        d.cantidad_sanitarios_dl = dato.cantidad_sanitarios_dl;
+                        d.CreateDate = DateTime.Now;
+                        d.CreateUser = userid;
+                        d.croquis_ubicacion_dl = dato.croquis_ubicacion_dl;
+                        d.dimesion_frente_dl = dato.dimesion_frente_dl;
+                        d.estacionamiento_dl = dato.estacionamiento_dl;
+                        d.fondo_dl = dato.fondo_dl;
+                        d.frente_dl = dato.frente_dl;
+                        d.id_encomienda = id_encomienda;
+                        d.lateral_derecho_dl = dato.lateral_derecho_dl;
+                        d.lateral_izquierdo_dl = dato.lateral_izquierdo_dl;
+                        d.local_venta = dato.local_venta;
+                        d.lugar_carga_descarga_dl = dato.lugar_carga_descarga_dl;
+                        d.materiales_paredes_dl = dato.materiales_paredes_dl;
+                        d.materiales_pisos_dl = dato.materiales_pisos_dl;
+                        d.materiales_revestimientos_dl = dato.materiales_revestimientos_dl;
+                        d.materiales_techos_dl = dato.materiales_techos_dl;
+                        d.red_transito_pesado_dl = dato.red_transito_pesado_dl;
+                        d.sanitarios_distancia_dl = dato.sanitarios_distancia_dl;
+                        d.sanitarios_ubicacion_dl = dato.sanitarios_ubicacion_dl;
+
+                        d.dj_certificado_sobrecarga = dato.dj_certificado_sobrecarga;
+
+                        d.sobrecarga_art813_inciso = dato.sobrecarga_art813_inciso;
+                        d.sobrecarga_art813_item = dato.sobrecarga_art813_item;
+                        d.sobrecarga_corresponde_dl = dato.sobrecarga_corresponde_dl;
+                        d.sobrecarga_requisitos_opcion = dato.sobrecarga_requisitos_opcion;
+                        d.sobrecarga_tipo_observacion = dato.sobrecarga_tipo_observacion;
+                        d.sobre_avenida_dl = dato.sobre_avenida_dl;
+
+                        if (dato.ampliacion_superficie.HasValue && dato.ampliacion_superficie.Value)
+                        {
+                            d.superficie_cubierta_dl = dato.superficie_descubierta_amp;
+                            d.superficie_descubierta_dl = dato.superficie_descubierta_amp;
+                        }
+                        else
+                        {
+                            d.superficie_cubierta_dl = dato.superficie_cubierta_dl;
+                            d.superficie_descubierta_dl = dato.superficie_descubierta_dl;
+                        }
+                        d.superficie_sanitarios_dl = dato.superficie_sanitarios_dl;
+                        d.cumple_ley_962 = dato.cumple_ley_962;
+                        d.eximido_ley_962 = dato.eximido_ley_962;
+
+                        int id_encomiendadatoslocal = blDatos.Insert(d);
+
+                        #region Sobrecargas
+                        EncomiendaCertificadoSobrecargaBL blCertSobre = new EncomiendaCertificadoSobrecargaBL();
+                        var certSobre = blCertSobre.GetByFKIdEncomiendaDatosLocal(dato.id_encomiendadatoslocal);
+                        if (certSobre != null)
+                        {
+                            EncomiendaCertificadoSobrecargaDTO cs = new EncomiendaCertificadoSobrecargaDTO();
+                            cs.CreateDate = DateTime.Now;
+                            cs.id_encomienda_datoslocal = id_encomiendadatoslocal;
+                            cs.id_tipo_certificado = certSobre.id_tipo_certificado;
+                            cs.id_tipo_sobrecarga = certSobre.id_tipo_sobrecarga;
+                            int id_sobrecarga = blCertSobre.Insert(cs);
+
+                        }
+                        #endregion
+                    }
+                    #endregion
+
+                    #region Rubros         
+                    int nroSolReferencia = 0;
+                    var encAnt = Single(id_encomienda_ant);
+                    if (encAnt.IdSolicitud < nroSolReferencia && encAnt.IdTipoTramite != (int)Constantes.TipoTramite.TRANSFERENCIA)
+                    {
+                        EncomiendaRubrosBL blRubros = new EncomiendaRubrosBL();
+                        var lstRubros = blRubros.GetByFKIdEncomienda(id_encomienda_ant);
+
+                        EncomiendaRubrosCNBL blRubrosCN = new EncomiendaRubrosCNBL();
+                        var lstRubrosCN = blRubrosCN.GetByFKIdEncomienda(id_encomienda_ant);
+
+                        if (id_tipotramite == (int)Constantes.TipoTramite.AMPLIACION ||
+                            id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA ||
+                            id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
+                        {
+                            // por cada rubro codigo VIEJO lo copio y lo mando a la tabla rubros_AT_anterior
+                            foreach (var rub in lstRubros)
+                            {
+                                EncomiendaRubrosDTO r = new EncomiendaRubrosDTO();
+                                r.CodigoRubro = rub.CodigoRubro;
+                                r.CreateDate = DateTime.Now;
+                                r.DescripcionRubro = rub.DescripcionRubro;
+                                r.EsAnterior = rub.EsAnterior;
+                                r.IdEncomienda = id_encomienda;
+                                r.IdImpactoAmbiental = rub.IdImpactoAmbiental;
+                                r.IdTipoActividad = rub.IdTipoActividad;
+                                r.IdTipoDocumentoRequerido = rub.IdTipoDocumentoRequerido;
+                                r.LocalVenta = rub.LocalVenta;
+                                r.RestriccionSup = rub.RestriccionSup;
+                                r.RestriccionZona = rub.RestriccionZona;
+                                r.SuperficieHabilitar = rub.SuperficieHabilitar;
+                                blRubros.InsertATAnterior(r);
+                            }
+                            // por cada rubro codigo NUEVO lo copio y lo mando a la tabla rubrosCN_AT_anterior
+                            foreach (var rub in lstRubrosCN)
+                            {
+                                EncomiendaRubrosCNDTO r = new EncomiendaRubrosCNDTO();
+                                r.CodigoRubro = rub.CodigoRubro;
+                                r.CreateDate = DateTime.Now;
+                                r.DescripcionRubro = rub.DescripcionRubro;
+                                r.EsAnterior = rub.EsAnterior;
+                                r.IdEncomienda = id_encomienda;
+                                r.idImpactoAmbiental = rub.idImpactoAmbiental;
+                                r.IdTipoActividad = rub.IdTipoActividad;
+                                r.RestriccionSup = rub.RestriccionSup;
+                                r.RestriccionZona = rub.RestriccionZona;
+                                r.SuperficieHabilitar = rub.SuperficieHabilitar;
+                                r.IdTipoExpediente = rub.IdTipoExpediente;
+                                blRubrosCN.InsertATAnterior(r);
+                            }
+                        }
+                        else
+                        {
+                            foreach (var rub in lstRubros)
+                            {
+                                EncomiendaRubrosDTO r = new EncomiendaRubrosDTO();
+                                r.CodigoRubro = rub.CodigoRubro;
+                                r.CreateDate = DateTime.Now;
+                                r.DescripcionRubro = rub.DescripcionRubro;
+                                r.EsAnterior = rub.EsAnterior;
+                                r.IdEncomienda = id_encomienda;
+                                r.IdImpactoAmbiental = rub.IdImpactoAmbiental;
+                                r.IdTipoActividad = rub.IdTipoActividad;
+                                r.IdTipoDocumentoRequerido = rub.IdTipoDocumentoRequerido;
+                                r.LocalVenta = rub.LocalVenta;
+                                r.RestriccionSup = rub.RestriccionSup;
+                                r.RestriccionZona = rub.RestriccionZona;
+                                r.SuperficieHabilitar = rub.SuperficieHabilitar;
+                                blRubros.Insert(r, false);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        EncomiendaRubrosCNBL blRubrosCN = new EncomiendaRubrosCNBL();
+                        var lstRubros = blRubrosCN.GetByFKIdEncomienda(id_encomienda_ant);
+
+                        //Valido si es una eci de tipo adecuacion y no inserto los rubros
+                        SSITSolicitudesBL sol = new SSITSolicitudesBL();
+                        var Solicitud = sol.Single(id_solicitud);
+                        bool EsEci = (
+                            Solicitud != null &&
+                            Solicitud.IdTipoTramite == (int)StaticClass.Constantes.TipoTramite.HabilitacionECIAdecuacion
+                            && Solicitud.EsECI
+                            );
+                        if (!EsEci)
+                        {
+                            foreach (var rub in lstRubros)
+                            {
+                                EncomiendaRubrosCNDTO r = new EncomiendaRubrosCNDTO();
+                                r.CodigoRubro = rub.CodigoRubro;
+                                r.CreateDate = DateTime.Now;
+                                r.DescripcionRubro = rub.DescripcionRubro;
+                                r.EsAnterior = rub.EsAnterior;
+                                r.IdEncomienda = id_encomienda;
+                                r.IdTipoActividad = rub.IdTipoActividad;
+                                r.RestriccionSup = rub.RestriccionSup;
+                                r.RestriccionZona = rub.RestriccionZona;
+                                r.SuperficieHabilitar = rub.SuperficieHabilitar;
+                                blRubrosCN.Insert(r, false, userid);
+
+                                EncomiendaRubrosSubCNBL blSubRubrosCN = new EncomiendaRubrosSubCNBL();
+                                var lstSubRubros = blSubRubrosCN.GetSubRubrosByEncomiendaRubroVigentes(rub.IdEncomiendaRubro, id_encomienda_ant);
+                                if (lstSubRubros.Count() > 0)
+                                {
+                                    foreach (var item in lstSubRubros)
+                                    {
+                                        EncomiendaRubrosCNSubrubrosDTO subr = new EncomiendaRubrosCNSubrubrosDTO();
+                                        subr.Id_rubrosubrubro = item.Id_rubrosubrubro;
+                                        subr.Id_EncRubro = r.IdEncomiendaRubro; //
+                                        subr.rubrosCNSubRubrosDTO = item.rubrosCNSubRubrosDTO;
+                                        blSubRubrosCN.Insert(subr, userid);
+                                    }
+                                }
+                            }
+
+                        }
+                        if (id_tipotramite == (int)Constantes.TipoTramite.AMPLIACION ||
+                            id_tipotramite == (int)Constantes.TipoTramite.TRANSFERENCIA ||
+                            id_tipotramite == (int)Constantes.TipoTramite.REDISTRIBUCION_USO)
+                        {
+                            if (lstRubros.Count() > 0)
+                            {
+                                foreach (var rub in lstRubros)
+                                {
+                                    EncomiendaRubrosCNDTO r = new EncomiendaRubrosCNDTO();
+                                    r.CodigoRubro = rub.CodigoRubro;
+                                    r.CreateDate = DateTime.Now;
+                                    r.DescripcionRubro = rub.DescripcionRubro;
+                                    r.EsAnterior = rub.EsAnterior;
+                                    r.IdEncomienda = id_encomienda;
+                                    r.idImpactoAmbiental = rub.idImpactoAmbiental;
+                                    r.IdTipoActividad = rub.IdTipoActividad;
+                                    r.RestriccionSup = rub.RestriccionSup;
+                                    r.RestriccionZona = rub.RestriccionZona;
+                                    r.SuperficieHabilitar = rub.SuperficieHabilitar;
+
+                                    if (id_s_origen != 0 && id_tipotramite == (int)Constantes.TipoTramite.AMPLIACION)
+                                    {
+                                        blRubrosCN.InsertATAnterior(r);
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                EncomiendaRubrosBL blRubros = new EncomiendaRubrosBL();
+                                var lstRubrosAnt = blRubros.GetByFKIdEncomienda(id_encomienda_ant);
+
+                                foreach (var rub in lstRubrosAnt)
+                                {
+                                    EncomiendaRubrosDTO r = new EncomiendaRubrosDTO();
+                                    r.CodigoRubro = rub.CodigoRubro;
+                                    r.CreateDate = DateTime.Now;
+                                    r.DescripcionRubro = rub.DescripcionRubro;
+                                    r.EsAnterior = rub.EsAnterior;
+                                    r.IdEncomienda = id_encomienda;
+                                    r.IdImpactoAmbiental = rub.IdImpactoAmbiental;
+                                    r.IdTipoActividad = rub.IdTipoActividad;
+                                    r.IdTipoDocumentoRequerido = rub.IdTipoDocumentoRequerido;
+                                    r.LocalVenta = rub.LocalVenta;
+                                    r.RestriccionSup = rub.RestriccionSup;
+                                    r.RestriccionZona = rub.RestriccionZona;
+                                    r.SuperficieHabilitar = rub.SuperficieHabilitar;
+                                    blRubros.InsertATAnterior(r);
+                                }
+                            }
+                        }
+
+                        // Copiamos los depositos
+                        Encomienda_RubrosCN_DepositoBL depoBL = new Encomienda_RubrosCN_DepositoBL();
+                        var lstDeposAnteiores = depoBL.GetByEncomienda(id_encomienda_ant);
+                        foreach (var depo in lstDeposAnteiores)
+                        {
+                            Encomienda_RubrosCN_DepositoDTO d = new Encomienda_RubrosCN_DepositoDTO();
+                            d.id_encomienda = id_encomienda;
+                            d.IdDeposito = depo.IdDeposito;
+                            d.IdRubro = depo.IdRubro;
+                            depoBL.InsertRubDeposito(d);
+                        }
+                    }
+
+                    #endregion
+
+                    #region Normativas
+                    EncomiendaNormativasBL blNor = new EncomiendaNormativasBL();
+                    var listNor = blNor.GetByFKIdEncomienda(id_encomienda_ant);
+                    foreach (var nor in listNor)
+                    {
+                        EncomiendaNormativasDTO n = new EncomiendaNormativasDTO();
+                        n.CreateDate = DateTime.Now;
+                        n.CreateUser = userid;
+                        n.IdEncomienda = id_encomienda;
+                        n.IdEntidadNormativa = nor.IdEntidadNormativa;
+                        n.IdTipoNormativa = nor.IdTipoNormativa;
+                        n.NroNormativa = nor.NroNormativa;
+                        blNor.Insert(n);
+                    }
+                    #endregion
+
+                    #region Conformación del Local
+                    EncomiendaConformacionLocalBL blConf = new EncomiendaConformacionLocalBL();
+                    var listConf = blConf.GetByFKIdEncomienda(id_encomienda_ant);
+                    foreach (var conf in listConf)
+                    {
+                        EncomiendaConformacionLocalDTO c = new EncomiendaConformacionLocalDTO();
+                        c.alto_conflocal = conf.alto_conflocal;
+                        c.ancho_conflocal = conf.ancho_conflocal;
+                        c.CreateDate = DateTime.Now;
+                        c.CreateUser = userid;
+                        c.Detalle_conflocal = conf.Detalle_conflocal;
+                        c.Frisos_conflocal = conf.Frisos_conflocal;
+                        c.id_destino = conf.id_destino;
+                        c.id_encomienda = id_encomienda;
+                        var pl = listPlantas.Where(x => x.id_encomiendatiposector == conf.id_encomiendatiposector).FirstOrDefault();
+                        int? id_encomiendatiposector = null;
+
+                        if (pl != null)
+                        {
+                            foreach (var p in listPlantasNew)
+                            {
+                                if (p.IdTipoSector == pl.IdTipoSector && p.Descripcion == pl.Descripcion)
+                                {
+                                    id_encomiendatiposector = p.id_encomiendatiposector;
+                                    break;
+                                }
+                            }
+                        }
+                        c.id_encomiendatiposector = id_encomiendatiposector;
+                        c.id_iluminacion = conf.id_iluminacion;
+                        c.id_tiposuperficie = conf.id_tiposuperficie;
+                        c.id_ventilacion = conf.id_ventilacion;
+                        c.largo_conflocal = conf.largo_conflocal;
+                        c.Observaciones_conflocal = conf.Observaciones_conflocal;
+                        c.Paredes_conflocal = conf.Paredes_conflocal;
+                        c.Pisos_conflocal = conf.Pisos_conflocal;
+                        c.superficie_conflocal = conf.superficie_conflocal;
+                        c.Techos_conflocal = conf.Techos_conflocal;
+                        blConf.Insert(c);
+                    }
+                    #endregion
+
+                    #region Planos
+                    EncomiendaPlanosBL blPlanos = new EncomiendaPlanosBL();
+                    var listPlanos = blPlanos.GetByFKIdEncomienda(id_encomienda_ant);
+                    foreach (var plano in listPlanos)
+                    {
+                        EncomiendaPlanosDTO p = new EncomiendaPlanosDTO();
+
+                        // En este caso se deja la fecha ya que no se permite eliminar los planos que se ingresaron en el trámite anterior.
+                        // para realizar dicho análisis es necesario tener la fecha original que se subió el plano que se está copiando.
+                        p.CreateDate = plano.CreateDate;
+                        p.CreateUser = userid.ToString();
+                        p.detalle = plano.detalle;
+                        p.id_encomienda = id_encomienda;
+                        p.id_file = plano.id_file;
+                        p.id_tipo_plano = plano.id_tipo_plano;
+                        p.nombre_archivo = plano.nombre_archivo;
+
+                        blPlanos.Insert(p);
+                    }
+                    #endregion
+
+                    unitOfWork.Commit();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void copyTitularesFromEncomienda(int id_solicitud, int id_encomienda, Guid userid)
