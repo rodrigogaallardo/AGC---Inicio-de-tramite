@@ -17,6 +17,7 @@ namespace DataAcess.EntityCustom
         public string NomTipoCaracter { get; set; }
         public string CargoFirmante { get; set; }
         public string Email { get; set; }
+        public string Cuit { get; set; }
     }
 
     public class FirmantesPJEntity

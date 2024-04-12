@@ -55,6 +55,7 @@
                     <asp:BoundField DataField="ApellidoNombres" HeaderText="Apellido y Nombre/s" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" />
                     <asp:BoundField DataField="DescTipoDocPersonal" HeaderText="Tipo" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" />
                     <asp:BoundField DataField="Nro_Documento" HeaderText="Documento" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" />
+                    <asp:BoundField DataField="Cuit" HeaderText="Cuit" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" />
                     <asp:BoundField DataField="nom_tipocaracter" HeaderText="Carácter Legal" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" />
                     <asp:BoundField DataField="cargo_firmante_pj" HeaderText="Cargo" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center" />
                 </Columns>

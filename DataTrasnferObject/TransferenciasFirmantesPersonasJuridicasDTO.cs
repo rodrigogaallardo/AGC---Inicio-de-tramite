@@ -15,7 +15,8 @@ namespace DataTransferObject
 		public string Email { get; set; }
 		public int IdTipoCaracter { get; set; }
 		public string CargoFirmantePersonaJuridica { get; set; }
-	}				
+        public string Cuit { get; set; }
+    }				
 }
 
 

@@ -59,7 +59,8 @@ namespace BusinesLayer.Implementation
                     .ForMember(dest => dest.IdPersonaFisica, source => source.MapFrom(p => p.id_personafisica))
                     .ForMember(dest => dest.IdTipoDocumentoPersonal, source => source.MapFrom(p => p.id_tipodoc_personal))
                     .ForMember(dest => dest.NumeroDocumento, source => source.MapFrom(p => p.Nro_Documento))
-                    .ForMember(dest => dest.IdTipoCaracter, source => source.MapFrom(p => p.id_tipocaracter));
+                    .ForMember(dest => dest.IdTipoCaracter, source => source.MapFrom(p => p.id_tipocaracter))
+                    .ForMember(dest => dest.Cuit, source => source.MapFrom(p => p.Cuit));
 
                 cfg.CreateMap<Transf_Firmantes_PersonasFisicas, TransferenciasFirmantesPersonasFisicasDTO>().ReverseMap()
                     .ForMember(dest => dest.id_firmante_pf, source => source.MapFrom(p => p.IdFirmantePersonaFisica))
@@ -67,7 +68,8 @@ namespace BusinesLayer.Implementation
                     .ForMember(dest => dest.id_personafisica, source => source.MapFrom(p => p.IdPersonaFisica))
                     .ForMember(dest => dest.id_tipodoc_personal, source => source.MapFrom(p => p.IdTipoDocumentoPersonal))
                     .ForMember(dest => dest.Nro_Documento, source => source.MapFrom(p => p.NumeroDocumento))
-                    .ForMember(dest => dest.id_tipocaracter, source => source.MapFrom(p => p.IdTipoCaracter));
+                    .ForMember(dest => dest.id_tipocaracter, source => source.MapFrom(p => p.IdTipoCaracter))
+                    .ForMember(dest => dest.Cuit, source => source.MapFrom(p => p.Cuit));
             });
 
              mapperFirmantes = configFirmantes.CreateMapper(); 

@@ -17,6 +17,7 @@ namespace DataTransferObject
         public string nom_tipocaracter { get; set; }
         public string cargo_firmante_pj { get; set; }
         public string Email { get; set; }
+        public string Cuit { get; set; }
     }
 
     public class FirmantesPJDTO

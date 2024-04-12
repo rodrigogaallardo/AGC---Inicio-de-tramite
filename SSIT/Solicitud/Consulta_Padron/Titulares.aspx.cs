@@ -580,7 +580,6 @@ namespace SSIT.Solicitud.Consulta_Padron
         {
             ConsultaPadronTitularesPersonasJuridicasBL consultaPadronTitularesPersonasJuridicasBL = new ConsultaPadronTitularesPersonasJuridicasBL();
             LocalidadBL localidadBL = new LocalidadBL();
-            FirmantesBL firmantesBL = new FirmantesBL();
 
             var pj = consultaPadronTitularesPersonasJuridicasBL.Single(id_personajuridica);
 

@@ -32,13 +32,15 @@ namespace BusinesLayer.Implementation
                     .ForMember(dest => dest.id_firmante, source => source.MapFrom(p => p.IdFirmante))
                     .ForMember(dest => dest.Nro_Documento, source => source.MapFrom(p => p.NroDocumento))
                     .ForMember(dest => dest.nom_tipocaracter, source => source.MapFrom(p => p.NomTipoCaracter))
-                    .ForMember(dest => dest.cargo_firmante_pj, source => source.MapFrom(p => p.CargoFirmante));
+                    .ForMember(dest => dest.cargo_firmante_pj, source => source.MapFrom(p => p.CargoFirmante))
+                    .ForMember(dest => dest.Cuit, source => source.MapFrom(p => p.Cuit));
 
                 cfg.CreateMap<FirmantesEntity, FirmantesDTO>().ReverseMap()
                     .ForMember(dest => dest.IdFirmante, source => source.MapFrom(p => p.id_firmante))
                     .ForMember(dest => dest.NroDocumento, source => source.MapFrom(p => p.Nro_Documento))
                     .ForMember(dest => dest.NomTipoCaracter, source => source.MapFrom(p => p.nom_tipocaracter))
-                    .ForMember(dest => dest.CargoFirmante, source => source.MapFrom(p => p.cargo_firmante_pj));
+                    .ForMember(dest => dest.CargoFirmante, source => source.MapFrom(p => p.cargo_firmante_pj))
+                    .ForMember(dest => dest.Cuit, source => source.MapFrom(p => p.Cuit));
             });
             mapperBase = config.CreateMapper();
             mapperBaseFirmantesPJEntity = configFirmantesPJEntity.CreateMapper();

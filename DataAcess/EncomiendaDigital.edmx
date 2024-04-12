@@ -4965,6 +4965,7 @@ warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitudes_Enco
           <Property Name="Nro_Documento" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="id_tipocaracter" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="Cuit" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Transf_Firmantes_PersonasJuridicas">
           <Key>
@@ -4980,6 +4981,7 @@ warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.SSIT_Solicitudes_Enco
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
           <Property Name="id_tipocaracter" Type="int" Nullable="false" />
           <Property Name="cargo_firmante_pj" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cuit" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Transf_Firmantes_Solicitud_PersonasFisicas">
           <Key>
@@ -10005,8 +10007,8 @@ warning 6002: The table/view 'DGHP_Solicitudes_preprod.dbo.vis_Certificados' doe
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_MasBuscados_Categorias' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_MasBuscados_Categorias' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_MasBuscados_Categorias" />-->
         <Association Name="FK_Parametros_Bandeja_Rubro_Rubros">
           <End Role="Rubros" Type="Self.Rubros" Multiplicity="1" />
@@ -22693,7 +22695,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
             <End Role="Login_Tad_Token1" EntitySet="Login_Tad_Token" />
           </AssociationSet>
           <FunctionImport Name="Get_Token_Tad" ReturnType="Collection(String)">
-            <Parameter Name="userId" Mode="In" Type="Guid" />
+          <Parameter Name="userId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Insert_Login_Tad_Token">
             <Parameter Name="userId" Mode="In" Type="Guid" />
@@ -26212,6 +26214,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Transf_Titulares_PersonasFisicas" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasFisicas_Transf_Titulares_PersonasFisicas" FromRole="Transf_Firmantes_PersonasFisicas" ToRole="Transf_Titulares_PersonasFisicas" />
           <NavigationProperty Name="TipoDocumentoPersonal" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasFisicas_TipoDocumentoPersonal" FromRole="Transf_Firmantes_PersonasFisicas" ToRole="TipoDocumentoPersonal" />
           <NavigationProperty Name="Transf_Solicitudes" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasFisicas_Transf_Solicitudes" FromRole="Transf_Firmantes_PersonasFisicas" ToRole="Transf_Solicitudes" />
+          <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Transf_Firmantes_PersonasJuridicas">
           <Key>
@@ -26232,6 +26235,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <NavigationProperty Name="Transf_Titulares_PersonasJuridicas_PersonasFisicas" Relationship="EncmiendaEntityes.FK_Transf_Titulares_PersonasJuridicas_PersonasFisicas_Transf_Firmantes_PersonasJuridicas" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Transf_Titulares_PersonasJuridicas_PersonasFisicas" />
           <NavigationProperty Name="TipoDocumentoPersonal" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_TipoDocumentoPersonal" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="TipoDocumentoPersonal" />
           <NavigationProperty Name="Transf_Solicitudes" Relationship="EncmiendaEntityes.FK_Transf_Firmantes_PersonasJuridicas_Transf_Solicitudes" FromRole="Transf_Firmantes_PersonasJuridicas" ToRole="Transf_Solicitudes" />
+          <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Transf_Titulares_PersonasFisicas">
           <Key>
@@ -41045,6 +41049,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Transf_Firmantes_PersonasFisicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Transf_Firmantes_PersonasFisicas">
               <MappingFragment StoreEntitySet="Transf_Firmantes_PersonasFisicas">
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="id_tipocaracter" ColumnName="id_tipocaracter" />
                 <ScalarProperty Name="Nro_Documento" ColumnName="Nro_Documento" />
@@ -41060,6 +41065,7 @@ warning 6035: The relationship 'FK_Rel_ZonasPlaneamiento_ZonasHabilitaciones_Zon
           <EntitySetMapping Name="Transf_Firmantes_PersonasJuridicas">
             <EntityTypeMapping TypeName="EncmiendaEntityes.Transf_Firmantes_PersonasJuridicas">
               <MappingFragment StoreEntitySet="Transf_Firmantes_PersonasJuridicas">
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
                 <ScalarProperty Name="cargo_firmante_pj" ColumnName="cargo_firmante_pj" />
                 <ScalarProperty Name="id_tipocaracter" ColumnName="id_tipocaracter" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
