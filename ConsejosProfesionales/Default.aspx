@@ -163,7 +163,7 @@
                                             <span class="bg-violet-lt">
                                                     <span class="glyphicon imoon-road fs48"></span>
                                                 </span>
-                                            <h4 style="text-transform:uppercase">Encomienda de Demoledores y Excavadores</h4>
+                                            <h4 style="text-transform:uppercase">ENCOMIENDA DE DEMOLEDORAS, EXCAVADORAS Y CONSTRUCTORAS</h4>
                     </asp:LinkButton>
                 </div>
 
