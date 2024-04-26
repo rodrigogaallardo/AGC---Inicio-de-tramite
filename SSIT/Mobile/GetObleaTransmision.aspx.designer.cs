@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSIT.Mobile {
-    
-    
-    public partial class GetObleaTransmision {
-        
+namespace SSIT.Mobile
+{
+
+
+    public partial class GetObleaTransmision
+    {
+
         /// <summary>
         /// Head1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// ScriptManager1 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// hdfid_solicitud control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdfid_solicitud;
-        
+
         /// <summary>
         /// hdfid_tarea control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdfid_tarea;
-        
+
         /// <summary>
         /// lblNroExpediente control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNroExpediente;
-        
+
         /// <summary>
         /// lblTipoTramite control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTipoTramite;
-        
+
         /// <summary>
         /// lblNroSolicitud control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNroSolicitud;
-        
+
         /// <summary>
         /// lblNroDisposicionSADEText control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNroDisposicionSADEText;
-        
+
         /// <summary>
         /// lblNroDisposicionSADE control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNroDisposicionSADE;
-        
+
         /// <summary>
         /// lblFechaDisposicionText control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFechaDisposicionText;
-        
+
         /// <summary>
         /// lblFechaDisposicion control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFechaDisposicion;
-        
+
         /// <summary>
         /// lblObservacionesText control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblObservacionesText;
-        
+
         /// <summary>
         /// lblObservaciones control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblObservaciones;
-        
+
         /// <summary>
         /// lblEstado control.
         /// </summary>
@@ -146,7 +148,16 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEstado;
-        
+
+        /// <summary>
+        /// lblFechaLibrado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaLibrado;
+
         /// <summary>
         /// repeater_titulares control.
         /// </summary>
@@ -155,7 +166,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater repeater_titulares;
-        
+
         /// <summary>
         /// lblDireccion control.
         /// </summary>
@@ -164,7 +175,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDireccion;
-        
+
         /// <summary>
         /// lblPlantashabilitar control.
         /// </summary>
@@ -173,7 +184,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPlantashabilitar;
-        
+
         /// <summary>
         /// ZonaMix control.
         /// </summary>
@@ -182,7 +193,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ZonaMix;
-        
+
         /// <summary>
         /// lblZonaDeclarada control.
         /// </summary>
@@ -191,7 +202,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblZonaDeclarada;
-        
+
         /// <summary>
         /// lblCantOperarios control.
         /// </summary>
@@ -200,7 +211,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCantOperarios;
-        
+
         /// <summary>
         /// pnlSuperficieTramiteAnterior control.
         /// </summary>
@@ -209,7 +220,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSuperficieTramiteAnterior;
-        
+
         /// <summary>
         /// lblNroExpedienteAnteriorSuperficie control.
         /// </summary>
@@ -218,7 +229,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNroExpedienteAnteriorSuperficie;
-        
+
         /// <summary>
         /// lblSuperficieTotalAnterior control.
         /// </summary>
@@ -227,7 +238,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSuperficieTotalAnterior;
-        
+
         /// <summary>
         /// lblSuperficieTotal control.
         /// </summary>
@@ -236,7 +247,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSuperficieTotal;
-        
+
         /// <summary>
         /// imgMapa1 control.
         /// </summary>
@@ -245,7 +256,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgMapa1;
-        
+
         /// <summary>
         /// gridubicacion_db control.
         /// </summary>
@@ -254,7 +265,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridubicacion_db;
-        
+
         /// <summary>
         /// pnlRubrosTramiteAnterior control.
         /// </summary>
@@ -263,7 +274,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlRubrosTramiteAnterior;
-        
+
         /// <summary>
         /// lblNroExpedienteAnteriorRubros control.
         /// </summary>
@@ -272,7 +283,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNroExpedienteAnteriorRubros;
-        
+
         /// <summary>
         /// grdRubrosTramiteAnterior control.
         /// </summary>
@@ -281,7 +292,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdRubrosTramiteAnterior;
-        
+
         /// <summary>
         /// grdRubros control.
         /// </summary>
@@ -290,7 +301,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdRubros;
-        
+
         /// <summary>
         /// grdSubRubros control.
         /// </summary>
@@ -299,7 +310,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdSubRubros;
-        
+
         /// <summary>
         /// lblObservacionesRubros control.
         /// </summary>
@@ -308,7 +319,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblObservacionesRubros;
-        
+
         /// <summary>
         /// lblPlanoVisado control.
         /// </summary>
@@ -317,7 +328,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPlanoVisado;
-        
+
         /// <summary>
         /// pnlInformacionAdicional control.
         /// </summary>
@@ -326,7 +337,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlInformacionAdicional;
-        
+
         /// <summary>
         /// blInfoAdicional control.
         /// </summary>
@@ -335,7 +346,7 @@ namespace SSIT.Mobile {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.BulletedList blInfoAdicional;
-        
+
         /// <summary>
         /// lblTextCertificado control.
         /// </summary>

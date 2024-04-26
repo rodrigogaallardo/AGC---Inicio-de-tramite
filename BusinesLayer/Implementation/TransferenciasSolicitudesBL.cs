@@ -57,6 +57,7 @@ namespace BusinesLayer.Implementation
                     .ForMember(dest => dest.Ubicaciones, source => source.MapFrom(p => p.Transf_Ubicaciones))
                     .ForMember(dest => dest.Plantas, source => source.MapFrom(p => p.Transf_Plantas))
                     .ForMember(dest => dest.EncomiendaTransfSolicitudesDTO, source => source.MapFrom(p => p.Encomienda_Transf_Solicitudes))
+                    .ForMember(dest => dest.FechaLibrado, source => source.MapFrom(p => p.FechaLibrado))
                     ;
 
                 cfg.CreateMap<TransferenciasSolicitudesDTO, Transf_Solicitudes>()
@@ -82,6 +83,7 @@ namespace BusinesLayer.Implementation
                 .ForMember(dest => dest.Transf_Ubicaciones, source => source.MapFrom(p => p.Ubicaciones))
                 .ForMember(dest => dest.Transf_Plantas, source => source.MapFrom(p => p.Plantas))
                 .ForMember(dest => dest.Encomienda_Transf_Solicitudes, source => source.MapFrom(p => p.EncomiendaTransfSolicitudesDTO))
+                .ForMember(dest => dest.FechaLibrado, source => source.MapFrom(p => p.FechaLibrado))
                 ;
 
                 cfg.CreateMap<Transf_DocumentosAdjuntos, TransferenciasDocumentosAdjuntosDTO>()

@@ -94,6 +94,13 @@
                             <asp:Label ID="lblEstado" runat="server"></asp:Label></b>
                     </td>
                 </tr>
+                <tr>
+                    <td>Fecha de librado al uso:</td>
+                    <td colspan="3">
+                        <b>
+                            <asp:Label ID="lblFechaLibrado" runat="server"></asp:Label></b>
+                    </td>
+                </tr>
             </table>
             <div>
                 <table>

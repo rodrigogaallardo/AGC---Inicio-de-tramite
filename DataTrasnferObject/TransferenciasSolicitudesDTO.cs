@@ -18,6 +18,7 @@ namespace DataTransferObject
 		public DateTime? LastUpdateDate { get; set; }
 		public Guid? LastUpdateUser { get; set; }
 		public string CodigoSeguridad { get; set; }
+        public DateTime? FechaLibrado { get; set; }
         public Nullable<int> idTAD { get; set; }
         public Nullable<int> idSolicitudRef { get; set; }
         public ICollection<TransferenciasDocumentosAdjuntosDTO> Documentos { get; set; }

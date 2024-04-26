@@ -84,7 +84,7 @@ namespace SSIT.Mobile
             var sol = blSol.Single(id_solicitud);
             EncomiendaBL encBl = new EncomiendaBL();
             var datoSolicitudEnc = encBl.GetByFKIdSolicitud(id_solicitud);
-            var enc = datoSolicitudEnc.OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
+            var enc = datoSolicitudEnc.Where(x => x.IdEstado == (int)Constantes.Encomienda_Estados.Aprobada_por_el_consejo).OrderByDescending(x => x.IdEncomienda).FirstOrDefault();
 
 
 
@@ -101,10 +101,12 @@ namespace SSIT.Mobile
             if (sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.VENCIDA)
             {
                 if (sol.FechaLibrado == null &&
-                    (sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO) && enc.AcogeBeneficios == true)
+                    sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO && 
+                    enc.AcogeBeneficios == true)
                     lblFechaLibrado.Text = "<font color='red'><b>EL PRESENTE TRAMITE NO SE ENCUENTRA LIBRADO AL USO, YA QUE SE ACOGE A LOS BENEFICIOS DE LA DI-2023-2-GCABA-UERESGP. </b></font>";
                 else if (sol.FechaLibrado == null &&
-                ((sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO) && (enc.AcogeBeneficios == false || enc.AcogeBeneficios == null)))
+                         sol.IdEstado != (int)Constantes.TipoEstadoSolicitudEnum.APRO && 
+                         enc.AcogeBeneficios == false)
                     lblFechaLibrado.Text = "<font color='red'><b>EL PRESENTE TRAMITE NO SE ENCUENTRA LIBRADO AL USO. </b></font>";
                 else if (sol.IdEstado == (int)Constantes.TipoEstadoSolicitudEnum.CADUCO)
                     lblFechaLibrado.Text = "<font color='red'><b>TRAMITE CADUCO, NO LIBRADO AL USO</b></font>";
