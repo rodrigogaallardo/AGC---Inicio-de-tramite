@@ -107,6 +107,7 @@ namespace BusinesLayer.Implementation
         /// </summary>
         /// <param name="IdConsejoGrupo"></param>
         /// <returns></returns>
+        /// 
         public IEnumerable<RolesDTO> TraerPerfilesProfesionalXGrupo(int IdConsejoGrupo)
         {
             try
