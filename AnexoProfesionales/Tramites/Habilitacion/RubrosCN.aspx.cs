@@ -685,16 +685,16 @@ namespace AnexoProfesionales
                     foreach (GridViewRow row in grdRubrosIngresadosATAnterior.Rows)
                     {
                         LinkButton btnEliminarRubroATAnterior = (LinkButton)row.FindControl("btnEliminarRubroATAnterior");
-                        btnEliminarRubroATAnterior.Visible = false;
+                        btnEliminarRubroATAnterior.Visible = true; //Se cambio a true por nueva regla de negocio #Ticket 2318
                     }
-                    btnAgregarRubrosATAnterior.Visible = false;
+                    btnAgregarRubrosATAnterior.Visible = true; //Se cambio a true por nueva regla de negocio #Ticket 2318
 
                     foreach (GridViewRow row in grdRubrosCNIngresadosATAnterior.Rows)
                     {
                         LinkButton btnEliminarRubroCNATAnterior = (LinkButton)row.FindControl("btnEliminarRubroCNATAnterior");
-                        btnEliminarRubroCNATAnterior.Visible = false;
+                        btnEliminarRubroCNATAnterior.Visible = true; //Se cambio a true por nueva regla de negocio #Ticket 2318
                     }
-                    btnAgregarRubrosCNATAnterior.Visible = false;
+                    btnAgregarRubrosCNATAnterior.Visible = true; //Se cambio a true por nueva regla de negocio #Ticket 2318
                 }
 
                 updRubrosATAnterior.Update();
