@@ -58,8 +58,7 @@
                 <ul style="line-height: 20px">
                     <li><b>Titulares:</b>
                         <div>
-                            Son las personas físicas o jurídicas que se mostrarán en el Certificado de Aptitud Ambiental
-                                            si es que el trámite es satisfactorio.
+                            Se mostrará en el acto administrativo que otorgue la Transmisión ó la Disposición ó el QR.
                         </div>
                     </li>
                     <li><b>Firmantes:</b>
