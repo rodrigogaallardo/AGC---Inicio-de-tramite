@@ -451,6 +451,7 @@ namespace BusinesLayer.Implementation
                     itemFirNuevoPF.id_tipodoc_personal = itemFirPF.id_tipodoc_personal;
                     itemFirNuevoPF.Nombres = itemFirPF.Nombres;
                     itemFirNuevoPF.Nro_Documento = itemFirPF.Nro_Documento;
+                    itemFirNuevoPF.Cuit = itemFirPF.Cuit;
 
                     repoSolFirPF.Insert(itemFirNuevoPF);
                 }
@@ -500,6 +501,7 @@ namespace BusinesLayer.Implementation
                     itemFirNuevoPJ.id_tipodoc_personal = itemFirPJ.id_tipodoc_personal;
                     itemFirNuevoPJ.Nombres = itemFirPJ.Nombres;
                     itemFirNuevoPJ.Nro_Documento = itemFirPJ.Nro_Documento;
+                    itemFirNuevoPJ.Cuit = itemFirPJ.Cuit;
 
                     repoSolFirPJ.Insert(itemFirNuevoPJ);
 

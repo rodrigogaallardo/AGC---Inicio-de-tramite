@@ -13,7 +13,8 @@ namespace DataTransferObject
 		public int IdTipoDocumentoPersonal { get; set; }
 		public string NumeroDocumento { get; set; }
 		public int IdTipoCaracter { get; set; }
-		public string Email { get; set; }       
+		public string Email { get; set; }
+        public string Cuit { get; set; }
     }				
 }
 

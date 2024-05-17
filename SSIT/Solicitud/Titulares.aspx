@@ -175,6 +175,7 @@
                                 <asp:BoundField DataField="ApellidoNombres" HeaderText="Apellido y Nombre/s" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
                                 <asp:BoundField DataField="DescTipoDocPersonal" HeaderText="Tipo" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
                                 <asp:BoundField DataField="Nro_Documento" HeaderText="Documento" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
+                                <asp:BoundField DataField="Cuit" HeaderText="Cuit" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
                                 <asp:BoundField DataField="nom_tipocaracter" HeaderText="Carácter Legal" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
                                 <asp:BoundField DataField="cargo_firmante_pj" HeaderText="Cargo" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
                             </Columns>

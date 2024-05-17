@@ -63,7 +63,8 @@ namespace BusinesLayer.Implementation
                     .ForMember(dest => dest.IdTipoDocumentoPersonal, source => source.MapFrom(p => p.id_tipodoc_personal))
                     .ForMember(dest => dest.NumeroDocumento, source => source.MapFrom(p => p.Nro_Documento))
                     .ForMember(dest => dest.IdTipoCaracter, source => source.MapFrom(p => p.id_tipocaracter))
-                    .ForMember(dest => dest.CargoFirmantePersonaJuridica, source => source.MapFrom(p => p.cargo_firmante_pj));
+                    .ForMember(dest => dest.CargoFirmantePersonaJuridica, source => source.MapFrom(p => p.cargo_firmante_pj))
+                    .ForMember(dest => dest.Cuit, source => source.MapFrom(p => p.Cuit));
 
                 cfg.CreateMap<Transf_Firmantes_PersonasJuridicas, TransferenciasFirmantesPersonasJuridicasDTO>().ReverseMap()
                     .ForMember(dest => dest.id_firmante_pj, source => source.MapFrom(p => p.IdFirmantePersonaJuridica))
@@ -72,7 +73,8 @@ namespace BusinesLayer.Implementation
                     .ForMember(dest => dest.id_tipodoc_personal, source => source.MapFrom(p => p.IdTipoDocumentoPersonal))
                     .ForMember(dest => dest.Nro_Documento, source => source.MapFrom(p => p.NumeroDocumento))
                     .ForMember(dest => dest.id_tipocaracter, source => source.MapFrom(p => p.IdTipoCaracter))
-                    .ForMember(dest => dest.cargo_firmante_pj, source => source.MapFrom(p => p.CargoFirmantePersonaJuridica));
+                    .ForMember(dest => dest.cargo_firmante_pj, source => source.MapFrom(p => p.CargoFirmantePersonaJuridica))
+                    .ForMember(dest => dest.Cuit, source => source.MapFrom(p => p.Cuit));
             });
             mapperFirPJ = configFirPJ.CreateMapper();
 
@@ -312,6 +314,7 @@ namespace BusinesLayer.Implementation
                             encFirPerJur.Email = itemFirPj.email;
                             encFirPerJur.IdTipoCaracter = itemFirPj.id_tipocaracter;
                             encFirPerJur.CargoFirmantePersonaJuridica = itemFirPj.cargo_firmante;
+                            encFirPerJur.Cuit = itemFirPj.Cuit;
                             var elementDtoFirPerJurInsert = mapperFirPJ.Map<TransferenciasFirmantesPersonasJuridicasDTO, Transf_Firmantes_PersonasJuridicas>(encFirPerJur);
                             repoFirPJ.Insert(elementDtoFirPerJurInsert);
 
@@ -350,6 +353,7 @@ namespace BusinesLayer.Implementation
                             encFirPerJurInsert.Email = item.Email;
                             encFirPerJurInsert.IdTipoCaracter = item.IdTipoCaracter;
                             encFirPerJurInsert.CargoFirmantePersonaJuridica = item.CargoFirmantePersonaJuridica;
+                            encFirPerJurInsert.Cuit = item.Cuit;
                             var elementDtoFirPerJurInsert = mapperFirPJ.Map<TransferenciasFirmantesPersonasJuridicasDTO, Transf_Firmantes_PersonasJuridicas>(encFirPerJurInsert);
                             repoFirPJ.Insert(elementDtoFirPerJurInsert);
                         }

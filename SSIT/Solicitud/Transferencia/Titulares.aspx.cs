@@ -1,5 +1,6 @@
 ﻿using BusinesLayer.Implementation;
 using DataTransferObject;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using SSIT.App_Components;
 using StaticClass;
 using System;
@@ -638,6 +639,7 @@ namespace SSIT.Solicitud.Transferencia
                                 encTitPerFisDTO.DtoFirmantes.IdTipoDocumentoPersonal = id_tipodoc_personal;
                                 encTitPerFisDTO.DtoFirmantes.NumeroDocumento = txtNroDocumentoFirPF.Text.Trim();
                                 encTitPerFisDTO.DtoFirmantes.IdTipoCaracter = TipoCaracterLegalTitular;
+                                encTitPerFisDTO.DtoFirmantes.Cuit = txtCuitFirPF.Text.Trim();
                             }
                             else
                             {
@@ -646,6 +648,7 @@ namespace SSIT.Solicitud.Transferencia
                                 encTitPerFisDTO.DtoFirmantes.IdTipoDocumentoPersonal = id_tipodoc_personal;
                                 encTitPerFisDTO.DtoFirmantes.NumeroDocumento = Nro_Documento;
                                 encTitPerFisDTO.DtoFirmantes.IdTipoCaracter = TipoCaracterLegalTitular;
+                                encTitPerFisDTO.DtoFirmantes.Cuit = Cuit;
                             }
 
                             encTitPFBL.Insert(encTitPerFisDTO);
@@ -989,11 +992,9 @@ namespace SSIT.Solicitud.Transferencia
 
                             dtFirmantesSH.Rows.Add(datarw);
                         }
-
-                        grdFirmantesSH.DataSource = dtFirmantesSH;
-                        grdFirmantesSH.DataBind();
                     }
-
+                    grdFirmantesSH.DataSource = dtFirmantesSH;
+                    grdFirmantesSH.DataBind();
                 }
                 else
                 {
@@ -1008,6 +1009,7 @@ namespace SSIT.Solicitud.Transferencia
                     dt.Columns.Add("Nombres", typeof(string));
                     dt.Columns.Add("TipoDoc", typeof(string));
                     dt.Columns.Add("NroDoc", typeof(string));
+                    dt.Columns.Add("Cuit", typeof(string));
                     dt.Columns.Add("nom_tipocaracter", typeof(string));
                     dt.Columns.Add("IdTipoDocPersonal", typeof(int));
                     dt.Columns.Add("email", typeof(string));
@@ -1018,7 +1020,7 @@ namespace SSIT.Solicitud.Transferencia
 
                     foreach (var item in lstFirmantesPJ)
                     {
-                        dt.Rows.Add(item.Apellidos, item.Nombres, item.TipoDoc, item.NroDoc, item.NomTipoCaracter, item.IdTipoDocPersonal,
+                        dt.Rows.Add(item.Apellidos, item.Nombres, item.TipoDoc, item.NroDoc, item.Cuit, item.NomTipoCaracter, item.IdTipoDocPersonal,
                                 item.Email, item.IdTipoCaracter, item.CargoFirmantePj, rowindex);
                         rowindex++;
                     }
@@ -1135,6 +1137,7 @@ namespace SSIT.Solicitud.Transferencia
                     dt.Columns.Add("Nombres", typeof(string));
                     dt.Columns.Add("TipoDoc", typeof(string));
                     dt.Columns.Add("NroDoc", typeof(string));
+                    dt.Columns.Add("Cuit", typeof(string));
                     dt.Columns.Add("nom_tipocaracter", typeof(string));
                     dt.Columns.Add("IdTipoDocPersonal", typeof(int));
                     dt.Columns.Add("email", typeof(string));
@@ -1145,7 +1148,7 @@ namespace SSIT.Solicitud.Transferencia
 
                     foreach (var item in lstFirmantesPJ)
                     {
-                        dt.Rows.Add(item.Apellidos, item.Nombres, item.TipoDoc, item.NroDoc, item.NomTipoCaracter, item.IdTipoDocPersonal,
+                        dt.Rows.Add(item.Apellidos, item.Nombres, item.TipoDoc, item.NroDoc, item.Cuit, item.NomTipoCaracter, item.IdTipoDocPersonal,
                                 item.Email, item.IdTipoCaracter, item.CargoFirmantePj, rowindex);
                         rowindex++;
                     }
@@ -1176,6 +1179,7 @@ namespace SSIT.Solicitud.Transferencia
                     ddlTipoDocumentoFirPF.ClearSelection();
                     txtNroDocumentoFirPF.Text = "";
                     ddlTipoCaracterLegalFirPF.ClearSelection();
+                    txtCuitFirPF.Text = "";
                 }
                 else
                 {
@@ -1193,6 +1197,7 @@ namespace SSIT.Solicitud.Transferencia
                         ddlTipoDocumentoFirPF.SelectedValue = firmante.IdTipoDocumentoPersonal.ToString();
                         txtNroDocumentoFirPF.Text = firmante.NumeroDocumento;
                         ddlTipoCaracterLegalFirPF.SelectedValue = firmante.IdTipoCaracter.ToString();
+                        txtCuitFirPF.Text = firmante.Cuit;
                     }
 
                     pnlOtraPersona.Style["display"] = "block";
@@ -1378,13 +1383,13 @@ namespace SSIT.Solicitud.Transferencia
             dt.Columns.Add("Nombres", typeof(string));
             dt.Columns.Add("TipoDoc", typeof(string));
             dt.Columns.Add("NroDoc", typeof(string));
+            dt.Columns.Add("Cuit", typeof(string));
             dt.Columns.Add("nom_tipocaracter", typeof(string));
             dt.Columns.Add("IdTipoDocPersonal", typeof(int));
             dt.Columns.Add("email", typeof(string));
             dt.Columns.Add("id_tipocaracter", typeof(int));
             dt.Columns.Add("cargo_firmante_pj", typeof(string));
             dt.Columns.Add("rowindex", typeof(int));
-
 
             foreach (GridViewRow row in grdFirmantesPJ.Rows)
             {
@@ -1399,12 +1404,13 @@ namespace SSIT.Solicitud.Transferencia
                 datarw[1] = HttpUtility.HtmlDecode(row.Cells[1].Text);
                 datarw[2] = HttpUtility.HtmlDecode(row.Cells[2].Text);
                 datarw[3] = HttpUtility.HtmlDecode(row.Cells[3].Text);
-                datarw[4] = HttpUtility.HtmlDecode(row.Cells[5].Text);
-                datarw[5] = int.Parse(hid_id_tipodoc_grdFirmantes.Value);
-                datarw[6] = HttpUtility.HtmlDecode(row.Cells[4].Text);
-                datarw[7] = int.Parse(hid_id_caracter_grdFirmantes.Value);
-                datarw[8] = HttpUtility.HtmlDecode(row.Cells[6].Text);
-                datarw[9] = row.RowIndex;
+                datarw[4] = HttpUtility.HtmlDecode(row.Cells[4].Text);
+                datarw[5] = HttpUtility.HtmlDecode(row.Cells[6].Text);
+                datarw[6] = int.Parse(hid_id_tipodoc_grdFirmantes.Value);
+                datarw[7] = HttpUtility.HtmlDecode(row.Cells[5].Text);
+                datarw[8] = int.Parse(hid_id_caracter_grdFirmantes.Value);
+                datarw[9] = HttpUtility.HtmlDecode(row.Cells[7].Text);
+                datarw[10] = row.RowIndex;
 
                 dt.Rows.Add(datarw);
 
@@ -1482,7 +1488,7 @@ namespace SSIT.Solicitud.Transferencia
 
                     if (Validation)
                     {
-                        dt.Rows.Add(txtApellidosFirPJ.Text.Trim(), txtNombresFirPJ.Text.Trim(), ddlTipoDocumentoFirPJ.SelectedItem.Text.Trim(), txtNroDocumentoFirPJ.Text.Trim(),
+                        dt.Rows.Add(txtApellidosFirPJ.Text.Trim(), txtNombresFirPJ.Text.Trim(), ddlTipoDocumentoFirPJ.SelectedItem.Text.Trim(), txtNroDocumentoFirPJ.Text.Trim(), txtCuitFirPJ.Text.Trim(),
                             ddlTipoCaracterLegalFirPJ.SelectedItem.Text, int.Parse(ddlTipoDocumentoFirPJ.SelectedValue), txtEmailFirPJ.Text.Trim(), int.Parse(ddlTipoCaracterLegalFirPJ.SelectedValue),
                             txtCargoFirPJ.Text.Trim(), dt.Rows.Count);
 
@@ -1514,6 +1520,7 @@ namespace SSIT.Solicitud.Transferencia
                         dt.Rows[rowindex]["Nombres"] = txtNombresFirPJ.Text.Trim();
                         dt.Rows[rowindex]["TipoDoc"] = ddlTipoDocumentoFirPJ.SelectedItem.Text;
                         dt.Rows[rowindex]["NroDoc"] = txtNroDocumentoFirPJ.Text.Trim();
+                        dt.Rows[rowindex]["Cuit"] = txtCuitFirPJ.Text.Trim();
                         dt.Rows[rowindex]["nom_tipocaracter"] = ddlTipoCaracterLegalFirPJ.SelectedItem.Text;
                         dt.Rows[rowindex]["IdTipoDocPersonal"] = int.Parse(ddlTipoDocumentoFirPJ.SelectedValue);
                         dt.Rows[rowindex]["email"] = txtEmailFirPJ.Text.Trim();
@@ -1559,7 +1566,7 @@ namespace SSIT.Solicitud.Transferencia
                 txtEmailFirPJ.Text = dr["Email"].ToString();
                 ddlTipoDocumentoFirPJ.SelectedValue = dr["IdTipoDocPersonal"].ToString();
                 ddlTipoCaracterLegalFirPJ.SelectedValue = dr["id_tipocaracter"].ToString();
-
+                txtCuitFirPJ.Text = dr["Cuit"].ToString();
                 txtCargoFirPJ.Text = dr["cargo_firmante_pj"].ToString();
 
                 if (!(String.IsNullOrWhiteSpace(txtCargoFirPJ.Text)))
@@ -1729,6 +1736,7 @@ namespace SSIT.Solicitud.Transferencia
                                 encFirPerJurInsertDTO.Email = rowFirPerJur["Email"].ToString();
                                 encFirPerJurInsertDTO.IdTipoCaracter = int.Parse(rowFirPerJur["id_tipocaracter"].ToString());
                                 encFirPerJurInsertDTO.CargoFirmantePersonaJuridica = rowFirPerJur["cargo_firmante_pj"].ToString();
+                                encFirPerJurInsertDTO.Cuit = rowFirPerJur["Cuit"].ToString();
 
                                 lstEncomiendaFirmantesPersonasJuridicasDTO.Add(encFirPerJurInsertDTO);
                             }
@@ -1820,7 +1828,7 @@ namespace SSIT.Solicitud.Transferencia
                                 encFirPerJurInsertDTO.Email = rowFirPerJur["Email"].ToString();
                                 encFirPerJurInsertDTO.id_tipocaracter = int.Parse(rowFirPerJur["id_tipocaracter"].ToString());
                                 encFirPerJurInsertDTO.cargo_firmante_pj = rowFirPerJur["cargo_firmante_pj"].ToString();
-
+                                encFirPerJurInsertDTO.Cuit = rowFirPerJur["Cuit"].ToString();
                                 lstEncomiendaFirmantesPersonasJuridicasDTO.Add(encFirPerJurInsertDTO);
                             }
 

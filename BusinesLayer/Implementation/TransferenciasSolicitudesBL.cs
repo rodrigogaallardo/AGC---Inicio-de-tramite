@@ -1721,6 +1721,7 @@ namespace BusinesLayer.Implementation
                                 firmantesSHDTO.id_tipocaracter = item.IdTipoCaracter;
                                 firmantesSHDTO.cargo_firmante = item.CargoFirmantePj;
                                 firmantesSHDTO.email = item.Email;
+                                firmantesSHDTO.Cuit = item.Cuit;
                                 n.firmantesSH.Add(firmantesSHDTO);
                             }
 
@@ -1997,7 +1998,7 @@ namespace BusinesLayer.Implementation
                                 n.DtoFirmantes.id_tipodoc_personal = p.DtoFirmantes.IdTipoDocumentoPersonal;
                                 n.DtoFirmantes.Nro_Documento = p.DtoFirmantes.NumeroDocumento;
                                 n.DtoFirmantes.id_tipocaracter = p.DtoFirmantes.IdTipoCaracter;
-                                //n.DtoFirmantes.Cuit = p.DtoFirmantes.c;
+                                n.DtoFirmantes.Cuit = p.DtoFirmantes.Cuit;
                             }
                             blcppf.Insert(n);
                         }
@@ -2054,7 +2055,7 @@ namespace BusinesLayer.Implementation
                                 a.Nombres = item.Nombres;
                                 a.id_tipodoc_personal = item.IdTipoDocumentoPersonal;
                                 a.Nro_Documento = item.NumeroDocumento;
-                                //a.Cuit = item.Cuit;
+                                a.Cuit = item.Cuit;
                                 a.Email = item.Email;
                                 a.id_tipocaracter = item.IdTipoCaracter;
                                 a.cargo_firmante_pj = item.CargoFirmantePersonaJuridica;

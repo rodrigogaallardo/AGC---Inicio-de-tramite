@@ -247,6 +247,7 @@ namespace BusinesLayer.Implementation
                             encFirPerJur.Nombres = itemFirPj.Nombres;
                             encFirPerJur.id_tipodoc_personal = itemFirPj.id_tipodoc_personal;
                             encFirPerJur.Nro_Documento = itemFirPj.NroDoc;
+                            encFirPerJur.Cuit = itemFirPj.Cuit;
                             encFirPerJur.Email = itemFirPj.email;
                             encFirPerJur.id_tipocaracter = itemFirPj.id_tipocaracter;
                             encFirPerJur.cargo_firmante_pj = itemFirPj.cargo_firmante;

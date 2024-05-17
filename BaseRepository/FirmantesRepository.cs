@@ -164,7 +164,8 @@ namespace BaseRepository
                                    NroDocumento = pj.Nro_Documento,
                                    NomTipoCaracter = tcl.nom_tipocaracter,
                                    CargoFirmante = pj.cargo_firmante_pj,
-                                   Email = pj.Email
+                                   Email = pj.Email,
+                                   Cuit = pj.Cuit
                                });
 
             var firmantesPJPF = (from pj in _unitOfWork.Db.SSIT_Solicitudes_Firmantes_PersonasJuridicas
@@ -184,7 +185,8 @@ namespace BaseRepository
                                      NroDocumento = pj.Nro_Documento,
                                      NomTipoCaracter = tcl.nom_tipocaracter,
                                      CargoFirmante = pj.cargo_firmante_pj,
-                                     Email = pj.Email
+                                     Email = pj.Email,
+                                     Cuit = pj.Cuit
                                  });
 
             var firmantesPF = (from titPF in _unitOfWork.Db.SSIT_Solicitudes_Titulares_PersonasFisicas
@@ -203,7 +205,8 @@ namespace BaseRepository
                                    NroDocumento = firPF.Nro_Documento,
                                    NomTipoCaracter = tcl.nom_tipocaracter,
                                    CargoFirmante = "",
-                                   Email = titPF.Email
+                                   Email = titPF.Email,
+                                   Cuit = firPF.Cuit
                                });
 
             var lstFirmantes = firmantesPJ.Union(firmantesPJPF).Union(firmantesPF);
@@ -231,7 +234,8 @@ namespace BaseRepository
                                     DescTipoDocPersonal = tdoc.Nombre,
                                     NroDocumento = pj.Nro_Documento,
                                     NomTipoCaracter = tcl.nom_tipocaracter,
-                                    CargoFirmante = pj.cargo_firmante_pj
+                                    CargoFirmante = pj.cargo_firmante_pj,
+                                    Cuit = pj.Cuit
                                 }).Union(
                                     from pf in _unitOfWork.Db.Transf_Firmantes_PersonasFisicas
                                     join titpf in _unitOfWork.Db.Transf_Titulares_PersonasFisicas on pf.id_personafisica equals titpf.id_personafisica
@@ -247,7 +251,8 @@ namespace BaseRepository
                                         DescTipoDocPersonal = tdoc.Nombre,
                                         NroDocumento = pf.Nro_Documento,
                                         NomTipoCaracter = tcl.nom_tipocaracter,
-                                        CargoFirmante = ""
+                                        CargoFirmante = "",
+                                        Cuit = pf.Cuit
                                     });
             return lstFirmantes;
         }
@@ -269,7 +274,8 @@ namespace BaseRepository
                                     DescTipoDocPersonal = tdoc.Nombre,
                                     NroDocumento = pj.Nro_Documento,
                                     NomTipoCaracter = tcl.nom_tipocaracter,
-                                    CargoFirmante = pj.cargo_firmante_pj
+                                    CargoFirmante = pj.cargo_firmante_pj,
+                                    Cuit = pj.Cuit
                                 }).Union(
                                     from pf in _unitOfWork.Db.Transf_Firmantes_Solicitud_PersonasFisicas
                                     join titpf in _unitOfWork.Db.Transf_Titulares_Solicitud_PersonasFisicas on pf.id_personafisica equals titpf.id_personafisica
@@ -285,7 +291,8 @@ namespace BaseRepository
                                         DescTipoDocPersonal = tdoc.Nombre,
                                         NroDocumento = pf.Nro_Documento,
                                         NomTipoCaracter = tcl.nom_tipocaracter,
-                                        CargoFirmante = ""
+                                        CargoFirmante = "",
+                                        Cuit = pf.Cuit
                                     });
             return lstFirmantes;
         }
@@ -328,7 +335,7 @@ namespace BaseRepository
                                       Nombres = firpj.Nombres,
                                       TipoDoc = tdoc.Nombre,
                                       NroDoc = firpj.Nro_Documento,
-                                      Cuit = "",
+                                      Cuit = firpj.Cuit,
                                       NomTipoCaracter = tcl.nom_tipocaracter,
                                       IdTipoDocPersonal = firpj.id_tipodoc_personal,
                                       IdTipoCaracter = firpj.id_tipocaracter,
@@ -353,7 +360,7 @@ namespace BaseRepository
                                       Nombres = firpj.Nombres,
                                       TipoDoc = tdoc.Nombre,
                                       NroDoc = firpj.Nro_Documento,
-                                      Cuit = "",
+                                      Cuit = firpj.Cuit,
                                       NomTipoCaracter = tcl.nom_tipocaracter,
                                       IdTipoDocPersonal = firpj.id_tipodoc_personal,
                                       IdTipoCaracter = firpj.id_tipocaracter,
@@ -430,7 +437,8 @@ namespace BaseRepository
                                       IdTipoDocPersonal = fpj.id_tipodoc_personal,
                                       Email = fpj.Email,
                                       IdTipoCaracter = fpj.id_tipocaracter,
-                                      CargoFirmantePj = fpj.cargo_firmante_pj
+                                      CargoFirmantePj = fpj.cargo_firmante_pj,
+                                      Cuit = fpj.Cuit
                                   });
 
             return lstFirmantesPJ;
@@ -455,7 +463,8 @@ namespace BaseRepository
                                       Email = fpj.Email,
                                       IdTipoCaracter = fpj.id_tipocaracter,
                                       CargoFirmantePj = fpj.cargo_firmante_pj,
-                                      FirmanteMismaPersona = true
+                                      FirmanteMismaPersona = true,
+                                      Cuit = fpj.Cuit
                                   });
 
             return lstFirmantesPJ;

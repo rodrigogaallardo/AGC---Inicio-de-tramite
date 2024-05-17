@@ -178,6 +178,7 @@
                                 <asp:BoundField DataField="ApellidoNombres" HeaderText="Apellido y Nombre/s" HeaderStyle-HorizontalAlign="Left" />
                                 <asp:BoundField DataField="DescTipoDocPersonal" HeaderText="Tipo" HeaderStyle-HorizontalAlign="Left" />
                                 <asp:BoundField DataField="Nro_Documento" HeaderText="Documento" ItemStyle-HorizontalAlign="Center" />
+                                <asp:BoundField DataField="Cuit" HeaderText="Cuit" ItemStyle-HorizontalAlign="Center" />
                                 <asp:BoundField DataField="nom_tipocaracter" HeaderText="Carácter Legal" HeaderStyle-HorizontalAlign="Left" />
                                 <asp:BoundField DataField="cargo_firmante_pj" HeaderText="Cargo" HeaderStyle-HorizontalAlign="Left" />
                             </Columns>
@@ -298,6 +299,7 @@
                                 <asp:BoundField DataField="ApellidoNombres" HeaderText="Apellido y Nombre/s" HeaderStyle-HorizontalAlign="Left" />
                                 <asp:BoundField DataField="DescTipoDocPersonal" HeaderText="Tipo" HeaderStyle-HorizontalAlign="Left" />
                                 <asp:BoundField DataField="Nro_Documento" HeaderText="Documento" ItemStyle-HorizontalAlign="Center" />
+                                <asp:BoundField DataField="Cuit" HeaderText="Cuit" ItemStyle-HorizontalAlign="Center" />
                                 <asp:BoundField DataField="nom_tipocaracter" HeaderText="Carácter Legal" HeaderStyle-HorizontalAlign="Left" />
                                 <asp:BoundField DataField="cargo_firmante_pj" HeaderText="Cargo" HeaderStyle-HorizontalAlign="Left" />
                             </Columns>
@@ -1188,6 +1190,7 @@
                                                         <asp:BoundField DataField="Nombres" HeaderText="Nombre/s" HeaderStyle-HorizontalAlign="Left" />
                                                         <asp:BoundField DataField="TipoDoc" HeaderText="Tipo Doc." HeaderStyle-HorizontalAlign="Left" />
                                                         <asp:BoundField DataField="NroDoc" HeaderText="Nro de Doc." HeaderStyle-HorizontalAlign="Left" />
+                                                        <asp:BoundField DataField="Cuit" HeaderText="Cuit" HeaderStyle-HorizontalAlign="Left" />
                                                         <asp:BoundField DataField="email" HeaderText="Email" HeaderStyle-HorizontalAlign="Left" />
                                                         <asp:BoundField DataField="nom_tipocaracter" HeaderText="Carácter Legal" HeaderStyle-HorizontalAlign="Left" />
                                                         <asp:BoundField DataField="cargo_firmante_pj" HeaderText="Cargo" HeaderStyle-HorizontalAlign="Left" />
